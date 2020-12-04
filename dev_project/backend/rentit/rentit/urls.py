@@ -27,4 +27,5 @@ urlpatterns = [
     path('api/cartandwish/',include('cartandwish.api.urls')),
     path('api/notifications/',include('notifications.api.urls')),
     path('api/paylater/',include('paylater.api.urls')),
+    path('api/services/',include('products.api.urls')),
 ]

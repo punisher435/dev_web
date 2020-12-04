@@ -10,7 +10,7 @@ class customer_serializer(serializers.ModelSerializer):
 class customer_details_serializer(serializers.ModelSerializer):
     class Meta:
         model = customer_details
-        fields = ('aadhar','alternate_mobile','photo')
+        fields = ('aadhar','alternate_mobile','photo','customer_details_id')
 
 
 
