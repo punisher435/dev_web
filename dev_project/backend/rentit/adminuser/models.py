@@ -18,3 +18,4 @@ class admin_user(models.Model):
     mobile=models.PositiveBigIntegerField(unique=True)
     date_joined=models.DateTimeField(auto_now_add=True)
     removed=models.BooleanField(default=False)
+

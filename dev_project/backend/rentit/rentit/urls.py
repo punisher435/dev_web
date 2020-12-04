@@ -18,5 +18,13 @@ from django.urls import path,include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api-auth/', include('rest_framework.urls'))
+    path('api-auth/', include('rest_framework.urls')),
+    path('api/admin/',include('adminuser.api.urls')),
+    path('api/customer/',include('customer.api.urls')),
+    path('api/seller/',include('seller.api.urls')),
+    path('api/bookings/',include('bookings.api.urls')),
+    path('api/cancelandrefund/',include('cancelandrefund.api.urls')),
+    path('api/cartandwish/',include('cartandwish.api.urls')),
+    path('api/notifications/',include('notifications.api.urls')),
+    path('api/paylater/',include('paylater.api.urls')),
 ]
