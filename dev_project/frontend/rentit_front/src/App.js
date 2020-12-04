@@ -1,17 +1,32 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 import 'antd/dist/antd.css';
 import 'bootstrap/dist/css/bootstrap.min.css'; 
-import NavBar from './containers/Navbar'
+import NavBar from './containers/Navbar';
+import CardList from './containers/CardList';
+import Welcome from './containers/Welcome'
+
 function App() {
   return (
     <div className="App">
       <NavBar/>
+      <Welcome/>
+      <CardList/>
     </div>
   );
 }
 
 export default App;
+
+
+
+
+
+
+
+
+
+
 
 /* <header className="App-header">
   <img src={logo} className="App-logo" alt="logo" />
