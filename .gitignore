@@ -1,0 +1,6 @@
+dev_project/frontend/node_modules/
+dev_project/frontend/rentit_front/node_modules/
+venv/
+dev_project/frontend/rentit_front/build/
+dev_project/backend/rentit/build/
+dev_project/backend/rentit/rentit/build/

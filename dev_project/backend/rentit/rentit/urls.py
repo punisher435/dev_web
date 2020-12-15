@@ -14,18 +14,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path,include
+from django.urls import path,include,re_path
+from django.views.generic import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('auth/', include('djoser.urls')),
+    path('auth/', include('djoser.urls.jwt')),
     path('api-auth/', include('rest_framework.urls')),
-    path('api/admin/',include('adminuser.api.urls')),
-    path('api/customer/',include('customer.api.urls')),
-    path('api/seller/',include('seller.api.urls')),
-    path('api/bookings/',include('bookings.api.urls')),
-    path('api/cancelandrefund/',include('cancelandrefund.api.urls')),
-    path('api/cartandwish/',include('cartandwish.api.urls')),
-    path('api/notifications/',include('notifications.api.urls')),
-    path('api/paylater/',include('paylater.api.urls')),
-    path('api/services/',include('products.api.urls')),
 ]
+
+urlpatterns += [re_path(r'^.*',TemplateView.as_view(template_name= 'index.html'))]

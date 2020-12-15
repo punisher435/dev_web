@@ -2,17 +2,38 @@
 import './App.css';
 import 'antd/dist/antd.css';
 import 'bootstrap/dist/css/bootstrap.min.css'; 
-import NavBar from './containers/Navbar';
-import CardList from './containers/CardList';
-import Welcome from './containers/Welcome'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'; 
+import Activate from './containers/Activate';
+import Home from './containers/Home';
+import Login from './containers/Login';
+import ResetPassword from './containers/ResetPassword';
+import ResetPasswordConfirm from './containers/ResetPasswordConfirm';
+import Signup from './containers/Signup';
+import Layout from './hocs/Layout';
+import { Provider } from 'react-redux';
+import store from './redux/auth/store';
 
-function App() {
+function App(props) {
+
   return (
-    <div className="App">
-      <NavBar/>
-      <Welcome/>
-      <CardList/>
-    </div>
+    <Provider store={store}>
+      <Router>
+          <Layout>
+            <Switch>
+              <>
+              <div className="App">
+                <Route exact path='/' component={Home} />
+                <Route exact path='/login' component={Login} />
+                <Route exact path='/signup' component={Signup} />
+                <Route exact path='/reset_password' component={ResetPassword} />
+                <Route exact path='/password/reset/confirm/:uid/:token' component={ResetPasswordConfirm} />
+                <Route exact path='/activate/:uid/:token' component={Activate} />
+              </div>
+              </>
+            </Switch>
+          </Layout>
+      </Router>
+    </Provider>
   );
 }
 
