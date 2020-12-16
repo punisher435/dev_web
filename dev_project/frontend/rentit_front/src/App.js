@@ -1,5 +1,4 @@
-// import logo from './logo.svg';
-import './App.css';
+// import './App.css';
 import 'antd/dist/antd.css';
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'; 
@@ -12,6 +11,7 @@ import Signup from './containers/Signup';
 import Layout from './hocs/Layout';
 import { Provider } from 'react-redux';
 import store from './redux/auth/store';
+import Pagination from './containers/PaginateCardList'
 
 function App(props) {
 
@@ -28,6 +28,7 @@ function App(props) {
                 <Route exact path='/reset_password' component={ResetPassword} />
                 <Route exact path='/password/reset/confirm/:uid/:token' component={ResetPasswordConfirm} />
                 <Route exact path='/activate/:uid/:token' component={Activate} />
+                <Route exact path='/searchList' component={Pagination}/>
               </div>
               </>
             </Switch>
@@ -38,28 +39,3 @@ function App(props) {
 }
 
 export default App;
-
-
-
-
-
-
-
-
-
-
-
-/* <header className="App-header">
-  <img src={logo} className="App-logo" alt="logo" />
-  <p>
-    Edit <code>src/App.js</code> and save to reload.
-  </p>
-  <a
-    className="App-link"
-    href="https://reactjs.org"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    Learn React
-  </a>
-</header> */
