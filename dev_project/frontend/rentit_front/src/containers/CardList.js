@@ -1,34 +1,5 @@
 import React from "react"
 import Card from '../components/Card'
-
-// function CardList(props){
-//     return (
-//         <div>
-//             <br></br>
-//             <br></br>
-//             <br></br>
-//             <br></br>
-//             <br></br>
-//             <br></br>
-//             <br></br>
-//             <br></br>
-//             <br></br>
-            
-
-//             <Card/>
-//             <br></br>
-//             <br></br>
-//             <Card/>
-//             <br></br>
-//             <br></br>
-//             <Card/>
-//             <br></br>
-//             <br></br>
-//             <Card/>
-//         </div>
-//     )
-// }
-
 import { List} from 'antd';
 
 const data = [
