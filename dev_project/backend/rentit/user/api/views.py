@@ -6,8 +6,6 @@ from rest_framework import permissions
 from rest_framework_simplejwt import authentication
 from rest_framework import status
 from rest_framework.parsers import MultiPartParser,FormParser
-import json
-
 
 User=get_user_model()
 
@@ -21,12 +19,12 @@ class profile_viewset(viewsets.ViewSet):
     permission_classes = [permissions.IsAuthenticated]
     parser_classes=(MultiPartParser,FormParser)
 
-    def list(self,request):
+    def list(self,request,format=None):
         queryset = customUser_profile.objects.get_user_profile(request.user)
         serializer = profile_serializer(queryset,many=True)
         return Response(serializer.data)
 
-    def retrieve(self,request,pk=None):
+    def retrieve(self,request,pk=None,format=None):
         queryset = customUser_profile.objects.get_user_profile(request.user)
         profile= get_object_or_404(queryset,pk=pk)
         serializer = profile_serializer(profile)
@@ -61,7 +59,7 @@ class profile_viewset(viewsets.ViewSet):
                 profile.photo=serializer.validated_data["photo"]
             profile.save()
             serializer = profile_serializer(profile)
-            return Response(serializer.data,status=status.HTTP_201_CREATED)
+            return Response(serializer.data,status=status.HTTP_202_ACCEPTED)
         else:
             return Response(serializer.errors,status=status.HTTP_406_NOT_ACCEPTABLE)
 

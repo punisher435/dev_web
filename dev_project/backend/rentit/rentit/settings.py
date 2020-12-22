@@ -41,8 +41,10 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'djoser',
+    'django_filters',
     'user',
     'rest_framework_simplejwt',
+    'products',
 ]
 
 MIDDLEWARE = [
@@ -106,6 +108,9 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
+    'DEFAULT_FILTER_BACKENDS': (
+        'django_filters.rest_framework.DjangoFilterBackend',
+    )
 }
 
 # Password validation

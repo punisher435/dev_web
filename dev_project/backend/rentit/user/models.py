@@ -73,7 +73,7 @@ def upload_to(instance, filename):
 
 
 class customUser_profile(models.Model):
-    user_id=models.OneToOneField(customUser,on_delete=models.CASCADE, primary_key=True)
+    user_id=models.OneToOneField(customUser,on_delete=models.PROTECT, primary_key=True)
     country_code=models.CharField(max_length=255,default='+91')
     mobile=models.CharField(max_length=255)
     aadhar=models.CharField(max_length=255)
