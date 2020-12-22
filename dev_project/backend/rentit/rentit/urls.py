@@ -23,9 +23,16 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.jwt')),
-    path('sourcezxrkgdlh/',include('user.api.urls')),
-    path('sourceaxcnfrudv34/',include('products.api.urls_rooms_listing')),
-    path('sourcewdsfegds/',include('products.api.urls_rooms_personal')),
+    path('sourcezxradakgdlh/',include('user.api.urls')),
+    path('sourceaxcnfrudadv34/',include('products.api.urls_rooms_listing')),
+    path('sourcewdsfdaegds/',include('products.api.urls_rooms_personal')),
+    path('sourceadadk2647kfs/',include('products.api.urls_shops_listing')),
+    path('sourcekfhkt274fs/',include('products.api.urls_shops_personal')),
+    path('sourcebvdfesl2746/',include('products.api.urls_apartments_listing')),
+    path('sourceddnvslf54d/',include('products.api.urls_apartments_personal')),
+    path('sourcedjfnsk743/',include('products.api.urls_room_reviews')),
+    path('sourcensjahdwua2853/',include('products.api.urls_shop_reviews')),
+    path('sourcemvdsnksnd59472/',include('products.api.urls_apartment_reviews')),
 ]
 
 urlpatterns += [re_path(r'^.*',TemplateView.as_view(template_name= 'index.html'))]

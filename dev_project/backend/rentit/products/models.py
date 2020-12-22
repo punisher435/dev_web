@@ -5,7 +5,7 @@ from django.utils.translation import gettext_lazy as _
 
 # Create your models here.
 
-from .managers import rooms_manager
+from .managers import rooms_manager,shops_manager,apartments_manager
 
 User= get_user_model()
 
@@ -100,6 +100,9 @@ class shops(models.Model):
     pincode=models.CharField(max_length=255)
     avg_rating=models.DecimalField(max_digits=3,decimal_places=1,default=0)
 
+    objects = models.Manager()
+    personal_shops = shops_manager()
+
 
 class shop_rating_and_reviews(models.Model):
     shop_id=models.ForeignKey(rooms,on_delete=models.PROTECT,related_name="shop")
@@ -148,6 +151,9 @@ class apartments(models.Model):
     landmark=models.CharField(max_length=255)
     pincode=models.CharField(max_length=255)
     avg_rating=models.DecimalField(max_digits=3,decimal_places=1,default=0)
+
+    objects = models.Manager()
+    personal_apartments = apartments_manager()
 
 
 
