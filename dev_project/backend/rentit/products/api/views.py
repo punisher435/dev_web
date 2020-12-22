@@ -74,7 +74,7 @@ class my_room_viewset(viewsets.ViewSet):
 
     def create(self,request,format=None):
         serializer = room_detail_serializer(data=request.data)
-        if serializer.is_valid(raise_exception=True):
+        if serializer.is_valid(raise_exception=True) and not request.user.is_seller:
             serializer.validated_data["seller_id"]=request.user
             x=serializer.validated_data["price"]
             y=serializer.validated_data["owner_discount"]
@@ -206,7 +206,7 @@ class my_shop_viewset(viewsets.ViewSet):
 
     def create(self,request,format=None):
         serializer = shop_detail_serializer(data=request.data)
-        if serializer.is_valid(raise_exception=True):
+        if serializer.is_valid(raise_exception=True) and not request.user.is_seller:
             serializer.validated_data["seller_id"]=request.user
             x=serializer.validated_data["price"]
             y=serializer.validated_data["owner_discount"]
@@ -336,7 +336,7 @@ class my_apartment_viewset(viewsets.ViewSet):
 
     def create(self,request,format=None):
         serializer = apartment_detail_serializer(data=request.data)
-        if serializer.is_valid(raise_exception=True):
+        if serializer.is_valid(raise_exception=True) and not request.user.is_seller:
             serializer.validated_data["seller_id"]=request.user
             x=serializer.validated_data["price"]
             y=serializer.validated_data["owner_discount"]
