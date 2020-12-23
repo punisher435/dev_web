@@ -5,6 +5,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework import filters
 from rest_framework.decorators import permission_classes
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.pagination import PageNumberPagination
 
 from products.models import room_rating_and_reviews,shop_rating_and_reviews,apartment_rating_and_reviews
 from .serializers import room_rating_and_reviews_serializer
@@ -12,23 +13,24 @@ from .serializers import shop_rating_and_reviews_serializer
 from .serializers import apartment_rating_and_reviews_serializer
 
 
-class room_reviews(viewsets.ViewSet):
+class StandardResultsSetPagination(PageNumberPagination):
+    page_size = 100
+    page_size_query_param = 'page_size'
+    max_page_size = 1000
 
+
+class room_reviews(viewsets.ReadOnlyModelViewSet):
+
+    pagination_class = StandardResultsSetPagination
     filter_backends=(filters.OrderingFilter,)
     ordering_fields = ['timestamp','rating']
-    ordering = ['rating']
+    ordering = ['-rating']
+
+    query_set = room_rating_and_reviews.objects.all()
+    serializer_class = room_rating_and_reviews_serializer
 
 
-    def list (self,request):
-        queryset = room_rating_and_reviews.objects.all()
-        serializer = room_rating_and_reviews_serializer(queryset,many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
-
-    def retrieve (self,request,pk=None):
-        queryset = room_rating_and_reviews.objects.all()
-        review = get_object_or_404(queryset,pk=pk)
-        serializer = room_rating_and_reviews_serializer(review)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+class give_room_reviews(viewsets.ViewSet):
 
     @permission_classes([IsAuthenticated])
     def create(self,request):
@@ -51,23 +53,18 @@ class room_reviews(viewsets.ViewSet):
             return Response("ERROR", status=status.HTTP_400_BAD_REQUEST)
 
 
-class shop_reviews(viewsets.ViewSet):
+class shop_reviews(viewsets.ReadOnlyModelViewSet):
     
+    pagination_class = StandardResultsSetPagination
     filter_backends=(filters.OrderingFilter,)
     ordering_fields = ['timestamp','rating']
-    ordering = ['rating']
+    ordering = ['-rating']
+
+    query_set = shop_rating_and_reviews.objects.all()
+    serializer_class = shop_rating_and_reviews_serializer
 
 
-    def list (self,request):
-        queryset = shop_rating_and_reviews.objects.all()
-        serializer = shop_rating_and_reviews_serializer(queryset,many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
-
-    def retrieve (self,request,pk=None):
-        queryset = shop_rating_and_reviews.objects.all()
-        review = get_object_or_404(queryset,pk=pk)
-        serializer = shop_rating_and_reviews_serializer(review)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+class give_shop_reviews(viewsets.ViewSet):
 
     @permission_classes([IsAuthenticated])
     def create(self,request):
@@ -90,25 +87,20 @@ class shop_reviews(viewsets.ViewSet):
             return Response("ERROR", status=status.HTTP_400_BAD_REQUEST)
 
         
-
-class apartment_reviews(viewsets.ViewSet):
+class apartment_reviews(viewsets.ReadOnlyModelViewSet):
     
+    pagination_class = StandardResultsSetPagination
     filter_backends=(filters.OrderingFilter,)
     ordering_fields = ['timestamp','rating']
-    ordering = ['rating']
+    ordering = ['-rating']
+
+    query_set = apartment_rating_and_reviews.objects.all()
+    serializer_class = apartment_rating_and_reviews_serializer
 
 
-    def list (self,request):
-        queryset = apartment_rating_and_reviews.objects.all()
-        serializer = apartment_rating_and_reviews_serializer(queryset,many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
 
-    def retrieve (self,request,pk=None):
-        queryset = apartment_rating_and_reviews.objects.all()
-        review = get_object_or_404(queryset,pk=pk)
-        serializer = apartment_rating_and_reviews_serializer(review)
-        return Response(serializer.data, status=status.HTTP_200_OK)
-
+class give_apartment_reviews(viewsets.ViewSet):
+    
     @permission_classes([IsAuthenticated])
     def create(self,request):
         serializer = apartment_rating_and_reviews_serializer(data=request.data)

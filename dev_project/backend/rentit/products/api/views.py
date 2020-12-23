@@ -8,6 +8,7 @@ from rest_framework_simplejwt import authentication
 from django.core.mail import send_mail
 from django_filters import rest_framework as rest_filters
 from rest_framework import filters
+from rest_framework.pagination import PageNumberPagination
 
 
 from .serializers import room_list_serializer,room_detail_serializer,room_rating_and_reviews_serializer
@@ -17,6 +18,16 @@ from .serializers import shop_list_serializer,shop_detail_serializer,shop_rating
 from .serializers import apartment_list_serializer,apartment_detail_serializer,apartment_rating_and_reviews_serializer
 
 
+
+#pagination
+
+class StandardResultsSetPagination(PageNumberPagination):
+    page_size = 20
+    page_size_query_param = 'page_size'
+    max_page_size = 30
+
+
+#filters
 
 
 class room_filter(rest_filters.FilterSet):
@@ -30,30 +41,23 @@ class room_filter(rest_filters.FilterSet):
         fields = ['category','location','city','state','country','pincode','min_price','max_price','capacity_filter','trust_points_filter','booked']
 
 
-
-
-class room_viewset(viewsets.ViewSet):
-
+class room_viewset(viewsets.ReadOnlyModelViewSet):
     parser_classes=(MultiPartParser,FormParser)
     filter_backends=(rest_filters.DjangoFilterBackend,filters.SearchFilter,filters.OrderingFilter,)
+    pagination_class = StandardResultsSetPagination
     filterset_class = room_filter
     search_fields = ['^category','^location','^city','=state','=country','=pincode']
     ordering_fields = ['final_price','capacity','trust_points','avg_rating']
+    ordering = ['-trust_points']
 
-    def list(self,request):
-        queryset = rooms.objects.all()
-        queryset = queryset.filter(verified=True)
-        queryset = queryset.filter(removed=False)
-        serializer = room_list_serializer(queryset,many=True)
-        return Response(serializer.data,status=status.HTTP_202_ACCEPTED)
+    query_set = rooms.objects.all()
+    query_set = query_set.filter(verified=True)
+    queryset = query_set.filter(removed=False)
+    serializer_class = room_list_serializer
 
-    def retrieve(self,request,pk=None):
-        queryset = rooms.objects.all()
-        queryset = queryset.filter(verified=True)
-        queryset = queryset.filter(removed=False)
-        room = get_object_or_404(queryset,pk=pk)
-        serializer = room_detail_serializer(room)
-        return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+
+
+
 
 class my_room_viewset(viewsets.ViewSet):
     
@@ -74,7 +78,7 @@ class my_room_viewset(viewsets.ViewSet):
 
     def create(self,request,format=None):
         serializer = room_detail_serializer(data=request.data)
-        if serializer.is_valid(raise_exception=True) and not request.user.is_seller:
+        if serializer.is_valid(raise_exception=True) and request.user.is_seller:
             serializer.validated_data["seller_id"]=request.user
             x=serializer.validated_data["price"]
             y=serializer.validated_data["owner_discount"]
@@ -162,28 +166,20 @@ class shop_filter(rest_filters.FilterSet):
         fields = ['category','location','city','state','country','pincode','min_price','max_price','trust_points_filter','booked']
 
             
-class shop_viewset(viewsets.ViewSet):
-    
+class shop_viewset(viewsets.ReadOnlyModelViewSet):
     parser_classes=(MultiPartParser,FormParser)
     filter_backends=(rest_filters.DjangoFilterBackend,filters.SearchFilter,filters.OrderingFilter,)
+    pagination_class = StandardResultsSetPagination
     filterset_class = shop_filter
     search_fields = ['^category','^location','^city','=state','=country','=pincode']
     ordering_fields = ['final_price','trust_points','avg_rating']
+    ordering = ['-trust_points']
 
-    def list(self,request):
-        queryset = shops.objects.all()
-        queryset = queryset.filter(verified=True)
-        queryset = queryset.filter(removed=False)
-        serializer = shop_list_serializer(queryset,many=True)
-        return Response(serializer.data,status=status.HTTP_202_ACCEPTED)
+    query_set = shops.objects.all()
+    query_set = query_set.filter(verified=True)
+    queryset = query_set.filter(removed=False)
+    serializer_class = shop_list_serializer
 
-    def retrieve(self,request,pk=None):
-        queryset = shops.objects.all()
-        queryset = queryset.filter(verified=True)
-        queryset = queryset.filter(removed=False)
-        shop = get_object_or_404(queryset,pk=pk)
-        serializer = shop_detail_serializer(shop)
-        return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
 
 
 
@@ -206,7 +202,7 @@ class my_shop_viewset(viewsets.ViewSet):
 
     def create(self,request,format=None):
         serializer = shop_detail_serializer(data=request.data)
-        if serializer.is_valid(raise_exception=True) and not request.user.is_seller:
+        if serializer.is_valid(raise_exception=True) and request.user.is_seller:
             serializer.validated_data["seller_id"]=request.user
             x=serializer.validated_data["price"]
             y=serializer.validated_data["owner_discount"]
@@ -289,33 +285,24 @@ class apartment_filter(rest_filters.FilterSet):
     trust_points_filter = rest_filters.NumberFilter(field_name='trust_points',lookup_expr='lte')
 
     class Meta:
-        model = rooms
+        model = apartments
         fields = ['category','location','city','state','country','pincode','min_price','max_price','BHK_filter','trust_points_filter','booked']
 
 
-class apartment_viewset(viewsets.ViewSet):
-    
+class apartment_viewset(viewsets.ReadOnlyModelViewSet):
     parser_classes=(MultiPartParser,FormParser)
     filter_backends=(rest_filters.DjangoFilterBackend,filters.SearchFilter,filters.OrderingFilter,)
+    pagination_class = StandardResultsSetPagination
     filterset_class = apartment_filter
     search_fields = ['^category','^location','^city','=state','=country','=pincode']
     ordering_fields = ['final_price','BHK','trust_points','avg_rating']
+    ordering = ['-trust_points']
 
-    def list(self,request):
-        queryset = apartments.objects.all()
-        queryset = queryset.filter(verified=True)
-        queryset = queryset.filter(removed=False)
-        serializer = apartment_list_serializer(queryset,many=True)
-        return Response(serializer.data,status=status.HTTP_202_ACCEPTED)
-
-    def retrieve(self,request,pk=None):
-        queryset = apartments.objects.all()
-        queryset = queryset.filter(verified=True)
-        queryset = queryset.filter(removed=False)
-        apartment = get_object_or_404(queryset,pk=pk)
-        serializer = apartment_detail_serializer(apartment)
-        return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
-    
+    query_set = apartments.objects.all()
+    query_set = query_set.filter(verified=True)
+    queryset = query_set.filter(removed=False)
+    serializer_class = apartment_list_serializer
+ 
 
 class my_apartment_viewset(viewsets.ViewSet):
     
@@ -336,7 +323,7 @@ class my_apartment_viewset(viewsets.ViewSet):
 
     def create(self,request,format=None):
         serializer = apartment_detail_serializer(data=request.data)
-        if serializer.is_valid(raise_exception=True) and not request.user.is_seller:
+        if serializer.is_valid(raise_exception=True) and request.user.is_seller:
             serializer.validated_data["seller_id"]=request.user
             x=serializer.validated_data["price"]
             y=serializer.validated_data["owner_discount"]
