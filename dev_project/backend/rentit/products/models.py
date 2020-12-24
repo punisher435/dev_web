@@ -6,6 +6,7 @@ from django.utils.translation import gettext_lazy as _
 # Create your models here.
 
 from .managers import rooms_manager,shops_manager,apartments_manager
+from django_google_maps import fields as map_fields
 
 User= get_user_model()
 
@@ -50,6 +51,8 @@ class rooms(models.Model):
     country = models.CharField(max_length=255)
     landmark=models.CharField(max_length=255)
     pincode=models.CharField(max_length=255)
+    address = map_fields.AddressField(max_length=200)
+    geolocation = map_fields.GeoLocationField(max_length=100)
     avg_rating=models.DecimalField(max_digits=3,decimal_places=1,default=0)
     electricity=models.BooleanField(default=True)
     water_facility=models.BooleanField(default=True)
@@ -119,6 +122,8 @@ class shops(models.Model):
     country = models.CharField(max_length=255)
     landmark=models.CharField(max_length=255)
     pincode=models.CharField(max_length=255)
+    address = map_fields.AddressField(max_length=200)
+    geolocation = map_fields.GeoLocationField(max_length=100)
     avg_rating=models.DecimalField(max_digits=3,decimal_places=1,default=0)
     electricity=models.BooleanField(default=True)
     water_facility=models.BooleanField(default=True)
@@ -182,6 +187,8 @@ class apartments(models.Model):
     country = models.CharField(max_length=255)
     landmark=models.CharField(max_length=255)
     pincode=models.CharField(max_length=255)
+    address = map_fields.AddressField(max_length=200)
+    geolocation = map_fields.GeoLocationField(max_length=100)
     avg_rating=models.DecimalField(max_digits=3,decimal_places=1,default=0)
     electricity=models.BooleanField(default=True)
     water_facility=models.BooleanField(default=True)

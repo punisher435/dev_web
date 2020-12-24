@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'user',
     'rest_framework_simplejwt',
     'products',
+    'django_google_maps',
 ]
 
 MIDDLEWARE = [
@@ -225,3 +226,4 @@ DJOSER = {
 
 AUTH_USER_MODEL = 'user.customUser'
 
+GOOGLE_MAPS_API_KEY = '76b59343e0a5d0'
