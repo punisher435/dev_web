@@ -22,9 +22,9 @@ from .serializers import apartment_list_serializer,apartment_detail_serializer,a
 #pagination
 
 class StandardResultsSetPagination(PageNumberPagination):
-    page_size = 20
+    page_size = 1
     page_size_query_param = 'page_size'
-    max_page_size = 30
+    max_page_size = 2
 
 
 #filters
@@ -38,7 +38,7 @@ class room_filter(rest_filters.FilterSet):
 
     class Meta:
         model = rooms
-        fields = ['category','location','city','state','country','pincode','min_price','max_price','capacity_filter','trust_points_filter','booked']
+        fields = ['category','location','city','state','water_facility','wifi','breakfast','lunch','dinner','house_TV','power_backup','geyser','electricity','country','pincode','min_price','max_price','capacity_filter','trust_points_filter','booked']
 
 
 class room_viewset(viewsets.ReadOnlyModelViewSet):
@@ -121,6 +121,12 @@ class my_room_viewset(viewsets.ViewSet):
             if room.photo3!=serializer.validated_data["photo3"]: 
                 room.photo3=serializer.validated_data["photo3"]
 
+            if room.photo4!=serializer.validated_data["photo4"]: 
+                room.photo4=serializer.validated_data["photo4"]
+            
+            if room.photo5!=serializer.validated_data["photo5"]: 
+                room.photo5=serializer.validated_data["photo5"]
+
             if room.booked!=serializer.validated_data["booked"]: 
                 room.booked=serializer.validated_data["booked"]
 
@@ -129,6 +135,50 @@ class my_room_viewset(viewsets.ViewSet):
 
             if room.description!=serializer.validated_data["description"]: 
                 room.description=serializer.validated_data["description"]
+
+            if room.electricity!=serializer.validated_data["electricity"]: 
+                room.electricity=serializer.validated_data["electricity"]
+            
+            if room.water_facility!=serializer.validated_data["water_facility"]: 
+                room.water_facility=serializer.validated_data["water_facility"]
+
+            if room.house_TV!=serializer.validated_data["house_TV"]: 
+                room.house_TV=serializer.validated_data["house_TV"]
+
+            if room.power_backup!=serializer.validated_data["power_backup"]: 
+                room.power_backup=serializer.validated_data["power_backup"]
+
+            if room.geyser!=serializer.validated_data["geyser"]: 
+                room.geyser=serializer.validated_data["geyser"]
+
+            if room.nearby_station1!=serializer.validated_data["nearby_station1"]: 
+                room.nearby_station1=serializer.validated_data["nearby_station1"]
+            
+            if room.nearby_station2!=serializer.validated_data["nearby_station2"]: 
+                room.nearby_station2=serializer.validated_data["nearby_station2"]
+
+            if room.nearby_restaurant1!=serializer.validated_data["nearby_restaurant1"]: 
+                room.nearby_restaurant1=serializer.validated_data["nearby_restaurant1"]
+
+            if room.nearby_restaurant2!=serializer.validated_data["nearby_restaurant2"]: 
+                room.nearby_restaurant2=serializer.validated_data["nearby_restaurant2"]
+
+            if room.wifi!=serializer.validated_data["wifi"]: 
+                room.wifi=serializer.validated_data["wifi"]
+
+            if room.breakfast!=serializer.validated_data["breakfast"]: 
+                room.breakfast=serializer.validated_data["breakfast"]
+            
+            if room.lunch!=serializer.validated_data["lunch"]: 
+                room.lunch=serializer.validated_data["lunch"]
+
+            if room.dinner!=serializer.validated_data["dinner"]: 
+                room.dinner=serializer.validated_data["dinner"]
+            
+            if room.room_policy!=serializer.validated_data["room_policy"]: 
+                room.room_policy=serializer.validated_data["room_policy"]
+
+            
 
             x=serializer.validated_data["price"]
             y=serializer.validated_data["owner_discount"]
@@ -163,7 +213,7 @@ class shop_filter(rest_filters.FilterSet):
 
     class Meta:
         model = shops
-        fields = ['category','location','city','state','country','pincode','min_price','max_price','trust_points_filter','booked']
+        fields = ['water_facility','wifi','power_backup','electricity','category','location','city','state','country','pincode','min_price','max_price','trust_points_filter','booked']
 
             
 class shop_viewset(viewsets.ReadOnlyModelViewSet):
@@ -206,7 +256,8 @@ class my_shop_viewset(viewsets.ViewSet):
             serializer.validated_data["seller_id"]=request.user
             x=serializer.validated_data["price"]
             y=serializer.validated_data["owner_discount"]
-            serializer.validated_data["final_price"]=(x-(((y)*x)/100))
+            z=serializer.validated_data["company_discount"]
+            serializer.validated_data["final_price"]=(x-(((y+z)*x)/100))
             serializer.save()
 
             subject = 'Shop Added'
@@ -242,6 +293,12 @@ class my_shop_viewset(viewsets.ViewSet):
             if shop.photo3!=serializer.validated_data["photo3"]: 
                 shop.photo3=serializer.validated_data["photo3"]
 
+            if shop.photo4!=serializer.validated_data["photo4"]: 
+                shop.photo4=serializer.validated_data["photo4"]
+            
+            if shop.photo5!=serializer.validated_data["photo5"]: 
+                shop.photo5=serializer.validated_data["photo5"]
+
             if shop.booked!=serializer.validated_data["booked"]: 
                 shop.booked=serializer.validated_data["booked"]
 
@@ -250,6 +307,27 @@ class my_shop_viewset(viewsets.ViewSet):
 
             if shop.description!=serializer.validated_data["description"]: 
                 shop.description=serializer.validated_data["description"]
+
+            if shop.electricity!=serializer.validated_data["electricity"]: 
+                shop.electricity=serializer.validated_data["electricity"]
+            
+            if shop.water_facility!=serializer.validated_data["water_facility"]: 
+                shop.water_facility=serializer.validated_data["water_facility"]
+
+            if shop.power_backup!=serializer.validated_data["power_backup"]: 
+                shop.power_backup=serializer.validated_data["power_backup"]
+
+            if shop.nearby_station1!=serializer.validated_data["nearby_station1"]: 
+                shop.nearby_station1=serializer.validated_data["nearby_station1"]
+            
+            if shop.nearby_station2!=serializer.validated_data["nearby_station2"]: 
+                shop.nearby_station2=serializer.validated_data["nearby_station2"]
+
+            if shop.wifi!=serializer.validated_data["wifi"]: 
+                shop.wifi=serializer.validated_data["wifi"]
+            
+            if shop.room_policy!=serializer.validated_data["shop_policy"]: 
+                shop.room_policy=serializer.validated_data["shop_policy"]
 
             x=serializer.validated_data["price"]
             y=serializer.validated_data["owner_discount"]
@@ -286,7 +364,7 @@ class apartment_filter(rest_filters.FilterSet):
 
     class Meta:
         model = apartments
-        fields = ['category','location','city','state','country','pincode','min_price','max_price','BHK_filter','trust_points_filter','booked']
+        fields = ['geyser','power_backup','TV','water_facility','electricity','category','location','city','state','country','pincode','min_price','max_price','BHK_filter','trust_points_filter','booked']
 
 
 class apartment_viewset(viewsets.ReadOnlyModelViewSet):
@@ -327,7 +405,8 @@ class my_apartment_viewset(viewsets.ViewSet):
             serializer.validated_data["seller_id"]=request.user
             x=serializer.validated_data["price"]
             y=serializer.validated_data["owner_discount"]
-            serializer.validated_data["final_price"]=(x-(((y)*x)/100))
+            z=serializer.validated_data["company_discount"]
+            serializer.validated_data["final_price"]=(x-(((y+z)*x)/100))
             serializer.save()
 
             subject = 'Apartment Added'
@@ -366,6 +445,12 @@ class my_apartment_viewset(viewsets.ViewSet):
             if apartment.photo3!=serializer.validated_data["photo3"]: 
                 apartment.photo3=serializer.validated_data["photo3"]
 
+            if apartment.photo4!=serializer.validated_data["photo4"]: 
+                apartment.photo4=serializer.validated_data["photo4"]
+            
+            if apartment.photo5!=serializer.validated_data["photo5"]: 
+                apartment.photo5=serializer.validated_data["photo5"]
+
             if apartment.booked!=serializer.validated_data["booked"]: 
                 apartment.booked=serializer.validated_data["booked"]
 
@@ -374,6 +459,37 @@ class my_apartment_viewset(viewsets.ViewSet):
 
             if apartment.description!=serializer.validated_data["description"]: 
                 apartment.description=serializer.validated_data["description"]
+
+            if apartment.electricity!=serializer.validated_data["electricity"]: 
+                apartment.electricity=serializer.validated_data["electricity"]
+            
+            if apartment.water_facility!=serializer.validated_data["water_facility"]: 
+                apartment.water_facility=serializer.validated_data["water_facility"]
+
+            if apartment.power_backup!=serializer.validated_data["power_backup"]: 
+                apartment.power_backup=serializer.validated_data["power_backup"]
+
+            if apartment.geyser!=serializer.validated_data["geyser"]: 
+                apartment.geyser=serializer.validated_data["geyser"]
+
+            if apartment.nearby_station1!=serializer.validated_data["nearby_station1"]: 
+                apartment.nearby_station1=serializer.validated_data["nearby_station1"]
+            
+            if apartment.nearby_station2!=serializer.validated_data["nearby_station2"]: 
+                apartment.nearby_station2=serializer.validated_data["nearby_station2"]
+
+            if apartment.nearby_restaurant1!=serializer.validated_data["nearby_restaurant1"]: 
+                apartment.nearby_restaurant1=serializer.validated_data["nearby_restaurant1"]
+
+            if apartment.nearby_restaurant2!=serializer.validated_data["nearby_restaurant2"]: 
+                apartment.nearby_restaurant2=serializer.validated_data["nearby_restaurant2"]
+
+            if apartment.wifi!=serializer.validated_data["wifi"]: 
+                apartment.wifi=serializer.validated_data["wifi"]
+            
+            if apartment.room_policy!=serializer.validated_data["apartment_policy"]: 
+                apartment.room_policy=serializer.validated_data["apartment_policy"]
+
 
             x=serializer.validated_data["price"]
             y=serializer.validated_data["owner_discount"]

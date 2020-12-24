@@ -7,13 +7,12 @@ from rest_framework import serializers
 class room_detail_serializer(serializers.ModelSerializer):
     class Meta:
         model = rooms
-        exclude = ('date_added','date_verified','removed',)
+        fields ='__all__'
 
 class room_list_serializer(serializers.ModelSerializer):
     class Meta:
         model = rooms
-        fields = ['room_id','category','location','city','state','country','pincode','price','owner_discount','company_discount','final_price','furniture','capacity','trust_points','photo1','booked','facility','avg_rating']
-
+        fields ='__all__'
 
 class room_rating_and_reviews_serializer(serializers.ModelSerializer):
     class Meta:
@@ -26,13 +25,12 @@ class room_rating_and_reviews_serializer(serializers.ModelSerializer):
 class shop_detail_serializer(serializers.ModelSerializer):
     class Meta:
         model = shops
-        exclude = ('date_added','date_verified','removed',)
+        fields ='__all__'
 
 class shop_list_serializer(serializers.ModelSerializer):
     class Meta:
         model = shops
-        fields = ['room_id','category','location','city','state','country','pincode','price','owner_discount','company_discount','final_price','furniture','trust_points','photo1','booked','facility','avg_rating']
-
+        fields ='__all__'
 
 class shop_rating_and_reviews_serializer(serializers.ModelSerializer):
     class Meta:
@@ -46,13 +44,12 @@ class shop_rating_and_reviews_serializer(serializers.ModelSerializer):
 class apartment_detail_serializer(serializers.ModelSerializer):
     class Meta:
         model = apartments
-        exclude = ('date_added','date_verified','removed',)
+        fields ='__all__'
 
 class apartment_list_serializer(serializers.ModelSerializer):
     class Meta:
         model = apartments
-        fields = ['room_id','category','location','city','state','country','pincode','price','owner_discount','company_discount','final_price','furniture','BHK','trust_points','photo1','booked','facility','avg_rating']
-
+        fields ='__all__'
 
 class apartment_rating_and_reviews_serializer(serializers.ModelSerializer):
     class Meta:

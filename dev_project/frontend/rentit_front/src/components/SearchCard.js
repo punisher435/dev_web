@@ -100,10 +100,13 @@ export default function NestedGrid() {
         <Grid item md={3} xs={12} >
           <MediaCard/>
         </Grid>
-        <Grid item md={3} xs={12}>
+        <Grid item md={2} xs={12}>
           <NameCard/>
         </Grid>
-        <Grid item md={3} xs={12}>
+        <Grid item md={2} xs={12}>
+          <PriceCard/>
+        </Grid>
+        <Grid item md={2} xs={12}>
           <PriceCard/>
         </Grid>
         <Grid item md={3} xs={12}>
