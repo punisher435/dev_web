@@ -22,7 +22,7 @@ const NavBar = ({ isAuthenticated, logout }) => {
     );
 
     return (
-        <nav className="navbar navbar-expand-lg navbar-light ">
+        <nav className="navbar navbar-expand-lg navbar-light fixed-top">
             <Link className="navbar-brand" to='/'>Rentit</Link>
             <button 
                 className="navbar-toggler"

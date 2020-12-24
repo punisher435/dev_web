@@ -66,7 +66,7 @@ export default function NestedGrid() {
 
   function NameCard(){
     return (
-      <Card className={classes.root1} elevation={1}>
+      <Card className={classes.root1}>
         <Typography variant="h4" component="h2">
           Master Suit
         </Typography>
@@ -76,7 +76,7 @@ export default function NestedGrid() {
 
   function PriceCard(){
     return (
-      <Card className={classes.root1} elevation={1}>
+      <Card className={classes.root1}>
         <Typography variant="h5" component="h2">
          $500
         </Typography>
@@ -86,7 +86,7 @@ export default function NestedGrid() {
 
   function BookCard(){
     return (
-      <Card className={classes.root1} elevation={1}>
+      <Card className={classes.root1}>
         <Button variant="outlined" color="secondary">
           Secondary
         </Button>
@@ -97,7 +97,7 @@ export default function NestedGrid() {
   function FormRow() {
     return (
       <React.Fragment>
-        <Grid item md={3} xs={12} >
+        <Grid item md={4} xs={12} >
           <MediaCard/>
         </Grid>
         <Grid item md={2} xs={12}>
@@ -109,7 +109,7 @@ export default function NestedGrid() {
         <Grid item md={2} xs={12}>
           <PriceCard/>
         </Grid>
-        <Grid item md={3} xs={12}>
+        <Grid item md={2} xs={12}>
           <BookCard/>
         </Grid>
         {/* <Grid item xs={3}>
@@ -122,7 +122,7 @@ export default function NestedGrid() {
   return (
     <div className={classes.root}>
       <Grid container spacing={1}>
-        <Grid container item xs={12} spacing={0}>
+        <Grid container xs={12} spacing={0}>
           <FormRow />
         </Grid>
         

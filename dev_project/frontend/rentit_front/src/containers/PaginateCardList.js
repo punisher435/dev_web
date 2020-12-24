@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Posts from '../components/Posts';
 import Pagination from '../components/Pagination';
+import Grid from '@material-ui/core/Grid';
 import axios from 'axios';
 
 const App = () => {
@@ -29,15 +30,22 @@ const App = () => {
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
   return (
-    <div className='container mt-5'>
-      <h1 className='text-primary mb-3'>Our rooms</h1>
-      <Posts posts={currentPosts} loading={loading} />
-      <Pagination
-        postsPerPage={postsPerPage}
-        totalPosts={posts.length}
-        paginate={paginate}
-      />
-    </div>
+      <Grid
+      container
+      direction="row"
+      justify="flex-end"
+      alignItems="center"
+      >
+        <Grid item md={9} xs={12} >
+        <h1 className='text-primary mb-3'>Our rooms</h1>
+        <Posts posts={currentPosts} loading={loading} />
+        <Pagination
+          postsPerPage={postsPerPage}
+          totalPosts={posts.length}
+          paginate={paginate}
+        />
+      </Grid>
+      </Grid>
   );
 };
 
