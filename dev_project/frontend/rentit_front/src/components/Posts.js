@@ -1,9 +1,11 @@
 import React from 'react';
 import SearchCard from './SearchCard'
+import Spinner from './Spinner'
 
 const Posts = ({ posts, loading }) => {
+
   if (loading) {
-    return <h2>Loading...</h2>;
+    return <Spinner loading={loading} />;
   }
 
   return (
