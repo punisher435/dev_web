@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     padding: theme.spacing(1),
-    height: 200,
+    height: 400,
     textAlign: 'center',
     alignItems: 'center',
     color: theme.palette.text.secondary, 
@@ -22,9 +22,21 @@ const useStyles = makeStyles((theme) => ({
 
 
   root1: {
-    maxWidth: 345,
-    height: 200,
+    maxWidth: 500,
+    height: 400,
     textAlign: 'center',
+
+    borderLeft: 2,
+    borderLeftColor: grey,
+    // display: 'flex',
+    // alignItems: 'center',
+  },
+
+  root2: {
+    maxWidth: '100%',
+    height: '100%',
+    textAlign: 'center',
+
     borderLeft: 2,
     borderLeftColor: grey,
     // display: 'flex',
@@ -33,8 +45,7 @@ const useStyles = makeStyles((theme) => ({
 
 
   media: {
-    // width: 128,
-    height: 200,
+    height: 400,
   },
 
   bullet: {
@@ -50,9 +61,10 @@ export default function NestedGrid() {
   const classes = useStyles();
 
   function MediaCard() {
+
   
     return (
-      <Card className={classes.root1} elevation={0}>
+      <Card className={classes.root1}>
         <CardActionArea>
           <CardMedia
             className={classes.media}
@@ -66,7 +78,7 @@ export default function NestedGrid() {
 
   function NameCard(){
     return (
-      <Card className={classes.root1}>
+      <Card className={classes.root2}>
         <Typography variant="h4" component="h2">
           Master Suit
         </Typography>
@@ -97,21 +109,18 @@ export default function NestedGrid() {
   function FormRow() {
     return (
       <React.Fragment>
-        <Grid item md={4} xs={12} >
+        <Grid item md={4} xs={12}>
           <MediaCard/>
         </Grid>
-        <Grid item md={2} xs={12}>
+        <Grid item md={8} xs={12}>
           <NameCard/>
         </Grid>
-        <Grid item md={2} xs={12}>
+       {/*  <Grid item md={2} xs={12}>
           <PriceCard/>
         </Grid>
-        <Grid item md={2} xs={12}>
-          <PriceCard/>
-        </Grid>
-        <Grid item md={2} xs={12}>
+        <Grid item md={3} xs={12}>
           <BookCard/>
-        </Grid>
+        </Grid> */}
         {/* <Grid item xs={3}>
           <Paper className={classes.paper} elevation= {0}>item</Paper>
         </Grid> */}
@@ -121,12 +130,10 @@ export default function NestedGrid() {
 
   return (
     <div className={classes.root}>
-      <Grid container spacing={1}>
-        <Grid container xs={12} spacing={0}>
+        <Grid container item xs={12}>
           <FormRow />
         </Grid>
         
-      </Grid>
     </div>
   );
 }

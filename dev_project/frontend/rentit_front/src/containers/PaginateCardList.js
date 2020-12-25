@@ -36,7 +36,7 @@ const App = () => {
       justify="flex-end"
       alignItems="center"
       >
-        <Grid item md={9} xs={12} >
+        <Grid item md={9} xs={12}>
         <h1 className='text-primary mb-3'>Our rooms</h1>
         <Posts posts={currentPosts} loading={loading} />
         <Pagination

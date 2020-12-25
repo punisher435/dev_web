@@ -10,14 +10,13 @@ const Posts = ({ posts, loading }) => {
   }
 
   const myStlye = {
-    height : '100%',
-    width : '100%'
+    border: '0px'
   };
 
   return (
     <ul className='list-group mb-4'>
       {posts.map(post => (
-        <li key={post.id} style={myStlye}>
+        <li key={post.id} style={myStlye} className='list-group-item'>
           {/* {post.title} */}
           <SearchCard/>
         </li>
