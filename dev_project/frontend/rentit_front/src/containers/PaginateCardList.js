@@ -1,25 +1,41 @@
 import React, { useState, useEffect } from 'react';
 import Posts from '../components/Posts';
-import Pagination from '../components/Pagination';
+/* import Pagination from '../components/Pagination'; */
 import Grid from '@material-ui/core/Grid';
 import axios from 'axios';
+import PaginationOutlined from '../components/PaginationOutlined';
 
 const App = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(20);
+  const [postsPerPage] = useState(2);
+  const [totalposts, settotalPosts] = useState(0);
 
   useEffect(() => {
     const fetchPosts = async () => {
       setLoading(true);
-      const res = await axios.get('https://jsonplaceholder.typicode.com/posts');
-      setPosts(res.data);
+      const config = {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+      };
+      const page = currentPage
+      /* const params = new URLSearchParams([page,currentPage]) */
+      const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourceaxcnfrudadv34/rooms/`,{
+        params:{
+          page:currentPage
+        },
+        config:config
+      });
+      console.log(res.data);
+      setPosts(res.data.results);
       setLoading(false);
+      settotalPosts(res.data.count);
     };
 
     fetchPosts();
-  }, []);
+  }, [currentPage]);
 
   // Get current posts
   const indexOfLastPost = currentPage * postsPerPage;
@@ -36,14 +52,16 @@ const App = () => {
       justify="flex-end"
       alignItems="center"
       >
-        <Grid item md={9} xs={12}>
+        <Grid item lg={9} xs={12}>
         <h1 className='text-primary mb-3'>Our rooms</h1>
-        <Posts posts={currentPosts} loading={loading} />
-        <Pagination
+        <Posts posts={posts} loading={loading} />
+        <PaginationOutlined paginate={paginate} postsPerPage={postsPerPage} currentPage={currentPage} totalposts={totalposts}/>
+
+        {/* <Pagination
           postsPerPage={postsPerPage}
           totalPosts={posts.length}
           paginate={paginate}
-        />
+        /> */}
       </Grid>
       </Grid>
   );

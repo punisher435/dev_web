@@ -1,7 +1,7 @@
 import React from 'react';
 import SearchCard from './SearchCard'
 import Spinner from './Spinner'
-import Grid from '@material-ui/core/Grid'
+
 
 const Posts = ({ posts, loading }) => {
 
@@ -16,9 +16,9 @@ const Posts = ({ posts, loading }) => {
   return (
     <ul className='list-group mb-4'>
       {posts.map(post => (
-        <li key={post.id} style={myStlye} className='list-group-item'>
+        <li key={post.room_id} style={myStlye} className='list-group-item'>
           {/* {post.title} */}
-          <SearchCard/>
+          <SearchCard post={post}/>
         </li>
       ))}
     </ul>

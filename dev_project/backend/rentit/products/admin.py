@@ -8,11 +8,11 @@ from .models import apartments,apartment_rating_and_reviews
 from django_google_maps import widgets as map_widgets
 from django_google_maps import fields as map_fields
 
-class room_admin(admin.ModelAdmin):
+""" class room_admin(admin.ModelAdmin):
     formfield_overrides = {
         map_fields.AddressField: {'widget': map_widgets.GoogleMapsAddressWidget},
     }
-
+ """
 class shop_admin(admin.ModelAdmin):
     formfield_overrides = {
         map_fields.AddressField: {'widget': map_widgets.GoogleMapsAddressWidget},

@@ -22,9 +22,9 @@ from .serializers import apartment_list_serializer,apartment_detail_serializer,a
 #pagination
 
 class StandardResultsSetPagination(PageNumberPagination):
-    page_size = 1
+    page_size = 2
     page_size_query_param = 'page_size'
-    max_page_size = 2
+    max_page_size = 3
 
 
 #filters
