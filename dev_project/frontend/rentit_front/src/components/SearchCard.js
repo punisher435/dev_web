@@ -10,6 +10,8 @@ import Typography from '@material-ui/core/Typography';
 import WifiOffIcon from '@material-ui/icons/WifiOff';
 import WifiIcon from '@material-ui/icons/Wifi';
 import RoomIcon from '@material-ui/icons/Room';
+import TvOutlinedIcon from '@material-ui/icons/TvOutlined';
+import TvOffOutlinedIcon from '@material-ui/icons/TvOffOutlined';
 import { grey } from '@material-ui/core/colors';
 
 const useStyles = makeStyles((theme) => ({
@@ -157,6 +159,8 @@ export default function NestedGrid({post}) {
   }
 
   function NameCard(){
+    const mystyle = {
+    }
     return (
       <Card className={classes.root2}>
         <Typography variant="h4" component="h3">
@@ -170,9 +174,30 @@ export default function NestedGrid({post}) {
             -   near {post.landmark}
         </Typography>
         <br/>
+        <div style={mystyle}>
+        <Grid
+        container
+        direction="row"
+        justify="flex-start"
+        alignItems="flex-start"
+        >
+        <Grid item lg={1}>
         { 
-        post.wifi ? <WifiIcon /> : <WifiOffIcon />
+        post.wifi ? <div><WifiIcon /><p>Wifi Facility</p></div> : <div><WifiOffIcon /><p>no Wifi</p></div>
         }
+        </Grid>
+        <Grid item lg={1}>
+        { 
+        post.room_TV ? <div><TvOutlinedIcon /><p>Room TV</p></div> : <div><TvOffOutlinedIcon /><p>No room TV</p></div>
+        }
+        </Grid>
+        <Grid item lg={1}>
+        { 
+        post.house_TV ? <div><TvOutlinedIcon /><p>House TV</p></div> : <div><TvOffOutlinedIcon /><p>No TV</p></div>
+        }
+        </Grid>
+        </Grid>
+        </div>
         
       </Card>
     );
