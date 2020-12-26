@@ -16,9 +16,13 @@ export default function PaginationOutlined({paginate,postsPerPage,currentPage,to
     paginate(value);
   };
 
+  var x = totalposts/postsPerPage;
+  x= Math.trunc(x);
+  if (totalposts%postsPerPage!==0){x=x+1;}
+
   return (
     <div className={classes.root}>
-      <Pagination count={totalposts/postsPerPage} variant="outlined" color="secondary" page={currentPage} onChange={handleChange} />
+      <Pagination count={x} variant="outlined" color="secondary" page={currentPage} onChange={handleChange} />
     </div>
   );
 }

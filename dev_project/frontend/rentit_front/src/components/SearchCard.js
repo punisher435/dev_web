@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{ useState }from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
@@ -7,16 +7,28 @@ import Icon from '@material-ui/core/Icon'
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import MeetingRoomOutlinedIcon from '@material-ui/icons/MeetingRoomOutlined';
+import AcUnitIcon from '@material-ui/icons/AcUnit';
 import WifiOffIcon from '@material-ui/icons/WifiOff';
 import WifiIcon from '@material-ui/icons/Wifi';
 import RoomIcon from '@material-ui/icons/Room';
 import TvOutlinedIcon from '@material-ui/icons/TvOutlined';
 import TvOffOutlinedIcon from '@material-ui/icons/TvOffOutlined';
+import { IoWaterOutline } from 'react-icons/io5';
+import HotTubIcon from '@material-ui/icons/HotTub';
+import ToysIcon from '@material-ui/icons/Toys';
+import LocalLaundryServiceIcon from '@material-ui/icons/LocalLaundryService';
+import WhatshotIcon from '@material-ui/icons/Whatshot';
+import BathtubIcon from '@material-ui/icons/Bathtub';
 import { grey } from '@material-ui/core/colors';
+import { IconContext } from "react-icons";
+
+import CustomizedRatings from './rating_meter';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    
   },
   paper: {
     padding: theme.spacing(1),
@@ -63,7 +75,13 @@ const useStyles = makeStyles((theme) => ({
 
   media: {
     height: 300,
+    left:0,
+    transition: 'opacity 5s ease-in-out',
+    webkitTransition: 'opacity 5s ease-in-out',
+    mozTransition: 'opacity 5s ease-in-out',
+    oTransition: 'opacity 5s ease-in-out',
   },
+
   media2: {
     height: 100,
   },
@@ -75,10 +93,40 @@ const useStyles = makeStyles((theme) => ({
   },
 
   textroot: {
-    textAlign: 'Left',
-
-    borderLeft: 2,
-    borderLeftColor: grey,
+    marginLeft:'2px',
+    fontWeight:'bold',
+    fontSize:'25px',
+    display: 'inline',
+    
+    // display: 'flex',
+    // alignItems: 'center',
+  },
+  textroot1: {
+    marginLeft:'2px',
+    fontWeight:'1rem',
+    fontSize:'18px',
+    display: 'inline',
+    marginLeft:'10px',
+    color:'#877f7f'
+    
+    // display: 'flex',
+    // alignItems: 'center',
+  },
+  textroot2: {
+    marginLeft:'2px',
+    fontWeight:'bold',
+    fontSize:'16px',
+    display: 'inline',
+    marginLeft:'10px',
+    color:'#dea300'
+    
+    // display: 'flex',
+    // alignItems: 'center',
+  },
+  buttonroot: {
+    
+    color:'green'
+    
     // display: 'flex',
     // alignItems: 'center',
   },
@@ -89,6 +137,17 @@ export default function NestedGrid({post}) {
   const classes = useStyles();
 
   function MediaCard() {
+    const [photos,changephotos] = useState({
+      a:post.photo1,
+      b:post.photo2,
+      c:post.photo3,
+      d:post.photo4,
+    })
+
+    const mystyle={
+      left:0,
+      transition: 'opacity 1s ease-in-out',
+    }
 
   
     return (
@@ -104,7 +163,7 @@ export default function NestedGrid({post}) {
         <CardActionArea>
           <CardMedia
             className={classes.media}
-            image={post.photo1}
+            image={photos.a}
             title="Contemplative Reptile"
           />
         </CardActionArea>
@@ -122,8 +181,19 @@ export default function NestedGrid({post}) {
         <CardActionArea>
           <CardMedia
             className={classes.media2}
-            image={post.photo2}
-            title="Contemplative Reptile"
+            image={photos.b}
+            title="Contemplative Reptile" 
+            onClick={
+              () => {
+                const temp=photos.a;
+                changephotos({
+                  a:photos.b,
+                  b:temp,
+                  c:photos.c,
+                  d:photos.d,
+                })
+              }
+            }
           />
         </CardActionArea>
       </Card>
@@ -133,8 +203,19 @@ export default function NestedGrid({post}) {
         <CardActionArea>
           <CardMedia
             className={classes.media2}
-            image={post.photo3}
+            image={photos.c}
             title="Contemplative Reptile"
+            onClick={
+              () => {
+                const temp=photos.a;
+                changephotos({
+                  a:photos.c,
+                  b:photos.b,
+                  c:temp,
+                  d:photos.d,
+                })
+              }
+            }
           />
         </CardActionArea>
       </Card>
@@ -144,8 +225,19 @@ export default function NestedGrid({post}) {
         <CardActionArea>
           <CardMedia
             className={classes.media2}
-            image={post.photo4}
+            image={photos.d}
             title="Contemplative Reptile"
+            onClick={
+              () => {
+                const temp=photos.a;
+                changephotos({
+                  a:photos.d,
+                  b:photos.b,
+                  c:photos.c,
+                  d:temp,
+                })
+              }
+            }
           />
         </CardActionArea>
       </Card>
@@ -160,7 +252,9 @@ export default function NestedGrid({post}) {
 
   function NameCard(){
     const mystyle = {
+      fontSize:'13px',
     }
+    const y=post.owner_discount+post.company_discount;
     return (
       <Card className={classes.root2}>
         <Typography variant="h4" component="h3">
@@ -173,7 +267,7 @@ export default function NestedGrid({post}) {
         <Typography variant="body2" component="h2">
             -   near {post.landmark}
         </Typography>
-        <br/>
+        <CustomizedRatings rating={post.avg_rating}/>
         <div style={mystyle}>
         <Grid
         container
@@ -181,21 +275,76 @@ export default function NestedGrid({post}) {
         justify="flex-start"
         alignItems="flex-start"
         >
-        <Grid item lg={1}>
+        <IconContext.Provider value={{ size: "1.5em",}}>
+  
         { 
-        post.wifi ? <div><WifiIcon /><p>Wifi Facility</p></div> : <div><WifiOffIcon /><p>no Wifi</p></div>
+        post.wifi ? <Grid item md={1}><div><Icon fontSize='small'><WifiIcon /></Icon><p style={mystyle}>Wifi Facility</p></div></Grid> : <Grid item md={1}><div><WifiOffIcon /><p>no Wifi</p></div></Grid>
         }
-        </Grid>
-        <Grid item lg={1}>
+        
         { 
-        post.room_TV ? <div><TvOutlinedIcon /><p>Room TV</p></div> : <div><TvOffOutlinedIcon /><p>No room TV</p></div>
+        post.room_TV ?  <Grid item md={1}><div><Icon fontSize='small'><TvOutlinedIcon /></Icon><p>Room TV</p></div> </Grid> : <p></p>
         }
-        </Grid>
-        <Grid item lg={1}>
         { 
-        post.house_TV ? <div><TvOutlinedIcon /><p>House TV</p></div> : <div><TvOffOutlinedIcon /><p>No TV</p></div>
+        post.house_TV ? <Grid item md={1}><div><Icon fontSize='small'><TvOutlinedIcon /></Icon><p>House TV</p></div></Grid> : <div><TvOffOutlinedIcon /><p>No TV</p></div>
         }
+        { 
+        post.balcony ? <Grid item md={1}><div><Icon fontSize='small'><MeetingRoomOutlinedIcon /></Icon><p>Balcony</p></div></Grid> : <></>
+        }
+        { 
+        post.separate_washroom ? <Grid item md={1}><div><Icon fontSize='small'><BathtubIcon /></Icon><p>Separate washroom</p></div></Grid> : <></>
+        }
+        { 
+        post.purified_water ? <Grid item md={1}><div><IoWaterOutline /><p>Pure Water</p></div></Grid> : <></>
+        }
+        { 
+        post.geyser ? <Grid item md={1}><div><HotTubIcon /><p>  Hot Water</p></div></Grid> : <></>
+        }
+        { 
+        post.AC ? <Grid item md={1}><div><AcUnitIcon /><p>AC</p></div></Grid> : <></>
+        }
+        { 
+        post.cooler ? <Grid item md={1}><div><ToysIcon /><p>Cooler</p></div></Grid> : <></>
+        }
+        { 
+        post.laundry ? <Grid item md={1}><div><LocalLaundryServiceIcon /><p>Laundry</p></div></Grid> : <></>
+        }
+        { 
+        post.iron ? <Grid item md={1}><div><WhatshotIcon /><p>Iron</p></div></Grid> : <></>
+        }
+        </IconContext.Provider>
         </Grid>
+        <Grid
+        container
+        direction="row"
+        justify="flex-start"
+        alignItems="flex-start"
+        >
+    
+        <Grid item md={9}>
+          <Typography color='error' variant='h6' className={classes.textroot}>
+          {post.currency} {post.final_price}
+          </Typography>
+          <Typography variant='h6' className={classes.textroot1}>
+          <s>{post.currency} {post.final_price}</s>
+          </Typography>
+          <Typography variant='h6' className={classes.textroot2}>
+            {y}% off
+          </Typography>
+        </Grid>
+
+        <Grid item md={3}>
+          { 
+          post.booked ? <Button variant="outlined" color="secondary">
+          Not Avaiable
+        </Button> :  <Button variant="contained" color="secondary">
+            Book Now
+        </Button>
+        }
+        
+          
+        </Grid> 
+
+
         </Grid>
         </div>
         
@@ -226,10 +375,10 @@ export default function NestedGrid({post}) {
   function FormRow() {
     return (
       <React.Fragment>
-        <Grid item lg={5} xs={12}>
+        <Grid item md={5} xs={12}>
           <MediaCard/>
         </Grid>
-        <Grid item lg={7} xs={12}>
+        <Grid item md={7} xs={12}>
           <NameCard/>
         </Grid>
        {/*  <Grid item md={2} xs={12}>
