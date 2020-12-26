@@ -65,6 +65,12 @@ class rooms(models.Model):
     avg_rating=models.DecimalField(max_digits=2,decimal_places=1,default=0)
     reviews=models.DecimalField(max_digits=2,decimal_places=1,default=0)
 
+    balcony=models.BooleanField(default=False)
+    separate_washroom=models.BooleanField(default=False)
+    windows=models.IntegerField(default=0)
+    fans=models.IntegerField(default=1)
+    bed_type=models.CharField(max_length=255)
+    floor_no=models.IntegerField(default=1)
 
     electricity=models.BooleanField(default=True)
     cost_electricity = models.IntegerField(default=0)
@@ -183,6 +189,12 @@ class shops(models.Model):
     avg_rating=models.DecimalField(max_digits=2,decimal_places=1,default=0)
     reviews=models.DecimalField(max_digits=2,decimal_places=1,default=0)
 
+    washroom=models.IntegerField(default=1)
+    total_rooms=models.IntegerField(default=1)
+    windows=models.IntegerField(default=1)
+    total_floors=models.IntegerField(default=1)
+    floor_no=models.IntegerField(default=1)
+
     electricity=models.BooleanField(default=True)
     cost_electricity = models.IntegerField(default=0)
 
@@ -241,6 +253,7 @@ class apartments(models.Model):
     photo3=models.ImageField(_("Image"),upload_to=upload_to_apartments,default='/images/rooms/default.jpg')
     photo4=models.ImageField(_("Image"),upload_to=upload_to_apartments,default='/images/rooms/default.jpg')
     photo5=models.ImageField(_("Image"),upload_to=upload_to_apartments,default='/images/rooms/default.jpg')
+    photo6=models.ImageField(_("Image"),upload_to=upload_to_apartments,default='/images/rooms/default.jpg')
     booked=models.BooleanField(default=False)
     removed=models.BooleanField(default=False)
     category=models.CharField(max_length=255)
@@ -269,6 +282,16 @@ class apartments(models.Model):
 
     wifi = models.BooleanField(default=False)
     cost_wifi = models.IntegerField(default=0)
+
+    balcony=models.IntegerField(default=0)
+    washroom=models.IntegerField(default=1)
+    total_rooms=models.IntegerField(default=1)
+    windows=models.IntegerField(default=1)
+    bed_type=models.CharField(max_length=255)
+    #floor no. for flats and total floors for bunglows
+    total_floors=models.IntegerField(default=1)
+    floor_no=models.IntegerField(default=1)
+    apartment_type=models.CharField(max_length=255)
 
     AC = models.BooleanField(default=False)
     cost_AC = models.IntegerField(default=0)
