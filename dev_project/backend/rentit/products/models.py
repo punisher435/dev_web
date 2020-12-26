@@ -48,7 +48,7 @@ class rooms(models.Model):
     country = models.CharField(max_length=255)
     landmark=models.CharField(max_length=255)
     pincode=models.CharField(max_length=255)
-    currency=models.CharField(max_length=200,default='Rs')
+    currency=models.CharField(max_length=200,default='₹')
 
     """ address = map_fields.AddressField(max_length=200,blank=True)
     geolocation = map_fields.GeoLocationField(max_length=100,blank=True) """
@@ -165,7 +165,7 @@ class shops(models.Model):
     photo5=models.ImageField(_("Image"),upload_to=upload_to_shops,default='/images/rooms/default.jpg')
     booked=models.BooleanField(default=False)
     removed=models.BooleanField(default=False)
-    currency=models.CharField(max_length=200,default='Rs')
+    currency=models.CharField(max_length=200,default='₹')
 
     #address
     location=models.TextField()
@@ -257,7 +257,7 @@ class apartments(models.Model):
     booked=models.BooleanField(default=False)
     removed=models.BooleanField(default=False)
     category=models.CharField(max_length=255)
-    currency=models.CharField(max_length=200,default='Rs')
+    currency=models.CharField(max_length=200,default='₹')
 
     #address
     location=models.TextField()
