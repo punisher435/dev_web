@@ -25,6 +25,8 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import { BiFoodMenu } from "react-icons/bi"
 import FastfoodIcon from '@material-ui/icons/Fastfood';
 import FreeBreakfastIcon from '@material-ui/icons/FreeBreakfast';
+import { BiCctv } from "react-icons/bi";
+import { GiGuards } from "react-icons/gi";
 import AccessibilityIcon from '@material-ui/icons/Accessibility';
 import WhatshotIcon from '@material-ui/icons/Whatshot';
 import BathtubIcon from '@material-ui/icons/Bathtub';
@@ -376,6 +378,12 @@ export default function NestedGrid({post}) {
         }
         { 
         post.dinner ? <Grid item md={1}><div><BiFoodMenu /><p>dinner</p></div></Grid> : <></>
+        }
+        { 
+        post.cctv_building ? <Grid item md={1}><div><BiCctv /><p>CCTV</p></div></Grid> : <></>
+        }
+        { 
+        post.building_guard ? <Grid item md={1}><div><GiGuards /><p>Sequrity guard</p></div></Grid> : <></>
         }
         </IconContext.Provider>
         </Grid>
