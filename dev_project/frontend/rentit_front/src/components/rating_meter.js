@@ -57,7 +57,7 @@ IconContainer.propTypes = {
 export default function CustomizedRatings({rating}) {
   return (
     <div>
-      <Box component="fieldset" mb={3} borderColor="transparent" m={1}>
+      <Box component="fieldset" mb={0} borderColor="transparent" m={0}>
         <Rating
           name="customized-color"
           readOnly
