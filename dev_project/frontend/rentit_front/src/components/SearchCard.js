@@ -288,7 +288,7 @@ export default function NestedGrid({post}) {
     
     const y=post.owner_discount+post.company_discount;
     return (
-      <Card className={classes.root2}>
+      <Card className={classes.root2} raised={true}>
         <Grid
         container
         direction="row"

@@ -9,7 +9,8 @@ function Spinner({loading}) {
    const override = css`
    display: block;
    margin: 0 auto;
-   border-color: red;
+   border-color: #f50057;
+   color: #f50057;
     `;
 
     return (
@@ -17,7 +18,7 @@ function Spinner({loading}) {
                 <HashLoader
                 css={override}
                 size={150}
-                color={"#123abc"}
+                color={"#f50057"}
                 loading={loading}
                  />
             </div> 

@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import Posts from '../components/Posts';
 /* import Pagination from '../components/Pagination'; */
 import Grid from '@material-ui/core/Grid';
 import axios from 'axios';
-import PaginationOutlined from '../components/PaginationOutlined';
+import ResponsiveDrawer from './searchlist';
 
 const App = () => {
   const [posts, setPosts] = useState([]);
@@ -52,10 +51,10 @@ const App = () => {
       justify="flex-end"
       alignItems="center"
       >
-        <Grid item lg={9} xs={12}>
+        <Grid item lg={12} xs={12}>
         <h1 className='text-primary mb-3'>Our rooms</h1>
-        <Posts posts={posts} loading={loading} />
-        <PaginationOutlined paginate={paginate} postsPerPage={postsPerPage} currentPage={currentPage} totalposts={totalposts}/>
+        <ResponsiveDrawer posts={posts} loading={loading} paginate={paginate} postsPerPage={postsPerPage} currentPage={currentPage} totalposts={totalposts}/>
+        
 
         {/* <Pagination
           postsPerPage={postsPerPage}
