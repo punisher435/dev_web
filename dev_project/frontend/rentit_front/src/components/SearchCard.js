@@ -459,15 +459,6 @@ export default function NestedGrid({post}) {
         <Grid item md={7} xs={12}>
           <NameCard/>
         </Grid>
-       {/*  <Grid item md={2} xs={12}>
-          <PriceCard/>
-        </Grid>
-        <Grid item md={3} xs={12}>
-          <BookCard/>
-        </Grid> */}
-        {/* <Grid item xs={3}>
-          <Paper className={classes.paper} elevation= {0}>item</Paper>
-        </Grid> */}
       </React.Fragment>
     );
   }
