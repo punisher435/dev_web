@@ -11,6 +11,15 @@ const App = () => {
   const [postsPerPage] = useState(2);
   const [totalposts, settotalPosts] = useState(0);
 
+  const [filters, setfilters] = useState({
+    nonveg_food:'',
+    veg_food:'',
+    guest_allowed:'',
+    iron:'',
+    booked:false,
+
+  });
+
   useEffect(() => {
     const fetchPosts = async () => {
       setLoading(true);
@@ -23,7 +32,8 @@ const App = () => {
       /* const params = new URLSearchParams([page,currentPage]) */
       const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourceaxcnfrudadv34/rooms/`,{
         params:{
-          page:currentPage
+          page:currentPage,
+          booked:filters.booked,
         },
         config:config
       });
@@ -34,7 +44,7 @@ const App = () => {
     };
 
     fetchPosts();
-  }, [currentPage]);
+  }, [currentPage,filters]);
 
   // Get current posts
   const indexOfLastPost = currentPage * postsPerPage;
@@ -53,7 +63,7 @@ const App = () => {
       >
         <Grid item lg={12} xs={12}>
         <h1 className='text-primary mb-3'>Our rooms</h1>
-        <ResponsiveDrawer posts={posts} loading={loading} paginate={paginate} postsPerPage={postsPerPage} currentPage={currentPage} totalposts={totalposts}/>
+        <ResponsiveDrawer setfilters={setfilters} filters={filters} posts={posts} loading={loading} paginate={paginate} postsPerPage={postsPerPage} currentPage={currentPage} totalposts={totalposts}/>
         
 
         {/* <Pagination

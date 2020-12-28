@@ -19,9 +19,10 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 
 
 import Posts from '../components/Posts';
-import Checkboxes from '../components/checkbox';
+import Checkboxes from '../components/bookedcheckbox';
 import MultiSelectTreeView from '../components/filters';
 import PaginationOutlined from '../components/PaginationOutlined';
+import RangeSlider from '../components/priceslider'
 
 const drawerWidth = 240;
 
@@ -79,15 +80,29 @@ function ResponsiveDrawer(props) {
       <ListItem>
       <Typography variant="h4" component="h3">
           Filters
-        </Typography>
+      </Typography>
       </ListItem>
 
       <ListItem>
-      <Checkboxes size='small'/>
+
+      <Checkboxes size='small' filters={props.filters} setfilters={props.setfilters}/>
+
       <Typography variant="body1">
-          Avaiable
-        </Typography>
+          Show all rooms
+      </Typography>
       </ListItem>
+      <Divider />
+      <ListItem>
+      <Typography variant="h6">
+          Price
+      </Typography>
+      </ListItem>
+      <ListItem>
+      <RangeSlider />
+      </ListItem>
+      <Divider />
+
+      
         
       </List>
 
