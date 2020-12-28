@@ -39,6 +39,7 @@ class rooms(models.Model):
     photo4=models.ImageField(_("Image"),upload_to=upload_to,default='/images/rooms/default.jpg')
     photo5=models.ImageField(_("Image"),upload_to=upload_to,default='/images/rooms/default.jpg')
     booked=models.BooleanField(default=False)
+    booked_by=models.IntegerField(default=0)
     removed=models.BooleanField(default=False)
 
     #address
@@ -64,6 +65,8 @@ class rooms(models.Model):
     description = models.TextField()
     avg_rating=models.DecimalField(max_digits=2,decimal_places=1,default=0)
     reviews=models.DecimalField(max_digits=2,decimal_places=1,default=0)
+    cctv_building=models.BooleanField(default=False)
+    building_guard=models.BooleanField(default=False)
 
     balcony=models.BooleanField(default=False)
     separate_washroom=models.BooleanField(default=False)
@@ -106,6 +109,10 @@ class rooms(models.Model):
     cost_iron = models.IntegerField(default=0)
 
     guest_allowed = models.BooleanField(default=False)
+    guest_policy=models.CharField(max_length=255,default='null')
+
+    veg_food=models.BooleanField(default=True)
+    nonveg_food=models.BooleanField(default=True)
     
     breakfast=models.BooleanField(default=True)
     cost_breakfast = models.IntegerField(default=0)
@@ -123,6 +130,10 @@ class rooms(models.Model):
     nearby_restaurant2 = models.TextField(max_length=255)
     room_policy = models.TextField()
 
+    #
+    wishlist=models.BooleanField(default=False)
+    cart=models.BooleanField(default=False)
+
 
     objects = models.Manager()
     personal_rooms = rooms_manager()
@@ -134,6 +145,8 @@ class room_rating_and_reviews(models.Model):
     rating=models.DecimalField(max_digits=2,decimal_places=1)
     reviews=models.TextField()
     timestamp=models.DateTimeField(auto_now=True) 
+
+
 
 
 
@@ -188,6 +201,8 @@ class shops(models.Model):
     description = models.TextField()
     avg_rating=models.DecimalField(max_digits=2,decimal_places=1,default=0)
     reviews=models.DecimalField(max_digits=2,decimal_places=1,default=0)
+    cctv_building=models.BooleanField(default=False)
+    building_guard=models.BooleanField(default=False)
 
     washroom=models.IntegerField(default=1)
     total_rooms=models.IntegerField(default=1)
@@ -212,6 +227,11 @@ class shops(models.Model):
     nearby_station1 = models.TextField(max_length=255)
     nearby_station2 = models.TextField(max_length=255)
     shop_policy = models.TextField()
+
+    # 
+    wishlist=models.BooleanField(default=False)
+    cart=models.BooleanField(default=False)
+
 
     objects = models.Manager()
     personal_shops = shops_manager()
@@ -279,6 +299,8 @@ class apartments(models.Model):
     description = models.TextField()
     avg_rating=models.DecimalField(max_digits=2,decimal_places=1,default=0)
     reviews=models.DecimalField(max_digits=2,decimal_places=1,default=0)
+    cctv_building=models.BooleanField(default=False)
+    building_guard=models.BooleanField(default=False)
 
     wifi = models.BooleanField(default=False)
     cost_wifi = models.IntegerField(default=0)
@@ -321,6 +343,10 @@ class apartments(models.Model):
     nearby_restaurant1 = models.TextField(max_length=255)
     nearby_restaurant2 = models.TextField(max_length=255)
     apartment_policy = models.TextField()
+
+    #
+    wishlist=models.BooleanField(default=False)
+    cart=models.BooleanField(default=False)
 
     objects = models.Manager()
     personal_apartments = apartments_manager()

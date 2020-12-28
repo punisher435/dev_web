@@ -13,15 +13,19 @@ import store from './redux/auth/store';
 import Pagination from './containers/PaginateCardList'
 import rooms from './containers/RoomDetails'
 
-function App(props) {
 
+function App(props) {
+  const mystyle ={
+    margin: '50px 0 0 0',
+  };
   return (
     <Provider store={store}>
       <Router>
           <Layout>
             <Switch>
               <>
-              <div className="App">
+              <div style={mystyle}
+              className="App">
                 <Route exact path='/' component={Home} />
                 <Route exact path='/login' component={Login} />
                 <Route exact path='/signup' component={Signup} />

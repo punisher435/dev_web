@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import Posts from '../components/Posts';
 /* import Pagination from '../components/Pagination'; */
 import Grid from '@material-ui/core/Grid';
 import axios from 'axios';
-import PaginationOutlined from '../components/PaginationOutlined';
+import ResponsiveDrawer from './searchlist';
 
 const App = () => {
   const [posts, setPosts] = useState([]);
@@ -11,6 +10,15 @@ const App = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(2);
   const [totalposts, settotalPosts] = useState(0);
+
+  const [filters, setfilters] = useState({
+    nonveg_food:'',
+    veg_food:'',
+    guest_allowed:'',
+    iron:'',
+    booked:false,
+
+  });
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -24,7 +32,8 @@ const App = () => {
       /* const params = new URLSearchParams([page,currentPage]) */
       const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourceaxcnfrudadv34/rooms/`,{
         params:{
-          page:currentPage
+          page:currentPage,
+          booked:filters.booked,
         },
         config:config
       });
@@ -35,7 +44,7 @@ const App = () => {
     };
 
     fetchPosts();
-  }, [currentPage]);
+  }, [currentPage,filters]);
 
   // Get current posts
   const indexOfLastPost = currentPage * postsPerPage;
@@ -52,10 +61,10 @@ const App = () => {
       justify="flex-end"
       alignItems="center"
       >
-        <Grid item lg={9} xs={12}>
+        <Grid item lg={12} xs={12}>
         <h1 className='text-primary mb-3'>Our rooms</h1>
-        <Posts posts={posts} loading={loading} />
-        <PaginationOutlined paginate={paginate} postsPerPage={postsPerPage} currentPage={currentPage} totalposts={totalposts}/>
+        <ResponsiveDrawer setfilters={setfilters} filters={filters} posts={posts} loading={loading} paginate={paginate} postsPerPage={postsPerPage} currentPage={currentPage} totalposts={totalposts}/>
+        
 
         {/* <Pagination
           postsPerPage={postsPerPage}

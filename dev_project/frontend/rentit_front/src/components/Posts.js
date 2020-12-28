@@ -1,7 +1,9 @@
 import React from 'react';
 import SearchCard from './SearchCard'
 import Spinner from './Spinner'
-
+import RecipeReviewCard from './card_1';
+import Grid from '@material-ui/core/Grid';
+import Hidden from '@material-ui/core/Hidden';
 
 const Posts = ({ posts, loading }) => {
 
@@ -18,7 +20,16 @@ const Posts = ({ posts, loading }) => {
       {posts.map(post => (
         <li key={post.room_id} style={myStlye} className='list-group-item'>
           {/* {post.title} */}
+          <Hidden smDown>
+        <Grid item md={12}>
           <SearchCard post={post}/>
+          </Grid>
+          </Hidden>
+        <Hidden smUp>
+        <Grid item md={12}>
+        <RecipeReviewCard post={post}/>
+        </Grid>
+        </Hidden>
         </li>
       ))}
     </ul>

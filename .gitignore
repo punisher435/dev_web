@@ -5,3 +5,8 @@ dev_project/frontend/rentit_front/build/
 dev_project/backend/rentit/build/
 dev_project/backend/rentit/rentit/build/
 dev_project/backend/rentit/media
+dev_project/backend/rentit/db.sqlite3
+dev_project/backend/rentit/products/__pycache__/models.cpython-36.pyc
+dev_project/backend/rentit/products/migrations/__pycache__/0021_rooms_guest_policy.cpython-36.pyc
+dev_project/frontend/rentit_front/.eslintcache
+dev_project/backend/rentit/products/migrations/0021_rooms_guest_policy.py

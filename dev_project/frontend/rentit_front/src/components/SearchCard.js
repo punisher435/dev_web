@@ -18,6 +18,16 @@ import { IoWaterOutline } from 'react-icons/io5';
 import HotTubIcon from '@material-ui/icons/HotTub';
 import ToysIcon from '@material-ui/icons/Toys';
 import LocalLaundryServiceIcon from '@material-ui/icons/LocalLaundryService';
+import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import { BiFoodMenu } from "react-icons/bi"
+import FastfoodIcon from '@material-ui/icons/Fastfood';
+import FreeBreakfastIcon from '@material-ui/icons/FreeBreakfast';
+import { BiCctv } from "react-icons/bi";
+import { GiGuards } from "react-icons/gi";
+import AccessibilityIcon from '@material-ui/icons/Accessibility';
 import WhatshotIcon from '@material-ui/icons/Whatshot';
 import BathtubIcon from '@material-ui/icons/Bathtub';
 import { grey } from '@material-ui/core/colors';
@@ -75,11 +85,6 @@ const useStyles = makeStyles((theme) => ({
 
   media: {
     height: 300,
-    left:0,
-    transition: 'opacity 5s ease-in-out',
-    webkitTransition: 'opacity 5s ease-in-out',
-    mozTransition: 'opacity 5s ease-in-out',
-    oTransition: 'opacity 5s ease-in-out',
   },
 
   media2: {
@@ -113,9 +118,8 @@ const useStyles = makeStyles((theme) => ({
     // alignItems: 'center',
   },
   textroot2: {
-    marginLeft:'2px',
     fontWeight:'bold',
-    fontSize:'16px',
+    fontSize:'20px',
     display: 'inline',
     marginLeft:'10px',
     color:'#dea300'
@@ -123,12 +127,40 @@ const useStyles = makeStyles((theme) => ({
     // display: 'flex',
     // alignItems: 'center',
   },
+
+  textroot4: {
+    fontWeight:'bold',
+    fontSize:'22px',
+    display: 'inline',
+    marginLeft:'6px',
+    marginBottom:'10px',
+    color:'#dea300'
+    
+    // display: 'flex',
+    // alignItems: 'center',
+  },
+  textroot5: {
+    color:'#f44336',
+    fontSize:'16px',
+    
+    marginTop:'5px',
+    
+    // display: 'flex',
+    // alignItems: 'center',
+  },
+  iconroot: {
+    display: 'inline',
+  },
+
   buttonroot: {
     
     color:'green'
     
     // display: 'flex',
     // alignItems: 'center',
+  },
+  mystyle2 :{
+    fontSize:'25px',
   },
 
 }));
@@ -143,11 +175,6 @@ export default function NestedGrid({post}) {
       c:post.photo3,
       d:post.photo4,
     })
-
-    const mystyle={
-      left:0,
-      transition: 'opacity 1s ease-in-out',
-    }
 
   
     return (
@@ -254,11 +281,38 @@ export default function NestedGrid({post}) {
     const mystyle = {
       fontSize:'13px',
     }
+    
+    const mystyle3 = {
+      display: 'inline',
+    }
+    
     const y=post.owner_discount+post.company_discount;
     return (
-      <Card className={classes.root2}>
-        <Typography variant="h4" component="h3">
+      <Card className={classes.root2} raised={true}>
+        <Grid
+        container
+        direction="row"
+        justify="flex-start"
+        alignItems="flex-start"
+        >
+        <Grid item md={10}>
+        <Typography variant="h4" component="h3" className={classes.mystyle2}>
           {post.title}
+        </Typography>
+        </Grid>
+        <Grid item md={1}>
+        { 
+        post.wishlist ? <Grid item md={1}><Icon color='error' className={classes.iconroot}><FavoriteIcon /></Icon></Grid> : <Grid item md={1}><Icon color='error' className={classes.iconroot}><FavoriteBorderOutlinedIcon /></Icon></Grid>
+        }
+        </Grid>
+        <Grid item md={1}>
+        { 
+        post.cart ? <Grid item md={1}><Icon className={classes.iconroot}><ShoppingCartIcon /></Icon></Grid> : <Grid item md={1}><Icon className={classes.iconroot}><ShoppingCartOutlinedIcon /></Icon></Grid>
+        }
+        </Grid>
+        </Grid>
+        <Typography variant="h4" component="h3" className={classes.textroot4}>
+          {post.category}
         </Typography>
         <Typography variant="body1" component="h2">
         <Icon color="error"><RoomIcon /></Icon>
@@ -268,6 +322,9 @@ export default function NestedGrid({post}) {
             -   near {post.landmark}
         </Typography>
         <CustomizedRatings rating={post.avg_rating}/>
+        <Typography variant="body2" component="h6">
+            Room of {post.capacity} people
+        </Typography>
         <div style={mystyle}>
         <Grid
         container
@@ -276,7 +333,6 @@ export default function NestedGrid({post}) {
         alignItems="flex-start"
         >
         <IconContext.Provider value={{ size: "1.5em",}}>
-  
         { 
         post.wifi ? <Grid item md={1}><div><Icon fontSize='small'><WifiIcon /></Icon><p style={mystyle}>Wifi Facility</p></div></Grid> : <Grid item md={1}><div><WifiOffIcon /><p>no Wifi</p></div></Grid>
         }
@@ -311,6 +367,24 @@ export default function NestedGrid({post}) {
         { 
         post.iron ? <Grid item md={1}><div><WhatshotIcon /><p>Iron</p></div></Grid> : <></>
         }
+        { 
+        post.guest_allowed ? <Grid item md={1}><div><AccessibilityIcon /><p>Guest Allowed</p></div></Grid> : <></>
+        }
+        { 
+        post.breakfast ? <Grid item md={1}><div><FreeBreakfastIcon /><p>Breakfast</p></div></Grid> : <></>
+        }
+        { 
+        post.lunch ? <Grid item md={1}><div><FastfoodIcon /><p>lunch</p></div></Grid> : <></>
+        }
+        { 
+        post.dinner ? <Grid item md={1}><div><BiFoodMenu /><p>dinner</p></div></Grid> : <></>
+        }
+        { 
+        post.cctv_building ? <Grid item md={1}><div><BiCctv /><p>CCTV</p></div></Grid> : <></>
+        }
+        { 
+        post.building_guard ? <Grid item md={1}><div><GiGuards /><p>Sequrity guard</p></div></Grid> : <></>
+        }
         </IconContext.Provider>
         </Grid>
         <Grid
@@ -320,23 +394,27 @@ export default function NestedGrid({post}) {
         alignItems="flex-start"
         >
     
-        <Grid item md={9}>
+        <Grid item md={8}>
           <Typography color='error' variant='h6' className={classes.textroot}>
-          {post.currency} {post.final_price}
+          {post.currency}{post.final_price}
           </Typography>
           <Typography variant='h6' className={classes.textroot1}>
-          <s>{post.currency} {post.final_price}</s>
+          <s>{post.currency}{post.final_price}</s>
           </Typography>
           <Typography variant='h6' className={classes.textroot2}>
             {y}% off
           </Typography>
         </Grid>
-
+        <Grid item md={1}>
+          { 
+          post.booked ? <></> :<p className={classes.textroot5}>Hurry! </p>
+        }
+        </Grid>
         <Grid item md={3}>
           { 
           post.booked ? <Button variant="outlined" color="secondary">
           Not Avaiable
-        </Button> :  <Button variant="contained" color="secondary">
+        </Button> :<Button variant="contained" color="secondary">
             Book Now
         </Button>
         }
