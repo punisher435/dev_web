@@ -44,7 +44,7 @@ backgroundColor: red[500],
 },
 }));
 
-export default function RecipeReviewCard() {
+export default function RecipeReviewCard({post}) {
 const classes = useStyles();
 const [expanded, setExpanded] = React.useState(false);
 

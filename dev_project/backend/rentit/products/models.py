@@ -146,8 +146,7 @@ class room_rating_and_reviews(models.Model):
     reviews=models.TextField()
     timestamp=models.DateTimeField(auto_now=True) 
 
-class minmax(models.Model):
-    
+
 
 
 

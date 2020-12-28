@@ -12,7 +12,6 @@ import Layout from './hocs/Layout';
 import { Provider } from 'react-redux';
 import store from './redux/auth/store';
 import Pagination from './containers/PaginateCardList'
-import card_1 from './components/card_1'
 
 
 function App(props) {
@@ -34,7 +33,6 @@ function App(props) {
                 <Route exact path='/password/reset/confirm/:uid/:token' component={ResetPasswordConfirm} />
                 <Route exact path='/activate/:uid/:token' component={Activate} />
                 <Route exact path='/searchList' component={Pagination}/>
-                <Route exact path='/card_1' component={card_1}/>
               </div>
               </>
             </Switch>
