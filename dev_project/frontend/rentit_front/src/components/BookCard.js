@@ -1,7 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
@@ -9,25 +8,15 @@ import Grid from '@material-ui/core/Grid';
 import DatePicker from '../components/DatePicker'
 import Cancellation from '../components/CancellationPolicyPopover'
 import Facility from './FacilityCheckBox'
-import StarRoundedIcon from '@material-ui/icons/Star';
 import Rating from '@material-ui/lab/Rating';
 import Box from '@material-ui/core/Box';
 import Divider from '@material-ui/core/Divider';
-import TextField from '@material-ui/core/TextField';
-
-
-import clsx from 'clsx';
-import IconButton from '@material-ui/core/IconButton';
-import Input from '@material-ui/core/Input';
-import FilledInput from '@material-ui/core/FilledInput';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputLabel from '@material-ui/core/InputLabel';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
-import Visibility from '@material-ui/icons/Visibility';
-import VisibilityOff from '@material-ui/icons/VisibilityOff';
-
+import MonthSelect from './MonthSelect'
+import FacilityIcon from './FacilityIconProvider'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MediaCard() {
+export default function BoolCard({details}) {
   const classes = useStyles();
   const [value, setValue] = React.useState(2);
   const [values, setValues] = React.useState({
@@ -61,6 +50,7 @@ export default function MediaCard() {
 
   return (
     <Card elevation={4}>
+        <FacilityIcon post={details}/>
         
             <Grid container alignItems='center' justify='space-around'  style={{ backgroundColor: '#cfe8fc'}}>
                 <Grid item>
@@ -116,17 +106,25 @@ export default function MediaCard() {
             (inclusive of all taxes)
              </Typography>      
         </Box>
-        </CardContent>
-            <Card  >
-                    <Grid container justify="space-around" >
-                        <Grid item>
-                                <br></br>
-                                <DatePicker/>
-                            </Grid>
-                            
+
+
+            <Grid container justify="space-around" alignItems='bottom' >
+                <Grid item xs={6}>
+                        <DatePicker/>
                     </Grid>
-                </Card>
-      <CardContent>
+                    <Grid item xs={6}>
+                        <Box mt={1}>
+                            <Grid container justify='center'>
+                                <Grid item>
+                                    <MonthSelect/>
+                                </Grid>
+                            </Grid>
+                        </Box>
+                    </Grid>
+                    
+            </Grid>
+
+
           <Facility type='Breakfast' price='price'/>
 
           <Facility type='Lunch' price='price'/>
@@ -143,23 +141,23 @@ export default function MediaCard() {
                 Apply Coupon
             </Typography>
         </Grid>
-<Grid item xs={7}>
-        <FormControl variant="outlined" noValidate>
-          <InputLabel >Coupon Code</InputLabel>
-          <OutlinedInput
-            value={values.password}
-            onChange={handleChange('password')}
-            endAdornment={
-                <InputAdornment position="end">
-                <Button>
-                    Check
-                </Button>
-              </InputAdornment>
-            }
-            labelWidth={100}
-            />
-        </FormControl>
-</Grid>
+                    <Grid item xs={7}>
+                            <FormControl variant="outlined" noValidate>
+                            <InputLabel >Coupon Code</InputLabel>
+                            <OutlinedInput
+                                value={values.password}
+                                onChange={handleChange('password')}
+                                endAdornment={
+                                    <InputAdornment position="end">
+                                    <Button>
+                                        Check
+                                    </Button>
+                                </InputAdornment>
+                                }
+                                labelWidth={100}
+                                />
+                            </FormControl>
+                    </Grid>
             </Grid>
 
 

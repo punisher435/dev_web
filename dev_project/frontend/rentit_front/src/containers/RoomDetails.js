@@ -143,7 +143,6 @@ export default function FullWidthGrid() {
                           </Grid>
 
                           <Grid item xs = {12}>
-                            {/* <Ameneties/> */}
                             <RatingAndReviews  no={96} rating={3.7}/>
                           </Grid>
                       </Grid>
@@ -154,7 +153,7 @@ export default function FullWidthGrid() {
                 <Grid item xs={4}>
                   <Box mt={7}>
 
-                  <BookCard/>
+                  <BookCard details={details}/>
                   </Box>
                 </Grid>
             </Grid>
