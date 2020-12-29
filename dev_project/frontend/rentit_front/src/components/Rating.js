@@ -4,6 +4,7 @@ import Card from '@material-ui/core/Card';
 import StarRoundedIcon from '@material-ui/icons/Star';
 import Typography from '@material-ui/core/Typography';
 import { CardActionArea } from '@material-ui/core';
+import Box from '@material-ui/core/Box'
 
 const useStyles = makeStyles({
   root: {
@@ -38,24 +39,26 @@ export default function SimpleCard(props) {
 
   return (
     <Card className={classes.root}>
-      <CardActionArea >
-        <Typography 
-          variant="h5" 
-          component="h2"
-          className={props.rating<1 ? classes.yy : 
-          props.rating<2? classes.yg :
-          props.rating<3? classes.gg :
-          props.rating<4? classes.gr :
-          classes.rr
-        }  >
-          {props.rating}
-          <StarRoundedIcon/>
-        </Typography>
-        {/* {props.rating? props.rating+1: props.rating} */}
-        <h6>
-            {props.no} rating
-        </h6>
-      </CardActionArea>
+                <Typography 
+                  variant="h5" 
+                  component="h2"
+                  className={props.rating<1 ? classes.yy : 
+                  props.rating<2? classes.yg :
+                  props.rating<3? classes.gg :
+                  props.rating<4? classes.gr :
+                  classes.rr
+                } >
+                  <Box textAlign="center">
+                  {props.rating}
+                  <StarRoundedIcon/>
+                  </Box>
+                </Typography>
+                {/* {props.rating? props.rating+1: props.rating} */}
+                <h6>
+                <Box textAlign="center">
+                    {props.no} rating
+                  </Box>
+                </h6>
     </Card>
   );
 }

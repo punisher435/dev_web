@@ -61,7 +61,7 @@ export default function CustomizedRatings({rating}) {
         <Rating
           name="customized-color"
           readOnly
-          defaultValue={rating}
+          defaultValue={3}
           getLabelText={(value) => `${value} Heart${value !== 1 ? 's' : ''}`}
           precision={0.1}
           icon={<StarIcon fontSize="inherit" />}
