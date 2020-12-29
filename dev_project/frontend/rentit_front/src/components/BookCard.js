@@ -120,15 +120,10 @@ export default function MediaCard() {
             <Card  >
                     <Grid container justify="space-around" >
                         <Grid item>
-                                From
                                 <br></br>
                                 <DatePicker/>
                             </Grid>
-                            <Grid item>
-                                Till
-                                <br></br>
-                                <DatePicker/>
-                            </Grid>
+                            
                     </Grid>
                 </Card>
       <CardContent>
