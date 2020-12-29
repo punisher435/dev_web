@@ -2,9 +2,9 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import rooms,room_rating_and_reviews
-from .models import shops,shop_rating_and_reviews
-from .models import apartments,apartment_rating_and_reviews
+from .models import rooms,room_rating_and_reviews,minmax_room
+from .models import shops,shop_rating_and_reviews,minmax_shop
+from .models import apartments,apartment_rating_and_reviews,minmax_apartment
 from django_google_maps import widgets as map_widgets
 from django_google_maps import fields as map_fields
 
@@ -24,9 +24,12 @@ class apartment_admin(admin.ModelAdmin):
 
 admin.site.register(rooms)
 admin.site.register(room_rating_and_reviews)
+admin.site.register(minmax_room)
 
 admin.site.register(shops)
 admin.site.register(shop_rating_and_reviews)
+admin.site.register(minmax_shop)
 
 admin.site.register(apartments)
 admin.site.register(apartment_rating_and_reviews)
+admin.site.register(minmax_apartment)

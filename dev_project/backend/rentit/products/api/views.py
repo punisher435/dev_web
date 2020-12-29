@@ -17,7 +17,8 @@ from rentit.settings import EMAIL_HOST_USER
 from .serializers import shop_list_serializer,shop_detail_serializer,shop_rating_and_reviews_serializer
 from .serializers import apartment_list_serializer,apartment_detail_serializer,apartment_rating_and_reviews_serializer
 
-
+from products.models import minmax_room,minmax_shop,minmax_apartment
+from .serializers import minmax_room_serializer,minmax_shop_serializer,minmax_apartment_serializer
 
 #pagination
 
@@ -86,6 +87,7 @@ class my_room_viewset(viewsets.ViewSet):
             x=serializer.validated_data["price"]
             y=serializer.validated_data["owner_discount"]
             serializer.validated_data["final_price"]=(x-(((y)*x)/100))
+            
             serializer.save()
 
             subject = 'Room Added'
@@ -204,6 +206,11 @@ class my_room_viewset(viewsets.ViewSet):
         send_mail(subject,message, EMAIL_HOST_USER, [recepient], fail_silently=False)
 
         return Response("Deleted",status=status.HTTP_200_OK)
+
+
+class minmax_room_viewset(viewsets.ReadOnlyModelViewSet):
+    queryset = minmax_room.objects.all()
+    serializer_class = minmax_room_serializer
 
 
 
@@ -353,6 +360,11 @@ class my_shop_viewset(viewsets.ViewSet):
         send_mail(subject,message, EMAIL_HOST_USER, [recepient], fail_silently=False)
 
         return Response("Deleted",status=status.HTTP_200_OK)
+
+
+class minmax_shop_viewset(viewsets.ReadOnlyModelViewSet):
+    queryset = minmax_shop.objects.all()
+    serializer_class = minmax_shop_serializer
 
 
 
@@ -515,3 +527,7 @@ class my_apartment_viewset(viewsets.ViewSet):
         send_mail(subject,message, EMAIL_HOST_USER, [recepient], fail_silently=False)
 
         return Response("Deleted",status=status.HTTP_200_OK)
+    
+class minmax_apartment_viewset(viewsets.ReadOnlyModelViewSet):
+    queryset = minmax_apartment.objects.all()
+    serializer_class = minmax_apartment_serializer
