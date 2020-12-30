@@ -6,14 +6,12 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box'
 import SpecificRoomCarousel from '../components/SpecificRoomCarousel'
-import Rating from '../components/Rating'
 import RatingAndReviews from '../components/RatingAndReviews'
-
 import RoomDescriptionContent from '../components/RoomDescriptionContent'
 import GoogleApiWrapper from '../components/GoogleMapAPI'
 import BookCard from '../components/BookCard'
-import RatingMeter from '../components/rating_meter'
 import RatingWithCompliment from '../components/RatingWithCompliment'
+import Facility from '../components/FacilityList'
 
 import axios from 'axios';
 
@@ -45,7 +43,7 @@ export default function FullWidthGrid() {
             'Content-Type': 'application/json'
         }
       };
-      const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourceaxcnfrudadv34/rooms/c18b4472-ab45-4d0f-9743-4c35a789fda5/`,config);
+      const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourceaxcnfrudadv34/rooms/476c219a-002a-4ef1-b552-59bdad81435d/`,config);
       
       try{
           console.log(res.data);
@@ -136,6 +134,12 @@ export default function FullWidthGrid() {
                               </Typography>
                               <RoomDescriptionContent description={details.description}/>
                           </Grid>
+                          <Grid item xs={12}>
+                          <Typography variant='h5'>
+                                  Facilities
+                              </Typography>
+                            <Facility post={details}/>
+                          </Grid>
                           
                           <Grid item xs = {12} className={classes.api}>
                             <br></br><br></br>
@@ -143,7 +147,6 @@ export default function FullWidthGrid() {
                           </Grid>
 
                           <Grid item xs = {12}>
-                            {/* <Ameneties/> */}
                             <RatingAndReviews  no={96} rating={3.7}/>
                           </Grid>
                       </Grid>
@@ -154,7 +157,7 @@ export default function FullWidthGrid() {
                 <Grid item xs={4}>
                   <Box mt={7}>
 
-                  <BookCard/>
+                  <BookCard details={details}/>
                   </Box>
                 </Grid>
             </Grid>

@@ -110,7 +110,7 @@ const App = () => {
       setmax_price(res2.data.max_price);
       setmin_price(res2.data.min_price);
 
-
+      console.log(res);
       setPosts(res.data.results);
       setLoading(false);
       settotalPosts(res.data.count);
