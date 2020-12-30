@@ -49,6 +49,7 @@ const App = () => {
     trust_points_filter:'',
     booked:false,
     windows:'',
+    bookedtill:'',
   });
 
   useEffect(() => {
@@ -70,6 +71,8 @@ const App = () => {
           category:filters.category,
           nonveg_food:filters.nonveg_food,
           veg_food:filters.veg_food,
+          bookedtill:filters.bookedtill,
+          min_rating:filters.min_rating,
         },
         config:config
       });

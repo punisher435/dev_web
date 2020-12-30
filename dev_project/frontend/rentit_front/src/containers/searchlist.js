@@ -22,6 +22,8 @@ import RangeSlider from '../components/priceslider'
 import SimpleSelect from '../components/categoryselect';
 import SimpleSelect1 from '../components/foodcheckbox';
 import SimpleSelect2 from '../components/facilitiesfilter';
+import MaterialUIPickers1 from '../components/datefilter';
+import RadioButtonsGroup from '../components/minratingfilter';
 
 const drawerWidth = 240;
 
@@ -91,6 +93,7 @@ function ResponsiveDrawer(props) {
       </Typography>
       </ListItem>
       <Divider />
+
       <ListItem>
       <Typography variant="h6">
           Price
@@ -99,15 +102,28 @@ function ResponsiveDrawer(props) {
       <ListItem>
       <RangeSlider setfilters={props.setfilters} filters={props.filters} max_price={props.max_price} min_price={props.min_price}/>
       </ListItem>
+
       <Divider />
       <ListItem>
        <SimpleSelect filters={props.filters} setfilters={props.setfilters}/>
       </ListItem>
       <Divider />
+
       <ListItem>
-      <SimpleSelect1 filters={props.filters} setfilters={props.setfilters}/>
+      <Typography variant="h6">
+          Booking Date
+      </Typography>
+      </ListItem>
+      <ListItem>
+      <MaterialUIPickers1 filters={props.filters} setfilters={props.setfilters}/>
       </ListItem>
       <Divider />
+
+      <ListItem>
+      <RadioButtonsGroup filters={props.filters} setfilters={props.setfilters}/>
+      </ListItem>
+      <Divider />
+      
       <ListItem>
       <Typography variant="h6">
           Facilities
