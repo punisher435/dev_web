@@ -10,14 +10,45 @@ const App = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(2);
   const [totalposts, settotalPosts] = useState(0);
+  const [max_price, setmax_price] = useState(0);
+  const [min_price, setmin_price] = useState(0);
 
   const [filters, setfilters] = useState({
     nonveg_food:'',
     veg_food:'',
     guest_allowed:'',
     iron:'',
+    laundry:'',
+    cooler:'',
+    AC:'',
+    room_TV:'',
+    power_backup:'',
+    floor_filter:'',
+    purified_water:'',
+    min_rating:'',
+    cctv_building:'',
+    bed_type:'',
+    building_guard:'',
+    balcony:'',
+    separate_washroom:'',
+    category:'',
+    location:'',
+    city:'',
+    state:'',
+    wifi:'',
+    breakfast:'',
+    lunch:'',
+    dinner:'',
+    house_TV:'',
+    geyser:'',
+    electricity:'',
+    country:'',
+    min_price:'',
+    max_price:'',
+    capacity_filter:'',
+    trust_points_filter:'',
     booked:false,
-
+    windows:'',
   });
 
   useEffect(() => {
@@ -34,10 +65,23 @@ const App = () => {
         params:{
           page:currentPage,
           booked:filters.booked,
+          min_price:filters.min_price,
+          max_price:filters.max_price,
+          category:filters.category,
+          nonveg_food:filters.nonveg_food,
+          veg_food:filters.veg_food,
         },
         config:config
       });
-      console.log(res.data);
+
+      const res2 = await axios.get(`${process.env.REACT_APP_API_URL}/sourcekadwbda24/minmax_room/1/`,{
+        config:config
+      });
+      console.log(res2.data.max_price);
+      setmax_price(res2.data.max_price);
+      setmin_price(res2.data.min_price);
+
+
       setPosts(res.data.results);
       setLoading(false);
       settotalPosts(res.data.count);
@@ -63,7 +107,7 @@ const App = () => {
       >
         <Grid item lg={12} xs={12}>
         <h1 className='text-primary mb-3'>Our rooms</h1>
-        <ResponsiveDrawer setfilters={setfilters} filters={filters} posts={posts} loading={loading} paginate={paginate} postsPerPage={postsPerPage} currentPage={currentPage} totalposts={totalposts}/>
+        <ResponsiveDrawer setfilters={setfilters} max_price={max_price} min_price={min_price} filters={filters} posts={posts} loading={loading} paginate={paginate} postsPerPage={postsPerPage} currentPage={currentPage} totalposts={totalposts}/>
         
 
         {/* <Pagination

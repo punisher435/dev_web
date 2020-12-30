@@ -6,12 +6,8 @@ import Divider from '@material-ui/core/Divider';
 import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import MailIcon from '@material-ui/icons/Mail';
 import Grid from '@material-ui/core/Grid';
 import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -21,10 +17,11 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 
 import Posts from '../components/Posts';
 import Checkboxes from '../components/bookedcheckbox';
-import RecipeReviewCard from '../components/card_1';
-import MultiSelectTreeView from '../components/filters';
 import PaginationOutlined from '../components/PaginationOutlined';
 import RangeSlider from '../components/priceslider'
+import SimpleSelect from '../components/categoryselect';
+import SimpleSelect1 from '../components/foodcheckbox';
+import SimpleSelect2 from '../components/facilitiesfilter';
 
 const drawerWidth = 240;
 
@@ -87,7 +84,7 @@ function ResponsiveDrawer(props) {
 
       <ListItem>
 
-      <Checkboxes size='small' filters={props.filters} setfilters={props.setfilters}/>
+      <Checkboxes size='small' setfilters={props.setfilters} filters={props.filters} setfilters={props.setfilters}/>
 
       <Typography variant="body1">
           Show all rooms
@@ -100,7 +97,24 @@ function ResponsiveDrawer(props) {
       </Typography>
       </ListItem>
       <ListItem>
-      <RangeSlider />
+      <RangeSlider setfilters={props.setfilters} filters={props.filters} max_price={props.max_price} min_price={props.min_price}/>
+      </ListItem>
+      <Divider />
+      <ListItem>
+       <SimpleSelect filters={props.filters} setfilters={props.setfilters}/>
+      </ListItem>
+      <Divider />
+      <ListItem>
+      <SimpleSelect1 filters={props.filters} setfilters={props.setfilters}/>
+      </ListItem>
+      <Divider />
+      <ListItem>
+      <Typography variant="h6">
+          Facilities
+      </Typography>
+      </ListItem>
+      <ListItem>
+      <SimpleSelect2 filters={props.filters} setfilters={props.setfilters}/>
       </ListItem>
       <Divider />
 
