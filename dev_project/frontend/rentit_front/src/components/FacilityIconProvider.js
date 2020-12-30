@@ -1,27 +1,15 @@
 import React ,{ useState }from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
 import Icon from '@material-ui/core/Icon'
-import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import MeetingRoomOutlinedIcon from '@material-ui/icons/MeetingRoomOutlined';
 import AcUnitIcon from '@material-ui/icons/AcUnit';
-import WifiOffIcon from '@material-ui/icons/WifiOff';
 import WifiIcon from '@material-ui/icons/Wifi';
-import RoomIcon from '@material-ui/icons/Room';
 import TvOutlinedIcon from '@material-ui/icons/TvOutlined';
-import TvOffOutlinedIcon from '@material-ui/icons/TvOffOutlined';
 import { IoWaterOutline } from 'react-icons/io5';
 import HotTubIcon from '@material-ui/icons/HotTub';
 import ToysIcon from '@material-ui/icons/Toys';
 import LocalLaundryServiceIcon from '@material-ui/icons/LocalLaundryService';
-import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import { BiFoodMenu } from "react-icons/bi"
 import FastfoodIcon from '@material-ui/icons/Fastfood';
 import FreeBreakfastIcon from '@material-ui/icons/FreeBreakfast';
@@ -30,15 +18,17 @@ import { GiGuards } from "react-icons/gi";
 import AccessibilityIcon from '@material-ui/icons/Accessibility';
 import WhatshotIcon from '@material-ui/icons/Whatshot';
 import BathtubIcon from '@material-ui/icons/Bathtub';
-import { grey } from '@material-ui/core/colors';
 import { IconContext } from "react-icons";
 import Box from '@material-ui/core/Box'
+import Checkbox from '@material-ui/core/Checkbox';
 
-import CustomizedRatings from './rating_meter';
 
+export default function Item({post}) {
+    const [checked, setChecked] = React.useState(true);
 
-export default function NestedGrid({post}) {
- 
+    const handleChange = (event) => {
+      setChecked(event.target.checked);
+    };
   
 
     const mystyle = {
@@ -51,312 +41,406 @@ export default function NestedGrid({post}) {
 
        <IconContext.Provider value={{ size: "1.5em",}}>
        { 
-       post.wifi ? 
+       post.removable_wifi ? 
        <Grid container alignItems="center">
-           <Grid item>
-               <Box textAlign='center'>
+           <Grid item xs={2} >
+               <Box mr={1} ml={1}>
                    <Icon fontSize='small' ><WifiIcon /></Icon>
                </Box>
            </Grid>
-           <Grid item>
+           <Grid item xs={4}>
                <Typography variant="p">
-                   <Box textAlign='center' mt={1}>
+                   <Box >
                        Wifi Facility
                    </Box>
                </Typography>
+           </Grid>
+           <Grid item xs={2}>
+               <Typography variant='p'>
+                   <Box>
+                       ({post.cost_wifi})
+                   </Box>
+               </Typography>
+           </Grid>
+           <Grid item>
+           <Checkbox
+                    checked={checked}
+                    onChange={handleChange}
+                    size="small"
+                    inputProps={{ 'aria-label': 'primary checkbox' }}
+                />
+           </Grid>
+       </Grid> 
+       : <></>
+       }
+
+
+{ 
+       post.removable_house_TV ?  
+       <Grid container alignItems="center">
+           <Grid item xs={2} >
+               <Box mr={1} ml={1}>
+                   <Icon fontSize='small' ><TvOutlinedIcon /></Icon>
+               </Box>
+           </Grid>
+           <Grid item xs={4}>
+               <Typography variant="p">
+                   <Box >
+                       House TV
+                   </Box>
+               </Typography>
+           </Grid>
+           <Grid item xs={2}>
+               <Typography variant='p'>
+                   <Box>
+                       ({post.cost_TV})
+                   </Box>
+               </Typography>
+           </Grid>
+           <Grid item>
+           <Checkbox
+                    checked={checked}
+                    onChange={handleChange}
+                    size="small"
+                    inputProps={{ 'aria-label': 'primary checkbox' }}
+                />
            </Grid>
        </Grid> 
        : <></>
        }
        
        { 
-       post.room_TV ?  
+       post.removable_room_TV ?  
        <Grid container alignItems="center">
-           <Grid item>
-               <Box textAlign='center'>
+           <Grid item xs={2} >
+               <Box mr={1} ml={1}>
                    <Icon fontSize='small' ><TvOutlinedIcon /></Icon>
                </Box>
            </Grid>
-           <Grid item>
+           <Grid item xs={4}>
                <Typography variant="p">
-                   <Box textAlign='center' mt={1}>
-                   Room TV
+                   <Box >
+                       Room TV
                    </Box>
                </Typography>
            </Grid>
-       </Grid> 
-       : <p></p>
-       }
-       { 
-       post.house_TV ? 
-       <Grid container alignItems="center">
-           <Grid item>
-               <Box textAlign='center'>
-                   <Icon fontSize='small' ><TvOutlinedIcon /></Icon>
-               </Box>
-           </Grid>
-           <Grid item>
-               <Typography variant="p">
-                   <Box textAlign='center' mt={1}>
-                   House TV
+           <Grid item xs={2}>
+               <Typography variant='p'>
+                   <Box>
+                       ({post.cost_TV})
                    </Box>
                </Typography>
+           </Grid>
+           <Grid item>
+           <Checkbox
+                    checked={checked}
+                    onChange={handleChange}
+                    size="small"
+                    inputProps={{ 'aria-label': 'primary checkbox' }}
+                />
            </Grid>
        </Grid> 
        : <></>
        }
        { 
-       post.balcony ? 
+       post.removable_purified_water ? 
        <Grid container alignItems="center">
-           <Grid item>
-               <Box textAlign='center'>
-                   <Icon fontSize='small' ><MeetingRoomOutlinedIcon /></Icon>
-               </Box>
-           </Grid>
-           <Grid item>
-               <Typography variant="p">
-                   <Box textAlign='center' mt={1}>
-                   Balcony
-                   </Box>
-               </Typography>
-           </Grid>
-       </Grid> 
-       : <></>
-       }
-       { 
-       post.separate_washroom ? 
-       <Grid container alignItems="center">
-           <Grid item>
-               <Box textAlign='center'>
-                   <Icon fontSize='small' ><BathtubIcon /></Icon>
-               </Box>
-           </Grid>
-           <Grid item>
-               <Typography variant="p">
-                   <Box textAlign='center' mt={1}>
-                   Separate washroom
-                   </Box>
-               </Typography>
-           </Grid>
-       </Grid>
-       : <></>
-       }
-       { 
-       post.purified_water ? 
-       <Grid container alignItems="center">
-           <Grid item>
-               <Box textAlign='center'>
+           <Grid item xs={2} >
+               <Box mr={1} ml={0}>
                    <Icon ><IoWaterOutline /></Icon>
                </Box>
            </Grid>
-           <Grid item>
+           <Grid item xs={4}>
                <Typography variant="p">
-                   <Box textAlign='center' mt={1}>
+                   <Box >
                        Pure Water
                    </Box>
                </Typography>
            </Grid>
+           <Grid item xs={2}>
+               <Typography variant='p'>
+                   <Box>
+                       ({post.cost_purified_water})
+                   </Box>
+               </Typography>
+           </Grid>
+           <Grid item>
+           <Checkbox
+                    checked={checked}
+                    onChange={handleChange}
+                    size="small"
+                    inputProps={{ 'aria-label': 'primary checkbox' }}
+                />
+           </Grid>
        </Grid>
        : <></>
        }
        { 
-       post.geyser ? 
+       post.removable_geyser ? 
        <Grid container alignItems="center">
-           <Grid item>
-               <Box textAlign='center'>
+           <Grid item xs={2} >
+               <Box mr={1} ml={1}>
                    <Icon ><HotTubIcon /></Icon>
                </Box>
            </Grid>
-           <Grid item>
+           <Grid item xs={4}>
                <Typography variant="p">
-                   <Box textAlign='center' mt={1}>
-                   Hot Water
+                   <Box >
+                       Hot Water
                    </Box>
                </Typography>
+           </Grid>
+           <Grid item xs={2}>
+               <Typography variant='p'>
+                   <Box>
+                       ({post.cost_geyser})
+                   </Box>
+               </Typography>
+           </Grid>
+           <Grid item>
+           <Checkbox
+                    checked={checked}
+                    onChange={handleChange}
+                    size="small"
+                    inputProps={{ 'aria-label': 'primary checkbox' }}
+                />
            </Grid>
        </Grid>
        : <></>
        }
        { 
-       post.AC ? 
+       post.removable_AC ? 
        <Grid container alignItems="center">
-           <Grid item>
-               <Box textAlign='center'>
+           <Grid item xs={2} >
+               <Box mr={1} ml={1}>
                    <Icon ><AcUnitIcon /></Icon>
                </Box>
            </Grid>
-           <Grid item>
+           <Grid item xs={4}>
                <Typography variant="p">
-                   <Box textAlign='center' mt={1}>
-                   AC
+                   <Box >
+                       AC
                    </Box>
                </Typography>
+           </Grid>
+           <Grid item xs={2}>
+               <Typography variant='p'>
+                   <Box>
+                       ({post.cost_AC})
+                   </Box>
+               </Typography>
+           </Grid>
+           <Grid item>
+           <Checkbox
+                    checked={checked}
+                    onChange={handleChange}
+                    size="small"
+                    inputProps={{ 'aria-label': 'primary checkbox' }}
+                />
            </Grid>
        </Grid>
        : <></>
        }
        { 
-       post.cooler ? 
+       post.removable_cooler ? 
        <Grid container alignItems="center">
-           <Grid item>
-               <Box textAlign='center'>
+           <Grid item xs={2} >
+               <Box  mr={1} ml={1}>
                    <Icon ><ToysIcon /></Icon>
                </Box>
            </Grid>
-           <Grid item>
+           <Grid item xs={4}>
                <Typography variant="p">
-                   <Box textAlign='center' mt={1}>
+                   <Box >
                        Cooler
                    </Box>
                </Typography>
            </Grid>
+           <Grid item xs={2}>
+               <Typography variant='p'>
+                   <Box>
+                       ({post.cost_cooler})
+                   </Box>
+               </Typography>
+           </Grid>
+           <Grid item>
+           <Checkbox
+                    checked={checked}
+                    onChange={handleChange}
+                    size="small"
+                    inputProps={{ 'aria-label': 'primary checkbox' }}
+                />
+           </Grid>
        </Grid>
        : <></>
        }
        { 
-       post.laundry ? 
+       post.removable_laundry ? 
        <Grid container alignItems="center">
-           <Grid item>
-               <Box textAlign='center'>
+           <Grid item xs={2} >
+               <Box mr={1} ml={1}>
                    <Icon ><LocalLaundryServiceIcon /></Icon>
                </Box>
            </Grid>
-           <Grid item>
+           <Grid item xs={4}>
                <Typography variant="p">
-                   <Box textAlign='center' mt={1}>
-                   Laundry
+                   <Box >
+                       Laundry
                    </Box>
                </Typography>
+           </Grid>
+           <Grid item xs={2}>
+               <Typography variant='p'>
+                   <Box>
+                       ({post.cost_laundry})
+                   </Box>
+               </Typography>
+           </Grid>
+           <Grid item>
+           <Checkbox
+                    checked={checked}
+                    onChange={handleChange}
+                    size="small"
+                    inputProps={{ 'aria-label': 'primary checkbox' }}
+                />
            </Grid>
        </Grid>
        : <></>
        }
        { 
-       post.iron ?
+       post.removable_iron ?
        <Grid container alignItems="center">
-           <Grid item>
-               <Box textAlign='center'>
+           <Grid item xs={2} >
+               <Box mr={1} ml={1}>
                    <Icon ><WhatshotIcon /></Icon>
                </Box>
            </Grid>
-           <Grid item>
+           <Grid item xs={4}>
                <Typography variant="p">
-                   <Box textAlign='center' mt={1}>
-                   Iron
+                   <Box >
+                       Iron
                    </Box>
                </Typography>
+           </Grid>
+           <Grid item xs={2}>
+               <Typography variant='p'>
+                   <Box>
+                       ({post.cost_iron})
+                   </Box>
+               </Typography>
+           </Grid>
+           <Grid item>
+           <Checkbox
+                    checked={checked}
+                    onChange={handleChange}
+                    size="small"
+                    inputProps={{ 'aria-label': 'primary checkbox' }}
+                />
            </Grid>
        </Grid>
        : <></>
        }
        { 
-       post.guest_allowed ? 
+       post.removable_breakfast ? 
        <Grid container alignItems="center">
-           <Grid item>
-               <Box textAlign='center'>
-                   <Icon ><AccessibilityIcon /></Icon>
-               </Box>
-           </Grid>
-           <Grid item>
-               <Typography variant="p">
-                   <Box textAlign='center' mt={1}>
-                   Guest Allowed
-                   </Box>
-               </Typography>
-           </Grid>
-       </Grid>
-       : <></>
-       }
-       { 
-       post.breakfast ? 
-       <Grid container alignItems="center">
-           <Grid item>
-               <Box textAlign='center'>
+           <Grid item xs={2} >
+               <Box  mr={1} ml={1}>
                    <Icon ><FreeBreakfastIcon /></Icon>
                </Box>
            </Grid>
-           <Grid item>
+           <Grid item xs={4}>
                <Typography variant="p">
-                   <Box textAlign='center' mt={1}>
-                   Breakfast
+                   <Box >
+                       Breakfast
                    </Box>
                </Typography>
+           </Grid>
+           <Grid item xs={2}>
+               <Typography variant='p'>
+                   <Box>
+                       ({post.cost_breakfast})
+                   </Box>
+               </Typography>
+           </Grid>
+           <Grid item>
+           <Checkbox
+                    checked={checked}
+                    onChange={handleChange}
+                    size="small"
+                    inputProps={{ 'aria-label': 'primary checkbox' }}
+                />
            </Grid>
        </Grid>
        : <></>
        }
        { 
-       post.lunch ? 
+       post.removable_lunch ? 
        <Grid container alignItems="center">
-           <Grid item>
-               <Box textAlign='center'>
+           <Grid item xs={2} >
+               <Box mr={1} ml={1}>
                    <Icon ><FastfoodIcon /></Icon>
                </Box>
            </Grid>
-           <Grid item>
+           <Grid item xs={4}>
                <Typography variant="p">
-                   <Box textAlign='center' mt={1}>
-                   Lunch
+                   <Box >
+                       Lunch
                    </Box>
                </Typography>
+           </Grid>
+           <Grid item xs={2}>
+               <Typography variant='p'>
+                   <Box>
+                       ({post.cost_lunch})
+                   </Box>
+               </Typography>
+           </Grid>
+           <Grid item>
+           <Checkbox
+                    checked={checked}
+                    onChange={handleChange}
+                    size="small"
+                    inputProps={{ 'aria-label': 'primary checkbox' }}
+                />
            </Grid>
        </Grid>
        : <></>
        }
        { 
-       post.dinner ? 
+       post.removable_dinner ? 
        <Grid container alignItems="center">
-           <Grid item>
-               <Box textAlign='center'>
+           <Grid item xs={2} >
+               <Box mr={1} ml={1}>
                    <Icon ><BiFoodMenu /></Icon>
                </Box>
            </Grid>
-           <Grid item>
+           <Grid item xs={4}>
                <Typography variant="p">
-                   <Box textAlign='center' mt={1}>
-                   dinner
+                   <Box >
+                       Dinner
                    </Box>
                </Typography>
+           </Grid>
+           <Grid item xs={2}>
+               <Typography variant='p'>
+                   <Box>
+                       ({post.cost_dinner})
+                   </Box>
+               </Typography>
+           </Grid>
+           <Grid item>
+           <Checkbox
+                    checked={checked}
+                    onChange={handleChange}
+                    size="small"
+                    inputProps={{ 'aria-label': 'primary checkbox' }}
+                />
            </Grid>
        </Grid>
        : <></>
        }
-       { 
-       post.cctv_building ? 
-       <Grid container alignItems="center">
-           <Grid item>
-               <Box textAlign='center'>
-                   <Icon ><BiCctv /></Icon>
-               </Box>
-           </Grid>
-           <Grid item>
-               <Typography variant="p">
-                   <Box textAlign='center' mt={1}>
-                   CCTV
-                   </Box>
-               </Typography>
-           </Grid>
-       </Grid>
-       : <></>
-       }
-       { 
-       post.building_guard ? 
-       <Grid container alignItems="center">
-           <Grid item>
-               <Box textAlign='center'>
-                   <Icon ><GiGuards /></Icon>
-               </Box>
-           </Grid>
-           <Grid item>
-               <Typography variant="p">
-                   <Box textAlign='center' mt={1}>
-                   Sequrity guard
-                   </Box>
-               </Typography>
-           </Grid>
-       </Grid>
-       : <></>
-       }
+
+       
        </IconContext.Provider>
 
     )

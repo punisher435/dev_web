@@ -7,7 +7,6 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import DatePicker from '../components/DatePicker'
 import Cancellation from '../components/CancellationPolicyPopover'
-import Facility from './FacilityCheckBox'
 import Rating from '@material-ui/lab/Rating';
 import Box from '@material-ui/core/Box';
 import Divider from '@material-ui/core/Divider';
@@ -26,31 +25,16 @@ const useStyles = makeStyles((theme) => ({
 
 export default function BoolCard({details}) {
   const classes = useStyles();
-  const [value, setValue] = React.useState(2);
   const [values, setValues] = React.useState({
-    amount: '',
-    password: '',
-    weight: '',
-    weightRange: '',
-    showPassword: false,
+    couponCode: '',
   });
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
 
-  const handleClickShowPassword = () => {
-    setValues({ ...values, showPassword: !values.showPassword });
-  };
-
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
-
-
   return (
     <Card elevation={4}>
-        <FacilityIcon post={details}/>
         
             <Grid container alignItems='center' justify='space-around'  style={{ backgroundColor: '#cfe8fc'}}>
                 <Grid item>
@@ -70,10 +54,12 @@ export default function BoolCard({details}) {
         <CardContent>
 
         <Box component="fieldset" mb={1} borderColor="transparent">
-        <Typography variant="h5" component="legend">Hostel Name</Typography>
+        <Typography variant="h5" component="legend">
+            {details.title}
+            </Typography>
         <Grid container alignItems="center">
             <Grid item>
-                <Rating name="read-only" value={value} readOnly  />
+                <Rating name="read-only" value={3} readOnly  />
             </Grid>
             <Grid item>
             <Typography variant="subtitle1">(244)</Typography>
@@ -88,17 +74,17 @@ export default function BoolCard({details}) {
             <Grid container alignItems="center" spacing={1}>
                 <Grid item  style={{ paddingBottom: '0px'}}>
                     <Typography variant="h5" color="textSecondary" display = 'inline' >
-                        500$
+                    {details.currency}{details.final_price}
                     </Typography>
                 </Grid>
                 <Grid item style={{ paddingBottom: '0px'}}>
                     <Typography variant="subtitle1" color="textSecondary" display = 'inline'>
-                        <strike>200$</strike>
+                        <strike>{details.currency}{details.price}</strike>
                     </Typography>
                 </Grid>
                 <Grid item style={{ paddingBottom: '0px'}}>
                     <Typography variant="subtitle2" color="textSecondary" display = 'inline'>
-                        35% off
+                        {details.fake_discount}% off
                     </Typography>
                 </Grid>
             </Grid>
@@ -107,7 +93,7 @@ export default function BoolCard({details}) {
              </Typography>      
         </Box>
 
-
+        
             <Grid container justify="space-around" alignItems='bottom' >
                 <Grid item xs={6}>
                         <DatePicker/>
@@ -117,6 +103,7 @@ export default function BoolCard({details}) {
                             <Grid container justify='center'>
                                 <Grid item>
                                     <MonthSelect/>
+                                    
                                 </Grid>
                             </Grid>
                         </Box>
@@ -124,14 +111,16 @@ export default function BoolCard({details}) {
                     
             </Grid>
 
-
+{/* 
           <Facility type='Breakfast' price='price'/>
 
           <Facility type='Lunch' price='price'/>
 
           <Facility type='Dinner' price='price'/>
 
-          <Facility type='wifi' price='price'/>
+          <Facility type='wifi' price='price'/> */}
+
+        <FacilityIcon post={details}/>
 
           <Divider/>
         <Box mt={1} mb={2}>
@@ -145,8 +134,8 @@ export default function BoolCard({details}) {
                             <FormControl variant="outlined" noValidate>
                             <InputLabel >Coupon Code</InputLabel>
                             <OutlinedInput
-                                value={values.password}
-                                onChange={handleChange('password')}
+                                value={values.couponCode}
+                                onChange={handleChange('couponCode')}
                                 endAdornment={
                                     <InputAdornment position="end">
                                     <Button>
@@ -168,23 +157,23 @@ export default function BoolCard({details}) {
         </Box>
 
 <Divider/>
-        <Box mt={1} mb={2}>
-        <Grid container alignItems='center'>
-            <Grid item xs={8}>
-                <Typography variant='subtitle1'>
-                    <Box fontSize="20px">
-                    Your savings
+            <Box mt={1} mb={2}>
+            <Grid container alignItems='center'>
+                <Grid item xs={8}>
+                    <Typography variant='subtitle1'>
+                        <Box fontSize="20px">
+                        Your savings
+                        </Box>
+                    </Typography>
+                </Grid>
+                <Grid item>
+                    <Typography variant='subtitle2'>
+                    <Box fontSize="18px">
+                    {details.currency}{details.price - details.final_price}
                     </Box>
-                </Typography>
+                    </Typography>
+                </Grid>
             </Grid>
-            <Grid item>
-                <Typography variant='subtitle2'>
-                <Box fontSize="18px">
-                    $500
-                </Box>
-                </Typography>
-            </Grid>
-        </Grid>
 
 
             <Grid container alignItems='center'>
@@ -198,7 +187,7 @@ export default function BoolCard({details}) {
                 <Grid item>
                     <Typography variant='subtitle2'>
                     <Box fontSize="18px">
-                    $1500
+                    {details.currency}{details.price}
                 </Box>
                     </Typography>
                 </Grid>
