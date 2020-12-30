@@ -226,7 +226,7 @@ export default function SimpleSelect2(props) {
       </FormControl>
 
       <FormControl className={classes.formControl}>
-        <InputLabel id="power_backup">Guest allowed</InputLabel>
+        <InputLabel id="power_backup">Power Backup</InputLabel>
         <Select
           labelId="power_backup_list"
           id="power_backup_id"

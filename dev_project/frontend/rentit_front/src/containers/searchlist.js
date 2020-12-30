@@ -22,10 +22,18 @@ import RangeSlider from '../components/priceslider'
 import SimpleSelect from '../components/categoryselect';
 import SimpleSelect1 from '../components/foodcheckbox';
 import SimpleSelect2 from '../components/facilitiesfilter';
+import SimpleSelect3 from '../components/sequrityfilter';
 import MaterialUIPickers1 from '../components/datefilter';
 import RadioButtonsGroup from '../components/minratingfilter';
+import Capacityfilter from '../components/Capacityfilter';
+import Trustpointsfilter from '../components/mintrustpoints';
+import Windowsfilter from '../components/minwindows';
+import Floorfilter from '../components/floorfilter';
+import SimpleSelect5 from '../components/bedtypefilter';
+import SearchFields from '../components/searchfilter';
+import SimpleSelectfinal from '../components/sort';
 
-const drawerWidth = 240;
+const drawerWidth = 300;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -60,7 +68,11 @@ const useStyles = makeStyles((theme) => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
+    marginTop:'0px',
   },
+  mystyle: {
+    marginLeft:'10px',
+  }
 }));
 
 function ResponsiveDrawer(props) {
@@ -78,13 +90,13 @@ function ResponsiveDrawer(props) {
       <div className={classes.toolbar} />
       <Divider />
       <List>
-      <ListItem>
+      <ListItem className={classes.mystyle}>
       <Typography variant="h4" component="h3">
           Filters
       </Typography>
       </ListItem>
 
-      <ListItem>
+      <ListItem className={classes.mystyle}>
 
       <Checkboxes size='small' setfilters={props.setfilters} filters={props.filters} setfilters={props.setfilters}/>
 
@@ -94,43 +106,103 @@ function ResponsiveDrawer(props) {
       </ListItem>
       <Divider />
 
-      <ListItem>
+      <ListItem className={classes.mystyle}>
       <Typography variant="h6">
           Price
       </Typography>
       </ListItem>
-      <ListItem>
+      <ListItem className={classes.mystyle}>
       <RangeSlider setfilters={props.setfilters} filters={props.filters} max_price={props.max_price} min_price={props.min_price}/>
       </ListItem>
 
       <Divider />
-      <ListItem>
+      <ListItem className={classes.mystyle}>
        <SimpleSelect filters={props.filters} setfilters={props.setfilters}/>
-      </ListItem>
+      </ListItem >
       <Divider />
 
-      <ListItem>
+      <ListItem className={classes.mystyle}>
       <Typography variant="h6">
           Booking Date
       </Typography>
       </ListItem>
-      <ListItem>
+      <ListItem className={classes.mystyle}>
       <MaterialUIPickers1 filters={props.filters} setfilters={props.setfilters}/>
       </ListItem>
       <Divider />
 
-      <ListItem>
+      <ListItem className={classes.mystyle}>
+      <Typography variant="h6">
+          Capacity
+      </Typography>
+      </ListItem>
+      <ListItem className={classes.mystyle}>
+      <Capacityfilter filters={props.filters} setfilters={props.setfilters}/>
+      </ListItem>
+      <Divider />
+
+      <ListItem className={classes.mystyle}>
+      <Typography variant="h6">
+          Min. Trust Points
+      </Typography>
+      </ListItem>
+      <ListItem className={classes.mystyle}>
+      <Trustpointsfilter filters={props.filters} setfilters={props.setfilters}/>
+      </ListItem>
+      <Divider />
+
+      <ListItem className={classes.mystyle}>
       <RadioButtonsGroup filters={props.filters} setfilters={props.setfilters}/>
       </ListItem>
       <Divider />
       
-      <ListItem>
+      <ListItem className={classes.mystyle}>
       <Typography variant="h6">
           Facilities
       </Typography>
       </ListItem>
-      <ListItem>
+      <ListItem className={classes.mystyle}>
       <SimpleSelect2 filters={props.filters} setfilters={props.setfilters}/>
+      </ListItem>
+      <Divider />
+
+      <ListItem className={classes.mystyle}>
+      <SimpleSelect1 filters={props.filters} setfilters={props.setfilters}/>
+      </ListItem>
+      <Divider />
+
+      <ListItem className={classes.mystyle}>
+      <Typography variant="h6">
+         Min. Windows
+      </Typography>
+      </ListItem>
+      <ListItem className={classes.mystyle}>
+      <Windowsfilter filters={props.filters} setfilters={props.setfilters}/>
+      </ListItem>
+      <Divider />
+
+      <ListItem className={classes.mystyle}>
+      <Typography variant="h6">
+         Sequrity
+      </Typography>
+      </ListItem>
+      <ListItem className={classes.mystyle}>
+      <SimpleSelect3 filters={props.filters} setfilters={props.setfilters}/>
+      </ListItem>
+      <Divider />
+
+      <ListItem className={classes.mystyle}>
+      <Typography variant="h6">
+        Floor no.
+      </Typography>
+      </ListItem>
+      <ListItem className={classes.mystyle}>
+      <Floorfilter filters={props.filters} setfilters={props.setfilters}/>
+      </ListItem>
+      <Divider />
+
+      <ListItem className={classes.mystyle}>
+      <SimpleSelect5 filters={props.filters} setfilters={props.setfilters}/>
       </ListItem>
       <Divider />
 
@@ -161,10 +233,16 @@ function ResponsiveDrawer(props) {
           
 
             {/* THE APPBAR CONTENT SHOULD BE HERE */}
+            
 
 
         </Toolbar>
+
+        
+
       </AppBar>
+
+
       <nav className={classes.drawer} aria-label="mailbox folders">
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
         <Hidden smUp implementation="css">
@@ -198,8 +276,21 @@ function ResponsiveDrawer(props) {
       </nav>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <Posts posts={props.posts} loading={props.loading} />
-        <PaginationOutlined paginate={props.paginate} postsPerPage={props.postsPerPage} currentPage={props.currentPage} totalposts={props.totalposts}/>
+
+        <Grid
+        container
+        direction="row"
+        justify="space-around"
+        alignItems="center"
+        >
+           <SearchFields filters={props.filters} setfilters={props.setfilters} />
+           <SimpleSelectfinal filters={props.filters} setfilters={props.setfilters} />
+
+        </Grid>
+
+        
+           <Posts posts={props.posts} loading={props.loading} />
+           <PaginationOutlined paginate={props.paginate} postsPerPage={props.postsPerPage} currentPage={props.currentPage} totalposts={props.totalposts}/>
 
       </main>
     </div>

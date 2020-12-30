@@ -35,7 +35,7 @@ class room_filter(rest_filters.FilterSet):
     min_price = rest_filters.NumberFilter(field_name='final_price',lookup_expr='gte')
     max_price = rest_filters.NumberFilter(field_name='final_price',lookup_expr='lte')
     min_rating = rest_filters.NumberFilter(field_name='avg_rating',lookup_expr='gte')
-    windows = rest_filters.NumberFilter(field_name='windows',lookup_expr='gte')
+    windows_filter = rest_filters.NumberFilter(field_name='windows',lookup_expr='gte')
     capacity_filter = rest_filters.NumberFilter(field_name='capacity',lookup_expr='exact')
     floor_filter = rest_filters.NumberFilter(field_name='floor_no',lookup_expr='exact')
     trust_points_filter = rest_filters.NumberFilter(field_name='trust_points',lookup_expr='gte')
@@ -43,7 +43,7 @@ class room_filter(rest_filters.FilterSet):
 
     class Meta:
         model = rooms
-        fields = ['bookedtill_filter','nonveg_food','veg_food','guest_allowed','iron','laundry','cooler','AC','room_TV','power_backup','floor_filter','purified_water','min_rating','cctv_building','bed_type','building_guard','balcony','separate_washroom','category','location','city','state','wifi','breakfast','lunch','dinner','house_TV','power_backup','geyser','electricity','country','min_price','max_price','capacity_filter','trust_points_filter','booked']
+        fields = ['windows_filter','bookedtill_filter','nonveg_food','veg_food','guest_allowed','iron','laundry','cooler','AC','room_TV','power_backup','floor_filter','purified_water','min_rating','cctv_building','bed_type','building_guard','balcony','separate_washroom','category','location','city','state','wifi','breakfast','lunch','dinner','house_TV','power_backup','geyser','electricity','country','min_price','max_price','capacity_filter','trust_points_filter','booked']
 
 
 class room_viewset(viewsets.ReadOnlyModelViewSet):
@@ -51,7 +51,7 @@ class room_viewset(viewsets.ReadOnlyModelViewSet):
     filter_backends=(rest_filters.DjangoFilterBackend,filters.SearchFilter,filters.OrderingFilter,)
     pagination_class = StandardResultsSetPagination
     filterset_class = room_filter
-    search_fields = ['^category','^location','^city','=state','=country','=pincode']
+    search_fields = ['^category','^location','^city','^state','^country','^pincode']
     ordering_fields = ['final_price','capacity','trust_points','avg_rating']
     ordering = ['-trust_points']
 
