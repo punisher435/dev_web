@@ -9,7 +9,7 @@ export default function Checkboxes({ filters,setfilters }) {
     console.log(event);
 
     if(event.target.checked===true){
-      setfilters({...filters,booked:''});
+      setfilters({...filters,booked:'',bookedtill:''});
     }
     if(event.target.checked===false){
       setfilters({...filters,booked:false});

@@ -1,6 +1,8 @@
 import uuid
 from django.db import models
 from django.contrib.auth import get_user_model
+from datetime import date
+import datetime
 from django.utils.translation import gettext_lazy as _
 
 # Create your models here.
@@ -13,6 +15,8 @@ User= get_user_model()
 
 def upload_to(instance, filename):
     return 'images/rooms/{filename}'.format(filename=filename)
+
+yesterday = datetime.datetime.now() - datetime.timedelta(days = 1)
 
 class rooms(models.Model):
     #info
@@ -40,7 +44,7 @@ class rooms(models.Model):
     photo5=models.ImageField(_("Image"),upload_to=upload_to,default='/images/rooms/default.jpg')
     booked=models.BooleanField(default=False)
     booked_by=models.IntegerField(default=0)
-    bookedtill =models.DateField()
+    bookedtill =models.DateField(_("Booked_till_Date"),null=True,blank=True)
     removed=models.BooleanField(default=False)
 
     #address
@@ -193,7 +197,7 @@ class shops(models.Model):
     photo4=models.ImageField(_("Image"),upload_to=upload_to_shops,default='/images/rooms/default.jpg')
     photo5=models.ImageField(_("Image"),upload_to=upload_to_shops,default='/images/rooms/default.jpg')
     booked=models.BooleanField(default=False)
-    bookedtill =models.DateField()
+    bookedtill =models.DateField(_("Booked_till_Date"),null=True,blank=True)
     removed=models.BooleanField(default=False)
     currency=models.CharField(max_length=200,default='₹')
 
@@ -277,7 +281,7 @@ class apartments(models.Model):
     apartment_id = models.UUIDField( 
          primary_key = True, 
          default = uuid.uuid4, 
-         editable = False,wifi
+         editable = False,
          unique = True)
     seller_id=models.ForeignKey(User,on_delete=models.PROTECT,related_name='apartment_owner_id')
     title = models.CharField(max_length=255)
@@ -298,7 +302,7 @@ class apartments(models.Model):
     photo5=models.ImageField(_("Image"),upload_to=upload_to_apartments,default='/images/rooms/default.jpg')
     photo6=models.ImageField(_("Image"),upload_to=upload_to_apartments,default='/images/rooms/default.jpg')
     booked=models.BooleanField(default=False)
-    bookedtill =models.DateField()
+    bookedtill =models.DateField(_("Booked_till_Date"),null=True,blank=True)
     removed=models.BooleanField(default=False)
     category=models.CharField(max_length=255)
     currency=models.CharField(max_length=200,default='₹')
