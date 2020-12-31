@@ -33,6 +33,11 @@ import SimpleSelect5 from '../components/bedtypefilter';
 import SearchFields from '../components/searchfilter';
 import SearchFields2 from '../components/searchfilter2';
 import SimpleSelectfinal from '../components/sort';
+import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
+import Icon from '@material-ui/core/Icon';
+
+import { Link } from 'react-router-dom';
+
 
 
 const drawerWidth = 300;
@@ -74,6 +79,9 @@ const useStyles = makeStyles((theme) => ({
   },
   mystyle: {
     marginLeft:'10px',
+  },
+  iconstyle: {
+    color: 'white',
   }
 }));
 
@@ -90,6 +98,7 @@ function ResponsiveDrawer(props) {
   const drawer = (
     <div>
       <div className={classes.toolbar} />
+      
       <Divider />
       
 
@@ -244,6 +253,12 @@ function ResponsiveDrawer(props) {
           
 
             {/* THE APPBAR CONTENT SHOULD BE HERE */}
+      
+      <Link to='/'>
+      <Icon className={classes.iconstyle}>
+      <KeyboardBackspaceIcon fontSize='large'/>
+      </Icon>
+      </Link>
             
 
 
