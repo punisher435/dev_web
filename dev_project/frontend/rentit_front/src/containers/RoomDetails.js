@@ -14,7 +14,6 @@ import RatingWithCompliment from '../components/RatingWithCompliment'
 import Facility from '../components/FacilityList'
 
 import axios from 'axios';
-import { useLocation,useParams } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,14 +26,16 @@ const useStyles = makeStyles((theme) => ({
   },
   api:{
     height:'450px'
+  },
+  mystyle: {
+    position: '-webkit-sticky',
+  position: 'sticky',
+  top: 0,
   }
 }));
 
 export default function FullWidthGrid(props) {
 
-  function useQuery(){
-    return new URLSearchParams(useLocation().search);
-  }
 
  /*  let query = useQuery();
   var roomid=query.get('roomid');
@@ -83,7 +84,7 @@ export default function FullWidthGrid(props) {
       };
       const res1 = await axios.get(`${process.env.REACT_APP_API_URL}/sourcedjfnsk743/room/reviews/`,{
         params:{
-          room_id:'c18b4472-ab45-4d0f-9743-4c35a789fda5',
+          room_id:roomid,
         },
         config:config
       });
@@ -167,7 +168,7 @@ export default function FullWidthGrid(props) {
 
 
                 <Grid item xs={4}>
-                  <Box mt={7}>
+                  <Box mt={7} className={classes.mystyle}>
 
                   <BookCard details={details}/>
                   </Box>
