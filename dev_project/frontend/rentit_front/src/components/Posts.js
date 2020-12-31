@@ -25,7 +25,7 @@ const Posts = ({ posts, loading }) => {
           <SearchCard post={post}/>
           </Grid>
           </Hidden>
-        <Hidden smUp>
+        <Hidden mdUp>
         <Grid item md={12}>
         <RecipeReviewCard post={post}/>
         </Grid>

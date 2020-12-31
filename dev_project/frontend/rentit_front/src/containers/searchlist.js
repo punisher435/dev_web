@@ -31,7 +31,9 @@ import Windowsfilter from '../components/minwindows';
 import Floorfilter from '../components/floorfilter';
 import SimpleSelect5 from '../components/bedtypefilter';
 import SearchFields from '../components/searchfilter';
+import SearchFields2 from '../components/searchfilter2';
 import SimpleSelectfinal from '../components/sort';
+
 
 const drawerWidth = 300;
 
@@ -89,7 +91,16 @@ function ResponsiveDrawer(props) {
     <div>
       <div className={classes.toolbar} />
       <Divider />
+      
+
       <List>
+
+      <Hidden mdUp>
+      <ListItem className={classes.mystyle}>
+      <SearchFields2 filters={props.filters} setfilters={props.setfilters} />
+      </ListItem>
+      </Hidden>
+
       <ListItem className={classes.mystyle}>
       <Typography variant="h4" component="h3">
           Filters
@@ -277,6 +288,7 @@ function ResponsiveDrawer(props) {
       <main className={classes.content}>
         <div className={classes.toolbar} />
 
+        <Hidden smDown>
         <Grid
         container
         direction="row"
@@ -287,6 +299,18 @@ function ResponsiveDrawer(props) {
            <SimpleSelectfinal filters={props.filters} setfilters={props.setfilters} />
 
         </Grid>
+        </Hidden>
+
+        <Hidden mdUp>
+        <Grid
+        container
+        direction="row"
+        justify="flex-end"
+        alignItems="center"
+        >
+          <SimpleSelectfinal filters={props.filters} setfilters={props.setfilters} />
+        </Grid>
+        </Hidden>
 
         
            <Posts posts={props.posts} loading={props.loading} />

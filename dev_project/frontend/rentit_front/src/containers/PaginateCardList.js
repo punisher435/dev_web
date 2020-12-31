@@ -135,7 +135,6 @@ const App = () => {
       alignItems="center"
       >
         <Grid item lg={12} xs={12}>
-        <h1 className='text-primary mb-3'>Our rooms</h1>
         <ResponsiveDrawer setfilters={setfilters} max_price={max_price} min_price={min_price} filters={filters} posts={posts} loading={loading} paginate={paginate} postsPerPage={postsPerPage} currentPage={currentPage} totalposts={totalposts}/>
         
 
