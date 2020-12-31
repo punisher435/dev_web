@@ -1,6 +1,8 @@
 import uuid
 from django.db import models
 from django.contrib.auth import get_user_model
+from datetime import date
+import datetime
 from django.utils.translation import gettext_lazy as _
 
 # Create your models here.
@@ -13,6 +15,8 @@ User= get_user_model()
 
 def upload_to(instance, filename):
     return 'images/rooms/{filename}'.format(filename=filename)
+
+yesterday = datetime.datetime.now() - datetime.timedelta(days = 1)
 
 class rooms(models.Model):
     #info
@@ -40,6 +44,7 @@ class rooms(models.Model):
     photo5=models.ImageField(_("Image"),upload_to=upload_to,default='/images/rooms/default.jpg')
     booked=models.BooleanField(default=False)
     booked_by=models.IntegerField(default=0)
+    bookedtill =models.DateField(_("Booked_till_Date"),null=True,blank=True)
     removed=models.BooleanField(default=False)
 
     #address
@@ -81,31 +86,40 @@ class rooms(models.Model):
     water_facility=models.BooleanField(default=True)
     cost_water = models.IntegerField(default=0)
     purified_water = models.BooleanField(default=True)
+    removable_purified_water=models.BooleanField(default=False)
     cost_purified_water = models.IntegerField(default=0)
 
     house_TV=models.BooleanField(default=False)
+    removable_house_TV=models.BooleanField(default=False)
     cost_TV = models.IntegerField(default=0)
 
     room_TV=models.BooleanField(default=False)
+    removable_room_TV=models.BooleanField(default=False)
 
     power_backup=models.BooleanField(default=False)
 
     geyser=models.BooleanField(default=False)
+    removable_geyser=models.BooleanField(default=False)
     cost_geyser = models.IntegerField(default=0)
 
     wifi = models.BooleanField(default=False)
+    removable_wifi=models.BooleanField(default=False)
     cost_wifi = models.IntegerField(default=0)
 
     AC = models.BooleanField(default=False)
+    removable_AC=models.BooleanField(default=False)
     cost_AC = models.IntegerField(default=0)
 
     cooler = models.BooleanField(default=False)
+    removable_cooler=models.BooleanField(default=False)
     cost_cooler = models.IntegerField(default=0)
     
     laundry = models.BooleanField(default=False)
+    removable_laundry=models.BooleanField(default=False)
     cost_laundry = models.IntegerField(default=0)
 
     iron = models.BooleanField(default=False)
+    removable_iron=models.BooleanField(default=False)
     cost_iron = models.IntegerField(default=0)
 
     guest_allowed = models.BooleanField(default=False)
@@ -115,12 +129,15 @@ class rooms(models.Model):
     nonveg_food=models.BooleanField(default=True)
     
     breakfast=models.BooleanField(default=True)
+    removable_breakfast=models.BooleanField(default=False)
     cost_breakfast = models.IntegerField(default=0)
 
     lunch=models.BooleanField(default=True)
+    removable_lunch=models.BooleanField(default=False)
     cost_lunch = models.IntegerField(default=0)
 
     dinner=models.BooleanField(default=True)
+    removable_dinner=models.BooleanField(default=False)
     cost_dinner = models.IntegerField(default=0)
 
     #neighbourhood
@@ -146,6 +163,9 @@ class room_rating_and_reviews(models.Model):
     reviews=models.TextField()
     timestamp=models.DateTimeField(auto_now=True) 
 
+class minmax_room(models.Model):
+    max_price = models.IntegerField()
+    min_price = models.IntegerField()
 
 
 
@@ -177,6 +197,7 @@ class shops(models.Model):
     photo4=models.ImageField(_("Image"),upload_to=upload_to_shops,default='/images/rooms/default.jpg')
     photo5=models.ImageField(_("Image"),upload_to=upload_to_shops,default='/images/rooms/default.jpg')
     booked=models.BooleanField(default=False)
+    bookedtill =models.DateField(_("Booked_till_Date"),null=True,blank=True)
     removed=models.BooleanField(default=False)
     currency=models.CharField(max_length=200,default='₹')
 
@@ -216,9 +237,11 @@ class shops(models.Model):
     water_facility=models.BooleanField(default=True)
     cost_water = models.IntegerField(default=0)
     purified_water = models.BooleanField(default=True)
+    removable_purified_water=models.BooleanField(default=False)
     cost_purified_water = models.IntegerField(default=0)
 
     wifi = models.BooleanField(default=False)
+    removable_wifi=models.BooleanField(default=False)
     cost_wifi = models.IntegerField(default=0)
 
     power_backup=models.BooleanField(default=False)
@@ -243,6 +266,10 @@ class shop_rating_and_reviews(models.Model):
     rating=models.DecimalField(max_digits=2,decimal_places=1)
     reviews=models.TextField()
     timestamp=models.DateTimeField(auto_now=True) 
+
+class minmax_shop(models.Model):
+    max_price = models.IntegerField()
+    min_price = models.IntegerField()
 
 
 
@@ -275,6 +302,7 @@ class apartments(models.Model):
     photo5=models.ImageField(_("Image"),upload_to=upload_to_apartments,default='/images/rooms/default.jpg')
     photo6=models.ImageField(_("Image"),upload_to=upload_to_apartments,default='/images/rooms/default.jpg')
     booked=models.BooleanField(default=False)
+    bookedtill =models.DateField(_("Booked_till_Date"),null=True,blank=True)
     removed=models.BooleanField(default=False)
     category=models.CharField(max_length=255)
     currency=models.CharField(max_length=200,default='₹')
@@ -303,6 +331,7 @@ class apartments(models.Model):
     building_guard=models.BooleanField(default=False)
 
     wifi = models.BooleanField(default=False)
+    removable_wifi=models.BooleanField(default=False)
     cost_wifi = models.IntegerField(default=0)
 
     balcony=models.IntegerField(default=0)
@@ -316,9 +345,11 @@ class apartments(models.Model):
     apartment_type=models.CharField(max_length=255)
 
     AC = models.BooleanField(default=False)
+    removable_AC=models.BooleanField(default=False)
     cost_AC = models.IntegerField(default=0)
 
     cooler = models.BooleanField(default=False)
+    removable_cooler=models.BooleanField(default=False)
     cost_cooler = models.IntegerField(default=0)
 
     electricity=models.BooleanField(default=True)
@@ -327,14 +358,17 @@ class apartments(models.Model):
     water_facility=models.BooleanField(default=True)
     cost_water = models.IntegerField(default=0)
     purified_water = models.BooleanField(default=True)
+    removable_purified_water=models.BooleanField(default=False)
     cost_purified_water = models.IntegerField(default=0)
 
     TV=models.CharField(max_length=255)
+    removable_TV=models.BooleanField(default=False)
     cost_TV = models.IntegerField(default=0)
 
     power_backup=models.BooleanField(default=False)
 
     geyser=models.BooleanField(default=False)
+    removable_geyser=models.BooleanField(default=False)
     cost_geyser = models.IntegerField(default=0)
 
     #neighbourhood
@@ -359,4 +393,8 @@ class apartment_rating_and_reviews(models.Model):
     rating=models.DecimalField(max_digits=2,decimal_places=1)
     reviews=models.TextField()
     timestamp=models.DateTimeField(auto_now=True) 
+
+class minmax_apartment(models.Model):
+    max_price = models.IntegerField()
+    min_price = models.IntegerField()
 

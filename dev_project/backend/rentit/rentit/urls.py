@@ -33,6 +33,9 @@ urlpatterns = [
     path('sourceddnvslf54d/',include('products.api.urls_apartments_personal')),
     path('sourcensjahdwua2853/',include('products.api.urls_shop_reviews')),
     path('sourcemvdsnksnd59472/',include('products.api.urls_apartment_reviews')),
+    path('sourcekadwbda24/',include('products.api.urls_minmax_room')),
+    path('sourcekasdauhnuwiqlr2/',include('products.api.urls_minmax_shop')),
+    path('sourcghfhf4/',include('products.api.urls_minmax_apartment')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

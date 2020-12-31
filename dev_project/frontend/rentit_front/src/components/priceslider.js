@@ -13,12 +13,13 @@ function valuetext(value) {
   return `₹${value}`;
 }
 
-export default function RangeSlider() {
+export default function RangeSlider(props) {
   const classes = useStyles();
-  const [value, setValue] = React.useState([0,50000]);
+  const value = [props.filters.min_price,props.filters.max_price];
 
   const handleChange = (event, newValue) => {
-    setValue(newValue);
+    console.log(newValue);
+    props.setfilters({...props.filters,max_price:newValue[1],min_price:newValue[0]});
   };
 
   return (
@@ -28,9 +29,9 @@ export default function RangeSlider() {
       </Typography>
       <Slider
         color='secondary'
-        max={50000}
-        min={0}
-        step={1000}
+        max={props.max_price}
+        min={props.min_price}
+        step={500}
         
         value={value}
         onChange={handleChange}

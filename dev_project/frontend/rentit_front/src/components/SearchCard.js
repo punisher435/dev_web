@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import Icon from '@material-ui/core/Icon'
-import CardMedia from '@material-ui/core/CardMedia';
+import CardMedia from '@material-ui/core/CardMedia'
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import MeetingRoomOutlinedIcon from '@material-ui/icons/MeetingRoomOutlined';
@@ -399,7 +399,7 @@ export default function NestedGrid({post}) {
           {post.currency}{post.final_price}
           </Typography>
           <Typography variant='h6' className={classes.textroot1}>
-          <s>{post.currency}{post.final_price}</s>
+          <s>{post.currency}{post.price}</s>
           </Typography>
           <Typography variant='h6' className={classes.textroot2}>
             {y}% off
@@ -430,26 +430,6 @@ export default function NestedGrid({post}) {
     );
   }
 
-  function PriceCard(){
-    return (
-      <Card className={classes.root1}>
-        <Typography variant="h5" component="h2" className={classes.root1}>
-         $500
-        </Typography>
-      </Card>
-    );
-  }
-
-  function BookCard(){
-    return (
-      <Card className={classes.root1}>
-        <Button variant="outlined" color="secondary">
-          Secondary
-        </Button>
-      </Card>
-    );
-  }
-
   function FormRow() {
     return (
       <React.Fragment>
@@ -459,15 +439,6 @@ export default function NestedGrid({post}) {
         <Grid item md={7} xs={12}>
           <NameCard/>
         </Grid>
-       {/*  <Grid item md={2} xs={12}>
-          <PriceCard/>
-        </Grid>
-        <Grid item md={3} xs={12}>
-          <BookCard/>
-        </Grid> */}
-        {/* <Grid item xs={3}>
-          <Paper className={classes.paper} elevation= {0}>item</Paper>
-        </Grid> */}
       </React.Fragment>
     );
   }
