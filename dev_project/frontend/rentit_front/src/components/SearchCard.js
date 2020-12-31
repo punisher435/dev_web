@@ -184,7 +184,7 @@ export default function NestedGrid({post}) {
   justify="center"
   alignItems="center"
   spacing = {1}
->
+      >
 <Grid item md={10} xs={12}>
 <Card className={classes.root1}>
         <CardActionArea>
