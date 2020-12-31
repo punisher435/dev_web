@@ -32,6 +32,7 @@ import WhatshotIcon from '@material-ui/icons/Whatshot';
 import BathtubIcon from '@material-ui/icons/Bathtub';
 import { grey } from '@material-ui/core/colors';
 import { IconContext } from "react-icons";
+import { Link } from "react-router-dom";
 
 import CustomizedRatings from './rating_meter';
 
@@ -436,9 +437,13 @@ export default function NestedGrid({post}) {
         <Grid item md={5} xs={12}>
           <MediaCard/>
         </Grid>
+        
         <Grid item md={7} xs={12}>
+        <Link to={`/searchlist/rooms/${post.room_id}`}>
           <NameCard/>
+          </Link>
         </Grid>
+       
       </React.Fragment>
     );
   }

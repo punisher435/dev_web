@@ -14,6 +14,7 @@ import RatingWithCompliment from '../components/RatingWithCompliment'
 import Facility from '../components/FacilityList'
 
 import axios from 'axios';
+import { useLocation,useParams } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,7 +30,18 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function FullWidthGrid() {
+export default function FullWidthGrid(props) {
+
+  function useQuery(){
+    return new URLSearchParams(useLocation().search);
+  }
+
+ /*  let query = useQuery();
+  var roomid=query.get('roomid');
+  console.log(roomid); */
+
+  const roomid = props.match.params.roomid;
+
   const classes = useStyles();
   const [details, setDetails] = useState({});
   const [reviews, setReviews] = useState([])
@@ -43,7 +55,7 @@ export default function FullWidthGrid() {
             'Content-Type': 'application/json'
         }
       };
-      const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourceaxcnfrudadv34/rooms/476c219a-002a-4ef1-b552-59bdad81435d/`,config);
+      const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourceaxcnfrudadv34/rooms/${roomid}/`,config);
       
       try{
           console.log(res.data);

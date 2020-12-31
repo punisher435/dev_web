@@ -7,9 +7,6 @@ import Hidden from '@material-ui/core/Hidden';
 
 const Posts = ({ posts, loading }) => {
 
-  if (loading) {
-    return <Spinner loading={loading} />;
-  }
 
   const myStlye = {
     border: '0px'
@@ -17,12 +14,13 @@ const Posts = ({ posts, loading }) => {
 
   return (
     <ul className='list-group mb-4'>
+       <Spinner loading={loading} />;
       {posts.map(post => (
         <li key={post.room_id} style={myStlye} className='list-group-item'>
           {/* {post.title} */}
           <Hidden smDown>
         <Grid item md={12}>
-          <SearchCard post={post}/>
+          <SearchCard post={post} loading={loading} />
           </Grid>
           </Hidden>
         <Hidden mdUp>
