@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import Icon from '@material-ui/core/Icon'
-import CardMedia from '@material-ui/core/CardMedia'
+import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import MeetingRoomOutlinedIcon from '@material-ui/icons/MeetingRoomOutlined';
@@ -32,7 +32,6 @@ import WhatshotIcon from '@material-ui/icons/Whatshot';
 import BathtubIcon from '@material-ui/icons/Bathtub';
 import { grey } from '@material-ui/core/colors';
 import { IconContext } from "react-icons";
-import { Link } from "react-router-dom";
 
 import CustomizedRatings from './rating_meter';
 
@@ -51,51 +50,39 @@ const useStyles = makeStyles((theme) => ({
 
 
   root1: {
-    maxWidth: 500,
-    height: 300,
+    maxWidth: '100%',
+    height: '100%',
     textAlign: 'center',
 
     borderLeft: 2,
     borderLeftColor: grey,
-    // display: 'flex',
-    // alignItems: 'center',
   },
 
   root2: {
-    maxWidth: '100%',
+   width:150,
     height: '100%',
     textAlign: 'left',
     padding : '10px 0 0 20px',
-
-
-    // display: 'flex',
-    // alignItems: 'center',
   },
+
+
   root3: {
-    maxWidth: 100,
-    height: 100,
+    maxWidth: 150,
+    height: 150,
     textAlign: 'center',
 
 
     borderLeft: 2,
     borderLeftColor: grey,
-    // display: 'flex',
-    // alignItems: 'center',
   },
 
 
   media: {
-    height: 300,
+    height: 250,
   },
 
   media2: {
-    height: 100,
-  },
-
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
+    height: 50,
   },
 
   textroot: {
@@ -103,9 +90,6 @@ const useStyles = makeStyles((theme) => ({
     fontWeight:'bold',
     fontSize:'25px',
     display: 'inline',
-    
-    // display: 'flex',
-    // alignItems: 'center',
   },
   textroot1: {
     marginLeft:'2px',
@@ -114,9 +98,6 @@ const useStyles = makeStyles((theme) => ({
     display: 'inline',
     marginLeft:'10px',
     color:'#877f7f'
-    
-    // display: 'flex',
-    // alignItems: 'center',
   },
   textroot2: {
     fontWeight:'bold',
@@ -124,9 +105,6 @@ const useStyles = makeStyles((theme) => ({
     display: 'inline',
     marginLeft:'10px',
     color:'#dea300'
-    
-    // display: 'flex',
-    // alignItems: 'center',
   },
 
   textroot4: {
@@ -136,18 +114,12 @@ const useStyles = makeStyles((theme) => ({
     marginLeft:'6px',
     marginBottom:'10px',
     color:'#dea300'
-    
-    // display: 'flex',
-    // alignItems: 'center',
   },
   textroot5: {
     color:'#f44336',
     fontSize:'16px',
     
     marginTop:'5px',
-    
-    // display: 'flex',
-    // alignItems: 'center',
   },
   iconroot: {
     display: 'inline',
@@ -156,9 +128,6 @@ const useStyles = makeStyles((theme) => ({
   buttonroot: {
     
     color:'green'
-    
-    // display: 'flex',
-    // alignItems: 'center',
   },
   mystyle2 :{
     fontSize:'25px',
@@ -166,7 +135,7 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-export default function NestedGrid({post}) {
+export default function NestedGrid1({post}) {
   const classes = useStyles();
 
   function MediaCard() {
@@ -181,12 +150,13 @@ export default function NestedGrid({post}) {
     return (
       <Grid
   container
-  direction="row"
+  direction="col"
   justify="center"
   alignItems="center"
   spacing = {1}
 >
-<Grid item md={10} xs={12}>
+
+<Grid item xs={12}>
 <Card className={classes.root1}>
         <CardActionArea>
           <CardMedia
@@ -195,17 +165,21 @@ export default function NestedGrid({post}) {
             title="Contemplative Reptile"
           />
         </CardActionArea>
-      </Card>
+    </Card>
 </Grid>
-<Grid item md={2}>
+
+
+
+<Grid item xs={12}>
 <Grid
   container
-  direction="column"
-  justify="flex-start"
+  direction="col"
+  justify="center"
   spacing = {1}
 >
-<Grid item>
-<Card className={classes.root3}>
+    
+<Grid item xs={2}>
+    <Card >
         <CardActionArea>
           <CardMedia
             className={classes.media2}
@@ -224,10 +198,12 @@ export default function NestedGrid({post}) {
             }
           />
         </CardActionArea>
-      </Card>
+    </Card>
 </Grid>
-<Grid item>
-<Card className={classes.root3}>
+
+
+<Grid item xs={2}>
+<Card>
         <CardActionArea>
           <CardMedia
             className={classes.media2}
@@ -248,8 +224,8 @@ export default function NestedGrid({post}) {
         </CardActionArea>
       </Card>
 </Grid>
-<Grid item>
-<Card className={classes.root3}>
+<Grid item xs={2}>
+<Card>
         <CardActionArea>
           <CardMedia
             className={classes.media2}
@@ -400,7 +376,7 @@ export default function NestedGrid({post}) {
           {post.currency}{post.final_price}
           </Typography>
           <Typography variant='h6' className={classes.textroot1}>
-          <s>{post.currency}{post.price}</s>
+          <s>{post.currency}{post.final_price}</s>
           </Typography>
           <Typography variant='h6' className={classes.textroot2}>
             {y}% off
@@ -431,19 +407,15 @@ export default function NestedGrid({post}) {
     );
   }
 
+
   function FormRow() {
     return (
       <React.Fragment>
-        <Grid item md={5} xs={12}>
-          <MediaCard/>
-        </Grid>
-        
-        <Grid item md={7} xs={12}>
-        <Link to={`/searchlist/rooms/${post.room_id}`} target="_blank">
-          <NameCard/>
-          </Link>
-        </Grid>
-       
+          <Grid container justify="center">
+            <Grid item xs={9}>
+            <MediaCard/>
+            </Grid>
+          </Grid>
       </React.Fragment>
     );
   }

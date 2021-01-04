@@ -6,18 +6,43 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box'
 import SpecificRoomCarousel from '../components/SpecificRoomCarousel'
+import NestedGrid1 from '../components/specificroomcarousel1';
 import RatingAndReviews from '../components/RatingAndReviews'
 import RoomDescriptionContent from '../components/RoomDescriptionContent'
 import GoogleApiWrapper from '../components/GoogleMapAPI'
+import GoogleApiWrapper1 from '../components/mobilemaps'
 import BookCard from '../components/BookCard'
 import RatingWithCompliment from '../components/RatingWithCompliment'
 import Facility from '../components/FacilityList'
+import Facilitymobile from '../components/mobilefacilitieslist'
+import Hidden from '@material-ui/core/Hidden';
+import BottomAppBar from '../components/mobileappbar';
+import Divider from '@material-ui/core/Divider';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import Paper from '@material-ui/core/Paper';
+import Icon from '@material-ui/core/Icon';
+import LocationOnIcon from '@material-ui/icons/LocationOn';
+import {Container as Container1} from 'react-bootstrap';
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+
+import CustomizedTabs1 from '../components/scrolloffers';
+import Mobileimages from '../components/mobileimages';
+
 
 import axios from 'axios';
+
+import CustomizedRatings from '../components/rating_meter';
+import LocalOfferOutlinedIcon from '@material-ui/icons/LocalOfferOutlined';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+  },
+  root1: {
+    width: '100%',
+    backgroundColor: theme.palette.background.paper,
   },
   paper: {
     padding: theme.spacing(2),
@@ -31,7 +56,60 @@ const useStyles = makeStyles((theme) => ({
     position: '-webkit-sticky',
   position: 'sticky',
   top: 0,
+  },
+  media1 : {
+    width:'100%',
+    right:0,
+  },
+  media2 : {
+    width:'100%',
+    right:0,
+  },
+  typo1 :{
+    fontSize: '1.5rem',
+    fontWeight: 'normal',
+  },
+  typo2 :{
+    fontSize: '1rem',
+    fontWeight: 'normal',
+    marginLeft:'1rem',
+    color:'#f50057',
+  },
+  paraclass:{
+    marginTop:'15px',
+  },
+  margingrid : {
+    marginTop:'100px',
+  },
+  sizeclass: {
+    width:'50%',
+    fontSize: '1.5rem',
+  },
+  divclass:{
+    width:'80%',
+    height:'30%',
+    position:'absolute',
+    overflowX:'hidden',
+    left:30,
+    right:20,
+    margin: '0  auto -150px',
+
+  },
+  apiclass:{
+    width:'100%',
+    height:'100%',
+    position:'absolute',
+    overflowX:'hidden',
+    left:'17%',
+    right:20,
+    margin: '0  auto -150px',
+
+  },
+  paraclass1 :{
+    position:'relative',
+    float:'bottom',
   }
+  
 }));
 
 export default function FullWidthGrid(props) {
@@ -47,6 +125,7 @@ export default function FullWidthGrid(props) {
   const [details, setDetails] = useState({});
   const [reviews, setReviews] = useState([])
   const [loading, setLoading] = useState(false);
+ 
 
   useEffect(() => {
     const fetchDetails = async () => {
@@ -64,6 +143,7 @@ export default function FullWidthGrid(props) {
           setDetails(res.data);
           setLoading(false);
           console.log(details);
+
       }  catch (err) {
         // Handle Error Here
         console.error(err);
@@ -104,9 +184,11 @@ export default function FullWidthGrid(props) {
   }, []);
 
 
-
   return (
+    
     <div className={classes.root}>
+
+      <Hidden smDown>
       <Grid container spacing={5}>
 
         <Grid item xs={12} >
@@ -156,7 +238,7 @@ export default function FullWidthGrid(props) {
                           
                           <Grid item xs = {12} className={classes.api}>
                             <br></br><br></br>
-                            <GoogleApiWrapper/>
+                            <div className={classes.apiclass}><GoogleApiWrapper/></div>
                           </Grid>
 
                           <Grid item xs = {12}>
@@ -182,6 +264,144 @@ export default function FullWidthGrid(props) {
               
 
       </Grid>
+      </Hidden>
+      <Hidden mdUp>
+            <Grid
+        container
+        direction="column"
+        justify="center"
+        alignItems="center"
+        spacing = {1}
+        >
+
+         <Mobileimages props={details}/>
+          
+          <br />
+          <Grid
+            container
+            direction="row"
+            justify="space-around"
+            alignItems="center"
+          >
+  
+            <Grid item xs={1}></Grid>
+
+            <Grid item xs={6}>
+            <Typography variant="h5" component="h4" className={classes.typo1}>
+            {details.title}
+            </Typography>
+            <Typography variant="body1" component="h6" gutterBottom >
+                              <Icon color="error"><LocationOnIcon /></Icon>  {details.location}, {details.city}
+                                </Typography>
+                                <Typography variant="body1" component="h6" gutterBottom >
+                                ,  {details.state}, {details.country}
+                                </Typography>
+            </Grid>
+
+            <Grid item xs={4}>
+            <RatingWithCompliment className={classes.sizeclass} reviews={details.reviews} rating={details.avg_rating}/>
+            </Grid>
+
+            <Grid item xs={1}></Grid>
+            
+          </Grid>
+
+          <List component="nav" className={classes.root1} aria-label="offers">
+          
+          
+
+          
+          <Grid item xs={12}>
+            <Divider variant='middle'/>
+            <ListItem>
+          <Typography variant="h5" component="h4" className={classes.typo2}>
+            *Offers Applicable
+            </Typography>
+            </ListItem>
+            <ListItem>
+            <CustomizedTabs1 post={details}/>
+            </ListItem>
+            <Divider variant='middle'/>
+
+          </Grid>
+          </List>
+          
+
+          <Grid
+            container
+            direction="row"
+            justify="space-around"
+            alignItems="center"
+          >
+          <Grid item xs={1}></Grid>
+          <Grid item xs={10} className={classes.paraclass}>
+          <Typography variant='h5'>
+                                  Facilities
+                              </Typography>
+                            <Facilitymobile post={details}/>            
+          </Grid>
+          <Grid item xs={1}></Grid>
+          </Grid>
+
+          <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+          >
+          <Grid item xs={1}></Grid>
+          <Grid item xs={10} className={classes.paraclass}>
+            <Typography variant='h5'>
+                Description
+            </Typography>
+            <RoomDescriptionContent description={details.description}/>
+          </Grid>
+          <Grid item xs={1}></Grid>
+          </Grid>
+
+          <br />
+
+          <Grid item xs={12}>
+          <div className={classes.divclass}><GoogleApiWrapper1/></div>
+          </Grid>
+
+
+          <br /><br /><br /><br /><br /><br />
+          <br /><br /><br />
+
+          <br /><br /><br /><br /><br /><br />
+          <br />
+
+
+          <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+          >
+          <Grid item xs={1}></Grid>
+          <Grid item xs={10} className={classes.paraclass1}>
+            <RatingAndReviews  no={details.reviews} rating={details.avg_rating}/>
+          </Grid>
+          <Grid item xs={1}></Grid>
+          </Grid>
+         
+          
+
+          
+
+          
+          <Grid item xs={12} className={classes.margingrid}></Grid>
+        </Grid>
+
+       
+
+        <BottomAppBar details={details}/>
+
+      </Hidden>
+
+
     </div>
+     
   );
 }

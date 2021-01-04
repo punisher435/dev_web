@@ -151,6 +151,11 @@ class rooms(models.Model):
     wishlist=models.BooleanField(default=False)
     cart=models.BooleanField(default=False)
 
+    #coupons
+    seller_coupon=models.CharField(max_length=255,null=True,blank=True)
+    coupon_discount=models.IntegerField(null=True, blank=True)
+
+
 
     objects = models.Manager()
     personal_rooms = rooms_manager()
@@ -254,6 +259,9 @@ class shops(models.Model):
     # 
     wishlist=models.BooleanField(default=False)
     cart=models.BooleanField(default=False)
+
+    seller_coupon=models.CharField(max_length=255,null=True,blank=True)
+    coupon_discount=models.IntegerField(null=True, blank=True)
 
 
     objects = models.Manager()
@@ -381,6 +389,10 @@ class apartments(models.Model):
     #
     wishlist=models.BooleanField(default=False)
     cart=models.BooleanField(default=False)
+
+
+    seller_coupon=models.CharField(max_length=255,null=True,blank=True)
+    coupon_discount=models.IntegerField(null=True, blank=True)
 
     objects = models.Manager()
     personal_apartments = apartments_manager()

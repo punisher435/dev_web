@@ -45,7 +45,7 @@ export default function SimpleCard(props) {
         setCompliment('bad');
     }
     else if(props.rating<=2){
-        setCompliment=('Not Good');
+        setCompliment('Not Good');
     }
     else if(props.rating<=3){
         setCompliment('Good');
@@ -71,7 +71,7 @@ export default function SimpleCard(props) {
       >
           <Grid item >
                 <Box mb={1} mt={1}>
-                <Rating name="read-only" value={props.rating} readOnly precision={0.5} size="large"  />
+                <Rating name="read-only" value={props.rating} readOnly precision={0.1} size="large"  />
                 </Box>
                 
               
@@ -110,7 +110,7 @@ export default function SimpleCard(props) {
           <Grid item>
               <Typography variant='subtitle1'>
               <Box fontSize={14}>
-                    (255) reviews
+                    ({props.reviews}) reviews
                 </Box>
               </Typography>
           </Grid>

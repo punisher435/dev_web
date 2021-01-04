@@ -4,6 +4,7 @@ import Divider from '@material-ui/core/Divider';
 import Rating from '../components/Rating';
 import { makeStyles } from '@material-ui/core/styles';
 
+
 import RatingBar from '../components/RatingBar'
 
 const useStyles = makeStyles((theme) => ({
@@ -30,7 +31,7 @@ export default function VerticalDividers({no, rating}) {
         alignItems="center"
         className={classes.root}>
         <Grid item>
-          <Rating  no={96} rating={3.7}/>
+          <Rating  no={no} rating={rating}/>
         </Grid>
 
         <Divider orientation="vertical" />
