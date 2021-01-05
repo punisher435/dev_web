@@ -33,8 +33,10 @@ const useStyles = makeStyles((theme) => ({
       right:0,
     },
     media2 : {
+      height:'auto',
       width:'100%',
-      right:0,
+      display: 'flex',
+     
     },
     typo1 :{
       fontSize: '1.5rem',
@@ -82,20 +84,43 @@ const useStyles = makeStyles((theme) => ({
     },
     buttonclass : {
         padding:0,
+    },
+    media3:{
+      width:'90%',
+      marginTop: '10px',
+      marginLeft: '5%',
+      marginRight: '5%',
+      marginBottom: '2%',
+      display: 'flex',
+    },
+    mediaclass:{
+     
     }
     
 }));
 
 
-function Mobileimages({props}) {
+export default function Mobileimages({p1,p2,p3,p4,p5}) {
 
     const [photos,changephotos] = useState({
-        a:props.photo1,
-        b:props.photo2,
-        c:props.photo3,
-        d:props.photo4,
-        e:props.photo5,
+        a:p1,
+        b:p2,
+        c:p3,
+        d:p4,
+        e:p5,
       })
+
+    useEffect(
+      () => {
+        changephotos({
+          a:p1,
+          b:p2,
+          c:p3,
+          d:p4,
+          e:p5,
+        });
+      }
+    ,[p1,p2,p3,p4,p5])
 
     const classes = useStyles();
     return (
@@ -109,24 +134,40 @@ function Mobileimages({props}) {
             direction="row"
             justify="center"
             alignItems="center"
-            spacing={1}
+            spacing={0}
+            className={classes.media3}
           >
           <Grid item xs={3}>
-          <Button className={classes.buttonclass} onclick={() => {
+          <Button className={classes.buttonclass} onClick={() => {
                 const temp=photos.a;
                 changephotos({
                     ...photos,a:photos.b,b:temp,
                 });
-            }}><img src={photos.b} className={classes.media2}/></Button>
+            }}><div className={classes.mediaclass}><img src={photos.b} className={classes.media2}/></div></Button>
           </Grid>
           <Grid item xs={3}>
-          <Button><img src={photos.c} className={classes.media2}/></Button>
+          <Button className={classes.buttonclass} onClick={() => {
+                const temp=photos.a;
+                changephotos({
+                    ...photos,a:photos.c,c:temp,
+                });
+            }}><div className={classes.mediaclass}><img src={photos.c} className={classes.media2}/></div></Button>
           </Grid>
           <Grid item xs={3}>
-          <Button><img src={photos.d} className={classes.media2}/></Button>
+          <Button className={classes.buttonclass} onClick={() => {
+                const temp=photos.a;
+                changephotos({
+                    ...photos,a:photos.d,d:temp,
+                });
+            }}><div className={classes.mediaclass}><img src={photos.d} className={classes.media2}/></div></Button>
           </Grid>
           <Grid item xs={3}>
-          <Button><img src={photos.e} className={classes.media2}/></Button>
+          <Button className={classes.buttonclass} onClick={() => {
+                const temp=photos.a;
+                changephotos({
+                    ...photos,a:photos.e,e:temp,
+                });
+            }}><div className={classes.mediaclass}><img src={photos.e} className={classes.media2}/></div></Button>
           </Grid>
           
           </Grid>
@@ -134,4 +175,3 @@ function Mobileimages({props}) {
     )
 }
 
-export default Mobileimages;

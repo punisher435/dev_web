@@ -66,7 +66,7 @@ const useStyles = makeStyles((theme) => ({
     right:0,
   },
   typo1 :{
-    fontSize: '1.5rem',
+    fontSize: '200%',
     fontWeight: 'normal',
   },
   typo2 :{
@@ -150,12 +150,7 @@ export default function FullWidthGrid(props) {
     }
     };
 
-    fetchDetails();
-  }, []);
-
-
-  useEffect(() => {
-    const fetchDetails = async () => {
+    const fetchreviews = async () => {
       setLoading(true);
       const config = {
         headers: {
@@ -179,9 +174,13 @@ export default function FullWidthGrid(props) {
         console.error(err);
     }
     };
-
     fetchDetails();
+    fetchreviews();
   }, []);
+
+
+  console.log('photo11',details.photo1);
+
 
 
   return (
@@ -274,7 +273,7 @@ export default function FullWidthGrid(props) {
         spacing = {1}
         >
 
-         <Mobileimages props={details}/>
+         <Mobileimages p1={details.photo1} p2={details.photo2} p3={details.photo3} p4={details.photo4} p5={details.photo5}/>
           
           <br />
           <Grid
@@ -299,7 +298,7 @@ export default function FullWidthGrid(props) {
             </Grid>
 
             <Grid item xs={4}>
-            <RatingWithCompliment className={classes.sizeclass} reviews={details.reviews} rating={details.avg_rating}/>
+            <RatingWithCompliment className={classes.sizeclass} reviews={details.reviews} rating={parseFloat(details.avg_rating)}/>
             </Grid>
 
             <Grid item xs={1}></Grid>
@@ -381,7 +380,7 @@ export default function FullWidthGrid(props) {
           >
           <Grid item xs={1}></Grid>
           <Grid item xs={10} className={classes.paraclass1}>
-            <RatingAndReviews  no={details.reviews} rating={details.avg_rating}/>
+            <RatingAndReviews  no={details.reviews} rating={parseFloat(details.avg_rating)}/>
           </Grid>
           <Grid item xs={1}></Grid>
           </Grid>
