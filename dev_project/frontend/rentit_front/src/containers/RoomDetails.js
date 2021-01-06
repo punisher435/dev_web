@@ -29,6 +29,9 @@ import Col from 'react-bootstrap/Col'
 
 import CustomizedTabs1 from '../components/scrolloffers';
 import Mobileimages from '../components/mobileimages';
+import SimpleModal1 from '../components/bookcardmodel';
+
+import RatingWithCompliments from '../components/MobileRatingSearchCard' 
 
 
 import axios from 'axios';
@@ -74,6 +77,9 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 'normal',
     marginLeft:'1rem',
     color:'#f50057',
+  },
+  typo3:{
+    fontSize: '90%',
   },
   paraclass:{
     marginTop:'15px',
@@ -125,6 +131,7 @@ export default function FullWidthGrid(props) {
   const [details, setDetails] = useState({});
   const [reviews, setReviews] = useState([])
   const [loading, setLoading] = useState(false);
+  const [open1,changeopen1] = useState(false)
  
 
   useEffect(() => {
@@ -285,20 +292,20 @@ export default function FullWidthGrid(props) {
   
             <Grid item xs={1}></Grid>
 
-            <Grid item xs={6}>
+            <Grid item xs={8}>
             <Typography variant="h5" component="h4" className={classes.typo1}>
             {details.title}
             </Typography>
-            <Typography variant="body1" component="h6" gutterBottom >
-                              <Icon color="error"><LocationOnIcon /></Icon>  {details.location}, {details.city}
+            <Typography variant="body1" component="h6" gutterBottom  className={classes.typo3}>
+                              <Icon color="error" fontSize="inherit"><LocationOnIcon /></Icon>  {details.location}, {details.city}
                                 </Typography>
-                                <Typography variant="body1" component="h6" gutterBottom >
+                                <Typography variant="body1" component="h6" gutterBottom className={classes.typo3}>
                                 ,  {details.state}, {details.country}
                                 </Typography>
             </Grid>
 
-            <Grid item xs={4}>
-            <RatingWithCompliment className={classes.sizeclass} reviews={details.reviews} rating={parseFloat(details.avg_rating)}/>
+            <Grid item xs={2}>
+            <RatingWithCompliments reviews={parseFloat(details.reviews)} rating={parseFloat(details.avg_rating)}/>
             </Grid>
 
             <Grid item xs={1}></Grid>
@@ -380,7 +387,7 @@ export default function FullWidthGrid(props) {
           >
           <Grid item xs={1}></Grid>
           <Grid item xs={10} className={classes.paraclass1}>
-            <RatingAndReviews  no={details.reviews} rating={parseFloat(details.avg_rating)}/>
+            <RatingAndReviews  no={parseFloat(details.reviews)} rating={parseFloat(details.avg_rating)}/>
           </Grid>
           <Grid item xs={1}></Grid>
           </Grid>
@@ -394,8 +401,8 @@ export default function FullWidthGrid(props) {
         </Grid>
 
        
-
-        <BottomAppBar details={details}/>
+        <SimpleModal1 details={details} open={open1} change={changeopen1}/>
+        <BottomAppBar details={details} open1={open1} changeopen1={changeopen1}/>
 
       </Hidden>
 

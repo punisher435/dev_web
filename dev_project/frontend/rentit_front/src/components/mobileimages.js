@@ -5,6 +5,10 @@ import Button from '@material-ui/core/Button';
 import CardMedia from '@material-ui/core/CardMedia';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
+import styles from './css/hover.module.css';
+import ReactImageMagnify from 'react-image-magnify';
+
+import SimpleModal from './imagemodal';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -24,19 +28,13 @@ const useStyles = makeStyles((theme) => ({
       height:'450px'
     },
     mystyle: {
-      position: '-webkit-sticky',
+    position: '-webkit-sticky',
     position: 'sticky',
     top: 0,
     },
     media1 : {
       width:'100%',
       right:0,
-    },
-    media2 : {
-      height:'auto',
-      width:'100%',
-      display: 'flex',
-     
     },
     typo1 :{
       fontSize: '1.5rem',
@@ -84,23 +82,30 @@ const useStyles = makeStyles((theme) => ({
     },
     buttonclass : {
         padding:0,
+        border:0,
     },
-    media3:{
+    media3 :{
       width:'90%',
+      height:'30%',
+      maxHeight:'150px',
       marginTop: '10px',
       marginLeft: '5%',
       marginRight: '5%',
       marginBottom: '2%',
       display: 'flex',
     },
+   
     mediaclass:{
-     
-    }
+      maxHeight:'150px',
+      maxWidth:'200px',
+    },
     
 }));
 
 
 export default function Mobileimages({p1,p2,p3,p4,p5}) {
+
+  const [open,changeopen] = useState(false)
 
     const [photos,changephotos] = useState({
         a:p1,
@@ -125,8 +130,9 @@ export default function Mobileimages({p1,p2,p3,p4,p5}) {
     const classes = useStyles();
     return (
         <div>
+            <SimpleModal open={open} change={changeopen} photo={photos.a}/>
             <Grid item xs={12}>
-            <img src={photos.a} className={classes.media1}/>
+            <Button className={classes.buttonclass} onClick={() => {changeopen(true);}}><img src={photos.a} className={styles.img1}/></Button>
           </Grid>
 
             <Grid
@@ -134,7 +140,7 @@ export default function Mobileimages({p1,p2,p3,p4,p5}) {
             direction="row"
             justify="center"
             alignItems="center"
-            spacing={0}
+            spacing={1}
             className={classes.media3}
           >
           <Grid item xs={3}>
@@ -143,7 +149,7 @@ export default function Mobileimages({p1,p2,p3,p4,p5}) {
                 changephotos({
                     ...photos,a:photos.b,b:temp,
                 });
-            }}><div className={classes.mediaclass}><img src={photos.b} className={classes.media2}/></div></Button>
+            }}><div className={classes.mediaclass}><img src={photos.b} className={styles.img2}/></div></Button>
           </Grid>
           <Grid item xs={3}>
           <Button className={classes.buttonclass} onClick={() => {
@@ -151,7 +157,7 @@ export default function Mobileimages({p1,p2,p3,p4,p5}) {
                 changephotos({
                     ...photos,a:photos.c,c:temp,
                 });
-            }}><div className={classes.mediaclass}><img src={photos.c} className={classes.media2}/></div></Button>
+            }}><div className={classes.mediaclass}><img src={photos.c} className={styles.img2}/></div></Button>
           </Grid>
           <Grid item xs={3}>
           <Button className={classes.buttonclass} onClick={() => {
@@ -159,7 +165,7 @@ export default function Mobileimages({p1,p2,p3,p4,p5}) {
                 changephotos({
                     ...photos,a:photos.d,d:temp,
                 });
-            }}><div className={classes.mediaclass}><img src={photos.d} className={classes.media2}/></div></Button>
+            }}><div className={classes.mediaclass}><img src={photos.d} className={styles.img2}/></div></Button>
           </Grid>
           <Grid item xs={3}>
           <Button className={classes.buttonclass} onClick={() => {
@@ -167,7 +173,7 @@ export default function Mobileimages({p1,p2,p3,p4,p5}) {
                 changephotos({
                     ...photos,a:photos.e,e:temp,
                 });
-            }}><div className={classes.mediaclass}><img src={photos.e} className={classes.media2}/></div></Button>
+            }}><div className={classes.mediaclass}><img src={photos.e} className={styles.img2}/></div></Button>
           </Grid>
           
           </Grid>

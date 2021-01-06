@@ -9,6 +9,7 @@ import RoomIcon from '@material-ui/icons/Room';
 import RoomImage from './MobileSearchCardImage'
 import Box from '@material-ui/core/Box'
 import ScrollableIcons from './ScrollableIcons'
+import {Link} from 'react-router-dom';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -47,8 +48,10 @@ export default function RecipeReviewCard({post}) {
    
  <RoomImage post={post}/>
 
+ <Link to={`/searchlist/rooms/${post.room_id}`} target="_blank">
 
  <Box ml={1}>
+
    <Box mb={0}>
    <Grid container alignItems='flex-start'>
      <Grid item xs={1}>
@@ -96,8 +99,9 @@ export default function RecipeReviewCard({post}) {
             </Typography>    
         </Grid>
     </Grid>
-            
+        
 </Box>
+</Link>  
 </Card>
 );
 }

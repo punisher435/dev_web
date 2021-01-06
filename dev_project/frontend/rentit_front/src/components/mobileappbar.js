@@ -64,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function BottomAppBar({details}) {
+export default function BottomAppBar({details,open1,changeopen1}) {
   const classes = useStyles();
 
   return (
@@ -82,7 +82,7 @@ export default function BottomAppBar({details}) {
             spacing={1}
           >
               <Grid item xs={5}>
-                    <Button className={classes.buttonroot}>
+                    <Button className={classes.buttonroot} onClick={() => {changeopen1(true)}}>
                         <BookIcon />
                         <Typography variant="body1" component="body1" className={classes.typo1}>
                         Book now
