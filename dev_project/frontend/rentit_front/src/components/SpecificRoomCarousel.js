@@ -33,7 +33,11 @@ import BathtubIcon from '@material-ui/icons/Bathtub';
 import { grey } from '@material-ui/core/colors';
 import { IconContext } from "react-icons";
 
+import style from './css/hover.module.css'
+
 import CustomizedRatings from './rating_meter';
+
+import SimpleModal from './imagemodal';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -144,8 +148,9 @@ export default function NestedGrid({post}) {
       b:post.photo2,
       c:post.photo3,
       d:post.photo4,
+      e:post.photo5,
     })
-
+    const [open,changeopen] = useState(false)
   
     return (
       <Grid
@@ -156,13 +161,17 @@ export default function NestedGrid({post}) {
   spacing = {1}
 >
 
+<SimpleModal open={open} change={changeopen} photo={photos.a}/>
+
 <Grid item xs={12}>
+
 <Card className={classes.root1}>
         <CardActionArea>
           <CardMedia
-            className={classes.media}
+            className={`${classes.media} ${style.pcimg1}`}
             image={photos.a}
             title="Contemplative Reptile"
+            onClick={() => {changeopen(true);}}
           />
         </CardActionArea>
     </Card>
@@ -182,17 +191,16 @@ export default function NestedGrid({post}) {
     <Card >
         <CardActionArea>
           <CardMedia
-            className={classes.media2}
+            className={`${classes.media2} ${style.pcimg2}`}
             image={photos.b}
             title="Contemplative Reptile" 
             onClick={
               () => {
                 const temp=photos.a;
                 changephotos({
+                  ...photos,
                   a:photos.b,
-                  b:temp,
-                  c:photos.c,
-                  d:photos.d,
+                  b:temp
                 })
               }
             }
@@ -206,17 +214,18 @@ export default function NestedGrid({post}) {
 <Card>
         <CardActionArea>
           <CardMedia
-            className={classes.media2}
+            className={`${classes.media2} ${style.pcimg2}`}
             image={photos.c}
             title="Contemplative Reptile"
             onClick={
               () => {
                 const temp=photos.a;
                 changephotos({
+                  ...photos,
                   a:photos.c,
-                  b:photos.b,
-                  c:temp,
-                  d:photos.d,
+          
+                  c:temp
+
                 })
               }
             }
@@ -228,17 +237,37 @@ export default function NestedGrid({post}) {
 <Card>
         <CardActionArea>
           <CardMedia
-            className={classes.media2}
+            className={`${classes.media2} ${style.pcimg2}`}
             image={photos.d}
             title="Contemplative Reptile"
             onClick={
               () => {
                 const temp=photos.a;
                 changephotos({
+                  ...photos,
                   a:photos.d,
-                  b:photos.b,
-                  c:photos.c,
                   d:temp,
+                })
+              }
+            }
+          />
+        </CardActionArea>
+      </Card>
+</Grid>
+<Grid item xs={2}>
+<Card>
+        <CardActionArea>
+          <CardMedia
+            className={`${classes.media2} ${style.pcimg2}`}
+            image={photos.e}
+            title="Contemplative Reptile"
+            onClick={
+              () => {
+                const temp=photos.a;
+                changephotos({
+                  ...photos,
+                  a:photos.e,
+                  e:temp,
                 })
               }
             }

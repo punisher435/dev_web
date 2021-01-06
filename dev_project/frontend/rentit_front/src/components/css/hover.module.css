@@ -11,6 +11,20 @@
 
 
 
+.pcimg2:hover{
+    transform: scale(1.3);
+    transition: transform .3s; 
+
+}
+.pcimg1:hover{
+    transform: scale(1.3);
+    transition: transform .3s; 
+    
+
+}
+
+
+
 
 img{
    

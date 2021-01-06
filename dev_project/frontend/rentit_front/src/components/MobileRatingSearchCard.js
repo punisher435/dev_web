@@ -101,7 +101,7 @@ export default function SimpleCard(props) {
           <Grid item>
               <Typography variant='subtitle1'>
               <Box fontSize={14}>
-                    {`${props.reviews} reviews`}
+                    {`(${props.reviews} ratings)`}
                 </Box>
               </Typography>
           </Grid>

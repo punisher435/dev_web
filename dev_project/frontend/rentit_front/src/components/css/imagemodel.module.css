@@ -1,4 +1,7 @@
-.boxclass:hover{
+
+
+@media only screen and (max-width: 1400px)
+{.boxclass:hover{
     transform: scale(1.3);
     transition: transform .3s; 
-}
+}}
