@@ -7,6 +7,9 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseU
 from .managers import profile_manager
 
 
+
+
+
 # Create your models here
 
 
@@ -22,6 +25,8 @@ class UserAccountManager(BaseUserManager):
         user.set_password(password)
         user.save(using=self._db)
         
+        
+
         return user
 
 

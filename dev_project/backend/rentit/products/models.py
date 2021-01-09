@@ -140,6 +140,8 @@ class rooms(models.Model):
     removable_dinner=models.BooleanField(default=False)
     cost_dinner = models.IntegerField(default=0)
 
+    room_cleaning=models.BooleanField(default=False)
+
     #neighbourhood
     nearby_station1 = models.TextField(max_length=255)
     nearby_station2 = models.TextField(max_length=255)
@@ -250,6 +252,8 @@ class shops(models.Model):
     cost_wifi = models.IntegerField(default=0)
 
     power_backup=models.BooleanField(default=False)
+
+    shop_cleaning=models.BooleanField(default=False)
     
     #neighbourhood
     nearby_station1 = models.TextField(max_length=255)
@@ -378,6 +382,8 @@ class apartments(models.Model):
     geyser=models.BooleanField(default=False)
     removable_geyser=models.BooleanField(default=False)
     cost_geyser = models.IntegerField(default=0)
+
+    apartment_cleaning=models.BooleanField(default=False)
 
     #neighbourhood
     nearby_station1 = models.TextField(max_length=255)
