@@ -6,6 +6,7 @@ import StarRoundedIcon from '@material-ui/icons/Star';
 import Typography from '@material-ui/core/Typography';
 import { CardActionArea } from '@material-ui/core';
 import Box from '@material-ui/core/Box'
+import Hidden from '@material-ui/core/Hidden';
 
 import Rating from '@material-ui/lab/Rating';
 
@@ -45,7 +46,7 @@ export default function SimpleCard(props) {
         setCompliment('bad');
     }
     else if(props.rating<=2){
-        setCompliment=('Not Good');
+        setCompliment('Not Good');
     }
     else if(props.rating<=3){
         setCompliment('Good');
@@ -71,7 +72,7 @@ export default function SimpleCard(props) {
       >
           <Grid item >
                 <Box mb={1} mt={1}>
-                <Rating name="read-only" value={props.rating} readOnly precision={0.5} size="large"  />
+                <Rating name="read-only" value={props.rating} readOnly precision={0.1} size="large" className={classes.myclass} />
                 </Box>
                 
               
@@ -102,7 +103,7 @@ export default function SimpleCard(props) {
           </Grid>
           <Grid item>
               <Typography variant='subtitle1'>
-                  <Box fontWeight="fontWeightMedium" ml={1} mr={1}>
+                  <Box fontWeight="fontWeightMedium" className={classes.myclass} ml={1} mr={1}>
                     {compliment}
                   </Box>
               </Typography>
@@ -110,7 +111,7 @@ export default function SimpleCard(props) {
           <Grid item>
               <Typography variant='subtitle1'>
               <Box fontSize={14}>
-                    (255) reviews
+                    ({props.reviews}) reviews
                 </Box>
               </Typography>
           </Grid>

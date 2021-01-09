@@ -17,7 +17,7 @@ function Spinner({loading}) {
             <div>
                 <HashLoader
                 css={override}
-                size={150}
+                size={100}
                 color={"#f50057"}
                 loading={loading}
                  />

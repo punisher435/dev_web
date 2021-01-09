@@ -33,30 +33,56 @@ import SimpleSelect5 from '../components/bedtypefilter';
 import SearchFields from '../components/searchfilter';
 import SearchFields2 from '../components/searchfilter2';
 import SimpleSelectfinal from '../components/sort';
+import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
+import Icon from '@material-ui/core/Icon';
+
+import { Link } from 'react-router-dom';
+
 
 
 const drawerWidth = 300;
+const drawerWidth1 = 250;
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
   },
   drawer: {
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('lg')]: {
       width: drawerWidth,
       flexShrink: 0,
     },
     
   },
-  appBar: {
+  drawer1: {
     [theme.breakpoints.up('sm')]: {
+      width: drawerWidth1,
+      flexShrink: 0,
+    },
+  },
+  appBar: {
+    [theme.breakpoints.up('lg')]: {
       width: `calc(100% - ${drawerWidth}px)`,
       marginLeft: drawerWidth,
 
     },
     backgroundColor:'#f50057',
   },
+  appBar1: {
+    [theme.breakpoints.up('sm')]: {
+      width: `calc(100% - ${drawerWidth1}px)`,
+      marginLeft: drawerWidth,
+
+    },
+    backgroundColor:'#f50057',
+  },
   menuButton: {
+    marginRight: theme.spacing(2),
+    [theme.breakpoints.up('lg')]: {
+      display: 'none',
+    },
+  },
+  menuButton1: {
     marginRight: theme.spacing(2),
     [theme.breakpoints.up('sm')]: {
       display: 'none',
@@ -67,6 +93,9 @@ const useStyles = makeStyles((theme) => ({
   drawerPaper: {
     width: drawerWidth,
   },
+  drawerPaper1: {
+    width: drawerWidth1,
+  },
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
@@ -74,6 +103,9 @@ const useStyles = makeStyles((theme) => ({
   },
   mystyle: {
     marginLeft:'10px',
+  },
+  iconstyle: {
+    color: 'white',
   }
 }));
 
@@ -90,6 +122,7 @@ function ResponsiveDrawer(props) {
   const drawer = (
     <div>
       <div className={classes.toolbar} />
+      
       <Divider />
       
 
@@ -230,6 +263,7 @@ function ResponsiveDrawer(props) {
   return (
     <div className={classes.root}>
       <CssBaseline />
+      <Hidden smDown>
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
           <IconButton
@@ -241,9 +275,15 @@ function ResponsiveDrawer(props) {
           >
             <MenuIcon />
           </IconButton>
-          
+      
 
             {/* THE APPBAR CONTENT SHOULD BE HERE */}
+      
+      <Link to='/'>
+      <Icon className={classes.iconstyle}>
+      <KeyboardBackspaceIcon fontSize='large'/>
+      </Icon>
+      </Link>
             
 
 
@@ -252,11 +292,43 @@ function ResponsiveDrawer(props) {
         
 
       </AppBar>
+      </Hidden>
+
+      <Hidden mdUp>
+      <AppBar position="fixed" className={classes.appBar1}>
+        <Toolbar>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={handleDrawerToggle}
+            className={classes.menuButton1}
+          >
+            <MenuIcon />
+          </IconButton>
+      
+
+            {/* THE APPBAR CONTENT SHOULD BE HERE */}
+      
+      <Link to='/'>
+      <Icon className={classes.iconstyle}>
+      <KeyboardBackspaceIcon fontSize='large'/>
+      </Icon>
+      </Link>
+            
 
 
+        </Toolbar>
+
+        
+
+      </AppBar>
+      </Hidden>
+
+      <Hidden smDown>
       <nav className={classes.drawer} aria-label="mailbox folders">
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-        <Hidden smUp implementation="css">
+        <Hidden lgUp implementation="css">
           <Drawer
             container={container}
             variant="temporary"
@@ -273,7 +345,7 @@ function ResponsiveDrawer(props) {
             {drawer}
           </Drawer>
         </Hidden>
-        <Hidden xsDown implementation="css">
+        <Hidden mdDown implementation="css">
           <Drawer
             classes={{
               paper: classes.drawerPaper,
@@ -285,6 +357,44 @@ function ResponsiveDrawer(props) {
           </Drawer>
         </Hidden>
       </nav>
+      </Hidden>
+
+
+      <Hidden mdUp>
+      <nav className={classes.drawer1} aria-label="mailbox folders">
+        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+        <Hidden mdUp implementation="css">
+          <Drawer
+            container={container}
+            variant="temporary"
+            anchor={theme.direction === 'rtl' ? 'right' : 'left'}
+            open={mobileOpen}
+            onClose={handleDrawerToggle}
+            classes={{
+              paper: classes.drawerPaper1,
+            }}
+            ModalProps={{
+              keepMounted: true, // Better open performance on mobile.
+            }}
+          >
+            {drawer}
+          </Drawer>
+        </Hidden>
+        <Hidden only={['xs']}implementation="css">
+          <Drawer
+            classes={{
+              paper: classes.drawerPaper1,
+            }}
+            variant="permanent"
+            open
+          >
+            {drawer}
+          </Drawer>
+        </Hidden>
+      </nav>
+      </Hidden>
+
+
       <main className={classes.content}>
         <div className={classes.toolbar} />
 

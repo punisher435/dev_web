@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'products',
     'django_google_maps',
+    'bookings',
 ]
 
 MIDDLEWARE = [
