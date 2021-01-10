@@ -1,4 +1,4 @@
-import React ,{ useState }from 'react';
+import React ,{ useState,useEffect }from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
@@ -35,6 +35,11 @@ import { IconContext } from "react-icons";
 import { Link } from "react-router-dom";
 
 import CustomizedRatings from './rating_meter';
+import { connect } from 'react-redux'
+import axios from 'axios'
+
+axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+axios.defaults.xsrfCookieName = "csrftoken";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -166,7 +171,7 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-export default function NestedGrid({post}) {
+function NestedGrid({post, isAuthenticated,access}) {
   const classes = useStyles();
 
   function MediaCard() {
@@ -176,6 +181,27 @@ export default function NestedGrid({post}) {
       c:post.photo3,
       d:post.photo4,
     })
+
+
+    useEffect(async () => {
+
+      if(true){
+      const config = {
+        headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `JWT ${localStorage.getItem('access')}`,
+                'Accept': 'application/json'
+        }
+      };
+      console.log(JSON.stringify(config.headers))
+      const res = await axios.put(`${process.env.REACT_APP_API_URL}/souraawdgrg33w24/wishlist/rooms/${post.room_id}/`,config,config);
+
+      console.log(res);
+
+    }
+
+    }
+      ,[isAuthenticated])
 
   
     return (
@@ -457,4 +483,11 @@ export default function NestedGrid({post}) {
     </div>
   );
 }
+
+const mapStateToProps = state => ({
+  isAuthenticated: state.authreducers.isAuthenticated,
+  access: state.authreducers.access
+});
+
+export default connect(mapStateToProps)(NestedGrid);
 
