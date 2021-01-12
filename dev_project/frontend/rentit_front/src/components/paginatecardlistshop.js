@@ -58,7 +58,6 @@ const App = ({isAuthenticated}) => {
     windows:'',
     bookedtill:'',
     search:'',
-    room_cleaning:'',
     ordering:'-trust_points',
   });
 
@@ -74,14 +73,11 @@ const App = ({isAuthenticated}) => {
       /* const params = new URLSearchParams([page,currentPage]) */
       try{const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourceaxcnfrudadv34/rooms/`,{
         params:{
-          room_cleaning:filters.room_cleaning,
           page:currentPage,
           booked:filters.booked,
           min_price:filters.min_price,
           max_price:filters.max_price,
           category:filters.category,
-          nonveg_food:filters.nonveg_food,
-          veg_food:filters.veg_food,
           bookedtill:filters.bookedtill,
           min_rating:filters.min_rating,
           capacity_filter:filters.capacity_filter,

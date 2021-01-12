@@ -69,6 +69,9 @@ export default function SimpleSelect2(props) {
   const handleChange15 = (event) => {
     props.setfilters({...props.filters,dinner:event.target.value});
   };
+  const handleChange16 = (event) => {
+    props.setfilters({...props.filters,room_cleaning:event.target.value});
+  };
   return (
     <div>
       <FormControl className={classes.formControl}>
@@ -288,6 +291,20 @@ export default function SimpleSelect2(props) {
           id="dinner_id"
           value={props.filters.dinner}
           onChange={handleChange15}
+        >
+          <MenuItem value={''}>None</MenuItem>
+          <MenuItem value={true}>Yes</MenuItem>
+          <MenuItem value={false}>No</MenuItem>
+        </Select>
+      </FormControl>
+
+      <FormControl className={classes.formControl}>
+        <InputLabel id="room_cleaning">Room cleaning</InputLabel>
+        <Select
+          labelId="room_cleaning_list"
+          id="room_cleaning_id"
+          value={props.filters.room_cleaning}
+          onChange={handleChange16}
         >
           <MenuItem value={''}>None</MenuItem>
           <MenuItem value={true}>Yes</MenuItem>

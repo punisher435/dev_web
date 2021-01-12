@@ -43,7 +43,7 @@ class room_filter(rest_filters.FilterSet):
 
     class Meta:
         model = rooms
-        fields = ['windows_filter','bookedtill_filter','nonveg_food','veg_food','guest_allowed','iron','laundry','cooler','AC','room_TV','power_backup','floor_filter','purified_water','min_rating','cctv_building','bed_type','building_guard','balcony','separate_washroom','category','location','city','state','wifi','breakfast','lunch','dinner','house_TV','power_backup','geyser','electricity','country','min_price','max_price','capacity_filter','trust_points_filter','booked']
+        fields = ['room_cleaning','windows_filter','bookedtill_filter','nonveg_food','veg_food','guest_allowed','iron','laundry','cooler','AC','room_TV','power_backup','floor_filter','purified_water','min_rating','cctv_building','bed_type','building_guard','balcony','separate_washroom','category','location','city','state','wifi','breakfast','lunch','dinner','house_TV','power_backup','geyser','electricity','country','min_price','max_price','capacity_filter','trust_points_filter','booked']
 
 
 class room_viewset(viewsets.ReadOnlyModelViewSet):
@@ -226,7 +226,7 @@ class shop_filter(rest_filters.FilterSet):
 
     class Meta:
         model = shops
-        fields = ['bookedtill_filter','water_facility','wifi','power_backup','electricity','category','location','city','state','country','pincode','min_price','max_price','trust_points_filter','booked']
+        fields = ['shop_cleaning','bookedtill_filter','water_facility','wifi','power_backup','electricity','category','location','city','state','country','pincode','min_price','max_price','trust_points_filter','booked']
 
             
 class shop_viewset(viewsets.ReadOnlyModelViewSet):
@@ -384,7 +384,7 @@ class apartment_filter(rest_filters.FilterSet):
 
     class Meta:
         model = apartments
-        fields = ['bookedtill_filter','geyser','power_backup','TV','water_facility','electricity','category','location','city','state','country','pincode','min_price','max_price','BHK_filter','trust_points_filter','booked']
+        fields = ['apartment_cleaning','bookedtill_filter','geyser','power_backup','TV','water_facility','electricity','category','location','city','state','country','pincode','min_price','max_price','BHK_filter','trust_points_filter','booked']
 
 
 class apartment_viewset(viewsets.ReadOnlyModelViewSet):
