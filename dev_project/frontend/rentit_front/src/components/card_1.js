@@ -1,4 +1,4 @@
-import React,{ useState } from 'react';
+import React,{ useState,useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
@@ -10,6 +10,9 @@ import RoomImage from './MobileSearchCardImage'
 import Box from '@material-ui/core/Box'
 import ScrollableIcons from './ScrollableIcons'
 import {Link} from 'react-router-dom';
+
+import axios from 'axios';
+import { connect } from 'react-redux'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -40,15 +43,61 @@ backgroundColor: red[500],
 },
 }));
 
-export default function RecipeReviewCard({post}) {
+function RecipeReviewCard({isAuthenticated,post,setOpen1,setOpen2,wishlistitems,changeitemswishlist}) {
        const classes = useStyles();
+
+       const [wishlist,changewishlist] = useState(false)
+       const [cart,changecart] = useState(false)
+
+       useEffect(async () => {
+
+        if(isAuthenticated){
+        const config = {
+          headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `JWT ${localStorage.getItem('access')}`,
+          },
+        };
+        try {
+        await axios.get(`${process.env.REACT_APP_API_URL}/souraawdgrg33w24/wishlist/rooms/${post.room_id}/`,config,config)
+        .then(res => {
+          changewishlist(res.data);
+        })
+        .catch(err => {
+          
+        })
+        
+        }
+        catch{
+        }
+  
+        try {
+          await axios.get(`${process.env.REACT_APP_API_URL}/souradadnaknda/cart/rooms/${post.room_id}/`,config,config)
+          .then(res => {
+            changecart(res.data);
+          })
+          .catch(err => {
+            
+          })
+          
+          }
+          catch{
+          }
+  
+      }
+  
+      }
+        ,[isAuthenticated])
+
+
+        
  
  return (
 <Card className={classes.root}>
    
- <RoomImage post={post}/>
+ <RoomImage post={post} wishlist={wishlist} changewishlist={changewishlist} setOpen1={setOpen1} isAuthenticated={isAuthenticated} wishlistitems={wishlistitems} changeitemswishlist={changeitemswishlist}/>
 
- <Link to={`/searchlist/rooms/${post.room_id}`} target="_blank">
+ <Link to={`/rooms/${post.room_id}`} target="_blank">
 
  <Box ml={1}>
 
@@ -105,3 +154,10 @@ export default function RecipeReviewCard({post}) {
 </Card>
 );
 }
+
+const mapStateToProps = state => ({
+  isAuthenticated: state.authreducers.isAuthenticated,
+  access: state.authreducers.access
+});
+
+export default connect(mapStateToProps)(RecipeReviewCard);

@@ -150,8 +150,8 @@ class rooms(models.Model):
     room_policy = models.TextField()
 
     #
-    wishlist=models.BooleanField(default=False)
-    cart=models.BooleanField(default=False)
+    wishlist=models.IntegerField(default=0)
+    cart=models.IntegerField(default=0)
 
     #coupons
     seller_coupon=models.CharField(max_length=255,null=True,blank=True)
@@ -261,8 +261,8 @@ class shops(models.Model):
     shop_policy = models.TextField()
 
     # 
-    wishlist=models.BooleanField(default=False)
-    cart=models.BooleanField(default=False)
+    wishlist=models.IntegerField(default=0)
+    cart=models.IntegerField(default=0)
 
     seller_coupon=models.CharField(max_length=255,null=True,blank=True)
     coupon_discount=models.IntegerField(null=True, blank=True)
@@ -393,8 +393,9 @@ class apartments(models.Model):
     apartment_policy = models.TextField()
 
     #
-    wishlist=models.BooleanField(default=False)
-    cart=models.BooleanField(default=False)
+    wishlist=models.IntegerField(default=0)
+    cart=models.IntegerField(default=0)
+
 
 
     seller_coupon=models.CharField(max_length=255,null=True,blank=True)

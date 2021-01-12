@@ -11,3 +11,4 @@ class wishlist(models.Model):
     room_wishlist = models.ManyToManyField(rooms,blank=True,related_name='wishlist_room')
     shop_wishlist = models.ManyToManyField(shops, blank=True,related_name='wishlist_shop')
     apartment_wishlist = models.ManyToManyField(apartments, blank=True,related_name='wishlist_apartment')
+    items = models.IntegerField(default=0)

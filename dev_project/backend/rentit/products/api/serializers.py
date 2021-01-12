@@ -9,6 +9,7 @@ class room_detail_serializer(serializers.ModelSerializer):
         model = rooms
         fields ='__all__'
 
+
 class room_list_serializer(serializers.ModelSerializer):
     class Meta:
         model = rooms

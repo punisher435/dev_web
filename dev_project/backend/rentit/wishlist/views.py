@@ -5,6 +5,7 @@ from rest_framework import status
 from django.shortcuts import get_object_or_404
 from rest_framework import permissions
 from rest_framework_simplejwt import authentication
+from rest_framework.parsers import MultiPartParser,FormParser
 from django.shortcuts import get_object_or_404
 from django.db.models import Q
 from itertools import chain
@@ -23,15 +24,16 @@ class wishlist_room(viewsets.ViewSet):
 
     authentication_classes = [authentication.JWTAuthentication]
     permission_classes = [permissions.IsAuthenticated]
+    parser_classes=(MultiPartParser,FormParser)
 
-    def list(self, request):
+    def list(self, request,format=None):
         queryset = wishlist.objects.all()
         try:
             wishlist_object = get_object_or_404(queryset,pk=request.user.pk)
 
             query_set = rooms.objects.filter(Q(room_id__in=wishlist_object.room_wishlist.all()))
             
-            serializer = room_list_serializer(query_set,many=True)
+            serializer = room_list_serializer(query_set,context={'request':request},many=True)
 
             #print(serializer.data)
 
@@ -53,14 +55,20 @@ class wishlist_room(viewsets.ViewSet):
         try:
             wishlist_object = wishlist.objects.get(pk=request.user.pk)
             wishlist_object.room_wishlist.add(room)
+            wishlist_object.items=wishlist_object.items+1
             wishlist_object.save()
+            room.wishlist=room.wishlist+1;
+            room.save()
             return Response('Added to wishlist', status=status.HTTP_202_ACCEPTED)
             
         except: 
             wishlist_object = wishlist(user_id=request.user)
             wishlist_object.save()
             wishlist_object.room_wishlist.add(room)
+            wishlist_object.items=wishlist_object.items+1
             wishlist_object.save()
+            room.wishlist=room.wishlist+1;
+            room.save()
             return Response('Added to wishlist', status=status.HTTP_202_ACCEPTED)
 
     def destroy(self,request,pk=None):
@@ -70,17 +78,18 @@ class wishlist_room(viewsets.ViewSet):
         try:
             wishlist_object = wishlist.objects.get(pk=request.user.pk)
             wishlist_object.room_wishlist.remove(room)
+            wishlist_object.items=wishlist_object.items-1
             wishlist_object.save()
+            room.wishlist=room.wishlist-1;
+            room.save()
             return Response('Removed from wishlist', status=status.HTTP_202_ACCEPTED)
 
         except:
             return Response('Error while removing from wishlist',status=status.HTTP_400_BAD_REQUEST)
 
-    def update(self, request,pk=None):
+    def retrieve(self, request,pk=None):
 
         room = get_object_or_404(rooms.objects.all(),pk=pk)
-
-        wishlist_object = wishlist.objects.get(pk=request.user.pk)
 
         try:
             wishlist_object = wishlist.objects.get(pk=request.user.pk)
@@ -93,6 +102,13 @@ class wishlist_room(viewsets.ViewSet):
         except:
             return Response(False,status=status.HTTP_400_BAD_REQUEST)
 
+    def update(self,request,pk=None):
+        try:
+            wishlist_object = wishlist.objects.get(pk=request.user.pk)
+            return Response(wishlist_object.items, status=status.HTTP_202_ACCEPTED)
+        except:
+            return Response(None,status=status.HTTP_400_BAD_REQUEST)
+
 
 
 
@@ -103,15 +119,16 @@ class wishlist_shop(viewsets.ViewSet):
     
     authentication_classes = [authentication.JWTAuthentication]
     permission_classes = [permissions.IsAuthenticated]
+    parser_classes=(MultiPartParser,FormParser)
 
-    def list(self, request):
+    def list(self, request,format=None):
         queryset = wishlist.objects.all()
         try:
             wishlist_object = get_object_or_404(queryset,pk=request.user.pk)
 
             query_set = shops.objects.filter(Q(shop_id__in=wishlist_object.shop_wishlist.all()))
             
-            serializer = shop_list_serializer(query_set,many=True)
+            serializer = shop_list_serializer(query_set,context={'request':request},many=True)
 
             #print(serializer.data)
 
@@ -133,14 +150,20 @@ class wishlist_shop(viewsets.ViewSet):
         try:
             wishlist_object = wishlist.objects.get(pk=request.user.pk)
             wishlist_object.shop_wishlist.add(shop)
+            wishlist_object.items=wishlist_object.items+1
             wishlist_object.save()
+            shop.wishlist=shop.wishlist+1;
+            shop.save()
             return Response('Added to wishlist', status=status.HTTP_202_ACCEPTED)
             
         except: 
             wishlist_object = wishlist(user_id=request.user)
             wishlist_object.save()
             wishlist_object.shop_wishlist.add(shop)
+            wishlist_object.items=wishlist_object.items+1
             wishlist_object.save()
+            shop.wishlist=shop.wishlist+1;
+            shop.save()
             return Response('Added to wishlist', status=status.HTTP_202_ACCEPTED)
 
     def destroy(self,request,pk=None):
@@ -150,7 +173,10 @@ class wishlist_shop(viewsets.ViewSet):
         try:
             wishlist_object = wishlist.objects.get(pk=request.user.pk)
             wishlist_object.shop_wishlist.remove(shop)
+            wishlist_object.items=wishlist_object.items-1
             wishlist_object.save()
+            shop.wishlist=shop.wishlist-1;
+            shop.save()
             return Response('Removed from wishlist', status=status.HTTP_202_ACCEPTED)
 
         except:
@@ -167,11 +193,11 @@ class wishlist_shop(viewsets.ViewSet):
             if shop in wishlist_object.shop_wishlist.all():
                 return Response(True, status=status.HTTP_202_ACCEPTED)
             else:
-                return Response(False, status=status.HTTP_400_BAD_REQUEST)
+                return Response(False, status=status.HTTP_202_ACCEPTED)
             
 
         except:
-            return Response(False,status=status.HTTP_400_BAD_REQUEST)
+            return Response(False, status=status.HTTP_202_ACCEPTED)
 
 
 
@@ -183,15 +209,16 @@ class wishlist_apartment(viewsets.ViewSet):
     
     authentication_classes = [authentication.JWTAuthentication]
     permission_classes = [permissions.IsAuthenticated]
+    parser_classes=(MultiPartParser,FormParser)
 
-    def list(self, request):
+    def list(self, request,format=None):
         queryset = wishlist.objects.all()
         try:
             wishlist_object = get_object_or_404(queryset,pk=request.user.pk)
 
             query_set = apartments.objects.filter(Q(apartment_id__in=wishlist_object.apartment_wishlist.all()))
             
-            serializer = apartment_list_serializer(query_set,many=True)
+            serializer = apartment_list_serializer(query_set,context={'request':request},many=True)
 
             #print(serializer.data)
 
@@ -213,14 +240,20 @@ class wishlist_apartment(viewsets.ViewSet):
         try:
             wishlist_object = wishlist.objects.get(pk=request.user.pk)
             wishlist_object.apartment_wishlist.add(apartment)
+            wishlist_object.items=wishlist_object.items+1
             wishlist_object.save()
+            apartment.wishlist=apartment.wishlist+1;
+            apartment.save()
             return Response('Added to wishlist', status=status.HTTP_202_ACCEPTED)
             
         except: 
             wishlist_object = wishlist(user_id=request.user)
             wishlist_object.save()
             wishlist_object.apartment_wishlist.add(apartment)
+            wishlist_object.items=wishlist_object.items+1
             wishlist_object.save()
+            apartment.wishlist=apartment.wishlist+1;
+            apartment.save()
             return Response('Added to wishlist', status=status.HTTP_202_ACCEPTED)
 
     def destroy(self,request,pk=None):
@@ -230,7 +263,10 @@ class wishlist_apartment(viewsets.ViewSet):
         try:
             wishlist_object = wishlist.objects.get(pk=request.user.pk)
             wishlist_object.apartment_wishlist.remove(apartment)
+            wishlist_object.items=wishlist_object.items-1
             wishlist_object.save()
+            apartment.wishlist=apartment.wishlist-1;
+            apartment.save()
             return Response('Removed from wishlist', status=status.HTTP_202_ACCEPTED)
 
         except:

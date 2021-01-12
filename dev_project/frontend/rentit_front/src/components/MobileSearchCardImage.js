@@ -12,6 +12,7 @@ import IconButton from '@material-ui/core/IconButton';
 import { Typography } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import RatingWithCompliments from './MobileRatingSearchCard' 
+import axios from 'axios'
 
 const useStyles = makeStyles((theme) => ({
 
@@ -23,7 +24,9 @@ const useStyles = makeStyles((theme) => ({
     borderLeft: 2,
     borderLeftColor: grey,
   },
-
+  iconroot:{
+    color:'#f44336',
+  },
 
 
   media: {
@@ -40,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-export default function NestedGrid({post}) {
+export default function NestedGrid({isAuthenticated,post,wishlist,changewishlist,setOpen1,wishlistitems,changeitemswishlist}) {
   const classes = useStyles();
 
   function MediaCard() {
@@ -55,7 +58,56 @@ export default function NestedGrid({post}) {
       // d:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-LmIs26AxRpNOAcQYJvD0Ki1BF2esKLrE1g&usqp=CAU',
     })
 
-  
+    
+    const handleclick = async (event) => {
+      event.preventDefault();
+
+      if(isAuthenticated)
+      {
+        if(wishlist)
+        {
+          const config = {
+            headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `JWT ${localStorage.getItem('access')}`,
+            },
+          };
+          const res = await axios.delete(`${process.env.REACT_APP_API_URL}/souraawdgrg33w24/wishlist/rooms/${post.room_id}/`,config);
+
+          if(res.data == 'Removed from wishlist'){changewishlist(false); changeitemswishlist(wishlistitems-1); console.log(wishlistitems);}
+        }
+      }else{
+        setOpen1(true);
+      }
+
+    }
+
+    const handleclick1 = async (event) => {
+      event.preventDefault();
+
+      if(isAuthenticated)
+      {
+        if(!wishlist)
+        {
+          const config = {
+            headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `JWT ${localStorage.getItem('access')}`,
+            },
+            params: {
+              room_id:post.room_id,
+            },
+          };
+          const res = await axios.post(`${process.env.REACT_APP_API_URL}/souraawdgrg33w24/wishlist/rooms/`,config,config);
+
+          if(res.data == 'Added to wishlist'){changewishlist(true); changeitemswishlist(wishlistitems+1); console.log(wishlistitems);}
+        }
+      }else{
+        setOpen1(true);
+      }
+
+    }
+
     return (
       <Grid
   container
@@ -93,13 +145,13 @@ export default function NestedGrid({post}) {
 
                     <Grid item xs={1}>
                         { 
-                        post.wishlist ? <Grid item xs={1}>
-                            <Icon color='error' className={classes.iconroot}>
+                        wishlist ? <Grid item xs={1}>
+                            <IconButton color='#f44336'  onClick={(event) => {handleclick(event);}} className={classes.iconroot}>
                             <FavoriteIcon />
-                            </Icon>
+                            </IconButton>
                             </Grid> :
                             <Grid item xs={1}>
-                                <IconButton color='#282828'  fontSize="large" className={classes.iconroot}>
+                                <IconButton color='#f44336'  onClick={(event) => {handleclick1(event);}} fontSize="large" className={classes.iconroot}>
                                     <FavoriteBorderOutlinedIcon />
                                     </IconButton>
                                     </Grid>

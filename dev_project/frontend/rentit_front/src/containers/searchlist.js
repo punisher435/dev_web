@@ -13,6 +13,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
+import Badge from '@material-ui/core/Badge';
 
 
 import Posts from '../components/Posts';
@@ -35,6 +36,8 @@ import SearchFields2 from '../components/searchfilter2';
 import SimpleSelectfinal from '../components/sort';
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 import Icon from '@material-ui/core/Icon';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 import { Link } from 'react-router-dom';
 
@@ -44,6 +47,12 @@ const drawerWidth = 300;
 const drawerWidth1 = 250;
 
 const useStyles = makeStyles((theme) => ({
+  iconstyle1:{
+    marginRight:'30px',
+  },
+  iconstyle2:{
+    marginRight:'20px',
+  },
   root: {
     display: 'flex',
   },
@@ -284,6 +293,28 @@ function ResponsiveDrawer(props) {
       <KeyboardBackspaceIcon fontSize='large'/>
       </Icon>
       </Link>
+
+      <Grid
+      container
+      direction="row"
+      justify="flex-end"
+      alignItems="center"
+      >
+
+      <Grid item xs={2}>
+      <Badge badgeContent={props.wishlistitems} color="primary"  className={classes.iconstyle1}>
+        <FavoriteIcon className={classes.iconstyle}/>
+      </Badge>
+     
+
+
+      <Badge badgeContent={props.cartitems} color="primary">
+        <ShoppingCartIcon />
+      </Badge>
+      </Grid>
+
+      </Grid>
+     
             
 
 
@@ -315,6 +346,27 @@ function ResponsiveDrawer(props) {
       <KeyboardBackspaceIcon fontSize='large'/>
       </Icon>
       </Link>
+
+      <Grid
+      container
+      direction="row"
+      justify="flex-end"
+      alignItems="center"
+      >
+
+      <Grid item xs={4}>
+      <Badge badgeContent={props.wishlistitems} color="primary"  className={classes.iconstyle2}>
+        <FavoriteIcon />
+      </Badge>
+     
+
+
+      <Badge badgeContent={props.cartitems} color="primary">
+        <ShoppingCartIcon />
+      </Badge>
+      </Grid>
+
+      </Grid>
             
 
 
@@ -423,7 +475,7 @@ function ResponsiveDrawer(props) {
         </Hidden>
 
         
-           <Posts posts={props.posts} loading={props.loading} />
+           <Posts posts={props.posts} loading={props.loading} wishlistitems={props.wishlistitems} cartitems={props.cartitems} changeitemswishlist={props.changeitemswishlist} changeitemscart={props.changeitemscart}/>
            <PaginationOutlined paginate={props.paginate} postsPerPage={props.postsPerPage} currentPage={props.currentPage} totalposts={props.totalposts}/>
 
       </main>

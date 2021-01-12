@@ -18,6 +18,7 @@ from django.urls import path,include,re_path
 from django.views.generic import TemplateView
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.static import serve
 
 urlpatterns = [
     #authentication
@@ -52,6 +53,12 @@ urlpatterns = [
     path('souraawdgrg33w24/',include('wishlist.urls_room_wishlist')),
     path('sourcesnjs03qjkda/',include('wishlist.urls_shop_wishlist')),
     path('sourcenasdknahi29ad/',include('wishlist.urls_apartment_wishlist')),
+
+    #cart
+    path('souradadnaknda/',include('cart.urls_cart_room')),
+    path('sourcekfnenasd/',include('cart.urls_cart_shop')),
+    path('sourceajd28eajbdk/',include('cart.urls_cart_apartment')),
+
 ]
 
 urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
