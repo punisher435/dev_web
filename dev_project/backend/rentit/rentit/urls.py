@@ -43,6 +43,9 @@ urlpatterns = [
     path('sourcebvdfesl2746/',include('products.api.urls_apartments_listing')),
     path('sourceddnvslf54d/',include('products.api.urls_apartments_personal')),
     path('sourcemvdsnksnd59472/',include('products.api.urls_apartment_reviews')),
+
+    #location
+    path('sourceadbeios287y19/',include('products.api.urls_location_room')),
  
     #filter min and max price
     path('sourcekadwbda24/',include('products.api.urls_minmax_room')),

@@ -115,6 +115,8 @@ const useStyles = makeStyles((theme) => ({
   },
   iconstyle: {
     color: 'white',
+    padding:0,
+    margin:0,
   }
 }));
 
@@ -289,9 +291,9 @@ function ResponsiveDrawer(props) {
             {/* THE APPBAR CONTENT SHOULD BE HERE */}
       
       <Link to='/'>
-      <Icon className={classes.iconstyle}>
+      <IconButton className={classes.iconstyle}>
       <KeyboardBackspaceIcon fontSize='large'/>
-      </Icon>
+      </IconButton>
       </Link>
 
       <Grid
@@ -302,15 +304,18 @@ function ResponsiveDrawer(props) {
       >
 
       <Grid item xs={2}>
+      <Link to='/wishlist'>
       <Badge badgeContent={props.wishlistitems} color="primary"  className={classes.iconstyle1}>
-        <FavoriteIcon className={classes.iconstyle}/>
+        <IconButton className={classes.iconstyle}><FavoriteIcon className={classes.iconstyle}/></IconButton>
       </Badge>
+      </Link>
      
 
-
+      <Link to='/cart'>
       <Badge badgeContent={props.cartitems} color="primary">
-        <ShoppingCartIcon />
+      <IconButton className={classes.iconstyle}><ShoppingCartIcon /></IconButton>
       </Badge>
+      </Link>
       </Grid>
 
       </Grid>
@@ -342,9 +347,9 @@ function ResponsiveDrawer(props) {
             {/* THE APPBAR CONTENT SHOULD BE HERE */}
       
       <Link to='/'>
-      <Icon className={classes.iconstyle}>
+      <IconButton className={classes.iconstyle}>
       <KeyboardBackspaceIcon fontSize='large'/>
-      </Icon>
+      </IconButton>
       </Link>
 
       <Grid
@@ -355,15 +360,18 @@ function ResponsiveDrawer(props) {
       >
 
       <Grid item xs={4}>
+      <Link to='/wishlist'>
       <Badge badgeContent={props.wishlistitems} color="primary"  className={classes.iconstyle2}>
-        <FavoriteIcon />
+      <IconButton className={classes.iconstyle}><FavoriteIcon /></IconButton>
       </Badge>
+      </Link>
      
 
-
+      <Link to='/cart'>
       <Badge badgeContent={props.cartitems} color="primary">
-        <ShoppingCartIcon />
+      <IconButton className={classes.iconstyle}><ShoppingCartIcon /></IconButton>
       </Badge>
+      </Link>
       </Grid>
 
       </Grid>
