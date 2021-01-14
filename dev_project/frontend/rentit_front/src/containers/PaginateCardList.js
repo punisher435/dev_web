@@ -16,6 +16,8 @@ const App = ({isAuthenticated}) => {
   const [max_price, setmax_price] = useState(0);
   const [min_price, setmin_price] = useState(0);
 
+  const [mapview,setmap] = useState(false);
+
   const [error, setError] = useState('');
   const [wishlistitems,changeitemswishlist] = useState(0)
   const [cartitems,changeitemscart] = useState(0)
@@ -72,6 +74,7 @@ const App = ({isAuthenticated}) => {
       };
       const page = currentPage
       /* const params = new URLSearchParams([page,currentPage]) */
+      if(mapview===false){
       try{const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourceaxcnfrudadv34/rooms/`,{
         params:{
           room_cleaning:filters.room_cleaning,
@@ -115,6 +118,8 @@ const App = ({isAuthenticated}) => {
       const res2 = await axios.get(`${process.env.REACT_APP_API_URL}/sourcekadwbda24/minmax_room/1/`,{
         config:config
       });
+
+      
       setmax_price(res2.data.max_price);
       setmin_price(res2.data.min_price);
       setPosts(res.data.results);
@@ -124,6 +129,7 @@ const App = ({isAuthenticated}) => {
       catch{
         setError('An error occurred');
       }
+    }
     };
 
 
@@ -197,7 +203,7 @@ const App = ({isAuthenticated}) => {
       alignItems="center"
       >
         <Grid item lg={12} xs={12}>
-        <ResponsiveDrawer setfilters={setfilters} max_price={max_price} min_price={min_price} filters={filters} posts={posts} loading={loading} paginate={paginate} postsPerPage={postsPerPage} currentPage={currentPage} totalposts={totalposts} wishlistitems={wishlistitems} cartitems={cartitems} changeitemswishlist={changeitemswishlist} changeitemscart={changeitemscart}/>
+        <ResponsiveDrawer mapview={mapview} setmap={setmap} setfilters={setfilters} max_price={max_price} min_price={min_price} filters={filters} posts={posts} loading={loading} paginate={paginate} postsPerPage={postsPerPage} currentPage={currentPage} totalposts={totalposts} wishlistitems={wishlistitems} cartitems={cartitems} changeitemswishlist={changeitemswishlist} changeitemscart={changeitemscart}/>
         
 
         {/* <Pagination

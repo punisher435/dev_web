@@ -9,6 +9,8 @@
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.57",
     "@material-ui/pickers": "^3.2.10",
+    "@reach/combobox": "^0.12.1",
+    "@react-google-maps/api": "^2.1.0",
     "@react-icons/all-files": "^4.1.0",
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.2",
@@ -40,6 +42,7 @@
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
+    "use-places-autocomplete": "^1.7.1",
     "web-vitals": "^0.2.4"
   },
   "scripts": {

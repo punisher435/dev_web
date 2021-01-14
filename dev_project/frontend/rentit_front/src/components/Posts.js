@@ -18,7 +18,7 @@ const Posts = ({ posts, loading,changeitemswishlist,changeitemscart,wishlistitem
   return (
     <ul className='list-group mb-4'>
 
-       <Spinner loading={loading} />;
+       <Spinner loading={loading} />
        <SimpleSnackbar open={open1} setOpen={setOpen1}/>
        <SimpleSnackbar1 open={open2} setOpen={setOpen2}/>
       {posts.map(post => (
