@@ -49,6 +49,8 @@ class customUser(AbstractBaseUser, PermissionsMixin):
     last_name=models.CharField(max_length=255)
     is_seller=models.BooleanField(default=False)
     profile_completed=models.BooleanField(default=False)
+    bank_completed=models.BooleanField(default=False)
+    address_completed=models.BooleanField(default=False)
     is_staff=models.BooleanField(default=False)
     is_superuser=models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
@@ -100,7 +102,21 @@ class seller_bank_details(models.Model):
     bank_address=models.TextField()
     IFSC_code=models.CharField(max_length=255)
     account_type=models.CharField( max_length=255,choices=account_type_choices)
+    currency=models.CharField(max_length=200,default='₹')
     total_due_payment=models.BigIntegerField()
+
+class seller_address(models.Model):
+    user_id=models.OneToOneField(customUser,on_delete=models.CASCADE,primary_key=True)
+    address = models.TextField()
+    city = models.CharField(max_length=255)
+    state=models.CharField(max_length=255)
+    country=models.CharField(max_length=255)
+    pincode=models.CharField(max_length=255)
+    landmark=models.CharField(max_length=255)
+
+    longitude = models.DecimalField(max_digits=9,decimal_places=6,default=0.0)
+    latitude = models.DecimalField(max_digits=9,decimal_places=6,default=0.0)
+
 
 
 

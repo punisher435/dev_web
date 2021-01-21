@@ -27,6 +27,8 @@ urlpatterns = [
     
     #user profile
     path('sourcezxradakgdlh/',include('user.api.urls')),
+    path('sourceadbahdvjs218/',include('user.api.urls_bank')),
+    path('sourcejkzff8wqhdq92/',include('user.api.urls_address')),
 
     #rooms
     path('sourcedjfnsk743/',include('products.api.urls_room_reviews')),

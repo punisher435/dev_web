@@ -13,10 +13,8 @@ import store from './redux/auth/store';
 import PaginationCardList from './containers/PaginateCardList'
 import rooms from './containers/RoomDetails'
 import SimpleTabs from './containers/wishlist';
-import Profile from './containers/Profile';
 import RecentBooking from './containers/RecentBooking'
 import Profile from './containers/Profile';
-import RecentBooking from './containers/RecentBooking'
 
 
 
