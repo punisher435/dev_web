@@ -13,6 +13,11 @@ import store from './redux/auth/store';
 import PaginationCardList from './containers/PaginateCardList'
 import rooms from './containers/RoomDetails'
 import SimpleTabs from './containers/wishlist';
+import Profile from './containers/Profile';
+import RecentBooking from './containers/RecentBooking'
+import Profile from './containers/Profile';
+import RecentBooking from './containers/RecentBooking'
+
 
 
 function App(props) {
@@ -36,6 +41,10 @@ function App(props) {
                 <Route exact path='/rooms' component={PaginationCardList}/>
                 <Route exact path='/rooms/:roomid' component={rooms}/>
                 <Route exact path='/wishlist' component={SimpleTabs}/>
+                <Route exact path='/profile' component={Profile}/>
+                <Route exact path='/recentBooking' component={RecentBooking}/>
+                <Route exact path='/profile' component={Profile}/>
+                <Route exact path='/recentBooking' component={RecentBooking}/>
               </div>
               </>
             </Switch>
