@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework import status
@@ -6,9 +5,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework import permissions
 from rest_framework_simplejwt import authentication
 from rest_framework.parsers import MultiPartParser,FormParser
-from django.shortcuts import get_object_or_404
 from django.db.models import Q
-from itertools import chain
 
 # Create your views here.
 

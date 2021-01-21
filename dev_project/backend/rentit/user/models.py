@@ -82,7 +82,7 @@ class customUser_profile(models.Model):
     country_code=models.CharField(max_length=255,default='+91')
     mobile=models.CharField(max_length=255)
     aadhar=models.CharField(max_length=255)
-    alternate_mobile=models.CharField(max_length=255,default='00000000000')
+    alternate_mobile=models.CharField(max_length=255,null=True,blank=True)
     photo=models.ImageField(_("Image"),upload_to=upload_to,default='/images/profile_pics/default.jpg')
 
     objects=profile_manager()

@@ -16,9 +16,9 @@ from .serializers import apartment_rating_and_reviews_serializer
 
 
 class StandardResultsSetPagination(PageNumberPagination):
-    page_size = 100
+    page_size = 10
     page_size_query_param = 'page_size'
-    max_page_size = 1000
+    max_page_size = 100
 
 
 class room_reviews(viewsets.ReadOnlyModelViewSet):
@@ -60,7 +60,7 @@ class give_room_reviews(viewsets.ViewSet):
             return Response(serializer.data,status=status.HTTP_400_BAD_REQUEST)
 
     @permission_classes([IsAuthenticated])
-    def delete (self,request,pk=None):
+    def destroy (self,request,pk=None):
         queryset = room_rating_and_reviews.objects.all()
         review = get_object_or_404(queryset,pk=pk)
         if review.customer_id==request.user:
@@ -108,7 +108,7 @@ class give_shop_reviews(viewsets.ViewSet):
             return Response(serializer.data,status=status.HTTP_400_BAD_REQUEST)
 
     @permission_classes([IsAuthenticated])
-    def delete (self,request,pk=None):
+    def destroy (self,request,pk=None):
         queryset = shop_rating_and_reviews.objects.all()
         review = get_object_or_404(queryset,pk=pk)
         if review.customer_id==request.user:
@@ -158,7 +158,7 @@ class give_apartment_reviews(viewsets.ViewSet):
             return Response(serializer.data,status=status.HTTP_400_BAD_REQUEST)
 
     @permission_classes([IsAuthenticated])
-    def delete (self,request,pk=None):
+    def destroy (self,request,pk=None):
         queryset = apartment_rating_and_reviews.objects.all()
         review = get_object_or_404(queryset,pk=pk)
         if review.customer_id==request.user:

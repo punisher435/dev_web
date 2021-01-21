@@ -13,7 +13,7 @@ class UserAdmin(BaseUserAdmin):
     add_form = AddUserForm
 
     list_display = ('email', 'first_name', 'last_name','is_seller','profile_completed','is_staff','is_superuser')
-    list_filter = ('is_staff', 'is_superuser', 'is_seller','is_active')
+    list_filter = ('is_staff', 'is_superuser', 'is_seller','is_active','profile_completed')
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
         ('Personal info', {'fields': ('first_name', 'last_name','is_seller','profile_completed')}),
@@ -34,6 +34,11 @@ class UserAdmin(BaseUserAdmin):
     search_fields = ('email', 'first_name', 'last_name')
     ordering = ('email', 'first_name', 'last_name')
     filter_horizontal = ()
+
+
+
+
+
 
 
 admin.site.register(User, UserAdmin)
