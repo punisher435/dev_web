@@ -15,6 +15,8 @@ import rooms from './containers/RoomDetails'
 import SimpleTabs from './containers/wishlist';
 import RecentBooking from './containers/RecentBooking'
 import Profile from './containers/Profile';
+// import Sforms from './components/Sforms'
+import Sforms from './components/Checkout' 
 
 
 
@@ -43,6 +45,7 @@ function App(props) {
                 <Route exact path='/recentBooking' component={RecentBooking}/>
                 <Route exact path='/profile' component={Profile}/>
                 <Route exact path='/recentBooking' component={RecentBooking}/>
+                <Route exact path='/Sform' component={Sforms}/>
               </div>
               </>
             </Switch>
