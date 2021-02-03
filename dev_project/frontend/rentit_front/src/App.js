@@ -12,6 +12,12 @@ import { Provider } from 'react-redux';
 import store from './redux/auth/store';
 import PaginationCardList from './containers/PaginateCardList'
 import rooms from './containers/RoomDetails'
+import SimpleTabs from './containers/wishlist';
+import RecentBooking from './containers/RecentBooking'
+import Profile from './containers/Profile';
+// import Sforms from './components/Sforms'
+import Sforms from './components/Checkout' 
+
 
 
 function App(props) {
@@ -32,8 +38,14 @@ function App(props) {
                 <Route exact path='/reset_password' component={ResetPassword} />
                 <Route exact path='/password/reset/confirm/:uid/:token' component={ResetPasswordConfirm} />
                 <Route exact path='/activate/:uid/:token' component={Activate} />
-                <Route exact path='/searchList' component={PaginationCardList}/>
-                <Route exact path='/searchlist/rooms/:roomid' component={rooms}/>
+                <Route exact path='/rooms' component={PaginationCardList}/>
+                <Route exact path='/rooms/:roomid' component={rooms}/>
+                <Route exact path='/wishlist' component={SimpleTabs}/>
+                <Route exact path='/profile' component={Profile}/>
+                <Route exact path='/recentBooking' component={RecentBooking}/>
+                <Route exact path='/profile' component={Profile}/>
+                <Route exact path='/recentBooking' component={RecentBooking}/>
+                <Route exact path='/Sform' component={Sforms}/>
               </div>
               </>
             </Switch>

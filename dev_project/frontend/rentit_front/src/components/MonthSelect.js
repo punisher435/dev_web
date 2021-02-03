@@ -4,16 +4,19 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import { withStyles } from '@material-ui/core/styles';
 
 
-const GlobalCss = withStyles({
-    // @global is handled by jss-plugin-global.
-    '@global': {
-      // You should target [class*="MuiButton-root"] instead if you nest themes.
-      
+  const ITEM_HEIGHT = 48;
+  const ITEM_PADDING_TOP = 8;
+  const MenuProps = {
+    PaperProps: {
+      style: {
+        maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+        width: 250,
+      },
     },
-  })(() => null);
+  };
+  
 
 
 const useStyles = makeStyles((theme) => ({
@@ -46,7 +49,6 @@ export default function ControlledOpenSelect() {
 
   return (
       <>
-    <GlobalCss />
       <FormControl className={classes.formControl} >
         <InputLabel id="demo-controlled-open-select-label">Duration</InputLabel>
         <Select
@@ -57,34 +59,35 @@ export default function ControlledOpenSelect() {
           onOpen={handleOpen}
           value={duration}
           onChange={handleChange}
+          MenuProps={MenuProps}
         >
           <MenuItem value="" >
             <em>None</em>
           </MenuItem>
           <MenuItem value={1}>1 month</MenuItem>
-          <MenuItem value={20}>2 months</MenuItem>
-          <MenuItem value={30}>3 months</MenuItem>
-          <MenuItem value={30}>4 months</MenuItem>
-          <MenuItem value={30}>5 months</MenuItem>
-          <MenuItem value={30}>6 months</MenuItem>
-          <MenuItem value={30}>7 months</MenuItem>
-          <MenuItem value={30}>8 months</MenuItem>
-          <MenuItem value={30}>9 months</MenuItem>
-          <MenuItem value={30}>10 months</MenuItem>
-          <MenuItem value={30}>11 months</MenuItem>
-          <MenuItem value={30}>1 year</MenuItem>
-          <MenuItem value={30}>1    year 1 month</MenuItem>
-          <MenuItem value={30}>1 year 2 months</MenuItem>
-          <MenuItem value={30}>1 year 3 months</MenuItem>
-          <MenuItem value={30}>1 year 4 months</MenuItem>
-          <MenuItem value={30}>1 year 5 months</MenuItem>
-          <MenuItem value={30}>1 year 6 months</MenuItem>
-          <MenuItem value={30}>1 year 7 months</MenuItem>
-          <MenuItem value={30}>1 year 8 months</MenuItem>
-          <MenuItem value={30}>1 year 9 months</MenuItem>
-          <MenuItem value={30}>1 year 10 months</MenuItem>
-          <MenuItem value={30}>1 year 11 months</MenuItem>
-          <MenuItem value={30}>2 years</MenuItem>
+          <MenuItem value={2}>2 months</MenuItem>
+          <MenuItem value={3}>3 months</MenuItem>
+          <MenuItem value={4}>4 months</MenuItem>
+          <MenuItem value={5}>5 months</MenuItem>
+          <MenuItem value={6}>6 months</MenuItem>
+          <MenuItem value={7}>7 months</MenuItem>
+          <MenuItem value={8}>8 months</MenuItem>
+          <MenuItem value={9}>9 months</MenuItem>
+          <MenuItem value={10}>10 months</MenuItem>
+          <MenuItem value={11}>11 months</MenuItem>
+          <MenuItem value={12}>1 year</MenuItem>
+          <MenuItem value={13}>1    year 1 month</MenuItem>
+          <MenuItem value={14}>1 year 2 months</MenuItem>
+          <MenuItem value={15}>1 year 3 months</MenuItem>
+          <MenuItem value={16}>1 year 4 months</MenuItem>
+          <MenuItem value={17}>1 year 5 months</MenuItem>
+          <MenuItem value={18}>1 year 6 months</MenuItem>
+          <MenuItem value={19}>1 year 7 months</MenuItem>
+          <MenuItem value={20}>1 year 8 months</MenuItem>
+          <MenuItem value={21}>1 year 9 months</MenuItem>
+          <MenuItem value={22}>1 year 10 months</MenuItem>
+          <MenuItem value={23}>1 year 11 months</MenuItem>
+          <MenuItem value={24}>2 years</MenuItem>
         </Select>
       </FormControl>
       </>

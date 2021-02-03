@@ -6,7 +6,6 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box'
 import SpecificRoomCarousel from '../components/SpecificRoomCarousel'
-import NestedGrid1 from '../components/specificroomcarousel1';
 import RatingAndReviews from '../components/RatingAndReviews'
 import RoomDescriptionContent from '../components/RoomDescriptionContent'
 import GoogleApiWrapper from '../components/GoogleMapAPI'
@@ -23,15 +22,13 @@ import ListItem from '@material-ui/core/ListItem';
 import Paper from '@material-ui/core/Paper';
 import Icon from '@material-ui/core/Icon';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
-import {Container as Container1} from 'react-bootstrap';
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
 
 import CustomizedTabs1 from '../components/scrolloffers';
 import Mobileimages from '../components/mobileimages';
 import SimpleModal1 from '../components/bookcardmodel';
 
 import RatingWithCompliments from '../components/MobileRatingSearchCard' 
+
 
 
 import axios from 'axios';
@@ -190,6 +187,8 @@ export default function FullWidthGrid(props) {
 
 
 
+
+
   return (
     
     <div className={classes.root}>
@@ -304,11 +303,11 @@ export default function FullWidthGrid(props) {
                                 </Typography>
             </Grid>
 
-            <Grid item xs={2}>
+            <Grid item xs={3}>
             <RatingWithCompliments reviews={parseFloat(details.reviews)} rating={parseFloat(details.avg_rating)}/>
             </Grid>
 
-            <Grid item xs={1}></Grid>
+            <Grid item xs={0}></Grid>
             
           </Grid>
 

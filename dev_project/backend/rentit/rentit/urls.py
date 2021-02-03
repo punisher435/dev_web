@@ -20,22 +20,52 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
+    #authentication
     path('admin/', admin.site.urls),
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.jwt')),
+    
+    #user profile
     path('sourcezxradakgdlh/',include('user.api.urls')),
+    path('sourceadbahdvjs218/',include('user.api.urls_bank')),
+    path('sourcejkzff8wqhdq92/',include('user.api.urls_address')),
+
+    #rooms
     path('sourcedjfnsk743/',include('products.api.urls_room_reviews')),
     path('sourceaxcnfrudadv34/',include('products.api.urls_rooms_listing')),
     path('sourcewdsfdaegds/',include('products.api.urls_rooms_personal')),
+
+    #shops
     path('sourceadadk2647kfs/',include('products.api.urls_shops_listing')),
     path('sourcekfhkt274fs/',include('products.api.urls_shops_personal')),
+    path('sourcensjahdwua2853/',include('products.api.urls_shop_reviews')),
+
+    #apartments
     path('sourcebvdfesl2746/',include('products.api.urls_apartments_listing')),
     path('sourceddnvslf54d/',include('products.api.urls_apartments_personal')),
-    path('sourcensjahdwua2853/',include('products.api.urls_shop_reviews')),
     path('sourcemvdsnksnd59472/',include('products.api.urls_apartment_reviews')),
+
+    #location
+    path('sourceadbeios287y19/',include('products.api.urls_location_room')),
+ 
+    #filter min and max price
     path('sourcekadwbda24/',include('products.api.urls_minmax_room')),
     path('sourcekasdauhnuwiqlr2/',include('products.api.urls_minmax_shop')),
     path('sourcghfhf4/',include('products.api.urls_minmax_apartment')),
+
+    #wishlist
+    path('souraawdgrg33w24/',include('wishlist.urls_room_wishlist')),
+    path('sourcesnjs03qjkda/',include('wishlist.urls_shop_wishlist')),
+    path('sourcenasdknahi29ad/',include('wishlist.urls_apartment_wishlist')),
+
+    #cart
+    path('souradadnaknda/',include('cart.urls_cart_room')),
+    path('sourcekfnenasd/',include('cart.urls_cart_shop')),
+    path('sourceajd28eajbdk/',include('cart.urls_cart_apartment')),
+
+    #coupons
+    #path('sourcesfnsjfn231/',include('coupons.urls_coupons')),
+
 ]
 
 urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

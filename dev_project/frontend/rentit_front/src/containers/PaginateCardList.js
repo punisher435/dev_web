@@ -3,8 +3,11 @@ import React, { useState, useEffect } from 'react';
 import Grid from '@material-ui/core/Grid';
 import axios from 'axios';
 import ResponsiveDrawer from './searchlist';
+import Eror from '../components/eror';
 
-const App = () => {
+import { connect } from 'react-redux'
+
+const App = ({isAuthenticated}) => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -12,6 +15,12 @@ const App = () => {
   const [totalposts, settotalPosts] = useState(0);
   const [max_price, setmax_price] = useState(0);
   const [min_price, setmin_price] = useState(0);
+
+  const [mapview,setmap] = useState(false);
+
+  const [error, setError] = useState('');
+  const [wishlistitems,changeitemswishlist] = useState(0)
+  const [cartitems,changeitemscart] = useState(0)
 
   const [filters, setfilters] = useState({
     nonveg_food:'',
@@ -51,6 +60,7 @@ const App = () => {
     windows:'',
     bookedtill:'',
     search:'',
+    room_cleaning:'',
     ordering:'-trust_points',
   });
 
@@ -64,8 +74,10 @@ const App = () => {
       };
       const page = currentPage
       /* const params = new URLSearchParams([page,currentPage]) */
-      const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourceaxcnfrudadv34/rooms/`,{
+      if(mapview===false){
+      try{const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourceaxcnfrudadv34/rooms/`,{
         params:{
+          room_cleaning:filters.room_cleaning,
           page:currentPage,
           booked:filters.booked,
           min_price:filters.min_price,
@@ -106,36 +118,92 @@ const App = () => {
       const res2 = await axios.get(`${process.env.REACT_APP_API_URL}/sourcekadwbda24/minmax_room/1/`,{
         config:config
       });
-      console.log(res2.data.max_price);
+
+      
       setmax_price(res2.data.max_price);
       setmin_price(res2.data.min_price);
-
-      console.log(res);
       setPosts(res.data.results);
       setLoading(false);
       settotalPosts(res.data.count);
+      }
+      catch{
+        setError('An error occurred');
+      }
+    }
     };
+
+
 
     fetchPosts();
   }, [currentPage,filters]);
 
+
+  useEffect(async () => {
+    if(isAuthenticated){
+    const config = {
+      headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `JWT ${localStorage.getItem('access')}`,
+      },
+    };
+    try {
+      await axios.put(`${process.env.REACT_APP_API_URL}/souradadnaknda/cart/rooms/1/`,config,config)
+      .then(res => {
+        changeitemscart(res.data);
+      })
+      .catch(err => {
+        
+      })
+      
+      }
+      catch{
+      }
+      try {
+        await axios.put(`${process.env.REACT_APP_API_URL}/souraawdgrg33w24/wishlist/rooms/1/`,config,config)
+        .then(res1 => {
+          changeitemswishlist(res1.data);
+        })
+        .catch(err => {
+          
+        })
+        
+        }
+        catch{
+        }
+    }
+
+  },[isAuthenticated])
+
   // Get current posts
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
   // Change page
   const paginate = pageNumber => setCurrentPage(pageNumber);
+
+  if(error!=='')
+  {
+    return (
+      <Grid
+      container
+      direction="row"
+      justify="center"
+      alignItems="center"
+      >
+        <Grid item xs={5}><Eror eror={error}/></Grid>
+      </Grid>
+    );
+  }
 
   return (
       <Grid
       container
       direction="row"
-      justify="flex-end"
+      justify="center"
       alignItems="center"
       >
         <Grid item lg={12} xs={12}>
-        <ResponsiveDrawer setfilters={setfilters} max_price={max_price} min_price={min_price} filters={filters} posts={posts} loading={loading} paginate={paginate} postsPerPage={postsPerPage} currentPage={currentPage} totalposts={totalposts}/>
+        <ResponsiveDrawer mapview={mapview} setmap={setmap} setfilters={setfilters} max_price={max_price} min_price={min_price} filters={filters} posts={posts} loading={loading} paginate={paginate} postsPerPage={postsPerPage} currentPage={currentPage} totalposts={totalposts} wishlistitems={wishlistitems} cartitems={cartitems} changeitemswishlist={changeitemswishlist} changeitemscart={changeitemscart}/>
         
 
         {/* <Pagination
@@ -148,4 +216,10 @@ const App = () => {
   );
 };
 
-export default App;
+
+const mapStateToProps = state => ({
+  isAuthenticated: state.authreducers.isAuthenticated,
+  access: state.authreducers.access
+});
+
+export default connect(mapStateToProps)(App);

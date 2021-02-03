@@ -59,6 +59,9 @@ class rooms(models.Model):
     """ address = map_fields.AddressField(max_length=200,blank=True)
     geolocation = map_fields.GeoLocationField(max_length=100,blank=True) """
 
+    longitude = models.DecimalField(max_digits=9,decimal_places=6,default=0.0)
+    latitude = models.DecimalField(max_digits=9,decimal_places=6,default=0.0)
+
 
     #facility and description
     length=models.IntegerField()
@@ -140,6 +143,8 @@ class rooms(models.Model):
     removable_dinner=models.BooleanField(default=False)
     cost_dinner = models.IntegerField(default=0)
 
+    room_cleaning=models.BooleanField(default=False)
+
     #neighbourhood
     nearby_station1 = models.TextField(max_length=255)
     nearby_station2 = models.TextField(max_length=255)
@@ -148,8 +153,8 @@ class rooms(models.Model):
     room_policy = models.TextField()
 
     #
-    wishlist=models.BooleanField(default=False)
-    cart=models.BooleanField(default=False)
+    wishlist=models.IntegerField(default=0)
+    cart=models.IntegerField(default=0)
 
     #coupons
     seller_coupon=models.CharField(max_length=255,null=True,blank=True)
@@ -214,8 +219,9 @@ class shops(models.Model):
     landmark=models.CharField(max_length=255)
     pincode=models.CharField(max_length=255)
 
-    address = map_fields.AddressField(max_length=200)
-    geolocation = map_fields.GeoLocationField(max_length=100)
+    longitude = models.DecimalField(max_digits=9,decimal_places=6,default=0.0)
+    latitude = models.DecimalField(max_digits=9,decimal_places=6,default=0.0)
+
 
     #facilities and description
     length=models.IntegerField()
@@ -250,6 +256,8 @@ class shops(models.Model):
     cost_wifi = models.IntegerField(default=0)
 
     power_backup=models.BooleanField(default=False)
+
+    shop_cleaning=models.BooleanField(default=False)
     
     #neighbourhood
     nearby_station1 = models.TextField(max_length=255)
@@ -257,8 +265,8 @@ class shops(models.Model):
     shop_policy = models.TextField()
 
     # 
-    wishlist=models.BooleanField(default=False)
-    cart=models.BooleanField(default=False)
+    wishlist=models.IntegerField(default=0)
+    cart=models.IntegerField(default=0)
 
     seller_coupon=models.CharField(max_length=255,null=True,blank=True)
     coupon_discount=models.IntegerField(null=True, blank=True)
@@ -323,8 +331,10 @@ class apartments(models.Model):
     landmark=models.CharField(max_length=255)
     pincode=models.CharField(max_length=255)
 
-    address = map_fields.AddressField(max_length=200)
-    geolocation = map_fields.GeoLocationField(max_length=100)
+    
+    longitude = models.DecimalField(max_digits=9,decimal_places=6,default=0.0)
+    latitude = models.DecimalField(max_digits=9,decimal_places=6,default=0.0)
+
 
     #facilities and description
     length=models.IntegerField()
@@ -379,6 +389,8 @@ class apartments(models.Model):
     removable_geyser=models.BooleanField(default=False)
     cost_geyser = models.IntegerField(default=0)
 
+    apartment_cleaning=models.BooleanField(default=False)
+
     #neighbourhood
     nearby_station1 = models.TextField(max_length=255)
     nearby_station2 = models.TextField(max_length=255)
@@ -387,8 +399,9 @@ class apartments(models.Model):
     apartment_policy = models.TextField()
 
     #
-    wishlist=models.BooleanField(default=False)
-    cart=models.BooleanField(default=False)
+    wishlist=models.IntegerField(default=0)
+    cart=models.IntegerField(default=0)
+
 
 
     seller_coupon=models.CharField(max_length=255,null=True,blank=True)

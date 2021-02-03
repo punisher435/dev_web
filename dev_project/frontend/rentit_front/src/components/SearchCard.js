@@ -1,4 +1,4 @@
-import React ,{ useState }from 'react';
+import React ,{ useState,useEffect }from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
@@ -32,9 +32,15 @@ import WhatshotIcon from '@material-ui/icons/Whatshot';
 import BathtubIcon from '@material-ui/icons/Bathtub';
 import { grey } from '@material-ui/core/colors';
 import { IconContext } from "react-icons";
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
+import IconButton from '@material-ui/core/IconButton';
 
 import CustomizedRatings from './rating_meter';
+import { connect } from 'react-redux'
+import axios from 'axios'
+
+axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+axios.defaults.xsrfCookieName = "csrftoken";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -152,6 +158,10 @@ const useStyles = makeStyles((theme) => ({
   iconroot: {
     display: 'inline',
   },
+  iconroot1: {
+    display: 'inline',
+    color:'#f44336',
+  },
 
   buttonroot: {
     
@@ -166,8 +176,12 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-export default function NestedGrid({post}) {
+
+function NestedGrid({post, isAuthenticated, setOpen1,setOpen2,changeitemswishlist,changeitemscart,wishlistitems,cartitems}) {
   const classes = useStyles();
+
+  const [wishlist,changewishlist] = useState(false)
+  const [cart,changecart] = useState(false)
 
   function MediaCard() {
     const [photos,changephotos] = useState({
@@ -176,6 +190,47 @@ export default function NestedGrid({post}) {
       c:post.photo3,
       d:post.photo4,
     })
+
+
+
+    useEffect(async () => {
+
+      if(isAuthenticated){
+      const config = {
+        headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `JWT ${localStorage.getItem('access')}`,
+        },
+      };
+      try {
+      await axios.get(`${process.env.REACT_APP_API_URL}/souraawdgrg33w24/wishlist/rooms/${post.room_id}/`,config,config)
+      .then(res => {
+        changewishlist(res.data);
+      })
+      .catch(err => {
+        
+      })
+      
+      }
+      catch{
+      }
+
+      try {
+        await axios.get(`${process.env.REACT_APP_API_URL}/souradadnaknda/cart/rooms/${post.room_id}/`,config,config)
+        .then(res => {
+          changecart(res.data);
+        })
+        .catch(err => {
+          
+        })
+        
+        }
+        catch{
+        }
+    }
+
+    }
+      ,[isAuthenticated])
 
   
     return (
@@ -286,6 +341,109 @@ export default function NestedGrid({post}) {
     const mystyle3 = {
       display: 'inline',
     }
+
+    
+
+    const handleclick = async (event) => {
+      event.preventDefault();
+
+      if(isAuthenticated)
+      {
+        if(wishlist)
+        {
+          const config = {
+            headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `JWT ${localStorage.getItem('access')}`,
+            },
+          };
+          const res = await axios.delete(`${process.env.REACT_APP_API_URL}/souraawdgrg33w24/wishlist/rooms/${post.room_id}/`,config);
+
+          if(res.data == 'Removed from wishlist'){changewishlist(false); changeitemswishlist(wishlistitems-1);}
+        }
+      }else{
+        setOpen1(true);
+      }
+
+    }
+
+    const handleclick1 = async (event) => {
+      event.preventDefault();
+
+      if(isAuthenticated)
+      {
+        if(!wishlist)
+        {
+          const config = {
+            headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `JWT ${localStorage.getItem('access')}`,
+            },
+            params: {
+              room_id:post.room_id,
+            },
+          };
+          const res = await axios.post(`${process.env.REACT_APP_API_URL}/souraawdgrg33w24/wishlist/rooms/`,config,config);
+
+          if(res.data == 'Added to wishlist'){changewishlist(true);  changeitemswishlist(wishlistitems+1);}
+        }
+      }else{
+        setOpen1(true);
+      }
+
+    }
+
+    const handleclick2 = async (event) => {
+      event.preventDefault();
+
+      if(isAuthenticated)
+      {
+        if(cart)
+        {
+          const config = {
+            headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `JWT ${localStorage.getItem('access')}`,
+            },
+          };
+          const res = await axios.delete(`${process.env.REACT_APP_API_URL}/souradadnaknda/cart/rooms/${post.room_id}/`,config);
+
+          if(res.data == 'Removed from cart'){changecart(false); changeitemscart(cartitems-1);}
+        }
+      }else{
+        setOpen2(true);
+      }
+
+    }
+
+    
+
+    const handleclick3 = async (event) => {
+      event.preventDefault();
+
+      if(isAuthenticated)
+      {
+        if(!cart)
+        {
+          const config = {
+            headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `JWT ${localStorage.getItem('access')}`,
+            },
+            params: {
+              room_id:post.room_id,
+            },
+          };
+          const res = await axios.post(`${process.env.REACT_APP_API_URL}/souradadnaknda/cart/rooms/`,config,config);
+
+          if(res.data == 'Added to cart'){changecart(true);  changeitemscart(cartitems+1);}
+        }
+      }else{
+        setOpen2(true);
+      }
+
+    }
+
     
     const y=post.owner_discount+post.company_discount;
     return (
@@ -303,12 +461,12 @@ export default function NestedGrid({post}) {
         </Grid>
         <Grid item md={1}>
         { 
-        post.wishlist ? <Grid item md={1}><Icon color='error' className={classes.iconroot}><FavoriteIcon /></Icon></Grid> : <Grid item md={1}><Icon color='error' className={classes.iconroot}><FavoriteBorderOutlinedIcon /></Icon></Grid>
+        wishlist ? <Grid item md={1}><IconButton color='error' onClick={(event) => {handleclick(event);}} className={classes.iconroot1}><FavoriteIcon /></IconButton></Grid> : <Grid item md={1}><IconButton color='error' onClick={(event) => {handleclick1(event);}} className={classes.iconroot1}><FavoriteBorderOutlinedIcon /></IconButton></Grid>
         }
         </Grid>
         <Grid item md={1}>
         { 
-        post.cart ? <Grid item md={1}><Icon className={classes.iconroot}><ShoppingCartIcon /></Icon></Grid> : <Grid item md={1}><Icon className={classes.iconroot}><ShoppingCartOutlinedIcon /></Icon></Grid>
+        cart ? <Grid item md={1}><IconButton onClick={(event) => {handleclick2(event);}} className={classes.iconroot}><ShoppingCartIcon /></IconButton></Grid> : <Grid item md={1}><IconButton onClick={(event) => {handleclick3(event);}} className={classes.iconroot}><ShoppingCartOutlinedIcon /></IconButton></Grid>
         }
         </Grid>
         </Grid>
@@ -439,7 +597,7 @@ export default function NestedGrid({post}) {
         </Grid>
         
         <Grid item md={7} xs={12}>
-        <Link to={`/searchlist/rooms/${post.room_id}`} target="_blank">
+        <Link to={`/rooms/${post.room_id}`} target="_blank">
           <NameCard/>
           </Link>
         </Grid>
@@ -457,4 +615,11 @@ export default function NestedGrid({post}) {
     </div>
   );
 }
+
+const mapStateToProps = state => ({
+  isAuthenticated: state.authreducers.isAuthenticated,
+  access: state.authreducers.access
+});
+
+export default connect(mapStateToProps)(NestedGrid);
 

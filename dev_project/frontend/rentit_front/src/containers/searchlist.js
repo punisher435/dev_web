@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{ useState} from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -13,6 +13,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
+import Badge from '@material-ui/core/Badge';
 
 
 import Posts from '../components/Posts';
@@ -35,6 +36,12 @@ import SearchFields2 from '../components/searchfilter2';
 import SimpleSelectfinal from '../components/sort';
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 import Icon from '@material-ui/core/Icon';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import MapIcon from '@material-ui/icons/Map';
+
+
+import Mapmount from '../components/Mapmount';
 
 import { Link } from 'react-router-dom';
 
@@ -44,6 +51,12 @@ const drawerWidth = 300;
 const drawerWidth1 = 250;
 
 const useStyles = makeStyles((theme) => ({
+  iconstyle1:{
+    marginRight:'30px',
+  },
+  iconstyle2:{
+    marginRight:'20px',
+  },
   root: {
     display: 'flex',
   },
@@ -89,7 +102,19 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   // necessary for content to be below app bar
-  toolbar: theme.mixins.toolbar,
+  toolbar: {
+    marginTop: theme.spacing(2),
+  },
+  myclass:{
+    marginTop:50,
+    display:'inline'
+  },
+  myclass2:{
+    display:'inline',
+    float:'left',
+    marginLeft:10,
+  },
+  
   drawerPaper: {
     width: drawerWidth,
   },
@@ -98,7 +123,7 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3),
+    padding: theme.spacing(0),
     marginTop:'0px',
   },
   mystyle: {
@@ -106,6 +131,8 @@ const useStyles = makeStyles((theme) => ({
   },
   iconstyle: {
     color: 'white',
+    padding:0,
+    margin:0,
   }
 }));
 
@@ -114,6 +141,7 @@ function ResponsiveDrawer(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
+
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -280,10 +308,41 @@ function ResponsiveDrawer(props) {
             {/* THE APPBAR CONTENT SHOULD BE HERE */}
       
       <Link to='/'>
-      <Icon className={classes.iconstyle}>
+      <IconButton className={classes.iconstyle}>
       <KeyboardBackspaceIcon fontSize='large'/>
-      </Icon>
+      </IconButton>
       </Link>
+
+      <Grid
+      container
+      direction="row"
+      justify="flex-end"
+      alignItems="center"
+      >
+      <Grid item xs={2}>
+      <IconButton onClick={(event) => {event.preventDefault();props.setmap(!props.mapview);}} className={classes.iconstyle}>
+        <MapIcon /> 
+          Map view
+      </IconButton>
+      </Grid>
+
+      <Grid item xs={2}>
+      <Link to='/wishlist'>
+      <Badge badgeContent={props.wishlistitems} color="primary"  className={classes.iconstyle1}>
+        <IconButton className={classes.iconstyle}><FavoriteIcon className={classes.iconstyle}/></IconButton>
+      </Badge>
+      </Link>
+     
+
+      <Link to='/cart'>
+      <Badge badgeContent={props.cartitems} color="primary">
+      <IconButton className={classes.iconstyle}><ShoppingCartIcon /></IconButton>
+      </Badge>
+      </Link>
+      </Grid>
+
+      </Grid>
+     
             
 
 
@@ -311,10 +370,41 @@ function ResponsiveDrawer(props) {
             {/* THE APPBAR CONTENT SHOULD BE HERE */}
       
       <Link to='/'>
-      <Icon className={classes.iconstyle}>
+      <IconButton className={classes.iconstyle}>
       <KeyboardBackspaceIcon fontSize='large'/>
-      </Icon>
+      </IconButton>
       </Link>
+
+      <Grid
+      container
+      direction="row"
+      justify="flex-end"
+      alignItems="center"
+      >
+
+      <Grid item xs={7}>
+      <IconButton onClick={(event) => {event.preventDefault();props.setmap(!props.mapview);}} className={classes.iconstyle}>
+        <MapIcon /> 
+          Map view
+      </IconButton>
+      </Grid>
+
+      <Grid item xs={4}>
+      <Link to='/wishlist'>
+      <Badge badgeContent={props.wishlistitems} color="primary"  className={classes.iconstyle2}>
+      <IconButton className={classes.iconstyle}><FavoriteIcon /></IconButton>
+      </Badge>
+      </Link>
+     
+
+      <Link to='/cart'>
+      <Badge badgeContent={props.cartitems} color="primary">
+      <IconButton className={classes.iconstyle}><ShoppingCartIcon /></IconButton>
+      </Badge>
+      </Link>
+      </Grid>
+
+      </Grid>
             
 
 
@@ -405,8 +495,11 @@ function ResponsiveDrawer(props) {
         justify="space-around"
         alignItems="center"
         >
-           <SearchFields filters={props.filters} setfilters={props.setfilters} />
-           <SimpleSelectfinal filters={props.filters} setfilters={props.setfilters} />
+          {
+            props.mapview ? null : <div className={classes.myclass}><div className={classes.myclass2}><SearchFields filters={props.filters} setfilters={props.setfilters} /></div>
+            <div className={classes.myclass2}><SimpleSelectfinal filters={props.filters} setfilters={props.setfilters} /></div></div> 
+          }
+           
 
         </Grid>
         </Hidden>
@@ -418,13 +511,19 @@ function ResponsiveDrawer(props) {
         justify="flex-end"
         alignItems="center"
         >
-          <SimpleSelectfinal filters={props.filters} setfilters={props.setfilters} />
+           {
+            props.mapview ? null : <>
+            <SimpleSelectfinal filters={props.filters} setfilters={props.setfilters} /></> 
+          }
+          
         </Grid>
         </Hidden>
 
-        
-           <Posts posts={props.posts} loading={props.loading} />
-           <PaginationOutlined paginate={props.paginate} postsPerPage={props.postsPerPage} currentPage={props.currentPage} totalposts={props.totalposts}/>
+            {
+              props.mapview ? <Mapmount filters={props.filters} setfilters={props.setfilters}/> : <div><Posts posts={props.posts} loading={props.loading} wishlistitems={props.wishlistitems} cartitems={props.cartitems} changeitemswishlist={props.changeitemswishlist} changeitemscart={props.changeitemscart}/>
+              <PaginationOutlined paginate={props.paginate} postsPerPage={props.postsPerPage} currentPage={props.currentPage} totalposts={props.totalposts}/></div>
+            }
+           
 
       </main>
     </div>
