@@ -144,6 +144,7 @@ const App = ({isAuthenticated}) => {
       
       setmax_price(res2.data.max_price);
       setmin_price(res2.data.min_price);
+      console.log(res.data.results)
       setPosts(res.data.results);
       setLoading(false);
       settotalPosts(res.data.count);
@@ -153,7 +154,7 @@ const App = ({isAuthenticated}) => {
       }
     }
     };
-
+    console.log('hy')
 
 
     fetchPosts();

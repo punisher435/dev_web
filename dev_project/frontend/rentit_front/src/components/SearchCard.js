@@ -209,9 +209,7 @@ function NestedGrid({filters,setfilters,post, isAuthenticated, setOpen1,setOpen2
     }
 
     const [mydate,setdate] = useState(`${date.getFullYear()}-${x}-${y}`)
-    if(filters){
-      setdate(filters.bookedtill);
-    }
+    
 
   function MediaCard() {
     const [photos,changephotos] = useState({
@@ -228,6 +226,9 @@ function NestedGrid({filters,setfilters,post, isAuthenticated, setOpen1,setOpen2
     useEffect(async () => {
 
       const date = post.bookedtill;
+      if(filters){
+        setdate(filters.bookedtill);
+      }
 
       if( ( (parseInt(date.slice(8,)) < parseInt(mydate.slice(8,))-1) && (parseInt(date.slice(5,7))==parseInt(mydate.slice(5,7))) && (parseInt(date.slice(0,4))==parseInt(mydate.slice(0,4)) ) ) || 
       ( (parseInt(date.slice(5,7))<parseInt(mydate.slice(5,7))) && (parseInt(date.slice(0,4))==parseInt(mydate.slice(0,4))) ) ||  (parseInt(date.slice(0,4))<parseInt(mydate.slice(0,4))))
