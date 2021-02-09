@@ -34,6 +34,7 @@ import { grey } from '@material-ui/core/colors';
 import { IconContext } from "react-icons";
 import { Link} from "react-router-dom";
 import IconButton from '@material-ui/core/IconButton';
+import KitchenIcon from '@material-ui/icons/Kitchen';
 
 import CustomizedRatings from './rating_meter';
 import { connect } from 'react-redux'
@@ -177,11 +178,40 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-function NestedGrid({post, isAuthenticated, setOpen1,setOpen2,changeitemswishlist,changeitemscart,wishlistitems,cartitems}) {
+function NestedGrid({filters,setfilters,post, isAuthenticated, setOpen1,setOpen2,changeitemswishlist,changeitemscart,wishlistitems,cartitems}) {
   const classes = useStyles();
+
+  const [booked,setbooked] = useState(true);
 
   const [wishlist,changewishlist] = useState(false)
   const [cart,changecart] = useState(false)
+  const [space,setspace] = useState(0);
+  const date = new Date(Date.now())
+ 
+
+    var x;
+    var y;
+    if(parseInt(date.getMonth()+1)<10)
+    {
+      x = `0${date.getMonth()+1}`;
+    }
+    if(parseInt(date.getMonth()+1)>=10)
+    {
+      x = `${date.getMonth()+1}`;
+    }
+    if(parseInt(date.getDate())<10)
+    {
+      y = `0${date.getDate()}`;
+    }
+    if(parseInt(date.getDate())>=10)
+    {
+      y = `${date.getDate()}`;
+    }
+
+    const [mydate,setdate] = useState(`${date.getFullYear()}-${x}-${y}`)
+    if(filters){
+      setdate(filters.bookedtill);
+    }
 
   function MediaCard() {
     const [photos,changephotos] = useState({
@@ -191,9 +221,117 @@ function NestedGrid({post, isAuthenticated, setOpen1,setOpen2,changeitemswishlis
       d:post.photo4,
     })
 
+    
+
 
 
     useEffect(async () => {
+
+      const date = post.bookedtill;
+
+      if( ( (parseInt(date.slice(8,)) < parseInt(mydate.slice(8,))-1) && (parseInt(date.slice(5,7))==parseInt(mydate.slice(5,7))) && (parseInt(date.slice(0,4))==parseInt(mydate.slice(0,4)) ) ) || 
+      ( (parseInt(date.slice(5,7))<parseInt(mydate.slice(5,7))) && (parseInt(date.slice(0,4))==parseInt(mydate.slice(0,4))) ) ||  (parseInt(date.slice(0,4))<parseInt(mydate.slice(0,4))))
+      {
+          setbooked(false);
+      }
+
+      var b = post.capacity-post.booked_by;
+      if(b<0){b=0;}
+   
+      if(post.book1!=null || post.book1!=undefined)
+{
+
+    if(  (parseInt(post.book1.slice(0,4))<parseInt(mydate.slice(0,4))) || ( parseInt(post.book1.slice(0,4))===parseInt(mydate.slice(0,4)) && parseInt(post.book1.slice(5,7))<parseInt(mydate.slice(5,7)) ) ||  
+    ( parseInt(post.book1.slice(0,4))===parseInt(mydate.slice(0,4)) && parseInt(post.book1.slice(5,7))===parseInt(mydate.slice(5,7)) && parseInt(post.book1.slice(8,))<parseInt(mydate.slice(8,))-1 )  ) 
+    {
+        b=b+1;
+    }
+}
+
+if(post.book2!=null || post.book2!=undefined)
+{
+    if(  (parseInt(post.book2.slice(0,4))<parseInt(mydate.slice(0,4))) || ( parseInt(post.book2.slice(0,4))==parseInt(mydate.slice(0,4)) && parseInt(post.book2.slice(5,7))<parseInt(mydate.slice(5,7)) ) ||  
+    ( parseInt(post.book2.slice(0,4))===parseInt(mydate.slice(0,4)) && parseInt(post.book2.slice(5,7))===parseInt(mydate.slice(5,7)) && parseInt(post.book2.slice(8,))<parseInt(mydate.slice(8,))-1 )  ) 
+    {
+        b=b+1;
+    }
+}
+
+if(post.book3!=null || post.book3!=undefined)
+{
+    if(  (parseInt(post.book3.slice(0,4))<parseInt(mydate.slice(0,4))) || ( parseInt(post.book3.slice(0,4))==parseInt(mydate.slice(0,4)) && parseInt(post.book3.slice(5,7))<parseInt(mydate.slice(5,7)) ) ||  
+    ( parseInt(post.book3.slice(0,4))===parseInt(mydate.slice(0,4)) && parseInt(post.book3.slice(5,7))===parseInt(mydate.slice(5,7)) && parseInt(post.book3.slice(8,))<parseInt(mydate.slice(8,))-1 )  ) 
+    {
+        b=b+1;
+    }
+}
+
+if(post.book4!=null || post.book4!=undefined)
+{
+    if(  (parseInt(post.book4.slice(0,4))<parseInt(mydate.slice(0,4))) || ( parseInt(post.book4.slice(0,4))==parseInt(mydate.slice(0,4)) && parseInt(post.book4.slice(5,7))<parseInt(mydate.slice(5,7)) ) ||  
+    ( parseInt(post.book4.slice(0,4))===parseInt(mydate.slice(0,4)) && parseInt(post.book4.slice(5,7))===parseInt(mydate.slice(5,7)) && parseInt(post.book4.slice(8,))<parseInt(mydate.slice(8,))-1 )  ) 
+    {
+        b=b+1;
+    }
+}
+
+if(post.book5!=null || post.book5!=undefined)
+{
+    if(  (parseInt(post.book5.slice(0,4))<parseInt(mydate.slice(0,4))) || ( parseInt(post.book5.slice(0,4))==parseInt(mydate.slice(0,4)) && parseInt(post.book5.slice(5,7))<parseInt(mydate.slice(5,7)) ) ||  
+    ( parseInt(post.book5.slice(0,4))===parseInt(mydate.slice(0,4)) && parseInt(post.book5.slice(5,7))===parseInt(mydate.slice(5,7)) && parseInt(post.book5.slice(8,))<parseInt(mydate.slice(8,))-1 )  ) 
+    {
+        b=b+1;
+    }
+}
+
+if(post.book6!=null || post.book6!=undefined)
+{
+    if(  (parseInt(post.book6.slice(0,4))<parseInt(mydate.slice(0,4))) || ( parseInt(post.book6.slice(0,4))==parseInt(mydate.slice(0,4)) && parseInt(post.book6.slice(5,7))<parseInt(mydate.slice(5,7)) ) ||  
+    ( parseInt(post.book6.slice(0,4))===parseInt(mydate.slice(0,4)) && parseInt(post.book6.slice(5,7))===parseInt(mydate.slice(5,7)) && parseInt(post.book6.slice(8,))<parseInt(mydate.slice(8,))-1 )  ) 
+    {
+        b=b+1;
+    }
+}
+
+if(post.book7!=null || post.book7!=undefined)
+{
+    if(  (parseInt(post.book7.slice(0,4))<parseInt(mydate.slice(0,4))) || ( parseInt(post.book7.slice(0,4))==parseInt(mydate.slice(0,4)) && parseInt(post.book7.slice(5,7))<parseInt(mydate.slice(5,7)) ) ||  
+    ( parseInt(post.book7.slice(0,4))===parseInt(mydate.slice(0,4)) && parseInt(post.book7.slice(5,7))===parseInt(mydate.slice(5,7)) && parseInt(post.book7.slice(8,))<parseInt(mydate.slice(8,))-1 )  ) 
+    {
+        b=b+1;
+    }
+}
+
+if(post.book8!=null || post.book8!=undefined)
+{
+    if(  (parseInt(post.book8.slice(0,4))<parseInt(mydate.slice(0,4))) || ( parseInt(post.book8.slice(0,4))==parseInt(mydate.slice(0,4)) && parseInt(post.book8.slice(5,7))<parseInt(mydate.slice(5,7)) ) ||  
+    ( parseInt(post.book8.slice(0,4))===parseInt(mydate.slice(0,4)) && parseInt(post.book8.slice(5,7))===parseInt(mydate.slice(5,7)) && parseInt(post.book8.slice(8,))<parseInt(mydate.slice(8,))-1 )  ) 
+    {
+        b=b+1;
+    }
+}
+
+if(post.book9!=null || post.book9!=undefined)
+{
+    if(  (parseInt(post.book9.slice(0,4))<parseInt(mydate.slice(0,4))) || ( parseInt(post.book9.slice(0,4))==parseInt(mydate.slice(0,4)) && parseInt(post.book9.slice(5,7))<parseInt(mydate.slice(5,7)) ) ||  
+    ( parseInt(post.book9.slice(0,4))===parseInt(mydate.slice(0,4)) && parseInt(post.book9.slice(5,7))===parseInt(mydate.slice(5,7)) && parseInt(post.book9.slice(8,))<parseInt(mydate.slice(8,))-1 )  ) 
+    {
+        b=b+1;
+    }
+}
+
+if(post.book10!=null || post.book10!=undefined)
+{
+    if(  (parseInt(post.book10.slice(0,4))<parseInt(mydate.slice(0,4))) || ( parseInt(post.book10.slice(0,4))==parseInt(mydate.slice(0,4)) && parseInt(post.book10.slice(5,7))<parseInt(mydate.slice(5,7)) ) ||  
+    ( parseInt(post.book10.slice(0,4))===parseInt(mydate.slice(0,4)) && parseInt(post.book10.slice(5,7))===parseInt(mydate.slice(5,7)) && parseInt(post.book10.slice(8,))<parseInt(mydate.slice(8,))-1 )  ) 
+    {
+        b=b+1;
+    }
+}
+
+
+
+setspace(b);
 
       if(isAuthenticated){
       const config = {
@@ -230,7 +368,7 @@ function NestedGrid({post, isAuthenticated, setOpen1,setOpen2,changeitemswishlis
     }
 
     }
-      ,[isAuthenticated])
+      ,[isAuthenticated],[post])
 
   
     return (
@@ -446,6 +584,13 @@ function NestedGrid({post, isAuthenticated, setOpen1,setOpen2,changeitemswishlis
 
     
     const y=post.owner_discount+post.company_discount;
+
+
+
+  
+
+
+
     return (
       <Card className={classes.root2} raised={true}>
         <Grid
@@ -503,6 +648,12 @@ function NestedGrid({post, isAuthenticated, setOpen1,setOpen2,changeitemswishlis
         post.house_TV ? <Grid item md={1}><div><Icon fontSize='small'><TvOutlinedIcon /></Icon><p>House TV</p></div></Grid> : <div><TvOffOutlinedIcon /><p>No TV</p></div>
         }
         { 
+        post.room_refridgerator ?  <Grid item md={1}><div><Icon fontSize='small'><KitchenIcon /></Icon><p>Room refridgerator</p></div> </Grid> : <p></p>
+        }
+        { 
+        post.house_refridgerator ? <Grid item md={1}><div><Icon fontSize='small'><KitchenIcon /></Icon><p>House refridgerator</p></div></Grid> : <div><TvOffOutlinedIcon /><p>No TV</p></div>
+        }
+        { 
         post.balcony ? <Grid item md={1}><div><Icon fontSize='small'><MeetingRoomOutlinedIcon /></Icon><p>Balcony</p></div></Grid> : <></>
         }
         { 
@@ -553,7 +704,7 @@ function NestedGrid({post, isAuthenticated, setOpen1,setOpen2,changeitemswishlis
         alignItems="flex-start"
         >
     
-        <Grid item md={8}>
+        <Grid item md={6}>
           <Typography color='error' variant='h6' className={classes.textroot}>
           {post.currency}{post.final_price}
           </Typography>
@@ -564,17 +715,17 @@ function NestedGrid({post, isAuthenticated, setOpen1,setOpen2,changeitemswishlis
             {y}% off
           </Typography>
         </Grid>
-        <Grid item md={1}>
+        <Grid item md={3}>
           { 
-          post.booked ? <></> :<p className={classes.textroot5}>Hurry! </p>
+          booked ? <></> :<p className={classes.textroot5}>Hurry! {space} space left</p>
         }
         </Grid>
         <Grid item md={3}>
           { 
-          post.booked ? <Button variant="outlined" color="secondary">
-          Not Avaiable
+          booked ? <Button variant="outlined" color="secondary">
+          Not Avaiable until 1 day after {post.bookedtill} 
         </Button> :<Button variant="contained" color="secondary">
-            Book Now
+            Book Now 
         </Button>
         }
         

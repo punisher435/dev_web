@@ -4,7 +4,6 @@ from django.contrib.auth import get_user_model
 from datetime import date
 import datetime
 from django.utils.translation import gettext_lazy as _
-
 # Create your models here.
 
 from .managers import rooms_manager,shops_manager,apartments_manager
@@ -42,10 +41,22 @@ class rooms(models.Model):
     photo3=models.ImageField(_("Image"),upload_to=upload_to,default='/images/rooms/default.jpg')
     photo4=models.ImageField(_("Image"),upload_to=upload_to,default='/images/rooms/default.jpg')
     photo5=models.ImageField(_("Image"),upload_to=upload_to,default='/images/rooms/default.jpg')
+    
     booked=models.BooleanField(default=False)
     booked_by=models.IntegerField(default=0)
     bookedtill =models.DateField(_("Booked_till_Date"),null=True,blank=True)
     removed=models.BooleanField(default=False)
+
+    book1 = models.DateField(null = True,blank=True)
+    book2 = models.DateField(null = True,blank=True)
+    book3 = models.DateField(null = True,blank=True)
+    book4 = models.DateField(null = True,blank=True)
+    book5 = models.DateField(null = True,blank=True)
+    book6 = models.DateField(null = True,blank=True)
+    book7 = models.DateField(null = True,blank=True)
+    book8 = models.DateField(null = True,blank=True)
+    book9 = models.DateField(null = True,blank=True)
+    book10 = models.DateField(null = True,blank=True)
 
     #address
     location=models.TextField()
@@ -88,6 +99,7 @@ class rooms(models.Model):
 
     water_facility=models.BooleanField(default=True)
     cost_water = models.IntegerField(default=0)
+
     purified_water = models.BooleanField(default=True)
     removable_purified_water=models.BooleanField(default=False)
     cost_purified_water = models.IntegerField(default=0)
@@ -97,7 +109,16 @@ class rooms(models.Model):
     cost_TV = models.IntegerField(default=0)
 
     room_TV=models.BooleanField(default=False)
+    cost_roomTV = models.IntegerField(default=0)
     removable_room_TV=models.BooleanField(default=False)
+
+    house_refridgerator=models.BooleanField(default=False)
+    removable_house_refridgerator=models.BooleanField(default=False)
+    cost_refridgerator = models.IntegerField(default=0)
+
+    room_refridgerator=models.BooleanField(default=False)
+    cost_roomrefridgerator = models.IntegerField(default=0)
+    removable_room_refridgerator=models.BooleanField(default=False)
 
     power_backup=models.BooleanField(default=False)
 
@@ -118,11 +139,9 @@ class rooms(models.Model):
     cost_cooler = models.IntegerField(default=0)
     
     laundry = models.BooleanField(default=False)
-    removable_laundry=models.BooleanField(default=False)
     cost_laundry = models.IntegerField(default=0)
 
     iron = models.BooleanField(default=False)
-    removable_iron=models.BooleanField(default=False)
     cost_iron = models.IntegerField(default=0)
 
     guest_allowed = models.BooleanField(default=False)
@@ -130,6 +149,7 @@ class rooms(models.Model):
 
     veg_food=models.BooleanField(default=True)
     nonveg_food=models.BooleanField(default=True)
+    food_policy=models.CharField(max_length=255,default='null')
     
     breakfast=models.BooleanField(default=True)
     removable_breakfast=models.BooleanField(default=False)
@@ -144,6 +164,7 @@ class rooms(models.Model):
     cost_dinner = models.IntegerField(default=0)
 
     room_cleaning=models.BooleanField(default=False)
+    cost_cleaning = models.IntegerField(default=0)
 
     #neighbourhood
     nearby_station1 = models.TextField(max_length=255)

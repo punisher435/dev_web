@@ -6,6 +6,7 @@ import ResponsiveDrawer from './searchlist';
 import Eror from '../components/eror';
 
 import { connect } from 'react-redux'
+import { getDayOfYear } from 'date-fns';
 
 const App = ({isAuthenticated}) => {
   const [posts, setPosts] = useState([]);
@@ -21,6 +22,27 @@ const App = ({isAuthenticated}) => {
   const [error, setError] = useState('');
   const [wishlistitems,changeitemswishlist] = useState(0)
   const [cartitems,changeitemscart] = useState(0)
+
+  const date = new Date(Date.now())
+
+    var x;
+    var y;
+    if(parseInt(date.getMonth()+1)<10)
+    {
+      x = `0${date.getMonth()+1}`;
+    }
+    if(parseInt(date.getMonth()+1)>=10)
+    {
+      x = `${date.getMonth()+1}`;
+    }
+    if(parseInt(date.getDate())<10)
+    {
+      y = `0${date.getDate()}`;
+    }
+    if(parseInt(date.getDate())>=10)
+    {
+      y = `${date.getDate()}`;
+    }
 
   const [filters, setfilters] = useState({
     nonveg_food:'',
@@ -58,7 +80,7 @@ const App = ({isAuthenticated}) => {
     trust_points_filter:'',
     booked:false,
     windows:'',
-    bookedtill:'',
+    bookedtill:`${date.getFullYear()}-${x}-${y}`,
     search:'',
     room_cleaning:'',
     ordering:'-trust_points',
@@ -85,7 +107,7 @@ const App = ({isAuthenticated}) => {
           category:filters.category,
           nonveg_food:filters.nonveg_food,
           veg_food:filters.veg_food,
-          bookedtill:filters.bookedtill,
+          bookedtill_filter:filters.bookedtill,
           min_rating:filters.min_rating,
           capacity_filter:filters.capacity_filter,
           trust_points_filter:filters.trust_points_filter,

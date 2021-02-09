@@ -30,13 +30,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ControlledOpenSelect() {
+export default function ControlledOpenSelect({bookvalues,setbookvalues}) {
   const classes = useStyles();
-  const [duration, setDuration] = React.useState('');
   const [open, setOpen] = React.useState(false);
 
   const handleChange = (event) => {
-    setDuration(event.target.value);
+    console.log(event.target.value)
+    if(event.target.value=='')
+    {
+      setbookvalues({...bookvalues,duration:'',price:bookvalues.month_price});
+    }
+    else{setbookvalues({...bookvalues,duration:event.target.value,price:bookvalues.month_price*bookvalues.capacity*event.target.value,savings:bookvalues.monthsavings*event.target.value*bookvalues.capacity});}
+    console.log(bookvalues)
   };
 
   const handleClose = () => {
@@ -57,13 +62,11 @@ export default function ControlledOpenSelect() {
           open={open}
           onClose={handleClose}
           onOpen={handleOpen}
-          value={duration}
+          value={bookvalues.duration}
           onChange={handleChange}
           MenuProps={MenuProps}
         >
-          <MenuItem value="" >
-            <em>None</em>
-          </MenuItem>
+         
           <MenuItem value={1}>1 month</MenuItem>
           <MenuItem value={2}>2 months</MenuItem>
           <MenuItem value={3}>3 months</MenuItem>

@@ -35,6 +35,7 @@ import axios from 'axios';
 
 import CustomizedRatings from '../components/rating_meter';
 import LocalOfferOutlinedIcon from '@material-ui/icons/LocalOfferOutlined';
+import {Redirect} from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -129,6 +130,39 @@ export default function FullWidthGrid(props) {
   const [reviews, setReviews] = useState([])
   const [loading, setLoading] = useState(false);
   const [open1,changeopen1] = useState(false)
+  const [loginpage,setloginpage] = useState(false);
+
+  const [bookform,setbookform] = useState(false);
+
+  const [bookvalues,setbookvalues] = React.useState({
+    price:'',
+    date:'',
+    month:'',
+    year:'',
+    duration:1,
+    wifi:'',
+    house_TV:'',
+    room_TV:'',
+    house_refridgerator:'',
+    room_refridgerator:'',
+    purified_water:'',
+    geyser:'',
+    AC:'',
+    cooler:'',
+    breakfast:'',
+    lunch:'',
+    dinner:'',
+    coupon:'',
+    discount:'',
+    month_price:'',
+    savings:'',
+    monthsavings:'',
+    roomid:'',
+    title:'',
+    address:'',
+    currency:'',
+    capacity:1,
+})
  
 
   useEffect(() => {
@@ -186,7 +220,18 @@ export default function FullWidthGrid(props) {
   console.log('photo11',details.photo1);
 
 
+if(loginpage===true)
+{ 
+  return <Redirect to='/login' />;
+}
 
+if(bookform===true)
+{
+  return <Redirect to={{
+    pathname: `/rooms/${details.room_id}/book`,
+    state: { property_id: bookvalues }
+  }}/>
+}
 
 
   return (
@@ -257,7 +302,7 @@ export default function FullWidthGrid(props) {
                 <Grid item xs={4}>
                   <Box mt={7} className={classes.mystyle}>
 
-                  <BookCard details={details}/>
+                  <BookCard details={details} bookvalues={bookvalues} setbookvalues={setbookvalues} loginpage={loginpage} setloginpage={setloginpage} bookform={bookform} setbookform={setbookform}/>
                   </Box>
                 </Grid>
             </Grid>
@@ -400,7 +445,7 @@ export default function FullWidthGrid(props) {
         </Grid>
 
        
-        <SimpleModal1 details={details} open={open1} change={changeopen1}/>
+        <SimpleModal1 details={details} open={open1} change={changeopen1} bookvalues={bookvalues} setbookvalues={setbookvalues} loginpage={loginpage} setloginpage={setloginpage} bookform={bookform} setbookform={setbookform}/>
         <BottomAppBar details={details} open1={open1} changeopen1={changeopen1}/>
 
       </Hidden>

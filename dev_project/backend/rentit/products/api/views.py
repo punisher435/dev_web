@@ -39,7 +39,7 @@ class room_filter(rest_filters.FilterSet):
     capacity_filter = rest_filters.NumberFilter(field_name='capacity',lookup_expr='exact')
     floor_filter = rest_filters.NumberFilter(field_name='floor_no',lookup_expr='exact')
     trust_points_filter = rest_filters.NumberFilter(field_name='trust_points',lookup_expr='gte')
-    bookedtill_filter = rest_filters.DateFilter(field_name='bookedtill', lookup_expr='gte')
+    bookedtill_filter = rest_filters.DateFilter(field_name='bookedtill', lookup_expr='lt')
 
     class Meta:
         model = rooms

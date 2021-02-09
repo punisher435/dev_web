@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SimpleModal1({details,open,change}) {
+export default function SimpleModal1({details,open,change,bookvalues,setbookvalues,loginpage,setloginpage,bookform,setbookform}) {
   const classes = useStyles();
   // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = React.useState(getModalStyle);
@@ -38,7 +38,7 @@ export default function SimpleModal1({details,open,change}) {
 
   const body = (
     <div style={modalStyle} className={`${classes.paper} ${style.boxclass}`}>
-        <BookCard details={details}/>
+        <BookCard details={details} bookvalues={bookvalues} setbookvalues={setbookvalues} loginpage={loginpage} setloginpage={setloginpage} bookform={bookform} setbookform={setbookform}/>
       
     </div>
   );

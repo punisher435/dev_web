@@ -141,6 +141,7 @@ function ResponsiveDrawer(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [checked, setChecked] = React.useState(false);
 
 
   const handleDrawerToggle = () => {
@@ -170,7 +171,7 @@ function ResponsiveDrawer(props) {
 
       <ListItem className={classes.mystyle}>
 
-      <Checkboxes size='small' setfilters={props.setfilters} filters={props.filters} setfilters={props.setfilters}/>
+      <Checkboxes size='small' checked={checked} setChecked={setChecked} setfilters={props.setfilters} filters={props.filters} setfilters={props.setfilters}/>
 
       <Typography variant="body1">
           Show all rooms
@@ -199,7 +200,7 @@ function ResponsiveDrawer(props) {
       </Typography>
       </ListItem>
       <ListItem className={classes.mystyle}>
-      <MaterialUIPickers1 filters={props.filters} setfilters={props.setfilters}/>
+      <MaterialUIPickers1 checked={checked} setChecked={setChecked} filters={props.filters} setfilters={props.setfilters}/>
       </ListItem>
       <Divider />
 
@@ -520,7 +521,7 @@ function ResponsiveDrawer(props) {
         </Hidden>
 
             {
-              props.mapview ? <Mapmount filters={props.filters} setfilters={props.setfilters}/> : <div><Posts posts={props.posts} loading={props.loading} wishlistitems={props.wishlistitems} cartitems={props.cartitems} changeitemswishlist={props.changeitemswishlist} changeitemscart={props.changeitemscart}/>
+              props.mapview ? <Mapmount filters={props.filters} setfilters={props.setfilters}/> : <div><Posts posts={props.posts}  setfilters={props.setfilters} filters={props.filters} loading={props.loading} wishlistitems={props.wishlistitems} cartitems={props.cartitems} changeitemswishlist={props.changeitemswishlist} changeitemscart={props.changeitemscart}/>
               <PaginationOutlined paginate={props.paginate} postsPerPage={props.postsPerPage} currentPage={props.currentPage} totalposts={props.totalposts}/></div>
             }
            

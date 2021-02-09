@@ -20,6 +20,7 @@ class roomBookings(models.Model):
          default = uuid.uuid4, 
          editable = False,
          unique = True)
+
     room_id = models.ForeignKey(rooms,on_delete=models.PROTECT,related_name="booked_room_id")
     customer_id= models.ForeignKey(user,on_delete=models.PROTECT,related_name="room_customer_id")
     seller_id= models.ForeignKey(user,on_delete=models.PROTECT,related_name="room_seller_id")
@@ -28,30 +29,53 @@ class roomBookings(models.Model):
 
     booked_from = models.DateField()
     booked_till = models.DateField()
-
+    capacity = models.IntegerField()
     duration=models.IntegerField()
 
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
+    mobile = models.BigIntegerField()
+    alternate_mobile=models.BigIntegerField(null=True,blank=True)
+    country_code = models.CharField(max_length=255)
+
+    wifi = models.BooleanField()
+    house_TV = models.BooleanField()
+    room_TV = models.BooleanField()
+    house_refridgerator = models.BooleanField()
+    room_refridgerator = models.BooleanField()
+    purified_water = models.BooleanField()
+    geyser = models.BooleanField()
+    AC = models.BooleanField()
+    cooler = models.BooleanField()
+    breakfast = models.BooleanField()
+    lunch = models.BooleanField()
+    dinner = models.BooleanField()
+
     currency=models.CharField(max_length=255)
+    savings = models.IntegerField()
     cost=models.BigIntegerField()
     price_to_be_paid=models.BigIntegerField()
     discount=models.IntegerField()
+    coupon=models.CharField(max_length=255,null=True,blank=True)
 
     paid = models.BooleanField(default=True)
 
-    invoice = models.FileField(upload_to ='invoices/% Y/% m/% d/',null=True) 
-    paylater_receipt = models.FileField(upload_to ='paylater_receipts/% Y/% m/% d/',null=True) 
+    invoice = models.FileField(upload_to ='invoices/% Y/% m/% d/',null=True,blank=True)  
 
     cancelled=models.BooleanField(default=False)
+    cancelled_date = models.DateTimeField(null=True,blank=True)
     refunded=models.BooleanField(default=False)
+    refund_amount=models.IntegerField(default=0)
     paylater=models.BooleanField(default=False)
     paylater_date=models.DateField(_("Pay Later Date"),null=True,blank=True)
-    removed=models.BooleanField(default=False)
+    
+    ended=models.BooleanField(default=False)
 
     customer = rooms_bookings_manager
     seller = rooms_seller_bookings_manager
 
 
-class shopBookings(models.Model):
+""" class shopBookings(models.Model):
     
     booking_id = models.UUIDField( 
          primary_key = True, 
@@ -126,7 +150,7 @@ class apartmentBookings(models.Model):
 
     customer = apartments_bookings_manager
     seller = apartments_seller_bookings_manager
-
+ """
 
 
 

@@ -14,6 +14,8 @@ from pathlib import Path
 import os
 from datetime import timedelta
 from . import settings
+from celery.schedules import crontab
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -44,14 +46,15 @@ INSTALLED_APPS = [
     'rest_framework',
     'djoser',
     'django_filters',
+    'django_celery_beat',
     'user',
     'rest_framework_simplejwt',
     'products',
     'django_google_maps',
-    'bookings',
     'wishlist',
     'cart',
-    #'coupons',
+    'bookings',
+    'coupons',
 ]
 
 MIDDLEWARE = [
@@ -227,3 +230,12 @@ DJOSER = {
 AUTH_USER_MODEL = 'user.customUser'
 
 GOOGLE_MAPS_API_KEY = '76b59343e0a5d0'
+
+
+CELERY_BEAT_SCHEDULE = {
+    "scheduled_task": {
+        "task":"bookings.tasks.book_end",
+        "schedule":60.0,
+    },
+}
+

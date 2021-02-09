@@ -13,7 +13,26 @@ export default function MaterialUIPickers1(props) {
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
-    props.setfilters({...props.filters,booked:'',bookedtill:date});
+    var x;
+    var y;
+    if(parseInt(date.getMonth()+1)<10)
+    {
+      x = `0${date.getMonth()+1}`;
+    }
+    if(parseInt(date.getMonth()+1)>=10)
+    {
+      x = `${date.getMonth()+1}`;
+    }
+    if(parseInt(date.getDate())<10)
+    {
+      y = `0${date.getDate()}`;
+    }
+    if(parseInt(date.getDate())>=10)
+    {
+      y = `${date.getDate()}`;
+    }
+    props.setfilters({...props.filters,booked:'',bookedtill:`${date.getFullYear()}-${x}-${y}`});
+    props.setChecked(false)
   };
 
   var newDate = new Date(Date.now() + 14 * 24*60*60*1000);

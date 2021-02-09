@@ -66,6 +66,9 @@ urlpatterns = [
     #coupons
     #path('sourcesfnsjfn231/',include('coupons.urls_coupons')),
 
+    #bookings
+    path('sourcehjbda983290whjba/',include('bookings.urls')),
+
 ]
 
 urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

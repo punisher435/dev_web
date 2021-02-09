@@ -22,7 +22,8 @@ class coupons(models.Model):
 
     date_created=models.DateTimeField(auto_now_add=True)
     life=models.IntegerField(default=2)
-    expiry_date=models.DateField(null=True,blank=True)
+    valid_from = models.DateField()
+    expiry_date=models.DateField()
 
     expired=models.BooleanField(default=False)
 
@@ -33,7 +34,7 @@ class coupons(models.Model):
     coupon_type=models.CharField( max_length=255,choices=coupon_type_choices)
     off=models.IntegerField(default=0)
 
-    min_price=models.IntegerField(null=True,blank=True)
+    min_price=models.IntegerField(default=0)
     max_off_price=models.IntegerField(null=True,blank=True)
 
 

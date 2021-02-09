@@ -14,7 +14,7 @@ from .serializers import coupon_serializer
 
 # Create your views here.
 
-class coupon_viewset(viewsets.ViewSet):
+""" class coupon_viewset(viewsets.ViewSet):
 
     authentication_classes = [authentication.JWTAuthentication]
     permission_classes = [permissions.IsAuthenticated]
@@ -151,9 +151,25 @@ class coupon_viewset(viewsets.ViewSet):
 
                     return Response('Added',status=status.HTTP_202_ACCEPTED)
 
+    def destroy(self,request,pk=None):
+        try:
+            if request.user.is_seller:
+                queryset = coupons.objects.all()
+                queryset = queryset.filter(seller_id=request.user)
+
+                queryset = get_object_or_404(queryset,pk=pk)
+                queryset.delete()
+                return Response('Deleted',status=status.HTTP_200_OK)
+            return Response('ERROR',status=status.HTTP_400_BAD_REQUEST)
+        except:
             return Response('ERROR',status=status.HTTP_400_BAD_REQUEST)
 
-        except:
+
+
+
+
+            
+            except:
             return Response('ERROR',status=status.HTTP_400_BAD_REQUEST)
 
     def destroy(self,request,pk=None):
@@ -172,7 +188,7 @@ class coupon_viewset(viewsets.ViewSet):
 
 
 
-
+ """
             
             
 

@@ -1,8 +1,7 @@
 import React from 'react';
 import Checkbox from '@material-ui/core/Checkbox';
 
-export default function Checkboxes({ filters,setfilters }) {
-  const [checked, setChecked] = React.useState(false);
+export default function Checkboxes({ filters,setfilters,checked,setChecked }) {
 
   const handleChange = (event) => {
     setChecked(event.target.checked);
