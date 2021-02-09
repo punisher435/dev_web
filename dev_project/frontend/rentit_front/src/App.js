@@ -14,9 +14,15 @@ import PaginationCardList from './containers/PaginateCardList'
 import rooms from './containers/RoomDetails'
 import SimpleTabs from './containers/wishlist';
 import RecentBooking from './containers/RecentBooking'
+<<<<<<< HEAD
 import Profile from './components/Profile';
 
 import Checkout from './components/bookform';
+=======
+import Profile from './containers/Profile';
+// import Sforms from './components/Sforms'
+import Sforms from './components/Checkout' 
+>>>>>>> 2963d8bec5e54ea674e1e9f87157c10292790097
 
 
 
@@ -43,6 +49,7 @@ function App(props) {
                 <Route exact path='/wishlist' component={SimpleTabs}/>
                 <Route exact path='/rooms/:roomid/book/' component={Checkout} />
                 <Route exact path='/recentBooking' component={RecentBooking}/>
+                <Route exact path='/Sform' component={Sforms}/>
               </div>
               </>
             </Switch>
