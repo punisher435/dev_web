@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{Fragment} from 'react';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -15,7 +15,7 @@ import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink,Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { logout } from '../redux/auth/actions/auth_actions';
 import styles from './css/navbar.module.css';
@@ -124,6 +124,12 @@ const useStyles = makeStyles((theme) => ({
 
 function RenteneAppBar(props) {
   const classes = useStyles();
+  const [redirect, setRedirect] = React.useState(false);
+
+    const logout_user = () => {
+        props.logout();
+        setRedirect(true);
+    };
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -162,7 +168,10 @@ function RenteneAppBar(props) {
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-      <MenuItem onClick={handleMenuClose}><NavLink className={`nav-link ${styles.textclass2}`} exact to='/logout'>Logout </NavLink></MenuItem>
+      {
+        props.isAuthenticated ? <NavLink className={`nav-link ${styles.textclass2}`} exact to='/#!' onClick={logout_user}><MenuItem onClick={handleMenuClose}>Logout</MenuItem></NavLink> : null
+      }
+      
    </Menu>
   );
 
@@ -295,12 +304,12 @@ function RenteneAppBar(props) {
           
 
           {
-            props.isAuthenticated ? null : <><NavLink className={`nav-link ${styles.textclass}`} exact to='/login'>
+            props.isAuthenticated ? null : <><NavLink className={`nav-link ${styles.textclass3}`} exact to='/login'>
             <Typography className={classes.body} variant="h6" noWrap>
               Login
             </Typography>
             </NavLink>
-            <NavLink className={`nav-link ${styles.textclass}`} exact to='/signup'>
+            <NavLink className={`nav-link ${styles.textclass3}`} exact to='/signup'>
             <Typography className={classes.body} variant="h6" noWrap>
               Sign up
             </Typography>
@@ -353,6 +362,7 @@ function RenteneAppBar(props) {
       <Toolbar id="back-to-top-anchor" />
       {renderMobileMenu}
       {renderMenu}
+      {redirect ? <Redirect to='/' /> : <Fragment></Fragment>}
     </div>
   );
 }

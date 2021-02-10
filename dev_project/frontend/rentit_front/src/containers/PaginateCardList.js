@@ -169,18 +169,7 @@ const App = ({isAuthenticated}) => {
               'Authorization': `JWT ${localStorage.getItem('access')}`,
       },
     };
-    try {
-      await axios.put(`${process.env.REACT_APP_API_URL}/souradadnaknda/cart/rooms/1/`,config,config)
-      .then(res => {
-        changeitemscart(res.data);
-      })
-      .catch(err => {
-        
-      })
-      
-      }
-      catch{
-      }
+    
       try {
         await axios.put(`${process.env.REACT_APP_API_URL}/souraawdgrg33w24/wishlist/rooms/1/`,config,config)
         .then(res1 => {

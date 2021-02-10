@@ -39,6 +39,7 @@ import KitchenIcon from '@material-ui/icons/Kitchen';
 import CustomizedRatings from './rating_meter';
 import { connect } from 'react-redux'
 import axios from 'axios'
+import SimpleModal1 from '../components/bookcardmodel1';
 
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";
@@ -178,15 +179,23 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
+
+
 function NestedGrid({filters,setfilters,post, isAuthenticated, setOpen1,setOpen2,changeitemswishlist,changeitemscart,wishlistitems,cartitems}) {
   const classes = useStyles();
 
   const [booked,setbooked] = useState(true);
 
   const [wishlist,changewishlist] = useState(false)
-  const [cart,changecart] = useState(false)
   const [space,setspace] = useState(0);
   const date = new Date(Date.now())
+
+  const [mybookcard,openbookcard] =  useState(false)
+  const [loginpage,setloginpage] =  useState(false)
+  const handlebookcard = e => {
+    e.preventDefault();
+    openbookcard(true);
+  }
  
 
     var x;
@@ -353,19 +362,6 @@ setspace(b);
       }
       catch{
       }
-
-      try {
-        await axios.get(`${process.env.REACT_APP_API_URL}/souradadnaknda/cart/rooms/${post.room_id}/`,config,config)
-        .then(res => {
-          changecart(res.data);
-        })
-        .catch(err => {
-          
-        })
-        
-        }
-        catch{
-        }
     }
 
     }
@@ -532,59 +528,14 @@ setspace(b);
 
     }
 
-    const handleclick2 = async (event) => {
-      event.preventDefault();
-
-      if(isAuthenticated)
-      {
-        if(cart)
-        {
-          const config = {
-            headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `JWT ${localStorage.getItem('access')}`,
-            },
-          };
-          const res = await axios.delete(`${process.env.REACT_APP_API_URL}/souradadnaknda/cart/rooms/${post.room_id}/`,config);
-
-          if(res.data == 'Removed from cart'){changecart(false); changeitemscart(cartitems-1);}
-        }
-      }else{
-        setOpen2(true);
-      }
-
-    }
+  
 
     
 
-    const handleclick3 = async (event) => {
-      event.preventDefault();
-
-      if(isAuthenticated)
-      {
-        if(!cart)
-        {
-          const config = {
-            headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `JWT ${localStorage.getItem('access')}`,
-            },
-            params: {
-              room_id:post.room_id,
-            },
-          };
-          const res = await axios.post(`${process.env.REACT_APP_API_URL}/souradadnaknda/cart/rooms/`,config,config);
-
-          if(res.data == 'Added to cart'){changecart(true);  changeitemscart(cartitems+1);}
-        }
-      }else{
-        setOpen2(true);
-      }
-
-    }
+    
 
     
-    const y=post.owner_discount+post.company_discount;
+    const y=post.owner_discount+post.company_discount+post.commission+post.fake_discount;
 
 
 
@@ -610,11 +561,7 @@ setspace(b);
         wishlist ? <Grid item md={1}><IconButton color='error' onClick={(event) => {handleclick(event);}} className={classes.iconroot1}><FavoriteIcon /></IconButton></Grid> : <Grid item md={1}><IconButton color='error' onClick={(event) => {handleclick1(event);}} className={classes.iconroot1}><FavoriteBorderOutlinedIcon /></IconButton></Grid>
         }
         </Grid>
-        <Grid item md={1}>
-        { 
-        cart ? <Grid item md={1}><IconButton onClick={(event) => {handleclick2(event);}} className={classes.iconroot}><ShoppingCartIcon /></IconButton></Grid> : <Grid item md={1}><IconButton onClick={(event) => {handleclick3(event);}} className={classes.iconroot}><ShoppingCartOutlinedIcon /></IconButton></Grid>
-        }
-        </Grid>
+       
         </Grid>
         <Typography variant="h4" component="h3" className={classes.textroot4}>
           {post.category}
@@ -723,9 +670,9 @@ setspace(b);
         </Grid>
         <Grid item md={3}>
           { 
-          booked ? <Button variant="outlined" color="secondary">
+          !post.verified || booked ? <Button variant="outlined" color="secondary">
           Not Avaiable until 1 day after {post.bookedtill} 
-        </Button> :<Button variant="contained" color="secondary">
+        </Button> :<Button variant="contained" color="secondary" onClick={e => {handlebookcard(e);}}>
             Book Now 
         </Button>
         }
@@ -742,6 +689,7 @@ setspace(b);
   }
 
   function FormRow() {
+   
     return (
       <React.Fragment>
         <Grid item md={5} xs={12}>
@@ -749,7 +697,7 @@ setspace(b);
         </Grid>
         
         <Grid item md={7} xs={12}>
-        <Link to={`/rooms/${post.room_id}`} target="_blank">
+        <Link to={`/rooms/${post.room_id}`} target="_blank" style={{textDecoration:'none'}}>
           <NameCard/>
           </Link>
         </Grid>
@@ -761,6 +709,7 @@ setspace(b);
   return (
     <div className={classes.root}>
         <Grid container item xs={12}>
+        <SimpleModal1 details={post} open={mybookcard} change={openbookcard} loginpage={loginpage} setloginpage={setloginpage}/>
           <FormRow />
         </Grid>
         

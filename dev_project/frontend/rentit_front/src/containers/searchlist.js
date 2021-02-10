@@ -335,11 +335,7 @@ function ResponsiveDrawer(props) {
       </Link>
      
 
-      <Link to='/cart'>
-      <Badge badgeContent={props.cartitems} color="primary">
-      <IconButton className={classes.iconstyle}><ShoppingCartIcon /></IconButton>
-      </Badge>
-      </Link>
+      
       </Grid>
 
       </Grid>
@@ -398,11 +394,7 @@ function ResponsiveDrawer(props) {
       </Link>
      
 
-      <Link to='/cart'>
-      <Badge badgeContent={props.cartitems} color="primary">
-      <IconButton className={classes.iconstyle}><ShoppingCartIcon /></IconButton>
-      </Badge>
-      </Link>
+      
       </Grid>
 
       </Grid>

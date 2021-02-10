@@ -23,6 +23,7 @@ from coupons.models import coupons
 
 import celery
 from email1 import email_send
+from user. models import seller_bank_details
 
 utc=pytz.UTC
 
@@ -197,33 +198,47 @@ class room_booking(viewsets.ViewSet):
                     print('success')
 
                     x = room.final_price
+                    seller_pay = room.seller_price
                     x = x + room.cost_electricity + room.cost_water
                     if data['wifi']:
                         x=x+room.cost_wifi
+                        seller_pay=seller_pay+room.cost_wifi
                     if data['house_TV']:
                         x=x+room.cost_TV
+                        seller_pay=seller_pay+room.cost_TV
                     if data['room_TV']:
                         x=x+room.cost_roomTV
+                        seller_pay=seller_pay+room.cost_roomTV
                     if data['house_refridgerator']:
                         x=x+room.cost_refridgerator
+                        seller_pay=seller_pay+room.cost_refridgerator
                     if data['room_refridgerator']:
                         x=x+room.cost_roomrefridgerator
+                        seller_pay=seller_pay+room.cost_roomrefridgerator
                     if data['purified_water']:
                         x=x+room.cost_purified_water
+                        seller_pay=seller_pay+room.cost_purified_water
                     if data['geyser']:
                         x=x+room.cost_geyser
+                        seller_pay=seller_pay+room.cost_geyser
                     if data['AC']:
                         x=x+room.cost_AC
+                        seller_pay=seller_pay+room.cost_AC
                     if data['cooler']:
                         x=x+room.cost_cooler
+                        seller_pay=seller_pay+room.cost_cooler
                     if data['lunch']:
                         x=x+room.cost_lunch
+                        seller_pay=seller_pay+room.cost_lunch
                     if data['breakfast']:
                         x=x+room.cost_breakfast
+                        seller_pay=seller_pay+room.cost_breakfast
                     if data['dinner']:
                         x=x+room.cost_dinner
+                        seller_pay=seller_pay+room.cost_dinner
 
                     price = x*data['duration']*data['capacity']
+                    seller_pay = seller_pay*data['duration']*data['capacity']
 
 
                     if data['coupon']!='none':
@@ -244,6 +259,8 @@ class room_booking(viewsets.ViewSet):
                                                 temp=coupon.max_off_price
                                         
                                         price = price - temp;
+                                        if coupon.admin_coupon == False:
+                                            seller_pay = seller_pay - temp;
 
                                         data['savings'] = data['savings']+temp
                                         data['discount'] = data['discount']+coupon.off
@@ -251,6 +268,8 @@ class room_booking(viewsets.ViewSet):
                                     if coupon.coupon_type=='off_price':
                                     
                                         price = price - coupon.off;
+                                        if coupon.admin_coupon == False:
+                                            seller_pay = seller_pay - coupon.off;
 
                                         data['savings'] = data['savings']+coupon.off
 
@@ -260,10 +279,21 @@ class room_booking(viewsets.ViewSet):
                         except:
                             return Response('Coupon not applicable',status=status.HTTP_400_BAD_REQUEST)
 
+
+
                         
                     x = payment()
 
                     if x == 'payment successful':
+
+
+                        seller = get_object_or_404(seller_bank_details.objects.all(),pk=room.seller_id)
+
+                        seller_pay = seller_pay - (seller_pay*seller.commission/100)
+
+                        seller.total_due_payment = seller.total_due_payment+seller_pay
+
+                        seller.save()
                             
                         list1 = [room.book1,room.book2,room.book3,room.book4,room.book5,room.book6,room.book7,room.book8,room.book9,room.book10]
 
@@ -275,7 +305,7 @@ class room_booking(viewsets.ViewSet):
                             booked_from=book_date,booked_till=end_date,capacity=data['capacity'],duration=data['duration'],first_name=data['firstname'],last_name=data['lastname'],mobile=data['mobile'],alternate_mobile=data['alternate_mobile'],
                             country_code=data['country_code'],wifi=data['wifi'],house_TV=data['house_TV'],room_TV=data['room_TV'],house_refridgerator=data['house_refridgerator'],room_refridgerator=data['room_refridgerator'],
                             purified_water=data['purified_water'],geyser=data['geyser'],AC=data['AC'],cooler=data['cooler'],breakfast=data['breakfast'],lunch=data['lunch'],dinner=data['dinner'],currency=room.currency,
-                            savings=data['savings'],cost=room.price,price_to_be_paid=price,discount=data['discount'],coupon=data['coupon'])
+                            savings=data['savings'],seller_pay=seller_pay,cost=room.price,price_to_be_paid=price,discount=data['discount'],coupon=data['coupon'])
                             
                             booking.save()
 
@@ -310,7 +340,7 @@ class room_booking(viewsets.ViewSet):
                             booked_from=book_date,booked_till=end_date,capacity=data['capacity'],duration=data['duration'],first_name=data['firstname'],last_name=data['lastname'],mobile=data['mobile'],alternate_mobile=data['alternate_mobile'],
                             country_code=data['country_code'],wifi=data['wifi'],house_TV=data['house_TV'],room_TV=data['room_TV'],house_refridgerator=data['house_refridgerator'],room_refridgerator=data['room_refridgerator'],
                             purified_water=data['purified_water'],geyser=data['geyser'],AC=data['AC'],cooler=data['cooler'],breakfast=data['breakfast'],lunch=data['lunch'],dinner=data['dinner'],currency=room.currency,
-                            savings=data['savings'],cost=room.price,price_to_be_paid=price,discount=data['discount'],coupon=data['coupon'])
+                            savings=data['savings'],cost=room.price,seller_pay=seller_pay,price_to_be_paid=price,discount=data['discount'],coupon=data['coupon'])
                             
                             booking.save()
                             
@@ -342,7 +372,7 @@ class room_booking(viewsets.ViewSet):
                             booked_from=book_date,booked_till=end_date,capacity=data['capacity'],duration=data['duration'],first_name=data['firstname'],last_name=data['lastname'],mobile=data['mobile'],alternate_mobile=data['alternate_mobile'],
                             country_code=data['country_code'],wifi=data['wifi'],house_TV=data['house_TV'],room_TV=data['room_TV'],house_refridgerator=data['house_refridgerator'],room_refridgerator=data['room_refridgerator'],
                             purified_water=data['purified_water'],geyser=data['geyser'],AC=data['AC'],cooler=data['cooler'],breakfast=data['breakfast'],lunch=data['lunch'],dinner=data['dinner'],currency=room.currency,
-                            savings=data['savings'],cost=room.price,price_to_be_paid=price,discount=data['discount'],coupon=data['coupon'])
+                            savings=data['savings'],cost=room.price,seller_pay=seller_pay,price_to_be_paid=price,discount=data['discount'],coupon=data['coupon'])
                             
                             booking.save()
                             
@@ -395,14 +425,26 @@ class room_booking(viewsets.ViewSet):
 
             room = get_object_or_404(rooms.objects.all(),pk=booking.room_id.room_id)
 
+            
+
             refund_price = 0
 
             if utc.localize(datetime.datetime.now())<=booking.created_at+datetime.timedelta(days=5):
                 print('refunded')
                 refund_price = booking.price_to_be_paid
 
+                seller_pay = booking.seller_pay
+                seller = get_object_or_404(seller_bank_details.objects.all(),pk=room.seller_id)
+                seller.total_due_payment = seller.total_due_payment-seller_pay
+                seller.save()
+
             elif utc.localize(datetime.datetime.now())<=booking.created_at+datetime.timedelta(days=7) and utc.localize(datetime.datetime.now())>booking.created_at+datetime.timedelta(days=5):
                 refund_price = int(booking.price_to_be_paid/2)
+
+                seller_pay = booking.seller_pay/2
+                seller = get_object_or_404(seller_bank_details.objects.all(),pk=room.seller_id)
+                seller.total_due_payment = seller.total_due_payment-seller_pay
+                seller.save()
 
             booking.refund_amount = refund_price
             booking.cancelled_date = datetime.datetime.now()

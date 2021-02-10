@@ -58,11 +58,6 @@ urlpatterns = [
     path('sourcesnjs03qjkda/',include('wishlist.urls_shop_wishlist')),
     path('sourcenasdknahi29ad/',include('wishlist.urls_apartment_wishlist')),
 
-    #cart
-    path('souradadnaknda/',include('cart.urls_cart_room')),
-    path('sourcekfnenasd/',include('cart.urls_cart_shop')),
-    path('sourceajd28eajbdk/',include('cart.urls_cart_apartment')),
-
     #coupons
     #path('sourcesfnsjfn231/',include('coupons.urls_coupons')),
 

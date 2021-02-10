@@ -59,6 +59,7 @@ class roomBookings(models.Model):
     coupon=models.CharField(max_length=255,null=True,blank=True)
 
     paid = models.BooleanField(default=True)
+    seller_pay = models.BigIntegerField()
 
     invoice = models.FileField(upload_to ='invoices/% Y/% m/% d/',null=True,blank=True)  
 

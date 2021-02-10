@@ -19,6 +19,7 @@ import Alert from '@material-ui/lab/Alert';
 import { connect } from 'react-redux'
 import axios from 'axios';
 import Eror from './eror';
+import {Redirect } from 'react-router-dom'
 
 function Copyright() {
   return (
@@ -280,6 +281,23 @@ function Checkout(props) {
 <Eror error={"Couldn't place your booking."}/></main></div>);
   }
 
+  if(props.isAuthenticated===false)
+  {
+    return <Redirect to='/login'/>;
+  }
+  if(props.profile)
+  {
+    if(props.profile.is_seller===true)
+    {
+      return <Redirect to='/'/>;
+    }
+    if(props.profile.profile_completed===false)
+    {
+      return <Redirect to='/'/>;
+    }
+
+  }
+
 
 
   return (
@@ -350,7 +368,8 @@ function Checkout(props) {
 
 
 const mapStateToProps = state => ({
-    profile: state.authreducers.user
+    profile: state.authreducers.user,
+    isAuthenticated: state.authreducers.isAuthenticated,
   });
 
 export default connect(mapStateToProps)(Checkout);

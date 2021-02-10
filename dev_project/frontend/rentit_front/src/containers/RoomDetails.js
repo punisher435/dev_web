@@ -132,37 +132,8 @@ export default function FullWidthGrid(props) {
   const [open1,changeopen1] = useState(false)
   const [loginpage,setloginpage] = useState(false);
 
-  const [bookform,setbookform] = useState(false);
 
-  const [bookvalues,setbookvalues] = React.useState({
-    price:'',
-    date:'',
-    month:'',
-    year:'',
-    duration:1,
-    wifi:'',
-    house_TV:'',
-    room_TV:'',
-    house_refridgerator:'',
-    room_refridgerator:'',
-    purified_water:'',
-    geyser:'',
-    AC:'',
-    cooler:'',
-    breakfast:'',
-    lunch:'',
-    dinner:'',
-    coupon:'',
-    discount:'',
-    month_price:'',
-    savings:'',
-    monthsavings:'',
-    roomid:'',
-    title:'',
-    address:'',
-    currency:'',
-    capacity:1,
-})
+
  
 
   useEffect(() => {
@@ -225,13 +196,7 @@ if(loginpage===true)
   return <Redirect to='/login' />;
 }
 
-if(bookform===true)
-{
-  return <Redirect to={{
-    pathname: `/rooms/${details.room_id}/book`,
-    state: { property_id: bookvalues }
-  }}/>
-}
+
 
 
   return (
@@ -302,7 +267,7 @@ if(bookform===true)
                 <Grid item xs={4}>
                   <Box mt={7} className={classes.mystyle}>
 
-                  <BookCard details={details} bookvalues={bookvalues} setbookvalues={setbookvalues} loginpage={loginpage} setloginpage={setloginpage} bookform={bookform} setbookform={setbookform}/>
+                  <BookCard details={details} loginpage={loginpage} setloginpage={setloginpage}/>
                   </Box>
                 </Grid>
             </Grid>
@@ -445,7 +410,7 @@ if(bookform===true)
         </Grid>
 
        
-        <SimpleModal1 details={details} open={open1} change={changeopen1} bookvalues={bookvalues} setbookvalues={setbookvalues} loginpage={loginpage} setloginpage={setloginpage} bookform={bookform} setbookform={setbookform}/>
+        <SimpleModal1 details={details} open={open1} change={changeopen1} loginpage={loginpage} setloginpage={setloginpage}/>
         <BottomAppBar details={details} open1={open1} changeopen1={changeopen1}/>
 
       </Hidden>

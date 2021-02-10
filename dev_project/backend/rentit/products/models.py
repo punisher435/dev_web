@@ -27,6 +27,7 @@ class rooms(models.Model):
     seller_id=models.ForeignKey(User,on_delete=models.PROTECT,related_name='room_owner_id')
     title = models.CharField(max_length=255)
     price=models.PositiveBigIntegerField()
+    seller_price = models.IntegerField()
     owner_discount=models.IntegerField(default=0)
     company_discount=models.IntegerField(default=0)
     fake_discount=models.IntegerField(default=0)
@@ -46,6 +47,7 @@ class rooms(models.Model):
     booked_by=models.IntegerField(default=0)
     bookedtill =models.DateField(_("Booked_till_Date"),null=True,blank=True)
     removed=models.BooleanField(default=False)
+    commission = models.IntegerField(default=0)
 
     book1 = models.DateField(null = True,blank=True)
     book2 = models.DateField(null = True,blank=True)

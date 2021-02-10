@@ -40,6 +40,7 @@ function App(props) {
                 <Route exact path='/reset_password' component={ResetPassword} />
                 <Route exact path='/password/reset/confirm/:uid/:token' component={ResetPasswordConfirm} />
                 <Route exact path='/activate/:uid/:token' component={Activate} />
+                
                 <Route exact path='/rooms' component={PaginationCardList}/>
                 <Route exact path='/rooms/:roomid' component={rooms}/>
                 <Route exact path='/wishlist' component={SimpleTabs}/>

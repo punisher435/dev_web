@@ -7,6 +7,14 @@
   font-size:1rem;
   
 }
+.textclass3 {
+  color: white !important;
+  font-size:1rem;
+  padding-top:7px;
+  text-align: center;
+  list-style: height 5px;
+  
+}
 .textclass2 {
   color: black !important;
   font-size:1rem;

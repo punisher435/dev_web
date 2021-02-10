@@ -20,7 +20,7 @@ import Capacityselect from './capacityselect'
 
 import { connect } from 'react-redux'
 
-import {Redirect} from 'react-router-dom';
+import {Redirect,Link} from 'react-router-dom';
 import Capacityfilter from './capacityselect';
 const useStyles = makeStyles((theme) => ({
   root1: {
@@ -28,8 +28,37 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function BoolCard({bookvalues,setbookvalues,details,isAuthenticated,loginpage,setloginpage,profile,bookform,setbookform}) {
+function BoolCard({details,isAuthenticated,loginpage,setloginpage,profile}) {
   const classes = useStyles();
+  const [bookvalues,setbookvalues] = React.useState({
+    price:'',
+    date:'',
+    month:'',
+    year:'',
+    duration:1,
+    wifi:'',
+    house_TV:'',
+    room_TV:'',
+    house_refridgerator:'',
+    room_refridgerator:'',
+    purified_water:'',
+    geyser:'',
+    AC:'',
+    cooler:'',
+    breakfast:'',
+    lunch:'',
+    dinner:'',
+    coupon:'',
+    discount:'',
+    month_price:'',
+    savings:'',
+    monthsavings:'',
+    roomid:'',
+    title:'',
+    address:'',
+    currency:'',
+    capacity:1,
+})
   const [values, setValues] = React.useState({
     couponCode: '',
   });
@@ -38,7 +67,7 @@ function BoolCard({bookvalues,setbookvalues,details,isAuthenticated,loginpage,se
     setbookvalues({ ...bookvalues, coupoun: event.target.value });
   };
 
-  const y=details.owner_discount+details.company_discount;
+  const y=details.owner_discount+details.company_discount+details.fake_discount+details.commission;
   const [selectedDate, setSelectedDate] = React.useState(new Date());
 
   const [capacity,setcapacity] = React.useState();
@@ -185,19 +214,6 @@ setcapacity(x);
   
   },[date,details,selectedDate])
 
-  const handlebook = event => {
-      event.preventDefault();
-      if(isAuthenticated===false)
-      {
-          setloginpage(true);
-      }
-      else{
-          if(profile.profile_completed===true)
-          {
-            setbookform(true);
-          }
-      }
-  }
 
 
 
@@ -381,11 +397,14 @@ setcapacity(x);
 
         </Box>
     {
-        booked ? <Button variant='contained' color="primary" fullWidth >
+        !details.verified || booked ? <Button variant='contained' color="primary" fullWidth >
         Unavaiable untill 1 day after {details.bookedtill}
-      </Button> :   <Button variant='contained' color="secondary" fullWidth onClick={event => {handlebook(event);}}>
+      </Button> :   <Link style={{textDecoration:'none'}} to={{
+    pathname: `/rooms/${details.room_id}/book`,
+    state: { property_id: bookvalues }
+  }}><Button variant='contained' color="secondary" fullWidth>
           Continue to book
-        </Button>
+        </Button></Link>
 
     }
       

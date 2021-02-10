@@ -103,7 +103,8 @@ class seller_bank_details(models.Model):
     IFSC_code=models.CharField(max_length=255)
     account_type=models.CharField( max_length=255,choices=account_type_choices)
     currency=models.CharField(max_length=200,default='₹')
-    total_due_payment=models.BigIntegerField()
+    total_due_payment=models.BigIntegerField(default=0)
+    commission = models.IntegerField(default=0)
 
 class seller_address(models.Model):
     user_id=models.OneToOneField(customUser,on_delete=models.CASCADE,primary_key=True)

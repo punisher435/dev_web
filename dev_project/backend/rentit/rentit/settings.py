@@ -52,7 +52,6 @@ INSTALLED_APPS = [
     'products',
     'django_google_maps',
     'wishlist',
-    'cart',
     'bookings',
     'coupons',
 ]

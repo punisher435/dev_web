@@ -47,7 +47,6 @@ function RecipeReviewCard({isAuthenticated,post,setOpen1,setOpen2,wishlistitems,
        const classes = useStyles();
 
        const [wishlist,changewishlist] = useState(false)
-       const [cart,changecart] = useState(false)
 
        useEffect(async () => {
 
@@ -71,18 +70,6 @@ function RecipeReviewCard({isAuthenticated,post,setOpen1,setOpen2,wishlistitems,
         catch{
         }
   
-        try {
-          await axios.get(`${process.env.REACT_APP_API_URL}/souradadnaknda/cart/rooms/${post.room_id}/`,config,config)
-          .then(res => {
-            changecart(res.data);
-          })
-          .catch(err => {
-            
-          })
-          
-          }
-          catch{
-          }
   
       }
   
@@ -97,7 +84,7 @@ function RecipeReviewCard({isAuthenticated,post,setOpen1,setOpen2,wishlistitems,
    
  <RoomImage post={post} wishlist={wishlist} changewishlist={changewishlist} setOpen1={setOpen1} isAuthenticated={isAuthenticated} wishlistitems={wishlistitems} changeitemswishlist={changeitemswishlist}/>
 
- <Link to={`/rooms/${post.room_id}`} target="_blank">
+ <Link to={`/rooms/${post.room_id}`} target="_blank" style={{textDecoration:'none',color:'black'}}>
 
  <Box ml={1}>
 
