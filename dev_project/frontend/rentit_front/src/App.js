@@ -23,16 +23,14 @@ import Sforms from './components/Checkout'
 
 
 function App(props) {
-  const mystyle ={
-    margin: '50px 0 0 0',
-  };
+  
   return (
     <Provider store={store}>
       <Router>
           <Layout>
             <Switch>
               <>
-              <div style={mystyle}
+              <div 
               className="App">
                 <Route exact path='/' component={Home} />
                 <Route exact path='/login' component={Login} />

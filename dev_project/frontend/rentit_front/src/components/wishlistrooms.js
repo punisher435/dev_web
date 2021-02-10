@@ -40,6 +40,7 @@ function Wishlistrooms({isAuthenticated,access}) {
             try{
                 const res = await axios.get(`${process.env.REACT_APP_API_URL}/souraawdgrg33w24/wishlist/rooms/`,config,config);
                 setpost(res.data);
+              
             }
             catch{
                 seterror('Oops! an error occurred');
