@@ -1,5 +1,4 @@
 import React from 'react';
-import Link from '@material-ui/core/Link';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -11,10 +10,10 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box'
 import Grid from '@material-ui/core/Grid'
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
+import Button from '@material-ui/core/Button';
+
+
+import { Link, NavLink,Redirect } from 'react-router-dom';
 
 
 
@@ -63,17 +62,17 @@ function createData(bookedOn, primaryGuest, bookingId, hostelName, price, paymen
   return {bookedOn, primaryGuest, bookingId, hostelName, price, paymentStatus };
 }
 
-const rows = [
-  createData("11 Mar '18", "Jatin Lambho", "UGIN7N6", "Rentit 13324", "$ 1234", "Pending"),
-  createData("11 Mar '18", "Jatin Lambho", "UGIN7N6", "Rentit 13324", "$ 1234", "Pending"),
-  createData("11 Mar '18", "Jatin Lambho", "UGIN7N6", "Rentit 13324", "$ 1234", "Pending"),
-  createData("11 Mar '18", "Jatin Lambho", "UGIN7N6", "Rentit 13324", "$ 1234", "Pending"),
-  createData("11 Mar '18", "Jatin Lambho", "UGIN7N6", "Rentit 13324", "$ 1234", "Pending"),
-];
 
 const useStyles = makeStyles({
   table: {
     minWidth: 700,
+    backgroundColor:'white',
+  },
+  table2: {
+    backgroundColor:'blue !important',
+  },
+  tablerow: {
+    backgroundColor:'blue !important',
   },
   button: {
     display: 'block',
@@ -83,27 +82,24 @@ const useStyles = makeStyles({
     margin: 2,
     minWidth: 85,
   },
+  textclass: {
+    borderBottom: 0
+  },
+  endclass: {
+    color:'#f44336 !important',
+  },
+  normalclass: {
+    color:'#4BB543 !important',
+  },
   
 });
 
 
 
-export default function CustomizedTables() {
+export default function CustomizedTables({bookings,setbookings}) {
   const classes = useStyles();
-  const [duration, setDuration] = React.useState('all');
-  const [open, setOpen] = React.useState(false);
 
-  const handleChange = (event) => {
-    setDuration(event.target.value);
-  };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
 
   return (
     <>
@@ -111,96 +107,52 @@ export default function CustomizedTables() {
       <Grid item>
         <Typography variant="h5" color="inherit" noWrap className={classes.title}>
           <Box mt={1} ml={1} mb={1} fontWeight="fontWeightBold">
-                Booking History
+                Room Bookings History
           </Box>
         </Typography>
 
       </Grid>
-      <Grid item>
-        <Box mr={1} mt={1} mb={1}>
-
-      <FormControl className={classes.formControl} >
-        <InputLabel id="demo-controlled-open-select-label">Duration</InputLabel>
-        <Select
-          labelId="demo-controlled-open-select-label"
-          id="demo-controlled-open-select"
-          open={open}
-          onClose={handleClose}
-          onOpen={handleOpen}
-          value={duration}
-          onChange={handleChange}
-          MenuProps={MenuProps}
-          >
-          <MenuItem value="all" >
-            <em>all</em>
-          </MenuItem>
-          <MenuItem value={1}>1 month</MenuItem>
-          <MenuItem value={2}>2 months</MenuItem>
-          <MenuItem value={3}>3 months</MenuItem>
-          <MenuItem value={4}>4 months</MenuItem>
-          <MenuItem value={5}>5 months</MenuItem>
-          <MenuItem value={6}>6 months</MenuItem>
-          <MenuItem value={7}>7 months</MenuItem>
-          <MenuItem value={8}>8 months</MenuItem>
-          <MenuItem value={9}>9 months</MenuItem>
-          <MenuItem value={10}>10 months</MenuItem>
-          <MenuItem value={11}>11 months</MenuItem>
-          <MenuItem value={12}>1 year</MenuItem>
-          <MenuItem value={13}>1    year 1 month</MenuItem>
-          <MenuItem value={14}>1 year 2 months</MenuItem>
-          <MenuItem value={15}>1 year 3 months</MenuItem>
-          <MenuItem value={16}>1 year 4 months</MenuItem>
-          <MenuItem value={17}>1 year 5 months</MenuItem>
-          <MenuItem value={18}>1 year 6 months</MenuItem>
-          <MenuItem value={19}>1 year 7 months</MenuItem>
-          <MenuItem value={20}>1 year 8 months</MenuItem>
-          <MenuItem value={21}>1 year 9 months</MenuItem>
-          <MenuItem value={22}>1 year 10 months</MenuItem>
-          <MenuItem value={23}>1 year 11 months</MenuItem>
-          <MenuItem value={24}>2 years</MenuItem>
-        </Select>
-      </FormControl>
-          </Box>
-
-      </Grid>
+      
     </Grid>
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper} className={classes.table2}>
       <Table className={classes.table} aria-label="customized table">
       {/* <caption className={classes.caption}>Show more</caption> */}
-        <TableHead>
+        <TableHead className={classes.tablerow} >
           <TableRow>
             <StyledTableCell>BOOKED ON</StyledTableCell>
             <StyledTableCell align="right">PRIMARY GUEST</StyledTableCell>
             <StyledTableCell align="right">BOOKING ID</StyledTableCell>
-            <StyledTableCell align="right">HOSTEL NAME</StyledTableCell>
+            <StyledTableCell align="right">ROOM NAME</StyledTableCell>
             <StyledTableCell align="right">PRICE</StyledTableCell>
-            <StyledTableCell align="right">PAYMENT STATUS</StyledTableCell>
+            <StyledTableCell align="right">BOOKING STATUS</StyledTableCell>
+            <StyledTableCell align="right">DETAILS</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <StyledTableRow key={row.name}>
-              <StyledTableCell component="th" scope="row">
-              {row.bookedOn}
+          
+          {
+            bookings.map(
+              booking => (
+
+               <StyledTableRow key={booking.booking_id}>
+       
+              <StyledTableCell component="th" scope="row" className={classes.textclass}>
+              {booking.created_at}
               </StyledTableCell>
-              <StyledTableCell align="right">{row.primaryGuest}</StyledTableCell>
-              <StyledTableCell align="right">{row.bookingId}</StyledTableCell>
-              <StyledTableCell align="right">{row.hostelName}</StyledTableCell>
-              <StyledTableCell align="right">{row.price}</StyledTableCell>
-              <StyledTableCell align="right">{row.paymentStatus}</StyledTableCell>
+              <StyledTableCell align="right">{booking.first_name} {booking.last_name}</StyledTableCell>
+              <StyledTableCell align="right">{booking.booking_id}</StyledTableCell>
+              <StyledTableCell align="right">{booking.room_name}</StyledTableCell>
+              <StyledTableCell align="right">{booking.price_to_be_paid}</StyledTableCell>
+              <StyledTableCell align="right">{booking.cancelled ? <p className={classes.endclass}>cancelled</p> : <p className={classes.normalclass}>active</p>}</StyledTableCell>
+              <StyledTableCell align="right"><Link style={{textAlign: 'center',textDecoration:'none'}} to={`/dashboard/recentbookings/${booking.booking_id}`}><Button>View details ...</Button></Link></StyledTableCell>
             </StyledTableRow>
-          ))}
+
+              )
+            )
+          }
         </TableBody>
       </Table>
-      <div className={classes.seeMore}>
-        <Link color="primary" href="#" onClick={preventDefault}>
-        <Typography variant="subtitle1" color="inherit" noWrap className={classes.title}>
-      <Box mt={1} ml={1} mb={1} >
-            See More Orders
-      </Box>
-          </Typography>
-        </Link>
-      </div>
+      
     </TableContainer>
     </>
   );

@@ -48,6 +48,7 @@ class rooms(models.Model):
     bookedtill =models.DateField(_("Booked_till_Date"),null=True,blank=True)
     removed=models.BooleanField(default=False)
     commission = models.IntegerField(default=0)
+    pausebooking = models.BooleanField(default=False)
 
     book1 = models.DateField(null = True,blank=True)
     book2 = models.DateField(null = True,blank=True)

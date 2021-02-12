@@ -22,6 +22,7 @@ class roomBookings(models.Model):
          unique = True)
 
     room_id = models.ForeignKey(rooms,on_delete=models.PROTECT,related_name="booked_room_id")
+    room_name = models.CharField(max_length=255)
     customer_id= models.ForeignKey(user,on_delete=models.PROTECT,related_name="room_customer_id")
     seller_id= models.ForeignKey(user,on_delete=models.PROTECT,related_name="room_seller_id")
 
@@ -65,6 +66,9 @@ class roomBookings(models.Model):
 
     cancelled=models.BooleanField(default=False)
     cancelled_date = models.DateTimeField(null=True,blank=True)
+    cancellation_reason = models.TextField(null=True,blank=True)
+    feedback = models.TextField(null=True,blank=True)
+
     refunded=models.BooleanField(default=False)
     refund_amount=models.IntegerField(default=0)
     paylater=models.BooleanField(default=False)

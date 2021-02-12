@@ -397,7 +397,7 @@ setcapacity(x);
 
         </Box>
     {
-        !details.verified || booked ? <Button variant='contained' color="primary" fullWidth >
+        details.pausebooking || !details.verified || booked ? <Button variant='contained' color="primary" fullWidth >
         Unavaiable untill 1 day after {details.bookedtill}
       </Button> :   <Link style={{textDecoration:'none'}} to={{
     pathname: `/rooms/${details.room_id}/book`,

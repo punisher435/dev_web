@@ -19,21 +19,11 @@ import { Link, NavLink,Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { logout } from '../redux/auth/actions/auth_actions';
 import styles from './css/navbar.module.css';
-import Nav from 'react-bootstrap/Nav'
 import Avatar from '@material-ui/core/Avatar';
-import { deepOrange, deepPurple } from '@material-ui/core/colors';
+import { deepPurple } from '@material-ui/core/colors';
 import axios from 'axios';
 import FavoriteOutlinedIcon from '@material-ui/icons/FavoriteOutlined';
 
-
-import PropTypes from 'prop-types';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import useScrollTrigger from '@material-ui/core/useScrollTrigger';
-import Box from '@material-ui/core/Box';
-import Container from '@material-ui/core/Container';
-import Fab from '@material-ui/core/Fab';
-import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-import Zoom from '@material-ui/core/Zoom';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -166,8 +156,8 @@ function RenteneAppBar(props) {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <NavLink className={`nav-link ${styles.textclass2}`} exact to='/dashboard'><MenuItem onClick={handleMenuClose}>Dashboard</MenuItem></NavLink>
+      <NavLink className={`nav-link ${styles.textclass2}`} exact to='/'><MenuItem onClick={handleMenuClose}>My account</MenuItem></NavLink>
       {
         props.isAuthenticated ? <NavLink className={`nav-link ${styles.textclass2}`} exact to='/#!' onClick={logout_user}><MenuItem onClick={handleMenuClose}>Logout</MenuItem></NavLink> : null
       }

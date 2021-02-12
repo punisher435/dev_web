@@ -119,7 +119,11 @@ class room_booking(viewsets.ViewSet):
         try:
 
             queryset = roomBookings.objects.all()
-            queryset = queryset.filter(customer_id = request.user)
+
+            if request.user.is_seller==True:
+                queryset = queryset.filter(seller_id = request.user)
+            else:
+                queryset = queryset.filter(customer_id = request.user)
 
             serializer = roomBookingsSerializer(queryset,context={'request':request},many=True)
             return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
@@ -133,7 +137,11 @@ class room_booking(viewsets.ViewSet):
         try:
 
             queryset = roomBookings.objects.all()
-            queryset = queryset.filter(customer_id = request.user)
+            if request.user.is_seller==True:
+                queryset = queryset.filter(seller_id = request.user)
+            else:
+                queryset = queryset.filter(customer_id = request.user)
+                
             booking = get_object_or_404(queryset,pk=pk)
 
             serializer = roomBookingsSerializer(booking,context={'request':request})
@@ -194,7 +202,7 @@ class room_booking(viewsets.ViewSet):
                 
 
 
-                if y>=data['capacity'] and book_date<=datetime.date.today()+datetime.timedelta(days=15):
+                if y>=data['capacity'] and book_date<=datetime.date.today()+datetime.timedelta(days=15) and room.pausebooking==False:
                     print('success')
 
                     x = room.final_price
@@ -301,7 +309,7 @@ class room_booking(viewsets.ViewSet):
 
                             end_date = book_date + relativedelta(months=+data['duration'])  
 
-                            booking = roomBookings(room_id=room,customer_id=request.user,seller_id=room.seller_id,
+                            booking = roomBookings(room_id=room,room_name=room.title,customer_id=request.user,seller_id=room.seller_id,
                             booked_from=book_date,booked_till=end_date,capacity=data['capacity'],duration=data['duration'],first_name=data['firstname'],last_name=data['lastname'],mobile=data['mobile'],alternate_mobile=data['alternate_mobile'],
                             country_code=data['country_code'],wifi=data['wifi'],house_TV=data['house_TV'],room_TV=data['room_TV'],house_refridgerator=data['house_refridgerator'],room_refridgerator=data['room_refridgerator'],
                             purified_water=data['purified_water'],geyser=data['geyser'],AC=data['AC'],cooler=data['cooler'],breakfast=data['breakfast'],lunch=data['lunch'],dinner=data['dinner'],currency=room.currency,
@@ -336,7 +344,7 @@ class room_booking(viewsets.ViewSet):
                         elif room.booked_by>=room.capacity:
                             end_date = book_date + relativedelta(months=+data['duration']) 
 
-                            booking = roomBookings(room_id=room,customer_id=request.user,seller_id=room.seller_id,
+                            booking = roomBookings(room_id=room,room_name=room.title,customer_id=request.user,seller_id=room.seller_id,
                             booked_from=book_date,booked_till=end_date,capacity=data['capacity'],duration=data['duration'],first_name=data['firstname'],last_name=data['lastname'],mobile=data['mobile'],alternate_mobile=data['alternate_mobile'],
                             country_code=data['country_code'],wifi=data['wifi'],house_TV=data['house_TV'],room_TV=data['room_TV'],house_refridgerator=data['house_refridgerator'],room_refridgerator=data['room_refridgerator'],
                             purified_water=data['purified_water'],geyser=data['geyser'],AC=data['AC'],cooler=data['cooler'],breakfast=data['breakfast'],lunch=data['lunch'],dinner=data['dinner'],currency=room.currency,
@@ -368,7 +376,7 @@ class room_booking(viewsets.ViewSet):
                         else:
                             end_date = book_date + relativedelta(months=+data['duration']) 
 
-                            booking = roomBookings(room_id=room,customer_id=request.user,seller_id=room.seller_id,
+                            booking = roomBookings(room_id=room,room_name=room.title,customer_id=request.user,seller_id=room.seller_id,
                             booked_from=book_date,booked_till=end_date,capacity=data['capacity'],duration=data['duration'],first_name=data['firstname'],last_name=data['lastname'],mobile=data['mobile'],alternate_mobile=data['alternate_mobile'],
                             country_code=data['country_code'],wifi=data['wifi'],house_TV=data['house_TV'],room_TV=data['room_TV'],house_refridgerator=data['house_refridgerator'],room_refridgerator=data['room_refridgerator'],
                             purified_water=data['purified_water'],geyser=data['geyser'],AC=data['AC'],cooler=data['cooler'],breakfast=data['breakfast'],lunch=data['lunch'],dinner=data['dinner'],currency=room.currency,
@@ -417,6 +425,8 @@ class room_booking(viewsets.ViewSet):
     def destroy(self,request,pk=None):
 
         try:
+
+
             queryset = roomBookings.objects.all()
             queryset = queryset.filter(customer_id = request.user)
             booking = get_object_or_404(queryset,pk=pk)
@@ -752,9 +762,27 @@ class room_booking(viewsets.ViewSet):
             return Response('error',status=status.HTTP_400_BAD_REQUEST)
 
 
+    def partial_update(self,request,pk=None):
+
+        try: 
+            data = json.loads(request.body.decode('utf-8'))['data']
+            queryset = roomBookings.objects.all()
+            queryset = queryset.filter(customer_id = request.user)
+            booking = get_object_or_404(queryset,pk=pk)
+
+            booking.cancellation_reason = data['reason']
+            booking.feedback = data['feedback']
+            booking.save()
+
+            return Response('success',status=status.HTTP_200_OK)
+
+        except:
+            return Response('error',status=status.HTTP_400_BAD_REQUEST)
 
 
 
+
+    
 
 
 

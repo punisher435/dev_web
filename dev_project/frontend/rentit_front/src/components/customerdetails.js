@@ -95,12 +95,7 @@ export default function AddressForm({bookdetails,setbookdetails,setpayment}) {
           />
         </Grid>
       
-        <Grid item xs={12}>
-          <FormControlLabel
-            control={<Checkbox color="secondary" name="paylater" value="yes" checked={bookdetails.paylater} onChange={e => {handleChange(e);}}/>}
-            label="Pay later"
-          />
-        </Grid>
+       
       </Grid>
     </React.Fragment>
   );
