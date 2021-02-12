@@ -34,7 +34,6 @@ export default function SuccessSnackbars({openme,setopenme,message}) {
           {message}
         </Alert>
       </Snackbar>
-      <Alert severity="success">{message}</Alert>
     </div>
   );
 }

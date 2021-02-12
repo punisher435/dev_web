@@ -240,8 +240,9 @@ setcapacity(x);
             const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcesawdajwnr32w2/coupon/apply/${bookvalues.coupon}/`,config,config);
 
           console.log(res.data);
-          setbookvalues({...bookvalues,price:res.data[2],discount:res.data[1],savings:res.data[0]})
+          setbookvalues({...bookvalues,price:res.data[1],discount:res.data[3],savings:res.data[2]})
           setno(1);
+          setopenme(true)
     
           
     

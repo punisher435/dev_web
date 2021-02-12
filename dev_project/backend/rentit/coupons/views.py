@@ -122,7 +122,7 @@ class Apply_coupon(viewsets.ViewSet):
             
 
 
-            return Response({price,savings,discount},status=status.HTTP_200_OK)
+            return Response({1:price,2:savings,3:discount},status=status.HTTP_200_OK)
             
 
             
