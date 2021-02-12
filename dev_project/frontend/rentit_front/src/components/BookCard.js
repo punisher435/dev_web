@@ -17,6 +17,9 @@ import FormControl from '@material-ui/core/FormControl';
 import MonthSelect from './MonthSelect'
 import FacilityIcon from './FacilityIconProvider'
 import Capacityselect from './capacityselect'
+import axios from 'axios'
+import Snackbar from '@material-ui/core/Snackbar';
+import SuccessSnackbars from './success_snackbar'
 
 import { connect } from 'react-redux'
 
@@ -30,6 +33,8 @@ const useStyles = makeStyles((theme) => ({
 
 function BoolCard({details,isAuthenticated,loginpage,setloginpage,profile}) {
   const classes = useStyles();
+  const [no,setno] = React.useState(0)
+  const [openme,setopenme] = React.useState(false)
   const [bookvalues,setbookvalues] = React.useState({
     price:'',
     date:'',
@@ -63,9 +68,7 @@ function BoolCard({details,isAuthenticated,loginpage,setloginpage,profile}) {
     couponCode: '',
   });
 
-  const handleChange = (prop) => (event) => {
-    setbookvalues({ ...bookvalues, coupoun: event.target.value });
-  };
+
 
   const y=details.owner_discount+details.company_discount+details.fake_discount+details.commission;
   const [selectedDate, setSelectedDate] = React.useState(new Date());
@@ -214,10 +217,52 @@ setcapacity(x);
   
   },[date,details,selectedDate])
 
+  const handlecoupon = async (e) => {
+      e.preventDefault();
+      if(bookvalues.coupon!='' && no==0)
+      {
+        try{
+            const config = {
+                headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `JWT ${localStorage.getItem('access')}`,
+                },
+                params:{
+                    price:bookvalues.price,
+                    discount:bookvalues.discount,
+                    savings:bookvalues.savings,
+                    roomid:bookvalues.roomid
+                   },
+              };
+
+            console.log(config)
+            
+            const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcesawdajwnr32w2/coupon/apply/${bookvalues.coupon}/`,config,config);
+
+          console.log(res.data);
+          setbookvalues({...bookvalues,price:res.data[2],discount:res.data[1],savings:res.data[0]})
+          setno(1);
+    
+          
+    
+          
+          }
+          catch{
+              console.log('error')
+          }
+      }
+  }
+
+
+  const oncouponChange = e => {
+      setbookvalues({...bookvalues,coupon:e.target.value})
+  }
 
 
 
   return (
+      <div>
+      <SuccessSnackbars openme={openme} setopenme={setopenme} message={'Coupon applied successfully!'}/>
     <Card elevation={4}>
         {
             isAuthenticated ? null : <Grid container alignItems='center' justify='space-around'  style={{ backgroundColor: '#cfe8fc'}}>
@@ -327,16 +372,19 @@ setcapacity(x);
             <Typography variant='subtitle1'>
                 Apply Coupon
             </Typography>
+            <Typography variant='body2' gutterBottom>
+                (Must be applied after you select all the details)
+            </Typography>
         </Grid>
                     <Grid item xs={7}>
                             <FormControl variant="outlined" noValidate>
                             <InputLabel >Coupon Code</InputLabel>
                             <OutlinedInput
-                                value={bookvalues.coupoun}
-                                onChange={handleChange('couponCode')}
+                                value={bookvalues.coupon}
+                                onInput={ e => oncouponChange(e)}
                                 endAdornment={
                                     <InputAdornment position="end">
-                                    <Button>
+                                    <Button onClick={e => {handlecoupon(e);}}>
                                         Check
                                     </Button>
                                 </InputAdornment>
@@ -411,6 +459,7 @@ setcapacity(x);
         <Cancellation/>
       </CardContent>
     </Card>
+    </div>
   );
 }
 

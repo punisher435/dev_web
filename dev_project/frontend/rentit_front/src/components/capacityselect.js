@@ -13,7 +13,7 @@ function Capacityselect({post,bookvalues,setbookvalues,capacity}) {
 const handleclick1 = () => {
     if(bookvalues.capacity<capacity)
     {
-        setbookvalues({...bookvalues,capacity:bookvalues.capacity+1,price:bookvalues.month_price*bookvalues.duration*(bookvalues.capacity+1),savings:bookvalues.monthsavings*bookvalues.duration*(bookvalues.capacity+1)})
+        setbookvalues({...bookvalues,coupon:'',capacity:bookvalues.capacity+1,price:bookvalues.month_price*bookvalues.duration*(bookvalues.capacity+1),savings:bookvalues.monthsavings*bookvalues.duration*(bookvalues.capacity+1)})
 
     }
 }
@@ -21,7 +21,7 @@ const handleclick2 = () => {
 
     if(bookvalues.capacity>1)
     {
-        setbookvalues({...bookvalues,capacity:bookvalues.capacity-1,price:bookvalues.month_price*bookvalues.duration*(bookvalues.capacity-1),savings:bookvalues.monthsavings*bookvalues.duration*(bookvalues.capacity-1)})
+        setbookvalues({...bookvalues,coupon:'',capacity:bookvalues.capacity-1,price:bookvalues.month_price*bookvalues.duration*(bookvalues.capacity-1),savings:bookvalues.monthsavings*bookvalues.duration*(bookvalues.capacity-1)})
     }
     
 }

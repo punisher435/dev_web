@@ -59,7 +59,8 @@ urlpatterns = [
     path('sourcenasdknahi29ad/',include('wishlist.urls_apartment_wishlist')),
 
     #coupons
-    #path('sourcesfnsjfn231/',include('coupons.urls_coupons')),
+    path('sourcesfnsjfn231/',include('coupons.urls_coupons')),
+    path('sourcesawdajwnr32w2/',include('coupons.urls_apply')),
 
     #bookings
     path('sourcehjbda983290whjba/',include('bookings.urls')),

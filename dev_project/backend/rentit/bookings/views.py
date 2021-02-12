@@ -248,6 +248,8 @@ class room_booking(viewsets.ViewSet):
                     price = x*data['duration']*data['capacity']
                     seller_pay = seller_pay*data['duration']*data['capacity']
 
+                    temp_coupon = 'None'
+
 
                     if data['coupon']!='none':
 
@@ -282,6 +284,7 @@ class room_booking(viewsets.ViewSet):
                                         data['savings'] = data['savings']+coupon.off
 
                                     coupon.used_by.add(request.user)
+                                    temp_coupon = coupon.coupoun_code
                                     coupon.save()
                 
                         except:
@@ -302,6 +305,8 @@ class room_booking(viewsets.ViewSet):
                         seller.total_due_payment = seller.total_due_payment+seller_pay
 
                         seller.save()
+
+                        
                             
                         list1 = [room.book1,room.book2,room.book3,room.book4,room.book5,room.book6,room.book7,room.book8,room.book9,room.book10]
 
@@ -309,11 +314,11 @@ class room_booking(viewsets.ViewSet):
 
                             end_date = book_date + relativedelta(months=+data['duration'])  
 
-                            booking = roomBookings(room_id=room,room_name=room.title,customer_id=request.user,seller_id=room.seller_id,
+                            booking = roomBookings(room_id=room,coupon=temp_coupon,room_name=room.title,customer_id=request.user,seller_id=room.seller_id,
                             booked_from=book_date,booked_till=end_date,capacity=data['capacity'],duration=data['duration'],first_name=data['firstname'],last_name=data['lastname'],mobile=data['mobile'],alternate_mobile=data['alternate_mobile'],
                             country_code=data['country_code'],wifi=data['wifi'],house_TV=data['house_TV'],room_TV=data['room_TV'],house_refridgerator=data['house_refridgerator'],room_refridgerator=data['room_refridgerator'],
                             purified_water=data['purified_water'],geyser=data['geyser'],AC=data['AC'],cooler=data['cooler'],breakfast=data['breakfast'],lunch=data['lunch'],dinner=data['dinner'],currency=room.currency,
-                            savings=data['savings'],seller_pay=seller_pay,cost=room.price,price_to_be_paid=price,discount=data['discount'],coupon=data['coupon'])
+                            savings=data['savings'],seller_pay=seller_pay,cost=room.price,price_to_be_paid=price,discount=data['discount'])
                             
                             booking.save()
 
@@ -344,11 +349,11 @@ class room_booking(viewsets.ViewSet):
                         elif room.booked_by>=room.capacity:
                             end_date = book_date + relativedelta(months=+data['duration']) 
 
-                            booking = roomBookings(room_id=room,room_name=room.title,customer_id=request.user,seller_id=room.seller_id,
+                            booking = roomBookings(room_id=room,coupon=temp_coupon,room_name=room.title,customer_id=request.user,seller_id=room.seller_id,
                             booked_from=book_date,booked_till=end_date,capacity=data['capacity'],duration=data['duration'],first_name=data['firstname'],last_name=data['lastname'],mobile=data['mobile'],alternate_mobile=data['alternate_mobile'],
                             country_code=data['country_code'],wifi=data['wifi'],house_TV=data['house_TV'],room_TV=data['room_TV'],house_refridgerator=data['house_refridgerator'],room_refridgerator=data['room_refridgerator'],
                             purified_water=data['purified_water'],geyser=data['geyser'],AC=data['AC'],cooler=data['cooler'],breakfast=data['breakfast'],lunch=data['lunch'],dinner=data['dinner'],currency=room.currency,
-                            savings=data['savings'],cost=room.price,seller_pay=seller_pay,price_to_be_paid=price,discount=data['discount'],coupon=data['coupon'])
+                            savings=data['savings'],cost=room.price,seller_pay=seller_pay,price_to_be_paid=price,discount=data['discount'])
                             
                             booking.save()
                             
@@ -376,11 +381,11 @@ class room_booking(viewsets.ViewSet):
                         else:
                             end_date = book_date + relativedelta(months=+data['duration']) 
 
-                            booking = roomBookings(room_id=room,room_name=room.title,customer_id=request.user,seller_id=room.seller_id,
+                            booking = roomBookings(room_id=room,coupon=temp_coupon,room_name=room.title,customer_id=request.user,seller_id=room.seller_id,
                             booked_from=book_date,booked_till=end_date,capacity=data['capacity'],duration=data['duration'],first_name=data['firstname'],last_name=data['lastname'],mobile=data['mobile'],alternate_mobile=data['alternate_mobile'],
                             country_code=data['country_code'],wifi=data['wifi'],house_TV=data['house_TV'],room_TV=data['room_TV'],house_refridgerator=data['house_refridgerator'],room_refridgerator=data['room_refridgerator'],
                             purified_water=data['purified_water'],geyser=data['geyser'],AC=data['AC'],cooler=data['cooler'],breakfast=data['breakfast'],lunch=data['lunch'],dinner=data['dinner'],currency=room.currency,
-                            savings=data['savings'],cost=room.price,seller_pay=seller_pay,price_to_be_paid=price,discount=data['discount'],coupon=data['coupon'])
+                            savings=data['savings'],cost=room.price,seller_pay=seller_pay,price_to_be_paid=price,discount=data['discount'])
                             
                             booking.save()
                             
@@ -640,6 +645,8 @@ class room_booking(viewsets.ViewSet):
 
                     price = x*data['duration']*data['capacity']
 
+                    temp_coupon = 'None'
+
 
                     if data['coupon']!='none':
 
@@ -660,16 +667,16 @@ class room_booking(viewsets.ViewSet):
                                         
                                         price = price - temp;
 
-                                        data['savings'] = data['savings']+temp
-                                        data['discount'] = data['discount']+coupon.off
+                                        
 
                                     if coupon.coupon_type=='off_price':
                                     
                                         price = price - coupon.off;
 
-                                        data['savings'] = data['savings']+coupon.off
+                                        
 
                                     coupon.used_by.add(request.user)
+                                    temp_coupon = coupon.coupoun_code
                                     coupon.save()
                 
                         except:
@@ -686,6 +693,8 @@ class room_booking(viewsets.ViewSet):
                         end_date = book_date + relativedelta(months=+data['duration'])  
 
                         booking.booked_till = end_date
+
+                        booking.coupon = temp_coupon
 
                         booking.save()
 

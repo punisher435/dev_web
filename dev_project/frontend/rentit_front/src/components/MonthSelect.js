@@ -38,9 +38,9 @@ export default function ControlledOpenSelect({bookvalues,setbookvalues}) {
     console.log(event.target.value)
     if(event.target.value=='')
     {
-      setbookvalues({...bookvalues,duration:'',price:bookvalues.month_price});
+      setbookvalues({...bookvalues,duration:'',coupon:'',price:bookvalues.month_price});
     }
-    else{setbookvalues({...bookvalues,duration:event.target.value,price:bookvalues.month_price*bookvalues.capacity*event.target.value,savings:bookvalues.monthsavings*event.target.value*bookvalues.capacity});}
+    else{setbookvalues({...bookvalues,coupon:'',duration:event.target.value,price:bookvalues.month_price*bookvalues.capacity*event.target.value,savings:bookvalues.monthsavings*event.target.value*bookvalues.capacity});}
     console.log(bookvalues)
   };
 

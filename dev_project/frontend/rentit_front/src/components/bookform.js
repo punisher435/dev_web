@@ -223,6 +223,7 @@ function Checkout(props) {
   const handleNext = () => {
     if(bookdetails.firstname==='' || bookdetails.lastname==='' || bookdetails.mobile.length <10 || bookdetails.country_code==='')
     {
+     
        setvalidationerror(true);
     }
     else{
@@ -264,6 +265,7 @@ function Checkout(props) {
           bookfunc();
       }
       else{
+        console.log(bookdetails)
         setActiveStep(activeStep + 1);
         setvalidationerror(false);
       }

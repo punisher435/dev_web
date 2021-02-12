@@ -21,7 +21,6 @@ class coupons(models.Model):
     coupoun_apartments=models.ManyToManyField(apartments,blank=True)
 
     date_created=models.DateTimeField(auto_now_add=True)
-    life=models.IntegerField(default=2)
     valid_from = models.DateField()
     expiry_date=models.DateField()
 
