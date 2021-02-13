@@ -153,10 +153,10 @@ function Dashboarddrawer(props) {
           </ListItem> : null
         }
 
-        <ListItem button key="My Profile">
+        <Link to='/dashboard/profile' style={{textDecoration:'none',color:'black'}}><ListItem button key="My Profile">
             <ListItemIcon><PersonOutlinedIcon /></ListItemIcon>
             <ListItemText primary="My Profile" />
-        </ListItem>
+        </ListItem></Link>
 
         {
           seller ? <ListItem button key="Bank details">

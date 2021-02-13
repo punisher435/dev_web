@@ -24,6 +24,8 @@ import RecentBooking1 from './components/recentbookings'
 import Bookingdetails from './containers/bookingdetails'
 import Bookingcancel from './components/cancellation'
 import Bookingextend from './components/extendbooking'
+import Myprofile from './components/myprofile';
+import ProfileForm from './/components/profile_form'
 
 
 
@@ -51,6 +53,8 @@ function App(props) {
                 <Route exact path='/recentBooking' component={RecentBooking}/>
                 
                 <Route exact path='/Sform' component={Sforms}/>
+                <Route exact path='/dashboard/profile' component={Myprofile}/>
+                <Route exact path='/dashboard/profile/edit' component={ProfileForm}/>
 
                 <Route exact path='/dashboard' component={Dashboard}/>
                 <Route exact path='/dashboard/recentbookings' component={RecentBooking1}/>

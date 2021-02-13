@@ -22,6 +22,7 @@
     "bootstrap": "^4.5.3",
     "cors": "^2.8.5",
     "date-fns": "^2.16.1",
+    "formik": "^2.2.6",
     "google-maps-react": "^2.0.6",
     "jquery": "^3.5.1",
     "react": "^17.0.1",
@@ -45,7 +46,8 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
     "use-places-autocomplete": "^1.7.1",
-    "web-vitals": "^0.2.4"
+    "web-vitals": "^0.2.4",
+    "yup": "^0.32.8"
   },
   "scripts": {
     "start": "react-scripts start",
