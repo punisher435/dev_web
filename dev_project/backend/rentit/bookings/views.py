@@ -436,6 +436,7 @@ class room_booking(viewsets.ViewSet):
             queryset = roomBookings.objects.all()
             queryset = queryset.filter(customer_id = request.user)
             queryset = queryset.filter(extended=False)
+            queryset = queryset.filter(ended=False)
             booking = get_object_or_404(queryset,pk=pk)
 
             booking.cancelled=True
@@ -573,6 +574,8 @@ class room_booking(viewsets.ViewSet):
             queryset = roomBookings.objects.all()
             queryset = queryset.filter(customer_id=request.user)
             queryset = queryset.filter(extended=False)
+            queryset = queryset.filter(ended=False)
+            queryset = queryset.filter(cancelled=False)
             booking = get_object_or_404(queryset,pk=pk)
             data['roomid'] = booking.room_id.room_id
 

@@ -161,13 +161,13 @@ function Bookingdetails(props) {
             </Grid>
             <button onClick={() => {setinvoice(true);}}>Generate pdf</button>
             {
-                mybooking.extended || props.profile.is_seller || mybooking.cancelled ? null : <Button variant="contained" color="secondary" onClick={(e) => {handleclick1(e);}}>
+                mybooking.ended || mybooking.extended || props.profile.is_seller || mybooking.cancelled ? null : <Button variant="contained" color="secondary" onClick={(e) => {handleclick1(e);}}>
                 Cancel booking
               </Button>
             }
 
             {
-                mybooking.extended || props.profile.is_seller || mybooking.cancelled ? null : <Button variant="contained" color="secondary" onClick={(e) => {handleclick2(e);}}>
+                mybooking.ended || mybooking.extended || props.profile.is_seller || mybooking.cancelled ? null : <Button variant="contained" color="secondary" onClick={(e) => {handleclick2(e);}}>
                 Extend booking
               </Button>
             }
