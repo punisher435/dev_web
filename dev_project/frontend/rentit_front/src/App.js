@@ -23,6 +23,7 @@ import Dashboard from './components/dashboard'
 import RecentBooking1 from './components/recentbookings'
 import Bookingdetails from './containers/bookingdetails'
 import Bookingcancel from './components/cancellation'
+import Bookingextend from './components/extendbooking'
 
 
 
@@ -55,6 +56,7 @@ function App(props) {
                 <Route exact path='/dashboard/recentbookings' component={RecentBooking1}/>
                 <Route exact path='/dashboard/recentbookings/:bookingid' component={Bookingdetails}/>
                 <Route exact path='/dashboard/recentbookings/cancel/:bookingid' component={Bookingcancel}/>
+                <Route exact path='/dashboard/recentbookings/extend/:bookingid' component={Bookingextend}/>
               </div>
               </>
             </Switch>

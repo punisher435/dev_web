@@ -110,6 +110,7 @@ export default function Item({post,bookvalues,setbookvalues}) {
             bookvalues.month_price=bookvalues.month_price + post.cost_TV;
         }
         setbookvalues({...bookvalues,house_TV:!bookvalues.house_TV})
+     
       };
       const handleChange2 = (event) => {
         var w = bookvalues.capacity

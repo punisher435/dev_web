@@ -17,6 +17,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
 import {Redirect} from 'react-router-dom'
+import {connect} from 'react-redux'
 
 
 
@@ -168,7 +169,7 @@ function Bookingcancel(props) {
         return <Redirect to='/dashboard/recentbookings'/>;
     }
 
-    if(mybooking){
+    if(mybooking && props.profile){
     
     
     return (
@@ -243,7 +244,7 @@ function Bookingcancel(props) {
 
 
             {
-                mybooking.cancelled ? null : <Button variant="contained" color="secondary" onClick={(e) => {handleclick1(e);}}>
+                mybooking.extended || props.profile.is_seller===true || mybooking.cancelled ? null : <Button variant="contained" color="secondary" onClick={(e) => {handleclick1(e);}}>
                 Cancel booking
               </Button>
             }
@@ -266,4 +267,9 @@ function Bookingcancel(props) {
     }
 }
 
-export default Bookingcancel
+const mapStateToProps = state => ({
+  isAuthenticated: state.authreducers.isAuthenticated,
+  profile : state.authreducers.user
+});
+
+export default connect(mapStateToProps)(Bookingcancel);

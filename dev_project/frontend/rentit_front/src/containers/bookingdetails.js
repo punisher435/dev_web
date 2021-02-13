@@ -11,6 +11,7 @@ import Button from '@material-ui/core/Button';
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import {Redirect} from 'react-router-dom'
+import {connect} from 'react-redux'
 
 const ref = React.createRef();
 
@@ -66,6 +67,8 @@ function Bookingdetails(props) {
   const [invoice,setinvoice] = useState(false)
     const bookingid = props.match.params.bookingid;
     const [error,seterror] = useState(false);
+    const [extend,setextend] = useState(false);
+
 
     const [mybooking,setmybooking]= useState()
     const [cancelled,setcancelled]= useState(false)
@@ -87,6 +90,7 @@ function Bookingdetails(props) {
                 catch{
                   seterror(true);
                 }
+
         }
     
     ,[])
@@ -96,6 +100,11 @@ function Bookingdetails(props) {
 
     const handleclick1 = async (e) => {
       setcancelled(true);
+      
+
+    }
+    const handleclick2 = async (e) => {
+      setextend(true);
       
 
     }
@@ -112,7 +121,10 @@ function Bookingdetails(props) {
     if(cancelled===true){
       return <Redirect to={`/dashboard/recentbookings/cancel/${bookingid}`}/>
     }
-    if(mybooking){
+    if(extend===true){
+      return <Redirect to={`/dashboard/recentbookings/extend/${bookingid}`}/>
+    }
+    if(mybooking && props.profile){
     
     
     return (
@@ -149,8 +161,14 @@ function Bookingdetails(props) {
             </Grid>
             <button onClick={() => {setinvoice(true);}}>Generate pdf</button>
             {
-                mybooking.cancelled ? null : <Button variant="contained" color="secondary" onClick={(e) => {handleclick1(e);}}>
+                mybooking.extended || props.profile.is_seller || mybooking.cancelled ? null : <Button variant="contained" color="secondary" onClick={(e) => {handleclick1(e);}}>
                 Cancel booking
+              </Button>
+            }
+
+            {
+                mybooking.extended || props.profile.is_seller || mybooking.cancelled ? null : <Button variant="contained" color="secondary" onClick={(e) => {handleclick2(e);}}>
+                Extend booking
               </Button>
             }
 
@@ -307,21 +325,51 @@ function Bookingdetails(props) {
 
               <br />
 
-              <Grid item >
-              <h6 className={classes.textclass}>Payment received :-  </h6>
-              <h6 className={classes.textclass}>   {mybooking.seller_pay} </h6>
-              </Grid>
+              {
+                props.profile.is_seller==false ? <Grid item >
+                <h6 className={classes.textclass}>Payment received :-  </h6>
+                <h6 className={classes.textclass}>   {mybooking.seller_pay} </h6>
+                </Grid> : null
+              }
+              {
+                props.profile.is_seller==false ? <Grid item >
+                <h6 className={classes.textclass}>Payment paid :-  </h6>
+                <h6 className={classes.textclass}>   {mybooking.price_to_be_paid} </h6>
+                </Grid> : null
+              }
 
 
               <Grid item >
               <h6 className={classes.textclass}>Cancelled :-  </h6>
               <h6 className={classes.textclass}>   {mybooking.cancelled ? 'Yes' : 'No'} </h6>
               </Grid>
+              <Grid item >
+              <h6 className={classes.textclass}>Extended booking:-  </h6>
+              <h6 className={classes.textclass}>   {mybooking.is_extended ? 'Yes' : 'No'} </h6>
+              </Grid>
+
+              {
+                mybooking.is_extended==true ? <Grid item >
+                <h6 className={classes.textclass}>Extended upon:-  </h6>
+                <h6 className={classes.textclass}>   {mybooking.extended_on} </h6>
+                </Grid> : null
+              }
+
+              <Grid item >
+              <h6 className={classes.textclass}>Extended :-  </h6>
+              <h6 className={classes.textclass}>   {mybooking.extended ? 'Yes' : 'No'} </h6>
+              </Grid>
 
               {
                 mybooking.cancelled ? <Grid item >
                 <h6 className={classes.textclass}>Cancellation Date:-  </h6>
                 <h6 className={classes.textclass}>   {mybooking.cancelled_date.slice(0,10)}</h6>
+                </Grid> : null
+              }
+              {
+                props.profile.is_seller==false && mybooking.cancelled ? <Grid item >
+                <h6 className={classes.textclass}>Refund amount:-  </h6>
+                <h6 className={classes.textclass}>   {mybooking.refund_amount}</h6>
                 </Grid> : null
               }
               {
@@ -367,4 +415,10 @@ function Bookingdetails(props) {
     }
 }
 
-export default Bookingdetails
+const mapStateToProps = state => ({
+  isAuthenticated: state.authreducers.isAuthenticated,
+  profile : state.authreducers.user
+});
+
+export default connect(mapStateToProps)(Bookingdetails);
+

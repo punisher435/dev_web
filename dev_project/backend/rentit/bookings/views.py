@@ -208,6 +208,7 @@ class room_booking(viewsets.ViewSet):
                     x = room.final_price
                     seller_pay = room.seller_price
                     x = x + room.cost_electricity + room.cost_water
+                    seller_pay = seller_pay + room.cost_electricity + room.cost_water
                     if data['wifi']:
                         x=x+room.cost_wifi
                         seller_pay=seller_pay+room.cost_wifi
@@ -434,12 +435,21 @@ class room_booking(viewsets.ViewSet):
 
             queryset = roomBookings.objects.all()
             queryset = queryset.filter(customer_id = request.user)
+            queryset = queryset.filter(extended=False)
             booking = get_object_or_404(queryset,pk=pk)
 
             booking.cancelled=True
 
             room = get_object_or_404(rooms.objects.all(),pk=booking.room_id.room_id)
 
+            if booking.is_extended==True:
+
+                old_booking = get_object_or_404(roomBookings.objects.all(),pk=booking.extended_on.booking_id)
+                old_booking.extended = False
+                old_booking.save()
+
+
+            print('new')
             
 
             refund_price = 0
@@ -474,6 +484,7 @@ class room_booking(viewsets.ViewSet):
             queryset = queryset.filter(room_id = room)
             queryset = queryset.filter(ended = False)
             queryset = queryset.filter(cancelled = False)
+            queryset = queryset.filter(extended=False)
 
             list1=[]
 
@@ -506,21 +517,24 @@ class room_booking(viewsets.ViewSet):
                 room.book10=list1[9]
 
             elif temp>=room.capacity:
-                list1.sort(reverse=True)
+                list1.sort()
+                while temp<=10:
+                    list1.append(None)
+                    temp=temp+1
                 room.booked_by=room.capacity
-                room.bookedtill=list1[9]
+                room.bookedtill=list1[0]
                 room.booked=True
 
-                room.book1=list1[9]
-                room.book2=list1[8]
-                room.book3=list1[7]
-                room.book4=list1[6]
-                room.book5=list1[5]
-                room.book6=list1[4]
-                room.book7=list1[3]
-                room.book8=list1[2]
-                room.book9=list1[1]
-                room.book10=list1[0]
+                room.book1=list1[0]
+                room.book2=list1[1]
+                room.book3=list1[2]
+                room.book4=list1[3]
+                room.book5=list1[4]
+                room.book6=list1[5]
+                room.book7=list1[6]
+                room.book8=list1[7]
+                room.book9=list1[8]
+                room.book10=list1[9]
 
             room.save()
 
@@ -536,6 +550,7 @@ class room_booking(viewsets.ViewSet):
             data = json.loads(request.body.decode('utf-8'))['data']
             queryset = roomBookings.objects.all()
             queryset = queryset.filter(customer_id=request.user)
+            queryset = queryset.filter(extended=False)
             booking = get_object_or_404(queryset,pk=pk)
             data['roomid'] = booking.room_id.room_id
 
@@ -545,27 +560,7 @@ class room_booking(viewsets.ViewSet):
             data['country_code'] = booking.country_code 
             data['alternate_mobile'] = booking.alternate_mobile 
 
-            data['wifi']=booking.wifi
-        
-            data['house_TV']=booking.house_TV
-
-            data['room_TV']=booking.room_TV
-                
-            data['house_refridgerator']=booking.house_refridgerator
-            
-            data['room_refridgerator']=booking.room_refridgerator
-            data['purified_water']=booking.purified_water
-                
-            data['geyser']=booking.geyser
-                
-            data['AC']=booking.AC
-
-            data['cooler']=booking.cooler
-                
-            data['lunch']=booking.lunch
-            
-            data['breakfast']=booking.breakfast
-            data['dinner']=booking.dinner
+           
                 
 
             data['capacity'] = booking.capacity 
@@ -617,33 +612,48 @@ class room_booking(viewsets.ViewSet):
                     print('success')
 
                     x = room.final_price
+                    seller_pay = room.seller_price
                     x = x + room.cost_electricity + room.cost_water
+                    seller_pay = seller_pay + room.cost_electricity + room.cost_water
                     if data['wifi']:
                         x=x+room.cost_wifi
+                        seller_pay=seller_pay+room.cost_wifi
                     if data['house_TV']:
                         x=x+room.cost_TV
+                        seller_pay=seller_pay+room.cost_TV
                     if data['room_TV']:
                         x=x+room.cost_roomTV
+                        seller_pay=seller_pay+room.cost_roomTV
                     if data['house_refridgerator']:
                         x=x+room.cost_refridgerator
+                        seller_pay=seller_pay+room.cost_refridgerator
                     if data['room_refridgerator']:
                         x=x+room.cost_roomrefridgerator
+                        seller_pay=seller_pay+room.cost_roomrefridgerator
                     if data['purified_water']:
                         x=x+room.cost_purified_water
+                        seller_pay=seller_pay+room.cost_purified_water
                     if data['geyser']:
                         x=x+room.cost_geyser
+                        seller_pay=seller_pay+room.cost_geyser
                     if data['AC']:
                         x=x+room.cost_AC
+                        seller_pay=seller_pay+room.cost_AC
                     if data['cooler']:
                         x=x+room.cost_cooler
+                        seller_pay=seller_pay+room.cost_cooler
                     if data['lunch']:
                         x=x+room.cost_lunch
+                        seller_pay=seller_pay+room.cost_lunch
                     if data['breakfast']:
                         x=x+room.cost_breakfast
+                        seller_pay=seller_pay+room.cost_breakfast
                     if data['dinner']:
                         x=x+room.cost_dinner
+                        seller_pay=seller_pay+room.cost_dinner
 
                     price = x*data['duration']*data['capacity']
+                    seller_pay = seller_pay*data['duration']*data['capacity']
 
                     temp_coupon = 'None'
 
@@ -666,37 +676,58 @@ class room_booking(viewsets.ViewSet):
                                                 temp=coupon.max_off_price
                                         
                                         price = price - temp;
+                                        if coupon.admin_coupon == False:
+                                            seller_pay = seller_pay - temp;
 
-                                        
+                                        data['savings'] = data['savings']+temp
+                                        data['discount'] = data['discount']+coupon.off
 
                                     if coupon.coupon_type=='off_price':
                                     
                                         price = price - coupon.off;
+                                        if coupon.admin_coupon == False:
+                                            seller_pay = seller_pay - coupon.off;
 
-                                        
+                                        data['savings'] = data['savings']+coupon.off
 
                                     coupon.used_by.add(request.user)
                                     temp_coupon = coupon.coupoun_code
                                     coupon.save()
                 
                         except:
+                            print('hy')
                             return Response('Coupon not applicable',status=status.HTTP_400_BAD_REQUEST)
 
                         
                     x = payment()
 
                     if x == 'payment successful':
+                        print('payment')
                             
                         list1 = [room.book1,room.book2,room.book3,room.book4,room.book5,room.book6,room.book7,room.book8,room.book9,room.book10]
 
 
                         end_date = book_date + relativedelta(months=+data['duration'])  
 
-                        booking.booked_till = end_date
+                        booking_new = roomBookings(room_id=room,extended_on=booking,is_extended=True,coupon=temp_coupon,room_name=room.title,customer_id=request.user,seller_id=room.seller_id,
+                            booked_from=book_date,booked_till=end_date,capacity=data['capacity'],duration=data['duration'],first_name=data['firstname'],last_name=data['lastname'],mobile=data['mobile'],alternate_mobile=data['alternate_mobile'],
+                            country_code=data['country_code'],wifi=data['wifi'],house_TV=data['house_TV'],room_TV=data['room_TV'],house_refridgerator=data['house_refridgerator'],room_refridgerator=data['room_refridgerator'],
+                            purified_water=data['purified_water'],geyser=data['geyser'],AC=data['AC'],cooler=data['cooler'],breakfast=data['breakfast'],lunch=data['lunch'],dinner=data['dinner'],currency=room.currency,
+                            savings=data['savings'],cost=room.price,seller_pay=seller_pay,price_to_be_paid=price,discount=data['discount'])
 
-                        booking.coupon = temp_coupon
+                        booking_new.save()                            
+
+                        booking.extended = True
 
                         booking.save()
+
+                        seller = get_object_or_404(seller_bank_details.objects.all(),pk=room.seller_id)
+
+                        seller_pay = seller_pay - (seller_pay*seller.commission/100)
+
+                        seller.total_due_payment = seller.total_due_payment+seller_pay
+
+                        seller.save()
 
                         subject = 'Booking Extended'
                         message = 'Booking has been successfull extended.'
@@ -706,8 +737,10 @@ class room_booking(viewsets.ViewSet):
                         queryset = queryset.filter(room_id = room)
                         queryset = queryset.filter(ended = False)
                         queryset = queryset.filter(cancelled = False)
+                        queryset = queryset.filter(extended = False)
 
                         list1=[]
+
                         for data1 in queryset:
                             a=0
                             while a<data1.capacity:
@@ -737,23 +770,27 @@ class room_booking(viewsets.ViewSet):
                             room.book10=list1[9]
 
                         elif temp>=room.capacity:
-                            list1.sort(reverse=True)
+                            list1.sort()
+                            while temp<=10:
+                                list1.append(None)
+                                temp=temp+1
                             room.booked_by=room.capacity
-                            room.bookedtill=list1[9]
+                            room.bookedtill=list1[0]
                             room.booked=True
 
-                            room.book1=list1[9]
-                            room.book2=list1[8]
-                            room.book3=list1[7]
-                            room.book4=list1[6]
-                            room.book5=list1[5]
-                            room.book6=list1[4]
-                            room.book7=list1[3]
-                            room.book8=list1[2]
-                            room.book9=list1[1]
-                            room.book10=list1[0]
+                            room.book1=list1[0]
+                            room.book2=list1[1]
+                            room.book3=list1[2]
+                            room.book4=list1[3]
+                            room.book5=list1[4]
+                            room.book6=list1[5]
+                            room.book7=list1[6]
+                            room.book8=list1[7]
+                            room.book9=list1[8]
+                            room.book10=list1[9]
 
                         room.save()
+
 
 
                         return Response('Success',status=status.HTTP_202_ACCEPTED)

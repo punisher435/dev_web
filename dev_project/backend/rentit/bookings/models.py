@@ -69,6 +69,10 @@ class roomBookings(models.Model):
     cancellation_reason = models.TextField(null=True,blank=True)
     feedback = models.TextField(null=True,blank=True)
 
+    extended = models.BooleanField(default=False)
+    is_extended = models.BooleanField(default=False)
+    extended_on = models.ForeignKey('self',null=True,blank=True,on_delete=models.PROTECT)
+
     refunded=models.BooleanField(default=False)
     refund_amount=models.IntegerField(default=0)
     paylater=models.BooleanField(default=False)

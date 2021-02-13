@@ -20,6 +20,7 @@ import Capacityselect from './capacityselect'
 import axios from 'axios'
 import Snackbar from '@material-ui/core/Snackbar';
 import SuccessSnackbars from './success_snackbar'
+import ErrorSnackbars from './error_snackbar'
 
 import { connect } from 'react-redux'
 
@@ -35,6 +36,7 @@ function BoolCard({details,isAuthenticated,loginpage,setloginpage,profile}) {
   const classes = useStyles();
   const [no,setno] = React.useState(0)
   const [openme,setopenme] = React.useState(false)
+  const [openme1,setopenme1] = React.useState(false)
   const [bookvalues,setbookvalues] = React.useState({
     price:'',
     date:'',
@@ -249,7 +251,7 @@ setcapacity(x);
           
           }
           catch{
-              console.log('error')
+            setopenme1(true)
           }
       }
   }
@@ -264,6 +266,7 @@ setcapacity(x);
   return (
       <div>
       <SuccessSnackbars openme={openme} setopenme={setopenme} message={'Coupon applied successfully!'}/>
+      <ErrorSnackbars openme={openme1} setopenme={setopenme1} message={'Coupon not applicable!'}/>
     <Card elevation={4}>
         {
             isAuthenticated ? null : <Grid container alignItems='center' justify='space-around'  style={{ backgroundColor: '#cfe8fc'}}>

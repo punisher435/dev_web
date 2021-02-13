@@ -40,6 +40,7 @@ def book_end():
             queryset = queryset.filter(room_id = room)
             queryset = queryset.filter(ended = False)
             queryset = queryset.filter(cancelled = False)
+            queryset = queryset.filter(extended = False)
 
             list1=[]
             for data1 in queryset:
@@ -70,21 +71,24 @@ def book_end():
                 room.book10=list1[9]
 
             elif temp>=room.capacity:
-                list1.sort(reverse=True)
+                list1.sort()
+                while temp<=10:
+                    list1.append(None)
+                    temp=temp+1
                 room.booked_by=room.capacity
-                room.bookedtill=list1[9]
+                room.bookedtill=list1[0]
                 room.booked=True
 
-                room.book1=list1[9]
-                room.book2=list1[8]
-                room.book3=list1[7]
-                room.book4=list1[6]
-                room.book5=list1[5]
-                room.book6=list1[4]
-                room.book7=list1[3]
-                room.book8=list1[2]
-                room.book9=list1[1]
-                room.book10=list1[0]
+                room.book1=list1[0]
+                room.book2=list1[1]
+                room.book3=list1[2]
+                room.book4=list1[3]
+                room.book5=list1[4]
+                room.book6=list1[5]
+                room.book7=list1[6]
+                room.book8=list1[7]
+                room.book9=list1[8]
+                room.book10=list1[9]
 
             room.save()
         
