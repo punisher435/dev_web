@@ -18,71 +18,72 @@ const useStyles = makeStyles({
   },
 });
 
-export default function ProfileCard({myprofile,info}) {
+export default function RoomCard({myroom}) {
   const classes = useStyles();
 
   
 
-  if(myprofile)
+  if(myroom)
   return (
+      <div>
     <Card className={classes.root}>
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image={myprofile.photo}
+          image={myroom.photo1}
           title="Photo"
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            {info.first_name} {info.last_name}
+            
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            {info.email}
+            
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            {myprofile.country_code} {myprofile.mobile}
+        
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            {myprofile.country_code} {myprofile.alternate_mobile}
+          
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Aadhar  {myprofile.aadhar}
+        
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+        
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
         
-        <Link to='/dashboard/profile/edit' style={{textDecoration:'none'}}><Button size="small" color="primary">
+        <Link to='/dashboard/bank_details/edit' style={{textDecoration:'none'}}><Button size="small" color="primary">
           Edit
         </Button></Link>
       </CardActions>
     </Card>
-  );
-  else{
-    return (
-      <div>
-        <Card className={classes.root}>
-      <CardActionArea>
-        <CardMedia
-          className={classes.media}
-          image="/account-icon-8.png"
-          title="Photo"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            Unknown
-          </Typography>
-          
-        </CardContent>
-      </CardActionArea>
-      <CardActions>
+    <br />
+    <Card className={classes.root}>
+    <CardActionArea>
+      <CardMedia
+        className={classes.media}
+        image="/bank.jpg"
+        title="Photo"
+      />
+      <CardContent>
+        <Typography gutterBottom variant="h5" component="h2">
+          Unknown
+        </Typography>
         
-        <Link to='/dashboard/profile/edit' style={{textDecoration:'none'}}><Button size="small" color="primary">
-          Add +
-        </Button></Link>
-      </CardActions>
-    </Card>
-      </div>
-    );
-  }
+      </CardContent>
+    </CardActionArea>
+    <CardActions>
+      
+      <Link to='/dashboard/bank_details/edit' style={{textDecoration:'none'}}><Button size="small" color="primary">
+        Add
+      </Button></Link>
+    </CardActions>
+  </Card>
+  </div>
+  );
+ 
 }

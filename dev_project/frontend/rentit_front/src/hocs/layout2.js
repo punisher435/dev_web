@@ -135,10 +135,10 @@ function Dashboarddrawer(props) {
         </ListItem></Link>
 
         {
-          seller ? <ListItem button key="My Rooms">
+          seller ? <Link to='/dashboard/my_rooms' style={{textDecoration:'none',color:'black'}}><ListItem button key="My Rooms">
           <ListItemIcon><MeetingRoomOutlinedIcon /></ListItemIcon>
           <ListItemText primary="My Rooms" />
-          </ListItem> : null
+          </ListItem></Link> : null
         }
         {
           seller ? <ListItem button key="My Shops">
@@ -158,19 +158,9 @@ function Dashboarddrawer(props) {
             <ListItemText primary="My Profile" />
         </ListItem></Link>
 
-        {
-          seller ? <ListItem button key="Bank details">
-          <ListItemIcon><AccountBalanceOutlinedIcon /></ListItemIcon>
-          <ListItemText primary="Bank details" />
-          </ListItem> : null
-        }
+        
 
-        {
-          seller ? <ListItem button key="Address details">
-          <ListItemIcon><LocationOnOutlinedIcon /></ListItemIcon>
-          <ListItemText primary="Address details" />
-          </ListItem> : null
-        }
+       
         
       </List>
       <Divider />

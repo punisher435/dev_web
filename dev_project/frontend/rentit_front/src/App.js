@@ -26,6 +26,9 @@ import Bookingcancel from './components/cancellation'
 import Bookingextend from './components/extendbooking'
 import Myprofile from './components/myprofile';
 import ProfileForm from './/components/profile_form'
+import BankForm from './/components/bank_form'
+import AddressForm from './/components/address_profile'
+import Myrooms from './components/myrooms'
 
 
 
@@ -51,16 +54,21 @@ function App(props) {
                 <Route exact path='/wishlist' component={SimpleTabs}/>
                 <Route exact path='/rooms/:roomid/book/' component={Checkout} />
                 <Route exact path='/recentBooking' component={RecentBooking}/>
+
+                <Route exact path='/dashboard/my_rooms' component={Myrooms}/>
                 
                 <Route exact path='/Sform' component={Sforms}/>
                 <Route exact path='/dashboard/profile' component={Myprofile}/>
                 <Route exact path='/dashboard/profile/edit' component={ProfileForm}/>
+                <Route exact path='/dashboard/bank_details/edit' component={BankForm}/>
+                <Route exact path='/dashboard/address_details/edit' component={AddressForm}/>
 
                 <Route exact path='/dashboard' component={Dashboard}/>
                 <Route exact path='/dashboard/recentbookings' component={RecentBooking1}/>
                 <Route exact path='/dashboard/recentbookings/:bookingid' component={Bookingdetails}/>
                 <Route exact path='/dashboard/recentbookings/cancel/:bookingid' component={Bookingcancel}/>
                 <Route exact path='/dashboard/recentbookings/extend/:bookingid' component={Bookingextend}/>
+
               </div>
               </>
             </Switch>

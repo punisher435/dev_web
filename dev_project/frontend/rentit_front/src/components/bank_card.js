@@ -18,41 +18,44 @@ const useStyles = makeStyles({
   },
 });
 
-export default function ProfileCard({myprofile,info}) {
+export default function BankCard({bank,info}) {
   const classes = useStyles();
 
   
 
-  if(myprofile)
+  if(bank)
   return (
     <Card className={classes.root}>
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image={myprofile.photo}
+          image="/bank.jpg"
           title="Photo"
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            {info.first_name} {info.last_name}
+            {bank.account_no}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            {info.email}
+            {bank.bank_name}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            {myprofile.country_code} {myprofile.mobile}
+            {bank.bank_address}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            {myprofile.country_code} {myprofile.alternate_mobile}
+          {bank.IFSC_code}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Aadhar  {myprofile.aadhar}
+          {bank.account_type}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+          {bank.currency}
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
         
-        <Link to='/dashboard/profile/edit' style={{textDecoration:'none'}}><Button size="small" color="primary">
+        <Link to='/dashboard/bank_details/edit' style={{textDecoration:'none'}}><Button size="small" color="primary">
           Edit
         </Button></Link>
       </CardActions>
@@ -61,11 +64,11 @@ export default function ProfileCard({myprofile,info}) {
   else{
     return (
       <div>
-        <Card className={classes.root}>
+       <Card className={classes.root}>
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image="/account-icon-8.png"
+          image="/bank.jpg"
           title="Photo"
         />
         <CardContent>
@@ -77,8 +80,8 @@ export default function ProfileCard({myprofile,info}) {
       </CardActionArea>
       <CardActions>
         
-        <Link to='/dashboard/profile/edit' style={{textDecoration:'none'}}><Button size="small" color="primary">
-          Add +
+        <Link to='/dashboard/bank_details/edit' style={{textDecoration:'none'}}><Button size="small" color="primary">
+          Add
         </Button></Link>
       </CardActions>
     </Card>

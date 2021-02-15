@@ -22,6 +22,7 @@ import {connect} from 'react-redux'
 import ProfileCard from './profilecard'
 import BankCard from './bank_card'
 import AddressCard from './address_card'
+import RoomCard from './room_card'
 
 
 
@@ -81,12 +82,10 @@ const useStyles = makeStyles((theme) => ({
 }));
   
 
-function Myprofile(props) {
+function Myrooms(props) {
 
     const [error,seterror] = useState(false)
-    const [myprofile,setprofile] = useState()
-    const [bank,setbank] = useState(false)
-    const [address,setaddress] = useState(false)
+    const [myrooms,setrooms] = useState()
    
 
     React.useEffect(
@@ -98,42 +97,23 @@ function Myprofile(props) {
                 },
               };
               
-              if(props.profile)
+              if(props.isAuthenticated)
               {
-                try{const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcezxradakgdlh/profile/${props.profile.id}/`,config);
+                try{const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcewdsfdaegds/my_rooms/`,config);
               
-                setprofile(res.data)
+                setrooms(res.data)
                 console.log(res.data)
               
               }
                 catch{
       
                 }
-                if(props.profile.is_seller===true){
-                try{const res1 = await axios.get(`${process.env.REACT_APP_API_URL}/sourceadbahdvjs218/my_bank_details/${props.profile.id}/`,config);
-              
-                setbank(res1.data)
-                console.log(res1.data)
-              
-              }
-                catch{
-      
-                }
-                try{const res2 = await axios.get(`${process.env.REACT_APP_API_URL}/sourcejkzff8wqhdq92/my_address/${props.profile.id}/`,config);
-              
-                setaddress(res2.data)
-                console.log(res2.data)
-              
-              }
-                catch{
-      
-                }
-              }
+                
               
         }
     }
     
-    ,[props.profile])
+    ,[props.isAuthenticated])
 
 
     const classes = useStyles();
@@ -145,7 +125,7 @@ function Myprofile(props) {
       return <div className={classes.erorclass}><Eror error='Error' /></div>
     }
 
-    if(props.profile){
+    if(props.isAuthenticated && myrooms){
     
     
     return (
@@ -154,18 +134,16 @@ function Myprofile(props) {
             <main className={classes.content}>
             <div className={classes.toolbar} />
 
-            <h2>My profile</h2>
-            
-            <ProfileCard myprofile={myprofile} info={props.profile}/>
-            <br />
+            <h2>My rooms</h2>
+
             {
-              props.profile.is_seller===true ? <BankCard bank={bank} info={props.profile}/> : null
+                myrooms.map(room =>
+                    {
+                        return <div><RoomCard myroom={room} /></div>;
+                    })
             }
-            <br />
             
-            {
-              props.profile.is_seller===true ? <AddressCard address={address} info={props.profile}/> : null
-            }
+            
 
             
             </main>
@@ -182,4 +160,4 @@ const mapStateToProps = state => ({
   profile : state.authreducers.user
 });
 
-export default connect(mapStateToProps)(Myprofile)
+export default connect(mapStateToProps)(Myrooms)

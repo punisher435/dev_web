@@ -72,13 +72,13 @@ class my_room_viewset(viewsets.ViewSet):
 
     def list(self,request,format=None):
         queryset = rooms.personal_rooms.get_seller_rooms(request.user)
-        serializer = room_list_serializer(queryset,many=True)
+        serializer = room_list_serializer(queryset,context={'request':request},many=True)
         return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
 
     def retrieve(self,request,pk=None,format=None):
         queryset = rooms.personal_rooms.get_seller_rooms(request.user)
         room = get_object_or_404(queryset,pk=pk)
-        serializer = room_detail_serializer(room)
+        serializer = room_detail_serializer(room,context={'request':request})
         return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
 
     def create(self,request,format=None):
