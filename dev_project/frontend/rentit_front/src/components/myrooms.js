@@ -23,6 +23,7 @@ import ProfileCard from './profilecard'
 import BankCard from './bank_card'
 import AddressCard from './address_card'
 import RoomCard from './room_card'
+import AddRoomCard from './addroomcard';
 
 
 
@@ -142,6 +143,7 @@ function Myrooms(props) {
                         return <div><RoomCard myroom={room} /></div>;
                     })
             }
+            <AddRoomCard info={props.profile}/>
             
             
 

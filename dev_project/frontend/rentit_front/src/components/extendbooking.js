@@ -321,30 +321,30 @@ function Bookingextend(props) {
                 value={bookdetails.duration}
                 onChange={handleChange}
                 >
-                <MenuItem value={'1'}>1 Months</MenuItem>
-                <MenuItem value={'2'}>2 Months</MenuItem>
-                <MenuItem value={'3'}>3 Months</MenuItem>
-                <MenuItem value={'4'}>4 Months</MenuItem>
-                <MenuItem value={'5'}>5 Months</MenuItem>
-                <MenuItem value={'6'}>6 Months</MenuItem>
-                <MenuItem value={'7'}>7 Months</MenuItem>
-                <MenuItem value={'8'}>8 Months</MenuItem>
-                <MenuItem value={'9'}>9 Months</MenuItem>
-                <MenuItem value={'10'}>10 Months</MenuItem>
-                <MenuItem value={'11'}>11 Months</MenuItem>
-                <MenuItem value={'12'}>12 Months</MenuItem>
-                <MenuItem value={'13'}>13 Months</MenuItem>
-                <MenuItem value={'14'}>14 Months</MenuItem>
-                <MenuItem value={'15'}>15 Months</MenuItem>
-                <MenuItem value={'16'}>16 Months</MenuItem>
-                <MenuItem value={'17'}>17 Months</MenuItem>
-                <MenuItem value={'18'}>18 Months</MenuItem>
-                <MenuItem value={'19'}>19 Months</MenuItem>
-                <MenuItem value={'20'}>20 Months</MenuItem>
-                <MenuItem value={'21'}>21 Months</MenuItem>
-                <MenuItem value={'22'}>22 Months</MenuItem>
-                <MenuItem value={'23'}>23 Months</MenuItem>
-                <MenuItem value={'24'}>24 Months</MenuItem>
+                <MenuItem value={1}>1 Months</MenuItem>
+                <MenuItem value={2}>2 Months</MenuItem>
+                <MenuItem value={3}>3 Months</MenuItem>
+                <MenuItem value={4}>4 Months</MenuItem>
+                <MenuItem value={5}>5 Months</MenuItem>
+                <MenuItem value={6}>6 Months</MenuItem>
+                <MenuItem value={7}>7 Months</MenuItem>
+                <MenuItem value={8}>8 Months</MenuItem>
+                <MenuItem value={9}>9 Months</MenuItem>
+                <MenuItem value={10}>10 Months</MenuItem>
+                <MenuItem value={11}>11 Months</MenuItem>
+                <MenuItem value={12}>12 Months</MenuItem>
+                <MenuItem value={13}>13 Months</MenuItem>
+                <MenuItem value={14}>14 Months</MenuItem>
+                <MenuItem value={15}>15 Months</MenuItem>
+                <MenuItem value={16}>16 Months</MenuItem>
+                <MenuItem value={17}>17 Months</MenuItem>
+                <MenuItem value={18}>18 Months</MenuItem>
+                <MenuItem value={19}>19 Months</MenuItem>
+                <MenuItem value={20}>20 Months</MenuItem>
+                <MenuItem value={21}>21 Months</MenuItem>
+                <MenuItem value={22}>22 Months</MenuItem>
+                <MenuItem value={23}>23 Months</MenuItem>
+                <MenuItem value={24}>24 Months</MenuItem>
                 </Select>
                 <FormHelperText>Select no. of months</FormHelperText>
             </FormControl>

@@ -8,6 +8,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import {Link} from 'react-router-dom'
+import RatingWithCompliments from './MobileRatingSearchCard' 
 
 const useStyles = makeStyles({
   root: {
@@ -27,6 +28,7 @@ export default function RoomCard({myroom}) {
   return (
       <div>
     <Card className={classes.root}>
+    <Link to={`/rooms/${myroom.room_id}`} target="_blank" style={{textDecoration:'none',color:'black'}}>
       <CardActionArea>
         <CardMedia
           className={classes.media}
@@ -35,13 +37,13 @@ export default function RoomCard({myroom}) {
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            
+            {myroom.title}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            
+            {myroom.location}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-        
+          <RatingWithCompliments rating={parseFloat(myroom.avg_rating)}/>
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
           
@@ -54,35 +56,18 @@ export default function RoomCard({myroom}) {
           </Typography>
         </CardContent>
       </CardActionArea>
+      </Link>
       <CardActions>
         
-        <Link to='/dashboard/bank_details/edit' style={{textDecoration:'none'}}><Button size="small" color="primary">
+        <Link to={{
+    pathname: `/dashboard/my_rooms/edit`,
+    state: { property_id: myroom.room_id }
+  }} style={{textDecoration:'none'}}><Button size="small" color="primary">
           Edit
         </Button></Link>
       </CardActions>
     </Card>
     <br />
-    <Card className={classes.root}>
-    <CardActionArea>
-      <CardMedia
-        className={classes.media}
-        image="/bank.jpg"
-        title="Photo"
-      />
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="h2">
-          Unknown
-        </Typography>
-        
-      </CardContent>
-    </CardActionArea>
-    <CardActions>
-      
-      <Link to='/dashboard/bank_details/edit' style={{textDecoration:'none'}}><Button size="small" color="primary">
-        Add
-      </Button></Link>
-    </CardActions>
-  </Card>
   </div>
   );
  

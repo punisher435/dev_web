@@ -29,6 +29,7 @@ import ProfileForm from './/components/profile_form'
 import BankForm from './/components/bank_form'
 import AddressForm from './/components/address_profile'
 import Myrooms from './components/myrooms'
+import RoomForm from './components/room_form'
 
 
 
@@ -56,6 +57,7 @@ function App(props) {
                 <Route exact path='/recentBooking' component={RecentBooking}/>
 
                 <Route exact path='/dashboard/my_rooms' component={Myrooms}/>
+                <Route exact path='/dashboard/my_rooms/edit' component={RoomForm}/>
                 
                 <Route exact path='/Sform' component={Sforms}/>
                 <Route exact path='/dashboard/profile' component={Myprofile}/>
