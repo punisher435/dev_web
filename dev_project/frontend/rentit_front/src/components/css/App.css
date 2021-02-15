@@ -13,3 +13,30 @@
   margin-bottom: 7px;
   border-right: 1px solid grey;
 }
+
+.search {
+  position: relative;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 400px;
+  z-index: 10;
+}
+
+.search input {
+  position: absolute;
+  display: inline
+}
+
+.locate {
+  position: relative;
+  top: 17rem;
+  left: 1rem;
+  
+  
+}
+.locate img {
+
+ 
+}

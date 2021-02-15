@@ -15,6 +15,9 @@ User= get_user_model()
 def upload_to(instance, filename):
     return 'images/rooms/{filename}'.format(filename=filename)
 
+def upload_file_to(instance, filename):
+    return 'address_proof/rooms/{filename}'.format(filename=filename)
+
 yesterday = datetime.datetime.now() - datetime.timedelta(days = 1)
 
 class rooms(models.Model):
@@ -172,19 +175,13 @@ class rooms(models.Model):
     #neighbourhood
     nearby_station1 = models.TextField(max_length=255)
     nearby_station2 = models.TextField(max_length=255)
-    nearby_restaurant1 = models.TextField(max_length=255)
-    nearby_restaurant2 = models.TextField(max_length=255)
     room_policy = models.TextField()
 
     #
     wishlist=models.IntegerField(default=0)
     cart=models.IntegerField(default=0)
 
-    #coupons
-    seller_coupon=models.CharField(max_length=255,null=True,blank=True)
-    coupon_discount=models.IntegerField(null=True, blank=True)
-
-
+    address_proof = models.FileField(upload_to=upload_file_to,default='/address_proof/rooms/default.pdf') 
 
     objects = models.Manager()
     personal_rooms = rooms_manager()
