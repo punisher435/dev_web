@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import ReactDOM from 'react-dom';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import Button from '@material-ui/core/Button';
@@ -24,13 +24,23 @@ const validationSchema = yup.object({
     
 });
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
     myclass: {
         marginTop:'10%'
     },
     imageclass: {
-      width:'350px',
+      width:'110px',
       borderRadius:'35%',
+      [theme.breakpoints.up('sm')]: {
+        width:'200px',
+        borderRadius:'35%',
+      },
+      [theme.breakpoints.up('md')]: {
+        width:'300px',
+        borderRadius:'35%',
+      },
+      marginLeft:'1%',
+      marginRight:'1%',
     },
     erorclass: {
       width:'50%',
@@ -41,9 +51,10 @@ const useStyles = makeStyles({
     borderRadius:'35%',
     
     }
-  });
+  }));
 
 function RoomForm (props){
+  const theme = useTheme();
     const classes = useStyles();
     const hiddenFileInput1 = React.useRef(null);
     const hiddenFileInput2 = React.useRef(null);
@@ -534,29 +545,39 @@ function RoomForm (props){
         
         </Grid>
 
+        
+
+
+      </Grid>
+
+      <Grid
+        container
+        direction="row"
+        justify="center"
+        alignItems="center"
+        spacing={1}
+      >
         <Grid item className={classes.imageclass}>
 
-        <Button variant='contained' className={classes.buttonclass} onClick={(e) => {hiddenFileInput4.current.click();}}>
-          <img src={myroom.file4} className={classes.imageclass}/>
-          </Button>
-        
-        <input type='file'  ref={hiddenFileInput4} style={{display:'none'}}  id='photo' accept='image/png,image/jpeg,image/jpg' onChange={(event) => {console.log(event.currentTarget.files[0]);
-  setroom({...myroom,file4: URL.createObjectURL(event.target.files[0]),photo4:event.target.files[0]})}}/> 
-        
-        </Grid>
+          <Button variant='contained' className={classes.buttonclass} onClick={(e) => {hiddenFileInput4.current.click();}}>
+            <img src={myroom.file4} className={classes.imageclass}/>
+            </Button>
 
-        <Grid item className={classes.imageclass}>
+          <input type='file'  ref={hiddenFileInput4} style={{display:'none'}}  id='photo' accept='image/png,image/jpeg,image/jpg' onChange={(event) => {console.log(event.currentTarget.files[0]);
+          setroom({...myroom,file4: URL.createObjectURL(event.target.files[0]),photo4:event.target.files[0]})}}/> 
 
-        <Button variant='contained' className={classes.buttonclass} onClick={(e) => {hiddenFileInput5.current.click();}}>
-          <img src={myroom.file5} className={classes.imageclass}/>
-          </Button>
-        
-        <input type='file'  ref={hiddenFileInput5} style={{display:'none'}}  id='photo' accept='image/png,image/jpeg,image/jpg' onChange={(event) => {console.log(event.currentTarget.files[0]);
-  setroom({...myroom,file5: URL.createObjectURL(event.target.files[0]),photo5:event.target.files[0]})}}/> 
-        
-        </Grid>
+          </Grid>
 
+          <Grid item className={classes.imageclass}>
 
+          <Button variant='contained' className={classes.buttonclass} onClick={(e) => {hiddenFileInput5.current.click();}}>
+            <img src={myroom.file5} className={classes.imageclass}/>
+            </Button>
+
+          <input type='file'  ref={hiddenFileInput5} style={{display:'none'}}  id='photo' accept='image/png,image/jpeg,image/jpg' onChange={(event) => {console.log(event.currentTarget.files[0]);
+          setroom({...myroom,file5: URL.createObjectURL(event.target.files[0]),photo5:event.target.files[0]})}}/> 
+
+          </Grid>
       </Grid>
 
 

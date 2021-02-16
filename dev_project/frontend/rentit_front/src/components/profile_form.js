@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import ReactDOM from 'react-dom';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles,useTheme } from '@material-ui/core/styles';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import Button from '@material-ui/core/Button';
@@ -30,21 +30,38 @@ const validationSchema = yup.object({
     
 });
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
     myclass: {
         marginTop:'10%'
     },
     imageclass: {
-      width:'350px'
+      width:'110px',
+      borderRadius:'35%',
+      [theme.breakpoints.up('sm')]: {
+        width:'200px',
+        borderRadius:'35%',
+      },
+      [theme.breakpoints.up('md')]: {
+        width:'300px',
+        borderRadius:'35%',
+      },
+      marginLeft:'1%',
+      marginRight:'1%',
     },
     erorclass: {
       width:'50%',
       marginLeft:'25%',
   },
-  });
+  buttonclass:{
+    padding:0,
+    borderRadius:'35%',
+    
+    },
+}));
 
 function ProfileForm (props){
     const classes = useStyles();
+    const theme = useTheme();
 
     const [myprofile,setprofile] = useState({
       country_code:'+91',
@@ -59,6 +76,7 @@ function ProfileForm (props){
     const [edit,setedit] = useState(false)
     const [redirect,setredirect] = useState(false)
     const [error,seterror] = useState(false)
+    const hiddenFileInput1 = React.useRef(null);
    
 
     useEffect(
@@ -169,15 +187,18 @@ function ProfileForm (props){
         alignItems="center"
         >
       <form onSubmit={formik.handleSubmit}>
-        <Grid item className={classes.imageclass}>
-          <img src={myprofile.file}/>
-        </Grid>
-        <Grid item>
-        <Button variant='contained'>
-        <input type='file' id='photo' accept='image/png,image/jpeg,image/jpg' onChange={(event) => {console.log(event.currentTarget.files[0]);
-  setprofile({...myprofile,file: URL.createObjectURL(event.target.files[0]),photo:event.target.files[0]})}}/> 
+
+      <Grid item className={classes.imageclass}>
+
+      <Button variant='contained' className={classes.buttonclass} onClick={(e) => {hiddenFileInput1.current.click();}}>
+        <img src={myprofile.file} className={classes.imageclass}/>
         </Button>
-        </Grid>
+
+      <input type='file'  ref={hiddenFileInput1} style={{display:'none'}}  id='photo' accept='image/png,image/jpeg,image/jpg' onChange={(event) => {console.log(event.currentTarget.files[0]);
+      setprofile({...myprofile,file: URL.createObjectURL(event.target.files[0]),photo:event.target.files[0]})}}/> 
+
+      </Grid>
+
         <br />
           <Grid item>
         <TextField
