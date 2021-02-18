@@ -27,6 +27,7 @@ import HomeWorkOutlinedIcon from '@material-ui/icons/HomeWorkOutlined';
 import PersonOutlinedIcon from '@material-ui/icons/PersonOutlined';
 import AccountBalanceOutlinedIcon from '@material-ui/icons/AccountBalanceOutlined';
 import LocationOnOutlinedIcon from '@material-ui/icons/LocationOnOutlined';
+import AccountBalanceWalletOutlinedIcon from '@material-ui/icons/AccountBalanceWalletOutlined';
 import {Link} from 'react-router-dom'
 
 const drawerWidth = 240;
@@ -150,6 +151,13 @@ function Dashboarddrawer(props) {
           seller ? <Link to='/dashboard/my_apartments' style={{textDecoration:'none',color:'black'}}><ListItem button key="My Apartments">
           <ListItemIcon><HomeWorkOutlinedIcon /></ListItemIcon>
           <ListItemText primary="My Apartments" />
+          </ListItem></Link> : null
+        }
+
+        {
+          seller ? <Link to='/dashboard/my_coupons' style={{textDecoration:'none',color:'black'}}><ListItem button key="My Coupons">
+          <ListItemIcon><AccountBalanceWalletOutlinedIcon /></ListItemIcon>
+          <ListItemText primary="My Coupons" />
           </ListItem></Link> : null
         }
 

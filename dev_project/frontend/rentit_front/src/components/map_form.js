@@ -27,7 +27,7 @@ const mapContainerStyle = {
   width: "70vw",
 };
 
-const center = {
+var center = {
   lat: 20.5937,
   lng: 78.9629,
 };
@@ -39,6 +39,8 @@ export default function App({value,setvalue}) {
   });
   const [markers, setMarkers] = React.useState([]);
   const [selected, setSelected] = React.useState(null);
+
+
 
   const onMapClick = React.useCallback((e) => {
     setMarkers((current) => [
@@ -65,9 +67,72 @@ export default function App({value,setvalue}) {
     mapRef.current.setZoom(14);
   }, []);
 
+  
+
   if (loadError) return "Error";
   if (!isLoaded) return "Loading...";
+  console.log(value)
+ 
 
+
+  if(value)
+  {
+    return (
+      <div>
+        
+  
+        <Locate panTo={panTo} />
+        <Search panTo={panTo} mapRef={mapRef}/>
+  
+        <GoogleMap
+          id="map"
+          mapContainerStyle={mapContainerStyle}
+          zoom={8}
+          center={{
+            lat: parseFloat(value.latitude),
+            lng: parseFloat(value.longitude),
+          }}
+          onClick={onMapClick}
+          onLoad={onMapLoad}
+        >
+
+          <Marker
+              key={`${parseFloat(value.latitude)}-${parseFloat(value.longitude)}`}
+              position={{ lat: parseFloat(value.latitude), lng:parseFloat(value.longitude) }}
+             
+              icon={{
+                url: `/location.png`,
+                origin: new window.google.maps.Point(0, 0),
+                anchor: new window.google.maps.Point(15, 15),
+                scaledSize: new window.google.maps.Size(30, 35),
+              }}
+            />
+          
+         
+          {markers.map((marker) => (
+            <Marker
+              key={`${marker.lat}-${marker.lng}`}
+              position={{ lat: marker.lat, lng: marker.lng }}
+              onClick={() => {
+                setSelected(marker);
+              }}
+              icon={{
+                url: `/location.png`,
+                origin: new window.google.maps.Point(0, 0),
+                anchor: new window.google.maps.Point(15, 15),
+                scaledSize: new window.google.maps.Size(30, 35),
+              }}
+            />
+          ))}
+  
+          
+        </GoogleMap>
+      </div>
+    );
+  }
+
+
+  else{
   return (
     <div>
       
@@ -83,6 +148,7 @@ export default function App({value,setvalue}) {
         onClick={onMapClick}
         onLoad={onMapLoad}
       >
+       
         {markers.map((marker) => (
           <Marker
             key={`${marker.lat}-${marker.lng}`}
@@ -99,27 +165,10 @@ export default function App({value,setvalue}) {
           />
         ))}
 
-        {selected ? (
-          <InfoWindow
-            position={{ lat: selected.lat, lng: selected.lng }}
-            onCloseClick={() => {
-              setSelected(null);
-            }}
-          >
-            <div>
-              <h2>
-                <span role="img" aria-label="bear">
-                  🐻
-                </span>{" "}
-                Alert
-              </h2>
-              <p>Spotted {formatRelative(selected.time, new Date())}</p>
-            </div>
-          </InfoWindow>
-        ) : null}
+        
       </GoogleMap>
     </div>
-  );
+  );}
 }
 
 function Locate({ panTo }) {
