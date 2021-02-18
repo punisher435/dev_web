@@ -19,6 +19,7 @@ from .serializers import apartment_list_serializer,apartment_detail_serializer,a
 
 from products.models import minmax_room,minmax_shop,minmax_apartment
 from .serializers import minmax_room_serializer,minmax_shop_serializer,minmax_apartment_serializer
+from user.models import seller_bank_details
 
 #pagination
 
@@ -58,6 +59,7 @@ class room_viewset(viewsets.ReadOnlyModelViewSet):
     query_set = rooms.objects.all()
     query_set = query_set.filter(verified=True)
     queryset = query_set.filter(removed=False)
+    queryset = query_set.filter(pausebooking=False)
     serializer_class = room_list_serializer
 
 
@@ -72,141 +74,223 @@ class my_room_viewset(viewsets.ViewSet):
 
     def list(self,request,format=None):
         queryset = rooms.personal_rooms.get_seller_rooms(request.user)
+        queryset = queryset.filter(removed=False)
         serializer = room_list_serializer(queryset,context={'request':request},many=True)
         return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
 
     def retrieve(self,request,pk=None,format=None):
         queryset = rooms.personal_rooms.get_seller_rooms(request.user)
+        queryset = queryset.filter(removed=False)
         room = get_object_or_404(queryset,pk=pk)
         serializer = room_detail_serializer(room,context={'request':request})
         return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
 
     def create(self,request,format=None):
-        serializer = room_detail_serializer(data=request.data)
-        if serializer.is_valid(raise_exception=True) and request.user.is_seller:
-            serializer.validated_data["seller_id"]=request.user
-            x=serializer.validated_data["price"]
-            y=serializer.validated_data["owner_discount"]
-            serializer.validated_data["final_price"]=(x-(((y)*x)/100))
-            
-            serializer.save()
+        try:
+        
+        
+            if request.user.is_seller and request.user.profile_completed and request.user.address_completed and request.user.bank_completed:
+                
+                
 
-            subject = 'Room Added'
-            message = 'Your room has been added'
-            recepient = request.user
-            send_mail(subject,message, EMAIL_HOST_USER, [recepient], fail_silently=False)
 
-            return Response(serializer.data,status=status.HTTP_201_CREATED)
-        else:
-            return Response(serializer.data,status=status.HTTP_400_BAD_REQUEST)
+                print(request.data)
+                
+                seller_price = int(request.data["seller_price"])
+                price = seller_price + ((seller_price*int(request.data["owner_discount"]))/100)
+
+                print(bool(request.data["wifi"]=='true'))
+
+                queryset = seller_bank_details.objects.all()
+                queryset = queryset.filter(user_id=request.user)
+                bank = get_object_or_404(queryset,pk=request.user.pk)
+
+                print(type(bank.currency))
+
+                room = rooms(title=request.data["title"],seller_id=request.user,price=price,seller_price=seller_price,owner_discount=int(request.data["owner_discount"]),final_price=seller_price,capacity=int(request.data["capacity"]),photo1=request.data["photo1"],photo2=request.data["photo2"],photo3=request.data["photo3"],photo4=request.data["photo4"],photo5=request.data["photo5"],
+                location=request.data["location"],city=request.data["city"],state=request.data["state"],country=request.data["country"],landmark=request.data["landmark"],pincode=request.data["pincode"],currency=bank.currency,longitude=float(request.data["longitude"]),latitude=float(request.data["latitude"]),length=int(request.data["length"]),breadth=int(request.data["breadth"]),height=int(request.data["height"]),furniture=request.data["furniture"],category=request.data["category"],
+                facility=request.data["facility"],description=request.data["description"],cctv_building=bool(request.data["cctv_building"]=='true'),building_guard=bool(request.data["building_guard"]=='true'),balcony=int(request.data["balcony"]),separate_washroom=bool(request.data["separate_washroom"]=='true'),windows=int(request.data["windows"]),fans=int(request.data["fans"]),bed_type=request.data["bed_type"],floor_no=int(request.data["floor_no"]),
+                cost_electricity=int(request.data["cost_electricity"]),cost_water=int(request.data["cost_water"]),purified_water=bool(request.data["purified_water"]=='true'),removable_purified_water=bool(request.data["removable_purified_water"]=='true'),cost_purified_water=int(request.data["cost_purified_water"]),house_TV=bool(request.data["house_TV"]=='true'),removable_house_TV=bool(request.data["removable_house_TV"]=='true'),
+                cost_TV=int(request.data["cost_TV"]),room_TV=bool(request.data["room_TV"]=='true'),cost_roomTV=int(request.data["cost_roomTV"]),removable_room_TV=bool(request.data["removable_room_TV"]=='true'),house_refridgerator=bool(request.data["house_refridgerator"]=='true'),removable_house_refridgerator=bool(request.data["removable_house_refridgerator"]=='true'),cost_refridgerator=int(request.data["cost_refridgerator"]),
+                room_refridgerator=bool(request.data["room_refridgerator"]=='true'),cost_roomrefridgerator=int(request.data["cost_roomrefridgerator"]),removable_room_refridgerator=bool(request.data["removable_room_refridgerator"]=='true'),power_backup=bool(request.data["power_backup"]=='true'),geyser=bool(request.data["geyser"]=='true'),removable_geyser=bool(request.data["removable_geyser"]=='true'),cost_geyser=int(request.data["cost_geyser"]),
+                wifi=bool(request.data["wifi"]=='true'),cost_wifi=int(request.data["cost_wifi"]),removable_wifi=bool(request.data["removable_wifi"]=='true'),AC=bool(request.data["AC"]=='true'),cost_AC=int(request.data["cost_AC"]),removable_AC=bool(request.data["removable_AC"]=='true'),cooler=bool(request.data["cooler"]=='true'),cost_cooler=int(request.data["cost_cooler"]),removable_cooler=bool(request.data["removable_cooler"]=='true'),laundry=bool(request.data["laundry"]=='true'),cost_laundry=int(request.data["cost_laundry"]),
+                iron=bool(request.data["iron"]=='true'),cost_iron=int(request.data["cost_iron"]),guest_allowed=bool(request.data["guest_allowed"]=='true'),guest_policy=request.data["guest_policy"],veg_food=bool(request.data["veg_food"]=='true'),nonveg_food=bool(request.data["nonveg_food"]=='true'),food_policy=request.data["food_policy"],breakfast=bool(request.data["breakfast"]=='true'),cost_breakfast=int(request.data["cost_breakfast"]),removable_breakfast=bool(request.data["removable_breakfast"]=='true'),lunch=bool(request.data["lunch"]=='true'),cost_lunch=int(request.data["cost_lunch"]),removable_lunch=bool(request.data["removable_lunch"]=='true'),
+                dinner=bool(request.data["dinner"]=='true'),cost_dinner=int(request.data["cost_dinner"]),removable_dinner=bool(request.data["removable_dinner"]=='true'),room_cleaning=bool(request.data["room_cleaning"]=='true'),cost_cleaning=int(request.data["cost_cleaning"]),nearby_station1=request.data["nearby_station1"],nearby_station2=request.data["nearby_station2"],distance1=float(request.data["distance1"]),distance2=float(request.data["distance2"]),room_policy=request.data["room_policy"],
+                address_proof=request.data["address_proof"])
+
+                room.save()
+
+                return Response('success',status=status.HTTP_200_OK)
+            else:
+                return Response('error',status=status.HTTP_400_BAD_REQUEST)
+        except:
+            return Response('error',status=status.HTTP_400_BAD_REQUEST)
 
 
     def update(self, request,pk=None,format=None):
-        serializer = room_detail_serializer(data=request.data,partial=True)
-        queryset = rooms.personal_rooms.get_seller_rooms(request.user)
-        room = get_object_or_404(queryset,pk=pk)
-        if serializer.is_valid(raise_exception=True):
-            if room.price!=serializer.validated_data["price"]: 
-                room.price=serializer.validated_data["price"]
 
-            if room.owner_discount!=serializer.validated_data["owner_discount"]: 
-                room.owner_discount=serializer.validated_data["owner_discount"]
+        try:
+        
+            queryset = rooms.objects.all()
+            queryset = queryset.filter(seller_id = request.user)
+            room = get_object_or_404(queryset,pk=pk)
 
-            if room.furniture!=serializer.validated_data["furniture"]: 
-                room.furniture=serializer.validated_data["furniture"]
+            seller_price = int(request.data["seller_price"])
+            our_price = seller_price + ((seller_price*room.commission)/100)
+            price = our_price + ((our_price*(int(request.data["owner_discount"])+room.commission+room.company_discount+room.fake_discount))/100) 
 
-            if room.capacity!=serializer.validated_data["capacity"]: 
-                room.capacity=serializer.validated_data["capacity"]
+            room.title=request.data["title"]  
+            room.seller_price=seller_price  
+            room.owner_discount=int(request.data["owner_discount"]) 
 
-            if room.photo1!=serializer.validated_data["photo1"]: 
-                room.photo1=serializer.validated_data["photo1"]
+            room.final_price=our_price
 
-            if room.photo2!=serializer.validated_data["photo2"]: 
-                room.photo2=serializer.validated_data["photo2"]
+            if(request.data["photo1"]!='undefined'):
+                room.photo1=request.data["photo1"] 
+            if(request.data["photo2"]!='undefined'):
+                room.photo2=request.data["photo2"] 
+            if(request.data["photo3"]!='undefined'):
+                room.photo3=request.data["photo3"] 
+            if(request.data["photo4"]!='undefined'):
+                room.photo4=request.data["photo4"] 
+            if(request.data["photo5"]!='undefined'):
+                room.photo5=request.data["photo5"] 
+            if(request.data["address_proof"]!='undefined'):
+                room.address_proof=request.data["address_proof"] 
+                        
+            room.location=request.data["location"]                                
+            room.longitude=float(request.data["longitude"])            
+            room.latitude=float(request.data["latitude"])            
+            room.length=int(request.data["length"])            
+            room.breadth=int(request.data["breadth"])            
+            room.height=int(request.data["height"])            
+            room.furniture=request.data["furniture"]            
+            room.category=request.data["category"]                       
+            room.facility=request.data["facility"]            
+            room.description=request.data["description"]            
+            room.cctv_building=bool(request.data["cctv_building"]=='true')           
+            room.building_guard=bool(request.data["building_guard"]=='true')            
+            room.balcony=int(request.data["balcony"])            
+            room.separate_washroom=bool(request.data["separate_washroom"]=='true')            
+            room.windows=int(request.data["windows"])            
+            room.fans=int(request.data["fans"])            
+            room.bed_type=request.data["bed_type"]            
+            room.floor_no=int(request.data["floor_no"])            
+            room.cost_electricity=int(request.data["cost_electricity"])            
+            room.cost_water=int(request.data["cost_water"])            
+            room.purified_water=bool(request.data["purified_water"]=='true')            
+            room.removable_purified_water=bool(request.data["removable_purified_water"]=='true')            
+            room.cost_purified_water=int(request.data["cost_purified_water"])            
+            room.house_TV=bool(request.data["house_TV"]=='true')            
+            room.removable_house_TV=bool(request.data["removable_house_TV"]=='true')            
+            room.cost_TV=int(request.data["cost_TV"])            
+            room.room_TV=bool(request.data["room_TV"]=='true')            
+            room.cost_roomTV=int(request.data["cost_roomTV"])            
+            room.removable_room_TV=bool(request.data["removable_room_TV"]=='true')            
+            room.house_refridgerator=bool(request.data["house_refridgerator"]=='true')            
+            room.removable_house_refridgerator=bool(request.data["removable_house_refridgerator"]=='true')            
+            room.cost_refridgerator=int(request.data["cost_refridgerator"])            
+            room.room_refridgerator=bool(request.data["room_refridgerator"]=='true')            
+            room.cost_roomrefridgerator=int(request.data["cost_roomrefridgerator"])            
+            room.removable_room_refridgerator=bool(request.data["removable_room_refridgerator"]=='true')            
+            room.power_backup=bool(request.data["power_backup"]=='true')            
+            room.geyser=bool(request.data["geyser"]=='true')            
+            room.removable_geyser=bool(request.data["removable_geyser"]=='true')            
+            room.cost_geyser=int(request.data["cost_geyser"])            
+            room.wifi=bool(request.data["wifi"]=='true')            
+            room.cost_wifi=int(request.data["cost_wifi"])            
+            room.removable_wifi=bool(request.data["removable_wifi"]=='true')            
+            room.AC=bool(request.data["AC"]=='true')            
+            room.cost_AC=int(request.data["cost_AC"])            
+            room.removable_AC=bool(request.data["removable_AC"]=='true')            
+            room.cooler=bool(request.data["cooler"]=='true')            
+            room.cost_cooler=int(request.data["cost_cooler"])            
+            room.removable_cooler=bool(request.data["removable_cooler"]=='true')            
+            room.laundry=bool(request.data["laundry"]=='true')            
+            room.cost_laundry=int(request.data["cost_laundry"])            
+            room.iron=bool(request.data["iron"]=='true')            
+            room.cost_iron=int(request.data["cost_iron"])            
+            room.guest_allowed=bool(request.data["guest_allowed"]=='true')            
+            room.guest_policy=request.data["guest_policy"]            
+            room.veg_food=bool(request.data["veg_food"]=='true')            
+            room.nonveg_food=bool(request.data["nonveg_food"]=='true')            
+            room.food_policy=request.data["food_policy"]            
+            room.breakfast=bool(request.data["breakfast"]=='true')            
+            room.cost_breakfast=int(request.data["cost_breakfast"])            
+            room.removable_breakfast=bool(request.data["removable_breakfast"]=='true')            
+            room.lunch=bool(request.data["lunch"]=='true')            
+            room.cost_lunch=int(request.data["cost_lunch"])            
+            room.removable_lunch=bool(request.data["removable_lunch"]=='true')            
+            room.dinner=bool(request.data["dinner"]=='true')            
+            room.cost_dinner=int(request.data["cost_dinner"])            
+            room.removable_dinner=bool(request.data["removable_dinner"]=='true')            
+            room.room_cleaning=bool(request.data["room_cleaning"]=='true')            
+            room.cost_cleaning=int(request.data["cost_cleaning"])            
+            room.nearby_station1=request.data["nearby_station1"]           
+            room.nearby_station2=request.data["nearby_station2"]            
+            room.distance1=float(request.data["distance1"])            
+            room.distance2=float(request.data["distance2"])            
+            room.room_policy=request.data["room_policy"]            
 
-            if room.photo3!=serializer.validated_data["photo3"]: 
-                room.photo3=serializer.validated_data["photo3"]
-
-            if room.photo4!=serializer.validated_data["photo4"]: 
-                room.photo4=serializer.validated_data["photo4"]
-            
-            if room.photo5!=serializer.validated_data["photo5"]: 
-                room.photo5=serializer.validated_data["photo5"]
-
-            if room.booked!=serializer.validated_data["booked"]: 
-                room.booked=serializer.validated_data["booked"]
-
-            if room.facility!=serializer.validated_data["facility"]: 
-                room.facility=serializer.validated_data["facility"]
-
-            if room.description!=serializer.validated_data["description"]: 
-                room.description=serializer.validated_data["description"]
-
-            if room.electricity!=serializer.validated_data["electricity"]: 
-                room.electricity=serializer.validated_data["electricity"]
-            
-            if room.water_facility!=serializer.validated_data["water_facility"]: 
-                room.water_facility=serializer.validated_data["water_facility"]
-
-            if room.house_TV!=serializer.validated_data["house_TV"]: 
-                room.house_TV=serializer.validated_data["house_TV"]
-
-            if room.power_backup!=serializer.validated_data["power_backup"]: 
-                room.power_backup=serializer.validated_data["power_backup"]
-
-            if room.geyser!=serializer.validated_data["geyser"]: 
-                room.geyser=serializer.validated_data["geyser"]
-
-            if room.nearby_station1!=serializer.validated_data["nearby_station1"]: 
-                room.nearby_station1=serializer.validated_data["nearby_station1"]
-            
-            if room.nearby_station2!=serializer.validated_data["nearby_station2"]: 
-                room.nearby_station2=serializer.validated_data["nearby_station2"]
-
-            if room.nearby_restaurant1!=serializer.validated_data["nearby_restaurant1"]: 
-                room.nearby_restaurant1=serializer.validated_data["nearby_restaurant1"]
-
-            if room.nearby_restaurant2!=serializer.validated_data["nearby_restaurant2"]: 
-                room.nearby_restaurant2=serializer.validated_data["nearby_restaurant2"]
-
-            if room.wifi!=serializer.validated_data["wifi"]: 
-                room.wifi=serializer.validated_data["wifi"]
-
-            if room.breakfast!=serializer.validated_data["breakfast"]: 
-                room.breakfast=serializer.validated_data["breakfast"]
-            
-            if room.lunch!=serializer.validated_data["lunch"]: 
-                room.lunch=serializer.validated_data["lunch"]
-
-            if room.dinner!=serializer.validated_data["dinner"]: 
-                room.dinner=serializer.validated_data["dinner"]
-            
-            if room.room_policy!=serializer.validated_data["room_policy"]: 
-                room.room_policy=serializer.validated_data["room_policy"]
-
-            
-
-            x=serializer.validated_data["price"]
-            y=serializer.validated_data["owner_discount"]
-            z=room.company_discount
-            room.final_price=(x-(((y+z)*x)/100))
-            
             room.save()
-            return Response(serializer.data,status=status.HTTP_202_ACCEPTED)
-        else:
-            return Response(serializer.data,status=status.HTTP_400_BAD_REQUEST)
+
+            print('success')
+
+
+
+            return Response('success',status=status.HTTP_200_OK)
+        except:
+            return Response('error',status=status.HTTP_400_BAD_REQUEST)
+
+
 
     def destroy(self,request,pk=None):
-        queryset = rooms.personal_rooms.get_seller_rooms(request.user)
-        room = get_object_or_404(queryset,pk=pk)
-        room.delete()
+        try:
 
-        subject = 'Room Deleted'
-        message = 'Your room has been deleted'
-        recepient = request.user
-        send_mail(subject,message, EMAIL_HOST_USER, [recepient], fail_silently=False)
+            queryset = rooms.personal_rooms.get_seller_rooms(request.user)
+            room = get_object_or_404(queryset,pk=pk)
+            room.removed = True
+            room.save()
 
-        return Response("Deleted",status=status.HTTP_200_OK)
+            subject = 'Room Deleted'
+            message = 'Your room has been deleted'
+            recepient = request.user
+            send_mail(subject,message, EMAIL_HOST_USER, [recepient], fail_silently=False)
+
+            return Response("Deleted",status=status.HTTP_200_OK)
+        except:
+            return Response('error',status=status.HTTP_400_BAD_REQUEST)
+
+    def partial_update(self,request,pk=None):
+        try:
+            print('hy')
+            queryset = rooms.objects.all()
+            queryset = queryset.filter(seller_id = request.user)
+            room = get_object_or_404(queryset,pk=pk)
+
+            if room.pausebooking==True:
+
+                room.pausebooking = False
+                room.save()
+                subject = 'Booking resumed'
+                message = 'Bookings on your room is resumed'
+                recepient = request.user
+                send_mail(subject,message, EMAIL_HOST_USER, [recepient], fail_silently=False)
+
+                return Response("Success",status=status.HTTP_200_OK)
+
+            if room.pausebooking==False:
+        
+                room.pausebooking = True
+                room.save()
+                subject = 'Booking paused'
+                message = 'Bookings on your room is paused'
+                recepient = request.user
+                send_mail(subject,message, EMAIL_HOST_USER, [recepient], fail_silently=False)
+
+                return Response("Success",status=status.HTTP_200_OK)
+        except:
+            return Response('error',status=status.HTTP_400_BAD_REQUEST)
 
 
 class minmax_room_viewset(viewsets.ReadOnlyModelViewSet):
@@ -254,115 +338,178 @@ class my_shop_viewset(viewsets.ViewSet):
 
     def list(self,request,format=None):
         queryset = shops.personal_shops.get_seller_shops(request.user)
-        serializer = shop_list_serializer(queryset,many=True)
+        queryset = queryset.filter(removed=False)
+        serializer = shop_list_serializer(queryset,context={'request':request},many=True)
         return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
 
     def retrieve(self,request,pk=None,format=None):
         queryset = shops.personal_shops.get_seller_shops(request.user)
+        queryset = queryset.filter(removed = False)
         shop = get_object_or_404(queryset,pk=pk)
-        serializer = shop_detail_serializer(shop)
+        serializer = shop_detail_serializer(shop,context={'request':request})
         return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
 
     def create(self,request,format=None):
-        serializer = shop_detail_serializer(data=request.data)
-        if serializer.is_valid(raise_exception=True) and request.user.is_seller:
-            serializer.validated_data["seller_id"]=request.user
-            x=serializer.validated_data["price"]
-            y=serializer.validated_data["owner_discount"]
-            z=serializer.validated_data["company_discount"]
-            serializer.validated_data["final_price"]=(x-(((y+z)*x)/100))
-            serializer.save()
+        try:
+            if request.user.is_seller and request.user.profile_completed and request.user.address_completed and request.user.bank_completed:
 
-            subject = 'Shop Added'
-            message = 'Your shop has been added'
+                print(request.data)
+                
+                seller_price = int(request.data["seller_price"])
+                price = seller_price + ((seller_price*int(request.data["owner_discount"]))/100)
+
+                queryset = seller_bank_details.objects.all()
+                queryset = queryset.filter(user_id=request.user)
+                bank = get_object_or_404(queryset,pk=request.user.pk)
+
+                print(type(bank.currency))
+
+                shop = shops(title=request.data["title"],seller_id=request.user,price=price,seller_price=seller_price,owner_discount=int(request.data["owner_discount"]),final_price=seller_price,photo1=request.data["photo1"],photo2=request.data["photo2"],photo3=request.data["photo3"],photo4=request.data["photo4"],photo5=request.data["photo5"],
+                location=request.data["location"],city=request.data["city"],state=request.data["state"],country=request.data["country"],landmark=request.data["landmark"],pincode=request.data["pincode"],currency=bank.currency,longitude=float(request.data["longitude"]),latitude=float(request.data["latitude"]),length=int(request.data["length"]),breadth=int(request.data["breadth"]),height=int(request.data["height"]),furniture=request.data["furniture"],category=request.data["category"],
+                facility=request.data["facility"],description=request.data["description"],cctv_building=bool(request.data["cctv_building"]=='true'),building_guard=bool(request.data["building_guard"]=='true'),balcony=int(request.data["balcony"]),separate_washroom=bool(request.data["separate_washroom"]=='true'),windows=int(request.data["windows"]),fans=int(request.data["fans"]),floor_no=int(request.data["floor_no"]),
+                cost_electricity=int(request.data["cost_electricity"]),cost_water=int(request.data["cost_water"]),purified_water=bool(request.data["purified_water"]=='true'),removable_purified_water=bool(request.data["removable_purified_water"]=='true'),cost_purified_water=int(request.data["cost_purified_water"]),
+                washroom=int(request.data["washroom"]),total_rooms=int(request.data["total_rooms"]),total_floors=int(request.data["total_floors"]),
+                power_backup=bool(request.data["power_backup"]=='true'),
+                wifi=bool(request.data["wifi"]=='true'),cost_wifi=int(request.data["cost_wifi"]),removable_wifi=bool(request.data["removable_wifi"]=='true'),
+                shop_cleaning=bool(request.data["shop_cleaning"]=='true'),cost_cleaning=int(request.data["cost_cleaning"]),nearby_station1=request.data["nearby_station1"],nearby_station2=request.data["nearby_station2"],distance1=float(request.data["distance1"]),distance2=float(request.data["distance2"]),shop_policy=request.data["shop_policy"],
+                address_proof=request.data["address_proof"])
+
+                shop.save()
+
+                print('success')
+                return Response('success',status=status.HTTP_200_OK)
+            else:
+                return Response('error',status=status.HTTP_400_BAD_REQUEST)
+        except:
+            return Response('error',status=status.HTTP_400_BAD_REQUEST)
+
+    def update(self, request,pk=None,format=None):
+        
+        try:
+        
+            queryset = shops.objects.all()
+            queryset = queryset.filter(seller_id = request.user)
+            room = get_object_or_404(queryset,pk=pk)
+
+            seller_price = int(request.data["seller_price"])
+            our_price = seller_price + ((seller_price*room.commission)/100)
+            price = our_price + ((our_price*(int(request.data["owner_discount"])+room.commission+room.company_discount+room.fake_discount))/100) 
+
+            room.title=request.data["title"]  
+            room.seller_price=seller_price  
+            room.owner_discount=int(request.data["owner_discount"]) 
+
+            room.final_price=our_price
+
+            if(request.data["photo1"]!='undefined'):
+                room.photo1=request.data["photo1"] 
+            if(request.data["photo2"]!='undefined'):
+                room.photo2=request.data["photo2"] 
+            if(request.data["photo3"]!='undefined'):
+                room.photo3=request.data["photo3"] 
+            if(request.data["photo4"]!='undefined'):
+                room.photo4=request.data["photo4"] 
+            if(request.data["photo5"]!='undefined'):
+                room.photo5=request.data["photo5"] 
+            if(request.data["address_proof"]!='undefined'):
+                room.address_proof=request.data["address_proof"] 
+                        
+            room.location=request.data["location"]                                
+            room.longitude=float(request.data["longitude"])            
+            room.latitude=float(request.data["latitude"])            
+            room.length=int(request.data["length"])            
+            room.breadth=int(request.data["breadth"])            
+            room.height=int(request.data["height"])            
+            room.furniture=request.data["furniture"]            
+            room.category=request.data["category"]                       
+            room.facility=request.data["facility"]            
+            room.description=request.data["description"]            
+            room.cctv_building=bool(request.data["cctv_building"]=='true')           
+            room.building_guard=bool(request.data["building_guard"]=='true')            
+            room.balcony=int(request.data["balcony"])            
+            room.separate_washroom=bool(request.data["separate_washroom"]=='true')            
+            room.windows=int(request.data["windows"])            
+            room.fans=int(request.data["fans"])                     
+            room.floor_no=int(request.data["floor_no"])            
+            room.cost_electricity=int(request.data["cost_electricity"])            
+            room.cost_water=int(request.data["cost_water"])            
+            room.purified_water=bool(request.data["purified_water"]=='true')            
+            room.removable_purified_water=bool(request.data["removable_purified_water"]=='true')            
+            room.cost_purified_water=int(request.data["cost_purified_water"])            
+                
+            room.power_backup=bool(request.data["power_backup"]=='true')            
+                       
+            room.wifi=bool(request.data["wifi"]=='true')            
+            room.cost_wifi=int(request.data["cost_wifi"])            
+            room.removable_wifi=bool(request.data["removable_wifi"]=='true')            
+                     
+                     
+            room.shop_cleaning=bool(request.data["shop_cleaning"]=='true')            
+            room.cost_cleaning=int(request.data["cost_cleaning"])            
+            room.nearby_station1=request.data["nearby_station1"]           
+            room.nearby_station2=request.data["nearby_station2"]            
+            room.distance1=float(request.data["distance1"])            
+            room.distance2=float(request.data["distance2"])            
+            room.shop_policy=request.data["shop_policy"]            
+
+            room.save()
+
+            print('success')
+
+
+
+            return Response('success',status=status.HTTP_200_OK)
+        except:
+            return Response('error',status=status.HTTP_400_BAD_REQUEST)
+
+    def destroy(self,request,pk=None):
+        try:
+            queryset = shops.objects.all()
+            queryset = queryset.filter(seller_id = request.user)
+            room = get_object_or_404(queryset,pk=pk)
+            room.removed = True
+            room.save()
+
+            subject = 'Shop Deleted'
+            message = 'Your Shop has been deleted'
             recepient = request.user
             send_mail(subject,message, EMAIL_HOST_USER, [recepient], fail_silently=False)
 
-            return Response(serializer.data,status=status.HTTP_201_CREATED)
-        else:
-            return Response(serializer.data,status=status.HTTP_400_BAD_REQUEST)
+            return Response("Deleted",status=status.HTTP_200_OK)
 
+        except:
+            return Response('error',status=status.HTTP_400_BAD_REQUEST)
 
-    def update(self, request,pk=None,format=None):
-        serializer = shop_detail_serializer(data=request.data,partial=True)
-        queryset = shops.personal_rooms.get_seller_shops(request.user)
-        shop = get_object_or_404(queryset,pk=pk)
-        if serializer.is_valid(raise_exception=True):
-            if shop.price!=serializer.validated_data["price"]: 
-                shop.price=serializer.validated_data["price"]
+    def partial_update(self,request,pk=None):
+        try:
+            print('hy')
+            queryset = shops.objects.all()
+            queryset = queryset.filter(seller_id = request.user)
+            room = get_object_or_404(queryset,pk=pk)
 
-            if shop.owner_discount!=serializer.validated_data["owner_discount"]: 
-                shop.owner_discount=serializer.validated_data["owner_discount"]
+            if room.pausebooking==True:
 
-            if shop.furniture!=serializer.validated_data["furniture"]: 
-                shop.furniture=serializer.validated_data["furniture"]
+                room.pausebooking = False
+                room.save()
+                subject = 'Booking resumed'
+                message = 'Bookings on your shop is resumed'
+                recepient = request.user
+                send_mail(subject,message, EMAIL_HOST_USER, [recepient], fail_silently=False)
 
-            if shop.photo1!=serializer.validated_data["photo1"]: 
-                shop.photo1=serializer.validated_data["photo1"]
+                return Response("Success",status=status.HTTP_200_OK)
 
-            if shop.photo2!=serializer.validated_data["photo2"]: 
-                shop.photo2=serializer.validated_data["photo2"]
+            if room.pausebooking==False:
+        
+                room.pausebooking = True
+                room.save()
+                subject = 'Booking paused'
+                message = 'Bookings on your shops is paused'
+                recepient = request.user
+                send_mail(subject,message, EMAIL_HOST_USER, [recepient], fail_silently=False)
 
-            if shop.photo3!=serializer.validated_data["photo3"]: 
-                shop.photo3=serializer.validated_data["photo3"]
-
-            if shop.photo4!=serializer.validated_data["photo4"]: 
-                shop.photo4=serializer.validated_data["photo4"]
-            
-            if shop.photo5!=serializer.validated_data["photo5"]: 
-                shop.photo5=serializer.validated_data["photo5"]
-
-            if shop.booked!=serializer.validated_data["booked"]: 
-                shop.booked=serializer.validated_data["booked"]
-
-            if shop.facility!=serializer.validated_data["facility"]: 
-                shop.facility=serializer.validated_data["facility"]
-
-            if shop.description!=serializer.validated_data["description"]: 
-                shop.description=serializer.validated_data["description"]
-
-            if shop.electricity!=serializer.validated_data["electricity"]: 
-                shop.electricity=serializer.validated_data["electricity"]
-            
-            if shop.water_facility!=serializer.validated_data["water_facility"]: 
-                shop.water_facility=serializer.validated_data["water_facility"]
-
-            if shop.power_backup!=serializer.validated_data["power_backup"]: 
-                shop.power_backup=serializer.validated_data["power_backup"]
-
-            if shop.nearby_station1!=serializer.validated_data["nearby_station1"]: 
-                shop.nearby_station1=serializer.validated_data["nearby_station1"]
-            
-            if shop.nearby_station2!=serializer.validated_data["nearby_station2"]: 
-                shop.nearby_station2=serializer.validated_data["nearby_station2"]
-
-            if shop.wifi!=serializer.validated_data["wifi"]: 
-                shop.wifi=serializer.validated_data["wifi"]
-            
-            if shop.room_policy!=serializer.validated_data["shop_policy"]: 
-                shop.room_policy=serializer.validated_data["shop_policy"]
-
-            x=serializer.validated_data["price"]
-            y=serializer.validated_data["owner_discount"]
-            z=shop.company_discount
-            shop.final_price=(x-(((y+z)*x)/100))
-            
-            shop.save()
-            return Response(serializer.data,status=status.HTTP_202_ACCEPTED)
-        else:
-            return Response(serializer.data,status=status.HTTP_400_BAD_REQUEST)
-
-    def destroy(self,request,pk=None):
-        queryset = shops.personal_shops.get_seller_shops(request.user)
-        shop = get_object_or_404(queryset,pk=pk)
-        shop.delete()
-
-        subject = 'Shop Deleted'
-        message = 'Your shop has been deleted'
-        recepient = request.user
-        send_mail(subject,message, EMAIL_HOST_USER, [recepient], fail_silently=False)
-
-        return Response("Deleted",status=status.HTTP_200_OK)
+                return Response("Success",status=status.HTTP_200_OK)
+        except:
+            return Response('error',status=status.HTTP_400_BAD_REQUEST)
 
 
 class minmax_shop_viewset(viewsets.ReadOnlyModelViewSet):
@@ -410,128 +557,214 @@ class my_apartment_viewset(viewsets.ViewSet):
 
     def list(self,request,format=None):
         queryset = apartments.personal_apartments.get_seller_apartments(request.user)
-        serializer = apartment_list_serializer(queryset,many=True)
+        queryset = queryset.filter(removed=False)
+        serializer = apartment_list_serializer(queryset,context={'request':request},many=True)
         return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
 
     def retrieve(self,request,pk=None,format=None):
         queryset = apartments.personal_apartments.get_seller_apartments(request.user)
+        queryset = queryset.filter(removed=False)
         apartment = get_object_or_404(queryset,pk=pk)
-        serializer = apartment_detail_serializer(apartment)
+        serializer = apartment_detail_serializer(apartment,context={'request':request})
         return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
 
     def create(self,request,format=None):
-        serializer = apartment_detail_serializer(data=request.data)
-        if serializer.is_valid(raise_exception=True) and request.user.is_seller:
-            serializer.validated_data["seller_id"]=request.user
-            x=serializer.validated_data["price"]
-            y=serializer.validated_data["owner_discount"]
-            z=serializer.validated_data["company_discount"]
-            serializer.validated_data["final_price"]=(x-(((y+z)*x)/100))
-            serializer.save()
+        try:
+            if request.user.is_seller and request.user.profile_completed and request.user.address_completed and request.user.bank_completed:
+                    
+                    
 
-            subject = 'Apartment Added'
-            message = 'Your Apartment has been added'
-            recepient = request.user
-            send_mail(subject,message, EMAIL_HOST_USER, [recepient], fail_silently=False)
 
-            return Response(serializer.data,status=status.HTTP_201_CREATED)
-        else:
-            return Response(serializer.data,status=status.HTTP_400_BAD_REQUEST)
+                print(request.data)
+                
+                seller_price = int(request.data["seller_price"])
+                price = seller_price + ((seller_price*int(request.data["owner_discount"]))/100)
+
+                print(bool(request.data["wifi"]=='true'))
+
+                queryset = seller_bank_details.objects.all()
+                queryset = queryset.filter(user_id=request.user)
+                bank = get_object_or_404(queryset,pk=request.user.pk)
+
+                print(type(bank.currency))
+                print(float(request.data["distance1"]))
+
+                room = apartments(title=request.data["title"],seller_id=request.user,price=price,seller_price=seller_price,owner_discount=int(request.data["owner_discount"]),final_price=seller_price,BHK=int(request.data["BHK"]),photo1=request.data["photo1"],photo2=request.data["photo2"],photo3=request.data["photo3"],photo4=request.data["photo4"],photo5=request.data["photo5"],photo6=request.data["photo6"],
+                location=request.data["location"],city=request.data["city"],state=request.data["state"],country=request.data["country"],landmark=request.data["landmark"],pincode=request.data["pincode"],currency=bank.currency,longitude=float(request.data["longitude"]),latitude=float(request.data["latitude"]),length=int(request.data["length"]),breadth=int(request.data["breadth"]),height=int(request.data["height"]),furniture=request.data["furniture"],category=request.data["category"],
+                facility=request.data["facility"],description=request.data["description"],cctv_building=bool(request.data["cctv_building"]=='true'),building_guard=bool(request.data["building_guard"]=='true'),balcony=int(request.data["balcony"]),windows=int(request.data["windows"]),fans=int(request.data["fans"]),bed_type=request.data["bed_type"],floor_no=int(request.data["floor_no"]),
+                cost_electricity=int(request.data["cost_electricity"]),cost_water=int(request.data["cost_water"]),purified_water=bool(request.data["purified_water"]=='true'),removable_purified_water=bool(request.data["removable_purified_water"]=='true'),cost_purified_water=int(request.data["cost_purified_water"]),TV=bool(request.data["TV"]=='true'),removable_house_TV=bool(request.data["removable_house_TV"]=='true'),
+                cost_TV=int(request.data["cost_TV"]),house_refridgerator=bool(request.data["house_refridgerator"]=='true'),removable_house_refridgerator=bool(request.data["removable_house_refridgerator"]=='true'),cost_refridgerator=int(request.data["cost_refridgerator"]),
+                power_backup=bool(request.data["power_backup"]=='true'),geyser=bool(request.data["geyser"]=='true'),removable_geyser=bool(request.data["removable_geyser"]=='true'),cost_geyser=int(request.data["cost_geyser"]),
+                wifi=bool(request.data["wifi"]=='true'),cost_wifi=int(request.data["cost_wifi"]),removable_wifi=bool(request.data["removable_wifi"]=='true'),AC=bool(request.data["AC"]=='true'),cost_AC=int(request.data["cost_AC"]),removable_AC=bool(request.data["removable_AC"]=='true'),cooler=bool(request.data["cooler"]=='true'),cost_cooler=int(request.data["cost_cooler"]),removable_cooler=bool(request.data["removable_cooler"]=='true'),laundry=bool(request.data["laundry"]=='true'),cost_laundry=int(request.data["cost_laundry"]),
+                apartment_cleaning=bool(request.data["apartment_cleaning"]=='true'),cost_cleaning=int(request.data["cost_cleaning"]),nearby_station1=request.data["nearby_station1"],nearby_station2=request.data["nearby_station2"],distance1=float(request.data["distance1"]),distance2=float(request.data["distance2"]),apartment_policy=request.data["apartment_policy"],
+                address_proof=request.data["address_proof"],washroom=int(request.data["washroom"]),total_rooms=int(request.data["total_rooms"]),total_floors=int(request.data["total_floors"]),total_beds=int(request.data["total_beds"]),total_TV=int(request.data["total_TV"]),total_AC=int(request.data["total_AC"]),total_cooler=int(request.data["total_cooler"]),total_geyser=int(request.data["total_geyser"]),
+                apartment_type=request.data["apartment_type"],sofa=bool(request.data["sofa"]=='true'))
+
+                room.save()
+
+                return Response('success',status=status.HTTP_200_OK)
+            else:
+                return Response('error',status=status.HTTP_400_BAD_REQUEST)
+        except:
+            return Response('error',status=status.HTTP_400_BAD_REQUEST)
 
 
     def update(self, request,pk=None,format=None):
-        serializer = apartment_detail_serializer(data=request.data,partial=True)
-        queryset = apartments.personal_apartments.get_seller_apartments(request.user)
-        apartment = get_object_or_404(queryset,pk=pk)
-        if serializer.is_valid(raise_exception=True):
-            if apartment.price!=serializer.validated_data["price"]: 
-                apartment.price=serializer.validated_data["price"]
+        try:
+        
+            queryset = apartments.objects.all()
+            queryset = queryset.filter(seller_id = request.user)
+            room = get_object_or_404(queryset,pk=pk)
 
-            if apartment.owner_discount!=serializer.validated_data["owner_discount"]: 
-                apartment.owner_discount=serializer.validated_data["owner_discount"]
+            seller_price = int(request.data["seller_price"])
+            our_price = seller_price + ((seller_price*room.commission)/100)
+            price = our_price + ((our_price*(int(request.data["owner_discount"])+room.commission+room.company_discount+room.fake_discount))/100) 
 
-            if apartment.furniture!=serializer.validated_data["furniture"]: 
-                apartment.furniture=serializer.validated_data["furniture"]
+            room.title=request.data["title"]  
+            room.seller_price=seller_price  
+            room.owner_discount=int(request.data["owner_discount"]) 
 
-            if apartment.BHK!=serializer.validated_data["BHK"]: 
-                apartment.BHK=serializer.validated_data["BHK"]
+            room.final_price=our_price
 
-            if apartment.photo1!=serializer.validated_data["photo1"]: 
-                apartment.photo1=serializer.validated_data["photo1"]
+            if(request.data["photo1"]!='undefined'):
+                room.photo1=request.data["photo1"] 
+            if(request.data["photo2"]!='undefined'):
+                room.photo2=request.data["photo2"] 
+            if(request.data["photo3"]!='undefined'):
+                room.photo3=request.data["photo3"] 
+            if(request.data["photo4"]!='undefined'):
+                room.photo4=request.data["photo4"] 
+            if(request.data["photo5"]!='undefined'):
+                room.photo5=request.data["photo5"] 
+            if(request.data["photo6"]!='undefined'):
+                room.photo5=request.data["photo6"] 
+            if(request.data["address_proof"]!='undefined'):
+                room.address_proof=request.data["address_proof"] 
+                        
+            room.location=request.data["location"]                                
+            room.longitude=float(request.data["longitude"])            
+            room.latitude=float(request.data["latitude"])            
+            room.length=int(request.data["length"])            
+            room.breadth=int(request.data["breadth"])            
+            room.height=int(request.data["height"])            
+            room.furniture=request.data["furniture"]            
+            room.category=request.data["category"]                       
+            room.facility=request.data["facility"]            
+            room.description=request.data["description"]            
+            room.cctv_building=bool(request.data["cctv_building"]=='true')           
+            room.building_guard=bool(request.data["building_guard"]=='true')            
+            room.balcony=int(request.data["balcony"])            
+                       
+            room.windows=int(request.data["windows"])            
+            room.fans=int(request.data["fans"])            
+            room.bed_type=request.data["bed_type"]            
+            room.floor_no=int(request.data["floor_no"])            
+            room.cost_electricity=int(request.data["cost_electricity"])            
+            room.cost_water=int(request.data["cost_water"])            
+            room.purified_water=bool(request.data["purified_water"]=='true')            
+            room.removable_purified_water=bool(request.data["removable_purified_water"]=='true')            
+            room.cost_purified_water=int(request.data["cost_purified_water"])            
+            room.TV=bool(request.data["TV"]=='true')            
+            room.removable_house_TV=bool(request.data["removable_house_TV"]=='true')            
+            room.cost_TV=int(request.data["cost_TV"])            
+                 
+            room.house_refridgerator=bool(request.data["house_refridgerator"]=='true')            
+            room.removable_house_refridgerator=bool(request.data["removable_house_refridgerator"]=='true')            
+            room.cost_refridgerator=int(request.data["cost_refridgerator"])            
+           
+            room.power_backup=bool(request.data["power_backup"]=='true')            
+            room.geyser=bool(request.data["geyser"]=='true')            
+            room.removable_geyser=bool(request.data["removable_geyser"]=='true')            
+            room.cost_geyser=int(request.data["cost_geyser"])            
+            room.wifi=bool(request.data["wifi"]=='true')            
+            room.cost_wifi=int(request.data["cost_wifi"])            
+            room.removable_wifi=bool(request.data["removable_wifi"]=='true')            
+            room.AC=bool(request.data["AC"]=='true')            
+            room.cost_AC=int(request.data["cost_AC"])            
+            room.removable_AC=bool(request.data["removable_AC"]=='true')            
+            room.cooler=bool(request.data["cooler"]=='true')            
+            room.cost_cooler=int(request.data["cost_cooler"])            
+            room.removable_cooler=bool(request.data["removable_cooler"]=='true')            
+            room.laundry=bool(request.data["laundry"]=='true')            
+            room.cost_laundry=int(request.data["cost_laundry"])            
+   
+            room.apartment_cleaning=bool(request.data["apartment_cleaning"]=='true')            
+            room.cost_cleaning=int(request.data["cost_cleaning"])            
+            room.nearby_station1=request.data["nearby_station1"]           
+            room.nearby_station2=request.data["nearby_station2"]            
+            room.distance1=float(request.data["distance1"])            
+            room.distance2=float(request.data["distance2"])            
+            room.apartment_policy=request.data["apartment_policy"] 
 
-            if apartment.photo2!=serializer.validated_data["photo2"]: 
-                apartment.photo2=serializer.validated_data["photo2"]
+            room.washroom=int(request.data["washroom"])       
+            room.total_rooms=int(request.data["total_rooms"])       
+            room.total_floors=int(request.data["total_floors"])       
+            room.total_beds=int(request.data["total_beds"])       
+            room.total_TV=int(request.data["total_TV"])       
+            room.total_AC=int(request.data["total_AC"])       
+            room.total_cooler=int(request.data["total_cooler"])       
+            room.total_geyser=int(request.data["total_geyser"])       
+            room.apartment_type=request.data["apartment_type"]       
+            room.sofa=bool(request.data["sofa"]=='true')           
 
-            if apartment.photo3!=serializer.validated_data["photo3"]: 
-                apartment.photo3=serializer.validated_data["photo3"]
+            room.save()
 
-            if apartment.photo4!=serializer.validated_data["photo4"]: 
-                apartment.photo4=serializer.validated_data["photo4"]
-            
-            if apartment.photo5!=serializer.validated_data["photo5"]: 
-                apartment.photo5=serializer.validated_data["photo5"]
-
-            if apartment.booked!=serializer.validated_data["booked"]: 
-                apartment.booked=serializer.validated_data["booked"]
-
-            if apartment.facility!=serializer.validated_data["facility"]: 
-                apartment.facility=serializer.validated_data["facility"]
-
-            if apartment.description!=serializer.validated_data["description"]: 
-                apartment.description=serializer.validated_data["description"]
-
-            if apartment.electricity!=serializer.validated_data["electricity"]: 
-                apartment.electricity=serializer.validated_data["electricity"]
-            
-            if apartment.water_facility!=serializer.validated_data["water_facility"]: 
-                apartment.water_facility=serializer.validated_data["water_facility"]
-
-            if apartment.power_backup!=serializer.validated_data["power_backup"]: 
-                apartment.power_backup=serializer.validated_data["power_backup"]
-
-            if apartment.geyser!=serializer.validated_data["geyser"]: 
-                apartment.geyser=serializer.validated_data["geyser"]
-
-            if apartment.nearby_station1!=serializer.validated_data["nearby_station1"]: 
-                apartment.nearby_station1=serializer.validated_data["nearby_station1"]
-            
-            if apartment.nearby_station2!=serializer.validated_data["nearby_station2"]: 
-                apartment.nearby_station2=serializer.validated_data["nearby_station2"]
-
-            if apartment.nearby_restaurant1!=serializer.validated_data["nearby_restaurant1"]: 
-                apartment.nearby_restaurant1=serializer.validated_data["nearby_restaurant1"]
-
-            if apartment.nearby_restaurant2!=serializer.validated_data["nearby_restaurant2"]: 
-                apartment.nearby_restaurant2=serializer.validated_data["nearby_restaurant2"]
-
-            if apartment.wifi!=serializer.validated_data["wifi"]: 
-                apartment.wifi=serializer.validated_data["wifi"]
-            
-            if apartment.room_policy!=serializer.validated_data["apartment_policy"]: 
-                apartment.room_policy=serializer.validated_data["apartment_policy"]
+            print('success')
 
 
-            x=serializer.validated_data["price"]
-            y=serializer.validated_data["owner_discount"]
-            z=apartment.company_discount
-            apartment.final_price=(x-(((y+z)*x)/100))
-            
-            apartment.save()
-            return Response(serializer.data,status=status.HTTP_202_ACCEPTED)
-        else:
-            return Response(serializer.data,status=status.HTTP_400_BAD_REQUEST)
+
+            return Response('success',status=status.HTTP_200_OK)
+        except:
+            return Response('error',status=status.HTTP_400_BAD_REQUEST)
 
     def destroy(self,request,pk=None):
-        queryset = apartments.personal_apartments.get_seller_apartments(request.user)
-        apartment = get_object_or_404(queryset,pk=pk)
-        apartment.delete()
+        try:
+            queryset = apartments.objects.all()
+            queryset = queryset.filter(seller_id = request.user)
+            room = get_object_or_404(queryset,pk=pk)
+            room.removed = True
+            room.save()
 
-        subject = 'Apartment Deleted'
-        message = 'Your apartment has been deleted'
-        recepient = request.user
-        send_mail(subject,message, EMAIL_HOST_USER, [recepient], fail_silently=False)
+            subject = 'Apartment Deleted'
+            message = 'Your Apartment has been deleted'
+            recepient = request.user
+            send_mail(subject,message, EMAIL_HOST_USER, [recepient], fail_silently=False)
 
-        return Response("Deleted",status=status.HTTP_200_OK)
+            return Response("Deleted",status=status.HTTP_200_OK)
+
+        except:
+            return Response('error',status=status.HTTP_400_BAD_REQUEST)
+
+    def partial_update(self,request,pk=None):
+        try:
+            print('hy')
+            queryset = apartments.objects.all()
+            queryset = queryset.filter(seller_id = request.user)
+            room = get_object_or_404(queryset,pk=pk)
+
+            if room.pausebooking==True:
+
+                room.pausebooking = False
+                room.save()
+                subject = 'Booking resumed'
+                message = 'Bookings on your apartment is resumed'
+                recepient = request.user
+                send_mail(subject,message, EMAIL_HOST_USER, [recepient], fail_silently=False)
+
+                return Response("Success",status=status.HTTP_200_OK)
+
+            if room.pausebooking==False:
+        
+                room.pausebooking = True
+                room.save()
+                subject = 'Booking paused'
+                message = 'Bookings on your apartment is paused'
+                recepient = request.user
+                send_mail(subject,message, EMAIL_HOST_USER, [recepient], fail_silently=False)
+
+                return Response("Success",status=status.HTTP_200_OK)
+        except:
+            return Response('error',status=status.HTTP_400_BAD_REQUEST)
     
 class minmax_apartment_viewset(viewsets.ReadOnlyModelViewSet):
     queryset = minmax_apartment.objects.all()

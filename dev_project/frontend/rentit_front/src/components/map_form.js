@@ -32,7 +32,7 @@ const center = {
   lng: 78.9629,
 };
 
-export default function App() {
+export default function App({value,setvalue}) {
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries,
@@ -49,6 +49,10 @@ export default function App() {
         time: new Date(),
       },
     ]);
+    setvalue('longitude',e.latLng.lng())
+    setvalue('latitude',e.latLng.lat())
+    console.log(e.latLng.lat())
+    console.log(e.latLng.lng())
   }, []);
 
   const mapRef = React.useRef();

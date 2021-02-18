@@ -55,27 +55,46 @@ const validationSchema = yup.object({
   .boolean()
   .required('You must answer this '),
   
-  house_TV: yup
+  TV: yup
   .boolean()
   .required('You must answer this '),
   
   cost_TV: yup
   .number().integer('please enter integer'),
+
+  BHK: yup
+  .number().integer('please enter integer'),
+
+  total_beds: yup
+  .number().integer('please enter integer'),
+
+  total_AC: yup
+  .number().integer('please enter integer'),
+
+  total_TV: yup
+  .number().integer('please enter integer'),
+
+  total_cooler: yup
+  .number().integer('please enter integer'),
+
+  total_geyser: yup
+  .number().integer('please enter integer'),
+
+  total_rooms: yup
+  .number().integer('please enter integer'),
+
+  total_floors: yup
+  .number().integer('please enter integer'),
+
+  washroom: yup
+  .number().integer('please enter integer'),
+
+  sofa: yup
+  .boolean()
+  .required('You must answer this '),
   
   
   removable_house_TV: yup
-  .boolean()
-  .required('You must answer this '),
-  
-  room_TV: yup
-  .boolean()
-  .required('You must answer this '),
-  
-  cost_roomTV: yup
-  .number().integer('please enter integer'),
-  
-  
-  removable_room_TV: yup
   .boolean()
   .required('You must answer this '),
   
@@ -83,17 +102,7 @@ const validationSchema = yup.object({
   .boolean()
   .required('You must answer this '),
   
-  room_refridgerator: yup
-  .boolean()
-  .required('You must answer this '),
   
-  cost_roomrefridgerator: yup
-  .number().integer('please enter integer'),
-  
-  
-  removable_room_refridgerator: yup
-  .boolean()
-  .required('You must answer this '),
   
   purified_water: yup
   .boolean()
@@ -143,41 +152,7 @@ const validationSchema = yup.object({
   .boolean()
   .required('You must answer this '),
   
-  breakfast: yup
-  .boolean()
-  .required('You must answer this '),
-  
-  cost_breakfast: yup
-  .number().integer('please enter integer'),
-  
-  
-  removable_breakfast: yup
-  .boolean()
-  .required('You must answer this '),
-  
-  lunch: yup
-  .boolean()
-  .required('You must answer this '),
-  
-  cost_lunch: yup
-  .number().integer('please enter integer'),
-  
-  
-  removable_lunch: yup
-  .boolean()
-  .required('You must answer this '),
-  
-  dinner: yup
-  .boolean()
-  .required('You must answer this '),
-  
-  cost_dinner: yup
-  .number().integer('please enter integer'),
-  
-  
-  removable_dinner: yup
-  .boolean()
-  .required('You must answer this '),
+ 
   
   laundry: yup
   .boolean()
@@ -187,15 +162,8 @@ const validationSchema = yup.object({
   .number().integer('please enter integer'),
   
   
-  iron: yup
-  .boolean()
-  .required('You must answer this '),
   
-  cost_iron: yup
-  .number().integer('please enter integer'),
-  
-  
-  room_cleaning: yup
+  apartment_cleaning: yup
   .boolean()
   .required('You must answer this '),
   
@@ -203,7 +171,7 @@ const validationSchema = yup.object({
   .number().integer('please enter integer'),
   
   
-  capacity: yup
+  BHK: yup
   .number().integer('please enter integer'),
   
   windows: yup
@@ -223,6 +191,10 @@ const validationSchema = yup.object({
   category: yup
   .string('Please, provide the appropriate answer')
   .required('You must answer this '),
+
+  apartment_type: yup
+  .string('Please, provide the appropriate answer')
+  .required('You must answer this '),
   
   city: yup
   .string('Please, provide the appropriate answer')
@@ -236,9 +208,7 @@ const validationSchema = yup.object({
   .string('Please, provide the appropriate answer')
   .required('You must answer this '),
   
-  separate_washroom: yup
-  .boolean()
-  .required('You must answer this '),
+ 
   
   location: yup
   .string('Please, provide the appropriate answer')
@@ -292,13 +262,7 @@ const validationSchema = yup.object({
   .boolean()
   .required('You must answer this '),
   
-  veg_food: yup
-  .boolean()
-  .required('You must answer this '),
   
-  nonveg_food: yup
-  .boolean()
-  .required('You must answer this '),
   
   seller_price: yup
   .number().integer('please enter integer'),
@@ -307,9 +271,7 @@ const validationSchema = yup.object({
   owner_discount: yup
   .number().integer('please enter integer'),
   
-  guest_allowed: yup
-  .boolean()
-  .required('You must answer this '),
+  
   
   longitude: yup
   .string('Please, provide the appropriate answer')
@@ -487,6 +449,36 @@ const validationSchema = yup.object({
           value => value && SUPPORTED_FORMATS.includes(value.type)
       ),
     }),
+
+    photo6: yup.mixed().when("input6", {
+        is: true,
+        then: yup.mixed().required("A file is required")
+        .test(
+            "fileSize",
+            "File too large",
+            value => value && value.size <= FILE_SIZE
+        )
+        .test(
+            "fileFormat",
+            "Unsupported Format",
+            value => value && SUPPORTED_FORMATS.includes(value.type)
+        ),
+      }),
+
+      photo6: yup.mixed().when("edit", {
+        is: false,
+        then: yup.mixed().required("A file is required")
+        .test(
+            "fileSize",
+            "File too large",
+            value => value && value.size <= FILE_SIZE
+        )
+        .test(
+            "fileFormat",
+            "Unsupported Format",
+            value => value && SUPPORTED_FORMATS.includes(value.type)
+        ),
+      }),
   
   address_proof: yup.mixed().when("edit", {
       is: false,
@@ -560,7 +552,7 @@ const useStyles = makeStyles(theme => ({
     },
   }));
 
-function RoomForm (props){
+function ApartmentForm (props){
   const theme = useTheme();
     const classes = useStyles();
     const hiddenFileInput1 = React.useRef(null);
@@ -568,33 +560,27 @@ function RoomForm (props){
     const hiddenFileInput3 = React.useRef(null);
     const hiddenFileInput4 = React.useRef(null);
     const hiddenFileInput5 = React.useRef(null);
+    const hiddenFileInput6 = React.useRef(null);
 
     const [input1,setinput1] = React.useState(false);
     const [input2,setinput2] = React.useState(false);
     const [input3,setinput3] = React.useState(false);
     const [input4,setinput4] = React.useState(false);
     const [input5,setinput5] = React.useState(false);
+    const [input6,setinput6] = React.useState(false);
     const [newfile,setnewfile] = React.useState(false);
     const [myroom,setroom] = useState({
       wifi:'',
       cost_wifi:'',
       removable_wifi:false,
 
-      house_TV:'',
+      TV:'',
       cost_TV:'',
       removable_house_TV:false,
-
-      room_TV:'',
-      cost_roomTV:'',
-      removable_room_TV:false,
 
       house_refridgerator:'',
       cost_refridgerator:'',
       removable_house_refridgerator:false,
-
-      room_refridgerator:'',
-      cost_roomrefridgerator:'',
-      removable_room_refridgerator:false,
 
       purified_water:'',
       cost_purified_water:'',
@@ -603,9 +589,6 @@ function RoomForm (props){
       AC:'',
       cost_AC:'',
       removable_AC:'',
-
-      iron:'',
-      cost_iron:0,
 
       laundry:'',
       cost_laundry:0,
@@ -618,27 +601,15 @@ function RoomForm (props){
       cost_cooler:'',
       removable_cooler:false,
 
-      breakfast:'',
-      cost_breakfast:'',
-      removable_breakfast:false,
-
-      lunch:'',
-      cost_lunch:'',
-      removable_lunch:false,
-
-      dinner:'',
-      cost_dinner:'',
-      removable_dinner:false,
-
       cost_electricity:'',
       cost_water:'',
 
-      room_cleaning:'',
+      apartment_cleaning:'',
       cost_cleaning:'',
 
-      capacity:'',
+      BHK:0,
       balcony:0,
-      separate_washroom:'',
+    
       title:'',
       seller_price:'',
       owner_discount:0,
@@ -656,11 +627,7 @@ function RoomForm (props){
       description:'',
       fans:1,
       floor_no:0,
-
-
-      veg_food:'',
-      nonveg_food:'',
-      food_policy:'',
+    
 
       city:'',
       state:'',
@@ -676,10 +643,7 @@ function RoomForm (props){
       distance1:0,
       distance2:0,
 
-      guest_allowed:'',
-      guest_policy:'',
-
-      room_policy:'',
+      apartment_policy:'',
 
       address_proof:'',
 
@@ -688,11 +652,25 @@ function RoomForm (props){
       photo3:'',
       photo4:'',
       photo5:'',
+      photo6:'',
       file1:"/addroom.png",
       file2:"/addroom.png",
       file3:"/addroom.png",
       file4:"/addroom.png",
       file5:"/addroom.png",
+      file6:"/addroom.png",
+
+      total_rooms:1,
+      total_floors:1,
+      total_beds:1,
+      sofa:false,
+      total_AC:0,
+      total_TV:0,
+      total_cooler:0,
+      total_geyser:0,
+      apartment_type:'',
+      washroom:0,
+
     })
 
     const [edit,setedit] = useState(false)
@@ -713,28 +691,20 @@ function RoomForm (props){
               
               if(props.profile && roomid)
               {
-                try{const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcewdsfdaegds/my_rooms/${roomid}/`,config);
+                try{const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourceddnvslf54d/my_apartments/${roomid}/`,config);
                 console.log(res.data)
                 setroom({
                   wifi:res.data.wifi,
                   cost_wifi:res.data.cost_wifi,
                   removable_wifi:res.data.removable_wifi,
 
-                  house_TV:res.data.house_TV,
+                  TV:res.data.TV,
                   cost_TV:res.data.cost_TV,
                   removable_house_TV:res.data.removable_house_TV,
-
-                  room_TV:res.data.room_TV,
-                  cost_roomTV:res.data.cost_roomTV,
-                  removable_room_TV:res.data.removable_room_TV,
 
                   house_refridgerator:res.data.house_refridgerator,
                   cost_refridgerator:res.data.cost_refridgerator,
                   removable_house_refridgerator:res.data.removable_house_refridgerator,
-
-                  room_refridgerator:res.data.room_refridgerator,
-                  cost_roomrefridgerator:res.data.cost_roomrefridgerator,
-                  removable_room_refridgerator:res.data.removable_room_refridgerator,
 
                   purified_water:res.data.purified_water,
                   cost_purified_water:res.data.cost_purified_water,
@@ -743,9 +713,6 @@ function RoomForm (props){
                   AC:res.data.AC,
                   cost_AC:res.data.cost_AC,
                   removable_AC:res.data.removable_AC,
-
-                  iron:res.data.iron,
-                  cost_iron:res.data.cost_iron,
 
                   laundry:res.data.laundry,
                   cost_laundry:res.data.cost_laundry,
@@ -758,27 +725,15 @@ function RoomForm (props){
                   cost_cooler:res.data.cost_cooler,
                   removable_cooler:res.data.removable_cooler,
 
-                  breakfast:res.data.breakfast,
-                  cost_breakfast:res.data.cost_breakfast,
-                  removable_breakfast:res.data.removable_breakfast,
-
-                  lunch:res.data.lunch,
-                  cost_lunch:res.data.cost_lunch,
-                  removable_lunch:res.data.removable_lunch,
-
-                  dinner:res.data.dinner,
-                  cost_dinner:res.data.cost_dinner,
-                  removable_dinner:res.data.removable_dinner,
-
                   cost_electricity:res.data.cost_electricity,
                   cost_water:res.data.cost_water,
 
-                  room_cleaning:res.data.room_cleaning,
+                  apartment_cleaning:res.data.apartment_cleaning,
                   cost_cleaning:res.data.cost_cleaning,
 
-                  capacity:res.data.capacity,
+                  BHK:res.data.BHK,
                   balcony:res.data.balcony,
-                  separate_washroom:res.data.separate_washroom,
+                  
                   title:res.data.title,
                   seller_price:res.data.seller_price,
                   owner_discount:res.data.owner_discount,
@@ -797,11 +752,6 @@ function RoomForm (props){
                   fans:res.data.fans,
                   floor_no:res.data.floor_no,
 
-
-                  veg_food:res.data.veg_food,
-                  nonveg_food:res.data.nonveg_food,
-                  food_policy:res.data.food_policy,
-
                   city:res.data.city,
                   state:res.data.state,
                   country:res.data.country,
@@ -816,10 +766,7 @@ function RoomForm (props){
                   distance1:res.data.distance1,
                   distance2:res.data.distance2,
 
-                  guest_allowed:res.data.guest_allowed,
-                  guest_policy:res.data.guest_policy,
-
-                  room_policy:res.data.room_policy,
+                  apartment_policy:res.data.apartment_policy,
 
                   address_proof:res.data.address_proof,
 
@@ -828,12 +775,25 @@ function RoomForm (props){
                   photo3:res.data.photo3,
                   photo4:res.data.photo4,
                   photo5:res.data.photo5,
+                  photo6:res.data.photo6,
 
                   file1:res.data.photo1,
                   file2:res.data.photo2,
                   file3:res.data.photo3,
                   file4:res.data.photo4,
                   file5:res.data.photo5,
+                  file6:res.data.photo6,
+
+                  total_rooms:res.data.total_rooms,
+                    total_floors:res.data.total_floors,
+                    total_beds:res.data.total_beds,
+                    sofa:res.data.sofa,
+                    total_AC:res.data.total_AC,
+                    total_TV:res.data.total_TV,
+                    total_cooler:res.data.total_cooler,
+                    total_geyser:res.data.total_geyser,
+                    apartment_type:res.data.apartment_type,
+                    washroom:res.data.washroom,
                 })
                 setedit(true);
                 
@@ -847,7 +807,7 @@ function RoomForm (props){
         }
     }
     
-    ,[props.profile])
+    ,[props.profile,roomid])
 
     
 
@@ -862,21 +822,13 @@ function RoomForm (props){
       cost_wifi:myroom.cost_wifi,
       removable_wifi:myroom.removable_wifi,
 
-      house_TV:myroom.house_TV,
+      TV:myroom.TV,
       cost_TV:myroom.cost_TV,
       removable_house_TV:myroom.removable_house_TV,
-
-      room_TV:myroom.room_TV,
-      cost_roomTV:myroom.cost_roomTV,
-      removable_room_TV:myroom.removable_room_TV,
 
       house_refridgerator:myroom.house_refridgerator,
       cost_refridgerator:myroom.cost_refridgerator,
       removable_house_refridgerator:myroom.removable_house_refridgerator,
-
-      room_refridgerator:myroom.room_refridgerator,
-      cost_roomrefridgerator:myroom.cost_roomrefridgerator,
-      removable_room_refridgerator:myroom.removable_room_refridgerator,
 
       purified_water:myroom.purified_water,
       cost_purified_water:myroom.cost_purified_water,
@@ -885,9 +837,6 @@ function RoomForm (props){
       AC:myroom.AC,
       cost_AC:myroom.cost_AC,
       removable_AC:myroom.removable_AC,
-
-      iron:myroom.iron,
-      cost_iron:myroom.cost_iron,
 
       laundry:myroom.laundry,
       cost_laundry:myroom.cost_laundry,
@@ -900,27 +849,16 @@ function RoomForm (props){
       cost_cooler:myroom.cost_cooler,
       removable_cooler:myroom.removable_cooler,
 
-      breakfast:myroom.breakfast,
-      cost_breakfast:myroom.cost_breakfast,
-      removable_breakfast:myroom.removable_breakfast,
-
-      lunch:myroom.lunch,
-      cost_lunch:myroom.cost_lunch,
-      removable_lunch:myroom.removable_lunch,
-
-      dinner:myroom.dinner,
-      cost_dinner:myroom.cost_dinner,
-      removable_dinner:myroom.removable_dinner,
 
       cost_electricity:myroom.cost_electricity,
       cost_water:myroom.cost_water,
 
-      room_cleaning:myroom.room_cleaning,
+      apartment_cleaning:myroom.apartment_cleaning,
       cost_cleaning:myroom.cost_cleaning,
 
-      capacity:myroom.capacity,
+      BHK:myroom.BHK,
       balcony:myroom.balcony,
-      separate_washroom:myroom.separate_washroom,
+      
       title:myroom.title,
       seller_price:myroom.seller_price,
       owner_discount:myroom.owner_discount,
@@ -940,11 +878,6 @@ function RoomForm (props){
 
       bed_type:myroom.bed_type,
 
-
-      veg_food:myroom.veg_food,
-      nonveg_food:myroom.nonveg_food,
-      food_policy:myroom.food_policy,
-
       city:myroom.city,
       state:myroom.state,
       country:myroom.country,
@@ -959,14 +892,21 @@ function RoomForm (props){
       distance1:myroom.distance1,
       distance2:myroom.distance2,
 
-      guest_allowed:myroom.guest_allowed,
-      guest_policy:myroom.guest_policy,
+      apartment_policy:myroom.apartment_policy,
 
-      room_policy:myroom.room_policy,
+      total_rooms:myroom.total_rooms,
+    total_floors:myroom.total_floors,
+    total_beds:myroom.total_beds,
+    sofa:myroom.sofa,
+    total_AC:myroom.total_AC,
+    total_TV:myroom.total_TV,
+    total_cooler:myroom.total_cooler,
+    total_geyser:myroom.total_geyser,
+    apartment_type:myroom.apartment_type,
+    washroom:myroom.washroom,
 
-      address_proof:myroom.address_proof,
+    address_proof:myroom.address_proof,
 
-      
 
       
       
@@ -981,21 +921,13 @@ function RoomForm (props){
       form_data.append('cost_wifi',values.cost_wifi)
       form_data.append('removable_wifi',values.removable_wifi)
 
-      form_data.append('house_TV',values.house_TV)
+      form_data.append('TV',values.TV)
       form_data.append('cost_TV',values.cost_TV)
       form_data.append('removable_house_TV',values.removable_house_TV)
-
-      form_data.append('room_TV',values.room_TV)
-      form_data.append('cost_roomTV',values.cost_roomTV)
-      form_data.append('removable_room_TV',values.removable_room_TV)
 
       form_data.append('house_refridgerator',values.house_refridgerator)
       form_data.append('cost_refridgerator',values.cost_refridgerator)
       form_data.append('removable_house_refridgerator',values.removable_house_refridgerator)
-
-      form_data.append('room_refridgerator',values.room_refridgerator)
-      form_data.append('cost_roomrefridgerator',values.cost_roomrefridgerator)
-      form_data.append('removable_room_refridgerator',values.removable_room_refridgerator)
 
       form_data.append('AC',values.AC)
       form_data.append('cost_AC',values.cost_AC)
@@ -1013,25 +945,10 @@ function RoomForm (props){
       form_data.append('cost_cooler',values.cost_cooler)
       form_data.append('removable_cooler',values.removable_cooler)
 
-      form_data.append('breakfast',values.breakfast)
-      form_data.append('cost_breakfast',values.cost_breakfast)
-      form_data.append('removable_breakfast',values.removable_breakfast)
-
-      form_data.append('lunch',values.lunch)
-      form_data.append('cost_lunch',values.cost_cooler)
-      form_data.append('removable_lunch',values.removable_lunch)
-
-      form_data.append('dinner',values.dinner)
-      form_data.append('cost_dinner',values.cost_dinner)
-      form_data.append('removable_dinner',values.removable_dinner)
-
       form_data.append('laundry',values.laundry)
       form_data.append('cost_laundry',values.cost_laundry)
 
-      form_data.append('iron',values.iron)
-      form_data.append('cost_iron',values.cost_iron)
-
-      form_data.append('room_cleaning',values.room_cleaning)
+      form_data.append('apartment_cleaning',values.apartment_cleaning)
       form_data.append('cost_cleaning',values.cost_cleaning)
 
       form_data.append('cost_electricity',values.cost_electricity)
@@ -1053,18 +970,16 @@ function RoomForm (props){
       form_data.append('distance1',values.distance1)
       form_data.append('distance2',values.distance2)
 
-      form_data.append('veg_food',values.veg_food)
-      form_data.append('nonveg_food',values.nonveg_food)
-
       form_data.append('photo1',values.photo1)
       form_data.append('photo2',values.photo2)
       form_data.append('photo3',values.photo3)
       form_data.append('photo4',values.photo4)
       form_data.append('photo5',values.photo5)
+      form_data.append('photo6',values.photo6)
 
       form_data.append('address_proof',values.address_proof)
 
-      form_data.append('capacity',values.capacity)
+      form_data.append('BHK',values.BHK)
       form_data.append('windows',values.windows)
       form_data.append('fans',values.fans)
       form_data.append('floor_no',values.floor_no)
@@ -1072,7 +987,7 @@ function RoomForm (props){
       form_data.append('separate_washroom',values.separate_washroom)
       form_data.append('cctv_building',values.cctv_building)
       form_data.append('building_guard',values.building_guard)
-      form_data.append('guest_allowed',values.guest_allowed)
+     
       form_data.append('owner_discount',values.owner_discount)
       form_data.append('seller_price',values.seller_price)
       form_data.append('power_backup',values.power_backup)
@@ -1087,31 +1002,26 @@ function RoomForm (props){
 
       form_data.append('height',values.height)
 
-      if(values.food_policy!='')
+      form_data.append('washroom',values.washroom)
+      form_data.append('total_rooms',values.total_rooms)
+      form_data.append('total_floors',values.total_floors)
+      form_data.append('total_beds',values.total_beds)
+      form_data.append('sofa',values.sofa)
+      form_data.append('total_AC',values.total_AC)
+      form_data.append('total_TV',values.total_TV)
+      form_data.append('total_cooler',values.total_cooler)
+      form_data.append('total_geyser',values.total_geyser)
+      form_data.append('apartment_type',values.apartment_type)
+
+      if(values.apartment_policy!='')
       {
-        form_data.append('food_policy',values.food_policy)
+        form_data.append('apartment_policy',values.apartment_policy)
       }
       else{
-        form_data.append('food_policy','None')
+        form_data.append('apartment_policy','None')
       }
 
-
-      if(values.room_policy!='')
-      {
-        form_data.append('room_policy',values.room_policy)
-      }
-      else{
-        form_data.append('room_policy','None')
-      }
-
-      if(values.guest_policy!='')
-      {
-        form_data.append('guest_policy',values.guest_policy)
-      }
-      else{
-        form_data.append('guest_policy','None')
-      }
-
+    
       if(values.facility!='')
       {
         form_data.append('facility',values.facility)
@@ -1139,7 +1049,7 @@ function RoomForm (props){
       
       if(edit===true)
       {
-        try{const res = await axios.put(`${process.env.REACT_APP_API_URL}/sourcewdsfdaegds/my_rooms/${roomid}/`,form_data,config);
+        try{const res = await axios.put(`${process.env.REACT_APP_API_URL}/sourceddnvslf54d/my_apartments/${roomid}/`,form_data,config);
             setload(false)  
           setredirect(true)
               
@@ -1152,7 +1062,7 @@ function RoomForm (props){
                 }
       }
       else{
-        try{const res = await axios.post(`${process.env.REACT_APP_API_URL}/sourcewdsfdaegds/my_rooms/`,form_data,config);
+        try{const res = await axios.post(`${process.env.REACT_APP_API_URL}/sourceddnvslf54d/my_apartments/`,form_data,config);
         setload(false)  
         setredirect(true)
 
@@ -1161,6 +1071,7 @@ function RoomForm (props){
                   setload(false)  
                   console.log('error')
                   seterror(true)
+                  
                  
                 }
       }
@@ -1231,22 +1142,22 @@ useEffect(
   () => {
     
     if(formik.values.cost_refridgerator!==formik.values.cost_refridgerator){formik.setFieldValue('cost_refridgerator',0);}
-    if(formik.values.cost_roomrefridgerator!==formik.values.cost_roomrefridgerator){formik.setFieldValue('cost_roomrefridgerator',0);}
+   
     
   
   }
-,[formik.values.cost_refridgerator,formik.values.cost_roomrefridgerator])
+,[formik.values.cost_refridgerator])
 
 
 useEffect(
   () => {
     
     if(formik.values.cost_TV!==formik.values.cost_TV){formik.setFieldValue('cost_TV',0);}
-    if(formik.values.cost_roomTV!==formik.values.cost_roomTV){formik.setFieldValue('cost_roomTV',0);}
+  
     
   
   }
-,[formik.values.cost_TV,formik.values.cost_roomTV])
+,[formik.values.cost_TV])
 
 
 useEffect(
@@ -1278,15 +1189,13 @@ useEffect(
     
     if(formik.values.distance1!==formik.values.distance1){formik.setFieldValue('distance1',0);}
     if(formik.values.distance2!==formik.values.distance2){formik.setFieldValue('distance2',0);}
-    if(formik.values.cost_breakfast!==formik.values.cost_breakfast){formik.setFieldValue('cost_breakfast',0);}
-    if(formik.values.cost_lunch!==formik.values.cost_lunch){formik.setFieldValue('cost_lunch',0);}
-    if(formik.values.cost_dinner!==formik.values.cost_dinner){formik.setFieldValue('cost_dinner',0);}
+    
     if(formik.values.cost_laundry!==formik.values.cost_laundry){formik.setFieldValue('cost_laundry',0);}
-    if(formik.values.cost_iron!==formik.values.cost_iron){formik.setFieldValue('cost_iron',0);}
+   
     if(formik.values.cost_cleaning!==formik.values.cost_cleaning){formik.setFieldValue('cost_cleaning',0);}
   
   }
-,[formik.values.distance1,formik.values.distance2,formik.values.cost_breakfast,formik.values.cost_laundry,formik.values.cost_lunch,formik.values.cost_dinner,formik.values.cost_cleaning,formik.values.cost_iron])
+,[formik.values.distance1,formik.values.distance2,formik.values.cost_laundry,formik.values.cost_cleaning])
 
 
 
@@ -1294,7 +1203,7 @@ useEffect(
 
   if(redirect==true)
   {
-    return <Redirect to='/dashboard/my_rooms' />
+    return <Redirect to='/dashboard/my_apartments' />
   }
   if(error===true)
   {
@@ -1390,6 +1299,18 @@ useEffect(
           setroom({...myroom,file5: URL.createObjectURL(event.target.files[0]),photo5:event.target.files[0]});  formik.setFieldValue('photo5',event.target.files[0]);  setinput5(true)}}/> 
 
           </Grid>
+
+          <Grid item className={classes.imageclass}>
+
+            <Button variant='contained' className={classes.buttonclass} onClick={(e) => {hiddenFileInput6.current.click();}}>
+            <img src={myroom.file6} className={classes.imageclass}/>
+            </Button>
+
+            <input type='file'  ref={hiddenFileInput6} style={{display:'none'}}  id='photo6' accept='image/png,image/jpeg,image/jpg' onChange={(event) => {console.log(event.currentTarget.files[0]);
+            setroom({...myroom,file6: URL.createObjectURL(event.target.files[0]),photo6:event.target.files[0]});  formik.setFieldValue('photo6',event.target.files[0]);  setinput6(true)}}/> 
+
+        </Grid>
+         
       </Grid>
 
 
@@ -1408,7 +1329,7 @@ useEffect(
           rows={1}
           id="title"
           name="title"
-          label="Room name"
+          label="Apartment name"
           value={formik.values.title}
           onChange={formik.handleChange}
           error={formik.touched.title && Boolean(formik.errors.title)}
@@ -1420,47 +1341,6 @@ useEffect(
 
         
 
-        
-        <Grid
-        container
-        direction="row"
-        justify="center"
-        alignItems="center"
-        spacing={1}
-      >
-        <Grid item>
-        <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-            Capacity of your room
-          </Typography>
-        </Grid>
-          <Grid item>
-        <FormControl className={classes.formControl}>
-        
-            <InputLabel id="capacity">Capacity</InputLabel>
-            <Select
-            labelId="capacity"
-            id="capacity"
-            value={formik.values.capacity}
-            onChange={(e) => formik.setFieldValue('capacity',e.target.value)}
-            error={formik.touched.capacity && Boolean(formik.errors.capacity)}
-            helperText={formik.touched.capacity && formik.errors.capacity}
-            >
-            <MenuItem value={1}>1</MenuItem>
-            <MenuItem value={2}>2</MenuItem>
-            <MenuItem value={3}>3</MenuItem>
-            <MenuItem value={4}>4</MenuItem>
-            <MenuItem value={5}>5</MenuItem>
-            <MenuItem value={6}>6</MenuItem>
-            <MenuItem value={7}>7</MenuItem>
-            <MenuItem value={8}>8</MenuItem>
-            <MenuItem value={9}>9</MenuItem>
-            <MenuItem value={10}>10</MenuItem>
-            </Select>
-        </FormControl>
-      </Grid>
-    </Grid>
-
-    <br />
 
         <Grid
         container
@@ -1471,7 +1351,7 @@ useEffect(
       >
         <Grid item>
         <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-            No. of windows in the room
+            No. of windows in the apartment
           </Typography>
         </Grid>
           <Grid item>
@@ -1500,7 +1380,7 @@ useEffect(
       >
         <Grid item>
         <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-            No. of balcony in the room
+            No. of balcony in the apartment
           </Typography>
         </Grid>
           <Grid item>
@@ -1530,7 +1410,7 @@ useEffect(
       >
         <Grid item>
         <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-            No. of fans in the room
+            No. of fans in the apartment
           </Typography>
         </Grid>
           <Grid item>
@@ -1550,6 +1430,42 @@ useEffect(
           
           <br />
 
+          <Grid
+        container
+        direction="row"
+        justify="center"
+        alignItems="center"
+        spacing={1}
+      >
+        <Grid item>
+        <Typography variant="body1" color="textSecondary" className={classes.textclass}>
+            Apartment type
+          </Typography>
+        </Grid>
+          <Grid item>
+        <FormControl className={classes.formControl}>
+        
+            <InputLabel id="apartment_type">Apartment type</InputLabel>
+            <Select
+            labelId="apartment_type"
+            id="apartment_type"
+            value={formik.values.apartment_type}
+            onChange={(e) => formik.setFieldValue('apartment_type',e.target.value)}
+            error={formik.touched.apartment_type && Boolean(formik.errors.apartment_type)}
+            helperText={formik.touched.apartment_type && formik.errors.apartment_type}
+            >
+          
+          <MenuItem value={'Flat'}>Flat</MenuItem>
+          <MenuItem value={'Bunglow'}>Bunglow</MenuItem>
+            </Select>
+        </FormControl>
+      </Grid>
+    </Grid>
+
+    <br />
+
+          
+
     <Grid
         container
         direction="row"
@@ -1559,7 +1475,7 @@ useEffect(
       >
         <Grid item>
         <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-            Floor no. of room
+            Floor no. of apartment
           </Typography>
         </Grid>
           <Grid item>
@@ -1588,7 +1504,124 @@ useEffect(
       >
         <Grid item>
         <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-            Category of the room
+            No. of washrooms in the apartment
+          </Typography>
+        </Grid>
+          <Grid item>
+          <div>   
+            <Button onClick={() => handleclick1('washroom',formik.values.washroom,formik.setFieldValue)} >
+                <AddIcon />
+            </Button>
+
+            {formik.values.washroom}
+
+            <Button  onClick={() => handleclick2('washroom',formik.values.washroom,formik.setFieldValue)}>
+                <RemoveIcon />
+            </Button>
+        </div>
+      </Grid>
+    </Grid>
+
+    <br />
+
+    <Grid
+        container
+        direction="row"
+        justify="center"
+        alignItems="center"
+        spacing={1}
+      >
+        <Grid item>
+        <Typography variant="body1" color="textSecondary" className={classes.textclass}>
+            No. of rooms in the apartment
+          </Typography>
+        </Grid>
+          <Grid item>
+          <div>   
+            <Button onClick={() => handleclick1('total_rooms',formik.values.total_rooms,formik.setFieldValue)} >
+                <AddIcon />
+            </Button>
+
+            {formik.values.total_rooms}
+
+            <Button  onClick={() => handleclick2('total_rooms',formik.values.total_rooms,formik.setFieldValue)}>
+                <RemoveIcon />
+            </Button>
+        </div>
+      </Grid>
+    </Grid>
+
+    <br />
+
+    <Grid
+        container
+        direction="row"
+        justify="center"
+        alignItems="center"
+        spacing={1}
+      >
+        <Grid item>
+        <Typography variant="body1" color="textSecondary" className={classes.textclass}>
+            No. of floors in the apartment
+          </Typography>
+        </Grid>
+          <Grid item>
+          <div>   
+            <Button onClick={() => handleclick1('total_floors',formik.values.total_floors,formik.setFieldValue)} >
+                <AddIcon />
+            </Button>
+
+            {formik.values.total_floors}
+
+            <Button  onClick={() => handleclick2('total_floors',formik.values.total_floors,formik.setFieldValue)}>
+                <RemoveIcon />
+            </Button>
+        </div>
+      </Grid>
+    </Grid>
+
+    <br />
+
+    <Grid
+        container
+        direction="row"
+        justify="center"
+        alignItems="center"
+        spacing={1}
+      >
+        <Grid item>
+        <Typography variant="body1" color="textSecondary" className={classes.textclass}>
+            BHK of the apartment
+          </Typography>
+        </Grid>
+          <Grid item>
+          <div>   
+            <Button onClick={() => handleclick1('BHK',formik.values.BHK,formik.setFieldValue)} >
+                <AddIcon />
+            </Button>
+
+            {formik.values.BHK}
+
+            <Button  onClick={() => handleclick2('BHK',formik.values.BHK,formik.setFieldValue)}>
+                <RemoveIcon />
+            </Button>
+        </div>
+      </Grid>
+    </Grid>
+
+    <br />
+
+
+    <Grid
+        container
+        direction="row"
+        justify="center"
+        alignItems="center"
+        spacing={1}
+      >
+        <Grid item>
+        <Typography variant="body1" color="textSecondary" className={classes.textclass}>
+            Category of the apartment
           </Typography>
         </Grid>
           <Grid item>
@@ -1641,7 +1674,7 @@ useEffect(
       >
         <Grid item>
         <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-            Bed type provided in the room
+            Bed type provided in the apartment
           </Typography>
         </Grid>
           <Grid item>
@@ -1664,6 +1697,199 @@ useEffect(
       </Grid>
     </Grid>
 
+    <br />
+
+    <Grid
+        container
+        direction="row"
+        justify="center"
+        alignItems="center"
+        spacing={1}
+      >
+        <Grid item>
+        <Typography variant="body1" color="textSecondary" className={classes.textclass}>
+            No. of beds in the apartment
+          </Typography>
+        </Grid>
+          <Grid item>
+          <div>   
+            <Button onClick={() => handleclick1('total_beds',formik.values.total_beds,formik.setFieldValue)} >
+                <AddIcon />
+            </Button>
+
+            {formik.values.total_beds}
+
+            <Button  onClick={() => handleclick2('total_beds',formik.values.total_beds,formik.setFieldValue)}>
+                <RemoveIcon />
+            </Button>
+        </div>
+      </Grid>
+    </Grid>
+
+    <br />
+
+    <Grid
+        container
+        direction="row"
+        justify="center"
+        alignItems="center"
+        spacing={1}
+      >
+        <Grid item>
+        <Typography variant="body1" color="textSecondary" className={classes.textclass}>
+            No. of TV in the apartment
+          </Typography>
+        </Grid>
+          <Grid item>
+          <div>   
+            <Button onClick={() => handleclick1('total_TV',formik.values.total_TV,formik.setFieldValue)} >
+                <AddIcon />
+            </Button>
+
+            {formik.values.total_TV}
+
+            <Button  onClick={() => handleclick2('total_TV',formik.values.total_TV,formik.setFieldValue)}>
+                <RemoveIcon />
+            </Button>
+        </div>
+      </Grid>
+    </Grid>
+
+    <br />
+
+    <Grid
+        container
+        direction="row"
+        justify="center"
+        alignItems="center"
+        spacing={1}
+      >
+        <Grid item>
+        <Typography variant="body1" color="textSecondary" className={classes.textclass}>
+            No. of AC in the apartment
+          </Typography>
+        </Grid>
+          <Grid item>
+          <div>   
+            <Button onClick={() => handleclick1('total_AC',formik.values.total_AC,formik.setFieldValue)} >
+                <AddIcon />
+            </Button>
+
+            {formik.values.total_AC}
+
+            <Button  onClick={() => handleclick2('total_AC',formik.values.total_AC,formik.setFieldValue)}>
+                <RemoveIcon />
+            </Button>
+        </div>
+      </Grid>
+    </Grid>
+
+    <br />
+
+    <Grid
+        container
+        direction="row"
+        justify="center"
+        alignItems="center"
+        spacing={1}
+      >
+        <Grid item>
+        <Typography variant="body1" color="textSecondary" className={classes.textclass}>
+            No. of cooler in the apartment
+          </Typography>
+        </Grid>
+          <Grid item>
+          <div>   
+            <Button onClick={() => handleclick1('total_cooler',formik.values.total_cooler,formik.setFieldValue)} >
+                <AddIcon />
+            </Button>
+
+            {formik.values.total_cooler}
+
+            <Button  onClick={() => handleclick2('total_cooler',formik.values.total_cooler,formik.setFieldValue)}>
+                <RemoveIcon />
+            </Button>
+        </div>
+      </Grid>
+    </Grid>
+
+    <br />
+
+    <Grid
+        container
+        direction="row"
+        justify="center"
+        alignItems="center"
+        spacing={1}
+      >
+        <Grid item>
+        <Typography variant="body1" color="textSecondary" className={classes.textclass}>
+            No. of geyser in the apartment
+          </Typography>
+        </Grid>
+          <Grid item>
+          <div>   
+            <Button onClick={() => handleclick1('total_geyser',formik.values.total_geyser,formik.setFieldValue)} >
+                <AddIcon />
+            </Button>
+
+            {formik.values.total_geyser}
+
+            <Button  onClick={() => handleclick2('total_geyser',formik.values.total_geyser,formik.setFieldValue)}>
+                <RemoveIcon />
+            </Button>
+        </div>
+      </Grid>
+    </Grid>
+
+    <br />
+
+    <Grid
+              container
+              direction="row"
+              justify="center"
+              alignItems="center"
+              spacing={1}
+            >
+            <Grid item>
+            <Typography variant="h6" color="textPrimary">
+              Sofa
+            </Typography>
+            </Grid>
+            </Grid>
+            <br />
+      <Grid
+        container
+        direction="row"
+        justify="center"
+        alignItems="center"
+        spacing={1}
+      >
+        <Grid item>
+        <Typography variant="body1" color="textSecondary" className={classes.textclass}>
+            Do you have Sofa ?
+        </Typography>
+        </Grid>
+          <Grid item>
+        <FormControl className={classes.formControl}>
+        
+            <InputLabel id="sofa">Sofa</InputLabel>
+            <Select
+            labelId="sofa"
+            id="sofa"
+            value={formik.values.sofa}
+            onChange={(e) => {if(e.target.value===false){formik.setFieldValue('sofa',e.target.value);}
+            else{formik.setFieldValue('sofa',e.target.value)}}}
+            error={formik.touched.sofa && Boolean(formik.errors.sofa)}
+            helperText={formik.touched.sofa && formik.errors.sofa}
+            >
+            <MenuItem value={true}>Yes</MenuItem>
+            <MenuItem value={false}>No</MenuItem>
+            </Select>
+        </FormControl>
+      </Grid>
+    </Grid>
+
     <div><br /><Grid
       container
       direction="row"
@@ -1674,7 +1900,7 @@ useEffect(
       
       <Grid item>
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-      Length of the room
+      Length of the apartment
         </Typography>
       </Grid>
         <Grid item>
@@ -1703,7 +1929,7 @@ useEffect(
       
       <Grid item>
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-      Breadth of the room
+      Breadth of the apartment
         </Typography>
       </Grid>
         <Grid item>
@@ -1732,7 +1958,7 @@ useEffect(
       
       <Grid item>
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-      Height of the room
+      Height of the apartment
         </Typography>
       </Grid>
         <Grid item>
@@ -1761,7 +1987,7 @@ useEffect(
       
       <Grid item>
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-      Furniture in the room
+      Furniture in the apartment
         </Typography>
       </Grid>
         <Grid item>
@@ -1789,7 +2015,7 @@ useEffect(
       
       <Grid item>
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-      Description of the room
+      Description of the apartment
         </Typography>
       </Grid>
         <Grid item>
@@ -2067,17 +2293,17 @@ useEffect(
           <Grid item>
         <FormControl className={classes.formControl}>
         
-            <InputLabel id="house_TV">House TV</InputLabel>
+            <InputLabel id="TV">House TV</InputLabel>
             <Select
-            labelId="house_TV"
-            id="house_TV"
-            value={formik.values.house_TV}
-            onChange={(e) => {if(e.target.value===false){formik.setFieldValue('house_TV',e.target.value);
+            labelId="TV"
+            id="TV"
+            value={formik.values.TV}
+            onChange={(e) => {if(e.target.value===false){formik.setFieldValue('TV',e.target.value);
             formik.setFieldValue('cost_TV',0);
             formik.setFieldValue('removable_house_TV',false);}
-            else{formik.setFieldValue('house_TV',e.target.value)}}}
-            error={formik.touched.house_TV && Boolean(formik.errors.house_TV)}
-            helperText={formik.touched.house_TV && formik.errors.house_TV}
+            else{formik.setFieldValue('TV',e.target.value)}}}
+            error={formik.touched.TV && Boolean(formik.errors.TV)}
+            helperText={formik.touched.TV && formik.errors.TV}
             >
             <MenuItem value={true}>Yes</MenuItem>
             <MenuItem value={false}>No</MenuItem>
@@ -2090,7 +2316,7 @@ useEffect(
 
 
     {
-      formik.values.house_TV ? <div><br /><Grid
+      formik.values.TV ? <div><br /><Grid
       container
       direction="row"
       justify="center"
@@ -2123,7 +2349,7 @@ useEffect(
     
 
 {
-      formik.values.house_TV ? <div><br /><Grid
+      formik.values.TV ? <div><br /><Grid
       container
       direction="row"
       justify="center"
@@ -2159,127 +2385,7 @@ useEffect(
     }
 
 
-            <Grid
-              container
-              direction="row"
-              justify="center"
-              alignItems="center"
-              spacing={1}
-            >
-            <Grid item>
-            <Typography variant="h6" color="textPrimary">
-              TV in the room
-            </Typography>
-            </Grid>
-            </Grid>
-            <br />
-      <Grid
-        container
-        direction="row"
-        justify="center"
-        alignItems="center"
-        spacing={1}
-      >
-        <Grid item>
-        <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-            Do you provide TV in the room ?
-        </Typography>
-        </Grid>
-          <Grid item>
-        <FormControl className={classes.formControl}>
-        
-            <InputLabel id="room_TV">Room TV</InputLabel>
-            <Select
-            labelId="room_TV"
-            id="room_TV"
-            value={formik.values.room_TV}
-            onChange={(e) => {if(e.target.value===false){formik.setFieldValue('room_TV',e.target.value);
-            formik.setFieldValue('cost_roomTV',0);
-            formik.setFieldValue('removable_room_TV',false);}
-            else{formik.setFieldValue('room_TV',e.target.value)}}}
-            error={formik.touched.room_TV && Boolean(formik.errors.room_TV)}
-            helperText={formik.touched.room_TV && formik.errors.room_TV}
-            >
-            <MenuItem value={true}>Yes</MenuItem>
-            <MenuItem value={false}>No</MenuItem>
-            </Select>
-        </FormControl>
-      </Grid>
-    </Grid>
-
-    
-
-
-    {
-      formik.values.room_TV ? <div><br /><Grid
-      container
-      direction="row"
-      justify="center"
-      alignItems="center"
-      spacing={1}
-    >
-      
-      <Grid item>
-      <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-      Cost of room TV facility(if not enter 0)
-        </Typography>
-      </Grid>
-        <Grid item>
-        <TextField
-          multiline
-          rows={1}
-          id="cost_roomTV"
-          name="cost_roomTV"
-          label="Cost of room TV facility"
-          value={formik.values.cost_roomTV}
-          onChange={(e) => {formik.setFieldValue('cost_roomTV',parseInt(e.target.value)); 
-          }}
-          error={formik.touched.cost_roomTV && Boolean(formik.errors.cost_roomTV)}
-          helperText={formik.touched.cost_roomTV && formik.errors.cost_roomTV}
-        />
-        </Grid>
-  </Grid></div>
-  : null
-    }
-    
-
-{
-      formik.values.room_TV ? <div><br /><Grid
-      container
-      direction="row"
-      justify="center"
-      alignItems="center"
-      spacing={1}
-    >
-      
-      <Grid item>
-      <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-      Can customers remove room TV facility?
-        </Typography>
-      </Grid>
-        <Grid item>
-        <FormControl className={classes.formControl}>
-        
-            <InputLabel id="removable_room_TV">Removable room TV facility?</InputLabel>
-            <Select
-            labelId="removable_room_TV"
-            id="removable_room_TV"
-            value={formik.values.removable_room_TV}
-            onChange={(e) => {
-            formik.setFieldValue('removable_room_TV',e.target.value)}}
-            error={formik.touched.removable_room_TV && Boolean(formik.errors.removable_room_TV)}
-            helperText={formik.touched.removable_room_TV && formik.errors.removable_room_TV}
-            >
-            <MenuItem value={true}>Yes</MenuItem>
-            <MenuItem value={false}>No</MenuItem>
-            </Select>
-        </FormControl>
-        </Grid>
-  </Grid></div>
-  : null
-    }
-
-
+       
 
 <Grid
             container
@@ -2400,128 +2506,6 @@ useEffect(
 </Grid></div>
 : null
   }
-
-
-          <Grid
-            container
-            direction="row"
-            justify="center"
-            alignItems="center"
-            spacing={1}
-          >
-          <Grid item>
-          <Typography variant="h6" color="textPrimary">
-            Refridgerator in the room
-          </Typography>
-          </Grid>
-          </Grid>
-          <br />
-    <Grid
-      container
-      direction="row"
-      justify="center"
-      alignItems="center"
-      spacing={1}
-    >
-      <Grid item>
-      <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-          Do you provide refridgerator in the room ?
-      </Typography>
-      </Grid>
-        <Grid item>
-      <FormControl className={classes.formControl}>
-      
-          <InputLabel id="room_refridgerator">Room refridgerator</InputLabel>
-          <Select
-          labelId="room_refridgerator"
-          id="room_refridgerator"
-          value={formik.values.room_refridgerator}
-          onChange={(e) => {if(e.target.value===false){formik.setFieldValue('room_refridgerator',e.target.value);
-          formik.setFieldValue('cost_roomrefridgerator',0);
-          formik.setFieldValue('removable_room_refridgerator',false);}
-          else{formik.setFieldValue('room_refridgerator',e.target.value)}}}
-          error={formik.touched.room_refridgerator && Boolean(formik.errors.room_refridgerator)}
-          helperText={formik.touched.room_refridgerator && formik.errors.room_refridgerator}
-          >
-          <MenuItem value={true}>Yes</MenuItem>
-          <MenuItem value={false}>No</MenuItem>
-          </Select>
-      </FormControl>
-    </Grid>
-  </Grid>
-
-  
-
-
-  {
-    formik.values.room_refridgerator ? <div><br /><Grid
-    container
-    direction="row"
-    justify="center"
-    alignItems="center"
-    spacing={1}
-  >
-    
-    <Grid item>
-    <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-    Cost of room refridgerator facility(if not enter 0)
-      </Typography>
-    </Grid>
-      <Grid item>
-      <TextField
-        multiline
-        rows={1}
-        id="cost_roomrefridgerator"
-        name="cost_roomrefridgerator"
-        label="Cost of room refridgerator facility"
-        value={formik.values.cost_roomrefridgerator}
-        onChange={(e) => {formik.setFieldValue('cost_roomrefridgerator',parseInt(e.target.value)); 
-          }}
-        error={formik.touched.cost_roomrefridgerator && Boolean(formik.errors.cost_roomrefridgerator)}
-        helperText={formik.touched.cost_roomrefridgerator && formik.errors.cost_roomrefridgerator}
-      />
-      </Grid>
-</Grid></div>
-: null
-  }
-  
-
-{
-    formik.values.room_refridgerator ? <div><br /><Grid
-    container
-    direction="row"
-    justify="center"
-    alignItems="center"
-    spacing={1}
-  >
-    
-    <Grid item>
-    <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-    Can customers remove room refridgerator facility?
-      </Typography>
-    </Grid>
-      <Grid item>
-      <FormControl className={classes.formControl}>
-      
-          <InputLabel id="removable_room_refridgerator">Removable room refridgerator facility?</InputLabel>
-          <Select
-          labelId="removable_room_refridgerator"
-          id="removable_room_refridgerator"
-          value={formik.values.removable_room_refridgerator}
-          onChange={(e) => {
-          formik.setFieldValue('removable_room_refridgerator',e.target.value)}}
-          error={formik.touched.removable_room_refridgerator && Boolean(formik.errors.removable_room_refridgerator)}
-          helperText={formik.touched.removable_room_refridgerator && formik.errors.removable_room_refridgerator}
-          >
-          <MenuItem value={true}>Yes</MenuItem>
-          <MenuItem value={false}>No</MenuItem>
-          </Select>
-      </FormControl>
-      </Grid>
-</Grid></div>
-: null
-  }
-
 
         <Grid
               container
@@ -3004,366 +2988,6 @@ useEffect(
   : null
     }
 
-<Grid
-              container
-              direction="row"
-              justify="center"
-              alignItems="center"
-              spacing={1}
-            >
-            <Grid item>
-            <Typography variant="h6" color="textPrimary">
-              Breakfast
-            </Typography>
-            </Grid>
-            </Grid>
-            <br />
-      <Grid
-        container
-        direction="row"
-        justify="center"
-        alignItems="center"
-        spacing={1}
-      >
-        <Grid item>
-        <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-            Do you have breakfast ?
-        </Typography>
-        </Grid>
-          <Grid item>
-        <FormControl className={classes.formControl}>
-        
-            <InputLabel id="breakfast">breakfast</InputLabel>
-            <Select
-            labelId="breakfast"
-            id="breakfast"
-            value={formik.values.breakfast}
-            onChange={(e) => {if(e.target.value===false){formik.setFieldValue('breakfast',e.target.value);
-            formik.setFieldValue('cost_breakfast',0);
-            formik.setFieldValue('removable_breakfast',false);}
-            else{formik.setFieldValue('breakfast',e.target.value)}}}
-            error={formik.touched.breakfast && Boolean(formik.errors.breakfast)}
-            helperText={formik.touched.breakfast && formik.errors.breakfast}
-            >
-            <MenuItem value={true}>Yes</MenuItem>
-            <MenuItem value={false}>No</MenuItem>
-            </Select>
-        </FormControl>
-      </Grid>
-    </Grid>
-
-    
-
-
-    {
-      formik.values.breakfast ? <div><br /><Grid
-      container
-      direction="row"
-      justify="center"
-      alignItems="center"
-      spacing={1}
-    >
-      
-      <Grid item>
-      <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-      Cost of breakfast facility(if not enter 0)
-        </Typography>
-      </Grid>
-        <Grid item>
-        <TextField
-          multiline
-          rows={1}
-          id="cost_breakfast"
-          name="cost_breakfast"
-          label="Cost of breakfast facility"
-          value={formik.values.cost_breakfast}
-          onChange={(e) => {formik.setFieldValue('cost_breakfast',parseInt(e.target.value)); 
-          }}
-          error={formik.touched.cost_breakfast && Boolean(formik.errors.cost_breakfast)}
-          helperText={formik.touched.cost_breakfast && formik.errors.cost_breakfast}
-        />
-        </Grid>
-  </Grid></div>
-  : null
-    }
-    
-
-{
-      formik.values.breakfast ? <div><br /><Grid
-      container
-      direction="row"
-      justify="center"
-      alignItems="center"
-      spacing={1}
-    >
-      
-      <Grid item>
-      <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-      Can customers remove this facility?
-        </Typography>
-      </Grid>
-        <Grid item>
-        <FormControl className={classes.formControl}>
-        
-            <InputLabel id="removable_breakfast">Removable breakfast facility?</InputLabel>
-            <Select
-            labelId="removable_breakfast"
-            id="removable_breakfast"
-            value={formik.values.removable_breakfast}
-            onChange={(e) => {
-            formik.setFieldValue('removable_breakfast',e.target.value)}}
-            error={formik.touched.removable_breakfast && Boolean(formik.errors.removable_breakfast)}
-            helperText={formik.touched.removable_breakfast && formik.errors.removable_breakfast}
-            >
-            <MenuItem value={true}>Yes</MenuItem>
-            <MenuItem value={false}>No</MenuItem>
-            </Select>
-        </FormControl>
-        </Grid>
-  </Grid></div>
-  : null
-    }
-
-<Grid
-              container
-              direction="row"
-              justify="center"
-              alignItems="center"
-              spacing={1}
-            >
-            <Grid item>
-            <Typography variant="h6" color="textPrimary">
-              Lunch
-            </Typography>
-            </Grid>
-            </Grid>
-            <br />
-      <Grid
-        container
-        direction="row"
-        justify="center"
-        alignItems="center"
-        spacing={1}
-      >
-        <Grid item>
-        <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-            Do you have lunch ?
-        </Typography>
-        </Grid>
-          <Grid item>
-        <FormControl className={classes.formControl}>
-        
-            <InputLabel id="lunch">lunch</InputLabel>
-            <Select
-            labelId="lunch"
-            id="lunch"
-            value={formik.values.lunch}
-            onChange={(e) => {if(e.target.value===false){formik.setFieldValue('lunch',e.target.value);
-            formik.setFieldValue('cost_lunch',0);
-            formik.setFieldValue('removable_lunch',false);}
-            else{formik.setFieldValue('lunch',e.target.value)}}}
-            error={formik.touched.lunch && Boolean(formik.errors.lunch)}
-            helperText={formik.touched.lunch && formik.errors.lunch}
-            >
-            <MenuItem value={true}>Yes</MenuItem>
-            <MenuItem value={false}>No</MenuItem>
-            </Select>
-        </FormControl>
-      </Grid>
-    </Grid>
-
-    
-
-
-    {
-      formik.values.lunch ? <div><br /><Grid
-      container
-      direction="row"
-      justify="center"
-      alignItems="center"
-      spacing={1}
-    >
-      
-      <Grid item>
-      <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-      Cost of lunch facility(if not enter 0)
-        </Typography>
-      </Grid>
-        <Grid item>
-        <TextField
-          multiline
-          rows={1}
-          id="cost_lunch"
-          name="cost_lunch"
-          label="Cost of lunch facility"
-          value={formik.values.cost_lunch}
-          onChange={(e) => {formik.setFieldValue('cost_lunch',parseInt(e.target.value)); 
-          }}
-          error={formik.touched.cost_lunch && Boolean(formik.errors.cost_lunch)}
-          helperText={formik.touched.cost_lunch && formik.errors.cost_lunch}
-        />
-        </Grid>
-  </Grid></div>
-  : null
-    }
-    
-
-{
-      formik.values.lunch ? <div><br /><Grid
-      container
-      direction="row"
-      justify="center"
-      alignItems="center"
-      spacing={1}
-    >
-      
-      <Grid item>
-      <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-      Can customers remove this facility?
-        </Typography>
-      </Grid>
-        <Grid item>
-        <FormControl className={classes.formControl}>
-        
-            <InputLabel id="removable_lunch">Removable lunch facility?</InputLabel>
-            <Select
-            labelId="removable_lunch"
-            id="removable_lunch"
-            value={formik.values.removable_lunch}
-            onChange={(e) => {
-            formik.setFieldValue('removable_lunch',e.target.value)}}
-            error={formik.touched.removable_lunch && Boolean(formik.errors.removable_lunch)}
-            helperText={formik.touched.removable_lunch && formik.errors.removable_lunch}
-            >
-            <MenuItem value={true}>Yes</MenuItem>
-            <MenuItem value={false}>No</MenuItem>
-            </Select>
-        </FormControl>
-        </Grid>
-  </Grid></div>
-  : null
-    }
-
-<Grid
-              container
-              direction="row"
-              justify="center"
-              alignItems="center"
-              spacing={1}
-            >
-            <Grid item>
-            <Typography variant="h6" color="textPrimary">
-              Dinner
-            </Typography>
-            </Grid>
-            </Grid>
-            <br />
-      <Grid
-        container
-        direction="row"
-        justify="center"
-        alignItems="center"
-        spacing={1}
-      >
-        <Grid item>
-        <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-            Do you have dinner ?
-        </Typography>
-        </Grid>
-          <Grid item>
-        <FormControl className={classes.formControl}>
-        
-            <InputLabel id="dinner">dinner</InputLabel>
-            <Select
-            labelId="dinner"
-            id="dinner"
-            value={formik.values.dinner}
-            onChange={(e) => {if(e.target.value===false){formik.setFieldValue('dinner',e.target.value);
-            formik.setFieldValue('cost_dinner',0);
-            formik.setFieldValue('removable_dinner',false);}
-            else{formik.setFieldValue('dinner',e.target.value)}}}
-            error={formik.touched.dinner && Boolean(formik.errors.dinner)}
-            helperText={formik.touched.dinner && formik.errors.dinner}
-            >
-            <MenuItem value={true}>Yes</MenuItem>
-            <MenuItem value={false}>No</MenuItem>
-            </Select>
-        </FormControl>
-      </Grid>
-    </Grid>
-
-    
-
-
-    {
-      formik.values.dinner ? <div><br /><Grid
-      container
-      direction="row"
-      justify="center"
-      alignItems="center"
-      spacing={1}
-    >
-      
-      <Grid item>
-      <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-      Cost of dinner facility(if not enter 0)
-        </Typography>
-      </Grid>
-        <Grid item>
-        <TextField
-          multiline
-          rows={1}
-          id="cost_dinner"
-          name="cost_dinner"
-          label="Cost of dinner facility"
-          value={formik.values.cost_dinner}
-          onChange={(e) => {formik.setFieldValue('cost_dinner',parseInt(e.target.value)); 
-          }}
-          error={formik.touched.cost_dinner && Boolean(formik.errors.cost_dinner)}
-          helperText={formik.touched.cost_dinner && formik.errors.cost_dinner}
-        />
-        </Grid>
-  </Grid></div>
-  : null
-    }
-    
-
-{
-      formik.values.dinner ? <div><br /><Grid
-      container
-      direction="row"
-      justify="center"
-      alignItems="center"
-      spacing={1}
-    >
-      
-      <Grid item>
-      <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-      Can customers remove this facility?
-        </Typography>
-      </Grid>
-        <Grid item>
-        <FormControl className={classes.formControl}>
-        
-            <InputLabel id="removable_dinner">Removable dinner facility?</InputLabel>
-            <Select
-            labelId="removable_dinner"
-            id="removable_dinner"
-            value={formik.values.removable_dinner}
-            onChange={(e) => {
-            formik.setFieldValue('removable_dinner',e.target.value)}}
-            error={formik.touched.removable_dinner && Boolean(formik.errors.removable_dinner)}
-            helperText={formik.touched.removable_dinner && formik.errors.removable_dinner}
-            >
-            <MenuItem value={true}>Yes</MenuItem>
-            <MenuItem value={false}>No</MenuItem>
-            </Select>
-        </FormControl>
-        </Grid>
-  </Grid></div>
-  : null
-    }
-
 
 
         <Grid
@@ -3427,7 +3051,7 @@ useEffect(
       
       <Grid item>
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-      Cost of laundry facility (in /kg/use)
+      Cost of laundry facility
         </Typography>
       </Grid>
         <Grid item>
@@ -3449,6 +3073,7 @@ useEffect(
   : null
     }
 
+
 <Grid
               container
               direction="row"
@@ -3458,7 +3083,7 @@ useEffect(
             >
             <Grid item>
             <Typography variant="h6" color="textPrimary">
-              Iron
+               Apartment cleaning
             </Typography>
             </Grid>
             </Grid>
@@ -3472,107 +3097,22 @@ useEffect(
       >
         <Grid item>
         <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-            Do you have iron ?
+            Do you provide Apartment cleaning ?
         </Typography>
         </Grid>
           <Grid item>
         <FormControl className={classes.formControl}>
         
-            <InputLabel id="iron">iron</InputLabel>
+            <InputLabel id="apartment_cleaning">Apartment cleaning</InputLabel>
             <Select
-            labelId="iron"
-            id="iron"
-            value={formik.values.iron}
-            onChange={(e) => {if(e.target.value===false){formik.setFieldValue('iron',e.target.value);
-            formik.setFieldValue('cost_iron',0);}
-            else{formik.setFieldValue('iron',e.target.value)}}}
-            error={formik.touched.iron && Boolean(formik.errors.iron)}
-            helperText={formik.touched.iron && formik.errors.iron}
-            >
-            <MenuItem value={true}>Yes</MenuItem>
-            <MenuItem value={false}>No</MenuItem>
-            </Select>
-        </FormControl>
-      </Grid>
-    </Grid>
-
-    
-
-
-    {
-      formik.values.iron ? <div><br /><Grid
-      container
-      direction="row"
-      justify="center"
-      alignItems="center"
-      spacing={1}
-    >
-      
-      <Grid item>
-      <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-      Cost of iron facility (in /kg/use)
-        </Typography>
-      </Grid>
-        <Grid item>
-        <TextField
-          multiline
-          rows={1}
-          id="cost_iron"
-          name="cost_iron"
-          label="Cost of iron facility"
-          value={formik.values.cost_iron}
-          onChange={(e) => {formik.setFieldValue('cost_iron',parseInt(e.target.value)); 
-          }}
-          onChange={formik.handleChange}
-          error={formik.touched.cost_iron && Boolean(formik.errors.cost_iron)}
-          helperText={formik.touched.cost_iron && formik.errors.cost_iron}
-        />
-        </Grid>
-  </Grid></div>
-  : null
-    }
-    <br />
-
-
-<Grid
-              container
-              direction="row"
-              justify="center"
-              alignItems="center"
-              spacing={1}
-            >
-            <Grid item>
-            <Typography variant="h6" color="textPrimary">
-               Room cleaning
-            </Typography>
-            </Grid>
-            </Grid>
-            <br />
-      <Grid
-        container
-        direction="row"
-        justify="center"
-        alignItems="center"
-        spacing={1}
-      >
-        <Grid item>
-        <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-            Do you provide room cleaning ?
-        </Typography>
-        </Grid>
-          <Grid item>
-        <FormControl className={classes.formControl}>
-        
-            <InputLabel id="room_cleaning">Room cleaning</InputLabel>
-            <Select
-            labelId="room_cleaning"
-            id="room_cleaning"
-            value={formik.values.room_cleaning}
-            onChange={(e) => {if(e.target.value===false){formik.setFieldValue('room_cleaning',e.target.value);
+            labelId="apartment_cleaning"
+            id="apartment_cleaning"
+            value={formik.values.apartment_cleaning}
+            onChange={(e) => {if(e.target.value===false){formik.setFieldValue('apartment_cleaning',e.target.value);
             formik.setFieldValue('cost_cleaning',0);}
-            else{formik.setFieldValue('room_cleaning',e.target.value)}}}
-            error={formik.touched.room_cleaning && Boolean(formik.errors.room_cleaning)}
-            helperText={formik.touched.room_cleaning && formik.errors.room_cleaning}
+            else{formik.setFieldValue('apartment_cleaning',e.target.value)}}}
+            error={formik.touched.apartment_cleaning && Boolean(formik.errors.apartment_cleaning)}
+            helperText={formik.touched.apartment_cleaning && formik.errors.apartment_cleaning}
             >
             <MenuItem value={true}>Yes</MenuItem>
             <MenuItem value={false}>No</MenuItem>
@@ -3585,7 +3125,7 @@ useEffect(
 
 
     {
-      formik.values.room_cleaning ? <div><br /><Grid
+      formik.values.apartment_cleaning ? <div><br /><Grid
       container
       direction="row"
       justify="center"
@@ -3595,7 +3135,7 @@ useEffect(
       
       <Grid item>
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-      Cost of room cleaning facility (in per cleaning)
+      Cost of apartment cleaning facility (in per cleaning)
         </Typography>
       </Grid>
         <Grid item>
@@ -3618,40 +3158,6 @@ useEffect(
     }
     <br />
 
-<Grid
-        container
-        direction="row"
-        justify="center"
-        alignItems="center"
-        spacing={1}
-      >
-        <Grid item>
-        <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-            Do you have separate washroom in room ?
-        </Typography>
-        </Grid>
-          <Grid item>
-        <FormControl className={classes.formControl}>
-        
-            <InputLabel id="separate_washroom">separate_washroom</InputLabel>
-            <Select
-            labelId="separate_washroom"
-            id="separate_washroom"
-            value={formik.values.separate_washroom}
-            onChange={(e) => {
-            formik.setFieldValue('separate_washroom',e.target.value)}}
-            error={formik.touched.separate_washroom && Boolean(formik.errors.separate_washroom)}
-            helperText={formik.touched.separate_washroom && formik.errors.separate_washroom}
-            >
-            <MenuItem value={true}>Yes</MenuItem>
-            <MenuItem value={false}>No</MenuItem>
-            </Select>
-        </FormControl>
-      </Grid>
-    </Grid>
-
-
-    <br />
 
     <Grid
         container
@@ -3858,186 +3364,6 @@ useEffect(
   </Grid></div>
 <br />
 
-   <Grid
-              container
-              direction="row"
-              justify="center"
-              alignItems="center"
-              spacing={1}
-            >
-            <Grid item>
-            <Typography variant="h4" color="textPrimary">
-              Food
-            </Typography>
-            </Grid>
-            </Grid>
-            <br />
-      <Grid
-        container
-        direction="row"
-        justify="center"
-        alignItems="center"
-        spacing={1}
-      >
-        <Grid item>
-        <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-            Do you provide Veg food ?
-        </Typography>
-        </Grid>
-          <Grid item>
-        <FormControl className={classes.formControl}>
-        
-            <InputLabel id="veg_food">veg_food</InputLabel>
-            <Select
-            labelId="veg_food"
-            id="veg_food"
-            value={formik.values.veg_food}
-            onChange={(e) => {
-            formik.setFieldValue('veg_food',e.target.value)}}
-            error={formik.touched.veg_food && Boolean(formik.errors.veg_food)}
-            helperText={formik.touched.veg_food && formik.errors.veg_food}
-            >
-            <MenuItem value={true}>Yes</MenuItem>
-            <MenuItem value={false}>No</MenuItem>
-            </Select>
-        </FormControl>
-      </Grid>
-    </Grid>
-
-    <Grid
-        container
-        direction="row"
-        justify="center"
-        alignItems="center"
-        spacing={1}
-      >
-        <Grid item>
-        <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-            Do you provide Non-Veg food ?
-        </Typography>
-        </Grid>
-          <Grid item>
-        <FormControl className={classes.formControl}>
-        
-            <InputLabel id="nonveg_food">nonveg_food</InputLabel>
-            <Select
-            labelId="nonveg_food"
-            id="nonveg_food"
-            value={formik.values.nonveg_food}
-            onChange={(e) => {
-            formik.setFieldValue('nonveg_food',e.target.value)}}
-            error={formik.touched.nonveg_food && Boolean(formik.errors.nonveg_food)}
-            helperText={formik.touched.nonveg_food && formik.errors.nonveg_food}
-            >
-            <MenuItem value={true}>Yes</MenuItem>
-            <MenuItem value={false}>No</MenuItem>
-            </Select>
-        </FormControl>
-      </Grid>
-    </Grid>
-
-    <div><br /><Grid
-      container
-      direction="row"
-      justify="center"
-      alignItems="center"
-      spacing={1}
-    >
-      
-      <Grid item>
-      <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-      Any food policy or schedule or rules
-        </Typography>
-      </Grid>
-        <Grid item>
-        <TextField
-          multiline
-          rows={5}
-          id="food_policy"
-          name="food_policy"
-          label="Food policy"
-          value={formik.values.food_policy}
-          onChange={formik.handleChange}
-          
-        />
-        </Grid>
-  </Grid></div>
-
-<br />
-   <Grid
-              container
-              direction="row"
-              justify="center"
-              alignItems="center"
-              spacing={1}
-            >
-            <Grid item>
-            <Typography variant="h4" color="textPrimary">
-              Guest
-            </Typography>
-            </Grid>
-            </Grid>
-            <br />
-      <Grid
-        container
-        direction="row"
-        justify="center"
-        alignItems="center"
-        spacing={1}
-      >
-        <Grid item>
-        <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-            Do you allow guest in the room ?
-        </Typography>
-        </Grid>
-          <Grid item>
-        <FormControl className={classes.formControl}>
-        
-            <InputLabel id="guest_allowed">Guest allowed</InputLabel>
-            <Select
-            labelId="guest_allowed"
-            id="guest_allowed"
-            value={formik.values.guest_allowed}
-            onChange={(e) => {
-            formik.setFieldValue('guest_allowed',e.target.value)}}
-            error={formik.touched.guest_allowed && Boolean(formik.errors.guest_allowed)}
-            helperText={formik.touched.guest_allowed && formik.errors.guest_allowed}
-            >
-            <MenuItem value={true}>Yes</MenuItem>
-            <MenuItem value={false}>No</MenuItem>
-            </Select>
-        </FormControl>
-      </Grid>
-    </Grid>
-
-    <div><br /><Grid
-      container
-      direction="row"
-      justify="center"
-      alignItems="center"
-      spacing={1}
-    >
-      
-      <Grid item>
-      <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-      Any guest policy or rules?
-        </Typography>
-      </Grid>
-        <Grid item>
-        <TextField
-          multiline
-          rows={5}
-          id="guest_policy"
-          name="guest_policy"
-          label="Guest policy"
-          value={formik.values.guest_policy}
-          onChange={formik.handleChange}
-          
-        />
-        </Grid>
-  </Grid></div>
-
-  <br />
 
 
   <Grid
@@ -4049,7 +3375,7 @@ useEffect(
             >
             <Grid item>
             <Typography variant="h4" color="textPrimary">
-              Regarding room
+              Regarding apartment
             </Typography>
             </Grid>
             </Grid>
@@ -4066,17 +3392,17 @@ useEffect(
       
       <Grid item>
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-      Any room policy or rules?
+      Any apartment policy or rules?
         </Typography>
       </Grid>
         <Grid item>
         <TextField
           multiline
           rows={5}
-          id="room_policy"
-          name="room_policy"
-          label="room policy"
-          value={formik.values.room_policy}
+          id="apartment_policy"
+          name="apartment_policy"
+          label="apartment policy"
+          value={formik.values.apartment_policy}
           onChange={formik.handleChange}
           
         />
@@ -4503,4 +3829,4 @@ const mapStateToProps = state => ({
   profile : state.authreducers.user
 });
 
-export default connect(mapStateToProps)(RoomForm)
+export default connect(mapStateToProps)(ApartmentForm)

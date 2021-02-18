@@ -284,7 +284,7 @@ function BankForm (props){
                 error={formik.touched.currency && Boolean(formik.errors.currency)}
                 helperText={formik.touched.currency && formik.errors.currency}
                 >
-                <MenuItem value={'₹'}>₹ (Indian rupees)</MenuItem>
+                <MenuItem value={'₹ INR'}>₹ (Indian rupees)</MenuItem>
                 </Select>
             </FormControl>
         </Grid>

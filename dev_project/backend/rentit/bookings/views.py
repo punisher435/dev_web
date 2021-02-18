@@ -202,7 +202,7 @@ class room_booking(viewsets.ViewSet):
                 
 
 
-                if y>=data['capacity'] and book_date<=datetime.date.today()+datetime.timedelta(days=15) and room.pausebooking==False:
+                if y>=data['capacity'] and book_date<=datetime.date.today()+datetime.timedelta(days=15) and room.pausebooking==False and room.removed==False:
                     print('success')
 
                     x = room.final_price
@@ -322,6 +322,8 @@ class room_booking(viewsets.ViewSet):
                             savings=data['savings'],seller_pay=seller_pay,cost=room.price,price_to_be_paid=price,discount=data['discount'])
                             
                             booking.save()
+                            
+                            room.trust_points = room.trust_points + 10*int(data['duration'])
 
                             room.booked_by=room.booked_by+data['capacity']
 
@@ -357,6 +359,8 @@ class room_booking(viewsets.ViewSet):
                             savings=data['savings'],cost=room.price,seller_pay=seller_pay,price_to_be_paid=price,discount=data['discount'])
                             
                             booking.save()
+
+                            room.trust_points = room.trust_points + 10*int(data['duration'])
                             
                 
 
@@ -389,6 +393,8 @@ class room_booking(viewsets.ViewSet):
                             savings=data['savings'],cost=room.price,seller_pay=seller_pay,price_to_be_paid=price,discount=data['discount'])
                             
                             booking.save()
+
+                            room.trust_points = room.trust_points + 10*int(data['duration'])
                             
 
 
@@ -451,6 +457,7 @@ class room_booking(viewsets.ViewSet):
 
 
             print('new')
+            room.trust_points = room.trust_points - 10*int(booking.duration)
             
 
             refund_price = 0
@@ -740,7 +747,9 @@ class room_booking(viewsets.ViewSet):
                             purified_water=data['purified_water'],geyser=data['geyser'],AC=data['AC'],cooler=data['cooler'],breakfast=data['breakfast'],lunch=data['lunch'],dinner=data['dinner'],currency=room.currency,
                             savings=data['savings'],cost=room.price,seller_pay=seller_pay,price_to_be_paid=price,discount=data['discount'])
 
-                        booking_new.save()                            
+                        booking_new.save()  
+
+                        room.trust_points = room.trust_points + 10*int(data['duration'])                          
 
                         booking.extended = True
 

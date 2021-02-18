@@ -19,33 +19,33 @@ const useStyles = makeStyles({
   },
 });
 
-export default function RoomCard({myroom}) {
+export default function ShopCard({myshop}) {
   const classes = useStyles();
 
   
 
   
 
-  if(myroom)
+  if(myshop)
   return (
       <div>
     <Card className={classes.root}>
-    <Link to={`/rooms/${myroom.room_id}`} target="_blank" style={{textDecoration:'none',color:'black'}}>
+    <Link to={`/rooms/${myshop.room_id}`} target="_blank" style={{textDecoration:'none',color:'black'}}>
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image={myroom.photo1}
+          image={myshop.photo1}
           title="Photo"
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            {myroom.title}
+            {myshop.title}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            {myroom.location}
+            {myshop.location}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-          <RatingWithCompliments rating={parseFloat(myroom.avg_rating)}/>
+          <RatingWithCompliments rating={parseFloat(myshop.avg_rating)}/>
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
           
@@ -62,27 +62,27 @@ export default function RoomCard({myroom}) {
       <CardActions>
         
         <Link to={{
-    pathname: `/dashboard/my_rooms/edit`,
-    state: { property_id: myroom.room_id}
+    pathname: `/dashboard/my_shops/edit`,
+    state: { property_id: myshop.shop_id}
   }} style={{textDecoration:'none'}}><Button size="small" color="primary">
           Edit
         </Button></Link>
         <Link to={{
-    pathname: `/dashboard/my_rooms/delete`,
-    state: { property_id: myroom.room_id,url:'sourcewdsfdaegds/my_rooms' ,url1:'my_rooms' }
+    pathname: `/dashboard/my_shops/delete`,
+    state: { property_id: myshop.shop_id,url:'sourcekfhkt274fs/my_shops' ,url1:'my_shops' }
   }} style={{textDecoration:'none'}}><Button size="small" color="primary" >
           Delete
         </Button></Link>
         
       {
-        myroom.pausebooking ? <Link to={{
-          pathname: `/dashboard/my_rooms/pause_booking`,
-          state: { property_id: myroom.room_id,url:'sourcewdsfdaegds/my_rooms',url1:'my_rooms' }
+        myshop.pausebooking ? <Link to={{
+          pathname: `/dashboard/my_shops/pause_booking`,
+          state: { property_id: myshop.shop_id,url:'sourcekfhkt274fs/my_shops' ,url1:'my_shops'}
         }} style={{textDecoration:'none'}}><Button size="small" color="primary">
                 Resume Booking
               </Button></Link> :  <Link to={{
-    pathname: `/dashboard/my_rooms/pause_booking`,
-    state: { property_id: myroom.room_id,url:'sourcewdsfdaegds/my_rooms',url1:'my_rooms' }
+    pathname: `/dashboard/my_shops/pause_booking`,
+    state: { property_id: myshop.shop_id,url:'sourcekfhkt274fs/my_shops' ,url1:'my_shops'}
   }} style={{textDecoration:'none'}}><Button size="small" color="primary">
           Pause Booking
         </Button></Link>

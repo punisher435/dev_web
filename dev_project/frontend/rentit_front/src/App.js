@@ -29,8 +29,13 @@ import ProfileForm from './/components/profile_form'
 import BankForm from './/components/bank_form'
 import AddressForm from './/components/address_profile'
 import Myrooms from './components/myrooms'
+import Myshops from './components/myshops'
 import RoomForm from './components/room_form'
-
+import ConfirmDelete from './components/confirmdelete'
+import ConfirmPause from './components/pausebooking'
+import Myapartments from './components/myapartments'
+import ShopForm from './components/shop_form'
+import ApartmentForm from './components/apartment_form'
 
 
 function App(props) {
@@ -54,10 +59,20 @@ function App(props) {
                 <Route exact path='/rooms/:roomid' component={rooms}/>
                 <Route exact path='/wishlist' component={SimpleTabs}/>
                 <Route exact path='/rooms/:roomid/book/' component={Checkout} />
-                <Route exact path='/recentBooking' component={RecentBooking}/>
+                <Route exact path='/recentBooking' component={ConfirmPause}/>
 
                 <Route exact path='/dashboard/my_rooms' component={Myrooms}/>
                 <Route exact path='/dashboard/my_rooms/edit' component={RoomForm}/>
+                <Route exact path='/dashboard/my_rooms/delete' component={ConfirmDelete}/>
+                <Route exact path='/dashboard/my_rooms/pause_booking' component={ConfirmPause}/>
+                <Route exact path='/dashboard/my_shops' component={Myshops}/>
+                <Route exact path='/dashboard/my_shops/edit' component={ShopForm}/>
+                <Route exact path='/dashboard/my_shops/delete' component={ConfirmDelete}/>
+                <Route exact path='/dashboard/my_shops/pause_booking' component={ConfirmPause}/>
+                <Route exact path='/dashboard/my_apartments' component={Myapartments}/>
+                <Route exact path='/dashboard/my_apartments/edit' component={ApartmentForm}/>
+                <Route exact path='/dashboard/my_apartments/delete' component={ConfirmDelete}/>
+                <Route exact path='/dashboard/my_apartments/pause_booking' component={ConfirmPause}/>
                 
                 <Route exact path='/Sform' component={Sforms}/>
                 <Route exact path='/dashboard/profile' component={Myprofile}/>

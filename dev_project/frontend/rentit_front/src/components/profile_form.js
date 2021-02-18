@@ -35,15 +35,24 @@ const useStyles = makeStyles(theme => ({
         marginTop:'10%'
     },
     imageclass: {
-      width:'110px',
-      borderRadius:'35%',
+      overflow: 'hidden',
+        width: '110px',
+        height: '110px',
+        position:'relative',
+      borderRadius:'50%',
       [theme.breakpoints.up('sm')]: {
-        width:'200px',
-        borderRadius:'35%',
+        borderRadius:'50%',
+        overflow: 'hidden',
+        width: '200px',
+        height: '200px',
+        position:'relative',
       },
       [theme.breakpoints.up('md')]: {
-        width:'300px',
-        borderRadius:'35%',
+        borderRadius:'50%',
+        overflow: 'hidden',
+        width: '300px',
+        height: '300px',
+        position:'relative',
       },
       marginLeft:'1%',
       marginRight:'1%',
@@ -54,7 +63,7 @@ const useStyles = makeStyles(theme => ({
   },
   buttonclass:{
     padding:0,
-    borderRadius:'35%',
+    borderRadius:'70%',
     
     },
 }));

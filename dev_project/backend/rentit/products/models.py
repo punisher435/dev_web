@@ -18,6 +18,12 @@ def upload_to(instance, filename):
 def upload_file_to(instance, filename):
     return 'address_proof/rooms/{filename}'.format(filename=filename)
 
+def upload_file_to1(instance, filename):
+    return 'address_proof/shops/{filename}'.format(filename=filename)
+
+def upload_file_to2(instance, filename):
+    return 'address_proof/apartments/{filename}'.format(filename=filename)
+
 yesterday = datetime.datetime.now() - datetime.timedelta(days = 1)
 
 class rooms(models.Model):
@@ -39,7 +45,7 @@ class rooms(models.Model):
     capacity=models.IntegerField()
     trust_points=models.BigIntegerField(default=0)
     date_added=models.DateTimeField(auto_now_add=True)
-    date_verified=models.DateTimeField(auto_now_add=True)
+    date_verified=models.DateTimeField(null=True, blank=True)
     photo1=models.ImageField(_("Image"),upload_to=upload_to,default='/images/rooms/default.jpg')
     photo2=models.ImageField(_("Image"),upload_to=upload_to,default='/images/rooms/default.jpg')
     photo3=models.ImageField(_("Image"),upload_to=upload_to,default='/images/rooms/default.jpg')
@@ -71,7 +77,7 @@ class rooms(models.Model):
     country = models.CharField(max_length=255)
     landmark=models.CharField(max_length=255)
     pincode=models.CharField(max_length=255)
-    currency=models.CharField(max_length=200,default='₹')
+    currency=models.CharField(max_length=200,default='₹ INR')
 
     """ address = map_fields.AddressField(max_length=200,blank=True)
     geolocation = map_fields.GeoLocationField(max_length=100,blank=True) """
@@ -93,7 +99,7 @@ class rooms(models.Model):
     cctv_building=models.BooleanField(default=False)
     building_guard=models.BooleanField(default=False)
 
-    balcony=models.BooleanField(default=False)
+    balcony=models.IntegerField(default=0)
     separate_washroom=models.BooleanField(default=False)
     windows=models.IntegerField(default=0)
     fans=models.IntegerField(default=1)
@@ -174,14 +180,16 @@ class rooms(models.Model):
 
     #neighbourhood
     nearby_station1 = models.TextField(max_length=255)
+    distance1 = models.DecimalField(max_digits=3,decimal_places=1,default=0)
     nearby_station2 = models.TextField(max_length=255)
-    room_policy = models.TextField()
+    distance2 = models.DecimalField(max_digits=3,decimal_places=1,default=0)
+    room_policy = models.TextField(null=True,blank=True)
 
     #
     wishlist=models.IntegerField(default=0)
     cart=models.IntegerField(default=0)
 
-    address_proof = models.FileField(upload_to=upload_file_to,default='/address_proof/rooms/default.pdf') 
+    address_proof = models.FileField(upload_to=upload_file_to) 
 
     objects = models.Manager()
     personal_rooms = rooms_manager()
@@ -206,12 +214,13 @@ def upload_to_shops(instance, filename):
 
 class shops(models.Model):
     #info
-    room_id = models.UUIDField( 
+    shop_id = models.UUIDField( 
          primary_key = True, 
          default = uuid.uuid4, 
          editable = False,
          unique = True)
     seller_id=models.ForeignKey(User,on_delete=models.PROTECT,related_name='shop_owner_id')
+    seller_price = models.IntegerField()
     title = models.CharField(max_length=255)
     price=models.PositiveBigIntegerField()
     owner_discount=models.IntegerField(default=0)
@@ -221,16 +230,20 @@ class shops(models.Model):
     verified=models.BooleanField(default=False)
     trust_points=models.BigIntegerField(default = 0)
     date_added=models.DateTimeField(auto_now_add=True)
-    date_verified=models.DateTimeField(auto_now_add=True)
+    date_verified=models.DateTimeField(null=True, blank=True)
     photo1=models.ImageField(_("Image"),upload_to=upload_to_shops,default='/images/rooms/default.jpg')
     photo2=models.ImageField(_("Image"),upload_to=upload_to_shops,default='/images/rooms/default.jpg')
     photo3=models.ImageField(_("Image"),upload_to=upload_to_shops,default='/images/rooms/default.jpg')
     photo4=models.ImageField(_("Image"),upload_to=upload_to_shops,default='/images/rooms/default.jpg')
     photo5=models.ImageField(_("Image"),upload_to=upload_to_shops,default='/images/rooms/default.jpg')
+
+    currency=models.CharField(max_length=200,default='₹ INR')
+
     booked=models.BooleanField(default=False)
     bookedtill =models.DateField(_("Booked_till_Date"),null=True,blank=True)
     removed=models.BooleanField(default=False)
-    currency=models.CharField(max_length=200,default='₹')
+    commission = models.IntegerField(default=0)
+    pausebooking = models.BooleanField(default=False)
 
     #address
     location=models.TextField()
@@ -250,24 +263,29 @@ class shops(models.Model):
     height=models.IntegerField()
     furniture=models.TextField()
     category=models.CharField(max_length=255)
-    facilities=models.TextField()
+    facility=models.TextField()
     description = models.TextField()
     avg_rating=models.DecimalField(max_digits=2,decimal_places=1,default=0)
     reviews=models.DecimalField(max_digits=2,decimal_places=1,default=0)
+
     cctv_building=models.BooleanField(default=False)
     building_guard=models.BooleanField(default=False)
 
     washroom=models.IntegerField(default=1)
+    separate_washroom=models.BooleanField(default=False)
     total_rooms=models.IntegerField(default=1)
+    fans = models.IntegerField(default=0)
     windows=models.IntegerField(default=1)
     total_floors=models.IntegerField(default=1)
     floor_no=models.IntegerField(default=1)
+    balcony= models.IntegerField(default=0)
 
     electricity=models.BooleanField(default=True)
     cost_electricity = models.IntegerField(default=0)
 
     water_facility=models.BooleanField(default=True)
     cost_water = models.IntegerField(default=0)
+
     purified_water = models.BooleanField(default=True)
     removable_purified_water=models.BooleanField(default=False)
     cost_purified_water = models.IntegerField(default=0)
@@ -279,18 +297,21 @@ class shops(models.Model):
     power_backup=models.BooleanField(default=False)
 
     shop_cleaning=models.BooleanField(default=False)
+    cost_cleaning = models.IntegerField(default=0)
     
     #neighbourhood
     nearby_station1 = models.TextField(max_length=255)
+    distance1 = models.DecimalField(max_digits=3,decimal_places=1,default=0)
     nearby_station2 = models.TextField(max_length=255)
-    shop_policy = models.TextField()
+    distance2 = models.DecimalField(max_digits=3,decimal_places=1,default=0)
+    shop_policy = models.TextField(null=True,blank=True)
+    address_proof = models.FileField(upload_to=upload_file_to1,default='/address_proof/rooms/default.pdf') 
 
     # 
     wishlist=models.IntegerField(default=0)
     cart=models.IntegerField(default=0)
 
-    seller_coupon=models.CharField(max_length=255,null=True,blank=True)
-    coupon_discount=models.IntegerField(null=True, blank=True)
+    
 
 
     objects = models.Manager()
@@ -321,6 +342,7 @@ class apartments(models.Model):
          editable = False,
          unique = True)
     seller_id=models.ForeignKey(User,on_delete=models.PROTECT,related_name='apartment_owner_id')
+    seller_price = models.IntegerField()
     title = models.CharField(max_length=255)
     price=models.PositiveBigIntegerField()
     owner_discount=models.IntegerField(default=0)
@@ -338,11 +360,14 @@ class apartments(models.Model):
     photo4=models.ImageField(_("Image"),upload_to=upload_to_apartments,default='/images/rooms/default.jpg')
     photo5=models.ImageField(_("Image"),upload_to=upload_to_apartments,default='/images/rooms/default.jpg')
     photo6=models.ImageField(_("Image"),upload_to=upload_to_apartments,default='/images/rooms/default.jpg')
+
+    currency=models.CharField(max_length=200,default='₹ INR')
+
     booked=models.BooleanField(default=False)
     bookedtill =models.DateField(_("Booked_till_Date"),null=True,blank=True)
     removed=models.BooleanField(default=False)
-    category=models.CharField(max_length=255)
-    currency=models.CharField(max_length=200,default='₹')
+    commission = models.IntegerField(default=0)
+    pausebooking = models.BooleanField(default=False)
 
     #address
     location=models.TextField()
@@ -362,8 +387,9 @@ class apartments(models.Model):
     breadth=models.IntegerField()
     height=models.IntegerField()
     furniture=models.TextField()
-    facilities=models.TextField()
+    facility=models.TextField()
     description = models.TextField()
+    fans = models.IntegerField(default=0)
     avg_rating=models.DecimalField(max_digits=2,decimal_places=1,default=0)
     reviews=models.DecimalField(max_digits=2,decimal_places=1,default=0)
     cctv_building=models.BooleanField(default=False)
@@ -380,14 +406,25 @@ class apartments(models.Model):
     bed_type=models.CharField(max_length=255)
     #floor no. for flats and total floors for bunglows
     total_floors=models.IntegerField(default=1)
+
     floor_no=models.IntegerField(default=1)
+    sofa = models.BooleanField(default=False)
+    total_beds=models.IntegerField(default=1)
+
     apartment_type=models.CharField(max_length=255)
+    category=models.CharField(max_length=255)
 
     AC = models.BooleanField(default=False)
+    total_AC = models.IntegerField(default=0)
     removable_AC=models.BooleanField(default=False)
     cost_AC = models.IntegerField(default=0)
 
+    house_refridgerator=models.BooleanField(default=False)
+    removable_house_refridgerator=models.BooleanField(default=False)
+    cost_refridgerator = models.IntegerField(default=0)
+
     cooler = models.BooleanField(default=False)
+    total_cooler = models.IntegerField(default=0)
     removable_cooler=models.BooleanField(default=False)
     cost_cooler = models.IntegerField(default=0)
 
@@ -396,37 +433,40 @@ class apartments(models.Model):
 
     water_facility=models.BooleanField(default=True)
     cost_water = models.IntegerField(default=0)
+
     purified_water = models.BooleanField(default=True)
     removable_purified_water=models.BooleanField(default=False)
     cost_purified_water = models.IntegerField(default=0)
 
-    TV=models.CharField(max_length=255)
-    removable_TV=models.BooleanField(default=False)
+    TV=models.BooleanField(default=False)
+    removable_house_TV=models.BooleanField(default=False)
     cost_TV = models.IntegerField(default=0)
+    total_TV = models.IntegerField(default=0) 
 
     power_backup=models.BooleanField(default=False)
 
     geyser=models.BooleanField(default=False)
+    total_geyser=models.IntegerField(default=0)
     removable_geyser=models.BooleanField(default=False)
     cost_geyser = models.IntegerField(default=0)
 
+    laundry=models.BooleanField(default=False)
+    cost_laundry = models.IntegerField(default=0)
+
     apartment_cleaning=models.BooleanField(default=False)
+    cost_cleaning = models.IntegerField(default=0)
 
     #neighbourhood
     nearby_station1 = models.TextField(max_length=255)
+    distance1 = models.DecimalField(max_digits=3,decimal_places=1,default=0)
     nearby_station2 = models.TextField(max_length=255)
-    nearby_restaurant1 = models.TextField(max_length=255)
-    nearby_restaurant2 = models.TextField(max_length=255)
-    apartment_policy = models.TextField()
+    distance2 = models.DecimalField(max_digits=3,decimal_places=1,default=0)
+    apartment_policy = models.TextField(null=True,blank=True)
+    address_proof = models.FileField(upload_to=upload_file_to2,default='/address_proof/rooms/default.pdf') 
 
     #
     wishlist=models.IntegerField(default=0)
     cart=models.IntegerField(default=0)
-
-
-
-    seller_coupon=models.CharField(max_length=255,null=True,blank=True)
-    coupon_discount=models.IntegerField(null=True, blank=True)
 
     objects = models.Manager()
     personal_apartments = apartments_manager()
