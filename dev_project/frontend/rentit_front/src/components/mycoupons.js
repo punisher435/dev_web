@@ -22,8 +22,8 @@ import {connect} from 'react-redux'
 import ProfileCard from './profilecard'
 import BankCard from './bank_card'
 import AddressCard from './address_card'
-import RoomCard from './room_card'
-import AddRoomCard from './addroomcard';
+import CouponCard from './coupon_card'
+import AddCouponCard from './addcouponcard';
 
 
 
@@ -83,10 +83,10 @@ const useStyles = makeStyles((theme) => ({
 }));
   
 
-function Myrooms(props) {
+function MyCoupons(props) {
 
     const [error,seterror] = useState(false)
-    const [myrooms,setrooms] = useState()
+    const [mycoupons,setcoupons] = useState()
    
 
     React.useEffect(
@@ -98,14 +98,13 @@ function Myrooms(props) {
                 },
               };
               
-              if(props.isAuthenticated && props.profile)
-              
+              if(props.isAuthenticated)
               {
-               
-                try{const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcewdsfdaegds/my_rooms/`,config);
+                try{const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcesfnsjfn231/mycoupons/`,config);
               
-                setrooms(res.data)
+                setcoupons(res.data)
                 console.log(res.data)
+        
               
               }
                 catch{
@@ -128,7 +127,7 @@ function Myrooms(props) {
       return <div className={classes.erorclass}><Eror error='Error' /></div>
     }
 
-    if(props.isAuthenticated && myrooms){
+    if(props.isAuthenticated && mycoupons){
     
     
     return (
@@ -137,15 +136,16 @@ function Myrooms(props) {
             <main className={classes.content}>
             <div className={classes.toolbar} />
 
-            <h2>My rooms</h2>
+            <h2>My coupons</h2>
 
             {
-                myrooms.map(room =>
+                mycoupons.map(coupon =>
                     {
-                        return <div><RoomCard myroom={room} /></div>;
+                        return <div><CouponCard mycoupon={coupon} /><br /></div>;
                     })
             }
-            <AddRoomCard info={props.profile}/>
+            
+            <AddCouponCard info={props.profile}/>
             
             
 
@@ -164,4 +164,4 @@ const mapStateToProps = state => ({
   profile : state.authreducers.user
 });
 
-export default connect(mapStateToProps)(Myrooms)
+export default connect(mapStateToProps)(MyCoupons)

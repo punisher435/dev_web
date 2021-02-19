@@ -678,7 +678,7 @@ function ApartmentForm (props){
     const [error,seterror] = useState(false)
     const roomid = props.location.state.property_id;
     const [load,setload] = useState(false)
-   
+   const [newredirect,setnewredirect] = useState(false);
 
     useEffect(
         async () => {
@@ -691,6 +691,7 @@ function ApartmentForm (props){
               
               if(props.profile && roomid)
               {
+                if(props.profile.is_seller && props.profile.profile_completed && props.profile.bank_completed && props.profile.address_completed){
                 try{const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourceddnvslf54d/my_apartments/${roomid}/`,config);
                 console.log(res.data)
                 setroom({
@@ -804,6 +805,10 @@ function ApartmentForm (props){
                   seterror(true)
       
                 }
+              }
+              else{
+                setnewredirect(true);
+              }
         }
     }
     
@@ -1198,7 +1203,10 @@ useEffect(
 ,[formik.values.distance1,formik.values.distance2,formik.values.cost_laundry,formik.values.cost_cleaning])
 
 
-
+if(newredirect==true)
+{
+  return <Redirect to='/dashboard/profile' />
+}
 
 
   if(redirect==true)

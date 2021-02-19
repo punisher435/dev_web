@@ -575,6 +575,7 @@ function RoomForm (props){
     const [input4,setinput4] = React.useState(false);
     const [input5,setinput5] = React.useState(false);
     const [newfile,setnewfile] = React.useState(false);
+    const [newredirect,setnewredirect] = React.useState(false);
     const [myroom,setroom] = useState({
       wifi:'',
       cost_wifi:'',
@@ -713,6 +714,7 @@ function RoomForm (props){
               
               if(props.profile && roomid)
               {
+                if(props.profile.is_seller && props.profile.profile_completed && props.profile.bank_completed && props.profile.address_completed){
                 try{const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcewdsfdaegds/my_rooms/${roomid}/`,config);
                 console.log(res.data)
                 setroom({
@@ -844,6 +846,10 @@ function RoomForm (props){
                   seterror(true)
       
                 }
+              }
+              else{
+                setnewredirect(true);
+              }
         }
     }
     
@@ -1290,7 +1296,10 @@ useEffect(
 
 
 
-
+if(newredirect==true)
+{
+  return <Redirect to='/dashboard/profile' />
+}
 
   if(redirect==true)
   {

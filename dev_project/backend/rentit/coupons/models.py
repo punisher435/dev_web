@@ -24,6 +24,8 @@ class coupons(models.Model):
     valid_from = models.DateField()
     expiry_date=models.DateField()
 
+    life = models.IntegerField()
+
     expired=models.BooleanField(default=False)
 
     used_by=models.ManyToManyField(User,related_name='used_by',blank=True)

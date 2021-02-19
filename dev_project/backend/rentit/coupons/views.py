@@ -53,26 +53,82 @@ class coupon_viewset(viewsets.ViewSet):
 
         try:
 
-            data = json.loads(request.body.decode('utf-8'))['data']
+            if request.user.is_seller and request.user.profile_completed and request.user.address_completed and request.user.bank_completed:
 
-            if request.user.is_seller==True or request.user.is_superuser==True:
+                data = json.loads(request.body.decode('utf-8'))['data']
 
-                admin = request.user.is_superuser
+                temp = int(data['max_off_price'])
 
+                if(temp==0):
+                    temp=None
 
+                start_date = datetime.date(int(data['valid_from'][0:4]),int(data['valid_from'][5:7]),int(data['valid_from'][8:]))
+                end_date = start_date + datetime.timedelta(days=int(data['life']))
+
+                coupon = coupons(coupoun_code=data['coupoun_code'],seller_id=request.user,valid_from=start_date,expiry_date=end_date,
+                life=int(data['life']),coupon_type=data['coupon_type'],off=int(data['off']),min_price=int(data['min_price']),max_off_price=temp)
                 
+                coupon.save()
 
+                queryset = coupons.objects.all()
+                queryset = queryset.filter(seller_id = request.user)
 
+                coupon = get_object_or_404(queryset,pk=data['coupoun_code'])
 
+                queryset = rooms.objects.all()
+                queryset = queryset.filter(seller_id = request.user)
 
+                for room in data['coupoun_rooms']:
+
+                    room1 = get_object_or_404(queryset,pk=room)
+
+                    coupon.coupoun_rooms.add(room1)
+
+                queryset = shops.objects.all()
+                queryset = queryset.filter(seller_id = request.user)
+
+                for room in data['coupoun_shops']:
+
+                    room1 = get_object_or_404(queryset,pk=room)
+
+                    coupon.coupoun_shops.add(room1)
+                
+                queryset = apartments.objects.all()
+                queryset = queryset.filter(seller_id = request.user)
+
+                for room in data['coupoun_apartments']:
+
+                    room1 = get_object_or_404(queryset,pk=room)
+
+                    coupon.coupoun_apartments.add(room1)
+                
+                coupon.save()
+
+                return Response('Success',status=status.HTTP_201_CREATED)
             else:
                 return Response('Error',status=status.HTTP_400_BAD_REQUEST)
 
-
-
-            return Response('success',status=status.HTTP_200_OK)
         except:
             return Response('Error',status=status.HTTP_400_BAD_REQUEST)
+
+    def destroy(self,request,pk=None):
+
+        try:
+
+            queryset = coupons.objects.all()
+            queryset = queryset.filter(seller_id = request.user)
+
+            coupon = get_object_or_404(queryset,pk=pk)
+
+            coupon.delete()
+
+            return Response('Success',status=status.HTTP_200_OK)
+
+        except:
+            return Response('Error',status=status.HTTP_400_BAD_REQUEST)
+
+
+       
 
 
 class Apply_coupon(viewsets.ViewSet):

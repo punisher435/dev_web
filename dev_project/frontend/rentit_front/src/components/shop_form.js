@@ -442,6 +442,7 @@ function ShopForm (props){
     const [input4,setinput4] = React.useState(false);
     const [input5,setinput5] = React.useState(false);
     const [newfile,setnewfile] = React.useState(false);
+    const [newredirect,setnewredirect] = React.useState(false);
     const [myroom,setroom] = useState({
       wifi:'',
       cost_wifi:'',
@@ -529,6 +530,7 @@ function ShopForm (props){
               
               if(props.profile && roomid)
               {
+                if(props.profile.is_seller && props.profile.profile_completed && props.profile.bank_completed && props.profile.address_completed){
                 try{const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcekfhkt274fs/my_shops/${roomid}/`,config);
                 console.log(res.data)
                 setroom({
@@ -610,6 +612,10 @@ function ShopForm (props){
                 catch{
       
                 }
+              }
+              else{
+                setnewredirect(true);
+              }
         }
     }
     
@@ -919,7 +925,10 @@ useEffect(
   }
 ,[formik.values.distance1,formik.values.distance2,formik.values.cost_cleaning])
 
-
+if(newredirect==true)
+{
+  return <Redirect to='/dashboard/profile' />
+}
 
 
 

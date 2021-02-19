@@ -36,6 +36,8 @@ import ConfirmPause from './components/pausebooking'
 import Myapartments from './components/myapartments'
 import ShopForm from './components/shop_form'
 import ApartmentForm from './components/apartment_form'
+import Mycoupons from './components/mycoupons'
+import CouponForm from './components/coupon_form'
 
 
 function App(props) {
@@ -73,6 +75,10 @@ function App(props) {
                 <Route exact path='/dashboard/my_apartments/edit' component={ApartmentForm}/>
                 <Route exact path='/dashboard/my_apartments/delete' component={ConfirmDelete}/>
                 <Route exact path='/dashboard/my_apartments/pause_booking' component={ConfirmPause}/>
+
+                <Route exact path='/dashboard/my_coupons' component={Mycoupons}/>
+                <Route exact path='/dashboard/my_coupons/edit' component={CouponForm}/>
+                <Route exact path='/dashboard/my_coupons/delete' component={ConfirmDelete}/>
                 
                 <Route exact path='/Sform' component={Sforms}/>
                 <Route exact path='/dashboard/profile' component={Myprofile}/>
