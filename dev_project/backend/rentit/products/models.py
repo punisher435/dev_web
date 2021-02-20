@@ -54,7 +54,7 @@ class rooms(models.Model):
     
     booked=models.BooleanField(default=False)
     booked_by=models.IntegerField(default=0)
-    bookedtill =models.DateField(_("Booked_till_Date"),null=True,blank=True)
+    bookedtill =models.DateField(_("Booked_till_Date"),default=datetime.date(2000,1,1))
     removed=models.BooleanField(default=False)
     commission = models.IntegerField(default=0)
     pausebooking = models.BooleanField(default=False)
@@ -240,7 +240,7 @@ class shops(models.Model):
     currency=models.CharField(max_length=200,default='₹ INR')
 
     booked=models.BooleanField(default=False)
-    bookedtill =models.DateField(_("Booked_till_Date"),null=True,blank=True)
+    bookedtill =models.DateField(_("Booked_till_Date"),default=datetime.date(2000,1,1))
     removed=models.BooleanField(default=False)
     commission = models.IntegerField(default=0)
     pausebooking = models.BooleanField(default=False)
@@ -364,7 +364,7 @@ class apartments(models.Model):
     currency=models.CharField(max_length=200,default='₹ INR')
 
     booked=models.BooleanField(default=False)
-    bookedtill =models.DateField(_("Booked_till_Date"),null=True,blank=True)
+    bookedtill =models.DateField(_("Booked_till_Date"),default=datetime.date(2000,1,1))
     removed=models.BooleanField(default=False)
     commission = models.IntegerField(default=0)
     pausebooking = models.BooleanField(default=False)

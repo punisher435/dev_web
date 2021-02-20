@@ -75,7 +75,7 @@ export default function App({value,setvalue}) {
  
 
 
-  if(value)
+  if(value.latitude && value.longitude)
   {
     return (
       <div>

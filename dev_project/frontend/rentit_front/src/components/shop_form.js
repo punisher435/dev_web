@@ -532,7 +532,7 @@ function ShopForm (props){
               {
                 if(props.profile.is_seller && props.profile.profile_completed && props.profile.bank_completed && props.profile.address_completed){
                 try{const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcekfhkt274fs/my_shops/${roomid}/`,config);
-                console.log(res.data)
+                
                 setroom({
                   wifi:res.data.wifi,
                   cost_wifi:res.data.cost_wifi,
@@ -970,7 +970,7 @@ if(newredirect==true)
           <img src={myroom.file1} className={classes.imageclass}/>
           </Button>
         
-        <input type='file'  ref={hiddenFileInput1} style={{display:'none'}}  id='photo1' accept='image/png,image/jpeg,image/jpg' onChange={(event) => {console.log(event.currentTarget.files[0]);
+        <input type='file'  ref={hiddenFileInput1} style={{display:'none'}}  id='photo1' accept='image/png,image/jpeg,image/jpg' onChange={(event) => {
   setroom({...myroom,file1: URL.createObjectURL(event.target.files[0]),photo1:event.target.files[0]}); formik.setFieldValue('photo1',event.target.files[0]); setinput1(true)}}/> 
         
         </Grid>
@@ -981,7 +981,7 @@ if(newredirect==true)
           <img src={myroom.file2} className={classes.imageclass}/>
           </Button>
         
-        <input type='file'  ref={hiddenFileInput2} style={{display:'none'}}  id='photo2' accept='image/png,image/jpeg,image/jpg' onChange={(event) => {console.log(event.currentTarget.files[0]);
+        <input type='file'  ref={hiddenFileInput2} style={{display:'none'}}  id='photo2' accept='image/png,image/jpeg,image/jpg' onChange={(event) => {
   setroom({...myroom,file2: URL.createObjectURL(event.target.files[0]),photo2:event.target.files[0]});  formik.setFieldValue('photo2',event.target.files[0]);  setinput2(true)}}/> 
         
         </Grid>
@@ -992,7 +992,7 @@ if(newredirect==true)
           <img src={myroom.file3} className={classes.imageclass}/>
           </Button>
         
-        <input type='file'  ref={hiddenFileInput3} style={{display:'none'}}  id='photo3' accept='image/png,image/jpeg,image/jpg' onChange={(event) => {console.log(event.currentTarget.files[0]);
+        <input type='file'  ref={hiddenFileInput3} style={{display:'none'}}  id='photo3' accept='image/png,image/jpeg,image/jpg' onChange={(event) => {
   setroom({...myroom,file3: URL.createObjectURL(event.target.files[0]),photo3:event.target.files[0]});  formik.setFieldValue('photo3',event.target.files[0]);  setinput3(true)}}/> 
         
         </Grid>
@@ -1015,7 +1015,7 @@ if(newredirect==true)
             <img src={myroom.file4} className={classes.imageclass}/>
             </Button>
 
-          <input type='file'  ref={hiddenFileInput4} style={{display:'none'}}  id='photo4' accept='image/png,image/jpeg,image/jpg' onChange={(event) => {console.log(event.currentTarget.files[0]);
+          <input type='file'  ref={hiddenFileInput4} style={{display:'none'}}  id='photo4' accept='image/png,image/jpeg,image/jpg' onChange={(event) => {
           setroom({...myroom,file4: URL.createObjectURL(event.target.files[0]),photo4:event.target.files[0]});  formik.setFieldValue('photo4',event.target.files[0]);  setinput4(true)}}/> 
 
           </Grid>
@@ -1026,7 +1026,7 @@ if(newredirect==true)
             <img src={myroom.file5} className={classes.imageclass}/>
             </Button>
 
-          <input type='file'  ref={hiddenFileInput5} style={{display:'none'}}  id='photo5' accept='image/png,image/jpeg,image/jpg' onChange={(event) => {console.log(event.currentTarget.files[0]);
+          <input type='file'  ref={hiddenFileInput5} style={{display:'none'}}  id='photo5' accept='image/png,image/jpeg,image/jpg' onChange={(event) => {
           setroom({...myroom,file5: URL.createObjectURL(event.target.files[0]),photo5:event.target.files[0]});  formik.setFieldValue('photo5',event.target.files[0]);  setinput5(true)}}/> 
 
           </Grid>

@@ -716,7 +716,7 @@ function RoomForm (props){
               {
                 if(props.profile.is_seller && props.profile.profile_completed && props.profile.bank_completed && props.profile.address_completed){
                 try{const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcewdsfdaegds/my_rooms/${roomid}/`,config);
-                console.log(res.data)
+               
                 setroom({
                   wifi:res.data.wifi,
                   cost_wifi:res.data.cost_wifi,
@@ -853,7 +853,7 @@ function RoomForm (props){
         }
     }
     
-    ,[props.profile])
+    ,[props.profile,roomid])
 
     
 
@@ -980,7 +980,7 @@ function RoomForm (props){
     validationSchema: validationSchema,
     onSubmit: async (values) => {
       let form_data = new FormData();
-      console.log(values)
+      
       setload(true)
       form_data.append('title',values.title)
       form_data.append('wifi',values.wifi)
@@ -1134,7 +1134,7 @@ function RoomForm (props){
 
    
       
-      console.log(form_data.entries())
+     
       const config = {
         headers: {
                 'Content-Type': 'multipart/form-data',
