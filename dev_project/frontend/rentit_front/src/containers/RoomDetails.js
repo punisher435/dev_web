@@ -28,6 +28,7 @@ import Mobileimages from '../components/mobileimages';
 import SimpleModal1 from '../components/bookcardmodel';
 
 import RatingWithCompliments from '../components/MobileRatingSearchCard' 
+import Mapview from '../components/mapcomp'
 
 
 
@@ -100,13 +101,7 @@ const useStyles = makeStyles((theme) => ({
 
   },
   apiclass:{
-    width:'100%',
-    height:'100%',
-    position:'absolute',
-    overflowX:'hidden',
-    left:'17%',
-    right:20,
-    margin: '0  auto -150px',
+    
 
   },
   paraclass1 :{
@@ -234,7 +229,7 @@ if(loginpage===true)
                             </Grid>
                               
                             <Grid item >
-                                <RatingWithCompliment rating={3.7}/>
+                                <RatingWithCompliment rating={parseFloat(details.avg_rating)} reviews={parseFloat(details.reviews)}/>
                             </Grid>
                       </Grid>
 
@@ -250,14 +245,15 @@ if(loginpage===true)
                               </Typography>
                             <Facility post={details}/>
                           </Grid>
+                          <br />
                           
                           <Grid item xs = {12} className={classes.api}>
-                            <br></br><br></br>
-                            <div className={classes.apiclass}><GoogleApiWrapper/></div>
+                            
+                            <div className={classes.apiclass}><Mapview value={details} /></div>
                           </Grid>
 
                           <Grid item xs = {12}>
-                            <RatingAndReviews  no={96} rating={3.7}/>
+                            <RatingAndReviews  no={parseFloat(details.reviews)} rating={parseFloat(details.avg_rating)}/>
                           </Grid>
                       </Grid>
                     </Box>
@@ -377,7 +373,7 @@ if(loginpage===true)
           <br />
 
           <Grid item xs={12}>
-          <div className={classes.divclass}><GoogleApiWrapper1/></div>
+          <div className={classes.divclass}><GoogleApiWrapper1 details={details}/></div>
           </Grid>
 
 

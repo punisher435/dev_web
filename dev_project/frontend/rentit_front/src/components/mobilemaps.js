@@ -15,18 +15,18 @@ export class MapContainer1 extends Component {
     return (
       <Map
         google={this.props.google}
-        zoom={14}
+        zoom={12}
         style={mapStyles}
         initialCenter={
           {
-            lat: -1.2884,
-            lng: 36.8233
+            lat: this.props.details.latitude,
+            lng: this.props.details.longitude
           }
         }
       >
           <Marker position={{
-                lat: -1.2884,
-                lng: 36.8233
+                lat:this.props.details.latitude,
+                lng:this.props.details.longitude
             }} />
     </Map>
     );
