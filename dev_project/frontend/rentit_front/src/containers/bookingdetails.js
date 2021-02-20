@@ -12,6 +12,7 @@ import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import {Redirect} from 'react-router-dom'
 import {connect} from 'react-redux'
+import './myStyles.css'
 
 const ref = React.createRef();
 
@@ -41,10 +42,18 @@ const useStyles = makeStyles((theme) => ({
     marginLeft:'25%',
   },
   textclass:{
-    float: 'left',
+    float: 'left ',
+    width: '200px',
+    marginLeft:'40px',
+  },
+  textsclass:{
+    float: 'center ',
+    width: '130px',
+    
   },
   table: {
     width:'30%'
+    
   },
   head: {
     fontSize:'20px'
@@ -148,32 +157,45 @@ function Bookingdetails(props) {
             <Grid
             container
             direction="row"
-            justify="center"
+            justify="space-evenly"
             alignItems="center"
+            
             >
             
             <Grid item >
-              <h3>Booking no.</h3>
+              
+              <h1 className='primary' >BOOKING NO </h1>
             </Grid>
 
             
 
             </Grid>
-            <button onClick={() => {setinvoice(true);}}>Generate pdf</button>
+            <button onClick={() => {setinvoice(true);}}>Generate pdf</button>   <p></p>  {/*marginBottom: 20,   padding: 30 */}
+            <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+            spacing={2}
+            >
+            <Grid item >
             {
-                mybooking.ended || mybooking.extended || props.profile.is_seller || mybooking.cancelled ? null : <Button variant="contained" color="secondary" onClick={(e) => {handleclick1(e);}}>
+                mybooking.ended || mybooking.extended || props.profile.is_seller || mybooking.cancelled ? null : <Button variant="contained"  padding="auto"color="secondary" onClick={(e) => {handleclick1(e);}}>
                 Cancel booking
               </Button>
-            }
-
+    }</Grid>
+   
+   <Grid item >
             {
-                mybooking.ended || mybooking.extended || props.profile.is_seller || mybooking.cancelled ? null : <Button variant="contained" color="secondary" onClick={(e) => {handleclick2(e);}}>
+                mybooking.ended || mybooking.extended || props.profile.is_seller || mybooking.cancelled ? null : <Button variant="contained" padding="auto"color="secondary" onClick={(e) => {handleclick2(e);}}>
                 Extend booking
               </Button>
-            }
+    }</Grid>
+    </Grid>
+           
 
             <Grid item >
-            <Barcode width={1} height={50} value={mybooking.booking_id} />
+            <Barcode width={1} height={40} value={mybooking.booking_id} />
             </Grid>
 
             <Grid
@@ -184,7 +206,7 @@ function Bookingdetails(props) {
             >
             
             <Grid item >
-              <h6>{mybooking.booking_id}</h6>
+              {/* <h6>{mybooking.booking_id}</h6> */}
             </Grid>
 
             </Grid>
@@ -196,19 +218,19 @@ function Bookingdetails(props) {
             <Grid
             container
             direction="row"
-            justify="space-evenly"
+            justify="center"
             alignItems="center"
             >
             
             <Grid item >
-              <h6 className={classes.textclass}>Booked on :-  </h6>
-              <h6 className={classes.textclass}> {mybooking.created_at.slice(0,10)}</h6>
+              <h5 className={classes.textsclass}>Booked on   </h5>
+              <h5 className={classes.textsclass}>  {mybooking.created_at.slice(0,10)}</h5>
             </Grid>
             <Grid item >
 
             <Grid item >
-              <h6 className={classes.textclass}>Booked at :-  </h6>
-              <h6 className={classes.textclass}> {mybooking.created_at.slice(11,19)}</h6>
+              <h5 className={classes.textsclass}>Booked at  </h5>
+              <h5 className={classes.textsclass}> {mybooking.created_at.slice(11,19)}</h5>
             </Grid>
            
               
@@ -221,181 +243,188 @@ function Bookingdetails(props) {
             <Grid
               container
               direction="row"
-              justify="center"
+              justify="space-evenly"
               alignItems="center"
+            
             >
+              </Grid>
+              
               <Grid item >
-              <h6 className={classes.textclass}>Customer name :-  </h6>
-              <h6 className={classes.textclass}> {mybooking.first_name + ' ' + mybooking.last_name}</h6>
+                
+              <h6 className={classes.textclass}>Customer name</h6>
+              <h6 className={classes.textclass}>    {mybooking.first_name + ' ' + mybooking.last_name}</h6>
+              
               </Grid>
 
-            </Grid>
+            
 
               <Grid item >
-              <h6 className={classes.textclass}>Mobile no. :-  </h6>
-              <h6 className={classes.textclass}> {mybooking.country_code}  {mybooking.mobile}</h6>
+               <h6 className={classes.textclass}>Mobile no.</h6>
+              <h6 className={classes.textclass}>    {mybooking.country_code}  {mybooking.mobile}</h6>
               </Grid>
 
             <Grid item >
-              <h6 className={classes.textclass}>Alternate mobile no. :-  </h6>
-              <h6 className={classes.textclass}> {mybooking.country_code}  {mybooking.alternate_mobile}</h6>
+              <h6 className={classes.textclass}>Alternate mobile no.</h6>
+              <h6 className={classes.textclass}>    {mybooking.country_code}  {mybooking.alternate_mobile}</h6>
               </Grid>
 
               <br />
 
               <Grid item >
-              <h6 className={classes.textclass}>Booked from :-  </h6>
-              <h6 className={classes.textclass}> {mybooking.booked_from} </h6>
+              <h6 className={classes.textclass}>Booked from</h6>
+              <h6 className={classes.textclass}>    {mybooking.booked_from} </h6>
               </Grid>
 
             <Grid item >
-              <h6 className={classes.textclass}>Booked till :-  </h6>
-              <h6 className={classes.textclass}> {mybooking.booked_till}</h6>
+              <h6 className={classes.textclass}>Booked till</h6>
+              <h6 className={classes.textclass}>    {mybooking.booked_till}</h6>
               </Grid>
 
               <Grid item >
-              <h6 className={classes.textclass}>Capacity :-  </h6>
-              <h6 className={classes.textclass}> {mybooking.capacity} </h6>
+              <h6 className={classes.textclass}>Capacity</h6>
+              <h6 className={classes.textclass}>    {mybooking.capacity} </h6>
               </Grid>
 
               <Grid item >
-              <h6 className={classes.textclass}>Duration :-  </h6>
-              <h6 className={classes.textclass}> {mybooking.duration} Months</h6>
+              <h6 className={classes.textclass}>Duration</h6>
+              <h6 className={classes.textclass}>    {mybooking.duration} Months</h6>
               </Grid>
+              
 
               <br />
               <Grid item>
-                <h5>Facilities selected :-</h5>
+                <h4 className='primary'>FACILITIES SELECTED :-</h4>
+                <p></p>
               </Grid>
               <Grid item >
-              <h6 className={classes.textclass}>WIFI :-  </h6>
-              <h6 className={classes.textclass}>   {mybooking.wifi ? 'Selected' : 'Not Selected'} </h6>
+              <h6 className={classes.textclass}>WIFI</h6>
+              <h6 className={classes.textclass}>    {mybooking.wifi ? 'Selected' : 'Not Selected'} </h6>
               </Grid>
               <Grid item >
-              <h6 className={classes.textclass}>House TV :-  </h6>
-              <h6 className={classes.textclass}>   {mybooking.house_TV ? 'Selected' : 'Not Selected'} </h6>
+              <h6 className={classes.textclass}>House TV</h6>
+              <h6 className={classes.textclass}>    {mybooking.house_TV ? 'Selected' : 'Not Selected'} </h6>
               </Grid>
               <Grid item >
-              <h6 className={classes.textclass}>Room TV :-  </h6>
-              <h6 className={classes.textclass}>   {mybooking.room_TV ? 'Selected' : 'Not Selected'} </h6>
+              <h6 className={classes.textclass}>Room TV</h6>
+              <h6 className={classes.textclass}>    {mybooking.room_TV ? 'Selected' : 'Not Selected'} </h6>
               </Grid>
               <Grid item >
-              <h6 className={classes.textclass}>House refridgerator :-  </h6>
-              <h6 className={classes.textclass}>   {mybooking.house_refridgerator ? 'Selected' : 'Not Selected'} </h6>
+              <h6 className={classes.textclass}>House refridgerator</h6>
+              <h6 className={classes.textclass}>    {mybooking.house_refridgerator ? 'Selected' : 'Not Selected'} </h6>
               </Grid>
               <Grid item >
-              <h6 className={classes.textclass}>Room refridgerator :-  </h6>
-              <h6 className={classes.textclass}>   {mybooking.room_refridgerator ? 'Selected' : 'Not Selected'} </h6>
+              <h6 className={classes.textclass}>Room refridgerator</h6>
+              <h6 className={classes.textclass}>    {mybooking.room_refridgerator ? 'Selected' : 'Not Selected'} </h6>
               </Grid>
               <Grid item >
-              <h6 className={classes.textclass}>Purified water :-  </h6>
-              <h6 className={classes.textclass}>   {mybooking.purified_water ? 'Selected' : 'Not Selected'} </h6>
+              <h6 className={classes.textclass}>Purified water</h6>
+              <h6 className={classes.textclass}>    {mybooking.purified_water ? 'Selected' : 'Not Selected'} </h6>
               </Grid>
               <Grid item >
-              <h6 className={classes.textclass}>Geyser :-  </h6>
-              <h6 className={classes.textclass}>   {mybooking.geyser ? 'Selected' : 'Not Selected'} </h6>
+              <h6 className={classes.textclass}>Geyser</h6>
+              <h6 className={classes.textclass}>    {mybooking.geyser ? 'Selected' : 'Not Selected'} </h6>
               </Grid>
               <Grid item >
-              <h6 className={classes.textclass}>AC :-  </h6>
-              <h6 className={classes.textclass}>   {mybooking.AC ? 'Selected' : 'Not Selected'} </h6>
+              <h6 className={classes.textclass}>AC</h6>
+              <h6 className={classes.textclass}>    {mybooking.AC ? 'Selected' : 'Not Selected'} </h6>
               </Grid>
               <Grid item >
-              <h6 className={classes.textclass}>Cooler :-  </h6>
-              <h6 className={classes.textclass}>   {mybooking.cooler ? 'Selected' : 'Not Selected'} </h6>
+              <h6 className={classes.textclass}>Cooler</h6>
+              <h6 className={classes.textclass}>    {mybooking.cooler ? 'Selected' : 'Not Selected'} </h6>
               </Grid>
               <Grid item >
-              <h6 className={classes.textclass}>Breakfast :-  </h6>
-              <h6 className={classes.textclass}>   {mybooking.breakfast ? 'Selected' : 'Not Selected'} </h6>
+              <h6 className={classes.textclass}>Breakfast</h6>
+              <h6 className={classes.textclass}>    {mybooking.breakfast ? 'Selected' : 'Not Selected'} </h6>
               </Grid>
               <Grid item >
-              <h6 className={classes.textclass}>Lunch :-  </h6>
-              <h6 className={classes.textclass}>   {mybooking.lunch ? 'Selected' : 'Not Selected'} </h6>
+              <h6 className={classes.textclass}>Lunch</h6>
+              <h6 className={classes.textclass}>    {mybooking.lunch ? 'Selected' : 'Not Selected'} </h6>
               </Grid>
               <Grid item >
-              <h6 className={classes.textclass}>Dinner :-  </h6>
-              <h6 className={classes.textclass}>   {mybooking.dinner ? 'Selected' : 'Not Selected'} </h6>
+              <h6 className={classes.textclass}>Dinner</h6>
+              <h6 className={classes.textclass}>    {mybooking.dinner ? 'Selected' : 'Not Selected'} </h6>
               </Grid>
 
               <br />
 
               <Grid item >
-              <h6 className={classes.textclass}>Coupon :-  </h6>
-              <h6 className={classes.textclass}>   {mybooking.coupon} </h6>
+              <h6 className={classes.textclass}>Coupon</h6>
+              <h6 className={classes.textclass}>    {mybooking.coupon} </h6>
               </Grid>
 
               <br />
 
               {
                 props.profile.is_seller==false ? <Grid item >
-                <h6 className={classes.textclass}>Payment received :-  </h6>
-                <h6 className={classes.textclass}>   {mybooking.seller_pay} </h6>
+                <h6 className={classes.textclass}>Payment received</h6>
+                <h6 className={classes.textclass}>    {mybooking.seller_pay} </h6>
                 </Grid> : null
               }
               {
                 props.profile.is_seller==false ? <Grid item >
-                <h6 className={classes.textclass}>Payment paid :-  </h6>
-                <h6 className={classes.textclass}>   {mybooking.price_to_be_paid} </h6>
+                <h6 className={classes.textclass}>Payment paid</h6>
+                <h6 className={classes.textclass}>    {mybooking.price_to_be_paid} </h6>
                 </Grid> : null
               }
 
 
               <Grid item >
-              <h6 className={classes.textclass}>Cancelled :-  </h6>
-              <h6 className={classes.textclass}>   {mybooking.cancelled ? 'Yes' : 'No'} </h6>
+              <h6 className={classes.textclass}>Cancelled</h6>
+              <h6 className={classes.textclass}>    {mybooking.cancelled ? 'Yes' : 'No'} </h6>
               </Grid>
               <Grid item >
-              <h6 className={classes.textclass}>Extended booking:-  </h6>
-              <h6 className={classes.textclass}>   {mybooking.is_extended ? 'Yes' : 'No'} </h6>
+              <h6 className={classes.textclass}>Extended booking</h6>
+              <h6 className={classes.textclass}>    {mybooking.is_extended ? 'Yes' : 'No'} </h6>
               </Grid>
 
               {
                 mybooking.is_extended==true ? <Grid item >
-                <h6 className={classes.textclass}>Extended upon:-  </h6>
-                <h6 className={classes.textclass}>   {mybooking.extended_on} </h6>
+                <h6 className={classes.textclass}>Extended upon</h6>
+                <h6 className={classes.textclass}>    {mybooking.extended_on} </h6>
                 </Grid> : null
               }
 
               <Grid item >
-              <h6 className={classes.textclass}>Extended :-  </h6>
-              <h6 className={classes.textclass}>   {mybooking.extended ? 'Yes' : 'No'} </h6>
+              <h6 className={classes.textclass}>Extended</h6>
+              <h6 className={classes.textclass}>    {mybooking.extended ? 'Yes' : 'No'} </h6>
               </Grid>
 
               {
                 mybooking.cancelled ? <Grid item >
-                <h6 className={classes.textclass}>Cancellation Date:-  </h6>
-                <h6 className={classes.textclass}>   {mybooking.cancelled_date.slice(0,10)}</h6>
+                <h6 className={classes.textclass}>Cancellation Date</h6>
+                <h6 className={classes.textclass}>    {mybooking.cancelled_date.slice(0,10)}</h6>
                 </Grid> : null
               }
               {
                 props.profile.is_seller==false && mybooking.cancelled ? <Grid item >
-                <h6 className={classes.textclass}>Refund amount:-  </h6>
-                <h6 className={classes.textclass}>   {mybooking.refund_amount}</h6>
+                <h6 className={classes.textclass}>Refund amount</h6>
+                <h6 className={classes.textclass}>    {mybooking.refund_amount}</h6>
                 </Grid> : null
               }
               {
                 mybooking.cancelled ? <Grid item >
-                <h6 className={classes.textclass}>Cancellation Time:-  </h6>
-                <h6 className={classes.textclass}>   {mybooking.cancelled_date.slice(11,19)}</h6>
+                <h6 className={classes.textclass}>Cancellation Time</h6>
+                <h6 className={classes.textclass}>    {mybooking.cancelled_date.slice(11,19)}</h6>
                 </Grid> : null
               }
 
               {
                 mybooking.cancelled ? <Grid item >
-                <h6 className={classes.textclass}>Cancellation reason:-  </h6>
-                <h6 className={classes.textclass}>   {mybooking.cancellation_reason}</h6>
+                <h6 className={classes.textclass}>Cancellation reason</h6>
+                <h6 className={classes.textclass}>    {mybooking.cancellation_reason}</h6>
                 </Grid> : null
               }
 
 
               <Grid item >
-              <h6 className={classes.textclass}>Pay Later :-  </h6>
-              <h6 className={classes.textclass}>   {mybooking.paylater ? 'Yes' : 'No'} </h6>
+              <h6 className={classes.textclass}>Pay Later</h6>
+              <h6 className={classes.textclass}>    {mybooking.paylater ? 'Yes' : 'No'} </h6>
               </Grid>
 
               {
                 mybooking.paylater ? <Grid item >
-                <h6 className={classes.textclass}>Pay later Date:-  </h6>
-                <h6 className={classes.textclass}>   {mybooking.paylater_date}</h6>
+                <h6 className={classes.textclass}>Pay later Date</h6>
+                <h6 className={classes.textclass}>    {mybooking.paylater_date}</h6>
                 </Grid> : null
               }
 

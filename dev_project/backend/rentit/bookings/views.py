@@ -203,7 +203,7 @@ class room_booking(viewsets.ViewSet):
 
 
                 if y>=data['capacity'] and book_date<=datetime.date.today()+datetime.timedelta(days=15) and room.pausebooking==False and room.removed==False:
-                    print('success')
+                    
 
                     x = room.final_price
                     seller_pay = room.seller_price
@@ -306,6 +306,8 @@ class room_booking(viewsets.ViewSet):
                         seller.total_due_payment = seller.total_due_payment+seller_pay
 
                         seller.save()
+
+                        print('success')
 
                         
                             
@@ -422,15 +424,17 @@ class room_booking(viewsets.ViewSet):
                         return Response('Success',status=status.HTTP_202_ACCEPTED)
 
                     else:
+                        print('no input1')
                         return Response('Payment failed',status=status.HTTP_400_BAD_REQUEST)
                 else:
+                    print('no input2')
                     return Response('error',status=status.HTTP_400_BAD_REQUEST)
 
             return Response(request.body,status=status.HTTP_202_ACCEPTED)
 
         except:
 
-            print('no input')
+            print('no input3')
             return Response('error',status=status.HTTP_400_BAD_REQUEST)
 
     
