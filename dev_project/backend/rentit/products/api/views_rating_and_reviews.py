@@ -74,6 +74,20 @@ class give_reviews(viewsets.ViewSet):
 
                             seller_review.save()
 
+                        room = get_object_or_404(rooms.objects.all(),pk=booking.room_id.room_id)
+
+                        rate = room.avg_rating
+                        total = room.reviews
+
+                        total_rate = float(rate*total) + float(request.data['rating'])
+                        total = total + 1
+
+                        room.avg_rating = float(total_rate)/float(total)
+                        room.reviews = total
+
+                        room.save()
+
+
                     booking.room_review=True
 
                     booking.save()
