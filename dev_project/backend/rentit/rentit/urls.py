@@ -65,6 +65,9 @@ urlpatterns = [
     #bookings
     path('sourcehjbda983290whjba/',include('bookings.urls')),
 
+    #reviews
+    path('sourcebahsda292bidua92/',include('products.api.urls_give_reviews')),
+
 ]
 
 urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

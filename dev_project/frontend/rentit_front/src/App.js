@@ -38,6 +38,7 @@ import ShopForm from './components/shop_form'
 import ApartmentForm from './components/apartment_form'
 import Mycoupons from './components/mycoupons'
 import CouponForm from './components/coupon_form'
+import ReviewForm from './components/givereviews'
 
 
 function App(props) {
@@ -91,6 +92,7 @@ function App(props) {
                 <Route exact path='/dashboard/recentbookings/:bookingid' component={Bookingdetails}/>
                 <Route exact path='/dashboard/recentbookings/cancel/:bookingid' component={Bookingcancel}/>
                 <Route exact path='/dashboard/recentbookings/extend/:bookingid' component={Bookingextend}/>
+                <Route exact path='/dashboard/recentbookings/:bookingid/feedback' component={ReviewForm}/>
 
               </div>
               </>

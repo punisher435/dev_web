@@ -10,9 +10,10 @@ import Download from '../components/invoicefile'
 import Button from '@material-ui/core/Button';
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import {Redirect} from 'react-router-dom'
+import {Redirect,Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import './myStyles.css'
+
 
 const ref = React.createRef();
 
@@ -192,6 +193,30 @@ function Bookingdetails(props) {
               </Button>
     }</Grid>
     </Grid>
+
+    <br />
+
+    <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+            spacing={2}
+            >
+            
+   
+   <Grid item >
+            {
+                mybooking.room_review || mybooking.cancelled ? null :  <Link to={{
+                  pathname: `/dashboard/recentbookings/${mybooking.booking_id}/feedback`,
+                  state: { property_id:'room' }
+                }} style={{textDecoration:'none'}}><Button variant="contained" padding="auto"color="secondary" >
+                Give Feedback
+              </Button></Link>
+    }</Grid>
+    </Grid>
+
+    
            
 
             <Grid item >

@@ -11,11 +11,11 @@ from rest_framework import filters
 from rest_framework.pagination import PageNumberPagination
 
 
-from .serializers import room_list_serializer,room_detail_serializer,room_rating_and_reviews_serializer
+from .serializers import room_list_serializer,room_detail_serializer
 from products.models import rooms,shops,apartments
 from rentit.settings import EMAIL_HOST_USER
-from .serializers import shop_list_serializer,shop_detail_serializer,shop_rating_and_reviews_serializer
-from .serializers import apartment_list_serializer,apartment_detail_serializer,apartment_rating_and_reviews_serializer
+from .serializers import shop_list_serializer,shop_detail_serializer
+from .serializers import apartment_list_serializer,apartment_detail_serializer
 
 from products.models import minmax_room,minmax_shop,minmax_apartment
 from .serializers import minmax_room_serializer,minmax_shop_serializer,minmax_apartment_serializer

@@ -9,11 +9,22 @@ from django.utils.translation import gettext_lazy as _
 from .managers import rooms_manager,shops_manager,apartments_manager
 from django_google_maps import fields as map_fields
 
+
 User= get_user_model()
 
 
 def upload_to(instance, filename):
     return 'images/rooms/{filename}'.format(filename=filename)
+
+def upload_to_roomreviews(instance, filename):
+    return 'reviews/rooms/{filename}'.format(filename=filename)
+
+def upload_to_shopreviews(instance, filename):
+    return 'reviews/shops/{filename}'.format(filename=filename)
+
+def upload_to_apartmentreviews(instance, filename):
+    return 'reviews/apartments/{filename}'.format(filename=filename)
+
 
 def upload_file_to(instance, filename):
     return 'address_proof/rooms/{filename}'.format(filename=filename)
@@ -195,12 +206,7 @@ class rooms(models.Model):
     personal_rooms = rooms_manager()
 
 
-class room_rating_and_reviews(models.Model):
-    room_id=models.ForeignKey(rooms,on_delete=models.PROTECT,related_name='room')
-    customer_id=models.ForeignKey(User,on_delete=models.PROTECT,related_name="room_customer")
-    rating=models.DecimalField(max_digits=2,decimal_places=1)
-    reviews=models.TextField()
-    timestamp=models.DateTimeField(auto_now=True) 
+
 
 class minmax_room(models.Model):
     max_price = models.IntegerField()
@@ -323,7 +329,10 @@ class shop_rating_and_reviews(models.Model):
     customer_id=models.ForeignKey(User,on_delete=models.PROTECT,related_name="shop_customer")
     rating=models.DecimalField(max_digits=2,decimal_places=1)
     reviews=models.TextField()
-    timestamp=models.DateTimeField(auto_now=True) 
+    timestamp=models.DateTimeField(auto_now=True)
+    photo1=models.ImageField(upload_to=upload_to_roomreviews,default='/images/rooms/default.jpg')
+    photo2=models.ImageField(upload_to=upload_to_roomreviews,default='/images/rooms/default.jpg')
+    photo3=models.ImageField(upload_to=upload_to_roomreviews,default='/images/rooms/default.jpg') 
 
 class minmax_shop(models.Model):
     max_price = models.IntegerField()
@@ -478,7 +487,10 @@ class apartment_rating_and_reviews(models.Model):
     customer_id=models.ForeignKey(User,on_delete=models.PROTECT,related_name="apartment_customer")
     rating=models.DecimalField(max_digits=2,decimal_places=1)
     reviews=models.TextField()
-    timestamp=models.DateTimeField(auto_now=True) 
+    timestamp=models.DateTimeField(auto_now=True)
+    photo1=models.ImageField(upload_to=upload_to_roomreviews,default='/images/rooms/default.jpg')
+    photo2=models.ImageField(upload_to=upload_to_roomreviews,default='/images/rooms/default.jpg')
+    photo3=models.ImageField(upload_to=upload_to_roomreviews,default='/images/rooms/default.jpg') 
 
 class minmax_apartment(models.Model):
     max_price = models.IntegerField()

@@ -13,6 +13,15 @@ from .managers import rooms_bookings_manager,rooms_seller_bookings_manager
 from .managers import shops_bookings_manager,shops_seller_bookings_manager
 from .managers import apartments_bookings_manager,apartments_seller_bookings_manager
 
+def upload_to_roomreviews(instance, filename):
+    return 'reviews/rooms/{filename}'.format(filename=filename)
+
+def upload_to_shopreviews(instance, filename):
+    return 'reviews/shops/{filename}'.format(filename=filename)
+
+def upload_to_apartmentreviews(instance, filename):
+    return 'reviews/apartments/{filename}'.format(filename=filename)
+
 class roomBookings(models.Model):
 
     booking_id = models.UUIDField( 
@@ -73,6 +82,8 @@ class roomBookings(models.Model):
     is_extended = models.BooleanField(default=False)
     extended_on = models.ForeignKey('self',null=True,blank=True,on_delete=models.PROTECT)
 
+    room_review = models.BooleanField(default=False)
+
     refunded=models.BooleanField(default=False)
     refund_amount=models.IntegerField(default=0)
     paylater=models.BooleanField(default=False)
@@ -82,6 +93,39 @@ class roomBookings(models.Model):
 
     customer = rooms_bookings_manager
     seller = rooms_seller_bookings_manager
+
+
+class room_rating_and_reviews(models.Model):
+    booking_id = models.OneToOneField(roomBookings,on_delete=models.PROTECT,primary_key=True)
+    room_id=models.ForeignKey(rooms,on_delete=models.PROTECT,related_name='room_my_id')
+    customer_id=models.ForeignKey(user,on_delete=models.PROTECT,related_name="room_customer_my_id")
+    rating=models.DecimalField(max_digits=2,decimal_places=1)
+    reviews=models.TextField()
+    photo1=models.ImageField(upload_to=upload_to_roomreviews,default='/images/rooms/default.jpg')
+    photo2=models.ImageField(upload_to=upload_to_roomreviews,default='/images/rooms/default.jpg')
+    photo3=models.ImageField(upload_to=upload_to_roomreviews,default='/images/rooms/default.jpg')
+    timestamp=models.DateTimeField(auto_now=True) 
+
+
+class shop_rating_and_reviews(models.Model):
+    shop_id=models.ForeignKey(rooms,on_delete=models.PROTECT,related_name="shop_my_id")
+    customer_id=models.ForeignKey(user,on_delete=models.PROTECT,related_name="shop_customer_my_id")
+    rating=models.DecimalField(max_digits=2,decimal_places=1)
+    reviews=models.TextField()
+    timestamp=models.DateTimeField(auto_now=True)
+    photo1=models.ImageField(upload_to=upload_to_roomreviews,default='/images/rooms/default.jpg')
+    photo2=models.ImageField(upload_to=upload_to_roomreviews,default='/images/rooms/default.jpg')
+    photo3=models.ImageField(upload_to=upload_to_roomreviews,default='/images/rooms/default.jpg') 
+
+class apartment_rating_and_reviews(models.Model):
+    apartment_id=models.ForeignKey(rooms,on_delete=models.PROTECT,related_name="apartment_my_id")
+    customer_id=models.ForeignKey(user,on_delete=models.PROTECT,related_name="apartment_customer_my_id")
+    rating=models.DecimalField(max_digits=2,decimal_places=1)
+    reviews=models.TextField()
+    timestamp=models.DateTimeField(auto_now=True)
+    photo1=models.ImageField(upload_to=upload_to_roomreviews,default='/images/rooms/default.jpg')
+    photo2=models.ImageField(upload_to=upload_to_roomreviews,default='/images/rooms/default.jpg')
+    photo3=models.ImageField(upload_to=upload_to_roomreviews,default='/images/rooms/default.jpg') 
 
 
 """ class shopBookings(models.Model):

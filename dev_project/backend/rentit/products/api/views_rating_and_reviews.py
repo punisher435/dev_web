@@ -6,13 +6,18 @@ from rest_framework import filters
 from rest_framework.decorators import permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.pagination import PageNumberPagination
+from rest_framework.parsers import MultiPartParser,FormParser
+from rest_framework import permissions
+from rest_framework_simplejwt import authentication
 from rest_framework import mixins
 
-from products.models import room_rating_and_reviews,shop_rating_and_reviews,apartment_rating_and_reviews
+from bookings.models import room_rating_and_reviews,shop_rating_and_reviews,apartment_rating_and_reviews
 from products.models import rooms,shops,apartments
-from .serializers import room_rating_and_reviews_serializer
-from .serializers import shop_rating_and_reviews_serializer
-from .serializers import apartment_rating_and_reviews_serializer
+from bookings.serializers import room_rating_and_reviews_serializer
+from bookings.serializers import shop_rating_and_reviews_serializer
+from bookings.serializers import apartment_rating_and_reviews_serializer
+from bookings.models import roomBookings
+from user.models import seller_rating_and_reviews
 
 
 class StandardResultsSetPagination(PageNumberPagination):
@@ -37,37 +42,47 @@ class room_reviews(viewsets.ReadOnlyModelViewSet):
 
 
 
-class give_room_reviews(viewsets.ViewSet):
+class give_reviews(viewsets.ViewSet):
 
-    @permission_classes([IsAuthenticated])
+    authentication_classes = [authentication.JWTAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
+    parser_classes=(MultiPartParser,FormParser)
+
     def create(self,request):
-        serializer = room_rating_and_reviews_serializer(data=request.data)
-        if serializer.is_valid() and (not request.user.is_seller):
-            serializer.validated_data["customer_id"]=request.user
-            x=serializer.validated_data["room_id"]
-            y=serializer.validated_data["rating"]
-            serializer.save()
+        print(request.data)
+        try:
 
-            query_set = rooms.objects.all()
-            room=get_object_or_404(query_set,pk=x)
-            total_rating=(room.avg_rating*room.reviews)+y
-            room.reviews=room.reviews+1
-            room.avg_rating=round((total_rating/room.reviews),1)
-            room.save()
+            if request.user.is_seller==False:
 
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        else:
-            return Response(serializer.data,status=status.HTTP_400_BAD_REQUEST)
+                if request.data['type']=='room':
+                    
+                    queryset = roomBookings.objects.all()
+                    queryset = queryset.filter(customer_id=request.user)
+                    booking = get_object_or_404(queryset,pk=request.data['bookingid'])
+                    
+                    if booking.room_review==False and booking.cancelled==False:
 
-    @permission_classes([IsAuthenticated])
-    def destroy (self,request,pk=None):
-        queryset = room_rating_and_reviews.objects.all()
-        review = get_object_or_404(queryset,pk=pk)
-        if review.customer_id==request.user:
-            review.delete()
-            return Response("Deleted",status=status.HTTP_200_OK)
-        else:
-            return Response("ERROR", status=status.HTTP_400_BAD_REQUEST)
+                        review = room_rating_and_reviews(booking_id = booking,room_id = booking.room_id,customer_id=request.user,
+                        rating=int(request.data['rating']),reviews = request.data['review'],photo1 = request.data['photo1'],photo2 = request.data['photo2'],photo3=request.data['photo3'])
+
+                        review.save()
+
+                        if(request.data['seller_review']!='' or int(request.data['seller_rating'])!=0):
+
+                            seller_review = seller_rating_and_reviews(seller_id = booking.seller_id,customer_id=request.user,
+                            rating = int(request.data["seller_rating"]),reviews= request.data['seller_review'])
+
+                            seller_review.save()
+
+                    booking.room_review=True
+
+                    booking.save()
+
+
+
+            return Response('success', status=status.HTTP_201_CREATED)
+        except:
+            return Response('error', status=status.HTTP_400_BAD_REQUEST)
 
 
 class shop_reviews(viewsets.ReadOnlyModelViewSet):

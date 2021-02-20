@@ -9,23 +9,75 @@ import Grid from '@material-ui/core/Grid';
 import axios from 'axios'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
+import Rating from '@material-ui/lab/Rating';
 import Eror from './eror'
+import Typography from '@material-ui/core/Typography';
+import Backdrop from '@material-ui/core/Backdrop';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
+const FILE_SIZE = 1600 * 1024;
+const SUPPORTED_FORMATS = [
+  "image/jpg",
+  "image/jpeg",
+  "image/png"
+];
 
 const validationSchema = yup.object({
-  
+  review: yup
+  .string('Enter your Room name')
+  .required('Room name is required'),
 
-    country_code: yup
-    .string('Enter your country code')
-    .required('Country code is required'),
+  rating: yup
+  .number().required(''),
 
-    mobile: yup
-    .string('Enter your mobile')
-    .min(10, 'Mobile should be of minimum 10 characters length')
-    .required('Mobile is required'),
-    aadhar: yup
-    .string('Enter your aadhar')
-    .min(12, 'Aadhar should be of minimum 12 characters length')
-    .required('Aadhar is required'),
+  photo1: yup.mixed().when("input1", {
+    is: true,
+    then: yup.mixed().required("A file is required")
+    .test(
+        "fileSize",
+        "File too large",
+        value => value && value.size <= FILE_SIZE
+    )
+    .test(
+        "fileFormat",
+        "Unsupported Format",
+        value => value && SUPPORTED_FORMATS.includes(value.type)
+    ),
+  }),
+
+  photo2: yup.mixed().when("input2", {
+    is: true,
+    then: yup.mixed().required("A file is required")
+    .test(
+        "fileSize",
+        "File too large",
+        value => value && value.size <= FILE_SIZE
+    )
+    .test(
+        "fileFormat",
+        "Unsupported Format",
+        value => value && SUPPORTED_FORMATS.includes(value.type)
+    ),
+  }),
+
+  photo3: yup.mixed().when("input3", {
+    is: true,
+    then: yup.mixed().required("A file is required")
+    .test(
+        "fileSize",
+        "File too large",
+        value => value && value.size <= FILE_SIZE
+    )
+    .test(
+        "fileFormat",
+        "Unsupported Format",
+        value => value && SUPPORTED_FORMATS.includes(value.type)
+    ),
+  }),
+
+
+
+    
 
     
 });
@@ -50,8 +102,8 @@ const useStyles = makeStyles(theme => ({
       [theme.breakpoints.up('md')]: {
         borderRadius:'50%',
         overflow: 'hidden',
-        width: '300px',
-        height: '300px',
+        width: '200px',
+        height: '200px',
         position:'relative',
       },
       marginLeft:'1%',
@@ -72,76 +124,66 @@ function ReviewForm (props){
     const classes = useStyles();
     const theme = useTheme();
 
-    const [myprofile,setprofile] = useState({
-      country_code:'+91',
-      mobile:'',
-      alternate_mobile:'',
-      aadhar:'',
-      user_id:'',
-      photo:'',
-      file:"/account-icon-8.png"
+    const [myreview,setreview] = useState({
+      rating:0,
+      review:'',
+      seller_rating:0,
+      seller_review:'',
+      photo1:'',
+      file1:"/addroom.png",
+      photo2:'',
+      file2:"/addroom.png",
+      photo3:'',
+      file3:"/addroom.png",
     })
 
-    const [edit,setedit] = useState(false)
+    
     const [redirect,setredirect] = useState(false)
     const [error,seterror] = useState(false)
     const hiddenFileInput1 = React.useRef(null);
-   
+    const hiddenFileInput2 = React.useRef(null);
+    const hiddenFileInput3 = React.useRef(null);
 
-    useEffect(
-        async () => {
-            const config = {
-                headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `JWT ${localStorage.getItem('access')}`,
-                },
-              };
-              
-              if(props.profile)
-              {
-                try{const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcezxradakgdlh/profile/${props.profile.id}/`,config);
-              
-                setprofile({
-                  country_code:res.data.country_code,
-                  mobile:res.data.mobile,
-                  alternate_mobile:res.data.alternate_mobile,
-                  aadhar:res.data.aadhar,
-                  user_id:props.profile.id,
-                  photo:res.data.photo,
-                  file:res.data.photo
-                })
-                setedit(true);
-                
-              
-              }
-                catch{
-      
-                }
-        }
-    }
+    const [input1,setinput1] = React.useState(false);
+    const [input2,setinput2] = React.useState(false);
+    const [input3,setinput3] = React.useState(false);
+
+    const [loading,setloading] = React.useState(false);
+
+    const type = props.location.state.property_id;
+    const bookingid = props.match.params.bookingid;
+
     
-    ,[props.profile])
 
   
 
   const formik = useFormik({
     enableReinitialize:true,
     initialValues: {
-      user_id:myprofile.user_id,
-      country_code:myprofile.country_code,
-      mobile:myprofile.mobile,
-      alternate_mobile:myprofile.alternate_mobile,
-      aadhar:myprofile.aadhar,
+      input1:false,
+      input2:false,
+      input3:false,
+        rating:myreview.rating,
+        review:myreview.review,
+        seller_rating:myreview.seller_rating,
+        seller_review:myreview.seller_review,
+        photo1:myreview.photo1,
+        photo2:myreview.photo2,
+        photo3:myreview.photo3,
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
+      setloading(true);
       let form_data = new FormData();
-      form_data.append('user_id',values.user_id)
-      form_data.append('country_code',values.country_code)
-      form_data.append('mobile',values.mobile)
-      form_data.append('alternate_mobile',values.alternate_mobile)
-      form_data.append('aadhar',values.aadhar)
-      form_data.append('photo',myprofile.photo)
+      form_data.append('rating',values.rating)
+      form_data.append('review',values.review)
+      form_data.append('seller_rating',values.seller_rating)
+      form_data.append('seller_review',values.seller_review)
+      form_data.append('photo1',values.photo1)
+      form_data.append('photo2',values.photo2)
+      form_data.append('photo3',values.photo3)
+      form_data.append('bookingid',bookingid)
+      form_data.append('type',type)
       console.log(form_data.entries())
       const config = {
         headers: {
@@ -151,43 +193,36 @@ function ReviewForm (props){
       };
 
       
-      if(edit===true)
-      {
-        try{const res = await axios.put(`${process.env.REACT_APP_API_URL}/sourcezxradakgdlh/profile/${props.profile.id}/`,form_data,config);
-              
-          setredirect(true)
-              
-              }
-                catch{
-                  console.log('error')
-                  seterror(true)
-                }
-      }
-      else{
-        try{const res = await axios.post(`${process.env.REACT_APP_API_URL}/sourcezxradakgdlh/profile/`,form_data,config);
-              
+      
+      
+        try{const res = await axios.post(`${process.env.REACT_APP_API_URL}/sourcebahsda292bidua92/reviews/`,form_data,config);
+            setloading(false)  
         setredirect(true)
 
               }
                 catch{
+                  setloading(false)
                   console.log('error')
                   seterror(true)
                 }
       }
-    },
+    
   });
 
   if(redirect==true)
   {
-    return <Redirect to='/dashboard/profile' />
+    return <Redirect to='/dashboard/recentbookings' />
   }
   if(error===true)
   {
-    return <div className={classes.erorclass}><Eror error={'Cannot update profile'} /></div>;
+    return <div className={classes.erorclass}><Eror error={'Unable to give feedback!'} /></div>;
   }
 
   return (
     <div className={classes.myclass}>
+            <Backdrop className={classes.backdrop} open={loading}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
         
         <Grid
         container
@@ -196,70 +231,117 @@ function ReviewForm (props){
         alignItems="center"
         >
       <form onSubmit={formik.handleSubmit}>
+        <Grid item>
+          <Typography variant="h5" component="h3" className={classes.newclass}>
+            Room Feedback
+          </Typography>
+        </Grid>
+        <br />
+
+      <Grid
+        container
+        direction="row"
+        justify="center"
+        alignItems="center"
+        spacing={1}
+      >
 
       <Grid item className={classes.imageclass}>
 
-      <Button variant='contained' className={classes.buttonclass} onClick={(e) => {hiddenFileInput1.current.click();}}>
-        <img src={myprofile.file} className={classes.imageclass}/>
-        </Button>
+        <Button variant='contained' className={classes.buttonclass} onClick={(e) => {hiddenFileInput1.current.click();}}>
+          <img src={myreview.file1} className={classes.imageclass}/>
+          </Button>
+        
+        <input type='file'  ref={hiddenFileInput1} style={{display:'none'}}  id='photo1' accept='image/png,image/jpeg,image/jpg' onChange={(event) => {
+  setreview({...myreview,file1: URL.createObjectURL(event.target.files[0])}); formik.setFieldValue('photo1',event.target.files[0]); formik.setFieldValue('input1',true)}}/> 
+        
+        </Grid>
 
-      <input type='file'  ref={hiddenFileInput1} style={{display:'none'}}  id='photo' accept='image/png,image/jpeg,image/jpg' onChange={(event) => {console.log(event.currentTarget.files[0]);
-      setprofile({...myprofile,file: URL.createObjectURL(event.target.files[0]),photo:event.target.files[0]})}}/> 
+        <Grid item className={classes.imageclass}>
 
-      </Grid>
+        <Button variant='contained' className={classes.buttonclass} onClick={(e) => {hiddenFileInput2.current.click();}}>
+          <img src={myreview.file2} className={classes.imageclass}/>
+          </Button>
+        
+        <input type='file'  ref={hiddenFileInput2} style={{display:'none'}}  id='photo2' accept='image/png,image/jpeg,image/jpg' onChange={(event) => {
+  setreview({...myreview,file2: URL.createObjectURL(event.target.files[0])});  formik.setFieldValue('photo2',event.target.files[0]);  formik.setFieldValue('input2',true)}}/> 
+        
+        </Grid>
+
+        <Grid item className={classes.imageclass}>
+
+        <Button variant='contained' className={classes.buttonclass} onClick={(e) => {hiddenFileInput3.current.click();}}>
+          <img src={myreview.file3} className={classes.imageclass}/>
+          </Button>
+        
+        <input type='file'  ref={hiddenFileInput3} style={{display:'none'}}  id='photo3' accept='image/png,image/jpeg,image/jpg' onChange={(event) => {
+  setreview({...myreview,file3: URL.createObjectURL(event.target.files[0])});  formik.setFieldValue('photo3',event.target.files[0]);  formik.setFieldValue('input3',true)}}/> 
+        
+        </Grid>
+
+        </Grid>
+
+        <Grid item>
+        <Rating
+          name="rating"
+          value={formik.values.rating}
+          onChange={(event, newValue) => {
+            formik.setFieldValue('rating',newValue);
+          }}
+        />
+        </Grid>
+
 
         <br />
           <Grid item>
         <TextField
           multiline
-          rows={1}
-          id="country_code"
-          name="country_code"
-          label="Country code"
-          value={formik.values.country_code}
+          rows={3}
+          id="review"
+          name="review"
+          label="WriteReview"
+          value={formik.values.review}
           onChange={formik.handleChange}
-          error={formik.touched.country_code && Boolean(formik.errors.country_code)}
-          helperText={formik.touched.country_code && formik.errors.country_code}
+          error={formik.touched.review && Boolean(formik.errors.review)}
+          helperText={formik.touched.review && formik.errors.review}
         />
         </Grid>
+        <br />
+
         <Grid item>
-        <TextField
-          multiline
-          rows={1}
-          id="mobile"
-          name="mobile"
-          label="mobile"
-          value={formik.values.mobile}
-          onChange={formik.handleChange}
-          error={formik.touched.mobile && Boolean(formik.errors.mobile)}
-          helperText={formik.touched.mobile && formik.errors.mobile}
-        />
+          <Typography variant="h5" component="h3" className={classes.newclass}>
+            Seller Feedback (optional)
+          </Typography>
         </Grid>
+        <br />
+
         <Grid item>
-        <TextField
-          multiline
-          rows={1}
-          id="alternate_mobile"
-          name="alternate_mobile"
-          label="alternate_mobile"
-          value={formik.values.alternate_mobile}
-          onChange={formik.handleChange}
+        <Rating
+          name="seller_rating"
+          value={formik.values.seller_rating}
+          onChange={(event, newValue1) => {
+            formik.setFieldValue('seller_rating',newValue1);
+          }}
         />
         </Grid>
+
+
+        <br />
 
         <Grid item>
         <TextField
           multiline
-          rows={1}
-          id="aadhar"
-          name="aadhar"
-          label="aadhar"
-          value={formik.values.aadhar}
+          rows={3}
+          id="seller_review"
+          name="seller_review"
+          label="seller_review"
+          value={formik.values.seller_review}
           onChange={formik.handleChange}
-          error={formik.touched.aadhar && Boolean(formik.errors.aadhar)}
-          helperText={formik.touched.aadhar && formik.errors.aadhar}
+          error={formik.touched.seller_review && Boolean(formik.errors.seller_review)}
+          helperText={formik.touched.seller_review && formik.errors.seller_review}
         />
         </Grid>
+       
         <br />
         
         <Button color="primary" variant="contained" fullWidth type="submit">
