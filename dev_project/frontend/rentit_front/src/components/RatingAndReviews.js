@@ -49,6 +49,7 @@ const useStyles = makeStyles((theme) => ({
     overflowX:'scroll',
     overflowY:'scroll',
     flexWrap: 'nowrap',
+    
   
     // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
     transform: 'translateZ(0)',
@@ -65,7 +66,7 @@ const useStyles = makeStyles((theme) => ({
    
   },
   liststyle: {
-    overflow: 'visiblw'
+    overflow: 'visible !important'
     
   },
 }));
@@ -75,11 +76,16 @@ export default function VerticalDividers({no, rating,reviews,params,setparams}) 
   const classes = useStyles();
 
   const handleclick1 = (e) => {
+
     e.preventDefault();
-    setparams({...params,page:params.page-1})
+    if(params.page>1){
+      setparams({...params,page:params.page-1})
+    }
+   
   }
   const handleclick2 = (e) => {
     e.preventDefault();
+    
     setparams({...params,page:params.page+1})
   }
 
@@ -129,35 +135,18 @@ export default function VerticalDividers({no, rating,reviews,params,setparams}) 
         <GridList className={classes.gridList} cols={2.5}>
         {reviews.map((review) => ( 
           <div>
-          <GridListTile key={review.photo1} className={classes.liststyle}>
-            {
-              review.photo1 ? <img src={review.photo1} className={classes.imageclass}/> : null
-            }
-
-           
-            
-          </GridListTile>
-
-          <GridListTile key={review.photo2} className={classes.liststyle}>
          
-
             {
-              review.photo2 ? <img src={review.photo2}/> : null
+              review.photo1 ? <GridListTile key={review.photo1} className={classes.liststyle}><img src={review.photo1} className={classes.imageclass}/></GridListTile> : null
             }
 
-            
-          </GridListTile>
-
-          <GridListTile key={review.photo3} className={classes.liststyle}>
-
-
             {
-              review.photo3? <img src={review.photo3}/> : null
+              review.photo2 ? <GridListTile key={review.photo2} className={classes.liststyle}><img src={review.photo1} className={classes.imageclass}/></GridListTile> : null
             }
 
-
-            
-          </GridListTile>
+            {
+              review.photo3 ? <GridListTile key={review.photo3} className={classes.liststyle}><img src={review.photo1} className={classes.imageclass}/></GridListTile> : null
+            }
 
           </div>
           
