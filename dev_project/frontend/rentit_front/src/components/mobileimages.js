@@ -1,183 +1,319 @@
-import React, { useState, useEffect } from 'react';
+import React ,{ useState }from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
-import CardMedia from '@material-ui/core/CardMedia';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
-import styles from './css/hover.module.css';
-import ReactImageMagnify from 'react-image-magnify';
+import Icon from '@material-ui/core/Icon'
+import CardMedia from '@material-ui/core/CardMedia';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import MeetingRoomOutlinedIcon from '@material-ui/icons/MeetingRoomOutlined';
+import AcUnitIcon from '@material-ui/icons/AcUnit';
+import WifiOffIcon from '@material-ui/icons/WifiOff';
+import WifiIcon from '@material-ui/icons/Wifi';
+import RoomIcon from '@material-ui/icons/Room';
+import TvOutlinedIcon from '@material-ui/icons/TvOutlined';
+import TvOffOutlinedIcon from '@material-ui/icons/TvOffOutlined';
+import { IoWaterOutline } from 'react-icons/io5';
+import HotTubIcon from '@material-ui/icons/HotTub';
+import ToysIcon from '@material-ui/icons/Toys';
+import LocalLaundryServiceIcon from '@material-ui/icons/LocalLaundryService';
+import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import { BiFoodMenu } from "react-icons/bi"
+import FastfoodIcon from '@material-ui/icons/Fastfood';
+import FreeBreakfastIcon from '@material-ui/icons/FreeBreakfast';
+import { BiCctv } from "react-icons/bi";
+import { GiGuards } from "react-icons/gi";
+import AccessibilityIcon from '@material-ui/icons/Accessibility';
+import WhatshotIcon from '@material-ui/icons/Whatshot';
+import BathtubIcon from '@material-ui/icons/Bathtub';
+import { grey } from '@material-ui/core/colors';
+import { IconContext } from "react-icons";
+
+import style from './css/hover.module.css'
+
+import CustomizedRatings from './rating_meter';
 
 import SimpleModal from './imagemodal';
 
-
 const useStyles = makeStyles((theme) => ({
-    root: {
-      flexGrow: 1,
-    },
-    root1: {
-      width: '100%',
-      backgroundColor: theme.palette.background.paper,
-    },
-    paper: {
-      padding: theme.spacing(2),
-      textAlign: 'center',
-      color: theme.palette.text.secondary,
-    },
-    api:{
-      height:'450px'
-    },
-    mystyle: {
-    position: '-webkit-sticky',
-    position: 'sticky',
-    top: 0,
-    },
-    media1 : {
-      width:'100%',
-      right:0,
-    },
-    typo1 :{
-      fontSize: '1.5rem',
-      fontWeight: 'normal',
-    },
-    typo2 :{
-      fontSize: '1rem',
-      fontWeight: 'normal',
-      marginLeft:'1rem',
-      color:'#f50057',
-    },
-    paraclass:{
-      marginTop:'15px',
-    },
-    margingrid : {
-      marginTop:'100px',
-    },
-    sizeclass: {
-      width:'50%',
-      fontSize: '1.5rem',
-    },
-    divclass:{
-      width:'80%',
-      height:'30%',
-      position:'absolute',
-      overflowX:'hidden',
-      left:30,
-      right:20,
-      margin: '0  auto -150px',
-  
-    },
-    apiclass:{
-      width:'100%',
-      height:'100%',
-      position:'absolute',
-      overflowX:'hidden',
-      left:'17%',
-      right:20,
-      margin: '0  auto -150px',
-  
-    },
-    paraclass1 :{
-      position:'relative',
-      float:'bottom',
-    },
-    buttonclass : {
-        padding:0,
-        border:0,
-    },
-    media3 :{
-      width:'90%',
-      height:'30%',
-      maxHeight:'150px',
-      marginTop: '10px',
-      marginLeft: '5%',
-      marginRight: '5%',
-      marginBottom: '2%',
-      display: 'flex',
-    },
-   
-    mediaclass:{
-      maxHeight:'150px',
-      maxWidth:'200px',
-    },
+  root: {
+    flexGrow: 1,
     
+  },
+  paper: {
+    padding: theme.spacing(1),
+    height: 400,
+    textAlign: 'center',
+    alignItems: 'center',
+    color: theme.palette.text.secondary, 
+  },
+
+
+  root1: {
+    width: '100%',
+   
+    textAlign: 'center',
+
+    borderLeft: 2,
+    borderLeftColor: grey,
+  },
+
+  root2: {
+   width:200,
+    height: '100%',
+    textAlign: 'left',
+    padding : '10px 0 0 20px',
+  },
+
+
+  root3: {
+    maxWidth: 200,
+    height: 150,
+    textAlign: 'center',
+
+
+    borderLeft: 2,
+    borderLeftColor: grey,
+  },
+
+
+  media: {
+    height: 400,
+    width:'100vw',
+    [theme.breakpoints.up('sm')]: {
+      width:400,
+      heigth:400,
+    },
+  },
+
+  media2: {
+    height: 100,
+    width:'100%'
+  },
+
+  textroot: {
+    marginLeft:'2px',
+    fontWeight:'bold',
+    fontSize:'25px',
+    display: 'inline',
+  },
+  textroot1: {
+    marginLeft:'2px',
+    fontWeight:'1rem',
+    fontSize:'18px',
+    display: 'inline',
+    marginLeft:'10px',
+    color:'#877f7f'
+  },
+  textroot2: {
+    fontWeight:'bold',
+    fontSize:'20px',
+    display: 'inline',
+    marginLeft:'10px',
+    color:'#dea300'
+  },
+
+  textroot4: {
+    fontWeight:'bold',
+    fontSize:'22px',
+    display: 'inline',
+    marginLeft:'6px',
+    marginBottom:'10px',
+    color:'#dea300'
+  },
+  textroot5: {
+    color:'#f44336',
+    fontSize:'16px',
+    
+    marginTop:'5px',
+  },
+  iconroot: {
+    display: 'inline',
+  },
+
+  buttonroot: {
+    
+    color:'green'
+  },
+  mystyle2 :{
+    fontSize:'25px',
+  },
+  grid1:{
+    marginTop:'1%'
+  }
+
 }));
 
+export default function Mobileimages({post}) {
+  const classes = useStyles();
 
-export default function Mobileimages({p1,p2,p3,p4,p5}) {
-
-  const [open,changeopen] = useState(false)
-
+  function MediaCard() {
     const [photos,changephotos] = useState({
-        a:p1,
-        b:p2,
-        c:p3,
-        d:p4,
-        e:p5,
-      })
-
-    useEffect(
-      () => {
-        changephotos({
-          a:p1,
-          b:p2,
-          c:p3,
-          d:p4,
-          e:p5,
-        });
-      }
-    ,[p1,p2,p3,p4,p5])
-
-    const classes = useStyles();
+      a:post.photo1,
+      b:post.photo2,
+      c:post.photo3,
+      d:post.photo4,
+      e:post.photo5,
+    })
+    const [open,changeopen] = useState(false)
+  
     return (
-        <div>
-            <SimpleModal open={open} change={changeopen} photo={photos.a}/>
-            <Grid item xs={12}>
-            <Button className={classes.buttonclass} onClick={() => {changeopen(true);}}><img src={photos.a} className={styles.img1}/></Button>
-          </Grid>
+      <Grid
+  container
+  direction="col"
+  justify="center"
+  alignItems="center"
+  
+>
 
-            <Grid
-            container
-            direction="row"
-            justify="center"
-            alignItems="center"
-            spacing={1}
-            className={classes.media3}
-          >
-          <Grid item xs={3}>
-          <Button className={classes.buttonclass} onClick={() => {
+<SimpleModal open={open} change={changeopen} photo={photos.a}/>
+
+<Grid>
+
+<Card className={classes.root1}>
+        <CardActionArea>
+          <CardMedia
+            className={`${classes.media} ${style.pcimg1}`}
+            image={photos.a}
+            title="Contemplative Reptile"
+            onClick={() => {changeopen(true);}}
+          />
+        </CardActionArea>
+    </Card>
+</Grid>
+
+
+
+
+<Grid
+  container
+  direction="col"
+  justify="center"
+  spacing = {1}
+  className={classes.grid1}
+>
+    
+<Grid item xs={3}>
+    <Card >
+        <CardActionArea>
+          <CardMedia
+            className={`${classes.media2} ${style.pcimg2}`}
+            image={photos.b}
+            title="Contemplative Reptile" 
+            onClick={
+              () => {
                 const temp=photos.a;
                 changephotos({
-                    ...photos,a:photos.b,b:temp,
-                });
-            }}><div className={classes.mediaclass}><img src={photos.b} className={styles.img2}/></div></Button>
-          </Grid>
-          <Grid item xs={3}>
-          <Button className={classes.buttonclass} onClick={() => {
+                  ...photos,
+                  a:photos.b,
+                  b:temp
+                })
+              }
+            }
+          />
+        </CardActionArea>
+    </Card>
+</Grid>
+
+
+<Grid item xs={3}>
+<Card>
+        <CardActionArea>
+          <CardMedia
+            className={`${classes.media2} ${style.pcimg2}`}
+            image={photos.c}
+            title="Contemplative Reptile"
+            onClick={
+              () => {
                 const temp=photos.a;
                 changephotos({
-                    ...photos,a:photos.c,c:temp,
-                });
-            }}><div className={classes.mediaclass}><img src={photos.c} className={styles.img2}/></div></Button>
-          </Grid>
-          <Grid item xs={3}>
-          <Button className={classes.buttonclass} onClick={() => {
-                const temp=photos.a;
-                changephotos({
-                    ...photos,a:photos.d,d:temp,
-                });
-            }}><div className={classes.mediaclass}><img src={photos.d} className={styles.img2}/></div></Button>
-          </Grid>
-          <Grid item xs={3}>
-          <Button className={classes.buttonclass} onClick={() => {
-                const temp=photos.a;
-                changephotos({
-                    ...photos,a:photos.e,e:temp,
-                });
-            }}><div className={classes.mediaclass}><img src={photos.e} className={styles.img2}/></div></Button>
-          </Grid>
+                  ...photos,
+                  a:photos.c,
           
+                  c:temp
+
+                })
+              }
+            }
+          />
+        </CardActionArea>
+      </Card>
+</Grid>
+<Grid item xs={3}>
+<Card>
+        <CardActionArea>
+          <CardMedia
+            className={`${classes.media2} ${style.pcimg2}`}
+            image={photos.d}
+            title="Contemplative Reptile"
+            onClick={
+              () => {
+                const temp=photos.a;
+                changephotos({
+                  ...photos,
+                  a:photos.d,
+                  d:temp,
+                })
+              }
+            }
+          />
+        </CardActionArea>
+      </Card>
+</Grid>
+<Grid item xs={3}>
+<Card>
+        <CardActionArea>
+          <CardMedia
+            className={`${classes.media2} ${style.pcimg2}`}
+            image={photos.e}
+            title="Contemplative Reptile"
+            onClick={
+              () => {
+                const temp=photos.a;
+                changephotos({
+                  ...photos,
+                  a:photos.e,
+                  e:temp,
+                })
+              }
+            }
+          />
+        </CardActionArea>
+      </Card>
+</Grid>
+
+</Grid>
+
+</Grid>
+
+    );
+  }
+
+
+
+  function FormRow() {
+    return (
+      <React.Fragment>
+          <Grid container justify="center">
+            <Grid item xs={9}>
+            <MediaCard/>
+            </Grid>
           </Grid>
-        </div>
-    )
+      </React.Fragment>
+    );
+  }
+
+  return (
+    <div className={classes.root}>
+        <Grid container item xs={12}>
+          <FormRow />
+        </Grid>
+        
+    </div>
+  );
 }
 

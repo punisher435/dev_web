@@ -121,11 +121,15 @@ export default function FullWidthGrid(props) {
   const roomid = props.match.params.roomid;
 
   const classes = useStyles();
-  const [details, setDetails] = useState({});
+  const [details, setDetails] = useState(false);
   const [reviews, setReviews] = useState([])
   const [loading, setLoading] = useState(false);
   const [open1,changeopen1] = useState(false)
   const [loginpage,setloginpage] = useState(false);
+  const [params,setparams] = useState({
+    page:1,
+    ordering:'-rating'
+  })
 
 
 
@@ -161,18 +165,21 @@ export default function FullWidthGrid(props) {
             'Content-Type': 'application/json'
         }
       };
+      try{
       const res1 = await axios.get(`${process.env.REACT_APP_API_URL}/sourcedjfnsk743/room/reviews/`,{
         params:{
           room_id:roomid,
+          page:params.page,
+          ordering:params.ordering,
         },
         config:config
       });
       
-      try{
-          console.log(res1.data);
+     
+          console.log('review',res1.data.results);
           setReviews(res1.data.results);
           setLoading(false);
-          console.log(reviews);
+          
       }  catch (err) {
         // Handle Error Here
         console.error(err);
@@ -193,7 +200,7 @@ if(loginpage===true)
 
 
 
-
+if(details){
   return (
     
     <div className={classes.root}>
@@ -253,20 +260,22 @@ if(loginpage===true)
                           </Grid>
 
                           <Grid item xs = {12}>
-                            <RatingAndReviews  no={parseFloat(details.reviews)} rating={parseFloat(details.avg_rating)}/>
+                            <RatingAndReviews  reviews={reviews} params={params} setparams={setparams} no={parseFloat(details.reviews)} rating={parseFloat(details.avg_rating)}/>
                           </Grid>
                       </Grid>
                     </Box>
                 </Grid>
 
-
+                
                 <Grid item xs={4}>
                   <Box mt={7} className={classes.mystyle}>
-
+                  
                   <BookCard details={details} loginpage={loginpage} setloginpage={setloginpage}/>
                   </Box>
                 </Grid>
+
             </Grid>
+            
         </Container>
       
         <Grid item xs={12} sm={12}>
@@ -285,7 +294,7 @@ if(loginpage===true)
         spacing = {1}
         >
 
-         <Mobileimages p1={details.photo1} p2={details.photo2} p3={details.photo3} p4={details.photo4} p5={details.photo5}/>
+         <Mobileimages post={details}/>
           
           <br />
           <Grid
@@ -392,7 +401,7 @@ if(loginpage===true)
           >
           <Grid item xs={1}></Grid>
           <Grid item xs={10} className={classes.paraclass1}>
-            <RatingAndReviews  no={parseFloat(details.reviews)} rating={parseFloat(details.avg_rating)}/>
+            <RatingAndReviews reviews={reviews} params={params} setparams={setparams} no={parseFloat(details.reviews)} rating={parseFloat(details.avg_rating)}/>
           </Grid>
           <Grid item xs={1}></Grid>
           </Grid>
@@ -415,4 +424,8 @@ if(loginpage===true)
     </div>
      
   );
+}
+else{
+  return <div></div>;
+}
 }

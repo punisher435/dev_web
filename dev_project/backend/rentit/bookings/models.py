@@ -101,9 +101,9 @@ class room_rating_and_reviews(models.Model):
     customer_id=models.ForeignKey(user,on_delete=models.PROTECT,related_name="room_customer_my_id")
     rating=models.DecimalField(max_digits=2,decimal_places=1)
     reviews=models.TextField()
-    photo1=models.ImageField(upload_to=upload_to_roomreviews,default='/images/rooms/default.jpg')
-    photo2=models.ImageField(upload_to=upload_to_roomreviews,default='/images/rooms/default.jpg')
-    photo3=models.ImageField(upload_to=upload_to_roomreviews,default='/images/rooms/default.jpg')
+    photo1=models.ImageField(upload_to=upload_to_roomreviews,null=True,blank=True)
+    photo2=models.ImageField(upload_to=upload_to_roomreviews,null=True,blank=True)
+    photo3=models.ImageField(upload_to=upload_to_roomreviews,null=True,blank=True)
     timestamp=models.DateTimeField(auto_now=True) 
 
 

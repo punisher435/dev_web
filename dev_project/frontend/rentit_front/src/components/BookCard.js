@@ -26,6 +26,7 @@ import { connect } from 'react-redux'
 
 import {Redirect,Link} from 'react-router-dom';
 import Capacityfilter from './capacityselect';
+import ScrollArea from 'react-scrollbar'; 
 const useStyles = makeStyles((theme) => ({
   root1: {
     
@@ -366,9 +367,19 @@ setcapacity(x);
           <Facility type='Dinner' price='price'/>
 
           <Facility type='wifi' price='price'/> */}
+        <ScrollArea
+            speed={0.8}
+            
+            horizontal={false}
+            
+            >
+           
+<div><FacilityIcon post={details} bookvalues={bookvalues} setbookvalues={setbookvalues}/></div>
+        
+      
+        </ScrollArea>
 
-        <FacilityIcon post={details} bookvalues={bookvalues} setbookvalues={setbookvalues}/>
-
+        
           <Divider/>
         <Box mt={1} mb={2}>
     <Grid container alignItems='center'>

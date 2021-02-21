@@ -90,21 +90,7 @@ export default function BottomAppBar({details,open1,changeopen1}) {
                     </Button>
               </Grid>
 
-              <Grid item xs={3}>
-              <Button className={classes.buttonroot}>
-
-                    
-                    { 
-                     details.cart ?<ShoppingCartIcon /> :<ShoppingCartOutlinedIcon />
-                     }
-                 
-                     
-                        <Typography variant="body1" component="body1" className={classes.typo1}>
-                        Cart
-                        </Typography>
-                    </Button>
-              </Grid>
-
+              
               <Grid item xs={3}>
                      <Button className={classes.buttonroot}>
                 
@@ -121,9 +107,7 @@ export default function BottomAppBar({details,open1,changeopen1}) {
           </Grid>
         
           <div className={classes.grow} />
-          <IconButton edge="end" color="inherit">
-            <MoreIcon />
-          </IconButton>
+          
         </Toolbar>
       </AppBar>
     </React.Fragment>
