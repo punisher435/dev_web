@@ -11,6 +11,17 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+
+import IconButton from '@material-ui/core/IconButton';
+
 
 
 import RatingBar from '../components/RatingBar'
@@ -63,8 +74,33 @@ const useStyles = makeStyles((theme) => ({
 export default function VerticalDividers({no, rating,reviews,params,setparams}) {
   const classes = useStyles();
 
+  const handleclick1 = (e) => {
+    e.preventDefault();
+    setparams({...params,page:params.page-1})
+  }
+  const handleclick2 = (e) => {
+    e.preventDefault();
+    setparams({...params,page:params.page+1})
+  }
+
   return (
     <div>
+
+      <FormControl className={classes.formControl}>
+        <InputLabel id="demo-simple-select-label">Age</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={params.ordering}
+          onChange={e => {e.preventDefault(); setparams({...params,ordering:e.target.value});}}
+        >
+          <MenuItem value={'-timestamp'}>Newest first</MenuItem>
+          <MenuItem value={'-rating'}>Highly rated</MenuItem>
+          <MenuItem value={'rating'}>Negative first</MenuItem>
+          <MenuItem value={'timestamp'}>Oldest first</MenuItem>
+        </Select>
+      </FormControl>
+
       <Grid container
         direction="row"
         justify="space-around"
@@ -83,6 +119,8 @@ export default function VerticalDividers({no, rating,reviews,params,setparams}) 
           <RatingBar star={3} value={70}/>
           <RatingBar star={4} value={40}/>
           <RatingBar star={5} value={30}/>
+
+        </Grid>
 
         </Grid>
         
@@ -147,14 +185,23 @@ export default function VerticalDividers({no, rating,reviews,params,setparams}) 
               )
             )
           }
+          <ListItem>
+          <IconButton onClick={e => handleclick1(e)} >
+      <ArrowBackIosIcon />
+      </IconButton>
+          <p>{params.page}</p>
+      <IconButton onClick={e => handleclick2(e)} >
+      <ArrowForwardIosIcon />
+      </IconButton>
+          </ListItem>
         </List>
-
+      
 
       <Paper />
 
     
 
-      </Grid>
+      
     </div>
   );
 }

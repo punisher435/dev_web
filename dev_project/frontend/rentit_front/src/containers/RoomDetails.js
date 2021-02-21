@@ -126,7 +126,7 @@ export default function FullWidthGrid(props) {
   const [loading, setLoading] = useState(false);
   const [open1,changeopen1] = useState(false)
   const [loginpage,setloginpage] = useState(false);
-  const [params,setparams] = useState({
+  const [params1,setparams] = useState({
     page:1,
     ordering:'-rating'
   })
@@ -158,39 +158,40 @@ export default function FullWidthGrid(props) {
     }
     };
 
-    const fetchreviews = async () => {
-      setLoading(true);
-      const config = {
-        headers: {
-            'Content-Type': 'application/json'
-        }
-      };
-      try{
-      const res1 = await axios.get(`${process.env.REACT_APP_API_URL}/sourcedjfnsk743/room/reviews/`,{
-        params:{
-          room_id:roomid,
-          page:params.page,
-          ordering:params.ordering,
-        },
-        config:config
-      });
-      
-     
-          console.log('review',res1.data.results);
-          setReviews(res1.data.results);
-          setLoading(false);
-          
-      }  catch (err) {
-        // Handle Error Here
-        console.error(err);
-    }
-    };
+   
     fetchDetails();
-    fetchreviews();
+   
   }, []);
 
+  useEffect( async() => {
+     
+    const config = {
+      headers: {
+          'Content-Type': 'application/json'
+      }
+    };
+    try{
+    const res1 = await axios.get(`${process.env.REACT_APP_API_URL}/sourcedjfnsk743/room/reviews/`,{
+      params:{
+        room_id:roomid,
+        page:params1.page,
+        ordering:params1.ordering,
+      },
+      config:config
+    });
+    
+   
+        console.log('review',res1.data.results);
+        setReviews(res1.data.results);
+        
+        
+    }  catch (err) {
+      // Handle Error Here
+      console.error(err);
+  }
+  },[params1])
 
-  console.log('photo11',details.photo1);
+
 
 
 if(loginpage===true)
@@ -260,7 +261,7 @@ if(details){
                           </Grid>
 
                           <Grid item xs = {12}>
-                            <RatingAndReviews  reviews={reviews} params={params} setparams={setparams} no={parseFloat(details.reviews)} rating={parseFloat(details.avg_rating)}/>
+                            <RatingAndReviews  reviews={reviews} params={params1} setparams={setparams} no={parseFloat(details.reviews)} rating={parseFloat(details.avg_rating)}/>
                           </Grid>
                       </Grid>
                     </Box>
@@ -401,7 +402,7 @@ if(details){
           >
           <Grid item xs={1}></Grid>
           <Grid item xs={10} className={classes.paraclass1}>
-            <RatingAndReviews reviews={reviews} params={params} setparams={setparams} no={parseFloat(details.reviews)} rating={parseFloat(details.avg_rating)}/>
+            <RatingAndReviews reviews={reviews} params={params1} setparams={setparams} no={parseFloat(details.reviews)} rating={parseFloat(details.avg_rating)}/>
           </Grid>
           <Grid item xs={1}></Grid>
           </Grid>
