@@ -20,15 +20,13 @@ import Posts from '../components/post_apartment';
 import Checkboxes from '../components/bookedcheckbox';
 import PaginationOutlined from '../components/PaginationOutlined';
 import RangeSlider from '../components/priceslider'
-import SimpleSelect from '../components/categoryselect';
-import SimpleSelect1 from '../components/foodcheckbox';
-import SimpleSelect2 from '../components/facilitiesfilter';
+import SimpleSelect from '../components/categoryselect_apartment';
+import SimpleSelect2 from '../components/facilities_filter_apartment';
 import SimpleSelect3 from '../components/sequrityfilter';
 import MaterialUIPickers1 from '../components/datefilter';
 import RadioButtonsGroup from '../components/minratingfilter';
-import Capacityfilter from '../components/Capacityfilter';
 import Trustpointsfilter from '../components/mintrustpoints';
-import Windowsfilter from '../components/minwindows';
+import Windowsfilter from '../components/minwindows_apartment';
 import Floorfilter from '../components/floorfilter';
 import SimpleSelect5 from '../components/bedtypefilter';
 import SearchFields from '../components/searchfilter';
@@ -241,14 +239,7 @@ function ResponsiveDrawer(props) {
       <Divider />
 
       <ListItem className={classes.mystyle}>
-      <SimpleSelect1 filters={props.filters} setfilters={props.setfilters}/>
-      </ListItem>
-      <Divider />
-
-      <ListItem className={classes.mystyle}>
-      <Typography variant="h6">
-         Min. Windows
-      </Typography>
+      
       </ListItem>
       <ListItem className={classes.mystyle}>
       <Windowsfilter filters={props.filters} setfilters={props.setfilters}/>
