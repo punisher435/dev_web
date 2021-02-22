@@ -44,7 +44,7 @@ export default function SimpleSelect3(props) {
         </Select>
         </FormControl>
         <FormControl className={classes.formControl}>
-        <InputLabel id="building_guard">Veg Food</InputLabel>
+        <InputLabel id="building_guard">Building Guard</InputLabel>
         <Select
           labelId="building_guard_list"
           id="building_guard_list_id"

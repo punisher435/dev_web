@@ -3,6 +3,7 @@ import React,{ useState } from 'react'
 import RemoveIcon from '@material-ui/icons/Remove';
 import AddIcon from '@material-ui/icons/Add';
 import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 
 
 
@@ -10,6 +11,7 @@ function Windowsfilter(props) {
 
 
     const [value,setvalue] = useState('Any') 
+    const [value1,setvalue1] = useState('Any') 
     const handleclick1 = event => {
         if(value==='Any'){
             setvalue(1);
@@ -33,8 +35,35 @@ function Windowsfilter(props) {
             props.setfilters({...props.filters,windows:temp});
         }
     }
+    const handleclick3 = event => {
+        if(value1==='Any'){
+            setvalue1(1);
+            props.setfilters({...props.filters,balcony:1});
+        } else{
+            var temp=value1+1;
+            setvalue1(temp);
+            props.setfilters({...props.filters,balcony:temp});
+        }
+    }
+    const handleclick4 = event => {
+        if(value1==='Any'){
+            setvalue1('Any');
+        }
+        else if(value1===1){
+                setvalue1('Any');
+                props.setfilters({...props.filters,balcony:''});
+        } else{
+            var temp=value1-1;
+            setvalue1(temp);
+            props.setfilters({...props.filters,balcony:temp});
+        }
+    }
     return (
-        <div>   
+        <div>  
+            <div>
+             <Typography variant="body1">
+                Min. Windows
+            </Typography> 
             <Button onClick={handleclick1} >
                 <AddIcon />
             </Button>
@@ -44,6 +73,22 @@ function Windowsfilter(props) {
             <Button  onClick={handleclick2}>
                 <RemoveIcon />
             </Button>
+            </div>
+
+            <div>
+             <Typography variant="body1">
+                Min. Balcony
+            </Typography> 
+            <Button onClick={handleclick3} >
+                <AddIcon />
+            </Button>
+
+            {value1}
+
+            <Button  onClick={handleclick4}>
+                <RemoveIcon />
+            </Button>
+            </div>
         </div>
     )
 }

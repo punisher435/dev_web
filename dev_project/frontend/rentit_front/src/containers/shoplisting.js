@@ -54,7 +54,7 @@ const App = ({isAuthenticated}) => {
     floor_filter:'',
     room_filter:'',
     washroom_filter:'',
-    windows_filter:'',
+    windows:'',
 
     purified_water:'',
     min_rating:'',
@@ -111,7 +111,7 @@ const App = ({isAuthenticated}) => {
           min_rating:filters.min_rating,
          
           trust_points_filter:filters.trust_points_filter,
-          windows_filter:filters.windows_filter,
+          windows_filter:filters.windows,
           building_guard:filters.building_guard,
           cctv_building:filters.cctv_building,
 

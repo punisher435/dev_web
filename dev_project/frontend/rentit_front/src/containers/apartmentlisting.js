@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 /* import Pagination from '../components/Pagination'; */
 import Grid from '@material-ui/core/Grid';
 import axios from 'axios';
-import ResponsiveDrawer from './searchlist';
+import ResponsiveDrawer from './searchlist_apartment';
 import Eror from '../components/eror';
 
 import { connect } from 'react-redux'
@@ -45,16 +45,25 @@ const App = ({isAuthenticated}) => {
     }
 
   const [filters, setfilters] = useState({
-    nonveg_food:'',
-    veg_food:'',
-    guest_allowed:'',
-    iron:'',
+    
     laundry:'',
     cooler:'',
     AC:'',
-    room_TV:'',
+    
     power_backup:'',
+
     floor_filter:'',
+    house_refridgerator:'',
+    washroom_filter:'',
+    beds_filter:'',
+    rooms_filter:'',
+    cooler_filter:'',
+    geyser_filter:'',
+    AC_filter:'',
+    TV_filter:'',
+    sofa:'',
+    apartment_type:'',
+
     purified_water:'',
     min_rating:'',
     cctv_building:'',
@@ -67,22 +76,20 @@ const App = ({isAuthenticated}) => {
     city:'',
     state:'',
     wifi:'',
-    breakfast:'',
-    lunch:'',
-    dinner:'',
-    house_TV:'',
+    
+    TV:'',
     geyser:'',
     electricity:'',
     country:'',
     min_price:'',
     max_price:'',
-    capacity_filter:'',
+    BHK_filter:'',
     trust_points_filter:'',
     booked:false,
     windows:'',
     bookedtill:`${date.getFullYear()}-${x}-${y}`,
     search:'',
-    room_cleaning:'',
+    apartment_cleaning:'',
     ordering:'-trust_points',
   });
 
@@ -97,47 +104,54 @@ const App = ({isAuthenticated}) => {
       const page = currentPage
       /* const params = new URLSearchParams([page,currentPage]) */
       if(mapview===false){
-      try{const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourceaxcnfrudadv34/rooms/`,{
+      try{const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcebvdfesl2746/apartments/`,{
         params:{
-          room_cleaning:filters.room_cleaning,
+          apartment_cleaning:filters.apartment_cleaning,
           page:currentPage,
           booked:filters.booked,
           min_price:filters.min_price,
           max_price:filters.max_price,
           category:filters.category,
-          nonveg_food:filters.nonveg_food,
-          veg_food:filters.veg_food,
+          
           bookedtill_filter:filters.bookedtill,
           min_rating:filters.min_rating,
-          capacity_filter:filters.capacity_filter,
+          BHK_filter:filters.BHK_filter,
           trust_points_filter:filters.trust_points_filter,
           windows_filter:filters.windows,
           building_guard:filters.building_guard,
           cctv_building:filters.cctv_building,
-          iron:filters.iron,
+          
           laundry:filters.laundry,
           cooler:filters.cooler,
           AC:filters.AC,
-          room_TV:filters.room_TV,
+          TV:filters.TV,
           power_backup:filters.power_backup,
           purified_water:filters.purified_water,
           balcony_filter:filters.balcony,
           separate_washroom:filters.separate_washroom,
           wifi:filters.wifi,
-          breakfast:filters.breakfast,
-          lunch:filters.lunch,
-          dinner:filters.dinner,
-          house_TV:filters.house_TV,
+          
           geyser:filters.geyser,
-          guest_allowed:filters.guest_allowed,
           floor_filter:filters.floor_filter,
           search:filters.search,
           ordering:filters.ordering,
+
+          floor_filter:filters.floor_filter,
+        house_refridgerator:filters.house_refridgerator,
+        washroom_filter:filters.washroom_filter,
+        beds_filter:filters.beds_filter,
+        rooms_filter:filters.rooms_filter,
+        cooler_filter:filters.cooler_filter,
+        geyser_filter:filters.geyser_filter,
+        AC_filter:filters.AC_filter,
+        TV_filter:filters.TV_filter,
+        sofa:filters.sofa,
+        apartment_type:filters.apartment_type,
         },
         config:config
       });
 
-      const res2 = await axios.get(`${process.env.REACT_APP_API_URL}/sourcekadwbda24/minmax_room/1/`,{
+      const res2 = await axios.get(`${process.env.REACT_APP_API_URL}/sourcghfhf4/minmax_apartment/1/`,{
         config:config
       });
 
@@ -171,7 +185,7 @@ const App = ({isAuthenticated}) => {
     };
     
       try {
-        await axios.put(`${process.env.REACT_APP_API_URL}/souraawdgrg33w24/wishlist/rooms/1/`,config,config)
+        await axios.put(`${process.env.REACT_APP_API_URL}/sourcenasdknahi29ad/wishlist/apartments/1/`,config,config)
         .then(res1 => {
           changeitemswishlist(res1.data);
         })

@@ -182,23 +182,27 @@ class wishlist_shop(viewsets.ViewSet):
         except:
             return Response('Error while removing from wishlist',status=status.HTTP_400_BAD_REQUEST)
 
-    def update(self, request,pk=None):
-
+    def retrieve(self, request,pk=None):
+    
         shop = get_object_or_404(shops.objects.all(),pk=pk)
-
-        wishlist_object = wishlist.objects.get(pk=request.user.pk)
 
         try:
             wishlist_object = wishlist.objects.get(pk=request.user.pk)
             if shop in wishlist_object.shop_wishlist.all():
                 return Response(True, status=status.HTTP_202_ACCEPTED)
             else:
-                return Response(False, status=status.HTTP_202_ACCEPTED)
+                return Response(False, status=status.HTTP_400_BAD_REQUEST)
             
 
         except:
-            return Response(False, status=status.HTTP_202_ACCEPTED)
+            return Response(False,status=status.HTTP_400_BAD_REQUEST)
 
+    def update(self,request,pk=None):
+        try:
+            wishlist_object = wishlist.objects.get(pk=request.user.pk)
+            return Response(wishlist_object.items, status=status.HTTP_202_ACCEPTED)
+        except:
+            return Response(None,status=status.HTTP_400_BAD_REQUEST)
 
 
 
@@ -272,11 +276,9 @@ class wishlist_apartment(viewsets.ViewSet):
         except:
             return Response('Error while removing from wishlist',status=status.HTTP_400_BAD_REQUEST)
 
-    def update(self, request,pk=None):
-
+    def retrieve(self, request,pk=None):
+    
         apartment = get_object_or_404(apartments.objects.all(),pk=pk)
-
-        wishlist_object = wishlist.objects.get(pk=request.user.pk)
 
         try:
             wishlist_object = wishlist.objects.get(pk=request.user.pk)
@@ -288,6 +290,13 @@ class wishlist_apartment(viewsets.ViewSet):
 
         except:
             return Response(False,status=status.HTTP_400_BAD_REQUEST)
+
+    def update(self,request,pk=None):
+        try:
+            wishlist_object = wishlist.objects.get(pk=request.user.pk)
+            return Response(wishlist_object.items, status=status.HTTP_202_ACCEPTED)
+        except:
+            return Response(None,status=status.HTTP_400_BAD_REQUEST)
 
 
 

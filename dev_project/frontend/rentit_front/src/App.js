@@ -40,6 +40,9 @@ import Mycoupons from './components/mycoupons'
 import CouponForm from './components/coupon_form'
 import ReviewForm from './components/givereviews'
 
+import ShopListing from './containers/shoplisting'
+import ApartmentListing from './containers/apartmentlisting'
+
 
 function App(props) {
   
@@ -63,6 +66,10 @@ function App(props) {
                 <Route exact path='/wishlist' component={SimpleTabs}/>
                 <Route exact path='/rooms/:roomid/book/' component={Checkout} />
                 <Route exact path='/recentBooking' component={ConfirmPause}/>
+
+                <Route exact path='/shops' component={ShopListing}/>
+
+                <Route exact path='/apartments' component={ApartmentListing}/>
 
                 <Route exact path='/dashboard/my_rooms' component={Myrooms}/>
                 <Route exact path='/dashboard/my_rooms/edit' component={RoomForm}/>

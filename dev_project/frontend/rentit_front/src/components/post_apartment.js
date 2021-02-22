@@ -1,7 +1,7 @@
 import {React,useState} from 'react';
-import SearchCard from './searchcard_shop'
+import SearchCard from './searchcard_apartment'
 import Spinner from './Spinner'
-import RecipeReviewCard from './card_1_shop';
+import RecipeReviewCard from './card_1_apartment';
 import Grid from '@material-ui/core/Grid';
 import Hidden from '@material-ui/core/Hidden';
 import SimpleSnackbar from './wishlistsmackbar';
@@ -14,7 +14,7 @@ const Posts = ({ posts, loading,changeitemswishlist,changeitemscart,wishlistitem
   const myStlye = {
     border: '0px'
   };
-
+  if(posts){
   return (
     <ul className='list-group mb-4'>
 
@@ -22,7 +22,7 @@ const Posts = ({ posts, loading,changeitemswishlist,changeitemscart,wishlistitem
        <SimpleSnackbar open={open1} setOpen={setOpen1}/>
        <SimpleSnackbar1 open={open2} setOpen={setOpen2}/>
       {posts.map(post => (
-        <li key={post.shop_id} style={myStlye} className='list-group-item'>
+        <li key={post.apartment_id} style={myStlye} className='list-group-item'>
           {/* {post.title} */}
           <Hidden smDown>
         <Grid item md={12}>
@@ -37,7 +37,10 @@ const Posts = ({ posts, loading,changeitemswishlist,changeitemscart,wishlistitem
         </li>
       ))}
     </ul>
-  );
+  );}
+  else{
+      return <div></div>;
+  }
 };
 
 export default Posts;

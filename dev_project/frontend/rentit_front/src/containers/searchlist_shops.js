@@ -20,17 +20,17 @@ import Posts from '../components/post_shops';
 import Checkboxes from '../components/bookedcheckbox';
 import PaginationOutlined from '../components/PaginationOutlined';
 import RangeSlider from '../components/priceslider'
-import SimpleSelect from '../components/categoryselect';
-import SimpleSelect1 from '../components/foodcheckbox';
-import SimpleSelect2 from '../components/facilitiesfilter';
+import SimpleSelect from '../components/categoryselect_shop';
+
+import SimpleSelect2 from '../components/facilitiesfilter_shop';
 import SimpleSelect3 from '../components/sequrityfilter';
 import MaterialUIPickers1 from '../components/datefilter';
 import RadioButtonsGroup from '../components/minratingfilter';
 import Capacityfilter from '../components/Capacityfilter';
 import Trustpointsfilter from '../components/mintrustpoints';
-import Windowsfilter from '../components/minwindows';
+import Windowsfilter from '../components/minwindows_shop';
 import Floorfilter from '../components/floorfilter';
-import SimpleSelect5 from '../components/bedtypefilter';
+
 import SearchFields from '../components/searchfilter';
 import SearchFields2 from '../components/searchfilter2';
 import SimpleSelectfinal from '../components/sort';
@@ -204,15 +204,7 @@ function ResponsiveDrawer(props) {
       </ListItem>
       <Divider />
 
-      <ListItem className={classes.mystyle}>
-      <Typography variant="h6">
-          Capacity
-      </Typography>
-      </ListItem>
-      <ListItem className={classes.mystyle}>
-      <Capacityfilter filters={props.filters} setfilters={props.setfilters}/>
-      </ListItem>
-      <Divider />
+
 
       <ListItem className={classes.mystyle}>
       <Typography variant="h6">
@@ -239,15 +231,10 @@ function ResponsiveDrawer(props) {
       </ListItem>
       <Divider />
 
-      <ListItem className={classes.mystyle}>
-      <SimpleSelect1 filters={props.filters} setfilters={props.setfilters}/>
-      </ListItem>
-      <Divider />
+      
 
       <ListItem className={classes.mystyle}>
-      <Typography variant="h6">
-         Min. Windows
-      </Typography>
+     
       </ListItem>
       <ListItem className={classes.mystyle}>
       <Windowsfilter filters={props.filters} setfilters={props.setfilters}/>
@@ -274,10 +261,7 @@ function ResponsiveDrawer(props) {
       </ListItem>
       <Divider />
 
-      <ListItem className={classes.mystyle}>
-      <SimpleSelect5 filters={props.filters} setfilters={props.setfilters}/>
-      </ListItem>
-      <Divider />
+      
 
       
         

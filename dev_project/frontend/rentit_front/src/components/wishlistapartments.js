@@ -5,8 +5,8 @@ import axios from 'axios'
 import Hidden from '@material-ui/core/Hidden';
 
 
-import SearchCard from './SearchCard'
-import RecipeReviewCard from './card_1';
+import SearchCard from './searchcard_apartment'
+import RecipeReviewCard from './card_1_apartment';
 import Spinner from './Spinner';
 import Eror from './eror';
 import {Redirect} from 'react-router-dom';

@@ -256,8 +256,9 @@ function NestedGrid({filters,setfilters,post, isAuthenticated, setOpen1,setOpen2
         },
       };
       try {
-      await axios.get(`${process.env.REACT_APP_API_URL}/sourcesnjs03qjkda/wishlist/shops/${post.shop_id}/`,config,config)
+      await axios.get(`${process.env.REACT_APP_API_URL}/sourcenasdknahi29ad/wishlist/apartments/${post.apartment_id}/`,config,config)
       .then(res => {
+          console.log('wishlist',res.data)
         changewishlist(res.data);
       })
       .catch(err => {
@@ -397,7 +398,7 @@ function NestedGrid({filters,setfilters,post, isAuthenticated, setOpen1,setOpen2
                     'Authorization': `JWT ${localStorage.getItem('access')}`,
             },
           };
-          const res = await axios.delete(`${process.env.REACT_APP_API_URL}/sourcesnjs03qjkda/wishlist/shops/${post.shop_id}/`,config);
+          const res = await axios.delete(`${process.env.REACT_APP_API_URL}/sourcenasdknahi29ad/wishlist/apartments/${post.apartment_id}/`,config);
 
           if(res.data == 'Removed from wishlist'){changewishlist(false); changeitemswishlist(wishlistitems-1);}
         }
@@ -420,10 +421,10 @@ function NestedGrid({filters,setfilters,post, isAuthenticated, setOpen1,setOpen2
                     'Authorization': `JWT ${localStorage.getItem('access')}`,
             },
             params: {
-              shop_id:post.shop_id,
+              apartment_id:post.apartment_id,
             },
           };
-          const res = await axios.post(`${process.env.REACT_APP_API_URL}/sourcesnjs03qjkda/wishlist/shops/`,config,config);
+          const res = await axios.post(`${process.env.REACT_APP_API_URL}/sourcenasdknahi29ad/wishlist/apartments/`,config,config);
 
           if(res.data == 'Added to wishlist'){changewishlist(true);  changeitemswishlist(wishlistitems+1);}
         }
@@ -501,6 +502,9 @@ function NestedGrid({filters,setfilters,post, isAuthenticated, setOpen1,setOpen2
         post.balcony!==0 ? <Grid item md={1}><div><Icon fontSize='small'><MeetingRoomOutlinedIcon /></Icon><p>Balcony</p></div></Grid> : <></>
         }
         { 
+        post.house_refridgerator ? <Grid item md={1}><div><Icon fontSize='small'><KitchenIcon /></Icon><p>House refridgerator</p></div></Grid> : <div><TvOffOutlinedIcon /><p>No TV</p></div>
+        }
+        { 
         post.separate_washroom ? <Grid item md={1}><div><Icon fontSize='small'><BathtubIcon /></Icon><p>Separate washroom</p></div></Grid> : <></>
         }
         { 
@@ -509,6 +513,9 @@ function NestedGrid({filters,setfilters,post, isAuthenticated, setOpen1,setOpen2
 
         { 
         post.AC ? <Grid item md={1}><div><AcUnitIcon /><p>AC</p></div></Grid> : <></>
+        }
+        { 
+        post.geyser ? <Grid item md={1}><div><HotTubIcon /><p>  Hot Water</p></div></Grid> : <></>
         }
         { 
         post.cooler ? <Grid item md={1}><div><ToysIcon /><p>Cooler</p></div></Grid> : <></>
@@ -574,7 +581,7 @@ function NestedGrid({filters,setfilters,post, isAuthenticated, setOpen1,setOpen2
         </Grid>
         
         <Grid item md={7} xs={12}>
-        <Link to={`/shops/${post.shop_id}`} target="_blank" style={{textDecoration:'none'}}>
+        <Link to={`/shops/${post.apartment_id}`} target="_blank" style={{textDecoration:'none'}}>
           <NameCard/>
           </Link>
         </Grid>

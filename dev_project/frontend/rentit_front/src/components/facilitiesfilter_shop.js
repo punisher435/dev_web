@@ -5,6 +5,11 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+
+import RemoveIcon from '@material-ui/icons/Remove';
+import AddIcon from '@material-ui/icons/Add';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -34,7 +39,7 @@ export default function SimpleSelect2(props) {
     props.setfilters({...props.filters,wifi:event.target.value});
   };
   const handleChange4 = (event) => {
-    props.setfilters({...props.filters,house_TV:event.target.value});
+    props.setfilters({...props.filters,TV:event.target.value});
   };
   const handleChange5 = (event) => {
     props.setfilters({...props.filters,room_TV:event.target.value});
@@ -70,8 +75,17 @@ export default function SimpleSelect2(props) {
     props.setfilters({...props.filters,dinner:event.target.value});
   };
   const handleChange16 = (event) => {
-    props.setfilters({...props.filters,room_cleaning:event.target.value});
+    props.setfilters({...props.filters,shop_cleaning:event.target.value});
   };
+
+  const handleclick1 = (name,value,setvalue) => {
+    
+    setvalue({...value,windows:parseInt(value.windows)+1})
+}
+const handleclick2 = (name,value,setvalue) => {
+  if(value>0){setvalue({...value,windows:parseInt(value.windows)-1})}
+  
+}
   return (
     <div>
       
@@ -119,11 +133,11 @@ export default function SimpleSelect2(props) {
       </FormControl>
 
       <FormControl className={classes.formControl}>
-        <InputLabel id="house_TV">House TV</InputLabel>
+        <InputLabel id="TV">TV</InputLabel>
         <Select
-          labelId="house_TV_list"
+          labelId="TV_list"
           id="house_TV_id"
-          value={props.filters.house_TV}
+          value={props.filters.TV}
           onChange={handleChange4}
         >
           <MenuItem value={''}>None</MenuItem>
@@ -132,19 +146,7 @@ export default function SimpleSelect2(props) {
         </Select>
       </FormControl>
 
-      <FormControl className={classes.formControl}>
-        <InputLabel id="room_TV">Room TV</InputLabel>
-        <Select
-          labelId="room_TV_list"
-          id="room_TV_id"
-          value={props.filters.room_TV}
-          onChange={handleChange5}
-        >
-          <MenuItem value={''}>None</MenuItem>
-          <MenuItem value={true}>Yes</MenuItem>
-          <MenuItem value={false}>No</MenuItem>
-        </Select>
-      </FormControl>
+     
 
       <FormControl className={classes.formControl}>
         <InputLabel id="AC">AC</InputLabel>
@@ -160,6 +162,8 @@ export default function SimpleSelect2(props) {
         </Select>
       </FormControl>
 
+
+
       <FormControl className={classes.formControl}>
         <InputLabel id="cooler">Cooler</InputLabel>
         <Select
@@ -174,48 +178,7 @@ export default function SimpleSelect2(props) {
         </Select>
       </FormControl>
 
-      <FormControl className={classes.formControl}>
-        <InputLabel id="laundry">Laundry</InputLabel>
-        <Select
-          labelId="laundry_list"
-          id="laundry_id"
-          value={props.filters.laundry}
-          onChange={handleChange8}
-        >
-          <MenuItem value={''}>None</MenuItem>
-          <MenuItem value={true}>Yes</MenuItem>
-          <MenuItem value={false}>No</MenuItem>
-        </Select>
-      </FormControl>
-
-      <FormControl className={classes.formControl}>
-        <InputLabel id="iron">Iron</InputLabel>
-        <Select
-          labelId="iron_list"
-          id="iron_id"
-          value={props.filters.iron}
-          onChange={handleChange9}
-        >
-          <MenuItem value={''}>None</MenuItem>
-          <MenuItem value={true}>Yes</MenuItem>
-          <MenuItem value={false}>No</MenuItem>
-        </Select>
-      </FormControl>
-
-      <FormControl className={classes.formControl}>
-        <InputLabel id="guest_allowed">Guest allowed</InputLabel>
-        <Select
-          labelId="guest_allowed_list"
-          id="guest_allowed_id"
-          value={props.filters.guest_allowed}
-          onChange={handleChange10}
-        >
-          <MenuItem value={''}>None</MenuItem>
-          <MenuItem value={true}>Yes</MenuItem>
-          <MenuItem value={false}>No</MenuItem>
-        </Select>
-      </FormControl>
-
+    
       <FormControl className={classes.formControl}>
         <InputLabel id="power_backup">Power Backup</InputLabel>
         <Select
@@ -231,67 +194,11 @@ export default function SimpleSelect2(props) {
       </FormControl>
 
       <FormControl className={classes.formControl}>
-        <InputLabel id="geyser">Geyser</InputLabel>
+        <InputLabel id="shop_cleaning">shop cleaning</InputLabel>
         <Select
-          labelId="geyser_list"
-          id="geyser_id"
-          value={props.filters.geyser}
-          onChange={handleChange12}
-        >
-          <MenuItem value={''}>None</MenuItem>
-          <MenuItem value={true}>Yes</MenuItem>
-          <MenuItem value={false}>No</MenuItem>
-        </Select>
-      </FormControl>
-
-      <FormControl className={classes.formControl}>
-        <InputLabel id="breakfast">Breakfast</InputLabel>
-        <Select
-          labelId="breakfast_list"
-          id="breakfast_id"
-          value={props.filters.breakfast}
-          onChange={handleChange13}
-        >
-          <MenuItem value={''}>None</MenuItem>
-          <MenuItem value={true}>Yes</MenuItem>
-          <MenuItem value={false}>No</MenuItem>
-        </Select>
-      </FormControl>
-
-      <FormControl className={classes.formControl}>
-        <InputLabel id="lunch">Lunch</InputLabel>
-        <Select
-          labelId="lunch_list"
-          id="lunch_id"
-          value={props.filters.lunch}
-          onChange={handleChange14}
-        >
-          <MenuItem value={''}>None</MenuItem>
-          <MenuItem value={true}>Yes</MenuItem>
-          <MenuItem value={false}>No</MenuItem>
-        </Select>
-      </FormControl>
-
-      <FormControl className={classes.formControl}>
-        <InputLabel id="dinner">Dinner</InputLabel>
-        <Select
-          labelId="dinner_list"
-          id="dinner_id"
-          value={props.filters.dinner}
-          onChange={handleChange15}
-        >
-          <MenuItem value={''}>None</MenuItem>
-          <MenuItem value={true}>Yes</MenuItem>
-          <MenuItem value={false}>No</MenuItem>
-        </Select>
-      </FormControl>
-
-      <FormControl className={classes.formControl}>
-        <InputLabel id="room_cleaning">Room cleaning</InputLabel>
-        <Select
-          labelId="room_cleaning_list"
-          id="room_cleaning_id"
-          value={props.filters.room_cleaning}
+          labelId="shop_cleaning_list"
+          id="shop_cleaning_id"
+          value={props.filters.shop_cleaning}
           onChange={handleChange16}
         >
           <MenuItem value={''}>None</MenuItem>
