@@ -52,7 +52,7 @@ class room_viewset(viewsets.ReadOnlyModelViewSet):
     filter_backends=(rest_filters.DjangoFilterBackend,filters.SearchFilter,filters.OrderingFilter,)
     pagination_class = StandardResultsSetPagination
     filterset_class = room_filter
-    search_fields = ['^category','^location','^city','^state','^country','^pincode']
+    search_fields = ['^category','^location','^city','^landmark','^state','^country','^pincode']
     ordering_fields = ['final_price','capacity','trust_points','avg_rating']
     ordering = ['-trust_points']
 
@@ -304,15 +304,23 @@ class minmax_room_viewset(viewsets.ReadOnlyModelViewSet):
 #shops
 
 class shop_filter(rest_filters.FilterSet):
+    windows_filter = rest_filters.NumberFilter(field_name='windows',lookup_expr='gte')
+    
+    floor_filter = rest_filters.NumberFilter(field_name='floor_no',lookup_expr='exact')
+    room_filter = rest_filters.NumberFilter(field_name='total_rooms',lookup_expr='exact')
+    min_rating = rest_filters.NumberFilter(field_name='avg_rating',lookup_expr='gte')
     min_price = rest_filters.NumberFilter(field_name='final_price',lookup_expr='gte')
     max_price = rest_filters.NumberFilter(field_name='final_price',lookup_expr='lte')
     trust_points_filter = rest_filters.NumberFilter(field_name='trust_points',lookup_expr='gte')
-    bookedtill_filter = rest_filters.DateFilter(field_name='bookedtill', lookup_expr='gte')
-
+    bookedtill_filter = rest_filters.DateFilter(field_name='bookedtill', lookup_expr='lt')
+    washroom_filter = rest_filters.NumberFilter(field_name='washroom',lookup_expr='gte')
+    balcony_filter = rest_filters.NumberFilter(field_name='balcony',lookup_expr='gte')
+    windows_filter = rest_filters.NumberFilter(field_name='windows',lookup_expr='gte')
+    
 
     class Meta:
         model = shops
-        fields = ['shop_cleaning','bookedtill_filter','water_facility','wifi','power_backup','electricity','category','location','city','state','country','pincode','min_price','max_price','trust_points_filter','booked']
+        fields = ['shop_cleaning','cctv_building','AC','cooler','TV','building_guard','min_rating','separate_washroom','purified_water','floor_filter','room_filter','windows_filter','bookedtill_filter','water_facility','wifi','power_backup','electricity','category','location','city','state','country','pincode','min_price','max_price','trust_points_filter','booked']
 
             
 class shop_viewset(viewsets.ReadOnlyModelViewSet):
@@ -320,12 +328,13 @@ class shop_viewset(viewsets.ReadOnlyModelViewSet):
     filter_backends=(rest_filters.DjangoFilterBackend,filters.SearchFilter,filters.OrderingFilter,)
     pagination_class = StandardResultsSetPagination
     filterset_class = shop_filter
-    search_fields = ['^category','^location','^city','=state','=country','=pincode']
-    ordering_fields = ['final_price','trust_points','avg_rating']
+    search_fields = ['^category','^location','^city','^landmark','^state','^country','^pincode']
+    ordering_fields = ['final_price','capacity','trust_points','avg_rating']
     ordering = ['-trust_points']
 
     query_set = shops.objects.all()
     query_set = query_set.filter(verified=True)
+    query_set = query_set.filter(pausebooking=False)
     queryset = query_set.filter(removed=False)
     serializer_class = shop_list_serializer
 
@@ -374,6 +383,9 @@ class my_shop_viewset(viewsets.ViewSet):
                 washroom=int(request.data["washroom"]),total_rooms=int(request.data["total_rooms"]),total_floors=int(request.data["total_floors"]),
                 power_backup=bool(request.data["power_backup"]=='true'),
                 wifi=bool(request.data["wifi"]=='true'),cost_wifi=int(request.data["cost_wifi"]),removable_wifi=bool(request.data["removable_wifi"]=='true'),
+                TV=bool(request.data["TV"]=='true'),cost_TV=int(request.data["cost_TV"]),removable_TV=bool(request.data["removable_TV"]=='true'),
+                cooler=bool(request.data["cooler"]=='true'),cost_cooler=int(request.data["cost_cooler"]),removable_cooler=bool(request.data["removable_cooler"]=='true'),
+                AC=bool(request.data["AC"]=='true'),cost_AC=int(request.data["cost_AC"]),
                 shop_cleaning=bool(request.data["shop_cleaning"]=='true'),cost_cleaning=int(request.data["cost_cleaning"]),nearby_station1=request.data["nearby_station1"],nearby_station2=request.data["nearby_station2"],distance1=float(request.data["distance1"]),distance2=float(request.data["distance2"]),shop_policy=request.data["shop_policy"],
                 address_proof=request.data["address_proof"])
 
@@ -445,6 +457,19 @@ class my_shop_viewset(viewsets.ViewSet):
             room.wifi=bool(request.data["wifi"]=='true')            
             room.cost_wifi=int(request.data["cost_wifi"])            
             room.removable_wifi=bool(request.data["removable_wifi"]=='true')            
+
+            room.TV=bool(request.data["TV"]=='true')            
+            room.cost_TV=int(request.data["cost_TV"])            
+            room.removable_TV=bool(request.data["removable_TV"]=='true')  
+
+            room.cooler=bool(request.data["cooler"]=='true')            
+            room.cost_cooler=int(request.data["cost_cooler"])            
+            room.removable_cooler=bool(request.data["removable_cooler"]=='true')   
+
+            room.AC=bool(request.data["AC"]=='true')            
+            room.cost_AC=int(request.data["cost_AC"])                            
+
+
                      
                      
             room.shop_cleaning=bool(request.data["shop_cleaning"]=='true')            
@@ -530,11 +555,20 @@ class apartment_filter(rest_filters.FilterSet):
     BHK_filter = rest_filters.NumberFilter(field_name='BHK',lookup_expr='exact')
     trust_points_filter = rest_filters.NumberFilter(field_name='trust_points',lookup_expr='gte')
     bookedtill_filter = rest_filters.DateFilter(field_name='bookedtill', lookup_expr='gte')
-
+    min_rating = rest_filters.NumberFilter(field_name='avg_rating',lookup_expr='gte')
+    floor_filter = rest_filters.NumberFilter(field_name='floor_no',lookup_expr='exact')
+    room_filter = rest_filters.NumberFilter(field_name='total_rooms',lookup_expr='gte')
+    beds_filter = rest_filters.NumberFilter(field_name='total_beds',lookup_expr='gte')
+    AC_filter = rest_filters.NumberFilter(field_name='total_AC',lookup_expr='gte')
+    cooler_filter = rest_filters.NumberFilter(field_name='total_cooler',lookup_expr='gte')
+    TV_filter = rest_filters.NumberFilter(field_name='total_TV',lookup_expr='gte')
+    washroom_filter = rest_filters.NumberFilter(field_name='washroom',lookup_expr='gte')
+    windows_filter = rest_filters.NumberFilter(field_name='windows',lookup_expr='gte')
+    
 
     class Meta:
         model = apartments
-        fields = ['apartment_cleaning','bookedtill_filter','geyser','power_backup','TV','water_facility','electricity','category','location','city','state','country','pincode','min_price','max_price','BHK_filter','trust_points_filter','booked']
+        fields = ['apartment_cleaning','washroom_filter','bed_type','laundry','TV','geyser','purified_water','cooler','house_refridgerator','AC','apartment_type','sofa','floor_filter','room_filter','balcony','washroom','cctv_building','building_guard','min_rating','bookedtill_filter','geyser','power_backup','TV','water_facility','electricity','category','location','city','state','country','pincode','min_price','max_price','BHK_filter','trust_points_filter','booked']
 
 
 class apartment_viewset(viewsets.ReadOnlyModelViewSet):
@@ -542,12 +576,14 @@ class apartment_viewset(viewsets.ReadOnlyModelViewSet):
     filter_backends=(rest_filters.DjangoFilterBackend,filters.SearchFilter,filters.OrderingFilter,)
     pagination_class = StandardResultsSetPagination
     filterset_class = apartment_filter
-    search_fields = ['^category','^location','^city','=state','=country','=pincode']
+
+    search_fields = ['^category','^location','^city','^landmark','^state','^country','^pincode']
     ordering_fields = ['final_price','BHK','trust_points','avg_rating']
     ordering = ['-trust_points']
 
     query_set = apartments.objects.all()
     query_set = query_set.filter(verified=True)
+    query_set = query_set.filter(pausebooking=False)
     queryset = query_set.filter(removed=False)
     serializer_class = apartment_list_serializer
  
@@ -652,9 +688,7 @@ class my_apartment_viewset(viewsets.ViewSet):
             room.length=int(request.data["length"])            
             room.breadth=int(request.data["breadth"])            
             room.height=int(request.data["height"])            
-            room.furniture=request.data["furniture"]            
-            room.category=request.data["category"]                       
-            room.facility=request.data["facility"]            
+            room.furniture = request.data["furniture"]
             room.description=request.data["description"]            
             room.cctv_building=bool(request.data["cctv_building"]=='true')           
             room.building_guard=bool(request.data["building_guard"]=='true')            

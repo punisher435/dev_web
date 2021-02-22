@@ -300,7 +300,18 @@ class shops(models.Model):
     removable_wifi=models.BooleanField(default=False)
     cost_wifi = models.IntegerField(default=0)
 
+    cooler = models.BooleanField(default=False)
+    removable_cooler=models.BooleanField(default=False)
+    cost_cooler = models.IntegerField(default=0)
+
     power_backup=models.BooleanField(default=False)
+
+    AC = models.BooleanField(default=False)
+    cost_AC = models.IntegerField(default=0)
+
+    TV = models.BooleanField(default=False)
+    cost_TV = models.IntegerField(default=0)
+    removable_TV = models.BooleanField(default=False)
 
     shop_cleaning=models.BooleanField(default=False)
     cost_cleaning = models.IntegerField(default=0)

@@ -46,6 +46,11 @@ class minmax_shop_serializer(serializers.ModelSerializer):
         model = minmax_shop
         fields = '__all__'
 
+class shop_location(serializers.ModelSerializer):
+    class Meta:
+        model = shops
+        fields = ['latitude','longitude','shop_id','category']
+
 
 
 #apartments
@@ -66,3 +71,8 @@ class minmax_apartment_serializer(serializers.ModelSerializer):
     class Meta:
         model = minmax_apartment
         fields = '__all__'
+
+class apartment_location(serializers.ModelSerializer):
+    class Meta:
+        model = apartments
+        fields = ['latitude','longitude','apartment_id','category']

@@ -53,6 +53,30 @@ const validationSchema = yup.object({
   removable_wifi: yup
   .boolean()
   .required('You must answer this '),
+
+  TV: yup
+  .boolean()
+  .required('You must answer this '),
+  
+  cost_TV: yup
+  .number().integer('please enter integer'),
+  
+  
+  removable_TV: yup
+  .boolean()
+  .required('You must answer this '),
+  
+  cooler: yup
+  .boolean()
+  .required('You must answer this '),
+  
+  cost_cooler: yup
+  .number().integer('please enter integer'),
+  
+  
+  removable_cooler: yup
+  .boolean()
+  .required('You must answer this '),
   
  
   
@@ -67,6 +91,13 @@ const validationSchema = yup.object({
   removable_purified_water: yup
   .boolean()
   .required('You must answer this '),
+
+  AC: yup
+  .boolean()
+  .required('You must answer this '),
+
+  cost_AC: yup
+  .number().integer('please enter integer'),
   
   
   
@@ -448,6 +479,17 @@ function ShopForm (props){
       cost_wifi:'',
       removable_wifi:false,
 
+      TV:'',
+      cost_TV:'',
+      removable_TV:false,
+
+      cooler:'',
+      cost_cooler:'',
+      removable_cooler:false,
+
+      AC:'',
+      cost_AC:'',
+
       purified_water:'',
       cost_purified_water:'',
       removable_purified_water:false,
@@ -538,6 +580,14 @@ function ShopForm (props){
                   cost_wifi:res.data.cost_wifi,
                   removable_wifi:res.data.removable_wifi,
 
+                  TV:res.data.TV,
+                  cost_TV:res.data.cost_TV,
+                  removable_TV:res.data.removable_TV,
+
+                  cooler:res.data.cooler,
+                  cost_cooler:res.data.cost_cooler,
+                  removable_cooler:res.data.removable_cooler,
+
                  
 
                   purified_water:res.data.purified_water,
@@ -574,6 +624,9 @@ function ShopForm (props){
                   description:res.data.description,
                   fans:res.data.fans,
                   floor_no:res.data.floor_no,
+
+                  AC:res.data.AC,
+                  cost_AC:res.data.cost_AC,
 
                   city:res.data.city,
                   state:res.data.state,
@@ -634,6 +687,14 @@ function ShopForm (props){
       cost_wifi:myroom.cost_wifi,
       removable_wifi:myroom.removable_wifi,
 
+      TV:myroom.TV,
+      cost_TV:myroom.cost_TV,
+      removable_TV:myroom.removable_TV,
+
+      cooler:myroom.cooler,
+      cost_cooler:myroom.cost_cooler,
+      removable_cooler:myroom.removable_cooler,
+
       purified_water:myroom.purified_water,
       cost_purified_water:myroom.cost_purified_water,
       removable_purified_water:myroom.removable_purified_water,
@@ -645,6 +706,9 @@ function ShopForm (props){
 
       shop_cleaning:myroom.shop_cleaning,
       cost_cleaning:myroom.cost_cleaning,
+
+      AC:myroom.AC,
+      cost_AC:myroom.AC,
 
      
       balcony:myroom.balcony,
@@ -700,6 +764,17 @@ function ShopForm (props){
       form_data.append('wifi',values.wifi)
       form_data.append('cost_wifi',values.cost_wifi)
       form_data.append('removable_wifi',values.removable_wifi)
+
+      form_data.append('cooler',values.cooler)
+      form_data.append('cost_cooler',values.cost_cooler)
+      form_data.append('removable_cooler',values.removable_cooler)
+
+      form_data.append('TV',values.TV)
+      form_data.append('cost_TV',values.cost_TV)
+      form_data.append('removable_TV',values.removable_TV)
+
+      form_data.append('AC',values.AC)
+      form_data.append('cost_AC',values.cost_AC)
 
       form_data.append('purified_water',values.purified_water)
       form_data.append('cost_purified_water',values.cost_purified_water)
@@ -908,10 +983,12 @@ useEffect(
     
     if(formik.values.cost_electricity!==formik.values.cost_electricity){formik.setFieldValue('cost_electricity',0);}
     if(formik.values.cost_water!==formik.values.cost_water){formik.setFieldValue('cost_water',0);}
-    
+    if(formik.values.cost_AC!==formik.values.cost_AC){formik.setFieldValue('cost_AC',0);}
+    if(formik.values.cost_TV!==formik.values.cost_TV){formik.setFieldValue('cost_TV',0);}
+    if(formik.values.cost_cooler!==formik.values.cost_cooler){formik.setFieldValue('cost_cooler',0);}
   
   }
-,[formik.values.cost_electricity,formik.values.cost_water])
+,[formik.values.cost_electricity,formik.values.cost_water,formik.values.cost_AC,formik.values.cost_TV,formik.values.cooler])
 
 
 useEffect(
@@ -1685,6 +1762,331 @@ if(newredirect==true)
             <MenuItem value={false}>No</MenuItem>
             </Select>
         </FormControl>
+        </Grid>
+  </Grid></div>
+  : null
+    }
+
+
+<Grid
+              container
+              direction="row"
+              justify="center"
+              alignItems="center"
+              spacing={1}
+            >
+            <Grid item>
+            <Typography variant="h6" color="textPrimary">
+              TV
+            </Typography>
+            </Grid>
+            </Grid>
+            <br />
+      <Grid
+        container
+        direction="row"
+        justify="center"
+        alignItems="center"
+        spacing={1}
+      >
+        <Grid item>
+        <Typography variant="body1" color="textSecondary" className={classes.textclass}>
+            Do you have TV ?
+        </Typography>
+        </Grid>
+          <Grid item>
+        <FormControl className={classes.formControl}>
+        
+            <InputLabel id="TV">TV</InputLabel>
+            <Select
+            labelId="TV"
+            id="TV"
+            value={formik.values.TV}
+            onChange={(e) => {if(e.target.value===false){formik.setFieldValue('TV',e.target.value);
+            formik.setFieldValue('cost_TV',0);
+            formik.setFieldValue('removable_TV',false);}
+            else{formik.setFieldValue('TV',e.target.value)}}}
+            error={formik.touched.TV && Boolean(formik.errors.TV)}
+            helperText={formik.touched.TV && formik.errors.TV}
+            >
+            <MenuItem value={true}>Yes</MenuItem>
+            <MenuItem value={false}>No</MenuItem>
+            </Select>
+        </FormControl>
+      </Grid>
+    </Grid>
+
+    
+
+
+    {
+      formik.values.TV ? <div><br /><Grid
+      container
+      direction="row"
+      justify="center"
+      alignItems="center"
+      spacing={1}
+    >
+      
+      <Grid item>
+      <Typography variant="body1" color="textSecondary" className={classes.textclass}>
+      Cost of TV facility(if not enter 0)
+        </Typography>
+      </Grid>
+        <Grid item>
+        <TextField
+          multiline
+          rows={1}
+          id="cost_TV"
+          name="cost_TV"
+          label="Cost of TV facility"
+          value={formik.values.cost_TV}
+          onChange={(e) => {formik.setFieldValue('cost_TV',parseInt(e.target.value)); 
+          }}
+          error={formik.touched.cost_TV && Boolean(formik.errors.cost_TV)}
+          helperText={formik.touched.cost_TV && formik.errors.cost_TV}
+        />
+        </Grid>
+  </Grid></div>
+  : null
+    }
+    
+
+{
+      formik.values.TV ? <div><br /><Grid
+      container
+      direction="row"
+      justify="center"
+      alignItems="center"
+      spacing={1}
+    >
+      
+      <Grid item>
+      <Typography variant="body1" color="textSecondary" className={classes.textclass}>
+      Can customers remove this facility?
+        </Typography>
+      </Grid>
+        <Grid item>
+        <FormControl className={classes.formControl}>
+        
+            <InputLabel id="removable_TV">Removable TV facility?</InputLabel>
+            <Select
+            labelId="removable_TV"
+            id="removable_TV"
+            value={formik.values.removable_TV}
+            onChange={(e) => {
+            formik.setFieldValue('removable_TV',e.target.value)}}
+            error={formik.touched.removable_TV && Boolean(formik.errors.removable_TV)}
+            helperText={formik.touched.removable_TV && formik.errors.removable_TV}
+            >
+            <MenuItem value={true}>Yes</MenuItem>
+            <MenuItem value={false}>No</MenuItem>
+            </Select>
+        </FormControl>
+        </Grid>
+  </Grid></div>
+  : null
+    }
+
+<Grid
+              container
+              direction="row"
+              justify="center"
+              alignItems="center"
+              spacing={1}
+            >
+            <Grid item>
+            <Typography variant="h6" color="textPrimary">
+              cooler
+            </Typography>
+            </Grid>
+            </Grid>
+            <br />
+      <Grid
+        container
+        direction="row"
+        justify="center"
+        alignItems="center"
+        spacing={1}
+      >
+        <Grid item>
+        <Typography variant="body1" color="textSecondary" className={classes.textclass}>
+            Do you have cooler ?
+        </Typography>
+        </Grid>
+          <Grid item>
+        <FormControl className={classes.formControl}>
+        
+            <InputLabel id="cooler">cooler</InputLabel>
+            <Select
+            labelId="cooler"
+            id="cooler"
+            value={formik.values.cooler}
+            onChange={(e) => {if(e.target.value===false){formik.setFieldValue('cooler',e.target.value);
+            formik.setFieldValue('cost_cooler',0);
+            formik.setFieldValue('removable_cooler',false);}
+            else{formik.setFieldValue('cooler',e.target.value)}}}
+            error={formik.touched.cooler && Boolean(formik.errors.cooler)}
+            helperText={formik.touched.cooler && formik.errors.cooler}
+            >
+            <MenuItem value={true}>Yes</MenuItem>
+            <MenuItem value={false}>No</MenuItem>
+            </Select>
+        </FormControl>
+      </Grid>
+    </Grid>
+
+    
+
+
+    {
+      formik.values.cooler ? <div><br /><Grid
+      container
+      direction="row"
+      justify="center"
+      alignItems="center"
+      spacing={1}
+    >
+      
+      <Grid item>
+      <Typography variant="body1" color="textSecondary" className={classes.textclass}>
+      Cost of cooler facility(if not enter 0)
+        </Typography>
+      </Grid>
+        <Grid item>
+        <TextField
+          multiline
+          rows={1}
+          id="cost_cooler"
+          name="cost_cooler"
+          label="Cost of cooler facility"
+          value={formik.values.cost_cooler}
+          onChange={(e) => {formik.setFieldValue('cost_cooler',parseInt(e.target.value)); 
+          }}
+          error={formik.touched.cost_cooler && Boolean(formik.errors.cost_cooler)}
+          helperText={formik.touched.cost_cooler && formik.errors.cost_cooler}
+        />
+        </Grid>
+  </Grid></div>
+  : null
+    }
+    
+
+{
+      formik.values.cooler ? <div><br /><Grid
+      container
+      direction="row"
+      justify="center"
+      alignItems="center"
+      spacing={1}
+    >
+      
+      <Grid item>
+      <Typography variant="body1" color="textSecondary" className={classes.textclass}>
+      Can customers remove this facility?
+        </Typography>
+      </Grid>
+        <Grid item>
+        <FormControl className={classes.formControl}>
+        
+            <InputLabel id="removable_cooler">Removable cooler facility?</InputLabel>
+            <Select
+            labelId="removable_cooler"
+            id="removable_cooler"
+            value={formik.values.removable_cooler}
+            onChange={(e) => {
+            formik.setFieldValue('removable_cooler',e.target.value)}}
+            error={formik.touched.removable_cooler && Boolean(formik.errors.removable_cooler)}
+            helperText={formik.touched.removable_cooler && formik.errors.removable_cooler}
+            >
+            <MenuItem value={true}>Yes</MenuItem>
+            <MenuItem value={false}>No</MenuItem>
+            </Select>
+        </FormControl>
+        </Grid>
+  </Grid></div>
+  : null
+    }
+
+
+<Grid
+              container
+              direction="row"
+              justify="center"
+              alignItems="center"
+              spacing={1}
+            >
+            <Grid item>
+            <Typography variant="h6" color="textPrimary">
+              AC
+            </Typography>
+            </Grid>
+            </Grid>
+            <br />
+      <Grid
+        container
+        direction="row"
+        justify="center"
+        alignItems="center"
+        spacing={1}
+      >
+        <Grid item>
+        <Typography variant="body1" color="textSecondary" className={classes.textclass}>
+            Do you have AC ?
+        </Typography>
+        </Grid>
+          <Grid item>
+        <FormControl className={classes.formControl}>
+        
+            <InputLabel id="AC">AC</InputLabel>
+            <Select
+            labelId="AC"
+            id="AC"
+            value={formik.values.AC}
+            onChange={(e) => {if(e.target.value===false){formik.setFieldValue('AC',e.target.value);
+            formik.setFieldValue('cost_AC',0);
+            }
+            else{formik.setFieldValue('AC',e.target.value)}}}
+            error={formik.touched.AC && Boolean(formik.errors.AC)}
+            helperText={formik.touched.AC && formik.errors.AC}
+            >
+            <MenuItem value={true}>Yes</MenuItem>
+            <MenuItem value={false}>No</MenuItem>
+            </Select>
+        </FormControl>
+      </Grid>
+    </Grid>
+
+    
+
+
+    {
+      formik.values.AC ? <div><br /><Grid
+      container
+      direction="row"
+      justify="center"
+      alignItems="center"
+      spacing={1}
+    >
+      
+      <Grid item>
+      <Typography variant="body1" color="textSecondary" className={classes.textclass}>
+      Cost of AC facility(if not enter 0)
+        </Typography>
+      </Grid>
+        <Grid item>
+        <TextField
+          multiline
+          rows={1}
+          id="cost_AC"
+          name="cost_AC"
+          label="Cost of AC facility"
+          value={formik.values.cost_AC}
+          onChange={(e) => {formik.setFieldValue('cost_AC',parseInt(e.target.value)); 
+          }}
+          error={formik.touched.cost_AC && Boolean(formik.errors.cost_AC)}
+          helperText={formik.touched.cost_AC && formik.errors.cost_AC}
+        />
         </Grid>
   </Grid></div>
   : null
