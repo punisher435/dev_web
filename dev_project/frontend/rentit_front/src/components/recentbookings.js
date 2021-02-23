@@ -3,6 +3,8 @@ import Dashboarddrawer from '../hocs/layout2'
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import CustomizedTables from './RecentBookingTable'
+import CustomizedTables1 from './RecentBookingsTable_shop'
+import CustomizedTables2 from './RecentBookingsTable_apartment'
 import {connect} from 'react-redux'
 import axios from 'axios'
 
@@ -39,6 +41,8 @@ function RecentBooking1(props) {
     const classes = useStyles();
     const theme = useTheme();
     const [bookings,setbookings]  = useState([])
+    const [shopbookings,setshopbookings] = useState([])
+    const [apartmentbookings,setapartmentbookings] = useState([])
 
     React.useEffect(
         async () => {
@@ -50,7 +54,7 @@ function RecentBooking1(props) {
               };
 
               
-                try{const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcehjbda983290whjba/book/`,config,config);
+                try{const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcehjbda983290whjba/room/book/`,config,config);
              console.log(res.data)
              setbookings(res.data)
               
@@ -58,6 +62,24 @@ function RecentBooking1(props) {
                 catch{
       
                 }
+
+                try{const res1 = await axios.get(`${process.env.REACT_APP_API_URL}/sourcehdawnajk289uadhq/shop/book/`,config,config);
+                console.log(res1.data)
+                setshopbookings(res1.data)
+                 
+                 }
+                   catch{
+         
+                   }
+
+                   try{const res2 = await axios.get(`${process.env.REACT_APP_API_URL}/sourcensinejfcdajewcn29210/apartment/book/`,config,config);
+                   console.log(res2.data)
+                   setapartmentbookings(res2.data)
+                    
+                    }
+                      catch{
+            
+                      }
         }
     
     ,[])
@@ -70,7 +92,16 @@ function RecentBooking1(props) {
         <div className={classes.toolbar} />
 
         <h3>Recent bookings</h3>
-        <CustomizedTables bookings={bookings} setbookings={setbookings}/>
+        <br />
+        <CustomizedTables bookings={bookings} title={'Rooms'} setbookings={setbookings}/>
+
+        <br />
+
+        <CustomizedTables1 bookings={shopbookings} title={'Shops'} setbookings={setshopbookings}/>
+
+        <br />
+
+        <CustomizedTables2 bookings={apartmentbookings} title={'Apartments'} setbookings={setapartmentbookings}/>
 
         
 

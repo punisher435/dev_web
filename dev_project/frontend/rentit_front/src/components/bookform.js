@@ -245,7 +245,7 @@ function Checkout(props) {
             data:bookdetails,
           }
           setopen(true);
-          try{const res = await axios.post(`${process.env.REACT_APP_API_URL}/sourcehjbda983290whjba/book/`,body,config);
+          try{const res = await axios.post(`${process.env.REACT_APP_API_URL}/sourcehjbda983290whjba/room/book/`,body,config);
           if(res.data==='Success'){
             setopen(false)
             setActiveStep(activeStep + 1);

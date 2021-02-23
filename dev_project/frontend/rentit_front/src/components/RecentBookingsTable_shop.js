@@ -96,7 +96,7 @@ const useStyles = makeStyles({
 
 
 
-export default function CustomizedTables({bookings,setbookings,title}) {
+export default function CustomizedTables1({bookings,setbookings,title}) {
   const classes = useStyles();
 
 
@@ -122,7 +122,7 @@ export default function CustomizedTables({bookings,setbookings,title}) {
             <StyledTableCell>BOOKED ON</StyledTableCell>
             <StyledTableCell align="right">PRIMARY GUEST</StyledTableCell>
             <StyledTableCell align="right">BOOKING ID</StyledTableCell>
-            <StyledTableCell align="right">ROOM NAME</StyledTableCell>
+            <StyledTableCell align="right">SHOP NAME</StyledTableCell>
             <StyledTableCell align="right">PRICE</StyledTableCell>
             <StyledTableCell align="right">BOOKING STATUS</StyledTableCell>
             <StyledTableCell align="right">DETAILS</StyledTableCell>
@@ -141,7 +141,7 @@ export default function CustomizedTables({bookings,setbookings,title}) {
               </StyledTableCell>
               <StyledTableCell align="right">{booking.first_name} {booking.last_name}</StyledTableCell>
               <StyledTableCell align="right">{booking.booking_id}</StyledTableCell>
-              <StyledTableCell align="right">{booking.room_name}</StyledTableCell>
+              <StyledTableCell align="right">{booking.shop_name}</StyledTableCell>
               <StyledTableCell align="right">{booking.price_to_be_paid}</StyledTableCell>
               <StyledTableCell align="right">{booking.cancelled ? <p className={classes.endclass}>cancelled</p> : <p className={classes.normalclass}>active</p>}</StyledTableCell>
               <StyledTableCell align="right"><Link style={{textAlign: 'center',textDecoration:'none'}} to={`/dashboard/recentbookings/${booking.booking_id}`}><Button>View details ...</Button></Link></StyledTableCell>
