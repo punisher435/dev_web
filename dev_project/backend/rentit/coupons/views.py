@@ -188,6 +188,122 @@ class Apply_coupon(viewsets.ViewSet):
             return Response('Error',status=status.HTTP_400_BAD_REQUEST)
 
 
+
+
+class Apply_coupon_shop(viewsets.ViewSet):
+
+    authentication_classes = [authentication.JWTAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
+
+    def retrieve(self,request,pk=None):
+
+        try:
+
+            queryset = coupons.objects.all()
+
+            coupon = get_object_or_404(queryset,pk=pk)
+
+            price= int(request.query_params.get('price'))
+            discount= int(request.query_params.get('discount'))
+            savings= int(request.query_params.get('savings'))
+            shopid= request.query_params.get('shopid')
+            print(type(price))
+    
+
+            room = get_object_or_404(shops.objects.all(),pk=shopid)
+
+            if request.user not in coupon.used_by.all() and datetime.date.today()<=coupon.expiry_date and datetime.date.today()>=coupon.valid_from and room in coupon.coupoun_shops.all():
+                    
+                if price>=coupon.min_price:
+
+                    if coupon.coupon_type=='discount':
+                        temp = (price*coupon.off)/100
+
+                        if coupon.max_off_price!=None:
+                            if temp>coupon.max_off_price:
+                                temp=coupon.max_off_price
+                        
+                        price = price - temp;
+
+                        savings = savings+temp
+                        discount = discount+coupon.off
+
+                    if coupon.coupon_type=='off_price':
+                    
+                        price = price - coupon.off;
+
+                        savings = savings+coupon.off
+
+            
+
+
+                return Response({1:price,2:savings,3:discount},status=status.HTTP_200_OK)
+
+            return Response('Error',status=status.HTTP_400_BAD_REQUEST)
+            
+
+            
+        except:
+            return Response('Error',status=status.HTTP_400_BAD_REQUEST)
+
+
+
+class Apply_coupon_apartment(viewsets.ViewSet):
+
+    authentication_classes = [authentication.JWTAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
+
+    def retrieve(self,request,pk=None):
+
+        try:
+
+            queryset = coupons.objects.all()
+
+            coupon = get_object_or_404(queryset,pk=pk)
+
+            price= int(request.query_params.get('price'))
+            discount= int(request.query_params.get('discount'))
+            savings= int(request.query_params.get('savings'))
+            apartmentid= request.query_params.get('apartmentid')
+            print(type(price))
+    
+
+            room = get_object_or_404(apartments.objects.all(),pk=apartmentid)
+
+            if request.user not in coupon.used_by.all() and datetime.date.today()<=coupon.expiry_date and datetime.date.today()>=coupon.valid_from and room in coupon.coupoun_apartments.all():
+                    
+                if price>=coupon.min_price:
+
+                    if coupon.coupon_type=='discount':
+                        temp = (price*coupon.off)/100
+
+                        if coupon.max_off_price!=None:
+                            if temp>coupon.max_off_price:
+                                temp=coupon.max_off_price
+                        
+                        price = price - temp;
+
+                        savings = savings+temp
+                        discount = discount+coupon.off
+
+                    if coupon.coupon_type=='off_price':
+                    
+                        price = price - coupon.off;
+
+                        savings = savings+coupon.off
+
+            
+
+
+                return Response({1:price,2:savings,3:discount},status=status.HTTP_200_OK)
+
+            return Response('Error',status=status.HTTP_400_BAD_REQUEST)
+            
+
+            
+        except:
+            return Response('Error',status=status.HTTP_400_BAD_REQUEST)
+
     
 
 

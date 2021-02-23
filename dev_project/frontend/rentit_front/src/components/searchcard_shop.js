@@ -39,7 +39,7 @@ import KitchenIcon from '@material-ui/icons/Kitchen';
 import CustomizedRatings from './rating_meter';
 import { connect } from 'react-redux'
 import axios from 'axios'
-import SimpleModal1 from '../components/bookcardmodel1';
+import SimpleModal1 from '../components/bookcardmodel1_shop';
 
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";

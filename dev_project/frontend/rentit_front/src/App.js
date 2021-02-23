@@ -12,11 +12,13 @@ import { Provider } from 'react-redux';
 import store from './redux/auth/store';
 import PaginationCardList from './containers/PaginateCardList'
 import rooms from './containers/RoomDetails'
+import Shops from './containers/shopdetails'
 import SimpleTabs from './containers/wishlist';
 import RecentBooking from './containers/RecentBooking'
 import Profile from './components/Profile';
 
 import Checkout from './components/bookform';
+import Checkout_shop from './components/bookform_shop'
 // import Sforms from './components/Sforms'
 import Sforms from './components/Checkout' 
 import Dashboard from './components/dashboard'
@@ -66,8 +68,10 @@ function App(props) {
                 <Route exact path='/wishlist' component={SimpleTabs}/>
                 <Route exact path='/rooms/:roomid/book/' component={Checkout} />
                 <Route exact path='/recentBooking' component={ConfirmPause}/>
+                <Route exact path='/shops/:shopid/book/' component={Checkout_shop} />
 
                 <Route exact path='/shops' component={ShopListing}/>
+                <Route exact path='/shops/:shopid' component={Shops}/>
 
                 <Route exact path='/apartments' component={ApartmentListing}/>
 
