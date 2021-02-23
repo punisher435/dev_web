@@ -128,6 +128,155 @@ class apartment_rating_and_reviews(models.Model):
     photo3=models.ImageField(upload_to=upload_to_roomreviews,default='/images/rooms/default.jpg') 
 
 
+
+
+
+
+
+class shopBookings(models.Model):
+
+    booking_id = models.UUIDField( 
+         primary_key = True, 
+         default = uuid.uuid4, 
+         editable = False,
+         unique = True)
+
+    shop_id = models.ForeignKey(shops,on_delete=models.PROTECT,related_name="booked_shop_id")
+    shop_name = models.CharField(max_length=255)
+    customer_id= models.ForeignKey(user,on_delete=models.PROTECT,related_name="shop_customer_id")
+    seller_id= models.ForeignKey(user,on_delete=models.PROTECT,related_name="shop_seller_id")
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    booked_from = models.DateField()
+    booked_till = models.DateField()
+
+    duration=models.IntegerField()
+
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
+    mobile = models.BigIntegerField()
+    alternate_mobile=models.BigIntegerField(null=True,blank=True)
+    country_code = models.CharField(max_length=255)
+
+    wifi = models.BooleanField()
+    TV = models.BooleanField()
+
+    purified_water = models.BooleanField()
+   
+    AC = models.BooleanField()
+    cooler = models.BooleanField()
+    
+    currency=models.CharField(max_length=255)
+    savings = models.IntegerField()
+    cost=models.BigIntegerField()
+    price_to_be_paid=models.BigIntegerField()
+    discount=models.IntegerField()
+    coupon=models.CharField(max_length=255,null=True,blank=True)
+
+    paid = models.BooleanField(default=True)
+    seller_pay = models.BigIntegerField()
+
+    invoice = models.FileField(upload_to ='invoices/% Y/% m/% d/',null=True,blank=True)  
+
+    cancelled=models.BooleanField(default=False)
+    cancelled_date = models.DateTimeField(null=True,blank=True)
+    cancellation_reason = models.TextField(null=True,blank=True)
+    feedback = models.TextField(null=True,blank=True)
+
+    extended = models.BooleanField(default=False)
+    is_extended = models.BooleanField(default=False)
+    extended_on = models.ForeignKey('self',null=True,blank=True,on_delete=models.PROTECT)
+
+    shop_review = models.BooleanField(default=False)
+
+    refunded=models.BooleanField(default=False)
+    refund_amount=models.IntegerField(default=0)
+    paylater=models.BooleanField(default=False)
+    paylater_date=models.DateField(_("Pay Later Date"),null=True,blank=True)
+    
+    ended=models.BooleanField(default=False)
+
+
+
+class apartmentBookings(models.Model):
+
+    booking_id = models.UUIDField( 
+         primary_key = True, 
+         default = uuid.uuid4, 
+         editable = False,
+         unique = True)
+
+    apartment_id = models.ForeignKey(apartments,on_delete=models.PROTECT,related_name="booked_apartment_id")
+    apartment_name = models.CharField(max_length=255)
+    customer_id= models.ForeignKey(user,on_delete=models.PROTECT,related_name="apartment_customer_id")
+    seller_id= models.ForeignKey(user,on_delete=models.PROTECT,related_name="apartment_seller_id")
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    booked_from = models.DateField()
+    booked_till = models.DateField()
+    
+    duration=models.IntegerField()
+
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
+    mobile = models.BigIntegerField()
+    alternate_mobile=models.BigIntegerField(null=True,blank=True)
+    country_code = models.CharField(max_length=255)
+
+    wifi = models.BooleanField()
+    TV = models.BooleanField()
+    
+    house_refridgerator = models.BooleanField()
+    
+    purified_water = models.BooleanField()
+    geyser = models.BooleanField()
+    AC = models.BooleanField()
+    cooler = models.BooleanField()
+    
+    laundry = models.BooleanField()
+
+    currency=models.CharField(max_length=255)
+    savings = models.IntegerField()
+    cost=models.BigIntegerField()
+    price_to_be_paid=models.BigIntegerField()
+    discount=models.IntegerField()
+    coupon=models.CharField(max_length=255,null=True,blank=True)
+
+    paid = models.BooleanField(default=True)
+    seller_pay = models.BigIntegerField()
+
+    invoice = models.FileField(upload_to ='invoices/% Y/% m/% d/',null=True,blank=True)  
+
+    cancelled=models.BooleanField(default=False)
+    cancelled_date = models.DateTimeField(null=True,blank=True)
+    cancellation_reason = models.TextField(null=True,blank=True)
+    feedback = models.TextField(null=True,blank=True)
+
+    extended = models.BooleanField(default=False)
+    is_extended = models.BooleanField(default=False)
+    extended_on = models.ForeignKey('self',null=True,blank=True,on_delete=models.PROTECT)
+
+    apartment_review = models.BooleanField(default=False)
+
+    refunded=models.BooleanField(default=False)
+    refund_amount=models.IntegerField(default=0)
+    paylater=models.BooleanField(default=False)
+    paylater_date=models.DateField(_("Pay Later Date"),null=True,blank=True)
+    
+    ended=models.BooleanField(default=False)
+
+
+
+
+
+
+
+
+
+
+
 """ class shopBookings(models.Model):
     
     booking_id = models.UUIDField( 
