@@ -160,6 +160,10 @@ const validationSchema = yup.object({
   
   cost_laundry: yup
   .number().integer('please enter integer'),
+
+  removable_laundry: yup
+  .boolean()
+  .required('You must answer this '),
   
   
   
@@ -592,6 +596,7 @@ function ApartmentForm (props){
 
       laundry:'',
       cost_laundry:0,
+      removable_laundry:false,
 
       geyser:'',
       cost_geyser:'',
@@ -717,6 +722,7 @@ function ApartmentForm (props){
 
                   laundry:res.data.laundry,
                   cost_laundry:res.data.cost_laundry,
+                  removable_laundry:res.data.removable_laundry,
 
                   geyser:res.data.geyser,
                   cost_geyser:res.data.cost_geyser,
@@ -845,6 +851,7 @@ function ApartmentForm (props){
 
       laundry:myroom.laundry,
       cost_laundry:myroom.cost_laundry,
+      removable_laundry:myroom.removable_laundry,
 
       geyser:myroom.geyser,
       cost_geyser:myroom.cost_geyser,
@@ -952,6 +959,7 @@ function ApartmentForm (props){
 
       form_data.append('laundry',values.laundry)
       form_data.append('cost_laundry',values.cost_laundry)
+      form_data.append('removable_laundry',values.removable_laundry)
 
       form_data.append('apartment_cleaning',values.apartment_cleaning)
       form_data.append('cost_cleaning',values.cost_cleaning)
@@ -3033,7 +3041,8 @@ if(newredirect==true)
             id="laundry"
             value={formik.values.laundry}
             onChange={(e) => {if(e.target.value===false){formik.setFieldValue('laundry',e.target.value);
-            formik.setFieldValue('cost_laundry',0);}
+            formik.setFieldValue('cost_laundry',0);
+            formik.setFieldValue('removable_laundry',false);}
             else{formik.setFieldValue('laundry',e.target.value)}}}
             error={formik.touched.laundry && Boolean(formik.errors.laundry)}
             helperText={formik.touched.laundry && formik.errors.laundry}
@@ -3076,6 +3085,43 @@ if(newredirect==true)
           error={formik.touched.cost_laundry && Boolean(formik.errors.cost_laundry)}
           helperText={formik.touched.cost_laundry && formik.errors.cost_laundry}
         />
+        </Grid>
+  </Grid></div>
+  : null
+    }
+
+
+{
+      formik.values.laundry ? <div><br /><Grid
+      container
+      direction="row"
+      justify="center"
+      alignItems="center"
+      spgeysering={1}
+    >
+      
+      <Grid item>
+      <Typography variant="body1" color="textSecondary" className={classes.textclass}>
+      Can customers remove this laundry?
+        </Typography>
+      </Grid>
+        <Grid item>
+        <FormControl className={classes.formControl}>
+        
+            <InputLabel id="removable_laundry">Removable laundry ?</InputLabel>
+            <Select
+            labelId="removable_laundry"
+            id="removable_laundry"
+            value={formik.values.removable_laundry}
+            onChange={(e) => {
+            formik.setFieldValue('removable_laundry',e.target.value)}}
+            error={formik.touched.removable_laundry && Boolean(formik.errors.removable_laundry)}
+            helperText={formik.touched.removable_laundry && formik.errors.removable_laundry}
+            >
+            <MenuItem value={true}>Yes</MenuItem>
+            <MenuItem value={false}>No</MenuItem>
+            </Select>
+        </FormControl>
         </Grid>
   </Grid></div>
   : null

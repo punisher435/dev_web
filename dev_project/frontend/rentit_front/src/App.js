@@ -13,12 +13,14 @@ import store from './redux/auth/store';
 import PaginationCardList from './containers/PaginateCardList'
 import rooms from './containers/RoomDetails'
 import Shops from './containers/shopdetails'
+import Apartments from './containers/apartment_details'
 import SimpleTabs from './containers/wishlist';
 import RecentBooking from './containers/RecentBooking'
 import Profile from './components/Profile';
 
 import Checkout from './components/bookform';
 import Checkout_shop from './components/bookform_shop'
+import Checkout_apartment from './components/bookform_apartment'
 // import Sforms from './components/Sforms'
 import Sforms from './components/Checkout' 
 import Dashboard from './components/dashboard'
@@ -68,12 +70,15 @@ function App(props) {
                 <Route exact path='/wishlist' component={SimpleTabs}/>
                 <Route exact path='/rooms/:roomid/book/' component={Checkout} />
                 <Route exact path='/recentBooking' component={ConfirmPause}/>
-                <Route exact path='/shops/:shopid/book/' component={Checkout_shop} />
+
 
                 <Route exact path='/shops' component={ShopListing}/>
                 <Route exact path='/shops/:shopid' component={Shops}/>
+                <Route exact path='/shops/:shopid/book/' component={Checkout_shop} />
 
                 <Route exact path='/apartments' component={ApartmentListing}/>
+                <Route exact path='/apartments/:apartmentid' component={Apartments}/>
+                <Route exact path='/apartments/:apartmentid/book/' component={Checkout_apartment} />
 
                 <Route exact path='/dashboard/my_rooms' component={Myrooms}/>
                 <Route exact path='/dashboard/my_rooms/edit' component={RoomForm}/>

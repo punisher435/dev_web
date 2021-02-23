@@ -472,6 +472,7 @@ class apartments(models.Model):
 
     laundry=models.BooleanField(default=False)
     cost_laundry = models.IntegerField(default=0)
+    removable_laundry=models.BooleanField(default=False)
 
     apartment_cleaning=models.BooleanField(default=False)
     cost_cleaning = models.IntegerField(default=0)

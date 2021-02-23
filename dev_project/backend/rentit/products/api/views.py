@@ -640,7 +640,7 @@ class my_apartment_viewset(viewsets.ViewSet):
                 cost_TV=int(request.data["cost_TV"]),house_refridgerator=bool(request.data["house_refridgerator"]=='true'),removable_house_refridgerator=bool(request.data["removable_house_refridgerator"]=='true'),cost_refridgerator=int(request.data["cost_refridgerator"]),
                 power_backup=bool(request.data["power_backup"]=='true'),geyser=bool(request.data["geyser"]=='true'),removable_geyser=bool(request.data["removable_geyser"]=='true'),cost_geyser=int(request.data["cost_geyser"]),
                 wifi=bool(request.data["wifi"]=='true'),cost_wifi=int(request.data["cost_wifi"]),removable_wifi=bool(request.data["removable_wifi"]=='true'),AC=bool(request.data["AC"]=='true'),cost_AC=int(request.data["cost_AC"]),removable_AC=bool(request.data["removable_AC"]=='true'),cooler=bool(request.data["cooler"]=='true'),cost_cooler=int(request.data["cost_cooler"]),removable_cooler=bool(request.data["removable_cooler"]=='true'),laundry=bool(request.data["laundry"]=='true'),cost_laundry=int(request.data["cost_laundry"]),
-                apartment_cleaning=bool(request.data["apartment_cleaning"]=='true'),cost_cleaning=int(request.data["cost_cleaning"]),nearby_station1=request.data["nearby_station1"],nearby_station2=request.data["nearby_station2"],distance1=float(request.data["distance1"]),distance2=float(request.data["distance2"]),apartment_policy=request.data["apartment_policy"],
+                apartment_cleaning=bool(request.data["apartment_cleaning"]=='true'),removable_laundry=bool(request.data["removable_laundry"]=='true'),cost_cleaning=int(request.data["cost_cleaning"]),nearby_station1=request.data["nearby_station1"],nearby_station2=request.data["nearby_station2"],distance1=float(request.data["distance1"]),distance2=float(request.data["distance2"]),apartment_policy=request.data["apartment_policy"],
                 address_proof=request.data["address_proof"],washroom=int(request.data["washroom"]),total_rooms=int(request.data["total_rooms"]),total_floors=int(request.data["total_floors"]),total_beds=int(request.data["total_beds"]),total_TV=int(request.data["total_TV"]),total_AC=int(request.data["total_AC"]),total_cooler=int(request.data["total_cooler"]),total_geyser=int(request.data["total_geyser"]),
                 apartment_type=request.data["apartment_type"],sofa=bool(request.data["sofa"]=='true'))
 
@@ -728,7 +728,8 @@ class my_apartment_viewset(viewsets.ViewSet):
             room.cost_cooler=int(request.data["cost_cooler"])            
             room.removable_cooler=bool(request.data["removable_cooler"]=='true')            
             room.laundry=bool(request.data["laundry"]=='true')            
-            room.cost_laundry=int(request.data["cost_laundry"])            
+            room.cost_laundry=int(request.data["cost_laundry"])
+            room.removable_laundry=bool(request.data["removable_laundry"]=='true')              
    
             room.apartment_cleaning=bool(request.data["apartment_cleaning"]=='true')            
             room.cost_cleaning=int(request.data["cost_cleaning"])            

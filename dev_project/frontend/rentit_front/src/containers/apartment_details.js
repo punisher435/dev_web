@@ -5,12 +5,12 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box'
-import SpecificRoomCarousel from '../components/SpecificRoomCarousel'
+import SpecificRoomCarousel from '../components/specificapartmentcarosel'
 import RatingAndReviews from '../components/RatingAndReviews'
 import RoomDescriptionContent from '../components/RoomDescriptionContent'
 import GoogleApiWrapper from '../components/GoogleMapAPI'
 import GoogleApiWrapper1 from '../components/mobilemaps'
-import BookCard from '../components/bookcard_shop'
+import BookCard from '../components/bookcard_apartment'
 import RatingWithCompliment from '../components/RatingWithCompliment'
 import Facility from '../components/FacilityList'
 import Facilitymobile from '../components/mobilefacilitieslist'
@@ -24,8 +24,8 @@ import Icon from '@material-ui/core/Icon';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 
 import CustomizedTabs1 from '../components/scrolloffers';
-import Mobileimages from '../components/mobileimages';
-import SimpleModal1 from '../components/bookcardmodel_shop';
+import Mobileimages from '../components/mobileimages_apartments';
+import SimpleModal1 from '../components/bookcardmodel_apartment';
 
 import RatingWithCompliments from '../components/MobileRatingSearchCard' 
 import Mapview from '../components/mapcomp'
@@ -115,10 +115,10 @@ export default function FullWidthGrid(props) {
 
 
  /*  let query = useQuery();
-  var shopid=query.get('shopid');
-  console.log(shopid); */
+  var apartmentid=query.get('apartmentid');
+  console.log(apartmentid); */
 
-  const shopid = props.match.params.shopid;
+  const apartmentid = props.match.params.apartmentid;
 
   const classes = useStyles();
   const [details, setDetails] = useState(false);
@@ -143,7 +143,7 @@ export default function FullWidthGrid(props) {
             'Content-Type': 'application/json'
         }
       };
-      const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourceadadk2647kfs/shops/${shopid}/`,config);
+      const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcebvdfesl2746/apartments/${apartmentid}/`,config);
       
       try{
           console.log(res.data);
@@ -171,9 +171,9 @@ export default function FullWidthGrid(props) {
       }
     };
     try{
-    const res1 = await axios.get(`${process.env.REACT_APP_API_URL}/sourcensjahdwua2853/shop/reviews/`,{
+    const res1 = await axios.get(`${process.env.REACT_APP_API_URL}/sourcemvdsnksnd59472/apartment/reviews/`,{
       params:{
-        shop_id:shopid,
+        apartment_id:apartmentid,
         page:params1.page,
         ordering:params1.ordering,
       },

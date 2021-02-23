@@ -84,7 +84,7 @@ function RecipeReviewCard({isAuthenticated,post,setOpen1,setOpen2,wishlistitems,
    
  <RoomImage post={post} wishlist={wishlist} changewishlist={changewishlist} setOpen1={setOpen1} isAuthenticated={isAuthenticated} wishlistitems={wishlistitems} changeitemswishlist={changeitemswishlist}/>
 
- <Link to={`/shops/${post.apartment_id}`} target="_blank" style={{textDecoration:'none',color:'black'}}>
+ <Link to={`/apartments/${post.apartment_id}`} target="_blank" style={{textDecoration:'none',color:'black'}}>
 
  <Box ml={1}>
 

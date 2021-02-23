@@ -14,8 +14,8 @@ import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputLabel from '@material-ui/core/InputLabel';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import FormControl from '@material-ui/core/FormControl';
-import MonthSelect from './MonthSelect'
-import FacilityIcon from './FacilityIconProvider'
+import MonthSelect from './monthselect_shop'
+import FacilityIcon from './facilityiconprovider_apartment'
 import Capacityselect from './capacityselect'
 import axios from 'axios'
 import Snackbar from '@material-ui/core/Snackbar';
@@ -45,27 +45,28 @@ function BoolCard({details,isAuthenticated,loginpage,setloginpage,profile}) {
     year:'',
     duration:1,
     wifi:'',
-    house_TV:'',
-    room_TV:'',
+    TV:'',
+   
     house_refridgerator:'',
-    room_refridgerator:'',
+    
     purified_water:'',
     geyser:'',
     AC:'',
     cooler:'',
-    breakfast:'',
-    lunch:'',
-    dinner:'',
+   
     coupon:'',
     discount:'',
     month_price:'',
     savings:'',
     monthsavings:'',
-    roomid:'',
+    apartmentid:'',
     title:'',
     address:'',
     currency:'',
-    capacity:1,
+
+    laundry:'',
+  
+
 })
   const [values, setValues] = React.useState({
     couponCode: '',
@@ -107,116 +108,19 @@ function BoolCard({details,isAuthenticated,loginpage,setloginpage,profile}) {
     }
     }
 
-    var x = details.cost_electricity +details.cost_water + details.final_price + details.cost_wifi + details.cost_TV + details.cost_roomTV + details.cost_refridgerator + details.cost_roomrefridgerator + details.cost_purified_water + details.cost_geyser + details.cost_AC + details.cost_cooler + details.cost_breakfast + details.cost_lunch + details.cost_dinner
+    var x = details.cost_electricity +details.cost_water + details.final_price + details.cost_wifi + details.cost_TV + details.cost_purified_water + details.cost_AC + details.cost_cooler + details.cost_geyser + details.cost_laundry + details.cost_refridgerator
 
 
     setbookvalues({...bookvalues,    date:selectedDate.getDate(),
         month:selectedDate.getMonth()+1,
-        year:selectedDate.getFullYear(),wifi:details.wifi,house_TV:details.house_TV,room_TV:details.room_TV,
-    house_refridgerator:details.house_refridgerator,room_refridgerator:details.room_refridgerator,
+        year:selectedDate.getFullYear(),wifi:details.wifi,TV:details.TV,
+    house_refridgerator:details.house_refridgerator,
 purified_water:details.purified_water,geyser:details.geyser,AC:details.AC,cooler:details.cooler,
-breakfast:details.breakfast,lunch:details.lunch,dinner:details.dinner,price:x,month_price:x,discount:details.owner_discount+details.company_discount+details.commission+details.fake_discount,
-savings:details.price - details.final_price,monthsavings:details.price - details.final_price,roomid:details.room_id,title:details.title,address:details.location,currency:details.currency,
+price:x,month_price:x,discount:details.owner_discount+details.company_discount+details.commission+details.fake_discount,
+savings:details.price - details.final_price,monthsavings:details.price - details.final_price,apartmentid:details.apartment_id,title:details.title,address:details.location,currency:details.currency,
+laundry:details.laundry
 });
 
-var x = details.capacity-details.booked_by
-if(x<0){x=0;}
-
-if(details.book1!=null || details.book1!=undefined)
-{
-
-    if(  (parseInt(details.book1.slice(0,4))<selectedDate.getFullYear()) || ( parseInt(details.book1.slice(0,4))===selectedDate.getFullYear() && parseInt(details.book1.slice(5,7))<selectedDate.getMonth()+1 ) ||  
-    ( parseInt(details.book1.slice(0,4))===selectedDate.getFullYear() && parseInt(details.book1.slice(5,7))===selectedDate.getMonth()+1 && parseInt(details.book1.slice(8,))<selectedDate.getDate()-1 )  ) 
-    {
-        x=x+1;
-    }
-}
-
-if(details.book2!=null || details.book2!=undefined)
-{
-    if(  (parseInt(details.book2.slice(0,4))<selectedDate.getFullYear()) || ( parseInt(details.book2.slice(0,4))==selectedDate.getFullYear() && parseInt(details.book2.slice(5,7))<selectedDate.getMonth()+1 ) ||  
-    ( parseInt(details.book2.slice(0,4))===selectedDate.getFullYear() && parseInt(details.book2.slice(5,7))===selectedDate.getMonth()+1 && parseInt(details.book2.slice(8,))<selectedDate.getDate()-1 )  ) 
-    {
-        x=x+1;
-    }
-}
-
-if(details.book3!=null || details.book3!=undefined)
-{
-    if(  (parseInt(details.book3.slice(0,4))<selectedDate.getFullYear()) || ( parseInt(details.book3.slice(0,4))==selectedDate.getFullYear() && parseInt(details.book3.slice(5,7))<selectedDate.getMonth()+1 ) ||  
-    ( parseInt(details.book3.slice(0,4))===selectedDate.getFullYear() && parseInt(details.book3.slice(5,7))===selectedDate.getMonth()+1 && parseInt(details.book3.slice(8,))<selectedDate.getDate()-1 )  ) 
-    {
-        x=x+1;
-    }
-}
-
-if(details.book4!=null || details.book4!=undefined)
-{
-    if(  (parseInt(details.book4.slice(0,4))<selectedDate.getFullYear()) || ( parseInt(details.book4.slice(0,4))==selectedDate.getFullYear() && parseInt(details.book4.slice(5,7))<selectedDate.getMonth()+1 ) ||  
-    ( parseInt(details.book4.slice(0,4))===selectedDate.getFullYear() && parseInt(details.book4.slice(5,7))===selectedDate.getMonth()+1 && parseInt(details.book4.slice(8,))<selectedDate.getDate()-1 )  ) 
-    {
-        x=x+1;
-    }
-}
-
-if(details.book5!=null || details.book5!=undefined)
-{
-    if(  (parseInt(details.book5.slice(0,4))<selectedDate.getFullYear()) || ( parseInt(details.book5.slice(0,4))==selectedDate.getFullYear() && parseInt(details.book5.slice(5,7))<selectedDate.getMonth()+1 ) ||  
-    ( parseInt(details.book5.slice(0,4))===selectedDate.getFullYear() && parseInt(details.book5.slice(5,7))===selectedDate.getMonth()+1 && parseInt(details.book5.slice(8,))<selectedDate.getDate()-1 )  ) 
-    {
-        x=x+1;
-    }
-}
-
-if(details.book6!=null || details.book6!=undefined)
-{
-    if(  (parseInt(details.book6.slice(0,4))<selectedDate.getFullYear()) || ( parseInt(details.book6.slice(0,4))==selectedDate.getFullYear() && parseInt(details.book6.slice(5,7))<selectedDate.getMonth()+1 ) ||  
-    ( parseInt(details.book6.slice(0,4))===selectedDate.getFullYear() && parseInt(details.book6.slice(5,7))===selectedDate.getMonth()+1 && parseInt(details.book6.slice(8,))<selectedDate.getDate()-1 )  ) 
-    {
-        x=x+1;
-    }
-}
-
-if(details.book7!=null || details.book7!=undefined)
-{
-    if(  (parseInt(details.book7.slice(0,4))<selectedDate.getFullYear()) || ( parseInt(details.book7.slice(0,4))==selectedDate.getFullYear() && parseInt(details.book7.slice(5,7))<selectedDate.getMonth()+1 ) ||  
-    ( parseInt(details.book7.slice(0,4))===selectedDate.getFullYear() && parseInt(details.book7.slice(5,7))===selectedDate.getMonth()+1 && parseInt(details.book7.slice(8,))<selectedDate.getDate()-1 )  ) 
-    {
-        x=x+1;
-    }
-}
-
-if(details.book8!=null || details.book8!=undefined)
-{
-    if(  (parseInt(details.book8.slice(0,4))<selectedDate.getFullYear()) || ( parseInt(details.book8.slice(0,4))==selectedDate.getFullYear() && parseInt(details.book8.slice(5,7))<selectedDate.getMonth()+1 ) ||  
-    ( parseInt(details.book8.slice(0,4))===selectedDate.getFullYear() && parseInt(details.book8.slice(5,7))===selectedDate.getMonth()+1 && parseInt(details.book8.slice(8,))<selectedDate.getDate()-1 )  ) 
-    {
-        x=x+1;
-    }
-}
-
-if(details.book9!=null || details.book9!=undefined)
-{
-    if(  (parseInt(details.book9.slice(0,4))<selectedDate.getFullYear()) || ( parseInt(details.book9.slice(0,4))==selectedDate.getFullYear() && parseInt(details.book9.slice(5,7))<selectedDate.getMonth()+1 ) ||  
-    ( parseInt(details.book9.slice(0,4))===selectedDate.getFullYear() && parseInt(details.book9.slice(5,7))===selectedDate.getMonth()+1 && parseInt(details.book9.slice(8,))<selectedDate.getDate()-1 )  ) 
-    {
-        x=x+1;
-    }
-}
-
-if(details.book10!=null || details.book10!=undefined)
-{
-    if(  (parseInt(details.book10.slice(0,4))<selectedDate.getFullYear()) || ( parseInt(details.book10.slice(0,4))==selectedDate.getFullYear() && parseInt(details.book10.slice(5,7))<selectedDate.getMonth()+1 ) ||  
-    ( parseInt(details.book10.slice(0,4))===selectedDate.getFullYear() && parseInt(details.book10.slice(5,7))===selectedDate.getMonth()+1 && parseInt(details.book10.slice(8,))<selectedDate.getDate()-1 )  ) 
-    {
-        x=x+1;
-    }
-}
-
-
-
-setcapacity(x);
-    
   
   },[date,details,selectedDate])
 
@@ -234,13 +138,13 @@ setcapacity(x);
                     price:bookvalues.price,
                     discount:bookvalues.discount,
                     savings:bookvalues.savings,
-                    roomid:bookvalues.roomid
+                    apartmentid:bookvalues.apartmentid
                    },
               };
 
             console.log(config)
             
-            const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcesawdajwnr32w2/coupon/room/apply/${bookvalues.coupon}/`,config,config);
+            const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourceasindwanuia29910/coupon/apartment/apply/${bookvalues.coupon}/`,config,config);
 
           console.log(res.data);
           setbookvalues({...bookvalues,price:res.data[1],discount:res.data[3],savings:res.data[2]})
@@ -310,12 +214,12 @@ setcapacity(x);
             <Grid container alignItems="center" spacing={1}>
                 <Grid item  style={{ paddingBottom: '0px'}}>
                     <Typography variant="h5" color="textSecondary" display = 'inline' >
-                    {details.currency}{details.final_price}
+                    {details.currency} {details.final_price}
                     </Typography>
                 </Grid>
                 <Grid item style={{ paddingBottom: '0px'}}>
                     <Typography variant="subtitle1" color="textSecondary" display = 'inline'>
-                        <strike>{details.currency}{details.price}</strike>
+                        <strike>{details.currency} {details.price}</strike>
                     </Typography>
                 </Grid>
                 <Grid item style={{ paddingBottom: '0px'}}>
@@ -347,17 +251,7 @@ setcapacity(x);
                     
             </Grid>
 
-            <Grid container justify="space-around" alignItems='bottom' >
-            <Grid item xs={3}>
-            <Typography variant="body1" color="textSecondary" >
-                    Capacity
-                    </Typography>
-            </Grid>
-            <Grid item xs={5}>
-                <Capacityselect setbookvalues={setbookvalues} bookvalues={bookvalues} details={details} capacity={capacity}/>
-            </Grid>
-
-            </Grid>
+            
 
 {/* 
           <Facility type='Breakfast' price='price'/>
@@ -371,6 +265,7 @@ setcapacity(x);
             speed={0.8}
             
             horizontal={false}
+            
             
             >
            
@@ -463,7 +358,7 @@ setcapacity(x);
         details.pausebooking || !details.verified || booked ? <Button variant='contained' color="primary" fullWidth >
         Unavaiable untill 1 day after {details.bookedtill}
       </Button> :   <Link style={{textDecoration:'none'}} to={{
-    pathname: `/rooms/${details.room_id}/book`,
+    pathname: `/apartments/${details.apartment_id}/book`,
     state: { property_id: bookvalues }
   }}><Button variant='contained' color="secondary" fullWidth>
           Continue to book
