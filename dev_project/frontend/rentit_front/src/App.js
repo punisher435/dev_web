@@ -32,6 +32,8 @@ import Bookingcancel from './components/cancellation'
 import Bookingcancel_shop from './components/cancelbooking_shop'
 import Bookingcancel_apartment from './components/cancelbooking_apartment'
 import Bookingextend from './components/extendbooking'
+import Bookingextend_shop from './components/extendbooking_shop'
+import Bookingextend_apartment from './components/extendbooking_apartment'
 import Myprofile from './components/myprofile';
 import ProfileForm from './/components/profile_form'
 import BankForm from './/components/bank_form'
@@ -117,8 +119,10 @@ function App(props) {
                 <Route exact path='/dashboard/recentbookings/room-bookings/extend/:bookingid' component={Bookingextend}/>
 
                 <Route exact path='/dashboard/recentbookings/shop-bookings/cancel/:bookingid' component={Bookingcancel_shop}/>
+                <Route exact path='/dashboard/recentbookings/shop-bookings/extend/:bookingid' component={Bookingextend_shop}/>
 
                 <Route exact path='/dashboard/recentbookings/apartment-bookings/cancel/:bookingid' component={Bookingcancel_apartment}/>
+                <Route exact path='/dashboard/recentbookings/apartment-bookings/extend/:bookingid' component={Bookingextend_apartment}/>
 
                 <Route exact path='/dashboard/recentbookings/:bookingid/feedback' component={ReviewForm}/>
 

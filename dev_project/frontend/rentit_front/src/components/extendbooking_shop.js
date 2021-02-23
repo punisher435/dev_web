@@ -18,7 +18,7 @@ import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
 import {Redirect} from 'react-router-dom'
 import {connect} from 'react-redux'
-import FacilityIcon from './FacilityIconProvider'
+import FacilityIcon from './FacilityIconProvider_shop'
 
 
 
@@ -136,11 +136,11 @@ function Bookingextend(props) {
                 },
               };
               
-                try{const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcehjbda983290whjba/room/book/${bookingid}/`,config);
+                try{const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcehdawnajk289uadhq/shop/book/${bookingid}/`,config);
              console.log(res.data)
              setmybooking(res.data)
 
-             try{const res1 = await axios.get(`${process.env.REACT_APP_API_URL}/sourceaxcnfrudadv34/rooms/${res.data.room_id}/`,config);
+             try{const res1 = await axios.get(`${process.env.REACT_APP_API_URL}/sourceadadk2647kfs/shops/${res.data.shop_id}/`,config);
              console.log(res1.data)
              setroom(res1.data)
               
@@ -152,26 +152,20 @@ function Bookingextend(props) {
 
              setbookdetails(
                 {
-                  ...bookdetails,
-                    price:10000,
-                    month_price:10000,
-                    monthsavings:1000,
-                    date:value.booked_till.slice(8,10),
-                    month:value.booked_till.slice(5,7),
-                    year:value.booked_till.slice(0,4),
+                    ...bookdetails,
+                    price:value.price,
+                    date:value.date,
+                    month:value.month,
+                    year:value.year,
                     duration:value.duration,
                     wifi:value.wifi,
-                    house_TV:value.house_TV,
-                    room_TV:value.room_TV,
-                    house_refridgerator:value.house_refridgerator,
-                    room_refridgerator:value.room_refridgerator,
+                    TV:value.TV,
+                   
                     purified_water:value.purified_water,
-                    geyser:value.geyser,
+                   
                     AC:value.AC,
                     cooler:value.cooler,
-                    breakfast:value.breakfast,
-                    lunch:value.lunch,
-                    dinner:value.dinner,
+                  
                     coupon:'none',
                     discount:value.discount,
                     month_price:value.month_price,
@@ -179,15 +173,20 @@ function Bookingextend(props) {
                     monthsavings:value.monthsavings,
                     currency:value.currency,
 
-                    roomid:value.room_id,
-                    title:value.room_name,
+                    shopid:value.shopid,
+                    title:value.title,
+                    address:value.address,
+
+
+                    shopid:value.shop_id,
+                    title:value.shop_name,
                     firstname:value.first_name,
                     lastname:value.last_name,
                     mobile:value.mobile,
                     country_code:value.country_code,
                     alternate_mobile:value.alternate_mobile,
 
-                    capacity:value.capacity,
+                 
 
                     
                 })
@@ -238,7 +237,7 @@ function Bookingextend(props) {
       setcancelled(true);
       console.log(bookdetails)
       
-        try{const res = await axios.put(`${process.env.REACT_APP_API_URL}/sourcehjbda983290whjba/room/book/${bookingid}/`,body,config);
+        try{const res = await axios.put(`${process.env.REACT_APP_API_URL}/sourcehdawnajk289uadhq/shop/book/${bookingid}/`,body,config);
         
 
         setredirect(true)
