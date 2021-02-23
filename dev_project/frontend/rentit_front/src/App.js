@@ -26,6 +26,8 @@ import Sforms from './components/Checkout'
 import Dashboard from './components/dashboard'
 import RecentBooking1 from './components/recentbookings'
 import Bookingdetails from './containers/bookingdetails'
+import Bookingdetails_shop from './containers/bookingdetails_shop'
+import Bookingdetails_apartment from './containers/bookingdetails_apartment'
 import Bookingcancel from './components/cancellation'
 import Bookingextend from './components/extendbooking'
 import Myprofile from './components/myprofile';
@@ -105,7 +107,9 @@ function App(props) {
 
                 <Route exact path='/dashboard' component={Dashboard}/>
                 <Route exact path='/dashboard/recentbookings' component={RecentBooking1}/>
-                <Route exact path='/dashboard/recentbookings/:bookingid' component={Bookingdetails}/>
+                <Route exact path='/dashboard/recentbookings/room-bookings/:bookingid' component={Bookingdetails}/>
+                <Route exact path='/dashboard/recentbookings/shop-bookings/:bookingid' component={Bookingdetails_shop}/>
+                <Route exact path='/dashboard/recentbookings/apartment-bookings/:bookingid' component={Bookingdetails_apartment}/>
                 <Route exact path='/dashboard/recentbookings/cancel/:bookingid' component={Bookingcancel}/>
                 <Route exact path='/dashboard/recentbookings/extend/:bookingid' component={Bookingextend}/>
                 <Route exact path='/dashboard/recentbookings/:bookingid/feedback' component={ReviewForm}/>

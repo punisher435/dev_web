@@ -73,7 +73,7 @@ const useStyles = makeStyles((theme) => ({
 }));
   
 
-function Bookingdetails(props) {
+function Bookingdetails_apartment(props) {
   const [invoice,setinvoice] = useState(false)
     const bookingid = props.match.params.bookingid;
     const [error,seterror] = useState(false);
@@ -92,7 +92,7 @@ function Bookingdetails(props) {
                 },
               };
               
-                try{const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcehjbda983290whjba/room/book/${bookingid}/`,config);
+                try{const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcensinejfcdajewcn29210/apartment/book/${bookingid}/`,config);
              console.log(res.data)
              setmybooking(res.data)
               
@@ -474,5 +474,5 @@ const mapStateToProps = state => ({
   profile : state.authreducers.user
 });
 
-export default connect(mapStateToProps)(Bookingdetails);
+export default connect(mapStateToProps)(Bookingdetails_apartment);
 
