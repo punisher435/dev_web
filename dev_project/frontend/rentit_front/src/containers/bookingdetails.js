@@ -129,10 +129,10 @@ function Bookingdetails(props) {
       return <Download />;
     }
     if(cancelled===true){
-      return <Redirect to={`/dashboard/recentbookings/cancel/${bookingid}`}/>
+      return <Redirect to={`/dashboard/recentbookings/room-bookings/cancel/${bookingid}`}/>
     }
     if(extend===true){
-      return <Redirect to={`/dashboard/recentbookings/extend/${bookingid}`}/>
+      return <Redirect to={`/dashboard/recentbookings/room-bookings/extend/${bookingid}`}/>
     }
     if(mybooking && props.profile){
     

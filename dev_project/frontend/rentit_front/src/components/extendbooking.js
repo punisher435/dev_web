@@ -136,7 +136,7 @@ function Bookingextend(props) {
                 },
               };
               
-                try{const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcehjbda983290whjba/book/${bookingid}/`,config);
+                try{const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcehjbda983290whjba/room/book/${bookingid}/`,config);
              console.log(res.data)
              setmybooking(res.data)
 

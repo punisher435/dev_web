@@ -98,7 +98,7 @@ function Bookingcancel(props) {
                 },
               };
               
-                try{const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcehjbda983290whjba/room/book/${bookingid}/`,config);
+                try{const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcehjbda983290whjba/book/${bookingid}/`,config);
              console.log(res.data)
              setmybooking(res.data)
               
@@ -127,10 +127,10 @@ function Bookingcancel(props) {
       }
       setcancelled(true);
       
-        try{const res = await axios.delete(`${process.env.REACT_APP_API_URL}/sourcehjbda983290whjba/book/${bookingid}/`,config);
+        try{const res = await axios.delete(`${process.env.REACT_APP_API_URL}/sourcehdawnajk289uadhq/shop/book/${bookingid}/`,config);
         
 
-        try{const res = await axios.patch(`${process.env.REACT_APP_API_URL}/sourcehjbda983290whjba/book/${bookingid}/`,body,config);
+        try{const res = await axios.patch(`${process.env.REACT_APP_API_URL}/sourcehdawnajk289uadhq/shop/book/${bookingid}/`,body,config);
 
         setcancelled(false);
         setredirect(true)

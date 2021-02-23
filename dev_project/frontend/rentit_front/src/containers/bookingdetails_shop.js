@@ -129,10 +129,10 @@ function Bookingdetails_shop(props) {
       return <Download />;
     }
     if(cancelled===true){
-      return <Redirect to={`/dashboard/recentbookings/cancel/${bookingid}`}/>
+      return <Redirect to={`/dashboard/recentbookings/shop-bookings/cancel/${bookingid}`}/>
     }
     if(extend===true){
-      return <Redirect to={`/dashboard/recentbookings/extend/${bookingid}`}/>
+      return <Redirect to={`/dashboard/recentbookings/shop-bookings/extend/${bookingid}`}/>
     }
     if(mybooking && props.profile){
     
@@ -326,29 +326,15 @@ function Bookingdetails_shop(props) {
               <h6 className={classes.textclass}>    {mybooking.wifi ? 'Selected' : 'Not Selected'} </h6>
               </Grid>
               <Grid item >
-              <h6 className={classes.textclass}>House TV</h6>
-              <h6 className={classes.textclass}>    {mybooking.house_TV ? 'Selected' : 'Not Selected'} </h6>
+              <h6 className={classes.textclass}>TV</h6>
+              <h6 className={classes.textclass}>    {mybooking.TV ? 'Selected' : 'Not Selected'} </h6>
               </Grid>
-              <Grid item >
-              <h6 className={classes.textclass}>Room TV</h6>
-              <h6 className={classes.textclass}>    {mybooking.room_TV ? 'Selected' : 'Not Selected'} </h6>
-              </Grid>
-              <Grid item >
-              <h6 className={classes.textclass}>House refridgerator</h6>
-              <h6 className={classes.textclass}>    {mybooking.house_refridgerator ? 'Selected' : 'Not Selected'} </h6>
-              </Grid>
-              <Grid item >
-              <h6 className={classes.textclass}>Room refridgerator</h6>
-              <h6 className={classes.textclass}>    {mybooking.room_refridgerator ? 'Selected' : 'Not Selected'} </h6>
-              </Grid>
+             
               <Grid item >
               <h6 className={classes.textclass}>Purified water</h6>
               <h6 className={classes.textclass}>    {mybooking.purified_water ? 'Selected' : 'Not Selected'} </h6>
               </Grid>
-              <Grid item >
-              <h6 className={classes.textclass}>Geyser</h6>
-              <h6 className={classes.textclass}>    {mybooking.geyser ? 'Selected' : 'Not Selected'} </h6>
-              </Grid>
+
               <Grid item >
               <h6 className={classes.textclass}>AC</h6>
               <h6 className={classes.textclass}>    {mybooking.AC ? 'Selected' : 'Not Selected'} </h6>
@@ -357,18 +343,7 @@ function Bookingdetails_shop(props) {
               <h6 className={classes.textclass}>Cooler</h6>
               <h6 className={classes.textclass}>    {mybooking.cooler ? 'Selected' : 'Not Selected'} </h6>
               </Grid>
-              <Grid item >
-              <h6 className={classes.textclass}>Breakfast</h6>
-              <h6 className={classes.textclass}>    {mybooking.breakfast ? 'Selected' : 'Not Selected'} </h6>
-              </Grid>
-              <Grid item >
-              <h6 className={classes.textclass}>Lunch</h6>
-              <h6 className={classes.textclass}>    {mybooking.lunch ? 'Selected' : 'Not Selected'} </h6>
-              </Grid>
-              <Grid item >
-              <h6 className={classes.textclass}>Dinner</h6>
-              <h6 className={classes.textclass}>    {mybooking.dinner ? 'Selected' : 'Not Selected'} </h6>
-              </Grid>
+              
 
               <br />
 
