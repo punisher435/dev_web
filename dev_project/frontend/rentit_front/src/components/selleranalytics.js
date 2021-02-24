@@ -7,6 +7,7 @@ import BarChart from './barchart';
 import Hidden from '@material-ui/core/Hidden';
 
 import PieChart from './piechart'
+import Multicolor_chart from './multicolor_chart';
 
 
 
@@ -133,6 +134,13 @@ function Selleranalytics({roombookings,shopbookings,apartmentbookings,bank}) {
                 <Grid item>
                     <div className={classes.graphclass}>
                     <PieChart roombookings={roombookings} shopbookings={shopbookings} apartmentbookings={apartmentbookings}/>
+                    
+                    </div>
+                </Grid>
+
+                <Grid item>
+                    <div className={classes.graphclass}>
+                    <Multicolor_chart roombookings={roombookings} shopbookings={shopbookings} apartmentbookings={apartmentbookings}/>
                     
                     </div>
                 </Grid>
