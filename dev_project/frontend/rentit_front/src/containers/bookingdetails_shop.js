@@ -196,6 +196,7 @@ function Bookingdetails_shop(props) {
 
     <br />
 
+
     <Grid
             container
             direction="row"
@@ -208,8 +209,8 @@ function Bookingdetails_shop(props) {
    <Grid item >
             {
                 mybooking.room_review || mybooking.cancelled ? null :  <Link to={{
-                  pathname: `/dashboard/recentbookings/${mybooking.booking_id}/feedback`,
-                  state: { property_id:'room' }
+                  pathname: `/dashboard/recentbookings/shop-bookings/${mybooking.booking_id}/feedback`,
+                  state: { property_id:'shop' }
                 }} style={{textDecoration:'none'}}><Button variant="contained" padding="auto"color="secondary" >
                 Give Feedback
               </Button></Link>

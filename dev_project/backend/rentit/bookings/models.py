@@ -13,6 +13,9 @@ from .managers import rooms_bookings_manager,rooms_seller_bookings_manager
 from .managers import shops_bookings_manager,shops_seller_bookings_manager
 from .managers import apartments_bookings_manager,apartments_seller_bookings_manager
 
+
+
+
 def upload_to_roomreviews(instance, filename):
     return 'reviews/rooms/{filename}'.format(filename=filename)
 
@@ -107,26 +110,6 @@ class room_rating_and_reviews(models.Model):
     timestamp=models.DateTimeField(auto_now=True) 
 
 
-class shop_rating_and_reviews(models.Model):
-    shop_id=models.ForeignKey(rooms,on_delete=models.PROTECT,related_name="shop_my_id")
-    customer_id=models.ForeignKey(user,on_delete=models.PROTECT,related_name="shop_customer_my_id")
-    rating=models.DecimalField(max_digits=2,decimal_places=1)
-    reviews=models.TextField()
-    timestamp=models.DateTimeField(auto_now=True)
-    photo1=models.ImageField(upload_to=upload_to_roomreviews,default='/images/rooms/default.jpg')
-    photo2=models.ImageField(upload_to=upload_to_roomreviews,default='/images/rooms/default.jpg')
-    photo3=models.ImageField(upload_to=upload_to_roomreviews,default='/images/rooms/default.jpg') 
-
-class apartment_rating_and_reviews(models.Model):
-    apartment_id=models.ForeignKey(rooms,on_delete=models.PROTECT,related_name="apartment_my_id")
-    customer_id=models.ForeignKey(user,on_delete=models.PROTECT,related_name="apartment_customer_my_id")
-    rating=models.DecimalField(max_digits=2,decimal_places=1)
-    reviews=models.TextField()
-    timestamp=models.DateTimeField(auto_now=True)
-    photo1=models.ImageField(upload_to=upload_to_roomreviews,default='/images/rooms/default.jpg')
-    photo2=models.ImageField(upload_to=upload_to_roomreviews,default='/images/rooms/default.jpg')
-    photo3=models.ImageField(upload_to=upload_to_roomreviews,default='/images/rooms/default.jpg') 
-
 
 
 
@@ -196,6 +179,19 @@ class shopBookings(models.Model):
     paylater_date=models.DateField(_("Pay Later Date"),null=True,blank=True)
     
     ended=models.BooleanField(default=False)
+
+
+
+class shop_rating_and_reviews(models.Model):
+    booking_id = models.OneToOneField(shopBookings,on_delete=models.PROTECT,primary_key=True)
+    shop_id=models.ForeignKey(shops,on_delete=models.PROTECT,related_name='shop_my_id')
+    customer_id=models.ForeignKey(user,on_delete=models.PROTECT,related_name="shop_customer_my_id")
+    rating=models.DecimalField(max_digits=2,decimal_places=1)
+    reviews=models.TextField()
+    photo1=models.ImageField(upload_to=upload_to_shopreviews,null=True,blank=True)
+    photo2=models.ImageField(upload_to=upload_to_shopreviews,null=True,blank=True)
+    photo3=models.ImageField(upload_to=upload_to_shopreviews,null=True,blank=True)
+    timestamp=models.DateTimeField(auto_now=True) 
 
 
 
@@ -270,6 +266,18 @@ class apartmentBookings(models.Model):
 
 
 
+
+
+class apartment_rating_and_reviews(models.Model):
+    booking_id = models.OneToOneField(apartmentBookings,on_delete=models.PROTECT,primary_key=True)
+    apartment_id=models.ForeignKey(apartments,on_delete=models.PROTECT,related_name='apartment_my_id')
+    customer_id=models.ForeignKey(user,on_delete=models.PROTECT,related_name="apartment_customer_my_id")
+    rating=models.DecimalField(max_digits=2,decimal_places=1)
+    reviews=models.TextField()
+    photo1=models.ImageField(upload_to=upload_to_apartmentreviews,null=True,blank=True)
+    photo2=models.ImageField(upload_to=upload_to_apartmentreviews,null=True,blank=True)
+    photo3=models.ImageField(upload_to=upload_to_apartmentreviews,null=True,blank=True)
+    timestamp=models.DateTimeField(auto_now=True) 
 
 
 

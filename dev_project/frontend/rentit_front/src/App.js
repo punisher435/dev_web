@@ -124,7 +124,9 @@ function App(props) {
                 <Route exact path='/dashboard/recentbookings/apartment-bookings/cancel/:bookingid' component={Bookingcancel_apartment}/>
                 <Route exact path='/dashboard/recentbookings/apartment-bookings/extend/:bookingid' component={Bookingextend_apartment}/>
 
-                <Route exact path='/dashboard/recentbookings/:bookingid/feedback' component={ReviewForm}/>
+                <Route exact path='/dashboard/recentbookings/room-bookings/:bookingid/feedback' component={ReviewForm}/>
+                <Route exact path='/dashboard/recentbookings/shop-bookings/:bookingid/feedback' component={ReviewForm}/>
+                <Route exact path='/dashboard/recentbookings/apartment-bookings/:bookingid/feedback' component={ReviewForm}/>
 
               </div>
               </>

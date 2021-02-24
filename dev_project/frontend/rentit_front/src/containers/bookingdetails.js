@@ -208,7 +208,7 @@ function Bookingdetails(props) {
    <Grid item >
             {
                 mybooking.room_review || mybooking.cancelled ? null :  <Link to={{
-                  pathname: `/dashboard/recentbookings/${mybooking.booking_id}/feedback`,
+                  pathname: `/dashboard/recentbookings/room-bookings/${mybooking.booking_id}/feedback`,
                   state: { property_id:'room' }
                 }} style={{textDecoration:'none'}}><Button variant="contained" padding="auto"color="secondary" >
                 Give Feedback

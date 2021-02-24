@@ -192,9 +192,11 @@ function Bookingdetails_apartment(props) {
                 Extend booking
               </Button>
     }</Grid>
+
     </Grid>
 
     <br />
+    
 
     <Grid
             container
@@ -208,8 +210,8 @@ function Bookingdetails_apartment(props) {
    <Grid item >
             {
                 mybooking.room_review || mybooking.cancelled ? null :  <Link to={{
-                  pathname: `/dashboard/recentbookings/${mybooking.booking_id}/feedback`,
-                  state: { property_id:'room' }
+                  pathname: `/dashboard/recentbookings/apartment-bookings/${mybooking.booking_id}/feedback`,
+                  state: { property_id:'apartment' }
                 }} style={{textDecoration:'none'}}><Button variant="contained" padding="auto"color="secondary" >
                 Give Feedback
               </Button></Link>

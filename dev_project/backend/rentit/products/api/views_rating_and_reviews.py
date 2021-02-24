@@ -16,7 +16,7 @@ from products.models import rooms,shops,apartments
 from bookings.serializers import room_rating_and_reviews_serializer
 from bookings.serializers import shop_rating_and_reviews_serializer
 from bookings.serializers import apartment_rating_and_reviews_serializer
-from bookings.models import roomBookings
+from bookings.models import roomBookings,shopBookings,apartmentBookings
 from user.models import seller_rating_and_reviews
 
 
@@ -89,6 +89,82 @@ class give_reviews(viewsets.ViewSet):
 
 
                     booking.room_review=True
+
+                    booking.save()
+
+                if request.data['type']=='shop':
+                    
+                    queryset = shopBookings.objects.all()
+                    queryset = queryset.filter(customer_id=request.user)
+                    booking = get_object_or_404(queryset,pk=request.data['bookingid'])
+                    
+                    if booking.shop_review==False and booking.cancelled==False:
+
+                        review = shop_rating_and_reviews(booking_id = booking,shop_id = booking.shop_id,customer_id=request.user,
+                        rating=int(request.data['rating']),reviews = request.data['review'],photo1 = request.data['photo1'],photo2 = request.data['photo2'],photo3=request.data['photo3'])
+
+                        review.save()
+
+                        if(request.data['seller_review']!='' or int(request.data['seller_rating'])!=0):
+
+                            seller_review = seller_rating_and_reviews(seller_id = booking.seller_id,customer_id=request.user,
+                            rating = int(request.data["seller_rating"]),reviews= request.data['seller_review'])
+
+                            seller_review.save()
+
+                        room = get_object_or_404(shops.objects.all(),pk=booking.shop_id.shop_id)
+
+                        rate = room.avg_rating
+                        total = room.reviews
+
+                        total_rate = float(rate*total) + float(request.data['rating'])
+                        total = total + 1
+
+                        room.avg_rating = float(total_rate)/float(total)
+                        room.reviews = total
+
+                        room.save()
+
+
+                    booking.shop_review=True
+
+                    booking.save()
+
+                if request.data['type']=='apartment':
+                    
+                    queryset = apartmentBookings.objects.all()
+                    queryset = queryset.filter(customer_id=request.user)
+                    booking = get_object_or_404(queryset,pk=request.data['bookingid'])
+                    
+                    if booking.apartment_review==False and booking.cancelled==False:
+
+                        review = apartment_rating_and_reviews(booking_id = booking,apartment_id = booking.apartment_id,customer_id=request.user,
+                        rating=int(request.data['rating']),reviews = request.data['review'],photo1 = request.data['photo1'],photo2 = request.data['photo2'],photo3=request.data['photo3'])
+
+                        review.save()
+
+                        if(request.data['seller_review']!='' or int(request.data['seller_rating'])!=0):
+
+                            seller_review = seller_rating_and_reviews(seller_id = booking.seller_id,customer_id=request.user,
+                            rating = int(request.data["seller_rating"]),reviews= request.data['seller_review'])
+
+                            seller_review.save()
+
+                        room = get_object_or_404(apartments.objects.all(),pk=booking.apartment_id.apartment_id)
+
+                        rate = room.avg_rating
+                        total = room.reviews
+
+                        total_rate = float(rate*total) + float(request.data['rating'])
+                        total = total + 1
+
+                        room.avg_rating = float(total_rate)/float(total)
+                        room.reviews = total
+
+                        room.save()
+
+
+                    booking.apartment_review=True
 
                     booking.save()
 
