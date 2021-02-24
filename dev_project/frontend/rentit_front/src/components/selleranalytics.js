@@ -4,6 +4,8 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import BarChart from './barchart';
+import Hidden from '@material-ui/core/Hidden';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -31,6 +33,17 @@ const useStyles = makeStyles((theme) => ({
         marginTop:'20px',
         color:'red',
     },
+    graphclass:{
+        width:'80vw',
+        [theme.breakpoints.up('sm')]: {
+            width:'80vw',
+            maxWidth:440,
+          },
+          [theme.breakpoints.up('md')]: {
+            width:'40vw',
+            maxWidth:440,
+          },
+    }
   }));
 
 function Selleranalytics({roombookings,shopbookings,apartmentbookings,bank}) {
@@ -108,7 +121,9 @@ function Selleranalytics({roombookings,shopbookings,apartmentbookings,bank}) {
             alignItems="center"
             >
                 <Grid item>
+                    <div className={classes.graphclass}>
                     <BarChart roombookings={roombookings} shopbookings={shopbookings} apartmentbookings={apartmentbookings}/>
+                    </div>
                 </Grid>
             </Grid>
 

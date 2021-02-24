@@ -10,6 +10,9 @@ import {
 
 import { Animation } from '@devexpress/dx-react-chart';
 
+import Hidden from '@material-ui/core/Hidden';
+
+
 
 
 
@@ -28,7 +31,7 @@ function BarChart({roombookings,shopbookings,apartmentbookings}) {
     var j = 0;
 
     roombookings.map(booking => {
-        if(booking.cancelled===false){
+        if(booking.cancelled==false){
         if( parseInt(booking.created_at.slice(0,4))===year )
         { a = a+booking.seller_pay;}
         else if( parseInt(booking.created_at.slice(0,4))===(year-1) )
@@ -43,93 +46,72 @@ function BarChart({roombookings,shopbookings,apartmentbookings}) {
         { e = e+booking.seller_pay;}
         else if( parseInt(booking.created_at.slice(0,4))===(year-5) )
         { f = f+booking.seller_pay;}
-        else if( parseInt(booking.created_at.slice(0,4))===(year-6) )
-        { g = g+booking.seller_pay;}
-        else if( parseInt(booking.created_at.slice(0,4))===(year-7) )
-        { h = h+booking.seller_pay;}
-        else if( parseInt(booking.created_at.slice(0,4))===(year-8) )
-        { i = i+booking.seller_pay;}
-        else if( parseInt(booking.created_at.slice(0,4))===(year-9) )
-        { j = j+booking.seller_pay;}
+        
         }
         
     })
-    shopbookings.map(booking => {
-        if(booking.cancelled===false){
-        if( parseInt(booking.created_at.slice(0,4))===year )
-        { a = a+booking.seller_pay;}
-        else if( parseInt(booking.created_at.slice(0,4))===(year-1) )
-        { b = b+booking.seller_pay;}
-
-        else if( parseInt(booking.created_at.slice(0,4))===(year-2) )
-        { c = c+booking.seller_pay;}
-
-        else if( parseInt(booking.created_at.slice(0,4))===(year-3) )
-        { d = d+booking.seller_pay;}
-        else if( parseInt(booking.created_at.slice(0,4))===(year-4) )
-        { e = e+booking.seller_pay;}
-        else if( parseInt(booking.created_at.slice(0,4))===(year-5) )
-        { f = f+booking.seller_pay;}
-        else if( parseInt(booking.created_at.slice(0,4))===(year-6) )
-        { g = g+booking.seller_pay;}
-        else if( parseInt(booking.created_at.slice(0,4))===(year-7) )
-        { h = h+booking.seller_pay;}
-        else if( parseInt(booking.created_at.slice(0,4))===(year-8) )
-        { i = i+booking.seller_pay;}
-        else if( parseInt(booking.created_at.slice(0,4))===(year-9) )
-        { j = j+booking.seller_pay;}
-        }
-        
+    shopbookings.map(booking1 => {
+      if(booking1.cancelled==false){
+      if( parseInt(booking1.created_at.slice(0,4))===year )
+      { a = a+booking1.seller_pay;}
+      else if( parseInt(booking1.created_at.slice(0,4))===(year-1) )
+      { b = b+booking1.seller_pay;}
+    
+      else if( parseInt(booking1.created_at.slice(0,4))===(year-2) )
+      { c = c+booking1.seller_pay;}
+    
+      else if( parseInt(booking1.created_at.slice(0,4))===(year-3) )
+      { d = d+booking1.seller_pay;}
+      else if( parseInt(booking1.created_at.slice(0,4))===(year-4) )
+      { e = e+booking1.seller_pay;}
+      else if( parseInt(booking1.created_at.slice(0,4))===(year-5) )
+      { f = f+booking1.seller_pay;}
+      
+      }
+      
     })
 
-    apartmentbookings.map(booking => {
-        if(booking.cancelled===false){
-        if( parseInt(booking.created_at.slice(0,4))===year )
-        { a = a+booking.seller_pay;}
-        else if( parseInt(booking.created_at.slice(0,4))===(year-1) )
-        { b = b+booking.seller_pay;}
-
-        else if( parseInt(booking.created_at.slice(0,4))===(year-2) )
-        { c = c+booking.seller_pay;}
-
-        else if( parseInt(booking.created_at.slice(0,4))===(year-3) )
-        { d = d+booking.seller_pay;}
-        else if( parseInt(booking.created_at.slice(0,4))===(year-4) )
-        { e = e+booking.seller_pay;}
-        else if( parseInt(booking.created_at.slice(0,4))===(year-5) )
-        { f = f+booking.seller_pay;}
-        else if( parseInt(booking.created_at.slice(0,4))===(year-6) )
-        { g = g+booking.seller_pay;}
-        else if( parseInt(booking.created_at.slice(0,4))===(year-7) )
-        { h = h+booking.seller_pay;}
-        else if( parseInt(booking.created_at.slice(0,4))===(year-8) )
-        { i = i+booking.seller_pay;}
-        else if( parseInt(booking.created_at.slice(0,4))===(year-9) )
-        { j = j+booking.seller_pay;}
-        }
-        
+    apartmentbookings.map(booking2 => {
+      if(booking2.cancelled==false){
+      if( parseInt(booking2.created_at.slice(0,4))===year )
+      { a = a+booking2.seller_pay;}
+      else if( parseInt(booking2.created_at.slice(0,4))===(year-1) )
+      { b = b+booking2.seller_pay;}
+    
+      else if( parseInt(booking2.created_at.slice(0,4))===(year-2) )
+      { c = c+booking2.seller_pay;}
+    
+      else if( parseInt(booking2.created_at.slice(0,4))===(year-3) )
+      { d = d+booking2.seller_pay;}
+      else if( parseInt(booking2.created_at.slice(0,4))===(year-4) )
+      { e = e+booking2.seller_pay;}
+      else if( parseInt(booking2.created_at.slice(0,4))===(year-5) )
+      { f = f+booking2.seller_pay;}
+      
+      }
+      
     })
 
     const data1 = [
-        { year: year, earnings: a },
-        { year: year-1, earnings: b },
-        { year: year-2, earnings: c },
-        { year: year-3, earnings: d },
-        { year: year-4, earnings: e },
-        { year: year-5, earnings: f },
-        { year: year-6, earnings: g },
-        { year: year-7, earnings: h },
-        { year: year-8, earnings: i },
-        { year: year-9, earnings: j },
+        { year:`${year}` , earnings: parseFloat(a) },
+        { year: `${year-1}`, earnings: parseFloat(b) },
+        { year: `${year-2}`, earnings: c },
+        { year:`${year-3}`, earnings: d },
+        { year:`${year-4}`, earnings: e },
+        { year:`${year-5}`, earnings: f },
+       
+        
       ];
       console.log(a,b,c,d,e,f,g,h,i,j)
 
     return (
         <div>
+          <Hidden smDown>
             <Paper>
         <Chart
           data={data1}
-          width={1000}
+          width={430}
+          height={430}
         >
           <ArgumentAxis />
           <ValueAxis max={7} />
@@ -142,6 +124,27 @@ function BarChart({roombookings,shopbookings,apartmentbookings}) {
           <Animation />
         </Chart>
       </Paper>
+      </Hidden>
+
+      <Hidden mdUp>
+            <Paper>
+        <Chart
+          data={data1}
+          width={350}
+          height={350}
+        >
+          <ArgumentAxis />
+          <ValueAxis max={7} />
+
+          <BarSeries
+            valueField="earnings"
+            argumentField="year"
+          />
+          <Title text="Earnings" />
+          <Animation />
+        </Chart>
+      </Paper>
+      </Hidden>
         </div>
     );
 }

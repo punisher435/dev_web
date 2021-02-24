@@ -1,6 +1,6 @@
 import React,{ useState, useEffect} from 'react'
 import { withStyles, makeStyles } from '@material-ui/core/styles';
-import Dashboarddrawer from '../hocs/layout2'
+import Dashboarddrawer from '../hocs/layout3'
 import axios from 'axios'
 import Eror from '../components/eror'
 import Grid from '@material-ui/core/Grid';
@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('md')]: {
       display: 'block',
       marginLeft:drawerWidth,
     },
