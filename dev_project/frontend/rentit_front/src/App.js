@@ -53,6 +53,7 @@ import ReviewForm from './components/givereviews'
 import ShopListing from './containers/shoplisting'
 import ApartmentListing from './containers/apartmentlisting'
 import MyReviews from './components/seller_reviews'
+import Analytics from './components/analytics'
 
 
 function App(props) {
@@ -86,6 +87,8 @@ function App(props) {
                 <Route exact path='/apartments' component={ApartmentListing}/>
                 <Route exact path='/apartments/:apartmentid' component={Apartments}/>
                 <Route exact path='/apartments/:apartmentid/book/' component={Checkout_apartment} />
+
+                <Route exact path='/dashboard/analytics' component={Analytics}/>
 
                 <Route exact path='/dashboard/my_rooms' component={Myrooms}/>
                 <Route exact path='/dashboard/my_rooms/edit' component={RoomForm}/>
