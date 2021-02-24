@@ -115,7 +115,7 @@ function App(props) {
                 <Route exact path='/dashboard/bank_details/edit' component={BankForm}/>
                 <Route exact path='/dashboard/address_details/edit' component={AddressForm}/>
 
-                <Route exact path='/dashboard' component={Dashboard}/>
+            
                 <Route exact path='/dashboard/recentbookings' component={RecentBooking1}/>
                 <Route exact path='/dashboard/recentbookings/room-bookings/:bookingid' component={Bookingdetails}/>
                 <Route exact path='/dashboard/recentbookings/shop-bookings/:bookingid' component={Bookingdetails_shop}/>
