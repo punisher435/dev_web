@@ -82,6 +82,10 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2),
     
   },
+  myclass: {
+      
+      width:'60vw'
+  },
 }));
   
 
@@ -155,9 +159,19 @@ function MyReviews(props) {
             <main className={classes.content}>
             <div className={classes.toolbar} />
 
-            
-            
+            <Grid
+            container
+            direction="column"
+            justify="center"
+            alignItems="center"
+            >
+            <Grid item>
+            <div className={classes.myclass}>
             <SellerReviews reviews={myreviews} params={params1} setparams={setparams}/>
+            </div>
+            </Grid>
+
+            </Grid>
 
             
             </main>
