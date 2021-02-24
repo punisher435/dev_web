@@ -1,0 +1,120 @@
+import React from 'react'
+import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
+import BarChart from './barchart';
+
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      '& > *': {
+        margin: theme.spacing(1),
+        width: theme.spacing(16),
+        height: theme.spacing(16),
+      },
+    },
+    paperclass: {
+        width:'200px',
+        height:'150px',
+      
+    
+    },
+    paraclass:{
+        textAlign: 'center',
+        marginTop:'20px'
+    },
+    paraclass1:{
+        textAlign: 'center',
+        marginTop:'20px',
+        color:'red',
+    },
+  }));
+
+function Selleranalytics({roombookings,shopbookings,apartmentbookings,bank}) {
+
+    var earning = 0;
+
+    roombookings.map((booking) => {
+        if(booking.cancelled===false)
+        {
+            earning = earning + booking.seller_pay
+        }
+    })
+
+    shopbookings.map((booking1) => {
+        if(booking1.cancelled===false)
+        {
+            earning = earning + booking1.seller_pay
+        }
+    })
+
+    apartmentbookings.map((booking2) => {
+        if(booking2.cancelled===false)
+        {
+            earning = earning + booking2.seller_pay
+        }
+    })
+
+
+    const classes = useStyles();
+    return (
+        <div>
+            <Grid
+            container
+            direction="row"
+            justify="flex-start"
+            alignItems="center"
+            >
+                <Grid item>
+        <div className={classes.root}>
+        <Paper elevation={3} className={classes.paperclass}>
+
+            <Typography variant='h6' className={classes.paraclass}>
+                Your due payment :
+            </Typography>
+            <Typography variant='body1' className={classes.paraclass1}>
+                {bank.currency} {bank.total_due_payment}
+            </Typography>
+
+        </Paper>
+        </div>
+        </Grid>
+
+        <Grid item>
+        <div className={classes.root}>
+        <Paper elevation={3} className={classes.paperclass}>
+
+            <Typography variant='h6' className={classes.paraclass}>
+                Your earnings :
+            </Typography>
+            <Typography variant='body1' className={classes.paraclass1}>
+                {bank.currency} {earning}
+            </Typography>
+
+        </Paper>
+        </div>
+        </Grid>
+
+        </Grid>
+        
+
+        <Grid
+            container
+            direction="row"
+            justify="flex-start"
+            alignItems="center"
+            >
+                <Grid item>
+                    <BarChart roombookings={roombookings} shopbookings={shopbookings} apartmentbookings={apartmentbookings}/>
+                </Grid>
+            </Grid>
+
+            
+        </div>
+    )
+}
+
+export default Selleranalytics

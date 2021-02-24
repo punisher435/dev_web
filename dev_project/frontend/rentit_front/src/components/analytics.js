@@ -26,6 +26,7 @@ import AddressCard from './address_card'
 import RoomCard from './room_card'
 import AddRoomCard from './addroomcard';
 
+import SellerAnalytics from './selleranalytics'
 
 
 
@@ -95,6 +96,7 @@ function Analytics(props) {
     const [bookings,setbookings]  = useState([])
     const [shopbookings,setshopbookings] = useState([])
     const [apartmentbookings,setapartmentbookings] = useState([])
+    const [bank,setbank] = useState()
 
     React.useEffect(
         async () => {
@@ -132,9 +134,33 @@ function Analytics(props) {
                       catch{
             
                       }
+                
         }
     
     ,[])
+
+    React.useEffect(async () => {
+
+        const config = {
+            headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `JWT ${localStorage.getItem('access')}`,
+            },
+          };
+          if(props.profile){
+        if(props.profile.is_seller===true){
+            try{const res1 = await axios.get(`${process.env.REACT_APP_API_URL}/sourceadbahdvjs218/my_bank_details/${props.profile.id}/`,config);
+          
+            setbank(res1.data)
+            console.log(res1.data)
+          
+          }
+            catch{
+  
+            }
+           
+          }}
+    },[props.profile])
 
 
     const classes = useStyles();
@@ -146,7 +172,7 @@ function Analytics(props) {
       return <div className={classes.erorclass}><Eror error='Error' /></div>
     }
 
-    if(props.isAuthenticated && bookings && shopbookings && apartmentbookings){
+    if(props.profile && bookings && shopbookings && apartmentbookings && bank){
     
     
     return (
@@ -158,6 +184,11 @@ function Analytics(props) {
             <Typography variant='h6'>
                 Analytics
             </Typography>
+
+            {
+                props.profile.is_seller ? <SellerAnalytics roombookings={bookings} bank={bank} shopbookings={shopbookings} apartmentbookings={apartmentbookings} /> 
+                : null
+            }
 
             
             </main>
