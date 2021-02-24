@@ -6,6 +6,8 @@ import Grid from '@material-ui/core/Grid';
 import BarChart from './barchart';
 import Hidden from '@material-ui/core/Hidden';
 
+import PieChart from './piechart'
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -119,10 +121,19 @@ function Selleranalytics({roombookings,shopbookings,apartmentbookings,bank}) {
             direction="row"
             justify="flex-start"
             alignItems="center"
+            spacing={3}
             >
                 <Grid item>
                     <div className={classes.graphclass}>
                     <BarChart roombookings={roombookings} shopbookings={shopbookings} apartmentbookings={apartmentbookings}/>
+                    
+                    </div>
+                </Grid>
+                
+                <Grid item>
+                    <div className={classes.graphclass}>
+                    <PieChart roombookings={roombookings} shopbookings={shopbookings} apartmentbookings={apartmentbookings}/>
+                    
                     </div>
                 </Grid>
             </Grid>
