@@ -92,7 +92,7 @@ function Mapmount({filters,setfilters}) {
     if(rooms!=={})
     {
         console.log('hy');
-        return <Mapview point={rooms}/>
+        return <Mapview url={'shops'} point={rooms}/>
     }
 
 

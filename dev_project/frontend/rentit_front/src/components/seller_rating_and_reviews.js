@@ -72,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function VerticalDividers({no, rating,reviews,params,setparams}) {
+export default function SellerReviews({reviews,params,setparams}) {
   const classes = useStyles();
 
   const handleclick1 = (e) => {
@@ -102,6 +102,9 @@ export default function VerticalDividers({no, rating,reviews,params,setparams}) 
     else if(review.rating==4){d=d+1;}
     else if(review.rating==5){e=e+1;}
   })
+
+  var no = reviews.length
+  var rating = parseFloat((1*a)+(2*b)+(3*c)+(4*d)+(5*e))/parseFloat(no)
 
   return (
     <div>
@@ -146,26 +149,7 @@ export default function VerticalDividers({no, rating,reviews,params,setparams}) 
         
         
         
-        <GridList className={classes.gridList} cols={2.5}>
-        {reviews.map((review) => ( 
-          <div>
-         
-            {
-              review.photo1 ? <GridListTile key={review.photo1} className={classes.liststyle}><img src={review.photo1} className={classes.imageclass}/></GridListTile> : null
-            }
-
-            {
-              review.photo2 ? <GridListTile key={review.photo2} className={classes.liststyle}><img src={review.photo1} className={classes.imageclass}/></GridListTile> : null
-            }
-
-            {
-              review.photo3 ? <GridListTile key={review.photo3} className={classes.liststyle}><img src={review.photo1} className={classes.imageclass}/></GridListTile> : null
-            }
-
-          </div>
-          
-        ))}    
-      </GridList>
+       
 
       <Paper elevation={0} />
       <List component="nav" aria-label="main mailbox folders">

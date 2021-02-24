@@ -74,6 +74,9 @@ urlpatterns = [
     #reviews
     path('sourcebahsda292bidua92/',include('products.api.urls_give_reviews')),
 
+    #seller_reviews
+    path('sourceuserjcnssjwhd9329hdw/',include('user.urls')),
+
 ]
 
 urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

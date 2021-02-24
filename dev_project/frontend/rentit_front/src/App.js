@@ -52,6 +52,7 @@ import ReviewForm from './components/givereviews'
 
 import ShopListing from './containers/shoplisting'
 import ApartmentListing from './containers/apartmentlisting'
+import MyReviews from './components/seller_reviews'
 
 
 function App(props) {
@@ -98,6 +99,8 @@ function App(props) {
                 <Route exact path='/dashboard/my_apartments/edit' component={ApartmentForm}/>
                 <Route exact path='/dashboard/my_apartments/delete' component={ConfirmDelete}/>
                 <Route exact path='/dashboard/my_apartments/pause_booking' component={ConfirmPause}/>
+
+                <Route exact path='/dashboard/my_reviews' component={MyReviews}/>
 
                 <Route exact path='/dashboard/my_coupons' component={Mycoupons}/>
                 <Route exact path='/dashboard/my_coupons/edit' component={CouponForm}/>

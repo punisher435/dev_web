@@ -37,7 +37,7 @@ const center = {
 
 
 
-export default function App({point}) {
+export default function App({point,url}) {
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries,
@@ -144,7 +144,7 @@ const mystyle1 = {
             style={mystyle1}
           >
             <div>
-              <Link to={`/rooms/${selected.properties.roomId}`} target="_blank">
+              <Link to={`/${url}/${selected.properties.roomId}`} target="_blank">
               <Button>
               <h2>
                 {selected.properties.category}
