@@ -8,7 +8,9 @@ import Hidden from '@material-ui/core/Hidden';
 
 import PieChart from './piechart'
 import Multicolor_chart from './multicolor_chart';
-
+import PieChart2 from './piechart2'
+import PieChart3 from './piechart3'
+import LineGraph from './linegraph'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -141,6 +143,26 @@ function Selleranalytics({roombookings,shopbookings,apartmentbookings,bank}) {
                 <Grid item>
                     <div className={classes.graphclass}>
                     <Multicolor_chart roombookings={roombookings} shopbookings={shopbookings} apartmentbookings={apartmentbookings}/>
+                    
+                    </div>
+                </Grid>
+
+                <Grid item>
+                    <div className={classes.graphclass}>
+                    <PieChart2 roombookings={roombookings} shopbookings={shopbookings} apartmentbookings={apartmentbookings}/>
+                    
+                    </div>
+                </Grid>
+
+                <Grid item>
+                    <div className={classes.graphclass}>
+                    <PieChart3 roombookings={roombookings} shopbookings={shopbookings} apartmentbookings={apartmentbookings}/>
+                    
+                    </div>
+                </Grid>
+                <Grid item>
+                    <div className={classes.graphclass}>
+                    <LineGraph roombookings={roombookings} shopbookings={shopbookings} apartmentbookings={apartmentbookings}/>
                     
                     </div>
                 </Grid>

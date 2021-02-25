@@ -174,7 +174,7 @@ apartmentbookings.map(booking2 => {
           />
           
           <Animation />
-          <Legend />
+          <Legend position="bottom"/>
           <Title
             text="Bookings earnings in types"
             textComponent={TitleText}
