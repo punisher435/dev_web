@@ -23,6 +23,9 @@ import ProfileCard from './profilecard'
 import BankCard from './bank_card'
 import AddressCard from './address_card'
 
+axios.defaults.xsrfHeaderName = `${process.env.XSRF_COOKIE}`;
+axios.defaults.xsrfCookieName = `${process.env.CSRF_COOKIE}`;
+
 
 
 

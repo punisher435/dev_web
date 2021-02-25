@@ -11,6 +11,9 @@ import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 import Eror from './eror'
 
+axios.defaults.xsrfHeaderName = `${process.env.XSRF_COOKIE}`;
+axios.defaults.xsrfCookieName = `${process.env.CSRF_COOKIE}`;
+
 const validationSchema = yup.object({
   
 

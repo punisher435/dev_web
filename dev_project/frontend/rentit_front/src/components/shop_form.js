@@ -23,6 +23,9 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import RemoveIcon from '@material-ui/icons/Remove';
 import AddIcon from '@material-ui/icons/Add';
 
+axios.defaults.xsrfHeaderName = `${process.env.XSRF_COOKIE}`;
+axios.defaults.xsrfCookieName = `${process.env.CSRF_COOKIE}`;
+
 const FILE_SIZE = 1600 * 1024;
 const SUPPORTED_FORMATS = [
   "image/jpg",

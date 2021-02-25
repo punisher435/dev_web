@@ -5,6 +5,9 @@ import Eror from './eror';
 
 import axios from 'axios';
 
+axios.defaults.xsrfHeaderName = `${process.env.XSRF_COOKIE}`;
+axios.defaults.xsrfCookieName = `${process.env.CSRF_COOKIE}`;
+
 function Mapmount({filters,setfilters}) {
 
     const [loading,setloading] = useState(false);

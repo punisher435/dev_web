@@ -17,8 +17,8 @@ import {
     AUTHENTICATED_SUCCESS
 } from '../actiontypes/auth_action_types';
 
-axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
-axios.defaults.xsrfCookieName = "csrftoken";
+axios.defaults.xsrfHeaderName = `${process.env.XSRF_COOKIE}`;
+axios.defaults.xsrfCookieName = `${process.env.CSRF_COOKIE}`;
 
 export const checkAuthenticated = () => async dispatch => {
     if (typeof window == 'undefined') {

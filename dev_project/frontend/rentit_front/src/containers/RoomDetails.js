@@ -38,6 +38,9 @@ import CustomizedRatings from '../components/rating_meter';
 import LocalOfferOutlinedIcon from '@material-ui/icons/LocalOfferOutlined';
 import {Redirect} from 'react-router-dom'
 
+axios.defaults.xsrfHeaderName = `${process.env.XSRF_COOKIE}`;
+axios.defaults.xsrfCookieName = `${process.env.CSRF_COOKIE}`;
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,

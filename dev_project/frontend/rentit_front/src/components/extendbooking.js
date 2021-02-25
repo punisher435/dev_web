@@ -20,6 +20,9 @@ import {Redirect} from 'react-router-dom'
 import {connect} from 'react-redux'
 import FacilityIcon from './FacilityIconProvider'
 
+axios.defaults.xsrfHeaderName = `${process.env.XSRF_COOKIE}`;
+axios.defaults.xsrfCookieName = `${process.env.CSRF_COOKIE}`;
+
 
 
 

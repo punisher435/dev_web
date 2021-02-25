@@ -19,6 +19,9 @@ import TextField from '@material-ui/core/TextField';
 import {Redirect} from 'react-router-dom'
 import {connect} from 'react-redux'
 
+axios.defaults.xsrfHeaderName = `${process.env.XSRF_COOKIE}`;
+axios.defaults.xsrfCookieName = `${process.env.CSRF_COOKIE}`;
+
 
 
 

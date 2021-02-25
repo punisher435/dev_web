@@ -14,6 +14,9 @@ import {Link} from 'react-router-dom';
 import axios from 'axios';
 import { connect } from 'react-redux'
 
+axios.defaults.xsrfHeaderName = `${process.env.XSRF_COOKIE}`;
+axios.defaults.xsrfCookieName = `${process.env.CSRF_COOKIE}`;
+
 
 const useStyles = makeStyles((theme) => ({
 root: {

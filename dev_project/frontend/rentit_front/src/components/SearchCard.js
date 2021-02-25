@@ -41,8 +41,8 @@ import { connect } from 'react-redux'
 import axios from 'axios'
 import SimpleModal1 from '../components/bookcardmodel1';
 
-axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
-axios.defaults.xsrfCookieName = "csrftoken";
+axios.defaults.xsrfHeaderName = `${process.env.XSRF_COOKIE}`;
+axios.defaults.xsrfCookieName = `${process.env.CSRF_COOKIE}`;
 
 const useStyles = makeStyles((theme) => ({
   root: {

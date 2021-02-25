@@ -21,6 +21,9 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import DateSelect from './dateselect'
 import Checkbox from '@material-ui/core/Checkbox';
 
+axios.defaults.xsrfHeaderName = `${process.env.XSRF_COOKIE}`;
+axios.defaults.xsrfCookieName = `${process.env.CSRF_COOKIE}`;
+
 const validationSchema = yup.object({
   
   coupoun_code: yup

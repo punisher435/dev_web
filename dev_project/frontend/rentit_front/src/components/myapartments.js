@@ -25,6 +25,9 @@ import AddressCard from './address_card'
 import ApartmentCard from './apartmentcard'
 import AddApartmentCard from './addapartmentcard';
 
+axios.defaults.xsrfHeaderName = `${process.env.XSRF_COOKIE}`;
+axios.defaults.xsrfCookieName = `${process.env.CSRF_COOKIE}`;
+
 
 
 

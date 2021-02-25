@@ -20,6 +20,9 @@ import {Redirect,Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import Typography from '@material-ui/core/Typography';
 
+axios.defaults.xsrfHeaderName = `${process.env.XSRF_COOKIE}`;
+axios.defaults.xsrfCookieName = `${process.env.CSRF_COOKIE}`;
+
 
 
 

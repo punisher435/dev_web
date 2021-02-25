@@ -21,6 +21,9 @@ import axios from 'axios';
 import Eror from './eror';
 import {Redirect } from 'react-router-dom'
 
+axios.defaults.xsrfHeaderName = `${process.env.XSRF_COOKIE}`;
+axios.defaults.xsrfCookieName = `${process.env.CSRF_COOKIE}`;
+
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">

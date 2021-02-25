@@ -24,6 +24,9 @@ import { deepPurple } from '@material-ui/core/colors';
 import axios from 'axios';
 import FavoriteOutlinedIcon from '@material-ui/icons/FavoriteOutlined';
 
+axios.defaults.xsrfHeaderName = `${process.env.XSRF_COOKIE}`;
+axios.defaults.xsrfCookieName = `${process.env.CSRF_COOKIE}`;
+
 
 const useStyles = makeStyles((theme) => ({
   grow: {

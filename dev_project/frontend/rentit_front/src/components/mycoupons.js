@@ -25,6 +25,8 @@ import AddressCard from './address_card'
 import CouponCard from './coupon_card'
 import AddCouponCard from './addcouponcard';
 
+axios.defaults.xsrfHeaderName = `${process.env.XSRF_COOKIE}`;
+axios.defaults.xsrfCookieName = `${process.env.CSRF_COOKIE}`;
 
 
 

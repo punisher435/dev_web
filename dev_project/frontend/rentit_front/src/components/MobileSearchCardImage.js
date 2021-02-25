@@ -14,6 +14,9 @@ import Box from '@material-ui/core/Box';
 import RatingWithCompliments from './MobileRatingSearchCard' 
 import axios from 'axios'
 
+axios.defaults.xsrfHeaderName = `${process.env.XSRF_COOKIE}`;
+axios.defaults.xsrfCookieName = `${process.env.CSRF_COOKIE}`;
+
 const useStyles = makeStyles((theme) => ({
 
   root1: {

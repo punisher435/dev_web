@@ -5,11 +5,16 @@ import axios from 'axios'
 import Hidden from '@material-ui/core/Hidden';
 
 
+
 import SearchCard from './searchcard_apartment'
 import RecipeReviewCard from './card_1_apartment';
 import Spinner from './Spinner';
 import Eror from './eror';
 import {Redirect} from 'react-router-dom';
+
+
+axios.defaults.xsrfHeaderName = `${process.env.XSRF_COOKIE}`;
+axios.defaults.xsrfCookieName = `${process.env.CSRF_COOKIE}`;
 
 
 

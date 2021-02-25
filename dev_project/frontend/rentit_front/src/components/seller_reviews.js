@@ -27,6 +27,9 @@ import AddRoomCard from './addroomcard';
 
 import SellerReviews from './seller_rating_and_reviews'
 
+axios.defaults.xsrfHeaderName = `${process.env.XSRF_COOKIE}`;
+axios.defaults.xsrfCookieName = `${process.env.CSRF_COOKIE}`;
+
 
 
 
