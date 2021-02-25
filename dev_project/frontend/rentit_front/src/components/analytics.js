@@ -27,6 +27,7 @@ import RoomCard from './room_card'
 import AddRoomCard from './addroomcard';
 
 import SellerAnalytics from './selleranalytics'
+import Customeranalytics from './customeranalytics'
 
 
 
@@ -172,7 +173,7 @@ function Analytics(props) {
       return <div className={classes.erorclass}><Eror error='Error' /></div>
     }
 
-    if(props.profile && bookings && shopbookings && apartmentbookings && bank){
+    if(props.profile && bookings && shopbookings && apartmentbookings){
     
     
     return (
@@ -187,7 +188,7 @@ function Analytics(props) {
 
             {
                 props.profile.is_seller ? <SellerAnalytics roombookings={bookings} bank={bank} shopbookings={shopbookings} apartmentbookings={apartmentbookings} /> 
-                : null
+                : <Customeranalytics roombookings={bookings} shopbookings={shopbookings} apartmentbookings={apartmentbookings} /> 
             }
 
             

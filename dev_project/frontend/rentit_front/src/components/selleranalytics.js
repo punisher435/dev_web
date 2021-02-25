@@ -78,6 +78,7 @@ function Selleranalytics({roombookings,shopbookings,apartmentbookings,bank}) {
 
 
     const classes = useStyles();
+    if(bank && roombookings && shopbookings && apartmentbookings){
     return (
         <div>
             <Grid
@@ -170,7 +171,12 @@ function Selleranalytics({roombookings,shopbookings,apartmentbookings,bank}) {
 
             
         </div>
-    )
+    );}
+    else{
+        return (<div>
+
+        </div>);
+    }
 }
 
 export default Selleranalytics
