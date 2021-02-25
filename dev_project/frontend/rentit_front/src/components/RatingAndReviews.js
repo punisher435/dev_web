@@ -20,6 +20,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
+
 import IconButton from '@material-ui/core/IconButton';
 
 
@@ -46,13 +47,13 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
   },
   gridList: {
-    overflowX:'scroll',
-    overflowY:'scroll',
+  
     flexWrap: 'nowrap',
     
   
     // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
     transform: 'translateZ(0)',
+    height:'100%'
   },
   title: {
     color: theme.palette.primary.light,
@@ -62,11 +63,11 @@ const useStyles = makeStyles((theme) => ({
       'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
   },
   imageclass: {
-    width:'100%',
+    
    
   },
   liststyle: {
-    overflow: 'visible !important'
+    
     
   },
 }));
@@ -95,12 +96,33 @@ export default function VerticalDividers({no, rating,reviews,params,setparams}) 
   var d = 0;
   var e = 0;
 
+  var list1 = []
+
   reviews.map((review) =>  {
     if(review.rating==1){a=a+1;}
     else if(review.rating==2){b=b+1;}
     else if(review.rating==3){c=c+1;}
     else if(review.rating==4){d=d+1;}
     else if(review.rating==5){e=e+1;}
+  })
+
+  console.log(reviews)
+
+  reviews.map((review) =>  {
+    if(review.photo1)
+    {
+      list1.push(review.photo1);
+    }
+    if(review.photo2)
+    {
+      list1.push(review.photo2);
+    }
+
+    if(review.photo3)
+    {
+      list1.push(review.photo3);
+    }
+
   })
 
   return (
@@ -146,26 +168,14 @@ export default function VerticalDividers({no, rating,reviews,params,setparams}) 
         
         
         
-        <GridList className={classes.gridList} cols={2.5}>
-        {reviews.map((review) => ( 
-          <div>
-         
-            {
-              review.photo1 ? <GridListTile key={review.photo1} className={classes.liststyle}><img src={review.photo1} className={classes.imageclass}/></GridListTile> : null
-            }
-
-            {
-              review.photo2 ? <GridListTile key={review.photo2} className={classes.liststyle}><img src={review.photo1} className={classes.imageclass}/></GridListTile> : null
-            }
-
-            {
-              review.photo3 ? <GridListTile key={review.photo3} className={classes.liststyle}><img src={review.photo1} className={classes.imageclass}/></GridListTile> : null
-            }
-
-          </div>
-          
-        ))}    
-      </GridList>
+        
+      <GridList cellHeight={400} className={classes.gridList} cols={3}>
+  {list1.map((tile) => (
+    <GridListTile key={tile} cols={3}>
+      <img src={tile}  />
+    </GridListTile>
+  ))}
+</GridList>
 
       <Paper elevation={0} />
       <List component="nav" aria-label="main mailbox folders">
