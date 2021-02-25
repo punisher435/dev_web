@@ -3,8 +3,8 @@ from celery import shared_task
 
 import celery
 
-from products.models import rooms
-from .models import roomBookings
+from products.models import rooms,shops,apartments
+from .models import roomBookings,shopBookings,apartmentBookings
 from email1 import email_send
 
 import datetime
@@ -214,5 +214,116 @@ def company_discount(x):
     except:
 
         return 'Error while doing company discount'
+
+
+
+
+@shared_task
+def book_end_shop():
+
+    try:
+
+
+        queryset = shopBookings.objects.all()
+        queryset = queryset.filter(ended = False)
+        
+        for booking in queryset:
+
+            if booking.booked_till<datetime.date.today():
+                booking.ended=True
+                subject = 'Booking ended'
+                message = 'Booking has ended.'
+                email_send(subject,message,booking.customer_id,booking.seller_id)
+                booking.save()
+
+        queryset1 = shops.objects.all()
+
+        for room in queryset1:
+
+            queryset = shopBookings.objects.all()
+            queryset = queryset.filter(shop_id = room)
+            queryset = queryset.filter(ended = False)
+            queryset = queryset.filter(cancelled = False)
+            queryset = queryset.filter(extended = False)
+
+            list1=[]
+
+            for data1 in queryset:
+                list1.append(data1.booked_till)
+               
+
+
+            temp = len(list1)
+
+            if temp==0:
+                room.booked = False
+                room.bookedtill = datetime.date(2000,1,1)
+            else:
+                list1.sort(reverse=True)
+                room.booked = True
+                room.bookedtill = list1[0]
+
+            room.save()
+        
+        return 'Book end done'
+
+    except:
+
+        return 'Error while doing book end'
+
+
+
+@shared_task
+def book_end_apartment():
+
+    try:
+
+
+        queryset = apartmentBookings.objects.all()
+        queryset = queryset.filter(ended = False)
+        
+        for booking in queryset:
+
+            if booking.booked_till<datetime.date.today():
+                booking.ended=True
+                subject = 'Booking ended'
+                message = 'Booking has ended.'
+                email_send(subject,message,booking.customer_id,booking.seller_id)
+                booking.save()
+
+        queryset1 = apartments.objects.all()
+
+        for room in queryset1:
+
+            queryset = apartmentBookings.objects.all()
+            queryset = queryset.filter(apartment_id = room)
+            queryset = queryset.filter(ended = False)
+            queryset = queryset.filter(cancelled = False)
+            queryset = queryset.filter(extended = False)
+
+            list1=[]
+
+            for data1 in queryset:
+                list1.append(data1.booked_till)
+               
+
+
+            temp = len(list1)
+
+            if temp==0:
+                room.booked = False
+                room.bookedtill = datetime.date(2000,1,1)
+            else:
+                list1.sort(reverse=True)
+                room.booked = True
+                room.bookedtill = list1[0]
+
+            room.save()
+        
+        return 'Book end done'
+
+    except:
+
+        return 'Error while doing book end'
 
     

@@ -234,7 +234,15 @@ GOOGLE_MAPS_API_KEY = '76b59343e0a5d0'
 CELERY_BEAT_SCHEDULE = {
     "scheduled_task": {
         "task":"bookings.tasks.book_end",
-        "schedule":60.0,
+        "schedule":crontab(minute=0,hour=0),
+    },
+    "scheduled_task": {
+        "task":"bookings.tasks.book_end_shop",
+        "schedule":crontab(minute=0,hour=0),
+    },
+    "scheduled_task": {
+        "task":"bookings.tasks.book_end_apartment",
+        "schedule":crontab(minute=0,hour=0),
     },
 }
 

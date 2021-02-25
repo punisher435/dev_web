@@ -25,6 +25,10 @@ import celery
 from email1 import email_send
 from user. models import seller_bank_details
 
+from django.views.decorators.csrf import ensure_csrf_cookie
+from django.views.decorators.csrf import csrf_protect
+from django.utils.decorators import method_decorator
+
 utc=pytz.UTC
 
 
@@ -113,6 +117,8 @@ class room_booking(viewsets.ViewSet):
     authentication_classes = [authentication.JWTAuthentication]
     permission_classes = [permissions.IsAuthenticated]
     parser_classes=(MultiPartParser,FormParser)
+    
+
 
     def list(self,request):
 
@@ -151,6 +157,7 @@ class room_booking(viewsets.ViewSet):
 
             return Response('ERROR', status=status.HTTP_400_BAD_REQUEST)
 
+    
     def create(self,request,format=None):
 
         try:
@@ -576,7 +583,7 @@ class room_booking(viewsets.ViewSet):
         except:
             return Response('error',status = status.HTTP_400_BAD_REQUEST)
 
-
+    
     def update(self,request,pk=None):
 
         try:
