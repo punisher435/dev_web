@@ -3,8 +3,7 @@ import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
 import Rating1 from '../components/Rating';
 import { makeStyles } from '@material-ui/core/styles';
-import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
+
 import Paper from '@material-ui/core/Paper';
 import Rating from '@material-ui/lab/Rating';
 import List from '@material-ui/core/List';

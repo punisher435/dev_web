@@ -19,8 +19,9 @@ function getModalStyle() {
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: 'absolute',
-    width: '70%',
-    height: '100%',
+   
+ 
+
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
   },
@@ -38,7 +39,7 @@ export default function SimpleModal1({details,open,change,bookvalues,setbookvalu
   };
 
   const body = (
-    <div style={modalStyle} className={`${classes.paper} ${style.boxclass}`}>
+    <div style={modalStyle} className={`${classes.paper}`}>
         <BookCard details={details} bookvalues={bookvalues} setbookvalues={setbookvalues} loginpage={loginpage} setloginpage={setloginpage} bookform={bookform} setbookform={setbookform}/>
       
     </div>

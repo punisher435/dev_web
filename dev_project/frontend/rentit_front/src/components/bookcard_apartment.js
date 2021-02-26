@@ -31,6 +31,11 @@ const useStyles = makeStyles((theme) => ({
   root1: {
     
   },
+  scrollclass:{
+    overflowX: 'hidden',
+    overflowY: 'auto',
+    height:'150px',
+  },
 }));
 
 function BoolCard({details,isAuthenticated,loginpage,setloginpage,profile}) {
@@ -269,7 +274,7 @@ laundry:details.laundry
             
             >
            
-<div><FacilityIcon post={details} bookvalues={bookvalues} setbookvalues={setbookvalues}/></div>
+           <div className={classes.scrollclass}>   <FacilityIcon post={details} bookvalues={bookvalues} setbookvalues={setbookvalues}/></div>
         
       
         </ScrollArea>

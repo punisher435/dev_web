@@ -241,7 +241,15 @@ function RenteneAppBar(props) {
 
 
       <MenuItem>
-      <NavLink className={`nav-link ${styles.textclass2}`} exact to='/wishlist'>
+      {
+        props.focus ? <NavLink className={`nav-link ${styles.textclass2}`} exact to='/wishlist'>
+        <IconButton aria-label="show 4 new mails" color="inherit">
+          <Badge badgeContent={props.no} color="secondary">
+            <FavoriteOutlinedIcon />
+          </Badge>
+        </IconButton>
+        <p>Wishlist</p>
+        </NavLink> : <NavLink className={`nav-link ${styles.textclass2}`} exact to='/wishlist'>
         <IconButton aria-label="show 4 new mails" color="inherit">
           <Badge badgeContent={wishlist} color="secondary">
             <FavoriteOutlinedIcon />
@@ -249,15 +257,10 @@ function RenteneAppBar(props) {
         </IconButton>
         <p>Wishlist</p>
         </NavLink>
+      }
+      
       </MenuItem>
-      <MenuItem>
-        <IconButton aria-label="show 11 new notifications" color="inherit">
-          <Badge badgeContent={11} color="secondary">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
+      
       <MenuItem onClick={handleprofileMenuOpen}>
         <IconButton
           aria-label="account of current user"
@@ -309,19 +312,23 @@ function RenteneAppBar(props) {
             </NavLink></>
           }
 
-
-            <NavLink className={`nav-link ${styles.textclass}`} exact to='/wishlist'>
+            {
+              props.focus ? <NavLink className={`nav-link ${styles.textclass}`} exact to='/wishlist'>
+              <IconButton aria-label="show 4 new mails" color="inherit">
+                <Badge badgeContent={props.no} color="secondary">
+                  <FavoriteOutlinedIcon />
+                </Badge>
+              </IconButton>
+              </NavLink> : <NavLink className={`nav-link ${styles.textclass}`} exact to='/wishlist'>
             <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={wishlist} color="secondary">
                 <FavoriteOutlinedIcon />
               </Badge>
             </IconButton>
             </NavLink>
-            <IconButton aria-label="show 17 new notifications" color="inherit">
-              <Badge badgeContent={17} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
+            }
+            
+            
             <IconButton
               edge="end"
               aria-label="account of current user"

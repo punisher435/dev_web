@@ -22,6 +22,8 @@ import Select from '@material-ui/core/Select';
 
 
 import IconButton from '@material-ui/core/IconButton';
+import SimpleModal from './imagemodal';
+import Button from '@material-ui/core/Button';
 
 
 
@@ -70,11 +72,16 @@ const useStyles = makeStyles((theme) => ({
     
     
   },
+  buttonclass: {
+    padding:0,
+  },
 }));
 
 
 export default function VerticalDividers({no, rating,reviews,params,setparams}) {
   const classes = useStyles();
+  const [open,setopen] = React.useState(false)
+  const [src,setsrc] = React.useState('')
 
   const handleclick1 = (e) => {
 
@@ -128,6 +135,10 @@ export default function VerticalDividers({no, rating,reviews,params,setparams}) 
   return (
     <div>
 
+      <SimpleModal open={open} change={setopen} photo={src}/>
+
+      
+
       <FormControl className={classes.formControl}>
         <InputLabel id="demo-simple-select-label">Age</InputLabel>
         <Select
@@ -169,10 +180,11 @@ export default function VerticalDividers({no, rating,reviews,params,setparams}) 
         
         
         
-      <GridList cellHeight={400} className={classes.gridList} cols={3}>
+      <GridList cellHeight={200} className={classes.gridList} cols={3}>
   {list1.map((tile) => (
     <GridListTile key={tile} cols={3}>
-      <img src={tile}  />
+      
+      <Button className={classes.buttonclass} onClick={e => {e.preventDefault();setsrc(tile);setopen(true);}}><img src={tile}  /></Button>
     </GridListTile>
   ))}
 </GridList>

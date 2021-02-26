@@ -34,6 +34,11 @@ const useStyles = makeStyles((theme) => ({
   root1: {
     
   },
+  scrollclass:{
+    overflowX: 'hidden',
+    overflowY: 'auto',
+    height:'150px',
+  },
 }));
 
 function BoolCard({details,isAuthenticated,loginpage,setloginpage,profile}) {
@@ -370,17 +375,12 @@ setcapacity(x);
           <Facility type='Dinner' price='price'/>
 
           <Facility type='wifi' price='price'/> */}
-        <ScrollArea
-            speed={0.8}
-            
-            horizontal={false}
-            
-            >
-           
-<div><FacilityIcon post={details} bookvalues={bookvalues} setbookvalues={setbookvalues}/></div>
-        
+       
+      <div className={classes.scrollclass}>    
+<FacilityIcon post={details} bookvalues={bookvalues} setbookvalues={setbookvalues}/>
+</div> 
       
-        </ScrollArea>
+       
 
         
           <Divider/>
