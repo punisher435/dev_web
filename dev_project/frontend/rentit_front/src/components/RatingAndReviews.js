@@ -180,7 +180,7 @@ export default function VerticalDividers({no, rating,reviews,params,setparams}) 
         
         
         
-      <GridList cellHeight={200} className={classes.gridList} cols={3}>
+      <GridList cellHeight={300} className={classes.gridList} cols={3}>
   {list1.map((tile) => (
     <GridListTile key={tile} cols={3}>
       

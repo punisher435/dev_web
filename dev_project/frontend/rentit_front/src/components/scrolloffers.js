@@ -19,6 +19,8 @@ import AccessibilityIcon from '@material-ui/icons/Accessibility';
 import WhatshotIcon from '@material-ui/icons/Whatshot';
 import BathtubIcon from '@material-ui/icons/Bathtub';
 import { IconContext } from "react-icons";
+import CouponCard from "./coupon_card1";
+import Grid from '@material-ui/core/Grid';
 // import Box from '@material-ui/core/Box'
 
 
@@ -70,6 +72,9 @@ const AntTab = withStyles((theme) => ({
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    
+    
+
   },
   padding: {
     padding: theme.spacing(0),
@@ -80,40 +85,55 @@ const useStyles = makeStyles((theme) => ({
   demo2: {
     backgroundColor: '#2e1534',
   },
+  gridclass: {
+    flexWrap: 'nowrap',
+   
+   
+  },
+  gridclass1: {
+    
+  float: 'left',
+  display: 'flex',
+  flexWrap: 'nowrap',
+   
+  },
+  itemclass: {
+    
+  },
 }));
 
 export default function CustomizedTabs1({post}) {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+
+  
 
   return (
     <div className={classes.root}>
-      <div className={classes.demo1}>
-        <AntTabs 
-        variant='scrollable'
-        aria-label="ant example">
-
-
-            
- <IconContext.Provider value={{ size: "1.5em",}}>
-         { 
-        post.wifi ? 
-        <AntTab label="Wifi Facility" icon={<WifiIcon />}/>
-        // <Grid item ><div><Icon fontSize='small' ><WifiIcon /></Icon><p style={mystyle}>Wifi Facility</p></div></Grid> 
-        : <></>
-        }
-
-        <AntTab><Offercard /></AntTab>
-        
+        <Grid
+          container
+          direction="row"
+          justify="flex-start"
+          alignItems="center"
+          className={classes.gridclass}
+          spacing={2}
+         
+          
+        >
       
-        </IconContext.Provider>
-        </AntTabs>
-        {/* <Typography className={classes.padding} /> */}
-      </div>
+      
+      {
+        post.map(coupon => (
+   
+          <Grid item className={classes.gridclass1}><CouponCard mycoupon={coupon} /></Grid>
+        ))
+      }
+
+  
+     
+      </Grid>
+      
+
       
     </div>
   );

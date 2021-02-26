@@ -5,6 +5,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework import permissions
 from rest_framework_simplejwt import authentication
 import datetime
+from django.db.models import Q
 import json
 
 
@@ -303,6 +304,90 @@ class Apply_coupon_apartment(viewsets.ViewSet):
             
         except:
             return Response('Error',status=status.HTTP_400_BAD_REQUEST)
+
+
+
+class Coupon_give(viewsets.ViewSet):
+
+    def list(self,request):
+        roomid = request.query_params.get('roomid')
+        type1 = request.query_params.get('type')
+
+        queryset1 = rooms.objects.all()
+        room = get_object_or_404(queryset1,pk=roomid)
+
+        
+       
+
+        if type1 == 'room':
+
+            try:
+
+                queryset1 = rooms.objects.all()
+                room = get_object_or_404(queryset1,pk=roomid)
+
+                queryset = coupons.objects.all()
+                list1=[]
+                print('yooooo')
+                for coupon in queryset:
+                    if room in coupon.coupoun_rooms.all() and datetime.date.today()<=coupon.expiry_date:
+                        list1.append(coupon)
+       
+
+
+                serializer = coupon_serializer(list1,many=True)
+
+
+                return Response(serializer.data,status=status.HTTP_200_OK)
+            except:
+                return Response('Error',status=status.HTTP_400_BAD_REQUEST)
+
+        if type1 == 'shop':
+    
+            try:
+
+                queryset1 = shops.objects.all()
+                room = get_object_or_404(queryset1,pk=roomid)
+
+                queryset = coupons.objects.all()
+                list1=[]
+                print('yooooo')
+                for coupon in queryset:
+                    if room in coupon.coupoun_shops.all() and datetime.date.today()<=coupon.expiry_date:
+                        list1.append(coupon)
+            
+
+
+                serializer = coupon_serializer(list1,many=True)
+
+
+                return Response(serializer.data,status=status.HTTP_200_OK)
+            except:
+                return Response('Error',status=status.HTTP_400_BAD_REQUEST)
+
+        if type1 == 'apartment':
+        
+            try:
+
+                queryset1 = apartments.objects.all()
+                room = get_object_or_404(queryset1,pk=roomid)
+
+                queryset = coupons.objects.all()
+                list1=[]
+                print('yooooo')
+                for coupon in queryset:
+                    if room in coupon.coupoun_apartments.all() and datetime.date.today()<=coupon.expiry_date:
+                        list1.append(coupon)
+            
+
+
+                serializer = coupon_serializer(list1,many=True)
+
+
+                return Response(serializer.data,status=status.HTTP_200_OK)
+            except:
+                return Response('Error',status=status.HTTP_400_BAD_REQUEST)
+            
 
     
 

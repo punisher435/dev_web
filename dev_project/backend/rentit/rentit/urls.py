@@ -65,6 +65,7 @@ urlpatterns = [
     path('sourcesawdajwnr32w2/',include('coupons.urls_apply')),
     path('sourcefsejfnsjcn9302/',include('coupons.urls_coupon_shop')),
     path('sourceasindwanuia29910/',include('coupons.urls_coupon_apartment')),
+    path('sourcesnajeijchi032uhd9w/',include('coupons.urls_get_coupon')),
 
     #bookings
     path('sourcehjbda983290whjba/',include('bookings.urls')),

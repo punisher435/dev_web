@@ -124,10 +124,24 @@ const useStyles = makeStyles((theme) => ({
   iconroot1: {
     display: 'inline',
     color:'#f44336',
+    
   },
   navclass:{
     overflowX:'hidden',
     position:'absolute',
+  },
+  scrollme:{
+    whiteSpace: 'nowrap',
+    flexWrap: 'nowrap',
+    width:'100vw',
+    overflowX:'scroll',
+    [theme.breakpoints.up('md')]: {
+      whiteSpace: 'nowrap',
+    flexWrap: 'nowrap',
+    width:'650px',
+    overflowX:'scroll',
+    },
+  
   },
   
 }));
@@ -158,6 +172,7 @@ function FullWidthGrid(props) {
   const [open2,setOpen2] = useState(false);
   const [wishlist,changewishlist] = useState(false)
   const [nav,setnav] = useState(false)
+  const [coupons,setcoupons] = useState([])
 
 
 
@@ -219,7 +234,25 @@ function FullWidthGrid(props) {
       // Handle Error Here
       console.error(err);
   }
-  },[params1])
+  try{
+    const res12 = await axios.get(`${process.env.REACT_APP_API_URL}/sourcesnajeijchi032uhd9w/coupon/give/`,{
+      params:{
+        roomid:roomid,
+        type:'room',
+      },
+      config:config
+    });
+    
+   
+        console.log('coupon',res12.data);
+        setcoupons(res12.data);
+        
+        
+    }  catch (err) {
+      // Handle Error Here
+      console.error(err,'coupons_error');
+  }
+  },[])
 
   useEffect( async() => {
      
@@ -376,6 +409,27 @@ if(details){
         wishlist ? <Grid item md={1}><IconButton color='error' onClick={(event) => {handleclick(event);}} className={classes.iconroot1}><FavoriteIcon /></IconButton></Grid> : <Grid item md={1}><IconButton color='error' onClick={(event) => {handleclick1(event);}} className={classes.iconroot1}><FavoriteBorderOutlinedIcon /></IconButton></Grid>
         }
 
+<List component="nav" className={classes.root1} aria-label="offers">
+          <Grid item >
+            <Divider variant='middle'/>
+            <ListItem>
+          <Typography variant="h5" component="h4" className={classes.typo2}>
+            *Offers Applicable
+            </Typography>
+            </ListItem>
+            </Grid>
+
+            <div className={classes.scrollme}>
+            <ListItem>
+            <CustomizedTabs1 post={coupons}/>
+            </ListItem>
+            </div>
+            
+            <Divider variant='middle'/>
+
+          
+          </List>
+
                           <Grid item xs = {12}>
                               <Typography variant='h5'>
                                   Description
@@ -429,7 +483,14 @@ if(details){
 
          <Mobileimages post={details} wishlist={wishlist} handleclick1={handleclick1} handleclick={handleclick} />
           
-          <br />
+         <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+          >{ 
+        wishlist ? <Grid item md={1}><IconButton color='error' onClick={(event) => {handleclick(event);}} className={classes.iconroot1}><FavoriteIcon /></IconButton></Grid> : <Grid item md={1}><IconButton color='error' onClick={(event) => {handleclick1(event);}} className={classes.iconroot1}><FavoriteBorderOutlinedIcon /></IconButton></Grid>
+        }</Grid>
           
           <Grid
             container
@@ -460,7 +521,7 @@ if(details){
             
           </Grid>
           
-
+          
           <List component="nav" className={classes.root1} aria-label="offers">
           <Grid item >
             <Divider variant='middle'/>
@@ -469,13 +530,19 @@ if(details){
             *Offers Applicable
             </Typography>
             </ListItem>
+            </Grid>
+
+            <div className={classes.scrollme}>
             <ListItem>
-            <CustomizedTabs1 post={details}/>
+            <CustomizedTabs1 post={coupons}/>
             </ListItem>
+            </div>
+            
             <Divider variant='middle'/>
 
-          </Grid>
+          
           </List>
+         
           
 
           <Grid
