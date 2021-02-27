@@ -4,9 +4,11 @@ import Grid from '@material-ui/core/Grid';
 import axios from 'axios';
 import ResponsiveDrawer from './searchlist';
 import Eror from '../components/eror';
+import Bookcardmodel from '../components/bookcardmodel1';
 
 import { connect } from 'react-redux'
 import { getDayOfYear } from 'date-fns';
+import {Redirect} from 'react-router-dom'
 
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
@@ -25,6 +27,9 @@ const App = ({isAuthenticated}) => {
   const [error, setError] = useState('');
   const [wishlistitems,changeitemswishlist] = useState(0)
   const [cartitems,changeitemscart] = useState(0)
+  const [mypost,setmypost] = useState()
+  const [openmycard,setmycard] = useState(false)
+  const [loginpage,setloginpage] = useState(false)
 
   const date = new Date(Date.now())
 
@@ -147,7 +152,7 @@ const App = ({isAuthenticated}) => {
       
       setmax_price(res2.data.max_price);
       setmin_price(res2.data.min_price);
-      console.log(res.data.results)
+      
       setPosts(res.data.results);
       setLoading(false);
       settotalPosts(res.data.count);
@@ -157,7 +162,7 @@ const App = ({isAuthenticated}) => {
       }
     }
     };
-    console.log('hy')
+   
 
 
     fetchPosts();
@@ -209,8 +214,14 @@ const App = ({isAuthenticated}) => {
       </Grid>
     );
   }
+  if(loginpage)
+  {
+    return <Redirect to='/login' />
+  }
 
   return (
+    <div>
+    <Bookcardmodel open={openmycard} change={setmycard} details={mypost} loginpage={loginpage} setloginpage={setloginpage}/>
       <Grid
       container
       direction="row"
@@ -218,7 +229,7 @@ const App = ({isAuthenticated}) => {
       alignItems="center"
       >
         <Grid item lg={12} xs={12}>
-        <ResponsiveDrawer mapview={mapview} setmap={setmap} setfilters={setfilters} max_price={max_price} min_price={min_price} filters={filters} posts={posts} loading={loading} paginate={paginate} postsPerPage={postsPerPage} currentPage={currentPage} totalposts={totalposts} wishlistitems={wishlistitems} cartitems={cartitems} changeitemswishlist={changeitemswishlist} changeitemscart={changeitemscart}/>
+        <ResponsiveDrawer mypost={mypost} setmypost={setmypost} openmycard={openmycard} setmycard={setmycard} mapview={mapview} setmap={setmap} setfilters={setfilters} max_price={max_price} min_price={min_price} filters={filters} posts={posts} loading={loading} paginate={paginate} postsPerPage={postsPerPage} currentPage={currentPage} totalposts={totalposts} wishlistitems={wishlistitems} cartitems={cartitems} changeitemswishlist={changeitemswishlist} changeitemscart={changeitemscart}/>
         
 
         {/* <Pagination
@@ -228,6 +239,8 @@ const App = ({isAuthenticated}) => {
         /> */}
       </Grid>
       </Grid>
+
+      </div>
   );
 };
 

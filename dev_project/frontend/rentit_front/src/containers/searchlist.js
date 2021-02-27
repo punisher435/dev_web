@@ -79,7 +79,7 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: drawerWidth,
 
     },
-    backgroundColor:'#f50057',
+    backgroundColor:`${process.env.REACT_APP_COLOR}`,
   },
   appBar1: {
     [theme.breakpoints.up('sm')]: {
@@ -87,7 +87,7 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: drawerWidth,
 
     },
-    backgroundColor:'#f50057',
+    backgroundColor:`${process.env.REACT_APP_COLOR}`,
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -513,7 +513,7 @@ function ResponsiveDrawer(props) {
         </Hidden>
 
             {
-              props.mapview ? <Mapmount filters={props.filters} setfilters={props.setfilters}/> : <div><Posts posts={props.posts}  setfilters={props.setfilters} filters={props.filters} loading={props.loading} wishlistitems={props.wishlistitems} cartitems={props.cartitems} changeitemswishlist={props.changeitemswishlist} changeitemscart={props.changeitemscart}/>
+              props.mapview ? <Mapmount filters={props.filters} setfilters={props.setfilters}/> : <div><Posts  mypost={props.mypost} setmypost={props.setmypost} openmycard={props.openmycard} setmycard={props.setmycard} posts={props.posts}  setfilters={props.setfilters} filters={props.filters} loading={props.loading} wishlistitems={props.wishlistitems} cartitems={props.cartitems} changeitemswishlist={props.changeitemswishlist} changeitemscart={props.changeitemscart}/>
               <PaginationOutlined paginate={props.paginate} postsPerPage={props.postsPerPage} currentPage={props.currentPage} totalposts={props.totalposts}/></div>
             }
            

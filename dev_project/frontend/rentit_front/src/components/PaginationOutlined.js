@@ -8,6 +8,9 @@ const useStyles = makeStyles((theme) => ({
       marginTop: theme.spacing(2),
     },
   },
+  myclass:{
+    color:`${process.env.REACT_APP_COLOR}`
+  }
 }));
 
 export default function PaginationOutlined({paginate,postsPerPage,currentPage,totalposts}) {
@@ -22,7 +25,7 @@ export default function PaginationOutlined({paginate,postsPerPage,currentPage,to
 
   return (
     <div className={classes.root}>
-      <Pagination count={x} variant="outlined" color="secondary" page={currentPage} onChange={handleChange} />
+      <Pagination count={x} variant="outlined" className={classes.myclass} page={currentPage} onChange={handleChange} />
     </div>
   );
 }

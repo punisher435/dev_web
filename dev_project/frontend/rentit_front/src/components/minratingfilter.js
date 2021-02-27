@@ -12,14 +12,14 @@ export default function RadioButtonsGroup(props) {
   };
 
   return (
-    <FormControl component="fieldset">
+    <FormControl component="fieldset" >
       <FormLabel component="legend">Min. rating</FormLabel>
-      <RadioGroup aria-label="gender" name="gender1" value={props.filters.min_rating} onChange={handleChange}>
-        <FormControlLabel value="5" control={<Radio />} label="5" /> 
-        <FormControlLabel value="4" control={<Radio />} label="4+" />
-        <FormControlLabel value="3" control={<Radio />} label="3+" />
-        <FormControlLabel value="2" control={<Radio />} label="2+" />
-        <FormControlLabel value="" control={<Radio />} label="Any" />
+      <RadioGroup aria-label="gender" name="gender1" value={props.filters.min_rating} onChange={handleChange} >
+        <FormControlLabel value="5" control={<Radio style={{  color:`${process.env.REACT_APP_COLOR}`}}/>} label="5" /> 
+        <FormControlLabel value="4" control={<Radio style={{  color:`${process.env.REACT_APP_COLOR}`}}/>} label="4+" />
+        <FormControlLabel value="3" control={<Radio style={{  color:`${process.env.REACT_APP_COLOR}`}}/>} label="3+" />
+        <FormControlLabel value="2" control={<Radio style={{  color:`${process.env.REACT_APP_COLOR}`}}/>} label="2+" />
+        <FormControlLabel value="" control={<Radio style={{  color:`${process.env.REACT_APP_COLOR}`}}/>} label="Any" />
       </RadioGroup>
     </FormControl>
   );

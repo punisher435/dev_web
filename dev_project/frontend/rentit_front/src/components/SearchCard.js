@@ -181,7 +181,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-function NestedGrid({filters,setfilters,post, isAuthenticated, setOpen1,setOpen2,changeitemswishlist,changeitemscart,wishlistitems,cartitems}) {
+function NestedGrid({ mypost,setmypost,openmycard,setmycard,filters,setfilters,post, isAuthenticated, setOpen1,setOpen2,changeitemswishlist,changeitemscart,wishlistitems,cartitems}) {
   const classes = useStyles();
 
   const [booked,setbooked] = useState(true);
@@ -194,7 +194,9 @@ function NestedGrid({filters,setfilters,post, isAuthenticated, setOpen1,setOpen2
   const [loginpage,setloginpage] =  useState(false)
   const handlebookcard = e => {
     e.preventDefault();
-    openbookcard(true);
+
+    setmypost(post);
+    setmycard(true);
   }
  
 

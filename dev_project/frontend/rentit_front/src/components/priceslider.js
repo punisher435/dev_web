@@ -7,6 +7,9 @@ const useStyles = makeStyles({
   root: {
     width: 300,
   },
+  myclass: {
+    Color:`${process.env.REACT_APP_COLOR}`,
+  }
 });
 
 function valuetext(value) {
@@ -28,7 +31,7 @@ export default function RangeSlider(props) {
         Min-Max Price 
       </Typography>
       <Slider
-        color='secondary'
+        className={classes.myclass}
         max={props.max_price}
         min={props.min_price}
         step={500}
