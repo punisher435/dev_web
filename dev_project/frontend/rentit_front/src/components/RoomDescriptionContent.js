@@ -1,6 +1,9 @@
 import React,{useState} from 'react';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import LocationOnOutlinedIcon from '@material-ui/icons/LocationOnOutlined';
+import Icon from '@material-ui/core/Icon';
+
 
 
 function App(props) {
@@ -203,6 +206,27 @@ function App(props) {
       </Typography>
       <Typography variant='body1'>
       {props.details.apartmnt_policy} 
+      
+      </Typography></div> : null
+        }
+
+
+{
+          props.details.nearby_station1 ? <div><Typography variant='h6'>
+          Nearby station
+      </Typography>
+      <Typography variant='body1'>
+      {props.details.nearby_station1} <Icon color='error'><LocationOnOutlinedIcon  /></Icon>{props.details.distance1} km
+      
+      </Typography></div> : null
+        }
+
+{
+          props.details.nearby_station2 ? <div><Typography variant='h6'>
+         Another Nearby station
+      </Typography>
+      <Typography variant='body1'>
+      {props.details.nearby_station2} <Icon color='error'><LocationOnOutlinedIcon  /></Icon>{props.details.distance2} km
       
       </Typography></div> : null
         }

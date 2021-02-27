@@ -54,21 +54,23 @@ class wishlist_room(viewsets.ViewSet):
 
         try:
             wishlist_object = wishlist.objects.get(pk=request.user.pk)
-            wishlist_object.room_wishlist.add(room)
-            wishlist_object.items=wishlist_object.items+1
-            wishlist_object.save()
-            room.wishlist=room.wishlist+1;
-            room.save()
+            if room not in wishlist_object.room_wishlist.all():
+                wishlist_object.room_wishlist.add(room)
+                wishlist_object.items=wishlist_object.items+1
+                wishlist_object.save()
+                room.wishlist=room.wishlist+1;
+                room.save()
             return Response('Added to wishlist', status=status.HTTP_202_ACCEPTED)
             
         except: 
             wishlist_object = wishlist(user_id=request.user)
             wishlist_object.save()
-            wishlist_object.room_wishlist.add(room)
-            wishlist_object.items=wishlist_object.items+1
-            wishlist_object.save()
-            room.wishlist=room.wishlist+1;
-            room.save()
+            if room not in wishlist_object.room_wishlist.all():
+                wishlist_object.room_wishlist.add(room)
+                wishlist_object.items=wishlist_object.items+1
+                wishlist_object.save()
+                room.wishlist=room.wishlist+1;
+                room.save()
             return Response('Added to wishlist', status=status.HTTP_202_ACCEPTED)
 
     def destroy(self,request,pk=None):
@@ -149,21 +151,23 @@ class wishlist_shop(viewsets.ViewSet):
 
         try:
             wishlist_object = wishlist.objects.get(pk=request.user.pk)
-            wishlist_object.shop_wishlist.add(shop)
-            wishlist_object.items=wishlist_object.items+1
-            wishlist_object.save()
-            shop.wishlist=shop.wishlist+1;
-            shop.save()
+            if shop not in wishlist_object.shop_wishlist.all():
+                wishlist_object.shop_wishlist.add(shop)
+                wishlist_object.items=wishlist_object.items+1
+                wishlist_object.save()
+                shop.wishlist=shop.wishlist+1;
+                shop.save()
             return Response('Added to wishlist', status=status.HTTP_202_ACCEPTED)
             
         except: 
             wishlist_object = wishlist(user_id=request.user)
             wishlist_object.save()
-            wishlist_object.shop_wishlist.add(shop)
-            wishlist_object.items=wishlist_object.items+1
-            wishlist_object.save()
-            shop.wishlist=shop.wishlist+1;
-            shop.save()
+            if shop not in wishlist_object.shop_wishlist.all():
+                wishlist_object.shop_wishlist.add(shop)
+                wishlist_object.items=wishlist_object.items+1
+                wishlist_object.save()
+                shop.wishlist=shop.wishlist+1;
+                shop.save()
             return Response('Added to wishlist', status=status.HTTP_202_ACCEPTED)
 
     def destroy(self,request,pk=None):
@@ -243,21 +247,23 @@ class wishlist_apartment(viewsets.ViewSet):
 
         try:
             wishlist_object = wishlist.objects.get(pk=request.user.pk)
-            wishlist_object.apartment_wishlist.add(apartment)
-            wishlist_object.items=wishlist_object.items+1
-            wishlist_object.save()
-            apartment.wishlist=apartment.wishlist+1;
-            apartment.save()
+            if apartment not in wishlist_object.apartment_wishlist.all():
+                wishlist_object.apartment_wishlist.add(apartment)
+                wishlist_object.items=wishlist_object.items+1
+                wishlist_object.save()
+                apartment.wishlist=apartment.wishlist+1;
+                apartment.save()
             return Response('Added to wishlist', status=status.HTTP_202_ACCEPTED)
             
         except: 
             wishlist_object = wishlist(user_id=request.user)
             wishlist_object.save()
-            wishlist_object.apartment_wishlist.add(apartment)
-            wishlist_object.items=wishlist_object.items+1
-            wishlist_object.save()
-            apartment.wishlist=apartment.wishlist+1;
-            apartment.save()
+            if apartment not in wishlist_object.apartment_wishlist.all():
+                wishlist_object.apartment_wishlist.add(apartment)
+                wishlist_object.items=wishlist_object.items+1
+                wishlist_object.save()
+                apartment.wishlist=apartment.wishlist+1;
+                apartment.save()
             return Response('Added to wishlist', status=status.HTTP_202_ACCEPTED)
 
     def destroy(self,request,pk=None):
