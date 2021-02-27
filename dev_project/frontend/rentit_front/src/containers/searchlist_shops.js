@@ -88,7 +88,7 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: drawerWidth,
 
     },
-    backgroundColor:'#f50057',
+    backgroundColor:`${process.env.REACT_APP_COLOR}`,
   },
   menuButton: {
     marginRight: theme.spacing(2),

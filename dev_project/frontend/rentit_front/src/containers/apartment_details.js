@@ -38,12 +38,26 @@ import CustomizedRatings from '../components/rating_meter';
 import LocalOfferOutlinedIcon from '@material-ui/icons/LocalOfferOutlined';
 import {Redirect} from 'react-router-dom'
 
+import IconButton from '@material-ui/core/IconButton';
+import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import { connect } from 'react-redux'
+
+import Mapviewmobile from '../components/mapmobile'
+import SimpleSnackbar from '../components/wishlistsmackbar';
+import SimpleSnackbar1 from '../components/cartsmackbar';
+
+import RenteneAppBar from '../components/Navbar'
+
+
+
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    overflowX: 'hidden'
   },
   root1: {
     width: '100%',
@@ -94,14 +108,12 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '1.5rem',
   },
   divclass:{
-    width:'80%',
-    height:'30%',
+    width:'100vw',
+    height:'30vh',
     position:'absolute',
     overflowX:'hidden',
-    left:30,
-    right:20,
-    margin: '0  auto -150px',
-
+    display:'flex',
+    
   },
   apiclass:{
     
@@ -110,29 +122,62 @@ const useStyles = makeStyles((theme) => ({
   paraclass1 :{
     position:'relative',
     float:'bottom',
-  }
+  },
+  mapclass:{
+
+  },
+  iconroot1: {
+    display: 'inline',
+    color:'#f44336',
+    
+  },
+  navclass:{
+    overflowX:'hidden',
+    position:'absolute',
+  },
+  scrollme:{
+    whiteSpace: 'nowrap',
+    flexWrap: 'nowrap',
+    width:'100vw',
+    overflowX:'scroll',
+    [theme.breakpoints.up('md')]: {
+      whiteSpace: 'nowrap',
+    flexWrap: 'nowrap',
+    width:'650px',
+    overflowX:'scroll',
+    },
+  
+  },
   
 }));
 
-export default function FullWidthGrid(props) {
+function FullWidthGrid(props) {
 
 
  /*  let query = useQuery();
-  var apartmentid=query.get('apartmentid');
-  console.log(apartmentid); */
+  var roomid=query.get('roomid');
+  console.log(roomid); */
 
-  const apartmentid = props.match.params.apartmentid;
+  const roomid = props.match.params.apartmentid;
 
   const classes = useStyles();
   const [details, setDetails] = useState(false);
   const [reviews, setReviews] = useState([])
   const [loading, setLoading] = useState(false);
-  const [open1,changeopen1] = useState(false)
+  const [open_book,changeopen1] = useState(false)
   const [loginpage,setloginpage] = useState(false);
+ 
   const [params1,setparams] = useState({
     page:1,
     ordering:'-rating'
   })
+  const [wishlistitems,changeitemswishlist] = useState(0)
+  const [cartitems,changeitemscart] = useState(0)
+  const [open1,setOpen1] = useState(false);
+  const [open2,setOpen2] = useState(false);
+  const [wishlist,changewishlist] = useState(false)
+  const [nav,setnav] = useState(false)
+  const [coupons,setcoupons] = useState([])
 
 
 
@@ -146,7 +191,7 @@ export default function FullWidthGrid(props) {
             'Content-Type': 'application/json'
         }
       };
-      const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcebvdfesl2746/apartments/${apartmentid}/`,config);
+      const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcebvdfesl2746/apartments/${roomid}/`,config);
       
       try{
           console.log(res.data);
@@ -159,12 +204,14 @@ export default function FullWidthGrid(props) {
         // Handle Error Here
         console.error(err);
     }
+
+    
     };
 
    
     fetchDetails();
    
-  }, []);
+  }, [props.isAuthenticated]);
 
   useEffect( async() => {
      
@@ -176,7 +223,7 @@ export default function FullWidthGrid(props) {
     try{
     const res1 = await axios.get(`${process.env.REACT_APP_API_URL}/sourcemvdsnksnd59472/apartment/reviews/`,{
       params:{
-        apartment_id:apartmentid,
+        apartment_id:roomid,
         page:params1.page,
         ordering:params1.ordering,
       },
@@ -192,7 +239,118 @@ export default function FullWidthGrid(props) {
       // Handle Error Here
       console.error(err);
   }
-  },[params1])
+  try{
+    const res12 = await axios.get(`${process.env.REACT_APP_API_URL}/sourcesnajeijchi032uhd9w/coupon/give/`,{
+      params:{
+        roomid:roomid,
+        type:'apartment',
+      },
+      config:config
+    });
+    
+   
+        console.log('coupon',res12.data);
+        setcoupons(res12.data);
+        
+        
+    }  catch (err) {
+      // Handle Error Here
+      console.error(err,'coupons_error');
+  }
+  },[])
+
+  useEffect( async() => {
+     
+    const config = {
+      headers: {
+          'Content-Type': 'application/json'
+      }
+    };
+    if(props.isAuthenticated){
+      const config = {
+        headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `JWT ${localStorage.getItem('access')}`,
+        },
+      };
+      try {
+      await axios.get(`${process.env.REACT_APP_API_URL}/sourcenasdknahi29ad/wishlist/apartments/${roomid}/`,config,config)
+      .then(res => {
+        changewishlist(res.data);
+      })
+      .catch(err => {
+        
+      })
+      
+      }
+      catch{
+      }
+
+      try {
+        await axios.put(`${process.env.REACT_APP_API_URL}/sourcenasdknahi29ad/wishlist/apartments/1/`,config,config)
+        .then(res1 => {
+          changeitemswishlist(res1.data);
+        })
+        .catch(err => {
+          
+        })
+        
+        }
+        catch{
+        }
+    }
+  },[props.isAuthenticated])
+
+
+  const handleclick = async (event) => {
+    event.preventDefault();
+
+    if(props.isAuthenticated)
+    {
+
+      if(wishlist)
+      {
+        const config = {
+          headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `JWT ${localStorage.getItem('access')}`,
+          },
+        };
+        const res = await axios.delete(`${process.env.REACT_APP_API_URL}/sourcenasdknahi29ad/wishlist/apartments/${roomid}/`,config);
+
+        if(res.data == 'Removed from wishlist'){changewishlist(false); changeitemswishlist(wishlistitems-1); setnav(true);}
+      }
+    }else{
+      setOpen1(true);
+    }
+
+  }
+
+  const handleclick1 = async (event) => {
+    event.preventDefault();
+
+    if(props.isAuthenticated)
+    {
+      if(!wishlist)
+      {
+        const config = {
+          headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `JWT ${localStorage.getItem('access')}`,
+          },
+          params: {
+            apartment_id:roomid,
+          },
+        };
+        const res = await axios.post(`${process.env.REACT_APP_API_URL}/sourcenasdknahi29ad/wishlist/apartments/`,config,config);
+
+        if(res.data == 'Added to wishlist'){changewishlist(true);  changeitemswishlist(wishlistitems+1);  setnav(true);}
+      }
+    }else{
+      setOpen1(true);
+    }
+
+  }
 
 
 
@@ -206,11 +364,20 @@ if(loginpage===true)
 
 if(details){
   return (
+
+    
+    
+    
     
     <div className={classes.root}>
+      <div className={classes.navclass}><RenteneAppBar no={wishlistitems} focus={true}/></div>
+      
+      
+      <SimpleSnackbar open={open1} setOpen={setOpen1}/>
+       <SimpleSnackbar1 open={open2} setOpen={setOpen2}/>
 
       <Hidden smDown>
-      <Grid container spacing={5}>
+      <Grid container>
 
         <Grid item xs={12} >
           <SpecificRoomCarousel post={details}/>
@@ -243,12 +410,46 @@ if(details){
                                 <RatingWithCompliment rating={parseFloat(details.avg_rating)} reviews={parseFloat(details.reviews)}/>
                             </Grid>
                       </Grid>
+                      { 
+        wishlist ? <Grid item ><IconButton color='error' onClick={(event) => {handleclick(event);}} className={classes.iconroot1}><FavoriteIcon /></IconButton> <Typography variant="body1" color="error">
+        {details.wishlist} have added this to their wishlist!
+        </Typography></Grid> : <Grid item ><IconButton color='error' onClick={(event) => {handleclick1(event);}} className={classes.iconroot1}><FavoriteBorderOutlinedIcon /></IconButton> <Typography variant="body1"  color="error">
+        {details.wishlist} have added this to their wishlist!
+        </Typography></Grid>
+        }
+  
+        <Grid item>
+        
+        </Grid>
+
+
+
+<List component="nav" className={classes.root1} aria-label="offers">
+          <Grid item >
+            <Divider variant='middle'/>
+            <ListItem>
+          <Typography variant="h5" component="h4" className={classes.typo2}>
+            *Offers Applicable
+            </Typography>
+            </ListItem>
+            </Grid>
+
+            <div className={classes.scrollme}>
+            <ListItem>
+            <CustomizedTabs1 post={coupons}/>
+            </ListItem>
+            </div>
+            
+            <Divider variant='middle'/>
+
+          
+          </List>
 
                           <Grid item xs = {12}>
                               <Typography variant='h5'>
                                   Description
                               </Typography>
-                              <RoomDescriptionContent description={details.description}/>
+                              <RoomDescriptionContent details={details}/>
                           </Grid>
                           <Grid item xs={12}>
                           <Typography variant='h5'>
@@ -256,9 +457,10 @@ if(details){
                               </Typography>
                             <Facility post={details}/>
                           </Grid>
-                          <br />
+                         
                           
                           <Grid item xs = {12} className={classes.api}>
+                            <br />
                             
                             <div className={classes.apiclass}><Mapview value={details} /></div>
                           </Grid>
@@ -289,18 +491,28 @@ if(details){
 
       </Grid>
       </Hidden>
-      <Hidden mdUp>
-            <Grid
-        container
-        direction="column"
-        justify="center"
-        alignItems="center"
-        spacing = {1}
-        >
 
-         <Mobileimages post={details}/>
+
+
+      <Hidden mdUp>
+            
+
+         <Mobileimages post={details} wishlist={wishlist} handleclick1={handleclick1} handleclick={handleclick} />
           
-          <br />
+         <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+          > { 
+            wishlist ? <><Grid item ><IconButton color='error' onClick={(event) => {handleclick(event);}} className={classes.iconroot1}><FavoriteIcon /></IconButton></Grid><Grid item><Typography variant="body1" color="error">
+            {details.wishlist} have added this to their wishlist!
+            </Typography></Grid></> : <><Grid item ><IconButton color='error' onClick={(event) => {handleclick1(event);}} className={classes.iconroot1}><FavoriteBorderOutlinedIcon /></IconButton></Grid><Grid item> <Typography variant="body1"  color="error">
+            {details.wishlist} have added this to their wishlist!
+            </Typography></Grid></>
+            }
+            </Grid>
+          
           <Grid
             container
             direction="row"
@@ -310,7 +522,7 @@ if(details){
   
             <Grid item xs={1}></Grid>
 
-            <Grid item xs={8}>
+            <Grid item xs={6}>
             <Typography variant="h5" component="h4" className={classes.typo1}>
             {details.title}
             </Typography>
@@ -322,33 +534,36 @@ if(details){
                                 </Typography>
             </Grid>
 
-            <Grid item xs={3}>
+            <Grid item xs={4}>
             <RatingWithCompliments reviews={parseFloat(details.reviews)} rating={parseFloat(details.avg_rating)}/>
             </Grid>
 
-            <Grid item xs={0}></Grid>
+            
             
           </Grid>
-
+          
+          
           <List component="nav" className={classes.root1} aria-label="offers">
-          
-          
-
-          
-          <Grid item xs={12}>
+          <Grid item >
             <Divider variant='middle'/>
             <ListItem>
           <Typography variant="h5" component="h4" className={classes.typo2}>
             *Offers Applicable
             </Typography>
             </ListItem>
+            </Grid>
+
+            <div className={classes.scrollme}>
             <ListItem>
-            <CustomizedTabs1 post={details}/>
+            <CustomizedTabs1 post={coupons}/>
             </ListItem>
+            </div>
+            
             <Divider variant='middle'/>
 
-          </Grid>
+          
           </List>
+         
           
 
           <Grid
@@ -378,22 +593,20 @@ if(details){
             <Typography variant='h5'>
                 Description
             </Typography>
-            <RoomDescriptionContent description={details.description}/>
+            <RoomDescriptionContent details={details}/>
           </Grid>
           <Grid item xs={1}></Grid>
           </Grid>
 
           <br />
 
-          <Grid item xs={12}>
-          <div className={classes.divclass}><GoogleApiWrapper1 details={details}/></div>
-          </Grid>
+          <br />
+          
+          
+          <Mapviewmobile value={details}/>
+       
 
-
-          <br /><br /><br /><br /><br /><br />
-          <br /><br /><br />
-
-          <br /><br /><br /><br /><br /><br />
+          <br />
           <br />
 
 
@@ -403,11 +616,11 @@ if(details){
             justify="center"
             alignItems="center"
           >
-          <Grid item xs={1}></Grid>
+          
           <Grid item xs={10} className={classes.paraclass1}>
             <RatingAndReviews reviews={reviews} params={params1} setparams={setparams} no={parseFloat(details.reviews)} rating={parseFloat(details.avg_rating)}/>
           </Grid>
-          <Grid item xs={1}></Grid>
+          
           </Grid>
          
           
@@ -416,11 +629,11 @@ if(details){
 
           
           <Grid item xs={12} className={classes.margingrid}></Grid>
-        </Grid>
+        
 
        
-        <SimpleModal1 details={details} open={open1} change={changeopen1} loginpage={loginpage} setloginpage={setloginpage}/>
-        <BottomAppBar details={details} open1={open1} changeopen1={changeopen1}/>
+        <SimpleModal1 details={details} open={open_book} change={changeopen1} loginpage={loginpage} setloginpage={setloginpage}/>
+        <BottomAppBar details={details} open1={open_book} changeopen1={changeopen1}/>
 
       </Hidden>
 
@@ -433,3 +646,10 @@ else{
   return <div></div>;
 }
 }
+
+const mapStateToProps = state => ({
+  isAuthenticated: state.authreducers.isAuthenticated,
+  access: state.authreducers.access
+});
+
+export default connect(mapStateToProps)(FullWidthGrid);

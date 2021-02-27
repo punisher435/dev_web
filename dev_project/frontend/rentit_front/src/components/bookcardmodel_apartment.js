@@ -19,8 +19,33 @@ function getModalStyle() {
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: 'absolute',
-    width: '70%',
-    height: '100%',
+    
+    width:'100%',
+    maxWidth:'400px',
+    height:'50vh',
+    overflowY: 'scroll',
+    overflowx: 'hidden',
+    
+    top:'25vh',
+    
+
+    [theme.breakpoints.up('sm')]: {
+      position: 'absolute',
+    
+      width:'100%',
+      maxWidth:'400px',
+      height:'50vh',
+      overflowY: 'scroll',
+      overflowx: 'hidden',
+      
+      top:'25vh',
+      left:'25vw',
+    },
+ 
+    
+   
+ 
+
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
   },
@@ -38,7 +63,7 @@ export default function SimpleModal1({details,open,change,bookvalues,setbookvalu
   };
 
   const body = (
-    <div style={modalStyle} className={`${classes.paper} ${style.boxclass}`}>
+    <div className={`${classes.paper}`}>
         <BookCard details={details} bookvalues={bookvalues} setbookvalues={setbookvalues} loginpage={loginpage} setloginpage={setloginpage} bookform={bookform} setbookform={setbookform}/>
       
     </div>

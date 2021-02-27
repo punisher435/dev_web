@@ -7,7 +7,7 @@ import Hidden from '@material-ui/core/Hidden';
 import SimpleSnackbar from './wishlistsmackbar';
 import SimpleSnackbar1 from './cartsmackbar';
 
-const Posts = ({ posts, loading,changeitemswishlist,changeitemscart,wishlistitems,cartitems,filters,setfilters }) => {
+const Posts = ({  mypost,setmypost,openmycard,setmycard,posts, loading,changeitemswishlist,changeitemscart,wishlistitems,cartitems,filters,setfilters }) => {
 
   const [open1,setOpen1] = useState(false);
   const [open2,setOpen2] = useState(false);
@@ -26,7 +26,7 @@ const Posts = ({ posts, loading,changeitemswishlist,changeitemscart,wishlistitem
           {/* {post.title} */}
           <Hidden smDown>
         <Grid item md={12}>
-          <SearchCard post={post} filters={filters} setfilters={setfilters} loading={loading} setOpen1={setOpen1} setOpen2={setOpen2} wishlistitems={wishlistitems} cartitems={cartitems} changeitemswishlist={changeitemswishlist} changeitemscart={changeitemscart}/>
+          <SearchCard mypost={mypost} setmypost={setmypost} openmycard={openmycard} setmycard={setmycard} post={post} filters={filters} setfilters={setfilters} loading={loading} setOpen1={setOpen1} setOpen2={setOpen2} wishlistitems={wishlistitems} cartitems={cartitems} changeitemswishlist={changeitemswishlist} changeitemscart={changeitemscart}/>
           </Grid>
           </Hidden>
         <Hidden mdUp>
