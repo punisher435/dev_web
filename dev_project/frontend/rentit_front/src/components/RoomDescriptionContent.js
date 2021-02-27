@@ -73,6 +73,56 @@ function App(props) {
       </Typography></div> : null
         }
 
+{
+          props.details.total_rooms ? <div><Typography variant='h6'>
+          Total Rooms
+      </Typography>
+      <Typography variant='body1'>
+      {props.details.total_rooms} 
+      
+      </Typography></div> : null
+        }
+
+{
+          props.details.total_washroom ? <div><Typography variant='h6'>
+          Total washroom
+      </Typography>
+      <Typography variant='body1'>
+      {props.details.total_washroom} 
+      
+      </Typography></div> : null
+        }
+
+{
+          props.details.total_beds ? <div><Typography variant='h6'>
+          Total beds
+      </Typography>
+      <Typography variant='body1'>
+      {props.details.total_beds} 
+      
+      </Typography></div> : null
+        }
+
+{
+          props.details.bed_type ? <div><Typography variant='h6'>
+          Bed Type
+      </Typography>
+      <Typography variant='body1'>
+      {props.details.bed_type} 
+      
+      </Typography></div> : null
+        }
+
+{
+          props.details.windows ? <div><Typography variant='h6'>
+           Total windows
+      </Typography>
+      <Typography variant='body1'>
+      {props.details.windows} 
+      
+      </Typography></div> : null
+        }
+
         <Typography variant='h6'>
             Furniture
         </Typography>
@@ -133,6 +183,26 @@ function App(props) {
       </Typography>
       <Typography variant='body1'>
       {props.details.room_policy} 
+      
+      </Typography></div> : null
+        }
+
+{
+          props.details.shop_policy ? <div><Typography variant='h6'>
+          Shop policy
+      </Typography>
+      <Typography variant='body1'>
+      {props.details.shop_policy} 
+      
+      </Typography></div> : null
+        }
+
+{
+          props.details.apartmnt_policy ? <div><Typography variant='h6'>
+          Apartmnt policy
+      </Typography>
+      <Typography variant='body1'>
+      {props.details.apartmnt_policy} 
       
       </Typography></div> : null
         }

@@ -42,10 +42,10 @@ export default function SimpleCard(props) {
                 <Typography 
                   variant="h5" 
                   component="h2"
-                  className={props.rating<1 ? classes.yy : 
-                  props.rating<2? classes.yg :
-                  props.rating<3? classes.gg :
-                  props.rating<4? classes.gr :
+                  className={props.rating<1 && props.rating>0 ? classes.yy : 
+                  props.rating<2 && props.rating>0? classes.yg :
+                  props.rating<3 && props.rating>0? classes.gg :
+                  props.rating<4 && props.rating>0? classes.gr :
                   classes.rr
                 } >
                   <Box textAlign="center">
