@@ -138,7 +138,7 @@ export default function VerticalDividers({no, rating,reviews,params,setparams}) 
 
   return (
     <div>
-      <Paper className={classes.paperme} elevation={5}>
+      <Paper className={classes.paperme} elevation={3}>
 
       <SimpleModal open={open} change={setopen} photo={src}/>
 

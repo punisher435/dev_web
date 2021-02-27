@@ -25,9 +25,8 @@ import AddressCard from './address_card'
 import ShopCard from './shop_card'
 import AddShopCard from './addshopcard';
 
-axios.defaults.xsrfHeaderName = `${process.env.XSRF_COOKIE}`;
-axios.defaults.xsrfCookieName = `${process.env.CSRF_COOKIE}`;
-
+axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
+axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
 
 
 

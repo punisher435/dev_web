@@ -8,8 +8,8 @@ import Eror from '../components/eror';
 import { connect } from 'react-redux'
 import { getDayOfYear } from 'date-fns';
 
-axios.defaults.xsrfHeaderName = `${process.env.XSRF_COOKIE}`;
-axios.defaults.xsrfCookieName = `${process.env.CSRF_COOKIE}`;
+axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
+axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
 
 const App = ({isAuthenticated}) => {
   const [posts, setPosts] = useState([]);

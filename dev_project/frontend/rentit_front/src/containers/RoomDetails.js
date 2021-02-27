@@ -46,8 +46,8 @@ import CustomizedRatings from '../components/rating_meter';
 import LocalOfferOutlinedIcon from '@material-ui/icons/LocalOfferOutlined';
 import {Redirect} from 'react-router-dom'
 
-axios.defaults.xsrfHeaderName = `${process.env.XSRF_COOKIE}`;
-axios.defaults.xsrfCookieName = `${process.env.CSRF_COOKIE}`;
+axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
+axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -452,9 +452,10 @@ if(details){
                               </Typography>
                             <Facility post={details}/>
                           </Grid>
-                          <br />
+                         
                           
                           <Grid item xs = {12} className={classes.api}>
+                            <br />
                             
                             <div className={classes.apiclass}><Mapview value={details} /></div>
                           </Grid>
