@@ -129,7 +129,7 @@ export default function SellerReviews({reviews,params,setparams}) {
         alignItems="center"
         className={classes.root}>
         <Grid item>
-          <Rating1  no={no} rating={rating}/>
+          <Rating1  no={no} rating={Math.round(rating * 10) / 10}/>
         </Grid>
 
         <Divider orientation="vertical" />

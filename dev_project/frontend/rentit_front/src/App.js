@@ -54,6 +54,7 @@ import ShopListing from './containers/shoplisting'
 import ApartmentListing from './containers/apartmentlisting'
 import MyReviews from './components/seller_reviews'
 import Analytics from './components/analytics'
+require('dotenv').config()
 
 
 function App(props) {

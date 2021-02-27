@@ -6,7 +6,11 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import StarRateIcon from '@material-ui/icons/StarRate';
 
+
+
 function LinearProgressWithLabel(props) {
+
+  
   return (
     <Box display="flex" alignItems="center">
       <Box minWidth={40}>
@@ -40,6 +44,24 @@ const useStyles = makeStyles({
   root: {
     width: '100%',
   },
+  pos: {
+    alignItems:'center',
+  },
+  yy: {
+    backgroundColor: '#ff4545',
+  },
+  yg: {
+    backgroundColor: '#ffa534',
+  },
+  gg: {
+    backgroundColor: '#ffe234',
+  },
+  gr: {
+    backgroundColor: '#b7dd29 ',
+  },
+  rr: {
+    backgroundColor: '#57e32c',
+  },
 });
 
 export default function LinearWithValueLabel(props) {
@@ -47,7 +69,12 @@ export default function LinearWithValueLabel(props) {
 
   return (
     <div className={classes.root}>
-      <LinearProgressWithLabel value={props.value} tag={props.star}/>
+      <LinearProgressWithLabel value={props.value} tag={props.star} className={props.star<=1 ? classes.yy : 
+                  props.star<2? classes.yg :
+                  props.star<3? classes.gg :
+                  props.star<4? classes.gr :
+                  classes.rr
+                } />
     </div>
   );
 }

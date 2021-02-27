@@ -24,7 +24,7 @@ import Select from '@material-ui/core/Select';
 import IconButton from '@material-ui/core/IconButton';
 import SimpleModal from './imagemodal';
 import Button from '@material-ui/core/Button';
-
+import Hidden from '@material-ui/core/Hidden';
 
 
 import RatingBar from '../components/RatingBar'
@@ -74,6 +74,10 @@ const useStyles = makeStyles((theme) => ({
   },
   buttonclass: {
     padding:0,
+  },
+  paperme:{
+    padding:15,
+    marginBottom:'5px',
   },
 }));
 
@@ -134,13 +138,15 @@ export default function VerticalDividers({no, rating,reviews,params,setparams}) 
 
   return (
     <div>
+      <Paper className={classes.paperme} elevation={5}>
 
       <SimpleModal open={open} change={setopen} photo={src}/>
 
       
 
       <FormControl className={classes.formControl}>
-        <InputLabel id="demo-simple-select-label">Age</InputLabel>
+        <br />
+        <InputLabel id="demo-simple-select-label">Sort</InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
@@ -152,7 +158,9 @@ export default function VerticalDividers({no, rating,reviews,params,setparams}) 
           <MenuItem value={'rating'}>Negative first</MenuItem>
           <MenuItem value={'timestamp'}>Oldest first</MenuItem>
         </Select>
+        <br />
       </FormControl>
+     
 
       <Grid container
         direction="row"
@@ -160,7 +168,7 @@ export default function VerticalDividers({no, rating,reviews,params,setparams}) 
         alignItems="center"
         className={classes.root}>
         <Grid item>
-          <Rating1  no={no} rating={rating}/>
+          <Rating1  no={no} rating={Math.round(rating * 10) / 10}/>
         </Grid>
 
         <Divider orientation="vertical" />
@@ -179,7 +187,7 @@ export default function VerticalDividers({no, rating,reviews,params,setparams}) 
         
         
         
-        
+      <Hidden xsDown>
       <GridList cellHeight={300} className={classes.gridList} cols={3}>
   {list1.map((tile) => (
     <GridListTile key={tile} cols={3}>
@@ -188,6 +196,19 @@ export default function VerticalDividers({no, rating,reviews,params,setparams}) 
     </GridListTile>
   ))}
 </GridList>
+</Hidden>
+
+<Hidden smUp>
+      <GridList cellHeight={200} className={classes.gridList} cols={3}>
+  {list1.map((tile) => (
+    <GridListTile key={tile} cols={3}>
+      
+      <Button className={classes.buttonclass} onClick={e => {e.preventDefault();setsrc(tile);setopen(true);}}><img src={tile}  /></Button>
+    </GridListTile>
+  ))}
+</GridList>
+</Hidden>
+<br />
 
       <Paper elevation={0} />
       <List component="nav" aria-label="main mailbox folders">
@@ -214,7 +235,7 @@ export default function VerticalDividers({no, rating,reviews,params,setparams}) 
           <IconButton onClick={e => handleclick1(e)} >
       <ArrowBackIosIcon />
       </IconButton>
-          <p>{params.page}</p>
+          {params.page}
       <IconButton onClick={e => handleclick2(e)} >
       <ArrowForwardIosIcon />
       </IconButton>
@@ -226,7 +247,8 @@ export default function VerticalDividers({no, rating,reviews,params,setparams}) 
 
     
 
-      
+      </Paper>
     </div>
+    
   );
 }

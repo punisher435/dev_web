@@ -406,8 +406,18 @@ if(details){
                             </Grid>
                       </Grid>
                       { 
-        wishlist ? <Grid item md={1}><IconButton color='error' onClick={(event) => {handleclick(event);}} className={classes.iconroot1}><FavoriteIcon /></IconButton></Grid> : <Grid item md={1}><IconButton color='error' onClick={(event) => {handleclick1(event);}} className={classes.iconroot1}><FavoriteBorderOutlinedIcon /></IconButton></Grid>
+        wishlist ? <Grid item ><IconButton color='error' onClick={(event) => {handleclick(event);}} className={classes.iconroot1}><FavoriteIcon /></IconButton> <Typography variant="body1" color="error">
+        {details.wishlist} have added this to their wishlist!
+        </Typography></Grid> : <Grid item ><IconButton color='error' onClick={(event) => {handleclick1(event);}} className={classes.iconroot1}><FavoriteBorderOutlinedIcon /></IconButton> <Typography variant="body1"  color="error">
+        {details.wishlist} have added this to their wishlist!
+        </Typography></Grid>
         }
+  
+        <Grid item>
+        
+        </Grid>
+
+
 
 <List component="nav" className={classes.root1} aria-label="offers">
           <Grid item >
@@ -488,9 +498,14 @@ if(details){
             direction="row"
             justify="center"
             alignItems="center"
-          >{ 
-        wishlist ? <Grid item md={1}><IconButton color='error' onClick={(event) => {handleclick(event);}} className={classes.iconroot1}><FavoriteIcon /></IconButton></Grid> : <Grid item md={1}><IconButton color='error' onClick={(event) => {handleclick1(event);}} className={classes.iconroot1}><FavoriteBorderOutlinedIcon /></IconButton></Grid>
-        }</Grid>
+          > { 
+            wishlist ? <><Grid item ><IconButton color='error' onClick={(event) => {handleclick(event);}} className={classes.iconroot1}><FavoriteIcon /></IconButton></Grid><Grid item><Typography variant="body1" color="error">
+            {details.wishlist} have added this to their wishlist!
+            </Typography></Grid></> : <><Grid item ><IconButton color='error' onClick={(event) => {handleclick1(event);}} className={classes.iconroot1}><FavoriteBorderOutlinedIcon /></IconButton></Grid><Grid item> <Typography variant="body1"  color="error">
+            {details.wishlist} have added this to their wishlist!
+            </Typography></Grid></>
+            }
+            </Grid>
           
           <Grid
             container

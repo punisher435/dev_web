@@ -43,6 +43,7 @@ const useStyles = makeStyles((theme) => ({
   appBar: {
     top: 'auto',
     bottom: 0,
+    backgroundColor:`${process.env.REACT_APP_COLOR}`,
 
   },
   grow: {
@@ -58,6 +59,8 @@ const useStyles = makeStyles((theme) => ({
   },
   buttonroot: {
     color: 'white',
+    padding:0,
+    display: 'block',
   },
   typo :{
     color: 'white',
@@ -66,49 +69,41 @@ const useStyles = makeStyles((theme) => ({
 
 export default function BottomAppBar({details,open1,changeopen1}) {
   const classes = useStyles();
+  console.log(process.env)
 
   return (
     <React.Fragment>
       <CssBaseline />
 
-      <AppBar position="fixed" color="primary" className={classes.appBar}>
+      <AppBar position="fixed" className={classes.appBar}>
+      <Button className={classes.buttonroot} onClick={() => {changeopen1(true)}}>
         <Toolbar>
         
         <Grid
             container
             direction="row"
-            justify="flex-start"
+            justify="center"
             alignItems="center"
             spacing={1}
           >
               <Grid item xs={5}>
-                    <Button className={classes.buttonroot} onClick={() => {changeopen1(true)}}>
+                    
                         <BookIcon />
                         <Typography variant="body1" component="body1" className={classes.typo1}>
                         Book now
                         </Typography>
-                    </Button>
+                   
               </Grid>
 
               
-              <Grid item xs={3}>
-                     <Button className={classes.buttonroot}>
-                
-                    { 
-                    details.wishlist ? <FavoriteIcon /> : <FavoriteBorderOutlinedIcon />
-                    }
-                    <Typography variant="body1" component="body1" className={classes.typo1}>
-                        Wishlist
-                        </Typography>
-                    </Button>
-            
-              </Grid>
+              
 
           </Grid>
         
           <div className={classes.grow} />
           
         </Toolbar>
+        </Button>
       </AppBar>
     </React.Fragment>
   );

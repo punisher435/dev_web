@@ -106,6 +106,10 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('md')]: {
       display: 'none',
     },
+  
+  },
+  AppBar: {
+    backgroundColor:`${process.env.REACT_APP_COLOR}`
   },
 }));
 
@@ -283,7 +287,7 @@ function RenteneAppBar(props) {
 
   return (
     <div className={classes.grow}>
-      <AppBar>
+      <AppBar className={classes.AppBar}>
         <Toolbar>
         <NavLink className={`nav-link ${styles.textclass}`} exact to='/'>
           <Typography className={classes.title} variant="h6" noWrap>

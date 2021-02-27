@@ -7,7 +7,41 @@ function App(props) {
   const [readMore,setReadMore]=useState(false);
   const extraContent =
   <div>
-          {props.details.description}
+
+      {
+          props.details.category ? <div><Typography variant='h6'>
+          Category
+      </Typography>
+      <Typography variant='body1'>
+      {props.details.category} 
+      
+      </Typography></div> : null
+        }
+
+{
+          props.details.balcony ? <div><Typography variant='h6'>
+          No. of balcony
+      </Typography>
+      <Typography variant='body1'>
+      {props.details.balcony} 
+      
+      </Typography></div> : null
+        }
+
+{
+          props.details.separate_washroom ? <div><Typography variant='h6'>
+          Separate Washroom
+      </Typography>
+      <Typography variant='body1'>
+      {props.details.separate_washroom ? 'Avaiable' : 'Not avaiable'} 
+      
+      </Typography></div> : null
+        }
+
+      <Typography variant='h6'>
+          Description
+      </Typography>
+          
         <Typography variant='body1'>
         {props.details.description}
         </Typography>
@@ -18,6 +52,26 @@ function App(props) {
         {props.details.location}, {props.details.city}, {props.details.state}, {props.details.country}, {props.details.pincode} 
         ({props.details.landmark})
         </Typography>
+
+        {
+          props.details.capacity ? <div><Typography variant='h6'>
+          Capacity
+      </Typography>
+      <Typography variant='body1'>
+      Room of {props.details.capacity} people 
+      
+      </Typography></div> : null
+        }
+
+{
+          props.details.BHK ? <div><Typography variant='h6'>
+          BHK
+      </Typography>
+      <Typography variant='body1'>
+      {props.details.BHK} 
+      
+      </Typography></div> : null
+        }
 
         <Typography variant='h6'>
             Furniture

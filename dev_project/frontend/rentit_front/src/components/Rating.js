@@ -15,19 +15,19 @@ const useStyles = makeStyles({
     alignItems:'center',
   },
   yy: {
-    backgroundColor: '#B4DA55',
+    backgroundColor: '#ff4545',
   },
   yg: {
-    backgroundColor: '#B4DA55',
+    backgroundColor: '#ffa534',
   },
   gg: {
-    backgroundColor: '#B4DA55',
+    backgroundColor: '#ffe234',
   },
   gr: {
-    backgroundColor: '#B4DA55',
+    backgroundColor: '#b7dd29 ',
   },
   rr: {
-    backgroundColor: '#B4DA55',
+    backgroundColor: '#57e32c',
   },
 });
 
