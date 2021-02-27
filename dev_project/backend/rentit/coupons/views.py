@@ -313,8 +313,7 @@ class Coupon_give(viewsets.ViewSet):
         roomid = request.query_params.get('roomid')
         type1 = request.query_params.get('type')
 
-        queryset1 = rooms.objects.all()
-        room = get_object_or_404(queryset1,pk=roomid)
+        
 
         
        

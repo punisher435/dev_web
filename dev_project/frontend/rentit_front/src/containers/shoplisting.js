@@ -4,6 +4,8 @@ import Grid from '@material-ui/core/Grid';
 import axios from 'axios';
 import ResponsiveDrawer from './searchlist_shops';
 import Eror from '../components/eror';
+import Bookcardmodel from '../components/bookcardmodel1_shop';
+import {Redirect} from 'react-router-dom'
 
 import { connect } from 'react-redux'
 import { getDayOfYear } from 'date-fns';
@@ -19,6 +21,9 @@ const App = ({isAuthenticated}) => {
   const [totalposts, settotalPosts] = useState(0);
   const [max_price, setmax_price] = useState(0);
   const [min_price, setmin_price] = useState(0);
+  const [mypost,setmypost] = useState()
+  const [openmycard,setmycard] = useState(false)
+  const [loginpage,setloginpage] = useState(false)
 
   const [mapview,setmap] = useState(false);
 
@@ -204,7 +209,16 @@ const App = ({isAuthenticated}) => {
     );
   }
 
+  if(loginpage)
+  {
+    return <Redirect to='/login' />
+  }
+
+
   return (
+    <div>
+    <Bookcardmodel open={openmycard} change={setmycard} details={mypost} loginpage={loginpage} setloginpage={setloginpage}/>
+    
       <Grid
       container
       direction="row"
@@ -212,7 +226,7 @@ const App = ({isAuthenticated}) => {
       alignItems="center"
       >
         <Grid item lg={12} xs={12}>
-        <ResponsiveDrawer mapview={mapview} setmap={setmap} setfilters={setfilters} max_price={max_price} min_price={min_price} filters={filters} posts={posts} loading={loading} paginate={paginate} postsPerPage={postsPerPage} currentPage={currentPage} totalposts={totalposts} wishlistitems={wishlistitems} cartitems={cartitems} changeitemswishlist={changeitemswishlist} changeitemscart={changeitemscart}/>
+        <ResponsiveDrawer  mypost={mypost} setmypost={setmypost} openmycard={openmycard} setmycard={setmycard} mapview={mapview} setmap={setmap} setfilters={setfilters} max_price={max_price} min_price={min_price} filters={filters} posts={posts} loading={loading} paginate={paginate} postsPerPage={postsPerPage} currentPage={currentPage} totalposts={totalposts} wishlistitems={wishlistitems} cartitems={cartitems} changeitemswishlist={changeitemswishlist} changeitemscart={changeitemscart}/>
         
 
         {/* <Pagination
@@ -222,6 +236,7 @@ const App = ({isAuthenticated}) => {
         /> */}
       </Grid>
       </Grid>
+      </div>
   );
 };
 
