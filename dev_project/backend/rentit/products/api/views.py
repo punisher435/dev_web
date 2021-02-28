@@ -24,9 +24,9 @@ from user.models import seller_bank_details
 #pagination
 
 class StandardResultsSetPagination(PageNumberPagination):
-    page_size = 2
+    page_size = 30
     page_size_query_param = 'page_size'
-    max_page_size = 3
+    max_page_size = 30
 
 
 #filters
@@ -45,7 +45,7 @@ class room_filter(rest_filters.FilterSet):
 
     class Meta:
         model = rooms
-        fields = ['room_cleaning','windows_filter','bookedtill_filter','nonveg_food','veg_food','guest_allowed','iron','laundry','cooler','AC','room_TV','power_backup','floor_filter','purified_water','min_rating','cctv_building','bed_type','building_guard','balcony_filter','separate_washroom','category','location','city','state','wifi','breakfast','lunch','dinner','house_TV','power_backup','geyser','electricity','country','min_price','max_price','capacity_filter','trust_points_filter','booked']
+        fields = ['room_cleaning','gender','windows_filter','bookedtill_filter','nonveg_food','veg_food','guest_allowed','iron','laundry','cooler','AC','room_TV','power_backup','floor_filter','purified_water','min_rating','cctv_building','bed_type','building_guard','balcony_filter','separate_washroom','category','location','city','state','wifi','breakfast','lunch','dinner','house_TV','power_backup','geyser','electricity','country','min_price','max_price','capacity_filter','trust_points_filter','booked']
 
 
 class room_viewset(viewsets.ReadOnlyModelViewSet):
@@ -322,7 +322,7 @@ class shop_filter(rest_filters.FilterSet):
 
     class Meta:
         model = shops
-        fields = ['shop_cleaning','cctv_building','AC','cooler','TV','building_guard','min_rating','separate_washroom','purified_water','floor_filter','room_filter','windows_filter','bookedtill_filter','water_facility','wifi','power_backup','electricity','category','location','city','state','country','pincode','min_price','max_price','trust_points_filter','booked']
+        fields = ['shop_cleaning','gender','cctv_building','AC','cooler','TV','building_guard','min_rating','separate_washroom','purified_water','floor_filter','room_filter','windows_filter','bookedtill_filter','water_facility','wifi','power_backup','electricity','category','location','city','state','country','pincode','min_price','max_price','trust_points_filter','booked']
 
             
 class shop_viewset(viewsets.ReadOnlyModelViewSet):
@@ -572,7 +572,7 @@ class apartment_filter(rest_filters.FilterSet):
 
     class Meta:
         model = apartments
-        fields = ['apartment_cleaning','geyser_filter','washroom_filter','bed_type','laundry','TV','geyser','purified_water','cooler','house_refridgerator','AC','apartment_type','sofa','floor_filter','room_filter','balcony_filter','washroom','cctv_building','building_guard','min_rating','bookedtill_filter','geyser','power_backup','TV','water_facility','electricity','category','location','city','state','country','pincode','min_price','max_price','BHK_filter','trust_points_filter','booked']
+        fields = ['apartment_cleaning','gender','geyser_filter','washroom_filter','bed_type','laundry','TV','geyser','purified_water','cooler','house_refridgerator','AC','apartment_type','sofa','floor_filter','room_filter','balcony_filter','washroom','cctv_building','building_guard','min_rating','bookedtill_filter','geyser','power_backup','TV','water_facility','electricity','category','location','city','state','country','pincode','min_price','max_price','BHK_filter','trust_points_filter','booked']
 
 
 class apartment_viewset(viewsets.ReadOnlyModelViewSet):

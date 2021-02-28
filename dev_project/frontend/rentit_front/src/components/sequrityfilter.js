@@ -27,6 +27,9 @@ export default function SimpleSelect3(props) {
   const handleChange1 = (event) => {
     props.setfilters({...props.filters,building_guard:event.target.value});
   };
+  const handleChange2 = (event) => {
+    props.setfilters({...props.filters,gender:event.target.value});
+  };
 
   return (
     <div>
@@ -56,6 +59,20 @@ export default function SimpleSelect3(props) {
           <MenuItem value={false}>No</MenuItem>
         </Select>
       </FormControl>
+      <FormControl className={classes.formControl}>
+        <InputLabel id="gender">Gender Specific</InputLabel>
+        <Select
+          labelId="gender"
+          id="gender"
+          value={props.filters.gender}
+          onChange={handleChange2}
+        >
+          <MenuItem value={'Male'}>Male</MenuItem>
+          <MenuItem value={'Female'}>Female</MenuItem>
+          <MenuItem value={'Both Male and Female'}>Both Male and Female</MenuItem>
+          <MenuItem value={'Any'}>Any</MenuItem>
+        </Select>
+        </FormControl>
      
     </div>
   );
