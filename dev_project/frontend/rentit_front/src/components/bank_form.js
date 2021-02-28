@@ -15,6 +15,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Eror from './eror'
+import Paper from '@material-ui/core/Paper';
 
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
@@ -56,8 +57,19 @@ const validationSchema = yup.object({
  
     // necessary for content to be below app bar
     myclass: {
-        marginTop:'10%'
-    },
+      padding:'10%'
+     
+  },
+  bgclass: {
+    backgroundColor:`${process.env.REACT_APP_BG_COLOR}`,
+    padding:0,
+    margin:0,
+    height:'100vh',
+    width:'100vw',
+  },
+  myclass1: {
+    padding:'30px'
+},
     imageclass: {
       width:'350px'
     },
@@ -185,6 +197,7 @@ function BankForm (props){
   }
 
   return (
+    <div className={classes.bgclass}>
     <div className={classes.myclass}>
         
         <Grid
@@ -193,6 +206,8 @@ function BankForm (props){
         justify="center"
         alignItems="center"
         >
+
+<Paper elevation={3} className={classes.myclass1}>
       <form onSubmit={formik.handleSubmit}>
         
        
@@ -298,7 +313,9 @@ function BankForm (props){
           Submit
         </Button>
       </form>
+      </Paper>
       </Grid>
+    </div>
     </div>
   );
 }
