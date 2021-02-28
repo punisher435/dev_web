@@ -44,6 +44,10 @@ const validationSchema = yup.object({
   title: yup
   .string('Enter your Room name')
   .required('Room name is required'),
+
+  gender: yup
+  .string('Enter your Room name')
+  .required('Room name is required'),
   
   wifi: yup
   .boolean()
@@ -486,6 +490,8 @@ function ShopForm (props){
       cost_TV:'',
       removable_TV:false,
 
+      gender:'Both Male and Female',
+
       cooler:'',
       cost_cooler:'',
       removable_cooler:false,
@@ -590,6 +596,8 @@ function ShopForm (props){
                   cooler:res.data.cooler,
                   cost_cooler:res.data.cost_cooler,
                   removable_cooler:res.data.removable_cooler,
+
+                  gender:res.data.gender,
 
                  
 
@@ -707,6 +715,8 @@ function ShopForm (props){
       cost_electricity:myroom.cost_electricity,
       cost_water:myroom.cost_water,
 
+      gender:myroom.gender,
+
       shop_cleaning:myroom.shop_cleaning,
       cost_cleaning:myroom.cost_cleaning,
 
@@ -791,6 +801,7 @@ function ShopForm (props){
       form_data.append('cost_water',values.cost_water)
 
       form_data.append('location',values.location)
+      form_data.append('gender',values.gender)
 
       form_data.append('city',values.city)
       form_data.append('state',values.state)
@@ -1224,6 +1235,42 @@ if(newredirect==true)
         </div>
       </Grid>
     </Grid>
+
+    <br />
+
+<Grid
+    container
+    direction="row"
+    justify="center"
+    alignItems="center"
+    spacing={1}
+  >
+    <Grid item>
+    <Typography variant="body1" color="textSecondary" className={classes.textclass}>
+        Who you want this shop to rent?
+      </Typography>
+    </Grid>
+      <Grid item>
+    <FormControl className={classes.formControl}>
+    
+        <InputLabel id="gender">Gender</InputLabel>
+        <Select
+        labelId="gender"
+        id="gender"
+        value={formik.values.gender}
+        onChange={(e) => formik.setFieldValue('gender',e.target.value)}
+        error={formik.touched.gender && Boolean(formik.errors.gender)}
+        helperText={formik.touched.gender && formik.errors.gender}
+        >
+        <MenuItem value={'Male'}>Male</MenuItem>
+        <MenuItem value={'Female'}>Female</MenuItem>
+        <MenuItem value={'Both Male and Female'}>Both Male and Female</MenuItem>
+        <MenuItem value={'Any'}>Any</MenuItem>
+        
+        </Select>
+    </FormControl>
+  </Grid>
+  </Grid>
 
     <br />
 

@@ -84,10 +84,10 @@ const useStyles = makeStyles((theme) => ({
 const steps = ['Customer details','Review your booking'];
 
 
-function getStepContent(step,bookdetails,setbookdetails,setpayment) {
+function getStepContent(step,bookdetails,setbookdetails,setpayment,profile) {
   switch (step) {
     case 0:
-      return <AddressForm bookdetails={bookdetails} setbookdetails={setbookdetails} setpayment={setpayment}/>;
+      return <AddressForm bookdetails={bookdetails} setbookdetails={setbookdetails} setpayment={setpayment} profile={profile}/>;
     case 1:
       return <Review bookdetails={bookdetails} setbookdetails={setbookdetails}/>;
     default:
@@ -294,7 +294,7 @@ function Checkout(props) {
   }
 
 
-
+  if(props.profile){
   return (
     <React.Fragment>
       <CssBaseline />
@@ -333,7 +333,7 @@ function Checkout(props) {
               </React.Fragment>
             ) : (
               <React.Fragment>
-                {getStepContent(activeStep,bookdetails,setbookdetails,setpayment)}
+                {getStepContent(activeStep,bookdetails,setbookdetails,setpayment,props.profile)}
                 <div className={classes.buttons}>
                   {activeStep !== 0 && (
                     <Button onClick={handleBack} className={classes.button}>
@@ -357,6 +357,7 @@ function Checkout(props) {
       </main>
     </React.Fragment>
   );
+}
 }
 
 

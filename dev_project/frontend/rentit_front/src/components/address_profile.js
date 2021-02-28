@@ -57,7 +57,8 @@ const validationSchema = yup.object({
  
     // necessary for content to be below app bar
     myclass: {
-        padding:'10%'
+        padding:'10%',
+        overflowX:'hidden'
        
     },
     bgclass: {
@@ -66,9 +67,11 @@ const validationSchema = yup.object({
       margin:0,
       height:'100vh',
       width:'100vw',
+      overflowX:'hidden'
     },
     myclass1: {
-      padding:'30px'
+      padding:'30px',
+      overflowX:'hidden',
   },
     imageclass: {
       width:'350px'
@@ -80,7 +83,10 @@ const validationSchema = yup.object({
     erorclass: {
         width:'50%',
         marginLeft:'25%',
-    }
+    },
+    gridclass: {
+      overflowX:'hidden'
+    },
   }));
 
 function AddressForm (props){
@@ -206,6 +212,7 @@ function AddressForm (props){
         direction="column"
         justify="center"
         alignItems="center"
+        className={classes.gridclass}
         >
 
 <Paper elevation={3} className={classes.myclass1}>

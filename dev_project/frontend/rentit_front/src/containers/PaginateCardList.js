@@ -92,6 +92,7 @@ const App = ({isAuthenticated}) => {
     search:'',
     room_cleaning:'',
     ordering:'-trust_points',
+    gender:'Any',
   });
 
   useEffect(() => {
@@ -141,6 +142,8 @@ const App = ({isAuthenticated}) => {
           floor_filter:filters.floor_filter,
           search:filters.search,
           ordering:filters.ordering,
+          gender:filters.gender,
+
         },
         config:config
       });

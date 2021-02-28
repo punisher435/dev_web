@@ -96,6 +96,8 @@ class rooms(models.Model):
     longitude = models.DecimalField(max_digits=9,decimal_places=6,default=0.0)
     latitude = models.DecimalField(max_digits=9,decimal_places=6,default=0.0)
 
+    gender = models.CharField(max_length=255)
+
 
     #facility and description
     length=models.IntegerField()
@@ -251,6 +253,8 @@ class shops(models.Model):
     commission = models.IntegerField(default=0)
     pausebooking = models.BooleanField(default=False)
 
+    gender = models.CharField(max_length=255)
+
     #address
     location=models.TextField()
     city = models.CharField(max_length=255)
@@ -382,6 +386,8 @@ class apartments(models.Model):
     photo6=models.ImageField(_("Image"),upload_to=upload_to_apartments,default='/images/rooms/default.jpg')
 
     currency=models.CharField(max_length=200,default='₹ INR')
+
+    gender = models.CharField(max_length=255)
 
     booked=models.BooleanField(default=False)
     bookedtill =models.DateField(_("Booked_till_Date"),default=datetime.date(2000,1,1))

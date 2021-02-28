@@ -76,6 +76,7 @@ const App = ({isAuthenticated}) => {
     city:'',
     state:'',
     wifi:'',
+    gender:'Any',
    
 
     electricity:'',
@@ -131,6 +132,7 @@ const App = ({isAuthenticated}) => {
           balcony_filter:filters.balcony_filter,
           separate_washroom:filters.separate_washroom,
           wifi:filters.wifi,
+          gender:filters.gender,
       
           floor_filter:filters.floor_filter,
           search:filters.search,

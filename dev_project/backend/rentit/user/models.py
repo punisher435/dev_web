@@ -16,11 +16,11 @@ from .managers import profile_manager
 
 class UserAccountManager(BaseUserManager):
 
-    def create_user(self,email,first_name,last_name,is_seller,password=None, **extra_fields):
+    def create_user(self,email,first_name,last_name,gender,is_seller,password=None, **extra_fields):
         if not email:
             raise ValueError('Users must have an email address!')
         email =self.normalize_email(email)
-        user = self.model(email=email,first_name=first_name,last_name=last_name,is_seller=is_seller,**extra_fields)
+        user = self.model(email=email,first_name=first_name,last_name=last_name,gender=gender,is_seller=is_seller,**extra_fields)
 
         user.set_password(password)
         user.save(using=self._db)
@@ -56,11 +56,12 @@ class customUser(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     date_jointed=models.DateTimeField(auto_now_add=True)
     removed=models.BooleanField(default=False)
+    gender=models.CharField(max_length=255)
 
     objects = UserAccountManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS= ['first_name','last_name','is_seller','profile_completed','bank_completed','address_completed']
+    REQUIRED_FIELDS= ['first_name','last_name','gender','is_seller','profile_completed','bank_completed','address_completed']
 
     def get_full_name(self):
         return self.first_name + ' ' + self.last_name

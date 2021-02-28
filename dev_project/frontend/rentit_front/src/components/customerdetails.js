@@ -7,7 +7,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 
 
 
-export default function AddressForm({bookdetails,setbookdetails,setpayment}) {
+export default function AddressForm({bookdetails,setbookdetails,setpayment,profile}) {
 
 
   const onChange = (e) => {
@@ -92,6 +92,18 @@ export default function AddressForm({bookdetails,setbookdetails,setpayment}) {
             value={bookdetails.country_code}
             autoComplete="country_code"
             onInput={ e => onChange(e)}
+          />
+        </Grid>
+
+        <Grid item xs={12} sm={6}>
+          <TextField
+            required
+            id="gender"
+            name="gender"
+            label="Gender"
+            fullWidth
+            value={profile.gender}
+            autoComplete="gender"
           />
         </Grid>
       

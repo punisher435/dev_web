@@ -119,7 +119,7 @@ class my_room_viewset(viewsets.ViewSet):
                 wifi=bool(request.data["wifi"]=='true'),cost_wifi=int(request.data["cost_wifi"]),removable_wifi=bool(request.data["removable_wifi"]=='true'),AC=bool(request.data["AC"]=='true'),cost_AC=int(request.data["cost_AC"]),removable_AC=bool(request.data["removable_AC"]=='true'),cooler=bool(request.data["cooler"]=='true'),cost_cooler=int(request.data["cost_cooler"]),removable_cooler=bool(request.data["removable_cooler"]=='true'),laundry=bool(request.data["laundry"]=='true'),cost_laundry=int(request.data["cost_laundry"]),
                 iron=bool(request.data["iron"]=='true'),cost_iron=int(request.data["cost_iron"]),guest_allowed=bool(request.data["guest_allowed"]=='true'),guest_policy=request.data["guest_policy"],veg_food=bool(request.data["veg_food"]=='true'),nonveg_food=bool(request.data["nonveg_food"]=='true'),food_policy=request.data["food_policy"],breakfast=bool(request.data["breakfast"]=='true'),cost_breakfast=int(request.data["cost_breakfast"]),removable_breakfast=bool(request.data["removable_breakfast"]=='true'),lunch=bool(request.data["lunch"]=='true'),cost_lunch=int(request.data["cost_lunch"]),removable_lunch=bool(request.data["removable_lunch"]=='true'),
                 dinner=bool(request.data["dinner"]=='true'),cost_dinner=int(request.data["cost_dinner"]),removable_dinner=bool(request.data["removable_dinner"]=='true'),room_cleaning=bool(request.data["room_cleaning"]=='true'),cost_cleaning=int(request.data["cost_cleaning"]),nearby_station1=request.data["nearby_station1"],nearby_station2=request.data["nearby_station2"],distance1=float(request.data["distance1"]),distance2=float(request.data["distance2"]),room_policy=request.data["room_policy"],
-                address_proof=request.data["address_proof"])
+                address_proof=request.data["address_proof"],gender=request.data["gender"])
 
                 room.save()
 
@@ -233,7 +233,8 @@ class my_room_viewset(viewsets.ViewSet):
             room.nearby_station2=request.data["nearby_station2"]            
             room.distance1=float(request.data["distance1"])            
             room.distance2=float(request.data["distance2"])            
-            room.room_policy=request.data["room_policy"]            
+            room.room_policy=request.data["room_policy"]  
+            room.gender=request.data["gender"]          
 
             room.save()
 
@@ -388,7 +389,7 @@ class my_shop_viewset(viewsets.ViewSet):
                 cooler=bool(request.data["cooler"]=='true'),cost_cooler=int(request.data["cost_cooler"]),removable_cooler=bool(request.data["removable_cooler"]=='true'),
                 AC=bool(request.data["AC"]=='true'),cost_AC=int(request.data["cost_AC"]),
                 shop_cleaning=bool(request.data["shop_cleaning"]=='true'),cost_cleaning=int(request.data["cost_cleaning"]),nearby_station1=request.data["nearby_station1"],nearby_station2=request.data["nearby_station2"],distance1=float(request.data["distance1"]),distance2=float(request.data["distance2"]),shop_policy=request.data["shop_policy"],
-                address_proof=request.data["address_proof"])
+                address_proof=request.data["address_proof"],gender=request.data["gender"])
 
                 shop.save()
 
@@ -469,7 +470,7 @@ class my_shop_viewset(viewsets.ViewSet):
 
             room.AC=bool(request.data["AC"]=='true')            
             room.cost_AC=int(request.data["cost_AC"])                            
-
+            room.gender=request.data["gender"]
 
                      
                      
@@ -642,7 +643,7 @@ class my_apartment_viewset(viewsets.ViewSet):
                 wifi=bool(request.data["wifi"]=='true'),cost_wifi=int(request.data["cost_wifi"]),removable_wifi=bool(request.data["removable_wifi"]=='true'),AC=bool(request.data["AC"]=='true'),cost_AC=int(request.data["cost_AC"]),removable_AC=bool(request.data["removable_AC"]=='true'),cooler=bool(request.data["cooler"]=='true'),cost_cooler=int(request.data["cost_cooler"]),removable_cooler=bool(request.data["removable_cooler"]=='true'),laundry=bool(request.data["laundry"]=='true'),cost_laundry=int(request.data["cost_laundry"]),
                 apartment_cleaning=bool(request.data["apartment_cleaning"]=='true'),removable_laundry=bool(request.data["removable_laundry"]=='true'),cost_cleaning=int(request.data["cost_cleaning"]),nearby_station1=request.data["nearby_station1"],nearby_station2=request.data["nearby_station2"],distance1=float(request.data["distance1"]),distance2=float(request.data["distance2"]),apartment_policy=request.data["apartment_policy"],
                 address_proof=request.data["address_proof"],washroom=int(request.data["washroom"]),total_rooms=int(request.data["total_rooms"]),total_floors=int(request.data["total_floors"]),total_beds=int(request.data["total_beds"]),total_TV=int(request.data["total_TV"]),total_AC=int(request.data["total_AC"]),total_cooler=int(request.data["total_cooler"]),total_geyser=int(request.data["total_geyser"]),
-                apartment_type=request.data["apartment_type"],sofa=bool(request.data["sofa"]=='true'))
+                apartment_type=request.data["apartment_type"],sofa=bool(request.data["sofa"]=='true'),gender=request.data["gender"])
 
                 room.save()
 
@@ -695,7 +696,8 @@ class my_apartment_viewset(viewsets.ViewSet):
             room.description=request.data["description"]            
             room.cctv_building=bool(request.data["cctv_building"]=='true')           
             room.building_guard=bool(request.data["building_guard"]=='true')            
-            room.balcony=int(request.data["balcony"])            
+            room.balcony=int(request.data["balcony"])           
+            room.gender=request.data["gender"] 
                        
             room.windows=int(request.data["windows"])            
             room.fans=int(request.data["fans"])            

@@ -86,6 +86,7 @@ const App = ({isAuthenticated}) => {
     city:'',
     state:'',
     wifi:'',
+    gender:'Any',
     
     TV:'',
     geyser:'',
@@ -130,6 +131,7 @@ const App = ({isAuthenticated}) => {
           windows_filter:filters.windows,
           building_guard:filters.building_guard,
           cctv_building:filters.cctv_building,
+          gender:filters.gender,
           
           laundry:filters.laundry,
           cooler:filters.cooler,

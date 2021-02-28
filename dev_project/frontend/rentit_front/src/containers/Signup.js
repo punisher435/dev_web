@@ -16,6 +16,11 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 
 function Copyright() {
   return (
@@ -48,6 +53,13 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
 }));
 
 
@@ -58,7 +70,8 @@ const Signup = ({ signup, isAuthenticated }) => {
         email: '',
         is_seller:false,
         password: '',
-        re_password: ''
+        re_password: '',
+        gender:'male'
     });
 
     const classes = useStyles();
@@ -91,6 +104,8 @@ const Signup = ({ signup, isAuthenticated }) => {
         <Container component="main" maxWidth="xs">
             <CssBaseline />
             <div className={classes.paper}>
+
+              
             <Avatar className={classes.avatar}>
                 <LockOutlinedIcon />
             </Avatar>
@@ -153,6 +168,21 @@ const Signup = ({ signup, isAuthenticated }) => {
                     onInput={ e => onChange(e)}
                     />
                 </Grid>
+                
+                <FormControl className={classes.formControl}>
+        <InputLabel id="gender">Gender</InputLabel>
+                <Select
+          labelId="gender"
+          id="gender"
+          value={formData.gender}
+          onChange={(e) => {setFormData({...formData,gender:e.target.value})}}
+        >
+          <MenuItem value={'Male'}>Male</MenuItem>
+          <MenuItem value={'Female'}>Female</MenuItem>
+          <MenuItem value={'Other'}>Other</MenuItem>
+        </Select>
+        </FormControl>
+
                 <Grid item xs={12}>
                     <TextField
                     variant="outlined"
