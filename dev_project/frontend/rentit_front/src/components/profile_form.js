@@ -10,6 +10,7 @@ import axios from 'axios'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 import Eror from './eror'
+import Paper from '@material-ui/core/Paper';
 
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
@@ -34,10 +35,22 @@ const validationSchema = yup.object({
 });
 
 const useStyles = makeStyles(theme => ({
-    myclass: {
-        marginTop:'10%'
-    },
+  myclass: {
+    padding:'10%'
+   
+},
+bgclass: {
+  backgroundColor:`${process.env.REACT_APP_BG_COLOR}`,
+  padding:0,
+  margin:0,
+  height:'100vh',
+  width:'100vw',
+},
+myclass1: {
+  padding:'30px'
+},
     imageclass: {
+      elevation:6,
       overflow: 'hidden',
         width: '110px',
         height: '110px',
@@ -49,6 +62,7 @@ const useStyles = makeStyles(theme => ({
         width: '200px',
         height: '200px',
         position:'relative',
+        elevation:6,
       },
       [theme.breakpoints.up('md')]: {
         borderRadius:'50%',
@@ -56,6 +70,7 @@ const useStyles = makeStyles(theme => ({
         width: '300px',
         height: '300px',
         position:'relative',
+        elevation:6,
       },
       marginLeft:'1%',
       marginRight:'1%',
@@ -190,6 +205,7 @@ function ProfileForm (props){
   }
 
   return (
+    <div className={classes.bgclass}>
     <div className={classes.myclass}>
         
         <Grid
@@ -198,6 +214,7 @@ function ProfileForm (props){
         justify="center"
         alignItems="center"
         >
+          <Paper elevation={3} className={classes.myclass1}>
       <form onSubmit={formik.handleSubmit}>
 
       <Grid item className={classes.imageclass}>
@@ -269,7 +286,9 @@ function ProfileForm (props){
           Submit
         </Button>
       </form>
+      </Paper>
       </Grid>
+    </div>
     </div>
   );
 }
