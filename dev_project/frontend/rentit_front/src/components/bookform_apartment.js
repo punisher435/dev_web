@@ -316,7 +316,7 @@ if(props.profile){
         <CircularProgress color="inherit" />
       </Backdrop>
 
-        <Paper className={classes.paper}>
+        <Paper className={classes.paper} elevation={5}>
           <Typography component="h1" variant="h4" align="center">
             Booking Form
           </Typography>
