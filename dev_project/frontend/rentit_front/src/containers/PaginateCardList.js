@@ -92,7 +92,7 @@ const App = ({isAuthenticated}) => {
     search:'',
     room_cleaning:'',
     ordering:'-trust_points',
-    gender:'Any',
+    gender:'',
   });
 
   useEffect(() => {

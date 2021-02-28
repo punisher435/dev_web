@@ -96,15 +96,9 @@ export default function AddressForm({bookdetails,setbookdetails,setpayment,profi
         </Grid>
 
         <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="gender"
-            name="gender"
-            label="Gender"
-            fullWidth
-            value={profile.gender}
-            autoComplete="gender"
-          />
+          <Typography variant='body1'>
+            Note: Gender of customer must match the room gender specificity
+          </Typography>
         </Grid>
       
        

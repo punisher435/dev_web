@@ -67,6 +67,7 @@ export default function SimpleSelect3(props) {
           value={props.filters.gender}
           onChange={handleChange2}
         >
+          <MenuItem value={''}>None</MenuItem>
           <MenuItem value={'Male'}>Male</MenuItem>
           <MenuItem value={'Female'}>Female</MenuItem>
           <MenuItem value={'Both Male and Female'}>Both Male and Female</MenuItem>

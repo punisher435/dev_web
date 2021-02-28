@@ -86,7 +86,7 @@ const App = ({isAuthenticated}) => {
     city:'',
     state:'',
     wifi:'',
-    gender:'Any',
+    gender:'',
     
     TV:'',
     geyser:'',
