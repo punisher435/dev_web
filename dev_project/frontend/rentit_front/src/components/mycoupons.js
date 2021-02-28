@@ -81,6 +81,11 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2),
     
   },
+  myclass: {
+    padding:0,
+    margin:0,
+
+  },
 }));
   
 
@@ -137,16 +142,25 @@ function MyCoupons(props) {
             <main className={classes.content}>
             <div className={classes.toolbar} />
 
-            <h2>My coupons</h2>
+            <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+            className={classes.myclass}
+            spacing={3}
+            >
 
             {
                 mycoupons.map(coupon =>
                     {
-                        return <div><CouponCard mycoupon={coupon} /><br /></div>;
+                        return  <Grid item><CouponCard mycoupon={coupon} /></Grid>;
                     })
             }
             
-            <AddCouponCard info={props.profile}/>
+            <Grid item><AddCouponCard info={props.profile}/></Grid>
+
+            </Grid>
             
             
 

@@ -189,10 +189,18 @@ function Analytics(props) {
                 Analytics
             </Typography>
 
+            <Grid
+  container
+  direction="column"
+  justify="center"
+  alignItems="center"
+>
+
             {
-                props.profile.is_seller ? <SellerAnalytics roombookings={bookings} bank={bank} shopbookings={shopbookings} apartmentbookings={apartmentbookings} /> 
-                : <Customeranalytics roombookings={bookings} shopbookings={shopbookings} apartmentbookings={apartmentbookings} /> 
+                props.profile.is_seller ? <Grid item><SellerAnalytics roombookings={bookings} bank={bank} shopbookings={shopbookings} apartmentbookings={apartmentbookings} /></Grid> 
+                : <Grid item><Customeranalytics roombookings={bookings} shopbookings={shopbookings} apartmentbookings={apartmentbookings} /> </Grid>
             }
+            </Grid>
 
             
             </main>

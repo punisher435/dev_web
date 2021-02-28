@@ -82,6 +82,12 @@ function Selleranalytics({roombookings,shopbookings,apartmentbookings,bank}) {
     return (
         <div>
             <Grid
+  container
+  direction="column"
+  justify="center"
+  alignItems="center"
+>
+            <Grid
             container
             direction="row"
             justify="flex-start"
@@ -167,6 +173,7 @@ function Selleranalytics({roombookings,shopbookings,apartmentbookings,bank}) {
                     
                     </div>
                 </Grid>
+            </Grid>
             </Grid>
 
             

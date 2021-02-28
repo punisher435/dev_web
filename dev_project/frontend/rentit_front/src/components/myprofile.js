@@ -79,6 +79,11 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2),
     
   },
+  myclass: {
+    padding:0,
+    margin:0,
+
+  },
 }));
   
 
@@ -155,18 +160,27 @@ function Myprofile(props) {
             <main className={classes.content}>
             <div className={classes.toolbar} />
 
-            <h2>My profile</h2>
+            <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+            className={classes.myclass}
+            spacing={3}
+            >
             
-            <ProfileCard myprofile={myprofile} info={props.profile}/>
+            <Grid item><ProfileCard myprofile={myprofile} info={props.profile}/></Grid>
             <br />
             {
-              props.profile.is_seller===true ? <BankCard bank={bank} info={props.profile}/> : null
+              props.profile.is_seller===true ? <Grid item><BankCard bank={bank} info={props.profile}/></Grid> : null
             }
             <br />
             
             {
-              props.profile.is_seller===true ? <AddressCard address={address} info={props.profile}/> : null
+              props.profile.is_seller===true ? <Grid item><AddressCard address={address} info={props.profile}/></Grid> : null
             }
+
+            </Grid>
 
             
             </main>

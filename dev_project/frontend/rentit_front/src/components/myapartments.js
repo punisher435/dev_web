@@ -81,6 +81,11 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2),
     
   },
+  myclass: {
+    padding:0,
+    margin:0,
+
+  },
 }));
   
 
@@ -136,17 +141,24 @@ function Myapartments(props) {
             <main className={classes.content}>
             <div className={classes.toolbar} />
 
-            <h2>My apartments</h2>
+            <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+            className={classes.myclass}
+            spacing={3}
+            >
 
             {
                 myapartments.map(apartment =>
                     {
-                        return <div><ApartmentCard myapartment={apartment} /></div>;
+                        return <Grid item><ApartmentCard myapartment={apartment} /></Grid>;
                     })
             }
-            <AddApartmentCard info={props.profile}/>
+            <Grid item><AddApartmentCard info={props.profile}/></Grid>
             
-            
+            </Grid>
 
             
             </main>

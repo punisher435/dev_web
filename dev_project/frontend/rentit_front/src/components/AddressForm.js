@@ -4,9 +4,11 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import Paper from '@material-ui/core/Paper';
 
 export default function AddressForm() {
   return (
+    <Paper elevation={3} >
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
         Seller address
@@ -92,5 +94,6 @@ export default function AddressForm() {
         </Grid>
       </Grid>
     </React.Fragment>
+    </Paper>
   );
 }
