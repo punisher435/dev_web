@@ -9,7 +9,7 @@ import {Link} from 'react-router-dom'
 
 const useStyles = makeStyles({
   root: {
-    minWidth: 275,
+    width:'80vw',
     maxWidth: 400,
   },
   bullet: {
