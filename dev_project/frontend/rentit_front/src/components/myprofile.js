@@ -80,8 +80,7 @@ const useStyles = makeStyles((theme) => ({
     
   },
   myclass: {
-    padding:0,
-    margin:0,
+    
 
   },
 }));

@@ -41,7 +41,7 @@ class profile_viewset(viewsets.ViewSet):
         try:
 
             temp = None
-            if request.data["photo"]:
+            if request.data["photo"] != 'null':
                 temp = request.data["photo"]
 
             profile = customUser_profile(user_id=request.user,mobile=request.data["mobile"],alternate_mobile=request.data["alternate_mobile"],
@@ -62,7 +62,9 @@ class profile_viewset(viewsets.ViewSet):
             queryset = queryset.filter(user_id=request.user)
             profile = get_object_or_404(queryset,pk=pk)
 
-            profile.photo = request.data['photo']
+            if request.data["photo"] != 'null':
+                profile.photo = request.data['photo']
+
             profile.country_code = request.data["country_code"]
             profile.mobile = request.data["mobile"]
             profile.alternate_mobile = request.data["alternate_mobile"]

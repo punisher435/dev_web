@@ -150,6 +150,7 @@ function ProfileForm (props){
       mobile:myprofile.mobile,
       alternate_mobile:myprofile.alternate_mobile,
       aadhar:myprofile.aadhar,
+      photo:'null',
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
@@ -159,7 +160,7 @@ function ProfileForm (props){
       form_data.append('mobile',values.mobile)
       form_data.append('alternate_mobile',values.alternate_mobile)
       form_data.append('aadhar',values.aadhar)
-      form_data.append('photo',myprofile.photo)
+      form_data.append('photo',values.photo)
       console.log(form_data.entries())
       const config = {
         headers: {
@@ -214,7 +215,7 @@ function ProfileForm (props){
         justify="center"
         alignItems="center"
         >
-          <Paper elevation={3} className={classes.myclass1}>
+          <Paper elevation={5} className={classes.myclass1}>
       <form onSubmit={formik.handleSubmit}>
 
       <Grid item className={classes.imageclass}>
@@ -224,6 +225,7 @@ function ProfileForm (props){
         </Button>
 
       <input type='file'  ref={hiddenFileInput1} style={{display:'none'}}  id='photo' accept='image/png,image/jpeg,image/jpg' onChange={(event) => {console.log(event.currentTarget.files[0]);
+      formik.setFieldValue('photo',event.target.files[0])
       setprofile({...myprofile,file: URL.createObjectURL(event.target.files[0]),photo:event.target.files[0]})}}/> 
 
       </Grid>
