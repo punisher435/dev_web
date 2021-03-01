@@ -46,10 +46,11 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3),
+    padding: theme.spacing(0),
     [theme.breakpoints.up('sm')]: {
       display: 'block',
       marginLeft:drawerWidth,
+      padding: theme.spacing(3),
     },
   },
   erorclass:{
@@ -86,7 +87,10 @@ const useStyles = makeStyles((theme) => ({
   },
   myclass: {
       
-      width:'60vw'
+      width:'90vw',
+      [theme.breakpoints.up('sm')]: {
+        width:'60vw',
+      },
   },
 }));
   

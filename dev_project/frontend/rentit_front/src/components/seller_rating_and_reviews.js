@@ -68,6 +68,10 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'visible !important'
     
   },
+  paperme:{
+    padding:25,
+    marginBottom:'5px',
+  },
 }));
 
 
@@ -107,9 +111,10 @@ export default function SellerReviews({reviews,params,setparams}) {
 
   return (
     <div>
+      <Paper className={classes.paperme} elevation={5}>
 
       <FormControl className={classes.formControl}>
-        <InputLabel id="demo-simple-select-label">Age</InputLabel>
+        <InputLabel id="demo-simple-select-label">Sort</InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
@@ -120,7 +125,9 @@ export default function SellerReviews({reviews,params,setparams}) {
           <MenuItem value={'-rating'}>Highly rated</MenuItem>
           <MenuItem value={'rating'}>Negative first</MenuItem>
           <MenuItem value={'timestamp'}>Oldest first</MenuItem>
+          
         </Select>
+        <br />
       </FormControl>
 
       <Grid container
@@ -175,7 +182,7 @@ export default function SellerReviews({reviews,params,setparams}) {
           <IconButton onClick={e => handleclick1(e)} >
       <ArrowBackIosIcon />
       </IconButton>
-          <p>{params.page}</p>
+          {params.page}
       <IconButton onClick={e => handleclick2(e)} >
       <ArrowForwardIosIcon />
       </IconButton>
@@ -184,6 +191,8 @@ export default function SellerReviews({reviews,params,setparams}) {
       
 
       <Paper />
+
+      </Paper>
 
     
 
