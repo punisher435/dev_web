@@ -12,7 +12,7 @@ import RatingWithCompliments from './MobileRatingSearchCard'
 
 const useStyles = makeStyles({
   root: {
-    width: '70vw',
+    width: '80vw',
    maxWidth:350,
   },
   media: {

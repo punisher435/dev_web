@@ -65,8 +65,8 @@ const validationSchema = yup.object({
       backgroundColor:`${process.env.REACT_APP_BG_COLOR}`,
       padding:0,
       margin:0,
-      height:'100vh',
-      width:'100vw',
+      
+   
       overflowX:'hidden'
     },
     myclass1: {

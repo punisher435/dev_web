@@ -12,7 +12,7 @@ import RatingWithCompliments from './MobileRatingSearchCard'
 
 const useStyles = makeStyles({
   root: {
-    width: '70vw',
+    width: '80vw',
     maxWidth:350,
   },
   media: {
@@ -31,7 +31,7 @@ export default function ApartmentCard({myapartment}) {
   return (
       <div>
     <Card className={classes.root}>
-    <Link to={`/rooms/${myapartment.room_id}`} target="_blank" style={{textDecoration:'none',color:'black'}}>
+    <Link to={`/apartments/${myapartment.apartment_id}`} target="_blank" style={{textDecoration:'none',color:'black'}}>
       <CardActionArea>
         <CardMedia
           className={classes.media}

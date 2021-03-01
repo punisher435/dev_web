@@ -19,6 +19,7 @@ import Typography from '@material-ui/core/Typography';
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import DateSelect from './dateselect'
+import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
 
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
@@ -62,8 +63,19 @@ const validationSchema = yup.object({
  
     // necessary for content to be below app bar
     myclass: {
-        marginTop:'10%'
-    },
+      padding:'10%'
+     
+  },
+  bgclass: {
+    backgroundColor:`${process.env.REACT_APP_BG_COLOR}`,
+    padding:0,
+    margin:0,
+
+ 
+  },
+  myclass1: {
+    padding:'30px'
+},
     imageclass: {
       width:'350px'
     },
@@ -322,6 +334,7 @@ const handleChange2 = (e,apartmentid,boolean) => {
 
 
   return (
+    <div className={classes.bgclass}>
     
     <div className={classes.myclass}>
 
@@ -336,6 +349,7 @@ const handleChange2 = (e,apartmentid,boolean) => {
         justify="center"
         alignItems="center"
         >
+          <Paper elevation={3} className={classes.myclass1}>
       <form onSubmit={formik.handleSubmit}>
         
        
@@ -355,18 +369,8 @@ const handleChange2 = (e,apartmentid,boolean) => {
         </Grid>
 
         <br />
-        <Grid
-        container
-        direction="row"
-        justify="center"
-        alignItems="center"
-        spacing={1}
-      >
-        <Grid item>
-        <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-            Coupon type
-        </Typography>
-        </Grid>
+        
+        
           <Grid item>
         <FormControl className={classes.formControl}>
         
@@ -385,13 +389,13 @@ const handleChange2 = (e,apartmentid,boolean) => {
             </Select>
         </FormControl>
       </Grid>
-    </Grid>
+   
 
         
         <div><br /><Grid
       container
       direction="row"
-      justify="center"
+      justify="flex-start"
       alignItems="center"
       spacing={1}
     >
@@ -420,7 +424,7 @@ const handleChange2 = (e,apartmentid,boolean) => {
   <div><br /><Grid
       container
       direction="row"
-      justify="center"
+      justify="flex-start"
       alignItems="center"
       spacing={1}
     >
@@ -449,7 +453,7 @@ const handleChange2 = (e,apartmentid,boolean) => {
   <div><br /><Grid
       container
       direction="row"
-      justify="center"
+      justify="flex-start"
       alignItems="center"
       spacing={1}
     >
@@ -481,7 +485,7 @@ const handleChange2 = (e,apartmentid,boolean) => {
   <div><br /><Grid
       container
       direction="row"
-      justify="center"
+      justify="flex-start"
       alignItems="center"
       spacing={1}
     >
@@ -514,7 +518,7 @@ const handleChange2 = (e,apartmentid,boolean) => {
         <div><br /><Grid
       container
       direction="row"
-      justify="center"
+      justify="flex-start"
       alignItems="center"
       spacing={1}
     >
@@ -625,7 +629,10 @@ const handleChange2 = (e,apartmentid,boolean) => {
         
         
       </form>
+      </Paper>
       </Grid>
+    
+    </div>
     </div>
   );
 }
