@@ -207,7 +207,7 @@ function BankForm (props){
         alignItems="center"
         >
 
-<Paper elevation={3} className={classes.myclass1}>
+<Paper elevation={5} className={classes.myclass1}>
       <form onSubmit={formik.handleSubmit}>
         
        
