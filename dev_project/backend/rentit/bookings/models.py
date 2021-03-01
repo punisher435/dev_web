@@ -81,6 +81,13 @@ class roomBookings(models.Model):
     cancellation_reason = models.TextField(null=True,blank=True)
     feedback = models.TextField(null=True,blank=True)
 
+    acccount_no = models.CharField(max_length=255,null=True, blank=True)
+    IFSC_code = models.CharField(max_length=255,null=True, blank=True)
+    bank_name = models.CharField(max_length=255,null=True, blank=True)
+    bank_address = models.TextField(null=True, blank=True)
+    account_type = models.CharField(max_length=255,null=True,blank=True)
+
+
     extended = models.BooleanField(default=False)
     is_extended = models.BooleanField(default=False)
     extended_on = models.ForeignKey('self',null=True,blank=True,on_delete=models.PROTECT)
@@ -167,6 +174,12 @@ class shopBookings(models.Model):
     cancellation_reason = models.TextField(null=True,blank=True)
     feedback = models.TextField(null=True,blank=True)
 
+    acccount_no = models.CharField(max_length=255,null=True, blank=True)
+    IFSC_code = models.CharField(max_length=255,null=True, blank=True)
+    bank_name = models.CharField(max_length=255,null=True, blank=True)
+    bank_address = models.TextField(null=True, blank=True)
+    account_type = models.CharField(max_length=255,null=True,blank=True)
+
     extended = models.BooleanField(default=False)
     is_extended = models.BooleanField(default=False)
     extended_on = models.ForeignKey('self',null=True,blank=True,on_delete=models.PROTECT)
@@ -249,6 +262,12 @@ class apartmentBookings(models.Model):
     cancelled_date = models.DateTimeField(null=True,blank=True)
     cancellation_reason = models.TextField(null=True,blank=True)
     feedback = models.TextField(null=True,blank=True)
+
+    acccount_no = models.CharField(max_length=255,null=True, blank=True)
+    IFSC_code = models.CharField(max_length=255,null=True, blank=True)
+    bank_name = models.CharField(max_length=255,null=True, blank=True)
+    bank_address = models.TextField(null=True, blank=True)
+    account_type = models.CharField(max_length=255,null=True,blank=True)
 
     extended = models.BooleanField(default=False)
     is_extended = models.BooleanField(default=False)

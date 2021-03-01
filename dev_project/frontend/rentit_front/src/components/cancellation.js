@@ -90,6 +90,11 @@ function Bookingcancel(props) {
     const [canceldetails,setdetails] = useState({
         reason:'No use to me',
         feedback:'',
+        account_no:'',
+        IFSC_code:'',
+        bank_name:'',
+        bank_address:'',
+        account_type:'Savings',
     })
 
     React.useEffect(
@@ -156,6 +161,10 @@ function Bookingcancel(props) {
     }
     const handleChange = (event) => {
         setdetails({...canceldetails,reason:event.target.value});
+      };
+
+      const handleChange1 = (event) => {
+        setdetails({...canceldetails,account_type:event.target.value});
       };
 
       const handleme = e => {
@@ -230,7 +239,63 @@ function Bookingcancel(props) {
             </FormControl>
             </Grid>
             <br />
+            <Grid item>
+            <FormControl className={classes.formControl}>
+                <InputLabel id="account_type">Account type</InputLabel>
+                <Select
+                labelId="account_type"
+                id="account_type"
+                value={canceldetails.account_type}
+                onChange={handleChange1}
+                >
+                <MenuItem value={'Savings'}>Savings</MenuItem>
+                <MenuItem value={'Current'}>Current</MenuItem>
+                </Select>
+                <FormHelperText>Select your cancellation reason</FormHelperText>
+            </FormControl>
+            </Grid>
+            <br />
             <form className={classes.root} noValidate autoComplete="off">
+            <TextField
+            id="account_no"
+            label="account_no"
+            name="account_no"
+            multiline
+            rows={1}
+            value = {canceldetails.account_no}
+            onInput={(e) =>{handleme(e);}}
+            variant="outlined"
+        />
+        <TextField
+            id="IFSC_code"
+            label="IFSC_code"
+            name="IFSC_code"
+            multiline
+            rows={1}
+            value = {canceldetails.IFSC_code}
+            onInput={(e) =>{handleme(e);}}
+            variant="outlined"
+        />
+        <TextField
+            id="bank_name"
+            label="bank_name"
+            name="bank_name"
+            multiline
+            rows={1}
+            value = {canceldetails.bank_name}
+            onInput={(e) =>{handleme(e);}}
+            variant="outlined"
+        />
+        <TextField
+            id="bank_address"
+            label="bank_address"
+            name="bank_address"
+            multiline
+            rows={3}
+            value = {canceldetails.bank_address}
+            onInput={(e) =>{handleme(e);}}
+            variant="outlined"
+        />
             <TextField
             id="feedback"
             label="Feedback"
@@ -241,6 +306,7 @@ function Bookingcancel(props) {
             onInput={(e) =>{handleme(e);}}
             variant="outlined"
         />
+
             </form>
             <br />
 

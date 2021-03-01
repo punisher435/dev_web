@@ -903,6 +903,12 @@ class room_booking(viewsets.ViewSet):
 
             booking.cancellation_reason = data['reason']
             booking.feedback = data['feedback']
+            booking.account_type=data['account_type']
+            booking.account_no=data['account_no']
+            booking.bank_name=data['bank_name']
+            booking.bank_address=data['bank_address']
+            booking.IFSC_code=data['IFSC_code']
+
             booking.save()
 
             return Response('success',status=status.HTTP_200_OK)
@@ -1385,6 +1391,11 @@ class shop_booking(viewsets.ViewSet):
 
             booking.cancellation_reason = data['reason']
             booking.feedback = data['feedback']
+            booking.account_type=data['account_type']
+            booking.account_no=data['account_no']
+            booking.bank_name=data['bank_name']
+            booking.bank_address=data['bank_address']
+            booking.IFSC_code=data['IFSC_code']
             booking.save()
 
             return Response('success',status=status.HTTP_200_OK)
@@ -1894,6 +1905,11 @@ class apartment_booking(viewsets.ViewSet):
 
             booking.cancellation_reason = data['reason']
             booking.feedback = data['feedback']
+            booking.account_type=data['account_type']
+            booking.account_no=data['account_no']
+            booking.bank_name=data['bank_name']
+            booking.bank_address=data['bank_address']
+            booking.IFSC_code=data['IFSC_code']
             booking.save()
 
             return Response('success',status=status.HTTP_200_OK)
