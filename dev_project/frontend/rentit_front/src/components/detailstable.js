@@ -18,7 +18,7 @@ const useStyles = makeStyles({
 
 
 
-export default function BasicTable({booking,profile}) {
+export default function BasicTable({booking,profile,name}) {
   const classes = useStyles();
 
   return (
@@ -51,6 +51,21 @@ export default function BasicTable({booking,profile}) {
               
             </TableRow>
 
+            <TableRow key='product_name'>
+              <TableCell component="th" scope="row">
+                Name
+              </TableCell>
+              <TableCell align="right">{name.slice(0,15)}</TableCell>
+              
+            </TableRow>
+
+            <TableRow key='product_name2'>
+              <TableCell component="th" scope="row">
+                Name
+              </TableCell>
+              <TableCell align="right">{name.slice(15,30)}</TableCell>
+              
+            </TableRow>
             <TableRow key='booked_from'>
               <TableCell component="th" scope="row">
                Booked from

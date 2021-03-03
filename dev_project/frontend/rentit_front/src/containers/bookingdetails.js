@@ -56,7 +56,7 @@ myclass1: {
 },
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3),
+    padding: theme.spacing(1.3),
     [theme.breakpoints.up('sm')]: {
       display: 'block',
       marginLeft:drawerWidth,
@@ -195,50 +195,59 @@ function Bookingdetails(props) {
 
             </Grid>
          
+         {
+           mybooking.ended || mybooking.extended || props.profile.is_seller || mybooking.cancelled ? null : <Grid
+           container
+           direction="row"
+           justify="center"
+           alignItems="center"
+           spacing={2}
+           >
+           <Grid item >
+           {
+               mybooking.ended || mybooking.extended || props.profile.is_seller || mybooking.cancelled ? null : <Button variant="contained"  padding="auto"color="secondary" onClick={(e) => {handleclick1(e);}}>
+               Cancel booking
+             </Button>
+   }</Grid>
+  
+  <Grid item >
+           {
+               mybooking.ended || mybooking.extended || props.profile.is_seller || mybooking.cancelled ? null : <Button variant="contained" padding="auto"color="secondary" onClick={(e) => {handleclick2(e);}}>
+               Extend booking
+             </Button>
+   }</Grid>
+   </Grid>
+         }
+
+         
             
-            <Grid
-            container
-            direction="row"
-            justify="center"
-            alignItems="center"
-            spacing={2}
-            >
-            <Grid item >
-            {
-                mybooking.ended || mybooking.extended || props.profile.is_seller || mybooking.cancelled ? null : <Button variant="contained"  padding="auto"color="secondary" onClick={(e) => {handleclick1(e);}}>
-                Cancel booking
-              </Button>
-    }</Grid>
-   
-   <Grid item >
-            {
-                mybooking.ended || mybooking.extended || props.profile.is_seller || mybooking.cancelled ? null : <Button variant="contained" padding="auto"color="secondary" onClick={(e) => {handleclick2(e);}}>
-                Extend booking
-              </Button>
-    }</Grid>
-    </Grid>
+            
 
     <br />
 
-    <Grid
-            container
-            direction="row"
-            justify="center"
-            alignItems="center"
-            spacing={2}
-            >
-            
+    {
+      mybooking.room_review || mybooking.cancelled ? null :  <Grid
+      container
+      direction="row"
+      justify="center"
+      alignItems="center"
+      spacing={2}
+      >
+      
+
+<Grid item >
+      {
+          mybooking.room_review || mybooking.cancelled ? null :  <Link to={{
+            pathname: `/dashboard/recentbookings/room-bookings/${mybooking.booking_id}/feedback`,
+            state: { property_id:'room' }
+          }} style={{textDecoration:'none'}}><Button variant="contained" padding="auto"color="secondary" >
+          Give Feedback
+        </Button></Link>
+}</Grid>
+</Grid>
+    }
+
    
-   <Grid item >
-            {
-                mybooking.room_review || mybooking.cancelled ? null :  <Link to={{
-                  pathname: `/dashboard/recentbookings/room-bookings/${mybooking.booking_id}/feedback`,
-                  state: { property_id:'room' }
-                }} style={{textDecoration:'none'}}><Button variant="contained" padding="auto"color="secondary" >
-                Give Feedback
-              </Button></Link>
-    }</Grid>
-    </Grid>
 
     
            
@@ -260,18 +269,7 @@ function Bookingdetails(props) {
             
 
             </Grid>
-            <br />
-            <Grid
-            container
-            direction="row"
-            justify="center"
-            alignItems="center"
             
-            >
-            <Grid item >
-              <h4>{mybooking.room_name}</h4>
-            </Grid>
-            </Grid>
             <br />
             <Grid
             container
@@ -307,7 +305,7 @@ function Bookingdetails(props) {
             
             >
               <Grid item>
-                <Details booking={mybooking}  profile={props.profile}/>
+                <Details booking={mybooking}  profile={props.profile} name={mybooking.room_name}/>
               </Grid>
             </Grid>
             <br />

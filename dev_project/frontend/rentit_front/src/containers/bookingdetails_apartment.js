@@ -58,7 +58,7 @@ myclass1: {
 },
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3),
+    padding: theme.spacing(1.3),
     [theme.breakpoints.up('sm')]: {
       display: 'block',
       marginLeft:drawerWidth,
@@ -262,18 +262,7 @@ function Bookingdetails(props) {
             
 
             </Grid>
-            <br />
-            <Grid
-            container
-            direction="row"
-            justify="center"
-            alignItems="center"
             
-            >
-            <Grid item >
-              <h4>{mybooking.apartment_name}</h4>
-            </Grid>
-            </Grid>
             <br />
             <Grid
             container
@@ -309,7 +298,7 @@ function Bookingdetails(props) {
             
             >
               <Grid item>
-                <Details booking={mybooking}  profile={props.profile}/>
+                <Details booking={mybooking}  profile={props.profile} name={mybooking.apartment_name}/>
               </Grid>
             </Grid>
             <br />
