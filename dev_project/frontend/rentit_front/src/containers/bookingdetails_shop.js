@@ -194,9 +194,10 @@ function Bookingdetails(props) {
               </Typography>
             </Grid>
 
-            
+           
 
             </Grid>
+           
             
             <Grid
             container
@@ -241,7 +242,7 @@ function Bookingdetails(props) {
               </Button></Link>
     }</Grid>
     </Grid>
-
+ 
     
            
             <Hidden mdDown>

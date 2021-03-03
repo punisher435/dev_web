@@ -194,6 +194,7 @@ function Bookingdetails(props) {
             
 
             </Grid>
+         
             
             <Grid
             container
