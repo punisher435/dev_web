@@ -81,7 +81,7 @@ class roomBookings(models.Model):
     cancellation_reason = models.TextField(null=True,blank=True)
     feedback = models.TextField(null=True,blank=True)
 
-    acccount_no = models.CharField(max_length=255,null=True, blank=True)
+    account_no = models.CharField(max_length=255,null=True, blank=True)
     IFSC_code = models.CharField(max_length=255,null=True, blank=True)
     bank_name = models.CharField(max_length=255,null=True, blank=True)
     bank_address = models.TextField(null=True, blank=True)
@@ -174,7 +174,7 @@ class shopBookings(models.Model):
     cancellation_reason = models.TextField(null=True,blank=True)
     feedback = models.TextField(null=True,blank=True)
 
-    acccount_no = models.CharField(max_length=255,null=True, blank=True)
+    account_no = models.CharField(max_length=255,null=True, blank=True)
     IFSC_code = models.CharField(max_length=255,null=True, blank=True)
     bank_name = models.CharField(max_length=255,null=True, blank=True)
     bank_address = models.TextField(null=True, blank=True)
@@ -263,7 +263,7 @@ class apartmentBookings(models.Model):
     cancellation_reason = models.TextField(null=True,blank=True)
     feedback = models.TextField(null=True,blank=True)
 
-    acccount_no = models.CharField(max_length=255,null=True, blank=True)
+    account_no = models.CharField(max_length=255,null=True, blank=True)
     IFSC_code = models.CharField(max_length=255,null=True, blank=True)
     bank_name = models.CharField(max_length=255,null=True, blank=True)
     bank_address = models.TextField(null=True, blank=True)
