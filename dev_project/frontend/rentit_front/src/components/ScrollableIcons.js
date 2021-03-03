@@ -81,7 +81,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CustomizedTabs({post}) {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState('Wifi Facility');
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -92,7 +92,9 @@ export default function CustomizedTabs({post}) {
       <div className={classes.demo1}>
         <AntTabs 
         variant='scrollable'
-        aria-label="ant example">
+        aria-label="ant example"
+        value={value}
+        onChange={handleChange}>
 
 
             
