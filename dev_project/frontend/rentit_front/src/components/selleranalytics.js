@@ -90,7 +90,7 @@ function Selleranalytics({roombookings,shopbookings,apartmentbookings,bank}) {
             <Grid
             container
             direction="row"
-            justify="flex-start"
+            justify="center"
             alignItems="center"
             >
                 <Grid item>
@@ -129,7 +129,7 @@ function Selleranalytics({roombookings,shopbookings,apartmentbookings,bank}) {
         <Grid
             container
             direction="row"
-            justify="flex-start"
+            justify="center"
             alignItems="center"
             spacing={3}
             >

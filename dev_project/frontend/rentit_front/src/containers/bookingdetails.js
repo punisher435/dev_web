@@ -53,6 +53,7 @@ myclass1: {
   [theme.breakpoints.up('sm')]: {
     padding:'30px',
   },
+  
 },
   content: {
     flexGrow: 1,

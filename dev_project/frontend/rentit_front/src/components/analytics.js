@@ -185,10 +185,7 @@ function Analytics(props) {
             <main className={classes.content}>
             <div className={classes.toolbar} />
 
-            <Typography variant='h6'>
-                Analytics
-            </Typography>
-
+            
             <Grid
   container
   direction="column"
