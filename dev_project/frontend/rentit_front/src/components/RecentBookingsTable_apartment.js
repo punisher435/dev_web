@@ -91,6 +91,9 @@ const useStyles = makeStyles({
   normalclass: {
     color:'#4BB543 !important',
   },
+  title:{
+    fontSize: 'calc(14px + .5vw)',
+  }
   
 });
 
@@ -107,7 +110,7 @@ export default function CustomizedTables2({bookings,setbookings,title}) {
       <Grid item>
         <Typography variant="h5" color="inherit" noWrap className={classes.title}>
           <Box mt={1} ml={1} mb={1} fontWeight="fontWeightBold">
-                {title} Bookings History
+                Apartment Bookings History
           </Box>
         </Typography>
 

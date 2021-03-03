@@ -93,7 +93,7 @@ function RecentBooking1(props) {
         <main className={classes.content}>
         <div className={classes.toolbar} />
 
-        <h3>Recent bookings</h3>
+        <Typography variant='h5'>Recent bookings</Typography>
         <br />
         <CustomizedTables bookings={bookings} title={'Rooms'} setbookings={setbookings}/>
 

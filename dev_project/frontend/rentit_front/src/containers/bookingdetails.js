@@ -77,6 +77,12 @@ myclass1: {
     zIndex: theme.zIndex.drawer + 1,
     color: '#fff',
   },
+  topclass: {
+    marginTop:'10px',
+    [theme.breakpoints.up('sm')]: {
+      
+    },
+  },
 }));
   
 
@@ -165,8 +171,7 @@ function Bookingdetails(props) {
            >
              <Paper elevation={5} className={classes.myclass1}>
 
-
-
+            <div className={classes.topclass}>
             <Grid
             container
             direction="row"
@@ -344,6 +349,8 @@ function Bookingdetails(props) {
 <br />
             <button onClick={() => {setinvoice(true);}}>Generate pdf</button> 
             </Grid>
+            </div>
+
             </Paper>
 
             </Grid>
