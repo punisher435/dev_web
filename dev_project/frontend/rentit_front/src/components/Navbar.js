@@ -107,9 +107,7 @@ const useStyles = makeStyles((theme) => ({
     },
   
   },
-  AppBar: {
-    backgroundColor:`${process.env.REACT_APP_COLOR}`
-  },
+  AppBar: process.env.REACT_APP_THEME,
 }));
 
 
