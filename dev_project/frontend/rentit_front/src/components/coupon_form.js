@@ -63,13 +63,17 @@ const validationSchema = yup.object({
  
     // necessary for content to be below app bar
     myclass: {
-      padding:'10%'
+     
+      [theme.breakpoints.up('md')]: {
+        padding:'10%',
+      },
      
   },
   bgclass: {
     backgroundColor:`${process.env.REACT_APP_BG_COLOR}`,
-    padding:0,
-    margin:0,
+    height:'100vh',
+  
+    
 
  
   },
