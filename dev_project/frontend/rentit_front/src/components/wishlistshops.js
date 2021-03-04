@@ -94,9 +94,8 @@ function Wishlistshops({isAuthenticated,access}) {
            alignItems="center"
         >
 
-        <Grid item xs={1}/>
-
-        <Grid item xs={10}>
+       
+        <Grid item >
 
         <ul className='list-group mb-4'>
             {posts.map(post => (
@@ -118,7 +117,7 @@ function Wishlistshops({isAuthenticated,access}) {
 
         </Grid>
 
-        <Grid item xs={1}/>
+      
 
        
 
