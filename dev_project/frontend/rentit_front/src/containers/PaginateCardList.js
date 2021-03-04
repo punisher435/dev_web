@@ -93,6 +93,7 @@ const App = ({isAuthenticated}) => {
     room_cleaning:'',
     ordering:'-trust_points',
     gender:'',
+    discount:'',
   });
 
   useEffect(() => {
@@ -143,6 +144,7 @@ const App = ({isAuthenticated}) => {
           search:filters.search,
           ordering:filters.ordering,
           gender:filters.gender,
+          discount:filters.discount,
 
         },
         config:config

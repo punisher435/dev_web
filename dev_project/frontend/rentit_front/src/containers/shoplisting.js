@@ -77,6 +77,7 @@ const App = ({isAuthenticated}) => {
     state:'',
     wifi:'',
     gender:'',
+    discount:'',
    
 
     electricity:'',
@@ -123,6 +124,7 @@ const App = ({isAuthenticated}) => {
           windows_filter:filters.windows,
           building_guard:filters.building_guard,
           cctv_building:filters.cctv_building,
+          discount:filters.discount,
 
           cooler:filters.cooler,
           AC:filters.AC,

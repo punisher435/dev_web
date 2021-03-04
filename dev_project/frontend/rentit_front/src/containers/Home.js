@@ -10,7 +10,7 @@ function Home() {
            
             <Welcome/>
             <br />
-            <CardList/>
+            
         </div>
     )
 }

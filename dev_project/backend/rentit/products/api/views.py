@@ -21,6 +21,7 @@ from products.models import minmax_room,minmax_shop,minmax_apartment
 from .serializers import minmax_room_serializer,minmax_shop_serializer,minmax_apartment_serializer
 from user.models import seller_bank_details
 
+
 #pagination
 
 class StandardResultsSetPagination(PageNumberPagination):
@@ -31,16 +32,15 @@ class StandardResultsSetPagination(PageNumberPagination):
 
 #filters
 
-def filter_discount(queryset,value):
+def filter_discount(queryset,name,value):
     if not value:
         return queryset
-    list1=[]
-    for room in queryset:
-        discount = room.owner_discount + room.company_discount + room.commission + room.fake_discount
-        if discount>=value:
-            list1.append(room)
+    
+    
+
+    queryset.filter( lambda x: x.owner_discount+x.company_discount+x.commission+x.fake_discount>=value)
         
-    return list1
+    return queryset
 
 
 class room_filter(rest_filters.FilterSet):
@@ -56,11 +56,11 @@ class room_filter(rest_filters.FilterSet):
     trust_points_filter = rest_filters.NumberFilter(field_name='trust_points',lookup_expr='gte')
     balcony_filter = rest_filters.NumberFilter(field_name='balcony',lookup_expr='gte')
     bookedtill_filter = rest_filters.DateFilter(field_name='bookedtill', lookup_expr='lt')
-    discount = rest_filters.NumberFilter(method=filter_discount)
+    discount = rest_filters.NumberFilter(field_name='net_discount',lookup_expr='gte')
 
     class Meta:
         model = rooms
-        fields = ['room_cleaning','gender','windows_filter','bookedtill_filter','nonveg_food','veg_food','guest_allowed','iron','laundry','cooler','AC','room_TV','power_backup','floor_filter','purified_water','min_rating','cctv_building','bed_type','building_guard','balcony_filter','separate_washroom','category','location','city','state','wifi','breakfast','lunch','dinner','house_TV','power_backup','geyser','electricity','country','min_price','max_price','capacity_filter','trust_points_filter','booked']
+        fields = ['room_cleaning','discount','gender','windows_filter','bookedtill_filter','nonveg_food','veg_food','guest_allowed','iron','laundry','cooler','AC','room_TV','power_backup','floor_filter','purified_water','min_rating','cctv_building','bed_type','building_guard','balcony_filter','separate_washroom','category','location','city','state','wifi','breakfast','lunch','dinner','house_TV','power_backup','geyser','electricity','country','min_price','max_price','capacity_filter','trust_points_filter','booked']
 
 
 class room_viewset(viewsets.ReadOnlyModelViewSet):
@@ -127,7 +127,7 @@ class my_room_viewset(viewsets.ViewSet):
 
                 booked_till = datetime.date(1910,1,1)
 
-                room = rooms(title=request.data["title"],seller_id=request.user,bookedtill=booked_till,price=price,seller_price=seller_price,owner_discount=int(request.data["owner_discount"]),final_price=seller_price,capacity=int(request.data["capacity"]),photo1=request.data["photo1"],photo2=request.data["photo2"],photo3=request.data["photo3"],photo4=request.data["photo4"],photo5=request.data["photo5"],
+                room = rooms(title=request.data["title"],seller_id=request.user,bookedtill=booked_till,price=price,seller_price=seller_price,owner_discount=int(request.data["owner_discount"]),net_discount=int(request.data["owner_discount"]),final_price=seller_price,capacity=int(request.data["capacity"]),photo1=request.data["photo1"],photo2=request.data["photo2"],photo3=request.data["photo3"],photo4=request.data["photo4"],photo5=request.data["photo5"],
                 location=request.data["location"],city=request.data["city"],state=request.data["state"],country=request.data["country"],landmark=request.data["landmark"],pincode=request.data["pincode"],currency=bank.currency,longitude=float(request.data["longitude"]),latitude=float(request.data["latitude"]),length=int(request.data["length"]),breadth=int(request.data["breadth"]),height=int(request.data["height"]),furniture=request.data["furniture"],category=request.data["category"],
                 facility=request.data["facility"],description=request.data["description"],cctv_building=bool(request.data["cctv_building"]=='true'),building_guard=bool(request.data["building_guard"]=='true'),balcony=int(request.data["balcony"]),separate_washroom=bool(request.data["separate_washroom"]=='true'),windows=int(request.data["windows"]),fans=int(request.data["fans"]),bed_type=request.data["bed_type"],floor_no=int(request.data["floor_no"]),
                 cost_electricity=int(request.data["cost_electricity"]),cost_water=int(request.data["cost_water"]),purified_water=bool(request.data["purified_water"]=='true'),removable_purified_water=bool(request.data["removable_purified_water"]=='true'),cost_purified_water=int(request.data["cost_purified_water"]),house_TV=bool(request.data["house_TV"]=='true'),removable_house_TV=bool(request.data["removable_house_TV"]=='true'),
@@ -162,6 +162,7 @@ class my_room_viewset(viewsets.ViewSet):
             room.title=request.data["title"]  
             room.seller_price=seller_price  
             room.owner_discount=int(request.data["owner_discount"]) 
+            room.net_discount=int(request.data["owner_discount"])+room.company_discount+room.fake_discount+room.commission
 
             room.final_price=our_price
 
@@ -335,13 +336,13 @@ class shop_filter(rest_filters.FilterSet):
     washroom_filter = rest_filters.NumberFilter(field_name='washroom',lookup_expr='gte')
     balcony_filter = rest_filters.NumberFilter(field_name='balcony',lookup_expr='gte')
     windows_filter = rest_filters.NumberFilter(field_name='windows',lookup_expr='gte')
-    discount = rest_filters.NumberFilter(method=filter_discount)
+    discount = rest_filters.NumberFilter(field_name='net_discount',lookup_expr='gte')
 
     
 
     class Meta:
         model = shops
-        fields = ['shop_cleaning','gender','cctv_building','AC','cooler','TV','building_guard','min_rating','separate_washroom','purified_water','floor_filter','room_filter','windows_filter','bookedtill_filter','water_facility','wifi','power_backup','electricity','category','location','city','state','country','pincode','min_price','max_price','trust_points_filter','booked']
+        fields = ['shop_cleaning','discount','gender','cctv_building','AC','cooler','TV','building_guard','min_rating','separate_washroom','purified_water','floor_filter','room_filter','windows_filter','bookedtill_filter','water_facility','wifi','power_backup','electricity','category','location','city','state','country','pincode','min_price','max_price','trust_points_filter','booked']
 
             
 class shop_viewset(viewsets.ReadOnlyModelViewSet):
@@ -397,7 +398,7 @@ class my_shop_viewset(viewsets.ViewSet):
                 print(type(bank.currency))
 
 
-                shop = shops(title=request.data["title"],seller_id=request.user,price=price,seller_price=seller_price,owner_discount=int(request.data["owner_discount"]),final_price=seller_price,photo1=request.data["photo1"],photo2=request.data["photo2"],photo3=request.data["photo3"],photo4=request.data["photo4"],photo5=request.data["photo5"],
+                shop = shops(title=request.data["title"],seller_id=request.user,price=price,net_discount=int(request.data["owner_discount"]),seller_price=seller_price,owner_discount=int(request.data["owner_discount"]),final_price=seller_price,photo1=request.data["photo1"],photo2=request.data["photo2"],photo3=request.data["photo3"],photo4=request.data["photo4"],photo5=request.data["photo5"],
                 location=request.data["location"],city=request.data["city"],state=request.data["state"],country=request.data["country"],landmark=request.data["landmark"],pincode=request.data["pincode"],currency=bank.currency,longitude=float(request.data["longitude"]),latitude=float(request.data["latitude"]),length=int(request.data["length"]),breadth=int(request.data["breadth"]),height=int(request.data["height"]),furniture=request.data["furniture"],category=request.data["category"],
                 facility=request.data["facility"],description=request.data["description"],cctv_building=bool(request.data["cctv_building"]=='true'),building_guard=bool(request.data["building_guard"]=='true'),balcony=int(request.data["balcony"]),separate_washroom=bool(request.data["separate_washroom"]=='true'),windows=int(request.data["windows"]),fans=int(request.data["fans"]),floor_no=int(request.data["floor_no"]),
                 cost_electricity=int(request.data["cost_electricity"]),cost_water=int(request.data["cost_water"]),purified_water=bool(request.data["purified_water"]=='true'),removable_purified_water=bool(request.data["removable_purified_water"]=='true'),cost_purified_water=int(request.data["cost_purified_water"]),
@@ -434,6 +435,7 @@ class my_shop_viewset(viewsets.ViewSet):
             room.title=request.data["title"]  
             room.seller_price=seller_price  
             room.owner_discount=int(request.data["owner_discount"]) 
+            room.net_discount=int(request.data["owner_discount"])+room.company_discount+room.fake_discount+room.commission
 
             room.final_price=our_price
 
@@ -587,13 +589,13 @@ class apartment_filter(rest_filters.FilterSet):
     washroom_filter = rest_filters.NumberFilter(field_name='washroom',lookup_expr='gte')
     windows_filter = rest_filters.NumberFilter(field_name='windows',lookup_expr='gte')
     balcony_filter = rest_filters.NumberFilter(field_name='balcony',lookup_expr='gte')
-    discount = rest_filters.NumberFilter(method=filter_discount)
+    discount = rest_filters.NumberFilter(field_name='net_discount',lookup_expr='gte')
 
     
 
     class Meta:
         model = apartments
-        fields = ['apartment_cleaning','gender','geyser_filter','washroom_filter','bed_type','laundry','TV','geyser','purified_water','cooler','house_refridgerator','AC','apartment_type','sofa','floor_filter','room_filter','balcony_filter','washroom','cctv_building','building_guard','min_rating','bookedtill_filter','geyser','power_backup','TV','water_facility','electricity','category','location','city','state','country','pincode','min_price','max_price','BHK_filter','trust_points_filter','booked']
+        fields = ['apartment_cleaning','discount','gender','geyser_filter','washroom_filter','bed_type','laundry','TV','geyser','purified_water','cooler','house_refridgerator','AC','apartment_type','sofa','floor_filter','room_filter','balcony_filter','washroom','cctv_building','building_guard','min_rating','bookedtill_filter','geyser','power_backup','TV','water_facility','electricity','category','location','city','state','country','pincode','min_price','max_price','BHK_filter','trust_points_filter','booked']
 
 
 class apartment_viewset(viewsets.ReadOnlyModelViewSet):
@@ -655,7 +657,7 @@ class my_apartment_viewset(viewsets.ViewSet):
 
                 booked_till = datetime.date(2000,1,1)
 
-                room = apartments(title=request.data["title"],seller_id=request.user,bookedtill=booked_till,price=price,seller_price=seller_price,owner_discount=int(request.data["owner_discount"]),final_price=seller_price,BHK=int(request.data["BHK"]),photo1=request.data["photo1"],photo2=request.data["photo2"],photo3=request.data["photo3"],photo4=request.data["photo4"],photo5=request.data["photo5"],photo6=request.data["photo6"],
+                room = apartments(title=request.data["title"],seller_id=request.user,net_discount=int(request.data["owner_discount"]),bookedtill=booked_till,price=price,seller_price=seller_price,owner_discount=int(request.data["owner_discount"]),final_price=seller_price,BHK=int(request.data["BHK"]),photo1=request.data["photo1"],photo2=request.data["photo2"],photo3=request.data["photo3"],photo4=request.data["photo4"],photo5=request.data["photo5"],photo6=request.data["photo6"],
                 location=request.data["location"],city=request.data["city"],state=request.data["state"],country=request.data["country"],landmark=request.data["landmark"],pincode=request.data["pincode"],currency=bank.currency,longitude=float(request.data["longitude"]),latitude=float(request.data["latitude"]),length=int(request.data["length"]),breadth=int(request.data["breadth"]),height=int(request.data["height"]),furniture=request.data["furniture"],category=request.data["category"],
                 facility=request.data["facility"],description=request.data["description"],cctv_building=bool(request.data["cctv_building"]=='true'),building_guard=bool(request.data["building_guard"]=='true'),balcony=int(request.data["balcony"]),windows=int(request.data["windows"]),fans=int(request.data["fans"]),bed_type=request.data["bed_type"],floor_no=int(request.data["floor_no"]),
                 cost_electricity=int(request.data["cost_electricity"]),cost_water=int(request.data["cost_water"]),purified_water=bool(request.data["purified_water"]=='true'),removable_purified_water=bool(request.data["removable_purified_water"]=='true'),cost_purified_water=int(request.data["cost_purified_water"]),TV=bool(request.data["TV"]=='true'),removable_house_TV=bool(request.data["removable_house_TV"]=='true'),
@@ -689,6 +691,7 @@ class my_apartment_viewset(viewsets.ViewSet):
             room.title=request.data["title"]  
             room.seller_price=seller_price  
             room.owner_discount=int(request.data["owner_discount"]) 
+            room.net_discount=int(request.data["owner_discount"])+room.company_discount+room.fake_discount+room.commission
 
             room.final_price=our_price
 

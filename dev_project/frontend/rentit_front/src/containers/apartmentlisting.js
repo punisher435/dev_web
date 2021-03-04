@@ -87,6 +87,7 @@ const App = ({isAuthenticated}) => {
     state:'',
     wifi:'',
     gender:'',
+    discount:'',
     
     TV:'',
     geyser:'',
@@ -147,6 +148,7 @@ const App = ({isAuthenticated}) => {
           floor_filter:filters.floor_filter,
           search:filters.search,
           ordering:filters.ordering,
+          discount:filters.discount,
 
           floor_filter:filters.floor_filter,
         house_refridgerator:filters.house_refridgerator,
