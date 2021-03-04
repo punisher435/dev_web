@@ -56,7 +56,7 @@ class room_filter(rest_filters.FilterSet):
     trust_points_filter = rest_filters.NumberFilter(field_name='trust_points',lookup_expr='gte')
     balcony_filter = rest_filters.NumberFilter(field_name='balcony',lookup_expr='gte')
     bookedtill_filter = rest_filters.DateFilter(field_name='bookedtill', lookup_expr='lt')
-    discount = rest_filters.NumberFilter(action=filter_discount)
+    discount = rest_filters.NumberFilter(method=filter_discount)
 
     class Meta:
         model = rooms
@@ -335,7 +335,7 @@ class shop_filter(rest_filters.FilterSet):
     washroom_filter = rest_filters.NumberFilter(field_name='washroom',lookup_expr='gte')
     balcony_filter = rest_filters.NumberFilter(field_name='balcony',lookup_expr='gte')
     windows_filter = rest_filters.NumberFilter(field_name='windows',lookup_expr='gte')
-    discount = rest_filters.NumberFilter(action=filter_discount)
+    discount = rest_filters.NumberFilter(method=filter_discount)
 
     
 
@@ -587,7 +587,7 @@ class apartment_filter(rest_filters.FilterSet):
     washroom_filter = rest_filters.NumberFilter(field_name='washroom',lookup_expr='gte')
     windows_filter = rest_filters.NumberFilter(field_name='windows',lookup_expr='gte')
     balcony_filter = rest_filters.NumberFilter(field_name='balcony',lookup_expr='gte')
-    discount = rest_filters.NumberFilter(action=filter_discount)
+    discount = rest_filters.NumberFilter(method=filter_discount)
 
     
 
