@@ -31,8 +31,22 @@ class StandardResultsSetPagination(PageNumberPagination):
 
 #filters
 
+def filter_discount(queryset,value):
+    if not value:
+        return queryset
+    list1=[]
+    for room in queryset:
+        discount = room.owner_discount + room.company_discount + room.commission + room.fake_discount
+        if discount>=value:
+            list1.append(room)
+        
+    return list1
+
 
 class room_filter(rest_filters.FilterSet):
+
+
+
     min_price = rest_filters.NumberFilter(field_name='final_price',lookup_expr='gte')
     max_price = rest_filters.NumberFilter(field_name='final_price',lookup_expr='lte')
     min_rating = rest_filters.NumberFilter(field_name='avg_rating',lookup_expr='gte')
@@ -42,6 +56,7 @@ class room_filter(rest_filters.FilterSet):
     trust_points_filter = rest_filters.NumberFilter(field_name='trust_points',lookup_expr='gte')
     balcony_filter = rest_filters.NumberFilter(field_name='balcony',lookup_expr='gte')
     bookedtill_filter = rest_filters.DateFilter(field_name='bookedtill', lookup_expr='lt')
+    discount = rest_filters.NumberFilter(action=filter_discount)
 
     class Meta:
         model = rooms
@@ -62,6 +77,8 @@ class room_viewset(viewsets.ReadOnlyModelViewSet):
     queryset = query_set.filter(removed=False)
     queryset = query_set.filter(pausebooking=False)
     serializer_class = room_list_serializer
+
+
 
 
 
@@ -318,6 +335,8 @@ class shop_filter(rest_filters.FilterSet):
     washroom_filter = rest_filters.NumberFilter(field_name='washroom',lookup_expr='gte')
     balcony_filter = rest_filters.NumberFilter(field_name='balcony',lookup_expr='gte')
     windows_filter = rest_filters.NumberFilter(field_name='windows',lookup_expr='gte')
+    discount = rest_filters.NumberFilter(action=filter_discount)
+
     
 
     class Meta:
@@ -568,6 +587,8 @@ class apartment_filter(rest_filters.FilterSet):
     washroom_filter = rest_filters.NumberFilter(field_name='washroom',lookup_expr='gte')
     windows_filter = rest_filters.NumberFilter(field_name='windows',lookup_expr='gte')
     balcony_filter = rest_filters.NumberFilter(field_name='balcony',lookup_expr='gte')
+    discount = rest_filters.NumberFilter(action=filter_discount)
+
     
 
     class Meta:

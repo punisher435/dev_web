@@ -26,7 +26,7 @@ function Welcome(){
     const classes = useStyles();
     return(
     <div>
-        <Carousel className={classes.myclass}>
+        <Carousel className={classes.myclass} controls={false} indicators={false} fade={true}>
             <Carousel.Item>
                 <img
                 className={classes.imgclass}
