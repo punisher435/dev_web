@@ -141,12 +141,12 @@ const useStyles = makeStyles((theme) => ({
     whiteSpace: 'nowrap',
     flexWrap: 'nowrap',
     width:'100vw',
-    overflowX:'scroll',
+    
     [theme.breakpoints.up('md')]: {
       whiteSpace: 'nowrap',
     flexWrap: 'nowrap',
     width:'650px',
-    overflowX:'scroll',
+    
     },
   
   },

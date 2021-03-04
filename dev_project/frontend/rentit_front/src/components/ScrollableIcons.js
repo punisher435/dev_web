@@ -84,6 +84,7 @@ export default function CustomizedTabs({post}) {
   const [value, setValue] = React.useState('Wifi Facility');
 
   const handleChange = (event, newValue) => {
+    event.preventDefault();
     setValue(newValue);
   };
 
@@ -94,7 +95,7 @@ export default function CustomizedTabs({post}) {
         variant='scrollable'
         aria-label="ant example"
         value={value}
-        onChange={handleChange}>
+        onClick={handleChange}>
 
 
             
