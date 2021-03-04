@@ -10,12 +10,26 @@ import RecipeReviewCard from './card_1';
 import Spinner from './Spinner';
 import Eror from './eror';
 import {Redirect} from 'react-router-dom';
+import { makeStyles } from '@material-ui/core/styles';
+import RenteneAppBar from './Navbar'
 
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
 
+const useStyles = makeStyles((theme) => ({
+    
+    navclass:{
+      overflowX:'hidden',
+      position:'absolute',
+    },
+   
+    
+  }));
+  
+
 
 function Wishlistrooms({isAuthenticated,access}) {
+    const classes = useStyles();
 
     const [posts,setpost] = useState([]);
     const [error,seterror] = useState('');
@@ -24,6 +38,8 @@ function Wishlistrooms({isAuthenticated,access}) {
     const [open2,setOpen2] = useState(false);
     const [wishlistitems,changeitemswishlist] = useState(0)
     const [cartitems,changeitemscart] = useState(0)
+
+
 
     const myStlye = {
         border: '0px'
@@ -87,37 +103,32 @@ function Wishlistrooms({isAuthenticated,access}) {
 
     return (
         <div>
+           
 
         <Grid
          container
           direction="row"
          justify="center"
            alignItems="center"
+           spacing={3}
         >
 
       
 
-        <Grid item>
-
-        <ul className='list-group mb-4'>
+       
+       
             {posts.map(post => (
-            <li key={post.room_id} style={myStlye} className='list-group-item'>
-            {/* {post.title} */}
-            <Hidden smDown>
-        <Grid item md={12}>
-          <SearchCard post={post} loading={loading} setOpen1={setOpen1} setOpen2={setOpen2} wishlistitems={wishlistitems} cartitems={cartitems} changeitemswishlist={changeitemswishlist} changeitemscart={changeitemscart}/>
-          </Grid>
-          </Hidden>
-        <Hidden mdUp>
-        <Grid item md={12}>
+            
+            
+     
+        <Grid item>
         <RecipeReviewCard post={post} setOpen1={setOpen1} setOpen2={setOpen2}  wishlistitems={wishlistitems} changeitemswishlist={changeitemswishlist}/>
         </Grid>
-        </Hidden>
-            </li>
+       
+          
             ))}
-        </ul>
-
-        </Grid>
+       
+     
 
     
 

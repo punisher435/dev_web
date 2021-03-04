@@ -92,30 +92,27 @@ function Wishlistshops({isAuthenticated,access}) {
           direction="row"
          justify="center"
            alignItems="center"
+           spacing={3}
         >
 
        
-        <Grid item >
+       
 
-        <ul className='list-group mb-4'>
-            {posts.map(post => (
-            <li key={post.shop_id} style={myStlye} className='list-group-item'>
-            {/* {post.title} */}
-            <Hidden smDown>
-        <Grid item md={12}>
-          <SearchCard post={post} loading={loading} setOpen1={setOpen1} setOpen2={setOpen2} wishlistitems={wishlistitems} cartitems={cartitems} changeitemswishlist={changeitemswishlist} changeitemscart={changeitemscart}/>
-          </Grid>
-          </Hidden>
-        <Hidden mdUp>
-        <Grid item md={12}>
+        
+            {posts.map(post => (<>
+           
+           
+            
+        
+        <Grid item>
         <RecipeReviewCard post={post} setOpen1={setOpen1} setOpen2={setOpen2}  wishlistitems={wishlistitems} changeitemswishlist={changeitemswishlist}/>
         </Grid>
-        </Hidden>
-            </li>
+        </>
+            
             ))}
-        </ul>
+        
 
-        </Grid>
+       
 
       
 

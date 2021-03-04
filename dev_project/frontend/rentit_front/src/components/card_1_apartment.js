@@ -6,7 +6,7 @@ import { red } from '@material-ui/core/colors';
 import Grid from '@material-ui/core/Grid';
 import Icon from '@material-ui/core/Icon'
 import RoomIcon from '@material-ui/icons/Room';
-import RoomImage from './mobilesearchshopimage'
+import RoomImage from './mobilesearchapartmentimage'
 import Box from '@material-ui/core/Box'
 import ScrollableIcons from './ScrollableIcons'
 import {Link} from 'react-router-dom';
