@@ -52,6 +52,7 @@ export default function SimpleSelect(props) {
           <MenuItem value={'Mini suite'}>Mini suite</MenuItem>
           <MenuItem value={'Presidential suite'}>Presidential suite</MenuItem>
           <MenuItem value={'Apartment'}>Apartment</MenuItem>
+          <MenuItem value={'Shop'}>Shop</MenuItem>
           <MenuItem value={'Connecting rooms'}>Connecting rooms</MenuItem>
           <MenuItem value={'Murphy rooms'}>Murphy room</MenuItem>
           <MenuItem value={'Adjacent rooms'}>Adjacent rooms</MenuItem>
