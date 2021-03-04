@@ -1,77 +1,47 @@
 import React from 'react'
 import { Carousel } from 'react-bootstrap';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Form from 'react-bootstrap/Form';
 import {Row, Col} from 'react-bootstrap'
 
+const useStyles = makeStyles((theme) => ({
+   imgclass:{
+    filter: 'brightness(50%)',
+    height: '80vh',
+    objectFit:'cover',
+  
+   
+  
+   },
+   myclass:{
+   height: '80vh',
 
+   
+   
+   },
+  }));
+  
 
 function Welcome(){
+    const classes = useStyles();
     return(
     <div>
-        <Carousel>
+        <Carousel className={classes.myclass}>
             <Carousel.Item>
                 <img
-                className="d-block w-100"
-                src="https://cdn.cnn.com/cnnnext/dam/assets/140127103345-peninsula-shanghai-deluxe-mock-up.jpg"
-                alt="First slide"
+                className={classes.imgclass}
+                src="https://cdn.suwalls.com/wallpapers/photography/hotel-room-27502-1920x1200.jpg"
+                alt="Rent=ene"
                 />
                 <Carousel.Caption>
-                <h3>First slide label</h3>
+                <h3>Welcome!</h3>
                 <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
                 </Carousel.Caption>
             </Carousel.Item>
-            <Carousel.Item>
-                <img
-                className="d-block w-100"
-                src="https://cdn.cnn.com/cnnnext/dam/assets/140127103345-peninsula-shanghai-deluxe-mock-up.jpg"
-                alt="Third slide"
-                />
-
-                <Carousel.Caption>
-                <h3>Second slide label</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                </Carousel.Caption>
-            </Carousel.Item>
-            <Carousel.Item>
-                <img
-                className="d-block w-100"
-                src="https://cdn.cnn.com/cnnnext/dam/assets/140127103345-peninsula-shanghai-deluxe-mock-up.jpg"
-                alt="Third slide"
-                />
-
-                <Carousel.Caption>
-                <h3>Third slide label</h3>
-                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-                </Carousel.Caption>
-            </Carousel.Item>
+           
+           
         </Carousel>
-        <div >
-            <Form >
-                <Row>
-                    <Col>
-                    <Form.Control placeholder="First name" />
-                    </Col>
-                    <Col>
-                    <Form.Control placeholder="Last name" />
-                    </Col>
-                </Row>
-                <Form.Group controlId="exampleForm.SelectCustom">
-                <Form.Label>Custom select</Form.Label>
-                <Form.Control as="select" custom>
-                <option>Room</option>
-                <option>Apartment</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-                </Form.Control>
-            </Form.Group>
-
-            <Form.Group controlId="formBasicRangeCustom">
-                <Form.Label>Range</Form.Label>
-                <Form.Control type="range" custom />
-            </Form.Group>
-            </Form>
-        </div>
+      
     </div>
     )
 }

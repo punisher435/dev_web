@@ -138,7 +138,7 @@ export default function NestedGrid({isAuthenticated,post,wishlist,changewishlist
             <Grid container justify='flex-start'>
               <Grid item>
                 <Box ml={1}>
-                  <RatingWithCompliments rating={3}/>
+                  <RatingWithCompliments rating={parseFloat(post.avg_rating)} reviews={parseInt(post.reviews)}/>
                 </Box>
               </Grid>
             </Grid>

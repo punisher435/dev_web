@@ -7,8 +7,9 @@ import 'antd/dist/antd.css';
 function Home() {
     return (
         <div>
-            Home
+           
             <Welcome/>
+            <br />
             <CardList/>
         </div>
     )
