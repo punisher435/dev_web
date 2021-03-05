@@ -9,6 +9,7 @@ import RecipeReviewCard from '../components/newcardroom';
 import Grid from '@material-ui/core/Grid';
 import Scrollroom from '../components/scrollroom';
 import Scrollshop from '../components/scrollshops';
+import Scrollapartment from '../components/scrollapartment';
 import Typography from '@material-ui/core/Typography';
 import {Link} from 'react-router-dom'
 
@@ -29,6 +30,7 @@ function Home() {
     const [classroom,setclassroom] = React.useState([])
     const [singleroom,setsingleroom] = React.useState([])
     const [shop,setshop] = React.useState([])
+    const [apartment,setapartment] = React.useState([])
 
     React.useEffect(async() => {
         const config = {
@@ -128,6 +130,31 @@ function Home() {
           }
     },[])
 
+    React.useEffect(async() => {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+          };
+          try{const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcebvdfesl2746/apartments/`,{
+            params:{
+             page:1,
+             
+             ordering:'-trust_points',
+    
+            },
+            config:config
+          });
+          
+          setapartment(res.data.results);
+          
+          
+          }
+          catch{
+            
+          }
+    },[])
+
     
     return (
         <div>
@@ -189,6 +216,19 @@ function Home() {
                 </div>
                 <br />
                 <Scrollshop rooms={shop}/> <br /></> : null
+            }
+
+
+            {
+                apartment.length>=1 ? <><div
+                className={classes.myclass}
+                >
+                <Typography variant='h6'>
+                    <Link to='/apartments/' style={{textDecoration:'none',color:'black'}}>Our Housing...</Link>
+                </Typography>
+                </div>
+                <br />
+                <Scrollapartment rooms={apartment}/> <br /></> : null
             }
 
             
