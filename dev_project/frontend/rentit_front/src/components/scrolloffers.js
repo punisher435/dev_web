@@ -91,8 +91,7 @@ export default function CustomizedTabs1({post}) {
         <div className="App">
         <ScrollMenu
           data={menu}
-          arrowLeft={ArrowLeft}
-          arrowRight={ArrowRight}
+         
           className={classes.scrollclass}
          
           

@@ -67,8 +67,7 @@ function Scrollroom({rooms}) {
         <div className="App">
         <ScrollMenu
           data={menu}
-          arrowLeft={ArrowLeft}
-          arrowRight={ArrowRight}
+          
           className={classes.scrollclass}
           wheel={false}
          
