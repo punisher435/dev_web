@@ -26,6 +26,7 @@ function Home() {
     const classes = useStyles();
     const [luxrooms,setluxrooms] = React.useState([])
     const [classroom,setclassroom] = React.useState([])
+    const [singleroom,setsingleroom] = React.useState([])
 
     React.useEffect(async() => {
         const config = {
@@ -37,12 +38,14 @@ function Home() {
             params:{
              page:1,
              category: 'Deluxe room',
+             ordering:'-trust_points',
     
             },
             config:config
           });
           
           setluxrooms(res.data.results);
+          
           
           }
           catch{
@@ -60,6 +63,7 @@ function Home() {
             params:{
              page:1,
              category: 'Classic room',
+             ordering:'-trust_points',
     
             },
             config:config
@@ -73,34 +77,82 @@ function Home() {
           }
     },[])
 
+    React.useEffect(async() => {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+          };
+          try{const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourceaxcnfrudadv34/rooms/`,{
+            params:{
+             page:1,
+             category: 'Single',
+             ordering:'-trust_points',
+    
+            },
+            config:config
+          });
+          
+          setsingleroom(res.data.results);
+          
+          }
+          catch{
+            
+          }
+    },[])
+
     
     return (
         <div>
            
             <Welcome/>
             <br />
+            
 
-            <div
-            className={classes.myclass}
-            >
-            <Typography variant='h6'>
-                <Link to='/rooms/?category=Deluxe+room' style={{textDecoration:'none',color:'black'}}>Our Deluxe Rooms...</Link>
-            </Typography>
-            </div>
-            <br />
-            <Scrollroom rooms={luxrooms}/>
+            {
+                luxrooms.length>=1 ? <><div
+                className={classes.myclass}
+                >
+                <Typography variant='h6'>
+                    <Link to='/rooms/?category=Deluxe+room' style={{textDecoration:'none',color:'black'}}>Our Deluxe Rooms...</Link>
+                </Typography>
+                </div>
+                <br />
+                <Scrollroom rooms={luxrooms}/>
+                
+    
+                <br /></> : null
+            }
+            
+            
+            {
+                classroom.length>=1 ? <><div
+                className={classes.myclass}
+                >
+                <Typography variant='h6'>
+                    <Link to='/rooms/?category=Classic+room' style={{textDecoration:'none',color:'black'}}>Our Classic Rooms...</Link>
+                </Typography>
+                </div>
+                <br />
+                <Scrollroom rooms={classroom}/>
+    
+                <br /></> : null
+            }
+            
 
-            <br />
+            {
+                singleroom.length>=1 ? <><div
+                className={classes.myclass}
+                >
+                <Typography variant='h6'>
+                    <Link to='/rooms/?category=Single' style={{textDecoration:'none',color:'black'}}>Our Single Rooms...</Link>
+                </Typography>
+                </div>
+                <br />
+                <Scrollroom rooms={singleroom}/> <br /></> : null
+            }
 
-            <div
-            className={classes.myclass}
-            >
-            <Typography variant='h6'>
-                <Link to='/rooms/?category=Classic+room' style={{textDecoration:'none',color:'black'}}>Our Classic Rooms...</Link>
-            </Typography>
-            </div>
-            <br />
-            <Scrollroom rooms={classroom}/>
+            
             
                         
         </div>
