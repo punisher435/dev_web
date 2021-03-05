@@ -199,9 +199,7 @@ const validationSchema = yup.object({
   .number().integer('please enter integer'),
   
   
-  category: yup
-  .string('Please, provide the appropriate answer')
-  .required('You must answer this '),
+ 
 
   apartment_type: yup
   .string('Please, provide the appropriate answer')
@@ -1524,6 +1522,9 @@ if(newredirect==true)
           
           <MenuItem value={'Flat'}>Flat</MenuItem>
           <MenuItem value={'Bunglow'}>Bunglow</MenuItem>
+          <MenuItem value={'Villa'}>Villa</MenuItem>
+          <MenuItem value={'Mansion'}>Mansion</MenuItem>
+          <MenuItem value={'Farm House'}>Farm House</MenuItem>
             </Select>
         </FormControl>
       </Grid>
@@ -1679,58 +1680,8 @@ if(newredirect==true)
     <br />
 
 
-    <Grid
-        container
-        direction="row"
-        justify="center"
-        alignItems="center"
-        spacing={1}
-      >
-        <Grid item>
-        <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-            Category of the apartment
-          </Typography>
-        </Grid>
-          <Grid item>
-        <FormControl className={classes.formControl}>
-        
-            <InputLabel id="category">Category</InputLabel>
-            <Select
-            labelId="category"
-            id="category"
-            value={formik.values.category}
-            onChange={(e) => formik.setFieldValue('category',e.target.value)}
-            error={formik.touched.category && Boolean(formik.errors.category)}
-            helperText={formik.touched.category && formik.errors.category}
-            >
-          <MenuItem value={''}>None</MenuItem>
-          <MenuItem value={'Classic room'}>Classic room</MenuItem>
-          <MenuItem value={'Deluxe room'}>Deluxe room</MenuItem>
-          <MenuItem value={'Single'}>Single</MenuItem>
-          <MenuItem value={'Double'}>Double</MenuItem>
-          <MenuItem value={'Triple'}>Triple</MenuItem>
-          <MenuItem value={'Quad'}>Quad</MenuItem>
-          <MenuItem value={'Queen'}>Queen</MenuItem>
-          <MenuItem value={'King'}>King</MenuItem>
-          <MenuItem value={'Twin'}>Twin</MenuItem>
-          <MenuItem value={'Double-Double'}>Double-Double</MenuItem>
-          <MenuItem value={'Studio'}>Studio</MenuItem>
-          <MenuItem value={'Suite'}>Suite</MenuItem>
-          <MenuItem value={'Executive suite'}>Executive suite</MenuItem>
-          <MenuItem value={'Mini suite'}>Mini suite</MenuItem>
-          <MenuItem value={'Presidential suite'}>Presidential suite</MenuItem>
-          <MenuItem value={'Apartment'}>Apartment</MenuItem>
-          <MenuItem value={'Connecting rooms'}>Connecting rooms</MenuItem>
-          <MenuItem value={'Murphy rooms'}>Murphy room</MenuItem>
-          <MenuItem value={'Adjacent rooms'}>Adjacent rooms</MenuItem>
-          <MenuItem value={'Murphy room'}>Murphy room</MenuItem>
-          <MenuItem value={'Adjacent rooms'}>Adjacent rooms</MenuItem>
-            </Select>
-        </FormControl>
-      </Grid>
-    </Grid>
-
-    <br />
+   
+    
 
     <Grid
         container

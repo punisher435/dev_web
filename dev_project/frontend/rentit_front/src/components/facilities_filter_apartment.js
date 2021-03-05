@@ -140,6 +140,9 @@ export default function SimpleSelect2(props) {
           <MenuItem value={''}>Any</MenuItem>
           <MenuItem value={'Flat'}>Flat</MenuItem>
           <MenuItem value={'Bunglow'}>Bunglow</MenuItem>
+          <MenuItem value={'Villa'}>Villa</MenuItem>
+          <MenuItem value={'Mansion'}>Mansion</MenuItem>
+          <MenuItem value={'Farm House'}>Farm House</MenuItem>
         </Select>
       </FormControl>
 

@@ -274,7 +274,7 @@ class shops(models.Model):
     breadth=models.IntegerField()
     height=models.IntegerField()
     furniture=models.TextField()
-    category=models.CharField(max_length=255)
+    category=models.CharField(max_length=255,null=True, blank=True)
     facility=models.TextField()
     description = models.TextField()
     avg_rating=models.DecimalField(max_digits=2,decimal_places=1,default=0)
@@ -441,7 +441,7 @@ class apartments(models.Model):
     total_beds=models.IntegerField(default=1)
 
     apartment_type=models.CharField(max_length=255)
-    category=models.CharField(max_length=255)
+    category=models.CharField(max_length=255,null=True, blank=True)
 
     AC = models.BooleanField(default=False)
     total_AC = models.IntegerField(default=0)

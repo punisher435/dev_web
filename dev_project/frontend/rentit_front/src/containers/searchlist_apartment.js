@@ -173,7 +173,7 @@ function ResponsiveDrawer(props) {
       <Checkboxes size='small' checked={checked} setChecked={setChecked} setfilters={props.setfilters} filters={props.filters} setfilters={props.setfilters}/>
 
       <Typography variant="body1">
-          Show all apartments
+          Show all Housings
       </Typography>
       </ListItem>
       <Divider />
@@ -188,10 +188,7 @@ function ResponsiveDrawer(props) {
       </ListItem>
 
       <Divider />
-      <ListItem className={classes.mystyle}>
-       <SimpleSelect filters={props.filters} setfilters={props.setfilters}/>
-      </ListItem >
-      <Divider />
+      
 
       <ListItem className={classes.mystyle}>
       <Typography variant="h6">
