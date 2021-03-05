@@ -25,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
 function Home() {
     const classes = useStyles();
     const [luxrooms,setluxrooms] = React.useState([])
+    const [classroom,setclassroom] = React.useState([])
 
     React.useEffect(async() => {
         const config = {
@@ -49,12 +50,36 @@ function Home() {
           }
     },[])
 
+    React.useEffect(async() => {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+          };
+          try{const res1 = await axios.get(`${process.env.REACT_APP_API_URL}/sourceaxcnfrudadv34/rooms/`,{
+            params:{
+             page:1,
+             category: 'Classic room',
+    
+            },
+            config:config
+          });
+          
+          setclassroom(res1.data.results);
+          
+          }
+          catch{
+            
+          }
+    },[])
+
     
     return (
         <div>
            
             <Welcome/>
             <br />
+
             <div
             className={classes.myclass}
             >
@@ -63,10 +88,19 @@ function Home() {
             </Typography>
             </div>
             <br />
-            
-            
-           
             <Scrollroom rooms={luxrooms}/>
+
+            <br />
+
+            <div
+            className={classes.myclass}
+            >
+            <Typography variant='h6'>
+                <Link to='/rooms/?category=Classic+room' style={{textDecoration:'none',color:'black'}}>Our Classic Rooms...</Link>
+            </Typography>
+            </div>
+            <br />
+            <Scrollroom rooms={classroom}/>
             
                         
         </div>

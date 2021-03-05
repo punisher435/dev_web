@@ -26,118 +26,86 @@ import Grid from '@material-ui/core/Grid';
 
 import Offercard from "./offercard"; 
 
-const AntTabs = withStyles({
-  root: {
-    borderBottom: '1px solid #e8e8e8',
-  },
-  indicator: {
-    backgroundColor: '#1890ff',
-  },
-})(Tabs);
-
-const AntTab = withStyles((theme) => ({
-  root: {
-    textTransform: 'none',
-    minWidth: '16%',
-    fontWeight: theme.typography.fontWeightRegular,
-    marginRight: theme.spacing(0),
-    fontFamily: [
-      '-apple-system',
-      'BlinkMacSystemFont',
-      '"Segoe UI"',
-      'Roboto',
-      '"Helvetica Neue"',
-      'Arial',
-      'sans-serif',
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"',
-    ].join(','),
-    '&:hover': {
-      color: '#40a9ff',
-      opacity: 1,
-    },
-    '&$selected': {
-      color: '#1890ff',
-      fontWeight: theme.typography.fontWeightMedium,
-    },
-    '&:focus': {
-      color: '#40a9ff',
-    },
-  },
-  selected: {},
-}))((props) => <Tab disableRipple {...props} />);
-
+import ScrollMenu from 'react-horizontal-scrolling-menu';
+import './css/App.css';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    
-    
-
-  },
-  padding: {
-    padding: theme.spacing(0),
-  },
-  demo1: {
-    backgroundColor: theme.palette.background.paper,
-  },
-  demo2: {
-    backgroundColor: '#2e1534',
-  },
-  gridclass: {
-    flexWrap: 'nowrap',
-   
-   
-  },
-  gridclass1: {
-    
-  float: 'left',
-  display: 'flex',
-  flexWrap: 'nowrap',
-   
-  },
-  itemclass: {
+  scrollclass:{
     
   },
 }));
 
+
+
 export default function CustomizedTabs1({post}) {
+
   const classes = useStyles();
 
+    const MenuItem = ({coupon}) => {
+        return <CouponCard mycoupon={coupon} />;
+      };
+      
+      // All items component
+      // Important! add unique key
+      const Menu = (post) =>
+        
+        post.map(room => {
+          
+          return <MenuItem coupon={room} />;
+        })
+        
 
-  
+    const Arrow = ({ text, className }) => {
+        return (
+          <div
+            className={className}
+          >{text}</div>
+        );
+      };
 
-  return (
-    <div className={classes.root}>
-        <Grid
-          container
-          direction="row"
-          justify="flex-start"
-          alignItems="center"
-          className={classes.gridclass}
-          spacing={2}
+    const ArrowLeft = Arrow({ text: '<', className: 'arrow-prev' });
+    const ArrowRight = Arrow({ text: '>', className: 'arrow-next' });
+
+    
+    const [menuItems,setitems] = React.useState()
+
+    React.useEffect(() => {
+      setitems(Menu(post))
+     
+      
+      
+    },[post])
+     
+   
+    
+    if(post && menuItems){
+
+
+      const menu = menuItems;
+   
+      
+     
+      
+      
+    return (
+        <div className="App">
+        <ScrollMenu
+          data={menu}
+          arrowLeft={ArrowLeft}
+          arrowRight={ArrowRight}
+          className={classes.scrollclass}
          
           
-        >
-      
-      
-      {
-        post.map(coupon => (
-   
-          <Grid item className={classes.gridclass1}><CouponCard mycoupon={coupon} /></Grid>
-        ))
-      }
-
-  
-     
-      </Grid>
-      
-
-      
-    </div>
-  );
+          
+        />
+      </div>
+    )}
+    else{
+      return <></>;
+    }
 }
+
+
 
 
 
