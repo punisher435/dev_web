@@ -21,7 +21,7 @@ axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
 const useStyles = makeStyles((theme) => ({
 root: {
 width: 280,
-maxLength: 400,
+height: 350,
 margin: 10,
 float: 'none',
  

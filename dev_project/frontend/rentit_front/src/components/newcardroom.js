@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 root: {
 
   width: 280,
-maxLength: 400,
+  height: 350,
 margin: 10,
 float: 'none',
  
