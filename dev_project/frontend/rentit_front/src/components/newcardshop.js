@@ -6,7 +6,7 @@ import { red } from '@material-ui/core/colors';
 import Grid from '@material-ui/core/Grid';
 import Icon from '@material-ui/core/Icon'
 import RoomIcon from '@material-ui/icons/Room';
-import RoomImage from './mobilesearchshopimage'
+import RoomImage from './newcardimage'
 import Box from '@material-ui/core/Box'
 import ScrollableIcons from './ScrollableIcons'
 import {Link} from 'react-router-dom';
@@ -20,10 +20,9 @@ axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
 
 const useStyles = makeStyles((theme) => ({
 root: {
-  width:'80vw',
-maxWidth: 355,
+maxWidth: 280,
 maxLength: 400,
-margin: '0 auto',
+margin: 10,
 float: 'none',
  
 },
@@ -47,38 +46,12 @@ backgroundColor: red[500],
 },
 }));
 
-function RecipeReviewCard({isAuthenticated,post,setOpen1,setOpen2,wishlistitems,changeitemswishlist}) {
+function RecipeReviewCard({post}) {
        const classes = useStyles();
 
-       const [wishlist,changewishlist] = useState(false)
+      
 
-       useEffect(async () => {
-
-        if(isAuthenticated){
-        const config = {
-          headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': `JWT ${localStorage.getItem('access')}`,
-          },
-        };
-        try {
-        await axios.get(`${process.env.REACT_APP_API_URL}/sourcesnjs03qjkda/wishlist/shops/${post.shop_id}/`,config,config)
-        .then(res => {
-          changewishlist(res.data);
-        })
-        .catch(err => {
-          
-        })
-        
-        }
-        catch{
-        }
-  
-  
-      }
-  
-      }
-        ,[isAuthenticated])
+       
 
 
         
@@ -86,7 +59,7 @@ function RecipeReviewCard({isAuthenticated,post,setOpen1,setOpen2,wishlistitems,
  return (
 <Card className={classes.root}>
    
- <RoomImage post={post} wishlist={wishlist} changewishlist={changewishlist} setOpen1={setOpen1} isAuthenticated={isAuthenticated} wishlistitems={wishlistitems} changeitemswishlist={changeitemswishlist}/>
+ <RoomImage post={post} />
 
  <Link to={`/shops/${post.shop_id}`} target="_blank" style={{textDecoration:'none',color:'black'}}>
 
@@ -101,7 +74,7 @@ function RecipeReviewCard({isAuthenticated,post,setOpen1,setOpen2,wishlistitems,
      <Grid item xs={11}>
             <Typography variant="body1" component="h2">
               <Box mt={1}>
-          {post.location},{post.city},{post.state}
+           {post.location},{post.city},{post.state}
           {/* Anand Plaza, First, University Rd, A Block, Udaipur, Rajasthan 313001 */}
               </Box>
         </Typography>
@@ -146,9 +119,6 @@ function RecipeReviewCard({isAuthenticated,post,setOpen1,setOpen2,wishlistitems,
 );
 }
 
-const mapStateToProps = state => ({
-  isAuthenticated: state.authreducers.isAuthenticated,
-  access: state.authreducers.access
-});
 
-export default connect(mapStateToProps)(RecipeReviewCard);
+
+export default RecipeReviewCard;

@@ -123,19 +123,19 @@ function RecipeReviewCard({isAuthenticated,post,setOpen1,setOpen2,wishlistitems,
         <Grid item md={4}>
         <Typography 
             color='error'  variant='h6' className={classes.textroot}>
-          {post.currency}{post.final_price}
+          {post.currency.slice(0,1)} {post.final_price}
           </Typography>
           </Grid>
           <Grid item md={4}>
           <Typography
           variant='h6' className={classes.textroot1}>
-          <s>{post.currency}{post.final_price}</s>
+          <s>{post.currency.slice(0,1)} {post.final_price}</s>
           </Typography>
           </Grid>
           <Grid item md={4}>
           <Typography
          variant='h6' className={classes.textroot2}>
-            {post.owner_discount+post.company_discount}% off    
+            {post.net_discount}% off    
             </Typography>    
         </Grid>
     </Grid>

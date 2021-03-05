@@ -8,6 +8,7 @@ import axios from 'axios'
 import RecipeReviewCard from '../components/newcardroom';
 import Grid from '@material-ui/core/Grid';
 import Scrollroom from '../components/scrollroom';
+import Scrollshop from '../components/scrollshops';
 import Typography from '@material-ui/core/Typography';
 import {Link} from 'react-router-dom'
 
@@ -27,6 +28,7 @@ function Home() {
     const [luxrooms,setluxrooms] = React.useState([])
     const [classroom,setclassroom] = React.useState([])
     const [singleroom,setsingleroom] = React.useState([])
+    const [shop,setshop] = React.useState([])
 
     React.useEffect(async() => {
         const config = {
@@ -101,6 +103,31 @@ function Home() {
           }
     },[])
 
+    React.useEffect(async() => {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+          };
+          try{const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourceadadk2647kfs/shops/`,{
+            params:{
+             page:1,
+             
+             ordering:'-trust_points',
+    
+            },
+            config:config
+          });
+          
+          setshop(res.data.results);
+          
+          
+          }
+          catch{
+            
+          }
+    },[])
+
     
     return (
         <div>
@@ -150,6 +177,18 @@ function Home() {
                 </div>
                 <br />
                 <Scrollroom rooms={singleroom}/> <br /></> : null
+            }
+
+            {
+                shop.length>=1 ? <><div
+                className={classes.myclass}
+                >
+                <Typography variant='h6'>
+                    <Link to='/shops/' style={{textDecoration:'none',color:'black'}}>Our Shops...</Link>
+                </Typography>
+                </div>
+                <br />
+                <Scrollshop rooms={shop}/> <br /></> : null
             }
 
             
