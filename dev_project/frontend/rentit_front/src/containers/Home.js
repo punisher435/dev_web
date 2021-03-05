@@ -7,12 +7,16 @@ import 'antd/dist/antd.css';
 import axios from 'axios'
 import RecipeReviewCard from '../components/newcardroom';
 import Grid from '@material-ui/core/Grid';
+import Scrollroom from '../components/scrollroom';
+import Typography from '@material-ui/core/Typography';
 
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
 
 const useStyles = makeStyles((theme) => ({
-    
+    myclass: {
+        marginLeft:'2%'
+    },
   }));
 
 
@@ -43,30 +47,25 @@ function Home() {
           }
     },[])
 
+    
     return (
         <div>
            
             <Welcome/>
             <br />
-            <div>
-            <Grid
-            container
-            direction="row"
-            justify="flex-start"
-            alignItems="center"
-            spacing={2}
+            <div
+            className={classes.myclass}
             >
-                {
-                    luxrooms.map(room => (
-                        <Grid item>
-                            <RecipeReviewCard post={room}/>
-
-                        </Grid>
-                    ))
-                }
-            </Grid>
-
+            <Typography variant='h6'>
+                Our Deluxe Rooms...
+            </Typography>
             </div>
+            <br />
+            
+            
+           
+            <Scrollroom rooms={luxrooms}/>
+           
             
         </div>
     )
