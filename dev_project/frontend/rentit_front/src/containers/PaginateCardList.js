@@ -14,6 +14,19 @@ axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
 
 const App = ({isAuthenticated}) => {
+
+  var temp=''
+  const urlParams = new URLSearchParams(window.location.search);
+  const myparam = urlParams.get('category')
+  
+  if(myparam)
+  {
+    temp=myparam
+  }
+  
+  
+  
+
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -70,7 +83,7 @@ const App = ({isAuthenticated}) => {
     building_guard:'',
     balcony:'',
     separate_washroom:'',
-    category:'',
+    category:temp,
     location:'',
     city:'',
     state:'',

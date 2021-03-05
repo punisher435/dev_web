@@ -9,14 +9,16 @@ import RecipeReviewCard from '../components/newcardroom';
 import Grid from '@material-ui/core/Grid';
 import Scrollroom from '../components/scrollroom';
 import Typography from '@material-ui/core/Typography';
+import {Link} from 'react-router-dom'
 
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
 
 const useStyles = makeStyles((theme) => ({
     myclass: {
-        marginLeft:'2%'
+        marginLeft:'4%'
     },
+  
   }));
 
 
@@ -57,7 +59,7 @@ function Home() {
             className={classes.myclass}
             >
             <Typography variant='h6'>
-                Our Deluxe Rooms...
+                <Link to='/rooms/?category=Deluxe+room' style={{textDecoration:'none',color:'black'}}>Our Deluxe Rooms...</Link>
             </Typography>
             </div>
             <br />
@@ -65,8 +67,8 @@ function Home() {
             
            
             <Scrollroom rooms={luxrooms}/>
-           
             
+                        
         </div>
     )
 }
