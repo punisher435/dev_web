@@ -6,6 +6,7 @@ from rest_framework import permissions
 from rest_framework_simplejwt import authentication
 import datetime
 from django.db.models import Q
+from rest_framework.pagination import PageNumberPagination
 import json
 
 
@@ -13,6 +14,23 @@ import json
 from products.models import rooms,shops,apartments
 from .models import coupons
 from .serializers import coupon_serializer
+
+class StandardResultsSetPagination(PageNumberPagination):
+    page_size = 10
+    page_size_query_param = 'page_size'
+    max_page_size = 10
+
+
+class coupon_list_viewset(viewsets.ReadOnlyModelViewSet):
+    
+    pagination_class = StandardResultsSetPagination
+    
+    ordering = ['-off']
+
+    query_set = coupons.objects.all()
+    queryset = query_set.filter(expiry_date__gt=datetime.date.today())
+    
+    serializer_class = coupon_serializer
 
 # Create your views here.
 

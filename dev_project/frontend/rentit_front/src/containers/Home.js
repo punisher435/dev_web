@@ -10,6 +10,7 @@ import Grid from '@material-ui/core/Grid';
 import Scrollroom from '../components/scrollroom';
 import Scrollshop from '../components/scrollshops';
 import Scrollapartment from '../components/scrollapartment';
+import Scrollcoupons from '../components/scrollcoupons';
 import Typography from '@material-ui/core/Typography';
 import {Link} from 'react-router-dom'
 
@@ -23,6 +24,14 @@ const useStyles = makeStyles((theme) => ({
     myclass1: {
         marginLeft:'2%'
     },
+    textclass: {
+        color:'white',
+        padding:'10px',
+    },
+    bgclass:{
+        backgroundColor: '#2d3436',
+        backgroundImage: 'linear-gradient(315deg, #2d3436 0%, #000000 74%)',
+    },
   
   }));
 
@@ -34,6 +43,7 @@ function Home() {
     const [singleroom,setsingleroom] = React.useState([])
     const [shop,setshop] = React.useState([])
     const [apartment,setapartment] = React.useState([])
+    const [coupons,setcoupons] = React.useState([])
 
     React.useEffect(async() => {
         const config = {
@@ -158,6 +168,33 @@ function Home() {
           }
     },[])
 
+    React.useEffect(async() => {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+          };
+          try{const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourceadbwub2812gbwga981/coupon/list/`,{
+            params:{
+             page:1,
+             
+             ordering:'-off',
+    
+            },
+            config:config
+          });
+          
+          setcoupons(res.data.results);
+          
+          
+          }
+          catch{
+            
+          }
+    },[])
+
+    
+
     
     return (
         <div>
@@ -239,6 +276,24 @@ function Home() {
                 <br />
                 <div className={classes.myclass1}>
                 <Scrollapartment rooms={apartment}/></div> <br /></> : null
+            }
+            
+            <div className={classes.bgclass}>
+            <div
+                className={classes.myclass}
+                >
+            <Typography variant='h6' className={classes.textclass}>
+                %Offers and discount
+            </Typography>
+            </div>
+            </div>
+            <br />
+
+            {
+                coupons.length>=1 ? <>
+                
+                <div className={classes.myclass1}>
+                <Scrollcoupons rooms={coupons}/></div> <br /></> : null
             }
 
             
