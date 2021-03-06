@@ -70,6 +70,7 @@ function Scrollroom({rooms}) {
           
           className={classes.scrollclass}
           wheel={false}
+          alignCenter={false}
          
           
           

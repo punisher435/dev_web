@@ -20,6 +20,9 @@ const useStyles = makeStyles((theme) => ({
     myclass: {
         marginLeft:'4%'
     },
+    myclass1: {
+        marginLeft:'2%'
+    },
   
   }));
 
@@ -172,7 +175,9 @@ function Home() {
                 </Typography>
                 </div>
                 <br />
+                <div className={classes.myclass1}>
                 <Scrollroom rooms={luxrooms}/>
+                </div>
                 
     
                 <br /></> : null
@@ -188,7 +193,9 @@ function Home() {
                 </Typography>
                 </div>
                 <br />
+                <div className={classes.myclass1}>
                 <Scrollroom rooms={classroom}/>
+                </div>
     
                 <br /></> : null
             }
@@ -203,7 +210,8 @@ function Home() {
                 </Typography>
                 </div>
                 <br />
-                <Scrollroom rooms={singleroom}/> <br /></> : null
+                <div className={classes.myclass1}>
+                <Scrollroom rooms={singleroom}/></div> <br /></> : null
             }
 
             {
@@ -215,7 +223,8 @@ function Home() {
                 </Typography>
                 </div>
                 <br />
-                <Scrollshop rooms={shop}/> <br /></> : null
+                <div className={classes.myclass1}>
+                <Scrollshop rooms={shop}/></div> <br /></> : null
             }
 
 
@@ -228,7 +237,8 @@ function Home() {
                 </Typography>
                 </div>
                 <br />
-                <Scrollapartment rooms={apartment}/> <br /></> : null
+                <div className={classes.myclass1}>
+                <Scrollapartment rooms={apartment}/></div> <br /></> : null
             }
 
             
