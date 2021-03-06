@@ -55,3 +55,212 @@
   padding: 20px;
   cursor: pointer;
 }
+
+.svg_me { 
+  display: inline-block; 
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+} 
+
+
+@media only screen and (max-width: 300px)
+{.container_class{
+  display: inline-block; 
+  position: absolute; 
+  width: 100%; 
+  padding-bottom: 100%; 
+  vertical-align: bottom; 
+  overflow: hidden; 
+  top: 71vh; 
+  left: 0; 
+}}
+
+@media only screen and (min-width: 300px)
+{.container_class{
+  display: inline-block; 
+  position: absolute; 
+  width: 100%; 
+  padding-bottom: 100%; 
+  vertical-align: bottom; 
+  overflow: hidden; 
+  top: 68vh; 
+  left: 0; 
+}}
+
+@media only screen and (min-width: 365px)
+{.container_class{
+  display: inline-block; 
+  position: absolute; 
+  width: 100%; 
+  padding-bottom: 100%; 
+  vertical-align: bottom; 
+  overflow: hidden; 
+  top: 68vh; 
+  left: 0; 
+}}
+
+@media only screen and (min-width: 375px)
+{.container_class{
+  display: inline-block; 
+  position: absolute; 
+  width: 100%; 
+  padding-bottom: 100%; 
+  vertical-align: bottom; 
+  overflow: hidden; 
+  top: 70vh; 
+  left: 0; 
+}}
+
+
+@media only screen and (min-width: 400px)
+{.container_class{
+  display: inline-block; 
+  position: absolute; 
+  width: 100%; 
+  padding-bottom: 100%; 
+  vertical-align: bottom; 
+  overflow: hidden; 
+  top: 70vh; 
+  left: 0; 
+}}
+
+
+
+@media only screen and (max-width: 426px) and (min-width: 400px)
+{.container_class{
+  display: inline-block; 
+  position: absolute; 
+  width: 100%; 
+  padding-bottom: 100%; 
+  vertical-align: bottom; 
+  overflow: hidden; 
+  top: 68vh; 
+  left: 0; 
+}}
+
+@media only screen and (max-width: 426px) and (min-width: 410px)
+{.container_class{
+  display: inline-block; 
+  position: absolute; 
+  width: 100%; 
+  padding-bottom: 100%; 
+  vertical-align: bottom; 
+  overflow: hidden; 
+  top: 69vh; 
+  left: 0; 
+}}
+
+
+@media only screen and (min-width: 426px)
+{.container_class{
+  display: inline-block; 
+  position: absolute; 
+  width: 100%; 
+  padding-bottom: 100%; 
+  vertical-align: bottom; 
+  overflow: hidden; 
+  top: 68vh; 
+  left: 0; 
+}}
+
+@media only screen and (min-width: 500px)
+{.container_class{
+  display: inline-block; 
+  position: absolute; 
+  width: 100%; 
+  padding-bottom: 100%; 
+  vertical-align: bottom; 
+  overflow: hidden; 
+  top: 68vh; 
+  left: 0; 
+}}
+
+@media only screen and (min-width: 540px) and (max-width:550px)
+{.container_class{
+  display: inline-block; 
+  position: absolute; 
+  width: 100%; 
+  padding-bottom: 100%; 
+  vertical-align: bottom; 
+  overflow: hidden; 
+  top: 66vh; 
+  left: 0; 
+}}
+
+
+
+
+
+@media only screen and (min-width: 700px)
+{.container_class{
+  display: inline-block; 
+  position: absolute; 
+  width: 100%; 
+  padding-bottom: 100%; 
+  vertical-align: bottom; 
+  overflow: hidden; 
+  top: 65vh; 
+  left: 0; 
+}}
+
+@media only screen and (min-width: 800px) and (max-width: 1000px)
+{.container_class{
+  display: inline-block; 
+  position: absolute; 
+  width: 100%; 
+  padding-bottom: 100%; 
+  vertical-align: bottom; 
+  overflow: hidden; 
+  top: 67vh; 
+  left: 0; 
+}}
+
+@media only screen and (min-width: 1000px)
+{.container_class{
+  display: inline-block; 
+  position: absolute; 
+  width: 100%; 
+  padding-bottom: 100%; 
+  vertical-align: bottom; 
+  overflow: hidden; 
+  top: 65vh; 
+  left: 0; 
+}}
+
+@media only screen and (min-width: 1100px)
+{.container_class{
+  display: inline-block; 
+  position: absolute; 
+  width: 100%; 
+  padding-bottom: 100%; 
+  vertical-align: bottom; 
+  overflow: hidden; 
+  top: 55vh; 
+  left: 0; 
+}}
+
+@media only screen and (min-width: 1200px)
+{.container_class{
+  display: inline-block; 
+  position: absolute; 
+  width: 100%; 
+  padding-bottom: 100%; 
+  vertical-align: bottom; 
+  overflow: hidden; 
+  top: 51vh; 
+  left: 0; 
+}}
+
+@media only screen and (min-width: 1300px)
+{.container_class{
+  display: inline-block; 
+  position: absolute; 
+  width: 100%; 
+  padding-bottom: 100%; 
+  vertical-align: bottom; 
+  overflow: hidden; 
+  top: 45vh; 
+  left: 0; 
+}}
+

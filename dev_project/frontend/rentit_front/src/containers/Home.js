@@ -31,7 +31,15 @@ const useStyles = makeStyles((theme) => ({
     bgclass:{
         backgroundColor: '#2d3436',
         backgroundImage: 'linear-gradient(315deg, #2d3436 0%, #000000 74%)',
+        elevation:30,
     },
+
+    headerclass:{
+        
+      },
+      containerclass:{
+       
+      },
   
   }));
 
@@ -199,7 +207,12 @@ function Home() {
     return (
         <div>
            
-            <Welcome/>
+            
+            <div className={classes.containerclass}>
+                <div className={classes.headerclass}>
+                    <Welcome />
+                </div>
+            </div>
             <br />
             
 
