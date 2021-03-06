@@ -51,7 +51,7 @@ export default function CustomizedTabs1({post}) {
         
         post.map(room => {
           
-          return <MenuItem coupon={room} />;
+          return <MenuItem coupon={room} key={room.coupoun_code}/>;
         })
         
 

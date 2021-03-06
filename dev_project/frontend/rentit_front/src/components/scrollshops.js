@@ -27,7 +27,7 @@ function Scrollroom({rooms}) {
         
         rooms.map(room => {
           
-          return <MenuItem room={room} />;
+          return <MenuItem room={room} key={room.shop_id}/>;
         })
         
 

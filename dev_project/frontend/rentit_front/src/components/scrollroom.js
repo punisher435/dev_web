@@ -18,7 +18,7 @@ function Scrollroom({rooms}) {
   const classes = useStyles();
 
     const MenuItem = ({room}) => {
-        return <RecipeReviewCard post={room}/>;
+        return <RecipeReviewCard post={room} />;
       };
       
       // All items component
@@ -27,7 +27,7 @@ function Scrollroom({rooms}) {
         
         rooms.map(room => {
           
-          return <MenuItem room={room} />;
+          return <MenuItem room={room} key={room.room_id}/>;
         })
         
 
