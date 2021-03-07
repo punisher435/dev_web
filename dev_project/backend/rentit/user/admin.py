@@ -12,11 +12,11 @@ class UserAdmin(BaseUserAdmin):
     form = UpdateUserForm
     add_form = AddUserForm
 
-    list_display = ('email', 'first_name', 'last_name','is_seller','profile_completed','bank_completed','address_completed','is_staff','is_superuser')
-    list_filter = ('is_staff', 'is_superuser', 'is_seller','is_active','profile_completed','bank_completed','address_completed')
+    list_display = ('email', 'first_name', 'last_name','is_seller','gender','profile_completed','bank_completed','address_completed','is_staff','is_superuser')
+    list_filter = ('is_staff', 'is_superuser', 'is_seller','is_active','gender','profile_completed','bank_completed','address_completed')
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
-        ('Personal info', {'fields': ('first_name', 'last_name','is_seller','profile_completed','bank_completed','address_completed')}),
+        ('Personal info', {'fields': ('first_name', 'last_name','is_seller','gender','profile_completed','bank_completed','address_completed')}),
         ('Permissions', {'fields': ('is_active', 'is_staff')}),
     )
     add_fieldsets = (
@@ -25,7 +25,7 @@ class UserAdmin(BaseUserAdmin):
             {
                 'classes': ('wide',),
                 'fields': (
-                    'email', 'first_name', 'last_name','is_seller','profile_completed','bank_completed','address_completed','password1',
+                    'email', 'first_name', 'last_name','is_seller','gender','profile_completed','bank_completed','address_completed','password1',
                     'password2'
                 )
             }

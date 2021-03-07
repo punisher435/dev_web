@@ -117,16 +117,17 @@ export const login = (email, password) => async dispatch => {
     }
 };
 
-export const signup = ({first_name,last_name, email,is_seller, password, re_password }) => async dispatch => {
+export const signup = ({first_name,last_name, email,is_seller,password, re_password,gender }) => async dispatch => {
     const config = {
         headers: {
             'Content-Type': 'application/json'
         }
     }
 
-    const body = JSON.stringify({ first_name,last_name, email,is_seller, password, re_password }); 
+    const body = JSON.stringify({ first_name,last_name, email,is_seller,gender, password, re_password }); 
 
     try {
+        console.log(body);
         const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/users/`, body, config);
 
         dispatch({

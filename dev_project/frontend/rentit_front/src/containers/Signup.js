@@ -71,14 +71,14 @@ const Signup = ({ signup, isAuthenticated }) => {
         is_seller:false,
         password: '',
         re_password: '',
-        gender:'male'
+        gender:'Male'
     });
 
     const classes = useStyles();
 
     const [accountCreated, setAccountCreated] = useState(false);
 
-    const { first_name,last_name,is_seller, email, password, re_password } = formData;
+    const { first_name,last_name,is_seller, email, password, re_password,gender } = formData;
 
     const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
 
@@ -90,7 +90,7 @@ const Signup = ({ signup, isAuthenticated }) => {
         e.preventDefault();
 
         if (password === re_password) {
-            signup({ first_name,last_name, email,is_seller, password, re_password });
+            signup({ first_name,last_name, email,is_seller, password, re_password,gender });
             setAccountCreated(true);
         }
     };

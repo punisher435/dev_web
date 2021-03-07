@@ -16,11 +16,12 @@ from .managers import profile_manager
 
 class UserAccountManager(BaseUserManager):
 
-    def create_user(self,email,first_name,last_name,gender,is_seller,password=None, **extra_fields):
+    def create_user(self,email,first_name,last_name,is_seller,gender,password=None,**extra_fields):
+     
         if not email:
             raise ValueError('Users must have an email address!')
         email =self.normalize_email(email)
-        user = self.model(email=email,first_name=first_name,last_name=last_name,gender=gender,is_seller=is_seller,**extra_fields)
+        user = self.model(email=email,first_name=first_name,last_name=last_name,is_seller=is_seller,gender=gender,**extra_fields)
 
         user.set_password(password)
         user.save(using=self._db)
@@ -30,7 +31,7 @@ class UserAccountManager(BaseUserManager):
         return user
 
 
-    def create_superuser(self,email,first_name,last_name,is_seller,password, **extra_fields):
+    def create_superuser(self,email,first_name,last_name,is_seller,gender,password, **extra_fields):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
         extra_fields.setdefault('is_active', True)
@@ -40,7 +41,7 @@ class UserAccountManager(BaseUserManager):
             raise ValueError('Superuser must have is_staff=True.')
         if extra_fields.get('is_superuser') is not True:
             raise ValueError('Superuser must have is_superuser=True.')
-        return self.create_user(email,first_name,last_name,is_seller, password, **extra_fields)
+        return self.create_user(email,first_name,last_name,is_seller,gender,password, **extra_fields)
 
 
 class customUser(AbstractBaseUser, PermissionsMixin):
