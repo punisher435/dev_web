@@ -293,7 +293,7 @@ function Home() {
             </div>
             <br />
 
-            <div>
+            <div className="searchcardme">
             <Grid
             container
             direction="row"
