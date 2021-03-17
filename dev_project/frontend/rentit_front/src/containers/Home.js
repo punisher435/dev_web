@@ -13,7 +13,15 @@ import Scrollapartment from '../components/scrollapartment';
 import Scrollcoupons from '../components/scrollcoupons';
 import Typography from '@material-ui/core/Typography';
 import {Link} from 'react-router-dom'
-
+import Paper from '@material-ui/core/Paper';
+import '../components/css/App.css';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
+import StorefrontIcon from '@material-ui/icons/Storefront';
+import ApartmentIcon from '@material-ui/icons/Apartment';
+import TextField from '@material-ui/core/TextField';
+import DatePick from '../components/datepick'
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
 
@@ -39,6 +47,22 @@ const useStyles = makeStyles((theme) => ({
       },
       containerclass:{
        
+      },
+      paperclass:{
+          width:'100%',
+          height:'100%',
+      },
+      gridclass1:{
+         
+      },
+      paperclass1:{
+          width:'90vw',
+          maxWidth:'1200px',
+      },
+
+      root12: {
+       marginRight:'8px',
+       marginBottom:'8px'
       },
   
   }));
@@ -201,6 +225,25 @@ function Home() {
           }
     },[])
 
+    const [value, setValue] = React.useState(2);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  const [input,setinput] = React.useState({
+      city:'',
+      state:'',
+      country:'',
+      date:'',
+  })
+
+  const handleinput = e => {
+      
+    
+      setinput({...input,[e.target.name]: e.target.value})
+  }
+
     
 
     
@@ -213,6 +256,81 @@ function Home() {
                     <Welcome />
                 </div>
             </div>
+            
+            <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+            
+            >
+            <Paper elevation={5} className={classes.paperclass1}>
+            
+            <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+            
+            >
+            <Paper square elevation={0}>
+            <Tabs
+                value={value}
+                indicatorColor="primary"
+                textColor="primary"
+                onChange={handleChange}
+                aria-label="disabled tabs example"
+            >
+                <Tab label="Rooms" icon={<MeetingRoomIcon />}/>
+                <Tab label="Shops" icon={<StorefrontIcon />}/>
+                <Tab label="Housing" icon={<ApartmentIcon />}/>
+            </Tabs>
+            </Paper>
+            </Grid>
+            <br />
+            
+            
+
+            <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+           
+            
+            >
+            <div className={classes.root12}>
+            <TextField id="city" label="City" variant="outlined" name="city" value={input.city} onInput={handleinput}/>
+            </div>
+            <div className={classes.root12}>
+            <TextField id="state" label="State" variant="outlined" name="state" value={input.state} onInput={handleinput}/>
+            </div>
+            <div className={classes.root12}>
+            <TextField id="country" label="Country" variant="outlined" name="country" value={input.country} onInput={handleinput}/>
+            </div>
+
+            </Grid>
+
+            <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+            
+            >
+
+            <DatePick value={input} setvalue={setinput} name={'date'} />
+
+            </Grid>
+
+            <br />
+
+            
+                
+            </Paper>
+            </Grid>
+
+            <br />
             <br />
             
 
@@ -291,6 +409,7 @@ function Home() {
                 <Scrollapartment rooms={apartment}/></div> <br /></> : null
             }
             
+            <Paper elevation={5} className={classes.paperclass}>
             <div className={classes.bgclass}>
             <div
                 className={classes.myclass}
@@ -300,6 +419,7 @@ function Home() {
             </Typography>
             </div>
             </div>
+            </Paper>
             <br />
 
             {
@@ -308,6 +428,58 @@ function Home() {
                 <div className={classes.myclass1}>
                 <Scrollcoupons rooms={coupons}/></div> <br /></> : null
             }
+
+
+            <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+            className={classes.gridclass1}
+            spacing={1}
+            >
+                <Grid item xs={4} >
+                <Paper elevation={5} className='gridme1' >
+                <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+            >
+                hy
+            </Grid>
+            </Paper>
+                </Grid>
+
+                <Grid item xs={4} >
+                <Paper elevation={5} className='gridme1' >
+                <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+            >
+                hy
+            </Grid>
+            </Paper>
+                </Grid>
+
+                
+                <Grid item xs={4} >
+                <Paper elevation={5} className='gridme1'>
+                <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+            >
+                hy
+            </Grid>
+            </Paper>
+                </Grid>
+                
+            </Grid>
+         
 
             
             
