@@ -51,6 +51,8 @@ export default function DateSelect({value,setvalue,name}) {
 
   };
 
+  var newDate = new Date(Date.now() + 14 * 24*60*60*1000);
+
 
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils} className={classes.root12}>
@@ -64,6 +66,8 @@ export default function DateSelect({value,setvalue,name}) {
           value={selectedDate}
           onChange={handleDateChange}
           minDate={new Date()}
+
+          maxDate={newDate}
           
 
           KeyboardButtonProps={{

@@ -12,7 +12,7 @@ import Scrollshop from '../components/scrollshops';
 import Scrollapartment from '../components/scrollapartment';
 import Scrollcoupons from '../components/scrollcoupons';
 import Typography from '@material-ui/core/Typography';
-import {Link} from 'react-router-dom'
+import {Link,Redirect} from 'react-router-dom'
 import Paper from '@material-ui/core/Paper';
 import '../components/css/App.css';
 import Tabs from '@material-ui/core/Tabs';
@@ -22,6 +22,7 @@ import StorefrontIcon from '@material-ui/icons/Storefront';
 import ApartmentIcon from '@material-ui/icons/Apartment';
 import TextField from '@material-ui/core/TextField';
 import DatePick from '../components/datepick'
+import Button from '@material-ui/core/Button';
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
 
@@ -225,7 +226,10 @@ function Home() {
           }
     },[])
 
-    const [value, setValue] = React.useState(2);
+    const [value, setValue] = React.useState('Rooms');
+    const [roomsearch,setroomsearch] = React.useState(false)
+    const [shopsearch,setshopsearch] = React.useState(false)
+    const [apartmentsearch,setapartmentsearch] = React.useState(false)
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -242,6 +246,37 @@ function Home() {
       
     
       setinput({...input,[e.target.name]: e.target.value})
+  }
+
+  const handleclick = e => {
+      e.preventDefault();
+      if(value ==='Rooms')
+      {
+        setroomsearch(true);
+      }
+
+      if(value ==='Shops')
+      {
+        setshopsearch(true);
+      }
+
+      if(value ==='Housing')
+      {
+        setapartmentsearch(true);
+      }
+  }
+
+  if(roomsearch===true)
+  {
+      return <Redirect to={`/rooms/?city=${input.city}&state=${input.state}&country=${input.country}&booking_date=${input.date}`} style={{textDecoration:'none',color:'black'}} />
+  }
+  if(shopsearch===true)
+  {
+      return <Redirect to={`/shops/?city=${input.city}&state=${input.state}&country=${input.country}&booking_date=${input.date}`} style={{textDecoration:'none',color:'black'}} />
+  }
+  if(apartmentsearch===true)
+  {
+      return <Redirect to={`/apartments/?city=${input.city}&state=${input.state}&country=${input.country}&booking_date=${input.date}`} style={{textDecoration:'none',color:'black'}} />
   }
 
     
@@ -265,6 +300,7 @@ function Home() {
             
             >
             <Paper elevation={5} className={classes.paperclass1}>
+                <br />
             
             <Grid
             container
@@ -281,9 +317,9 @@ function Home() {
                 onChange={handleChange}
                 aria-label="disabled tabs example"
             >
-                <Tab label="Rooms" icon={<MeetingRoomIcon />}/>
-                <Tab label="Shops" icon={<StorefrontIcon />}/>
-                <Tab label="Housing" icon={<ApartmentIcon />}/>
+                <Tab label="Rooms" icon={<MeetingRoomIcon />} value='Rooms'/>
+                <Tab label="Shops" icon={<StorefrontIcon />} value='Shops'/>
+                <Tab label="Housing" icon={<ApartmentIcon />} value='Housing'/>
             </Tabs>
             </Paper>
             </Grid>
@@ -323,6 +359,21 @@ function Home() {
 
             </Grid>
 
+            <br />
+
+            
+
+            <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+            
+            >
+
+            <Button variant="contained" color="primary" onClick={handleclick}>Search</Button>
+
+            </Grid>
             <br />
 
             

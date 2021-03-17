@@ -18,11 +18,37 @@ const App = ({isAuthenticated}) => {
   var temp=''
   const urlParams = new URLSearchParams(window.location.search);
   const myparam = urlParams.get('category')
-  
+
   if(myparam)
   {
     temp=myparam
   }
+
+  var temp1=''
+  const myparam1 = urlParams.get('city')
+  
+  if(myparam1)
+  {
+    temp1=myparam1
+  }
+
+  var temp2=''
+  const myparam2 = urlParams.get('state')
+  
+  if(myparam2)
+  {
+    temp2=myparam2
+  }
+
+  var temp3=''
+  const myparam3 = urlParams.get('country')
+  
+  if(myparam3)
+  {
+    temp3=myparam3
+  }
+
+  
   
   
   
@@ -65,6 +91,14 @@ const App = ({isAuthenticated}) => {
       y = `${date.getDate()}`;
     }
 
+    var temp4=`${date.getFullYear()}-${x}-${y}`
+  const myparam4 = urlParams.get('booking_date')
+  
+  if(myparam4)
+  {
+    temp4=myparam4
+  }
+
   const [filters, setfilters] = useState({
     nonveg_food:'',
     veg_food:'',
@@ -85,8 +119,8 @@ const App = ({isAuthenticated}) => {
     separate_washroom:'',
     category:temp,
     location:'',
-    city:'',
-    state:'',
+    city:temp1,
+    state:temp2,
     wifi:'',
     breakfast:'',
     lunch:'',
@@ -94,14 +128,14 @@ const App = ({isAuthenticated}) => {
     house_TV:'',
     geyser:'',
     electricity:'',
-    country:'',
+    country:temp3,
     min_price:'',
     max_price:'',
     capacity_filter:'',
     trust_points_filter:'',
     booked:false,
     windows:'',
-    bookedtill:`${date.getFullYear()}-${x}-${y}`,
+    bookedtill:temp4,
     search:'',
     room_cleaning:'',
     ordering:'-trust_points',

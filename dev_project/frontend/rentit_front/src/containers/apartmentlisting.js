@@ -15,6 +15,32 @@ axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
 
 const App = ({isAuthenticated}) => {
+
+  const urlParams = new URLSearchParams(window.location.search);
+
+  var temp1=''
+  const myparam1 = urlParams.get('city')
+  
+  if(myparam1)
+  {
+    temp1=myparam1
+  }
+
+  var temp2=''
+  const myparam2 = urlParams.get('state')
+  
+  if(myparam2)
+  {
+    temp2=myparam2
+  }
+
+  var temp3=''
+  const myparam3 = urlParams.get('country')
+  
+  if(myparam3)
+  {
+    temp3=myparam3
+  }
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -54,6 +80,14 @@ const App = ({isAuthenticated}) => {
       y = `${date.getDate()}`;
     }
 
+    var temp4=`${date.getFullYear()}-${x}-${y}`
+    const myparam4 = urlParams.get('booking_date')
+    
+    if(myparam4)
+    {
+      temp4=myparam4
+    }
+
   const [filters, setfilters] = useState({
     
     laundry:'',
@@ -83,8 +117,8 @@ const App = ({isAuthenticated}) => {
     separate_washroom:'',
     category:'',
     location:'',
-    city:'',
-    state:'',
+    city:temp1,
+    state:temp2,
     wifi:'',
     gender:'',
     discount:'',
@@ -92,14 +126,14 @@ const App = ({isAuthenticated}) => {
     TV:'',
     geyser:'',
     electricity:'',
-    country:'',
+    country:temp3,
     min_price:'',
     max_price:'',
     BHK_filter:'',
     trust_points_filter:'',
     booked:false,
     windows:'',
-    bookedtill:`${date.getFullYear()}-${x}-${y}`,
+    bookedtill:temp4,
     search:'',
     apartment_cleaning:'',
     ordering:'-trust_points',
