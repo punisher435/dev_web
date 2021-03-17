@@ -11,6 +11,19 @@ import {
 export default function MaterialUIPickers1(props) {
   const [selectedDate, setSelectedDate] = React.useState(new Date(Date.now()));
 
+  React.useEffect(
+    () => {
+      var date1 = new Date(Date.now());
+      if(props.filters)
+      {
+        date1.setYear(parseInt(props.filters.bookedtill.slice(0,4)))
+        date1.setMonth(parseInt(props.filters.bookedtill.slice(5,7))-1)
+        date1.setDate(parseInt(props.filters.bookedtill.slice(8,)))
+
+        setSelectedDate(date1);
+      }
+    }
+    ,[props.filters])
   
 
   const handleDateChange = (date) => {

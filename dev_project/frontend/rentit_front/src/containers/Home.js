@@ -291,7 +291,9 @@ function Home() {
                     <Welcome />
                 </div>
             </div>
-            
+            <br />
+
+            <div>
             <Grid
             container
             direction="row"
@@ -380,6 +382,7 @@ function Home() {
                 
             </Paper>
             </Grid>
+            </div>
 
             <br />
             <br />
