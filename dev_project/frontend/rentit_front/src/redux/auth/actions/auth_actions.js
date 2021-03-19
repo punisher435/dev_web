@@ -119,7 +119,7 @@ export const login = (email, password) => async dispatch => {
             });
 
             
-            console.log(err.response)
+            
             
            
             throw new Error(`${err.response.data.detail}`)
