@@ -23,6 +23,34 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
+
+const validationSchema = yup.object({
+  
+  first_name: yup
+  .string('Enter your first name')
+  .required('First name is required'),
+
+  last_name: yup
+  .string('Enter your last name')
+  .required('last name is required'),
+
+  email: yup
+  .string('Enter your email')
+  .email('PLease enter valid email')
+  .required('Email is required'),
+
+  password: yup.string()
+  .required('No password provided.') 
+  .min(8, 'Password is too short - should be 8 chars minimum.'),
+
+  re_password: yup.string()
+     .oneOf([yup.ref('password'), null], 'Passwords must match')
+ 
+
+  
+});
 
 function Copyright() {
   return (
@@ -80,14 +108,11 @@ const Signup = ({ signup, isAuthenticated }) => {
 
     const [accountCreated, setAccountCreated] = useState(false);
 
-    const { first_name,last_name,is_seller, email, password, re_password,gender } = formData;
+    
 
-    const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
+    
 
-    const checked = e => {
-        setFormData({ ...formData, is_seller: e.target.checked });
-    }
-
+   
     const [message,setmess] = useState('')
     const [display,setdisplay] = useState(false)
     const [display1,setdisplay1] = useState(false)
@@ -97,8 +122,44 @@ const Signup = ({ signup, isAuthenticated }) => {
     }
 
 
-    const onSubmit = async e => {
-        e.preventDefault();
+   
+
+    const handleClose = (event, reason) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+  
+      setdisplay(false);
+    };
+
+    const handleClose1 = (event, reason) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+  
+      setdisplay1(false);
+    };
+
+    const formik = useFormik({
+      
+      initialValues: {
+
+        first_name: '',
+        last_name: '',
+        email: '',
+        is_seller:false,
+        password: '',
+        re_password: '',
+        gender:'Male'
+       
+      },
+      validationSchema: validationSchema,
+      onSubmit: async (values) => {
+        
+        
+        const { first_name,last_name,is_seller, email, password, re_password,gender } = values;
+
+       
 
         if (password === re_password) {
             signup({ first_name,last_name, email,is_seller, password, re_password,gender })
@@ -118,23 +179,10 @@ const Signup = ({ signup, isAuthenticated }) => {
             
            
         }
-    };
-
-    const handleClose = (event, reason) => {
-      if (reason === 'clickaway') {
-        return;
-      }
   
-      setdisplay(false);
-    };
-
-    const handleClose1 = (event, reason) => {
-      if (reason === 'clickaway') {
-        return;
-      }
-  
-      setdisplay1(false);
-    };
+        
+      },
+    });
   
 
     if (isAuthenticated)
@@ -168,60 +216,68 @@ const Signup = ({ signup, isAuthenticated }) => {
             <Typography component="h1" variant="h5">
                 Sign up
             </Typography>
-            <form className={classes.form} noValidate onSubmit={e => onSubmit(e)}>
+            <form className={classes.form} onSubmit={formik.handleSubmit}>
                 <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
                     <TextField
                     autoComplete="fname"
                     name="first_name"
                     variant="outlined"
-                    required
+                   
                     fullWidth
                     id="first_name"
                     label="First Name"
                     autoFocus
-                    value={first_name}
-                    onInput={ e => onChange(e)}
+                    value={formik.values.first_name}
+                    onChange={formik.handleChange}
+                    error={formik.touched.first_name && Boolean(formik.errors.first_name)}
+                    helperText={formik.touched.first_name && formik.errors.first_name}
                     />
                 </Grid>
                 <Grid item xs={12} sm={6}>
                     <TextField
                     variant="outlined"
-                    required
+                    
                     fullWidth
                     id="last_name"
                     label="Last Name"
                     name="last_name"
                     autoComplete="lname"
-                    value={last_name}
-                    onInput={ e => onChange(e)}
+                    value={formik.values.last_name}
+                    onChange={formik.handleChange}
+                    error={formik.touched.last_name && Boolean(formik.errors.last_name)}
+                    helperText={formik.touched.last_name && formik.errors.last_name}
                     />
                 </Grid>
                 <Grid item xs={12}>
                     <TextField
                     variant="outlined"
-                    required
+                   
                     fullWidth
                     id="email"
                     label="Email Address"
                     name="email"
                     autoComplete="email"
-                    value={email}
-                    onInput={ e => onChange(e)}
+                    value={formik.values.email}
+                    onChange={formik.handleChange}
+                    error={formik.touched.email && Boolean(formik.errors.email)}
+                    helperText={formik.touched.email && formik.errors.email}
                     />
                 </Grid>
                 <Grid item xs={12}>
                     <TextField
                     variant="outlined"
-                    required
+                  
                     fullWidth
                     name="password"
                     label="Password"
                     type="password"
                     id="password"
                     autoComplete="current-password"
-                    value={password}
-                    onInput={ e => onChange(e)}
+                    value={formik.values.password}
+                    onChange={formik.handleChange}
+                    error={formik.touched.password && Boolean(formik.errors.password)}
+                    helperText={formik.touched.password && formik.errors.password}
                     />
                 </Grid>
                 
@@ -230,8 +286,8 @@ const Signup = ({ signup, isAuthenticated }) => {
                 <Select
           labelId="gender"
           id="gender"
-          value={formData.gender}
-          onChange={(e) => {setFormData({...formData,gender:e.target.value})}}
+          value={formik.values.gender}
+          onChange={(e) => {formik.setFieldValue('gender',e.target.value)}}
         >
           <MenuItem value={'Male'}>Male</MenuItem>
           <MenuItem value={'Female'}>Female</MenuItem>
@@ -242,20 +298,22 @@ const Signup = ({ signup, isAuthenticated }) => {
                 <Grid item xs={12}>
                     <TextField
                     variant="outlined"
-                    required
+                    
                     fullWidth
                     name="re_password"
                     label="Confirm Password"
                     type="password"
                     id="re_password"
                     autoComplete="current-password"
-                    value={re_password}
-                    onInput={ e => onChange(e)}
+                    value={formik.values.re_password}
+                    onChange={formik.handleChange}
+                    error={formik.touched.re_password && Boolean(formik.errors.re_password)}
+                    helperText={formik.touched.re_password && formik.errors.re_password}
                     />
                 </Grid>
                 <Grid item xs={12}>
                 <FormControlLabel
-                control={<Checkbox value={is_seller} onChange={e => checked(e)} color="primary" />}
+                control={<Checkbox value={formik.values.is_seller} onChange={e => formik.setFieldValue('is_seller',e.target.checked)} color="primary" />}
                 label="I am a seller."
                 />
                 </Grid>

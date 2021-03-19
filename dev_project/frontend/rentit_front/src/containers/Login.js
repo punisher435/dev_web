@@ -71,7 +71,7 @@ const Login = ({ login, isAuthenticated }) => {
 
   var temp=''
   const urlParams = new URLSearchParams(window.location.search);
-  const myparam = urlParams.get('singup')
+  const myparam = urlParams.get('signup')
 
   if(myparam)
   {
