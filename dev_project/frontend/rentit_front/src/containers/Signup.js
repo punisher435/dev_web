@@ -94,15 +94,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 const Signup = ({ signup, isAuthenticated }) => {
-    const [formData, setFormData] = useState({
-        first_name: '',
-        last_name: '',
-        email: '',
-        is_seller:false,
-        password: '',
-        re_password: '',
-        gender:'Male'
-    });
+   
 
     const classes = useStyles();
 
@@ -188,7 +180,7 @@ const Signup = ({ signup, isAuthenticated }) => {
     if (isAuthenticated)
         return <Redirect to='/' />;
     if (accountCreated)
-        return <Redirect to='login/?signup=success' />;
+        return <Redirect to='/login/?signup=success' />;
     
     return (
         <Container component="main" maxWidth="xs">

@@ -98,11 +98,16 @@ const Login = ({ login, isAuthenticated }) => {
 
   const [display,setdisplay] = React.useState(false)
 
-  if(temp==='success')
+  React.useEffect(() => {
+
+    if(temp==='success')
   {
    setdisplay(true) 
   }
 
+
+  },[temp])
+  
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
@@ -117,7 +122,7 @@ const Login = ({ login, isAuthenticated }) => {
 
     if (isAuthenticated)
         return <Redirect to='/' />;
-    
+    if(temp){
     return (
         <Grid container component="main" className={classes.root}>
           <CssBaseline />
@@ -192,7 +197,7 @@ const Login = ({ login, isAuthenticated }) => {
             </div>
           </Grid>
         </Grid>
-      );
+      );}
 };
 
 const mapStateToProps = state => ({
