@@ -126,19 +126,35 @@ export const signup = ({first_name,last_name, email,is_seller,password, re_passw
 
     const body = JSON.stringify({ first_name,last_name, email,is_seller,gender, password, re_password }); 
 
-    try {
-        console.log(body);
-        const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/users/`, body, config);
-
-        dispatch({
+   
+        
+        await axios.post(`${process.env.REACT_APP_API_URL}/auth/users/`, body, config)
+        .then((res) => {dispatch({
             type: SIGNUP_SUCCESS,
             payload: res.data
         });
-    } catch (err) {
-        dispatch({
-            type: SIGNUP_FAIL
-        });
-    }
+        return 'success' })
+        .catch(err => {
+            dispatch({
+                type: SIGNUP_FAIL
+            });
+            var temp1 = ''
+            var temp2 = ''
+            if(err.response.data['email'])
+            {
+                temp1 = err.response.data['email']
+            }
+
+            if(err.response.data['password'])
+            {
+                temp2 = err.response.data['password']
+            }
+           
+            throw new Error(`${temp1} ${temp2}`)
+        })
+
+        
+    
 };
 
 export const verify = (uid, token) => async dispatch => {

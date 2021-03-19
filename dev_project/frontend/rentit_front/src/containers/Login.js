@@ -15,11 +15,14 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 
 
 
 
 function Copyright() {
+
     return (
       <Typography variant="body2" color="textSecondary" align="center">
         {'Copyright © '}
@@ -66,6 +69,16 @@ function Copyright() {
 
 const Login = ({ login, isAuthenticated }) => {
 
+  var temp=''
+  const urlParams = new URLSearchParams(window.location.search);
+  const myparam = urlParams.get('singup')
+
+  if(myparam)
+  {
+    temp=myparam
+  }
+  
+
         const [formData, setFormData] = useState({
         email: '',
         password: ''
@@ -82,12 +95,39 @@ const Login = ({ login, isAuthenticated }) => {
         login(email, password);
     };
 
+
+  const [display,setdisplay] = React.useState(false)
+
+  if(temp==='success')
+  {
+   setdisplay(true) 
+  }
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setdisplay(false);
+  };
+
+    function Alert(props) {
+      return <MuiAlert elevation={6} variant="filled" {...props} />;
+    }
+
     if (isAuthenticated)
         return <Redirect to='/' />;
     
     return (
         <Grid container component="main" className={classes.root}>
           <CssBaseline />
+
+          <Snackbar open={display} autoHideDuration={6000} onClose={handleClose}>
+            <Alert onClose={handleClose} severity="success">
+              Activation email has been sent. Kindly check your email!
+            </Alert>
+          </Snackbar>
+
           <Grid item xs={false} sm={4} md={7} className={classes.image} />
           <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
             <div className={classes.paper}>

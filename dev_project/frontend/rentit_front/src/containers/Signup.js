@@ -21,13 +21,15 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
       <Link to='/'>
-        Rentit
+        Rent=ene
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -86,23 +88,77 @@ const Signup = ({ signup, isAuthenticated }) => {
         setFormData({ ...formData, is_seller: e.target.checked });
     }
 
-    const onSubmit = e => {
+    const [message,setmess] = useState('')
+    const [display,setdisplay] = useState(false)
+    const [display1,setdisplay1] = useState(false)
+
+    function Alert(props) {
+      return <MuiAlert elevation={6} variant="filled" {...props} />;
+    }
+
+
+    const onSubmit = async e => {
         e.preventDefault();
 
         if (password === re_password) {
-            signup({ first_name,last_name, email,is_seller, password, re_password,gender });
-            setAccountCreated(true);
+            signup({ first_name,last_name, email,is_seller, password, re_password,gender })
+            .then(temp => {
+              
+              setdisplay(true)
+              setAccountCreated(true)
+
+              })
+              .catch(err => {
+                console.log('error',err.message);
+                setmess(err.message);
+                setdisplay1(true)
+
+              })
+           
+            
+           
         }
     };
+
+    const handleClose = (event, reason) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+  
+      setdisplay(false);
+    };
+
+    const handleClose1 = (event, reason) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+  
+      setdisplay1(false);
+    };
+  
 
     if (isAuthenticated)
         return <Redirect to='/' />;
     if (accountCreated)
-        return <Redirect to='login' />;
+        return <Redirect to='login/?signup=success' />;
     
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline />
+
+            <Snackbar open={display} autoHideDuration={6000} onClose={handleClose}>
+            <Alert onClose={handleClose} severity="success">
+              Activation email has been sent. Kindly check your email!
+            </Alert>
+          </Snackbar>
+
+          <Snackbar open={display1} autoHideDuration={6000} onClose={handleClose1}>
+            <Alert onClose={handleClose1} severity="error">
+              Error! {message}
+            </Alert>
+          </Snackbar>
+
+
             <div className={classes.paper}>
 
               
