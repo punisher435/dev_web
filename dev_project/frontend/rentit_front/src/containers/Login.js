@@ -145,6 +145,7 @@ const Login = ({ login, isAuthenticated }) => {
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
+     
       const { email, password } = values;
       
       login(email, password)
@@ -257,6 +258,88 @@ const Login = ({ login, isAuthenticated }) => {
           </Grid>
         </Grid>
       );}
+      else{
+        return (
+        <Grid container component="main" className={classes.root}>
+          <CssBaseline />
+
+         
+          <Snackbar open={display1} autoHideDuration={6000} onClose={handleClose1}>
+            <Alert onClose={handleClose1} severity="error">
+              Error! {message}
+            </Alert>
+          </Snackbar>
+
+          <Grid item xs={false} sm={4} md={7} className={classes.image} />
+          <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+            <div className={classes.paper}>
+              <Avatar className={classes.avatar}>
+                <LockOutlinedIcon />
+              </Avatar>
+              <Typography component="h1" variant="h5">
+                Sign in
+              </Typography>
+              <form className={classes.form} onSubmit={formik.handleSubmit}>
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  
+                  fullWidth
+                  id="email"
+                  label="Email Address"
+                  name="email"
+                  autoComplete="email"
+                  autoFocus
+                  value={formik.values.email}
+                  onChange={formik.handleChange}
+                  error={formik.touched.email && Boolean(formik.errors.email)}
+                  helperText={formik.touched.email && formik.errors.email}
+                />
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                 
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                  autoComplete="current-password"
+                  value={formik.values.password}
+                  onChange={formik.handleChange}
+                  error={formik.touched.password && Boolean(formik.errors.password)}
+                  helperText={formik.touched.password && formik.errors.password}
+                />
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className={classes.submit}
+                >
+                  Sign In
+                </Button>
+                <Grid container>
+                  <Grid item xs>
+                    <Link to="/reset_password">
+                      Forgot password?
+                    </Link>
+                  </Grid>
+                  <Grid item>
+                    <Link  to='/signup'>
+                      {"Don't have an account? Sign Up"}
+                    </Link>
+                  </Grid>
+                </Grid>
+                <Box mt={5}>
+                  <Copyright />
+                </Box>
+              </form>
+            </div>
+          </Grid>
+        </Grid>
+      );
+      }
 };
 
 const mapStateToProps = state => ({
