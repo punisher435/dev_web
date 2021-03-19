@@ -101,20 +101,33 @@ export const login = (email, password) => async dispatch => {
 
     const body = JSON.stringify({ email, password });
 
-    try {
-        const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/jwt/create/`, body, config);
+   
+        await axios.post(`${process.env.REACT_APP_API_URL}/auth/jwt/create/`, body, config)
+        .then(res => {
+            dispatch({
+                type: LOGIN_SUCCESS,
+                payload: res.data
+            });
+    
+            dispatch(load_user());
 
-        dispatch({
-            type: LOGIN_SUCCESS,
-            payload: res.data
-        });
+            return 'success'
+        })
+        .catch(err => {
+            dispatch({
+                type: LOGIN_FAIL
+            });
 
-        dispatch(load_user());
-    } catch (err) {
-        dispatch({
-            type: LOGIN_FAIL
-        });
-    }
+            
+            console.log(err.response)
+            
+           
+            throw new Error(`${err.response.data.detail}`)
+            
+        })
+
+        
+    
 };
 
 export const signup = ({first_name,last_name, email,is_seller,password, re_password,gender }) => async dispatch => {

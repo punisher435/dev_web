@@ -162,7 +162,7 @@ const Signup = ({ signup, isAuthenticated }) => {
 
               })
               .catch(err => {
-                console.log('error',err.message);
+                
                 setmess(err.message);
                 setdisplay1(true)
 

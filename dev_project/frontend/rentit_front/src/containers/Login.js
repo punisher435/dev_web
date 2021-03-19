@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { Link , Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { login } from '../redux/auth/actions/auth_actions'
+import { useFormik } from 'formik';
+import * as yup from 'yup';
 
 
 import Avatar from '@material-ui/core/Avatar';
@@ -17,6 +19,23 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
+
+const validationSchema = yup.object({
+  
+ 
+
+  email: yup
+  .string('Enter your email')
+  .email('PLease enter valid email')
+  .required('Email is required'),
+
+  password: yup.string()
+  .required('No password provided.') 
+  
+ 
+
+  
+});
 
 
 
@@ -79,21 +98,9 @@ const Login = ({ login, isAuthenticated }) => {
   }
   
 
-        const [formData, setFormData] = useState({
-        email: '',
-        password: ''
-    });
-
-    const { email, password } = formData;
+        
+   
     const classes = useStyles();
-
-    const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
-
-    const onSubmit = e => {
-        e.preventDefault();
-    
-        login(email, password);
-    };
 
 
   const [display,setdisplay] = React.useState(false)
@@ -116,6 +123,48 @@ const Login = ({ login, isAuthenticated }) => {
     setdisplay(false);
   };
 
+  const handleClose1 = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setdisplay1(false);
+  };
+
+
+  const [message,setmess] = useState('')
+    const [display1,setdisplay1] = useState(false)
+
+  const formik = useFormik({
+      
+    initialValues: {
+
+      email: '',
+      password: ''
+     
+    },
+    validationSchema: validationSchema,
+    onSubmit: async (values) => {
+      const { email, password } = values;
+      
+      login(email, password)
+      .then(temp => {
+  
+
+        })
+        .catch(err => {
+          
+          setmess(err.message);
+          setdisplay1(true)
+
+        })
+
+
+      
+      
+    },
+  });
+
     function Alert(props) {
       return <MuiAlert elevation={6} variant="filled" {...props} />;
     }
@@ -133,6 +182,12 @@ const Login = ({ login, isAuthenticated }) => {
             </Alert>
           </Snackbar>
 
+          <Snackbar open={display1} autoHideDuration={6000} onClose={handleClose1}>
+            <Alert onClose={handleClose1} severity="error">
+              Error! {message}
+            </Alert>
+          </Snackbar>
+
           <Grid item xs={false} sm={4} md={7} className={classes.image} />
           <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
             <div className={classes.paper}>
@@ -142,32 +197,36 @@ const Login = ({ login, isAuthenticated }) => {
               <Typography component="h1" variant="h5">
                 Sign in
               </Typography>
-              <form className={classes.form} noValidate onSubmit={onSubmit}>
+              <form className={classes.form} onSubmit={formik.handleSubmit}>
                 <TextField
                   variant="outlined"
                   margin="normal"
-                  required
+                  
                   fullWidth
                   id="email"
                   label="Email Address"
                   name="email"
                   autoComplete="email"
                   autoFocus
-                  value={email}
-                  onInput={ e => onChange(e)}
+                  value={formik.values.email}
+                  onChange={formik.handleChange}
+                  error={formik.touched.email && Boolean(formik.errors.email)}
+                  helperText={formik.touched.email && formik.errors.email}
                 />
                 <TextField
                   variant="outlined"
                   margin="normal"
-                  required
+                 
                   fullWidth
                   name="password"
                   label="Password"
                   type="password"
                   id="password"
                   autoComplete="current-password"
-                  value={password}
-                  onInput={ e => onChange(e)}
+                  value={formik.values.password}
+                  onChange={formik.handleChange}
+                  error={formik.touched.password && Boolean(formik.errors.password)}
+                  helperText={formik.touched.password && formik.errors.password}
                 />
                 <Button
                   type="submit"
