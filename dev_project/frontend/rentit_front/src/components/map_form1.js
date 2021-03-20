@@ -22,11 +22,14 @@ import "@reach/combobox/styles.css";
 import './css/App.css'
 
 const libraries = ["places"];
-
+const mapContainerStyle = {
+  height: "50vh",
+  width: "38vw",
+};
 
 const mapContainerStyle1 = {
   height: "50vh",
-  width: 500,
+  width: "60vw",
 };
 
 var center = {
@@ -35,20 +38,6 @@ var center = {
 };
 
 export default function App({value,setvalue}) {
-  const [width,setwidth] = React.useState(500);
-React.useEffect(() => {
-  let map = document.getElementById('mapcontainer1').clientWidth;
-  console.log(map)
-  setwidth(map)
-},[])
-
-const mapContainerStyle = {
-  height: "50vh",
-  width: width,
-};
-
-  
-
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries,
@@ -87,7 +76,7 @@ const mapContainerStyle = {
   if (loadError) return "Error";
   if (!isLoaded) return "Loading...";
  
-
+ 
 
 
   if(value.latitude && value.longitude)
@@ -101,7 +90,7 @@ const mapContainerStyle = {
   
         <GoogleMap
           id="map"
-          mapContainerStyle={mapContainerStyle}
+          mapContainerStyle={mapContainerStyle1}
           zoom={8}
           center={{
             lat: parseFloat(value.latitude),

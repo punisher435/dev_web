@@ -11,6 +11,8 @@ import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 import Eror from './eror'
 import MapForm from './map_form'
+import Hidden from '@material-ui/core/Hidden';
+import MapForm1 from './map_form1'
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
@@ -586,6 +588,7 @@ function RoomForm (props){
     const hiddenFileInput3 = React.useRef(null);
     const hiddenFileInput4 = React.useRef(null);
     const hiddenFileInput5 = React.useRef(null);
+    const [width,setwidth] = React.useState(100);
 
     const [input1,setinput1] = React.useState(false);
     const [input2,setinput2] = React.useState(false);
@@ -1322,6 +1325,9 @@ useEffect(
 
 
 
+
+
+
 if(newredirect==true)
 {
   return <Redirect to='/dashboard/profile' />
@@ -1350,10 +1356,13 @@ if(newredirect==true)
         justify="center"
         alignItems="center"
         >
-          <Grid item lg={5} md={10}>
+          
+          <Grid item lg={5} md={6}>
+           
           <Paper elevation={5} className={classes.papernewclass}>
+          <div id="mapcontainer1">
       <form onSubmit={formik.handleSubmit} className={classes.nowclass} >
-
+      <br />
       <Grid
         container
         direction="row"
@@ -1362,6 +1371,7 @@ if(newredirect==true)
         spacing={1}
         className={classes.nowclass1}
       >
+       
 
         <Grid item className={classes.imageclass}>
 
@@ -3825,7 +3835,9 @@ if(newredirect==true)
         </Grid>
        
       </form>
+      </div>
       </Paper>
+     
       </Grid>
       </Grid>
     </div>
