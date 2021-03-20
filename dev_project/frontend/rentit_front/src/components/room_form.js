@@ -573,6 +573,7 @@ const useStyles = makeStyles(theme => ({
     },
     papernewclass:{
       padding:30,
+      borderRadius:'3%',
     },
     nowclass1:{
       width: 'inherit'
@@ -996,7 +997,7 @@ function RoomForm (props){
 
       room_policy:myroom.room_policy,
 
-      address_proof:myroom.address_proof,
+      
 
       
 
