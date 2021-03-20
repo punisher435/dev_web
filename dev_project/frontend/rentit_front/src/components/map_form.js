@@ -38,7 +38,7 @@ export default function App({value,setvalue}) {
   const [width,setwidth] = React.useState(500);
 React.useEffect(() => {
   let map = document.getElementById('mapcontainer1').clientWidth;
-  console.log(map)
+  
   setwidth(map)
 },[])
 
