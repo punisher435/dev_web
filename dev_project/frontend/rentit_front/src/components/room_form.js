@@ -573,7 +573,7 @@ const useStyles = makeStyles(theme => ({
     },
     papernewclass:{
       padding:30,
-      borderRadius:'3%',
+     
     },
     nowclass1:{
       width: 'inherit'

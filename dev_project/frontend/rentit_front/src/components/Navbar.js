@@ -23,6 +23,7 @@ import Avatar from '@material-ui/core/Avatar';
 import { deepPurple } from '@material-ui/core/colors';
 import axios from 'axios';
 import FavoriteOutlinedIcon from '@material-ui/icons/FavoriteOutlined';
+import './css/App.css'
 
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
@@ -284,7 +285,7 @@ function RenteneAppBar(props) {
 
   return (
     <div className={classes.grow}>
-      <AppBar className={classes.AppBar}>
+      <AppBar className="navbarclass">
         <Toolbar>
         <NavLink className={`nav-link ${styles.textclass}`} exact to='/'>
           <Typography className={classes.title} variant="h6" noWrap>

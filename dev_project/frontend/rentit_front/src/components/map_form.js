@@ -44,7 +44,7 @@ React.useEffect(() => {
 
 const mapContainerStyle = {
   height: "50vh",
-  width: width,
+  width: width-5,
 };
 
   
