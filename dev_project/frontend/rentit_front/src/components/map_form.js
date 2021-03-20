@@ -53,8 +53,7 @@ export default function App({value,setvalue}) {
     ]);
     setvalue('longitude',e.latLng.lng())
     setvalue('latitude',e.latLng.lat())
-    console.log(e.latLng.lat())
-    console.log(e.latLng.lng())
+    
   }, []);
 
   const mapRef = React.useRef();
@@ -71,7 +70,7 @@ export default function App({value,setvalue}) {
 
   if (loadError) return "Error";
   if (!isLoaded) return "Loading...";
-  console.log(value)
+ 
  
 
 
@@ -229,7 +228,7 @@ function Search({ panTo,mapRef }) {
       const { lat, lng } = await getLatLng(results[0]);
       panTo({ lat, lng });
     } catch (error) {
-      console.log("Error: ", error);
+     
     }
   };
 
