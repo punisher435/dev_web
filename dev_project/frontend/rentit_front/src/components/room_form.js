@@ -543,6 +543,8 @@ const useStyles = makeStyles(theme => ({
         height: '200px',
         position:'relative',
       },
+      marginRight:'1%',
+      marginLeft:'1%',
    
     },
     erorclass: {
