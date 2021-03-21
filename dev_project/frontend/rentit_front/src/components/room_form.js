@@ -373,6 +373,9 @@ const validationSchema = yup.object({
       ),
     }),
   
+
+    
+    
   
   
     photo2: yup.mixed().when("edit", {
@@ -1001,6 +1004,8 @@ function RoomForm (props){
     validationSchema: validationSchema,
     onSubmit: async (values) => {
       let form_data = new FormData();
+
+      
       
       setload(true)
       form_data.append('title',values.title)
@@ -1319,6 +1324,147 @@ useEffect(
 
 
 
+const Filevalidation = (file1) => {
+  
+ 
+  // Check if any file is selected.
+  
+     
+
+          const fsize =file1.size;
+          const file = Math.round((fsize / 1024));
+          // The size of the file.
+          if (file >= 2048) {
+              alert(
+                "File too Big, please select a file less than 4mb");
+          } 
+          else{
+            
+            formik.setFieldValue('address_proof',file1);
+            document.getElementById("proof").innerHTML = '<b>'
+                    + file1.name + '</b> KB UPLOADED';
+          }
+      
+  
+}
+
+
+const Filevalidation4 = (file1,name) => {
+  
+ 
+  // Check if any file is selected.
+  
+     
+
+          const fsize =file1.size;
+          const file = Math.round((fsize / 1024));
+          // The size of the file.
+          if (file >= 5120) {
+              alert(
+                "File too Big, please select a file less than 5mb");
+          } 
+          else{
+            
+            formik.setFieldValue('photo4',file1);
+            setroom({...myroom,file4: URL.createObjectURL(file1),photo4:file1});
+          }
+      
+  
+}
+
+
+const Filevalidation3 = (file1,name) => {
+  
+ 
+  // Check if any file is selected.
+  
+     
+
+          const fsize =file1.size;
+          const file = Math.round((fsize / 1024));
+          // The size of the file.
+          if (file >= 5120) {
+              alert(
+                "File too Big, please select a file less than 5mb");
+          } 
+          else{
+            
+            formik.setFieldValue('photo3',file1);
+            setroom({...myroom,file3: URL.createObjectURL(file1),photo3:file1});
+          }
+      
+  
+}
+
+const Filevalidation2 = (file1,name) => {
+  
+ 
+  // Check if any file is selected.
+  
+     
+
+          const fsize =file1.size;
+          const file = Math.round((fsize / 1024));
+          // The size of the file.
+          if (file >= 5120) {
+              alert(
+                "File too Big, please select a file less than 5mb");
+          } 
+          else{
+            
+            formik.setFieldValue('photo2',file1);
+            setroom({...myroom,file2: URL.createObjectURL(file1),photo2:file1});
+          }
+      
+  
+}
+
+const Filevalidation1 = (file1,name) => {
+  
+ 
+  // Check if any file is selected.
+  
+     
+
+          const fsize =file1.size;
+          const file = Math.round((fsize / 1024));
+          // The size of the file.
+          if (file >= 5120) {
+              alert(
+                "File too Big, please select a file less than 5mb");
+          } 
+          else{
+            
+            formik.setFieldValue('photo1',file1);
+            setroom({...myroom,file1: URL.createObjectURL(file1),photo1:file1});
+          }
+      
+  
+}
+
+const Filevalidation5 = (file1,name) => {
+  
+ 
+  // Check if any file is selected.
+  
+     
+
+          const fsize =file1.size;
+          const file = Math.round((fsize / 1024));
+          // The size of the file.
+          if (file >= 5120) {
+              alert(
+                "File too Big, please select a file less than 5mb");
+          } 
+          else{
+            
+            formik.setFieldValue('photo5',file1);
+            setroom({...myroom,file5: URL.createObjectURL(file1),photo5:file1});
+          }
+      
+  
+}
+
 
 
 
@@ -1374,7 +1520,8 @@ if(newredirect==true)
           </Button>
         
         <input type='file'  ref={hiddenFileInput1} style={{display:'none'}}  id='photo1' accept='image/png,image/jpeg,image/jpg' onChange={(event) => {
-  setroom({...myroom,file1: URL.createObjectURL(event.target.files[0]),photo1:event.target.files[0]}); formik.setFieldValue('photo1',event.target.files[0]); setinput1(true)}}/> 
+          Filevalidation1(event.target.files[0]);}}
+ /> 
         
         </Grid>
 
@@ -1385,7 +1532,7 @@ if(newredirect==true)
           </Button>
         
         <input type='file'  ref={hiddenFileInput2} style={{display:'none'}}  id='photo2' accept='image/png,image/jpeg,image/jpg' onChange={(event) => {
-  setroom({...myroom,file2: URL.createObjectURL(event.target.files[0]),photo2:event.target.files[0]});  formik.setFieldValue('photo2',event.target.files[0]);  setinput2(true)}}/> 
+  Filevalidation2(event.target.files[0]);}}/> 
         
         </Grid>
 
@@ -1396,7 +1543,7 @@ if(newredirect==true)
           </Button>
         
         <input type='file'  ref={hiddenFileInput3} style={{display:'none'}}  id='photo3' accept='image/png,image/jpeg,image/jpg' onChange={(event) => {
-  setroom({...myroom,file3: URL.createObjectURL(event.target.files[0]),photo3:event.target.files[0]});  formik.setFieldValue('photo3',event.target.files[0]);  setinput3(true)}}/> 
+  Filevalidation3(event.target.files[0]);}}/> 
         
         </Grid>
 
@@ -1424,7 +1571,7 @@ if(newredirect==true)
             </Button>
 
           <input type='file'  ref={hiddenFileInput4} style={{display:'none'}}  id='photo4' accept='image/png,image/jpeg,image/jpg' onChange={(event) => {
-          setroom({...myroom,file4: URL.createObjectURL(event.target.files[0]),photo4:event.target.files[0]});  formik.setFieldValue('photo4',event.target.files[0]);  setinput4(true)}}/> 
+          Filevalidation4(event.target.files[0]);}}/> 
 
           </Grid>
 
@@ -1435,7 +1582,7 @@ if(newredirect==true)
             </Button>
 
           <input type='file'  ref={hiddenFileInput5} style={{display:'none'}}  id='photo5' accept='image/png,image/jpeg,image/jpg' onChange={(event) => {
-          setroom({...myroom,file5: URL.createObjectURL(event.target.files[0]),photo5:event.target.files[0]});  formik.setFieldValue('photo5',event.target.files[0]);  setinput5(true)}}/> 
+          Filevalidation5(event.target.files[0]);}}/> 
 
           </Grid>
       </Grid>
@@ -3668,9 +3815,14 @@ if(newredirect==true)
       Address proof (pdf format)
         </Typography>
      
-        <input type='file'  id='address_proof' accept='file.pdf' onChange={(event) => {
-  formik.setFieldValue('address_proof',event.target.files[0]); setnewfile(true);}}/> 
+        <input type='file'  id='address' accept='application/pdf' onChange={(event) => {
+   Filevalidation(event.target.files[0]);}}/> 
         </>
+
+{
+  myroom.address_proof ? <p id="proof">UPLOADED ALREADY</p> : <p id="proof">NOT UPLOADED</p>
+ }
+        
 
   <br />
 
