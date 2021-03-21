@@ -309,12 +309,6 @@ function ShopForm (props){
     const hiddenFileInput4 = React.useRef(null);
     const hiddenFileInput5 = React.useRef(null);
 
-    const [input1,setinput1] = React.useState(false);
-    const [input2,setinput2] = React.useState(false);
-    const [input3,setinput3] = React.useState(false);
-    const [input4,setinput4] = React.useState(false);
-    const [input5,setinput5] = React.useState(false);
-    const [newfile,setnewfile] = React.useState(false);
     const [newredirect,setnewredirect] = React.useState(false);
     const [myroom,setroom] = useState({
       wifi:'',
