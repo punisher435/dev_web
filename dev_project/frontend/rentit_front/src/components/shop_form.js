@@ -1031,6 +1031,7 @@ if(newredirect==true)
            <Paper elevation={5} className={classes.papernewclass}>
            <div id="mapcontainer1">
        <form onSubmit={formik.handleSubmit} className={classes.nowclass} >
+         <br />
        <Grid
         container
         direction="row"
