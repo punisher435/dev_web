@@ -35,7 +35,7 @@ var center = {
 };
 
 export default function App({value,setvalue}) {
-  const [width,setwidth] = React.useState(500);
+  const [width,setwidth] = React.useState(false);
 React.useEffect(() => {
   let map = document.getElementById('mapcontainer1').clientWidth;
   
@@ -44,6 +44,7 @@ React.useEffect(() => {
 
 const mapContainerStyle = {
   height: "50vh",
+  minHeight:500,
   width: width-5,
 };
 
@@ -90,7 +91,7 @@ const mapContainerStyle = {
 
 
 
-  if(value.latitude && value.longitude)
+  if(value.latitude && value.longitude && width)
   {
     return (
       <div>

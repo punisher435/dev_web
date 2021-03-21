@@ -525,15 +525,15 @@ const useStyles = makeStyles(theme => ({
     },
     imageclass: {
       overflow: 'hidden',
-        width: '110px',
-        height: '110px',
+        width: '85px',
+        height: '85px',
         position:'relative',
       borderRadius:'50%',
       [theme.breakpoints.up('sm')]: {
         borderRadius:'50%',
         overflow: 'hidden',
-        width: '150px',
-        height: '150px',
+        width: '100px',
+        height: '100px',
         position:'relative',
       },
       [theme.breakpoints.up('md')]: {
@@ -543,8 +543,7 @@ const useStyles = makeStyles(theme => ({
         height: '200px',
         position:'relative',
       },
-      marginLeft:'1%',
-      marginRight:'1%',
+   
     },
     erorclass: {
       width:'50%',
@@ -555,24 +554,17 @@ const useStyles = makeStyles(theme => ({
     borderRadius:'70%',
     
     },
-    textclass:{
-      float: 'left',
-      marginRight:'3%',
-      
-    },
-    formControl: {
-      width: '100%', // Fix IE 11 issue.
-      marginTop: theme.spacing(1),
-      
-      
-    },
+    
     form: {
       width: '100%', // Fix IE 11 issue.
       marginTop: theme.spacing(1),
      
     },
     papernewclass:{
-      padding:30,
+      padding:6,
+      [theme.breakpoints.up('sm')]: {
+        padding:30,
+      },
      
     },
     nowclass1:{
