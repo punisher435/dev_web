@@ -22,6 +22,8 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 import RemoveIcon from '@material-ui/icons/Remove';
 import AddIcon from '@material-ui/icons/Add';
+import Paper from '@material-ui/core/Paper';
+import './css/App.css';
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
 
@@ -239,228 +241,63 @@ const validationSchema = yup.object({
   .string('Please, provide the appropriate answer')
   .required('You must answer this '),
   
-  photo1: yup.mixed().when("edit", {
-      is: false,
-      then: yup.mixed().required("A file is required")
-      .test(
-          "fileSize",
-          "File too large",
-          value => value && value.size <= FILE_SIZE
-      )
-      .test(
-          "fileFormat",
-          "Unsupported Format",
-          value => value && SUPPORTED_FORMATS.includes(value.type)
-      ),
-    }),
-  
-    photo1: yup.mixed().when("input1", {
-      is: true,
-      then: yup.mixed().required("A file is required")
-      .test(
-          "fileSize",
-          "File too large",
-          value => value && value.size <= FILE_SIZE
-      )
-      .test(
-          "fileFormat",
-          "Unsupported Format",
-          value => value && SUPPORTED_FORMATS.includes(value.type)
-      ),
-    }),
-  
-  
-  
-    photo2: yup.mixed().when("edit", {
-      is: false,
-      then: yup.mixed().required("A file is required")
-      .test(
-          "fileSize",
-          "File too large",
-          value => value && value.size <= FILE_SIZE
-      )
-      .test(
-          "fileFormat",
-          "Unsupported Format",
-          value => value && SUPPORTED_FORMATS.includes(value.type)
-      ),
-    }),
-  
-    photo2: yup.mixed().when("input2", {
-      is: true,
-      then: yup.mixed().required("A file is required")
-      .test(
-          "fileSize",
-          "File too large",
-          value => value && value.size <= FILE_SIZE
-      )
-      .test(
-          "fileFormat",
-          "Unsupported Format",
-          value => value && SUPPORTED_FORMATS.includes(value.type)
-      ),
-    }),
-  
-    photo3: yup.mixed().when("edit", {
-      is: false,
-      then: yup.mixed().required("A file is required")
-      .test(
-          "fileSize",
-          "File too large",
-          value => value && value.size <= FILE_SIZE
-      )
-      .test(
-          "fileFormat",
-          "Unsupported Format",
-          value => value && SUPPORTED_FORMATS.includes(value.type)
-      ),
-    }),
-  
-    photo3: yup.mixed().when("input3", {
-      is: true,
-      then: yup.mixed().required("A file is required")
-      .test(
-          "fileSize",
-          "File too large",
-          value => value && value.size <= FILE_SIZE
-      )
-      .test(
-          "fileFormat",
-          "Unsupported Format",
-          value => value && SUPPORTED_FORMATS.includes(value.type)
-      ),
-    }),
-  
-    photo4: yup.mixed().when("edit", {
-      is: false,
-      then: yup.mixed().required("A file is required")
-      .test(
-          "fileSize",
-          "File too large",
-          value => value && value.size <= FILE_SIZE
-      )
-      .test(
-          "fileFormat",
-          "Unsupported Format",
-          value => value && SUPPORTED_FORMATS.includes(value.type)
-      ),
-    }),
-  
-    photo4: yup.mixed().when("input4", {
-      is: true,
-      then: yup.mixed().required("A file is required")
-      .test(
-          "fileSize",
-          "File too large",
-          value => value && value.size <= FILE_SIZE
-      )
-      .test(
-          "fileFormat",
-          "Unsupported Format",
-          value => value && SUPPORTED_FORMATS.includes(value.type)
-      ),
-    }),
-  
-    photo5: yup.mixed().when("edit", {
-      is: false,
-      then: yup.mixed().required("A file is required")
-      .test(
-          "fileSize",
-          "File too large",
-          value => value && value.size <= FILE_SIZE
-      )
-      .test(
-          "fileFormat",
-          "Unsupported Format",
-          value => value && SUPPORTED_FORMATS.includes(value.type)
-      ),
-    }),
-  
-    photo5: yup.mixed().when("input5", {
-      is: true,
-      then: yup.mixed().required("A file is required")
-      .test(
-          "fileSize",
-          "File too large",
-          value => value && value.size <= FILE_SIZE
-      )
-      .test(
-          "fileFormat",
-          "Unsupported Format",
-          value => value && SUPPORTED_FORMATS.includes(value.type)
-      ),
-    }),
-  
-  address_proof: yup.mixed().when("edit", {
-      is: false,
-      then: yup.mixed().required("A file is required")
-      .test(
-          "fileFormat",
-          "Unsupported Format",
-          value => value && SUPPORTED_FORMATS1.includes(value.type)
-      ),
-    }),
-  
-    address_proof: yup.mixed().when("newfile", {
-      is: true,
-      then: yup.mixed().required("A file is required")
-      .test(
-          "fileFormat",
-          "Unsupported Format",
-          value => value && SUPPORTED_FORMATS1.includes(value.type)
-      ),
-    }),
-
+ 
     
 });
 
 const useStyles = makeStyles(theme => ({
-    myclass: {
-        marginTop:'10%'
-    },
-    imageclass: {
-      overflow: 'hidden',
-        width: '110px',
-        height: '110px',
-        position:'relative',
-      borderRadius:'50%',
-      [theme.breakpoints.up('sm')]: {
-        borderRadius:'50%',
-        overflow: 'hidden',
-        width: '200px',
-        height: '200px',
-        position:'relative',
-      },
-      [theme.breakpoints.up('md')]: {
-        borderRadius:'50%',
-        overflow: 'hidden',
-        width: '300px',
-        height: '300px',
-        position:'relative',
-      },
-      marginLeft:'1%',
-      marginRight:'1%',
-    },
-    erorclass: {
-      width:'50%',
-      marginLeft:'25%',
+  myclass: {
+    paddingTop:'10%'
+},
+imageclass: {
+  overflow: 'hidden',
+    width: '85px',
+    height: '85px',
+    position:'relative',
+  borderRadius:'50%',
+  [theme.breakpoints.up('sm')]: {
+    borderRadius:'50%',
+    overflow: 'hidden',
+    width: '100px',
+    height: '100px',
+    position:'relative',
   },
-  buttonclass:{
-    padding:0,
-    borderRadius:'70%',
-    
-    },
-    textclass:{
-      float: 'left',
-      marginRight:'3%',
-      
-    },
-    formControl: {
-      margin: theme.spacing(1),
-      minWidth: 120,
-      
-      
-    },
+  [theme.breakpoints.up('md')]: {
+    borderRadius:'50%',
+    overflow: 'hidden',
+    width: '200px',
+    height: '200px',
+    position:'relative',
+  },
+  marginRight:'1%',
+  marginLeft:'1%',
+
+},
+erorclass: {
+  width:'50%',
+  marginLeft:'25%',
+},
+buttonclass:{
+padding:0,
+borderRadius:'70%',
+
+},
+
+form: {
+  width: '100%', // Fix IE 11 issue.
+  marginTop: theme.spacing(1),
+ 
+},
+papernewclass:{
+  padding:6,
+  [theme.breakpoints.up('sm')]: {
+    padding:30,
+  },
+ 
+},
+nowclass1:{
+  width: 'inherit'
+}
   }));
 
 function ShopForm (props){
@@ -719,7 +556,7 @@ function ShopForm (props){
       cost_cleaning:myroom.cost_cleaning,
 
       AC:myroom.AC,
-      cost_AC:myroom.AC,
+      cost_AC:myroom.cost_AC,
 
      
       balcony:myroom.balcony,
@@ -761,7 +598,7 @@ function ShopForm (props){
 
       shop_policy:myroom.room_policy,
 
-      address_proof:myroom.address_proof,
+      
 
       
       
@@ -769,7 +606,7 @@ function ShopForm (props){
     validationSchema: validationSchema,
     onSubmit: async (values) => {
       let form_data = new FormData();
-      console.log(values)
+     
       setload(true)
       form_data.append('title',values.title)
       form_data.append('wifi',values.wifi)
@@ -1014,6 +851,150 @@ useEffect(
   }
 ,[formik.values.distance1,formik.values.distance2,formik.values.cost_cleaning])
 
+
+const Filevalidation = (file1) => {
+  
+ 
+  // Check if any file is selected.
+  
+     
+
+          const fsize =file1.size;
+          const file = Math.round((fsize / 1024));
+          // The size of the file.
+          if (file >= 2048) {
+              alert(
+                "File too Big, please select a file less than 4mb");
+          } 
+          else{
+            
+            formik.setFieldValue('address_proof',file1);
+            document.getElementById("proof").innerHTML = '<b>'
+                    + file1.name + '</b> KB UPLOADED';
+          }
+      
+  
+}
+
+
+const Filevalidation4 = (file1,name) => {
+  
+ 
+  // Check if any file is selected.
+  
+     
+
+          const fsize =file1.size;
+          const file = Math.round((fsize / 1024));
+          // The size of the file.
+          if (file >= 5120) {
+              alert(
+                "File too Big, please select a file less than 5mb");
+          } 
+          else{
+            
+            formik.setFieldValue('photo4',file1);
+            setroom({...myroom,file4: URL.createObjectURL(file1),photo4:file1});
+          }
+      
+  
+}
+
+
+const Filevalidation3 = (file1,name) => {
+  
+ 
+  // Check if any file is selected.
+  
+     
+
+          const fsize =file1.size;
+          const file = Math.round((fsize / 1024));
+          // The size of the file.
+          if (file >= 5120) {
+              alert(
+                "File too Big, please select a file less than 5mb");
+          } 
+          else{
+            
+            formik.setFieldValue('photo3',file1);
+            setroom({...myroom,file3: URL.createObjectURL(file1),photo3:file1});
+          }
+      
+  
+}
+
+const Filevalidation2 = (file1,name) => {
+  
+ 
+  // Check if any file is selected.
+  
+     
+
+          const fsize =file1.size;
+          const file = Math.round((fsize / 1024));
+          // The size of the file.
+          if (file >= 5120) {
+              alert(
+                "File too Big, please select a file less than 5mb");
+          } 
+          else{
+            
+            formik.setFieldValue('photo2',file1);
+            setroom({...myroom,file2: URL.createObjectURL(file1),photo2:file1});
+          }
+      
+  
+}
+
+const Filevalidation1 = (file1,name) => {
+  
+ 
+  // Check if any file is selected.
+  
+     
+
+          const fsize =file1.size;
+          const file = Math.round((fsize / 1024));
+          // The size of the file.
+          if (file >= 5120) {
+              alert(
+                "File too Big, please select a file less than 5mb");
+          } 
+          else{
+            
+            formik.setFieldValue('photo1',file1);
+            setroom({...myroom,file1: URL.createObjectURL(file1),photo1:file1});
+          }
+      
+  
+}
+
+const Filevalidation5 = (file1,name) => {
+  
+ 
+  // Check if any file is selected.
+  
+     
+
+          const fsize =file1.size;
+          const file = Math.round((fsize / 1024));
+          // The size of the file.
+          if (file >= 5120) {
+              alert(
+                "File too Big, please select a file less than 5mb");
+          } 
+          else{
+            
+            formik.setFieldValue('photo5',file1);
+            setroom({...myroom,file5: URL.createObjectURL(file1),photo5:file1});
+          }
+      
+  
+}
+
+
+
 if(newredirect==true)
 {
   return <Redirect to='/dashboard/profile' />
@@ -1031,6 +1012,8 @@ if(newredirect==true)
   }
 
   return (
+
+    <div className="formbgclass">
     <div className={classes.myclass}>
 
       <Backdrop className={classes.backdrop} open={load}>
@@ -1043,15 +1026,20 @@ if(newredirect==true)
         justify="center"
         alignItems="center"
         >
-      <form onSubmit={formik.handleSubmit}>
-
-      <Grid
+      <Grid item lg={5} md={6}>
+           
+           <Paper elevation={5} className={classes.papernewclass}>
+           <div id="mapcontainer1">
+       <form onSubmit={formik.handleSubmit} className={classes.nowclass} >
+       <Grid
         container
         direction="row"
         justify="center"
         alignItems="center"
         spacing={1}
+        className={classes.nowclass1}
       >
+       
 
         <Grid item className={classes.imageclass}>
 
@@ -1060,7 +1048,8 @@ if(newredirect==true)
           </Button>
         
         <input type='file'  ref={hiddenFileInput1} style={{display:'none'}}  id='photo1' accept='image/png,image/jpeg,image/jpg' onChange={(event) => {
-  setroom({...myroom,file1: URL.createObjectURL(event.target.files[0]),photo1:event.target.files[0]}); formik.setFieldValue('photo1',event.target.files[0]); setinput1(true)}}/> 
+          Filevalidation1(event.target.files[0]);}}
+ /> 
         
         </Grid>
 
@@ -1071,7 +1060,7 @@ if(newredirect==true)
           </Button>
         
         <input type='file'  ref={hiddenFileInput2} style={{display:'none'}}  id='photo2' accept='image/png,image/jpeg,image/jpg' onChange={(event) => {
-  setroom({...myroom,file2: URL.createObjectURL(event.target.files[0]),photo2:event.target.files[0]});  formik.setFieldValue('photo2',event.target.files[0]);  setinput2(true)}}/> 
+  Filevalidation2(event.target.files[0]);}}/> 
         
         </Grid>
 
@@ -1082,14 +1071,20 @@ if(newredirect==true)
           </Button>
         
         <input type='file'  ref={hiddenFileInput3} style={{display:'none'}}  id='photo3' accept='image/png,image/jpeg,image/jpg' onChange={(event) => {
-  setroom({...myroom,file3: URL.createObjectURL(event.target.files[0]),photo3:event.target.files[0]});  formik.setFieldValue('photo3',event.target.files[0]);  setinput3(true)}}/> 
+  Filevalidation3(event.target.files[0]);}}/> 
         
         </Grid>
+
+
+       
 
         
 
 
       </Grid>
+
+      <br />
+
 
       <Grid
         container
@@ -1105,7 +1100,7 @@ if(newredirect==true)
             </Button>
 
           <input type='file'  ref={hiddenFileInput4} style={{display:'none'}}  id='photo4' accept='image/png,image/jpeg,image/jpg' onChange={(event) => {
-          setroom({...myroom,file4: URL.createObjectURL(event.target.files[0]),photo4:event.target.files[0]});  formik.setFieldValue('photo4',event.target.files[0]);  setinput4(true)}}/> 
+          Filevalidation4(event.target.files[0]);}}/> 
 
           </Grid>
 
@@ -1116,24 +1111,30 @@ if(newredirect==true)
             </Button>
 
           <input type='file'  ref={hiddenFileInput5} style={{display:'none'}}  id='photo5' accept='image/png,image/jpeg,image/jpg' onChange={(event) => {
-          setroom({...myroom,file5: URL.createObjectURL(event.target.files[0]),photo5:event.target.files[0]});  formik.setFieldValue('photo5',event.target.files[0]);  setinput5(true)}}/> 
+          Filevalidation5(event.target.files[0]);}}/> 
 
           </Grid>
       </Grid>
 
+        <br />
+        <br />
 
-        <br />
-        <br />
-        <Grid
+
+      <Grid
         container
-        direction="row"
-        justify="center"
-        alignItems="center"
-        spacing={1}
-      >
-        <Grid item>
+        direction="column"
+        justify="flex-start"
+        alignItems="flex-start"
+        >
+
+
+      <div className={classes.form}>
         <TextField
           multiline
+          variant="outlined"
+          margin="normal"
+          
+          fullWidth
           rows={1}
           id="title"
           name="title"
@@ -1143,25 +1144,17 @@ if(newredirect==true)
           error={formik.touched.title && Boolean(formik.errors.title)}
           helperText={formik.touched.title && formik.errors.title}
         />
-        </Grid>
-        </Grid>
+        </div>
+        
         <br />
 
         
 
-        <Grid
-        container
-        direction="row"
-        justify="center"
-        alignItems="center"
-        spacing={1}
-      >
-        <Grid item>
+      
         <Typography variant="body1" color="textSecondary" className={classes.textclass}>
             No. of windows in the shop
           </Typography>
-        </Grid>
-          <Grid item>
+       
           <div>   
             <Button onClick={() => handleclick1('windows',formik.values.windows,formik.setFieldValue)} >
                 <AddIcon />
@@ -1173,24 +1166,15 @@ if(newredirect==true)
                 <RemoveIcon />
             </Button>
         </div>
-      </Grid>
-    </Grid>
+      
 
     <br />
 
-    <Grid
-        container
-        direction="row"
-        justify="center"
-        alignItems="center"
-        spacing={1}
-      >
-        <Grid item>
+ 
         <Typography variant="body1" color="textSecondary" className={classes.textclass}>
             No. of washrooms in the shop
           </Typography>
-        </Grid>
-          <Grid item>
+       
           <div>   
             <Button onClick={() => handleclick1('washroom',formik.values.washroom,formik.setFieldValue)} >
                 <AddIcon />
@@ -1202,24 +1186,15 @@ if(newredirect==true)
                 <RemoveIcon />
             </Button>
         </div>
-      </Grid>
-    </Grid>
+  
 
     <br />
 
-    <Grid
-        container
-        direction="row"
-        justify="center"
-        alignItems="center"
-        spacing={1}
-      >
-        <Grid item>
+   
         <Typography variant="body1" color="textSecondary" className={classes.textclass}>
             No. of rooms in the shop
           </Typography>
-        </Grid>
-          <Grid item>
+      
           <div>   
             <Button onClick={() => handleclick1('total_rooms',formik.values.total_rooms,formik.setFieldValue)} >
                 <AddIcon />
@@ -1231,25 +1206,15 @@ if(newredirect==true)
                 <RemoveIcon />
             </Button>
         </div>
-      </Grid>
-    </Grid>
+   
 
     <br />
 
-<Grid
-    container
-    direction="row"
-    justify="center"
-    alignItems="center"
-    spacing={1}
-  >
-    <Grid item>
     <Typography variant="body1" color="textSecondary" className={classes.textclass}>
         Who you want this shop to rent?
       </Typography>
-    </Grid>
-      <Grid item>
-    <FormControl className={classes.formControl}>
+   
+    <FormControl className={classes.form}>
     
         <InputLabel id="gender">Gender</InputLabel>
         <Select
@@ -1267,24 +1232,15 @@ if(newredirect==true)
         
         </Select>
     </FormControl>
-  </Grid>
-  </Grid>
+ 
 
     <br />
 
-    <Grid
-        container
-        direction="row"
-        justify="center"
-        alignItems="center"
-        spacing={1}
-      >
-        <Grid item>
+    
         <Typography variant="body1" color="textSecondary" className={classes.textclass}>
             No. of floors in the shop
           </Typography>
-        </Grid>
-          <Grid item>
+       
           <div>   
             <Button onClick={() => handleclick1('total_floors',formik.values.total_floors,formik.setFieldValue)} >
                 <AddIcon />
@@ -1296,24 +1252,14 @@ if(newredirect==true)
                 <RemoveIcon />
             </Button>
         </div>
-      </Grid>
-    </Grid>
-
+     
     <br />
 
-    <Grid
-        container
-        direction="row"
-        justify="center"
-        alignItems="center"
-        spacing={1}
-      >
-        <Grid item>
+    
         <Typography variant="body1" color="textSecondary" className={classes.textclass}>
             No. of balconys in the room
           </Typography>
-        </Grid>
-          <Grid item>
+       
           <div>   
             <Button onClick={() => handleclick1('balcony',formik.values.balcony,formik.setFieldValue)} >
                 <AddIcon />
@@ -1325,25 +1271,16 @@ if(newredirect==true)
                 <RemoveIcon />
             </Button>
         </div>
-      </Grid>
-    </Grid>
+    
 
     <br />
 
 
-    <Grid
-        container
-        direction="row"
-        justify="center"
-        alignItems="center"
-        spacing={1}
-      >
-        <Grid item>
+   
         <Typography variant="body1" color="textSecondary" className={classes.textclass}>
             No. of fans in the room
           </Typography>
-        </Grid>
-          <Grid item>
+      
           <div>   
             <Button onClick={() => handleclick1('fans',formik.values.fans,formik.setFieldValue)} >
                 <AddIcon />
@@ -1355,24 +1292,15 @@ if(newredirect==true)
                 <RemoveIcon />
             </Button>
         </div>
-      </Grid>
-    </Grid>
+    
           
           <br />
 
-    <Grid
-        container
-        direction="row"
-        justify="center"
-        alignItems="center"
-        spacing={1}
-      >
-        <Grid item>
+   
         <Typography variant="body1" color="textSecondary" className={classes.textclass}>
             Floor no. of room
           </Typography>
-        </Grid>
-          <Grid item>
+     
           <div>   
             <Button onClick={() => handleclick1('floor_no',formik.values.floor_no,formik.setFieldValue)} >
                 <AddIcon />
@@ -1384,31 +1312,24 @@ if(newredirect==true)
                 <RemoveIcon />
             </Button>
         </div>
-      </Grid>
-    </Grid>
-
+     
     <br />
 
    
 
    
 
-    <div><Grid
-      container
-      direction="row"
-      justify="center"
-      alignItems="center"
-      spacing={1}
-    >
-      
-      <Grid item>
+    <>
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
       Length of the room
         </Typography>
-      </Grid>
-        <Grid item>
+     <div className={classes.form}>
         <TextField
           multiline
+          variant="outlined"
+          margin="normal"
+          
+          fullWidth
           rows={1}
           id="length"
           name="length"
@@ -1418,26 +1339,20 @@ if(newredirect==true)
           }}
           error={formik.touched.length && Boolean(formik.errors.length)}
           helperText={formik.touched.length && formik.errors.length}
-        />
-        </Grid>
-  </Grid></div>
+        /></div>
+       </>
 
-  <div><br /><Grid
-      container
-      direction="row"
-      justify="center"
-      alignItems="center"
-      spacing={1}
-    >
-      
-      <Grid item>
+  <><br />
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
       Breadth of the room
         </Typography>
-      </Grid>
-        <Grid item>
+     
         <TextField
           multiline
+          variant="outlined"
+          margin="normal"
+          
+          fullWidth
           rows={1}
           id="breadth"
           name="breadth"
@@ -1448,25 +1363,19 @@ if(newredirect==true)
           error={formik.touched.breadth && Boolean(formik.errors.breadth)}
           helperText={formik.touched.breadth && formik.errors.breadth}
         />
-        </Grid>
-  </Grid></div>
+      </>
 
-  <div><br /><Grid
-      container
-      direction="row"
-      justify="center"
-      alignItems="center"
-      spacing={1}
-    >
-      
-      <Grid item>
+  <><br />
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
       Height of the room
         </Typography>
-      </Grid>
-        <Grid item>
+      
         <TextField
           multiline
+          variant="outlined"
+          margin="normal"
+          
+          fullWidth
           rows={1}
           id="height"
           name="height"
@@ -1477,25 +1386,19 @@ if(newredirect==true)
           error={formik.touched.height && Boolean(formik.errors.height)}
           helperText={formik.touched.height && formik.errors.height}
         />
-        </Grid>
-  </Grid></div>
+       </>
 
-  <div><br /><Grid
-      container
-      direction="row"
-      justify="center"
-      alignItems="center"
-      spacing={1}
-    >
-      
-      <Grid item>
+  <><br />
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
       Furniture in the room
         </Typography>
-      </Grid>
-        <Grid item>
+      
         <TextField
           multiline
+          variant="outlined"
+          margin="normal"
+          
+          fullWidth
           rows={4}
           id="furniture"
           name="furniture"
@@ -1505,25 +1408,19 @@ if(newredirect==true)
           error={formik.touched.furniture && Boolean(formik.errors.furniture)}
           helperText={formik.touched.furniture && formik.errors.furniture}
         />
-        </Grid>
-  </Grid></div>
+        </>
 
-  <div><br /><Grid
-      container
-      direction="row"
-      justify="center"
-      alignItems="center"
-      spacing={1}
-    >
-      
-      <Grid item>
+  <><br />
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
       Description of the room
         </Typography>
-      </Grid>
-        <Grid item>
+      
         <TextField
           multiline
+          variant="outlined"
+          margin="normal"
+          
+          fullWidth
           rows={4}
           id="description"
           name="description"
@@ -1533,58 +1430,36 @@ if(newredirect==true)
           error={formik.touched.description && Boolean(formik.errors.description)}
           helperText={formik.touched.description && formik.errors.description}
         />
-        </Grid>
-  </Grid></div>
+       </>
 
 
 
 
             <br />
-            <Grid
-              container
-              direction="row"
-              justify="center"
-              alignItems="center"
-              spacing={1}
-            >
-            <Grid item>
+            
             <Typography variant="h4" color="textPrimary">
               Facilities
             </Typography>
-            </Grid>
-            </Grid>
+           
             <br />
 
-            <Grid
-              container
-              direction="row"
-              justify="center"
-              alignItems="center"
-              spacing={1}
-            >
-            <Grid item>
+            
             <Typography variant="h6" color="textPrimary">
               Electricity charge
             </Typography>
-            </Grid>
-            </Grid>
+           
 
-<div><br /><Grid
-      container
-      direction="row"
-      justify="center"
-      alignItems="center"
-      spacing={1}
-    >
-      
-      <Grid item>
+<><br />
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
       Cost of electricity facility(if not any, enter 0)
         </Typography>
-      </Grid>
-        <Grid item>
+     
         <TextField
-          multiline
+         multiline
+         variant="outlined"
+         margin="normal"
+         
+         fullWidth
           rows={1}
           id="cost_electricity"
           name="cost_electricity"
@@ -1595,41 +1470,27 @@ if(newredirect==true)
           error={formik.touched.cost_electricity && Boolean(formik.errors.cost_electricity)}
           helperText={formik.touched.cost_electricity && formik.errors.cost_electricity}
         />
-        </Grid>
-  </Grid></div>
+       </>
 
   <br />
 
-  <Grid
-              container
-              direction="row"
-              justify="center"
-              alignItems="center"
-              spacing={1}
-            >
-            <Grid item>
+ 
             <Typography variant="h6" color="textPrimary">
               Water charge
             </Typography>
-            </Grid>
-            </Grid>
+           
 
-<div><br /><Grid
-      container
-      direction="row"
-      justify="center"
-      alignItems="center"
-      spacing={1}
-    >
-      
-      <Grid item>
+<><br />
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
       Cost of Water facility(if not any, enter 0)
         </Typography>
-      </Grid>
-        <Grid item>
+     
         <TextField
           multiline
+          variant="outlined"
+          margin="normal"
+          
+          fullWidth
           rows={1}
           id="cost_water"
           name="cost_water"
@@ -1640,40 +1501,23 @@ if(newredirect==true)
           error={formik.touched.cost_water && Boolean(formik.errors.cost_water)}
           helperText={formik.touched.cost_water && formik.errors.cost_water}
         />
-        </Grid>
-  </Grid></div>
+       </>
 
   <br />
 
 
-            <Grid
-              container
-              direction="row"
-              justify="center"
-              alignItems="center"
-              spacing={1}
-            >
-            <Grid item>
+           
             <Typography variant="h6" color="textPrimary">
               WIFI
             </Typography>
-            </Grid>
-            </Grid>
+           
             <br />
-      <Grid
-        container
-        direction="row"
-        justify="center"
-        alignItems="center"
-        spacing={1}
-      >
-        <Grid item>
+     
         <Typography variant="body1" color="textSecondary" className={classes.textclass}>
             Do you have WIFI ?
         </Typography>
-        </Grid>
-          <Grid item>
-        <FormControl className={classes.formControl}>
+       
+        <FormControl className={classes.form}>
         
             <InputLabel id="wifi">WIFI</InputLabel>
             <Select
@@ -1691,29 +1535,23 @@ if(newredirect==true)
             <MenuItem value={false}>No</MenuItem>
             </Select>
         </FormControl>
-      </Grid>
-    </Grid>
+      
 
     
 
 
     {
-      formik.values.wifi ? <div><br /><Grid
-      container
-      direction="row"
-      justify="center"
-      alignItems="center"
-      spacing={1}
-    >
-      
-      <Grid item>
+      formik.values.wifi ? <><br />
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
       Cost of wifi facility(if not enter 0)
         </Typography>
-      </Grid>
-        <Grid item>
+     
         <TextField
           multiline
+          variant="outlined"
+          margin="normal"
+          
+          fullWidth
           rows={1}
           id="cost_wifi"
           name="cost_wifi"
@@ -1724,28 +1562,18 @@ if(newredirect==true)
           error={formik.touched.cost_wifi && Boolean(formik.errors.cost_wifi)}
           helperText={formik.touched.cost_wifi && formik.errors.cost_wifi}
         />
-        </Grid>
-  </Grid></div>
+      </>
   : null
     }
     
 
 {
-      formik.values.wifi ? <div><br /><Grid
-      container
-      direction="row"
-      justify="center"
-      alignItems="center"
-      spacing={1}
-    >
-      
-      <Grid item>
+      formik.values.wifi ? <><br />
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
       Can customers remove this facility?
         </Typography>
-      </Grid>
-        <Grid item>
-        <FormControl className={classes.formControl}>
+     
+        <FormControl className={classes.form}>
         
             <InputLabel id="removable_wifi">Removable wifi facility?</InputLabel>
             <Select
@@ -1761,40 +1589,24 @@ if(newredirect==true)
             <MenuItem value={false}>No</MenuItem>
             </Select>
         </FormControl>
-        </Grid>
-  </Grid></div>
+        </>
   : null
     }
 
+<br />
 
-<Grid
-              container
-              direction="row"
-              justify="center"
-              alignItems="center"
-              spacing={1}
-            >
-            <Grid item>
+
             <Typography variant="h6" color="textPrimary">
               TV
             </Typography>
-            </Grid>
-            </Grid>
+            
             <br />
-      <Grid
-        container
-        direction="row"
-        justify="center"
-        alignItems="center"
-        spacing={1}
-      >
-        <Grid item>
+    
         <Typography variant="body1" color="textSecondary" className={classes.textclass}>
             Do you have TV ?
         </Typography>
-        </Grid>
-          <Grid item>
-        <FormControl className={classes.formControl}>
+       
+        <FormControl className={classes.form}>
         
             <InputLabel id="TV">TV</InputLabel>
             <Select
@@ -1812,29 +1624,23 @@ if(newredirect==true)
             <MenuItem value={false}>No</MenuItem>
             </Select>
         </FormControl>
-      </Grid>
-    </Grid>
+      
 
     
 
 
     {
-      formik.values.TV ? <div><br /><Grid
-      container
-      direction="row"
-      justify="center"
-      alignItems="center"
-      spacing={1}
-    >
-      
-      <Grid item>
+      formik.values.TV ? <><br />
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
       Cost of TV facility(if not enter 0)
         </Typography>
-      </Grid>
-        <Grid item>
+     
         <TextField
           multiline
+          variant="outlined"
+          margin="normal"
+          
+          fullWidth
           rows={1}
           id="cost_TV"
           name="cost_TV"
@@ -1845,28 +1651,18 @@ if(newredirect==true)
           error={formik.touched.cost_TV && Boolean(formik.errors.cost_TV)}
           helperText={formik.touched.cost_TV && formik.errors.cost_TV}
         />
-        </Grid>
-  </Grid></div>
+        </>
   : null
     }
     
 
 {
-      formik.values.TV ? <div><br /><Grid
-      container
-      direction="row"
-      justify="center"
-      alignItems="center"
-      spacing={1}
-    >
-      
-      <Grid item>
+      formik.values.TV ? <><br />
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
       Can customers remove this facility?
         </Typography>
-      </Grid>
-        <Grid item>
-        <FormControl className={classes.formControl}>
+      
+        <FormControl className={classes.form}>
         
             <InputLabel id="removable_TV">Removable TV facility?</InputLabel>
             <Select
@@ -1882,39 +1678,23 @@ if(newredirect==true)
             <MenuItem value={false}>No</MenuItem>
             </Select>
         </FormControl>
-        </Grid>
-  </Grid></div>
+       </>
   : null
     }
 
-<Grid
-              container
-              direction="row"
-              justify="center"
-              alignItems="center"
-              spacing={1}
-            >
-            <Grid item>
+<br />
+
             <Typography variant="h6" color="textPrimary">
               cooler
             </Typography>
-            </Grid>
-            </Grid>
+         
             <br />
-      <Grid
-        container
-        direction="row"
-        justify="center"
-        alignItems="center"
-        spacing={1}
-      >
-        <Grid item>
+     
         <Typography variant="body1" color="textSecondary" className={classes.textclass}>
             Do you have cooler ?
         </Typography>
-        </Grid>
-          <Grid item>
-        <FormControl className={classes.formControl}>
+       
+        <FormControl className={classes.form}>
         
             <InputLabel id="cooler">cooler</InputLabel>
             <Select
@@ -1932,29 +1712,23 @@ if(newredirect==true)
             <MenuItem value={false}>No</MenuItem>
             </Select>
         </FormControl>
-      </Grid>
-    </Grid>
+     
 
     
 
 
     {
-      formik.values.cooler ? <div><br /><Grid
-      container
-      direction="row"
-      justify="center"
-      alignItems="center"
-      spacing={1}
-    >
-      
-      <Grid item>
+      formik.values.cooler ? <><br />
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
       Cost of cooler facility(if not enter 0)
         </Typography>
-      </Grid>
-        <Grid item>
+    
         <TextField
           multiline
+          variant="outlined"
+          margin="normal"
+          
+          fullWidth
           rows={1}
           id="cost_cooler"
           name="cost_cooler"
@@ -1965,28 +1739,18 @@ if(newredirect==true)
           error={formik.touched.cost_cooler && Boolean(formik.errors.cost_cooler)}
           helperText={formik.touched.cost_cooler && formik.errors.cost_cooler}
         />
-        </Grid>
-  </Grid></div>
+      </>
   : null
     }
     
 
 {
-      formik.values.cooler ? <div><br /><Grid
-      container
-      direction="row"
-      justify="center"
-      alignItems="center"
-      spacing={1}
-    >
-      
-      <Grid item>
+      formik.values.cooler ? <><br />
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
       Can customers remove this facility?
         </Typography>
-      </Grid>
-        <Grid item>
-        <FormControl className={classes.formControl}>
+    
+        <FormControl className={classes.form}>
         
             <InputLabel id="removable_cooler">Removable cooler facility?</InputLabel>
             <Select
@@ -2002,40 +1766,23 @@ if(newredirect==true)
             <MenuItem value={false}>No</MenuItem>
             </Select>
         </FormControl>
-        </Grid>
-  </Grid></div>
+        </>
   : null
     }
+    <br />
 
 
-<Grid
-              container
-              direction="row"
-              justify="center"
-              alignItems="center"
-              spacing={1}
-            >
-            <Grid item>
             <Typography variant="h6" color="textPrimary">
               AC
             </Typography>
-            </Grid>
-            </Grid>
+            
             <br />
-      <Grid
-        container
-        direction="row"
-        justify="center"
-        alignItems="center"
-        spacing={1}
-      >
-        <Grid item>
+     
         <Typography variant="body1" color="textSecondary" className={classes.textclass}>
             Do you have AC ?
         </Typography>
-        </Grid>
-          <Grid item>
-        <FormControl className={classes.formControl}>
+        
+        <FormControl className={classes.form}>
         
             <InputLabel id="AC">AC</InputLabel>
             <Select
@@ -2053,29 +1800,23 @@ if(newredirect==true)
             <MenuItem value={false}>No</MenuItem>
             </Select>
         </FormControl>
-      </Grid>
-    </Grid>
+     
 
     
 
 
     {
-      formik.values.AC ? <div><br /><Grid
-      container
-      direction="row"
-      justify="center"
-      alignItems="center"
-      spacing={1}
-    >
-      
-      <Grid item>
+      formik.values.AC ? <><br />
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
       Cost of AC facility(if not enter 0)
         </Typography>
-      </Grid>
-        <Grid item>
+      
         <TextField
           multiline
+          variant="outlined"
+          margin="normal"
+          
+          fullWidth
           rows={1}
           id="cost_AC"
           name="cost_AC"
@@ -2086,43 +1827,26 @@ if(newredirect==true)
           error={formik.touched.cost_AC && Boolean(formik.errors.cost_AC)}
           helperText={formik.touched.cost_AC && formik.errors.cost_AC}
         />
-        </Grid>
-  </Grid></div>
+       </>
   : null
     }
 
 
-    
+<br />
 
 
-        <Grid
-              container
-              direction="row"
-              justify="center"
-              alignItems="center"
-              spacing={1}
-            >
-            <Grid item>
+        
             <Typography variant="h6" color="textPrimary">
               Purified water
             </Typography>
-            </Grid>
-            </Grid>
+           
             <br />
-      <Grid
-        container
-        direction="row"
-        justify="center"
-        alignItems="center"
-        spacing={1}
-      >
-        <Grid item>
+     
         <Typography variant="body1" color="textSecondary" className={classes.textclass}>
             Do you have purified water ?
         </Typography>
-        </Grid>
-          <Grid item>
-        <FormControl className={classes.formControl}>
+        
+        <FormControl className={classes.form}>
         
             <InputLabel id="purified_water">purified water</InputLabel>
             <Select
@@ -2140,29 +1864,23 @@ if(newredirect==true)
             <MenuItem value={false}>No</MenuItem>
             </Select>
         </FormControl>
-      </Grid>
-    </Grid>
+     
 
     
 
 
     {
-      formik.values.purified_water ? <div><br /><Grid
-      container
-      direction="row"
-      justify="center"
-      alignItems="center"
-      spacing={1}
-    >
-      
-      <Grid item>
+      formik.values.purified_water ? <><br />
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
       Cost of purified water facility(if not enter 0)
         </Typography>
-      </Grid>
-        <Grid item>
+     
         <TextField
           multiline
+          variant="outlined"
+          margin="normal"
+          
+          fullWidth
           rows={1}
           id="cost_purified_water"
           name="cost_purified_water"
@@ -2173,28 +1891,18 @@ if(newredirect==true)
           error={formik.touched.cost_purified_water && Boolean(formik.errors.cost_purified_water)}
           helperText={formik.touched.cost_purified_water && formik.errors.cost_purified_water}
         />
-        </Grid>
-  </Grid></div>
+      </>
   : null
     }
     
 
 {
-      formik.values.purified_water ? <div><br /><Grid
-      container
-      direction="row"
-      justify="center"
-      alignItems="center"
-      spacing={1}
-    >
-      
-      <Grid item>
+      formik.values.purified_water ? <><br />
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
       Can customers remove this facility?
         </Typography>
-      </Grid>
-        <Grid item>
-        <FormControl className={classes.formControl}>
+    
+        <FormControl className={classes.form}>
         
             <InputLabel id="removable_purified_water">Removable purified water facility?</InputLabel>
             <Select
@@ -2210,43 +1918,25 @@ if(newredirect==true)
             <MenuItem value={false}>No</MenuItem>
             </Select>
         </FormControl>
-        </Grid>
-  </Grid></div>
+       </>
   : null
     }
 
-
+<br />
 
        
 
-<Grid
-              container
-              direction="row"
-              justify="center"
-              alignItems="center"
-              spacing={1}
-            >
-            <Grid item>
             <Typography variant="h6" color="textPrimary">
                Shop cleaning
             </Typography>
-            </Grid>
-            </Grid>
+          
             <br />
-      <Grid
-        container
-        direction="row"
-        justify="center"
-        alignItems="center"
-        spacing={1}
-      >
-        <Grid item>
+     
         <Typography variant="body1" color="textSecondary" className={classes.textclass}>
             Do you provide Shop cleaning ?
         </Typography>
-        </Grid>
-          <Grid item>
-        <FormControl className={classes.formControl}>
+      
+        <FormControl className={classes.form}>
         
             <InputLabel id="shop_cleaning">Shop cleaning</InputLabel>
             <Select
@@ -2263,29 +1953,23 @@ if(newredirect==true)
             <MenuItem value={false}>No</MenuItem>
             </Select>
         </FormControl>
-      </Grid>
-    </Grid>
+     
 
     
 
 
     {
-      formik.values.shop_cleaning ? <div><br /><Grid
-      container
-      direction="row"
-      justify="center"
-      alignItems="center"
-      spacing={1}
-    >
-      
-      <Grid item>
+      formik.values.shop_cleaning ? <><br />
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
       Cost of shop cleaning facility (in per cleaning)
         </Typography>
-      </Grid>
-        <Grid item>
+     
         <TextField
           multiline
+          variant="outlined"
+          margin="normal"
+          
+          fullWidth
           rows={1}
           id="cost_cleaning"
           name="cost_cleaning"
@@ -2297,26 +1981,16 @@ if(newredirect==true)
           error={formik.touched.cost_cleaning && Boolean(formik.errors.cost_cleaning)}
           helperText={formik.touched.cost_cleaning && formik.errors.cost_cleaning}
         />
-        </Grid>
-  </Grid></div>
+       </>
   : null
     }
     <br />
 
-<Grid
-        container
-        direction="row"
-        justify="center"
-        alignItems="center"
-        spacing={1}
-      >
-        <Grid item>
         <Typography variant="body1" color="textSecondary" className={classes.textclass}>
             Do you have separate washroom in room ?
         </Typography>
-        </Grid>
-          <Grid item>
-        <FormControl className={classes.formControl}>
+       
+        <FormControl className={classes.form}>
         
             <InputLabel id="separate_washroom">separate_washroom</InputLabel>
             <Select
@@ -2332,26 +2006,17 @@ if(newredirect==true)
             <MenuItem value={false}>No</MenuItem>
             </Select>
         </FormControl>
-      </Grid>
-    </Grid>
+    
 
 
     <br />
 
-    <Grid
-        container
-        direction="row"
-        justify="center"
-        alignItems="center"
-        spacing={1}
-      >
-        <Grid item>
+   
         <Typography variant="body1" color="textSecondary" className={classes.textclass}>
             Do you have building sequrity guard ?
         </Typography>
-        </Grid>
-          <Grid item>
-        <FormControl className={classes.formControl}>
+      
+        <FormControl className={classes.form}>
         
             <InputLabel id="building_guard">building_guard</InputLabel>
             <Select
@@ -2367,25 +2032,16 @@ if(newredirect==true)
             <MenuItem value={false}>No</MenuItem>
             </Select>
         </FormControl>
-      </Grid>
-    </Grid>
+     
 
     <br />
 
-    <Grid
-        container
-        direction="row"
-        justify="center"
-        alignItems="center"
-        spacing={1}
-      >
-        <Grid item>
+  
         <Typography variant="body1" color="textSecondary" className={classes.textclass}>
             Do you have CCTV in building ?
         </Typography>
-        </Grid>
-          <Grid item>
-        <FormControl className={classes.formControl}>
+     
+        <FormControl className={classes.form}>
         
             <InputLabel id="cctv_building">cctv_building</InputLabel>
             <Select
@@ -2401,25 +2057,16 @@ if(newredirect==true)
             <MenuItem value={false}>No</MenuItem>
             </Select>
         </FormControl>
-      </Grid>
-    </Grid>
+     
 
     <br />
 
-    <Grid
-        container
-        direction="row"
-        justify="center"
-        alignItems="center"
-        spacing={1}
-      >
-        <Grid item>
+    
         <Typography variant="body1" color="textSecondary" className={classes.textclass}>
             Do you have power backup in building ?
         </Typography>
-        </Grid>
-          <Grid item>
-        <FormControl className={classes.formControl}>
+       
+        <FormControl className={classes.form}>
         
             <InputLabel id="power_backup">power_backup</InputLabel>
             <Select
@@ -2435,26 +2082,20 @@ if(newredirect==true)
             <MenuItem value={false}>No</MenuItem>
             </Select>
         </FormControl>
-      </Grid>
-    </Grid>
+     
 
 
-  <div><br /><Grid
-      container
-      direction="row"
-      justify="center"
-      alignItems="center"
-      spacing={1}
-    >
-      
-      <Grid item>
+  <><br />
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
       Any additional facility
         </Typography>
-      </Grid>
-        <Grid item>
+    
         <TextField
           multiline
+          variant="outlined"
+          margin="normal"
+          
+          fullWidth
           rows={4}
           id="facility"
           name="facility"
@@ -2462,44 +2103,30 @@ if(newredirect==true)
           value={formik.values.facility}
           onChange={formik.handleChange}
         />
-        </Grid>
-  </Grid></div>
+       </>
 
   <br />
 
 
-            <Grid
-              container
-              direction="row"
-              justify="center"
-              alignItems="center"
-              spacing={1}
-            >
-            <Grid item>
+           
             <Typography variant="h4" color="textPrimary">
               Pricing
             </Typography>
-            </Grid>
-            </Grid>
+          
             
     
 
-    <div><br /><Grid
-      container
-      direction="row"
-      justify="center"
-      alignItems="center"
-      spacing={1}
-    >
-      
-      <Grid item>
+    <><br />
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
       Any discount you want to provide (in %)
         </Typography>
-      </Grid>
-        <Grid item>
+     
         <TextField
           multiline
+          variant="outlined"
+          margin="normal"
+          
+          fullWidth
           rows={1}
           id="owner_discount"
           name="owner_discount"
@@ -2510,25 +2137,19 @@ if(newredirect==true)
           error={formik.touched.owner_discount && Boolean(formik.errors.owner_discount)}
           helperText={formik.touched.owner_discount && formik.errors.owner_discount}
         />
-        </Grid>
-  </Grid></div>
+      </>
 
-  <div><br /><Grid
-      container
-      direction="row"
-      justify="center"
-      alignItems="center"
-      spacing={1}
-    >
-      
-      <Grid item>
+  <><br />
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
       Price (excluding facilities charge and discount)
         </Typography>
-      </Grid>
-        <Grid item>
+     
         <TextField
-          multiline
+         multiline
+         variant="outlined"
+         margin="normal"
+         
+         fullWidth
           rows={1}
           id="seller_price"
           name="seller_price"
@@ -2539,45 +2160,30 @@ if(newredirect==true)
           error={formik.touched.seller_price && Boolean(formik.errors.seller_price)}
           helperText={formik.touched.seller_price && formik.errors.seller_price}
         />
-        </Grid>
-  </Grid></div>
+        </>
 <br />
 
 
 
 
-  <Grid
-              container
-              direction="row"
-              justify="center"
-              alignItems="center"
-              spacing={1}
-            >
-            <Grid item>
             <Typography variant="h4" color="textPrimary">
               Regarding Shop
             </Typography>
-            </Grid>
-            </Grid>
+          
             <br />
       
 
-    <div><Grid
-      container
-      direction="row"
-      justify="center"
-      alignItems="center"
-      spacing={1}
-    >
-      
-      <Grid item>
+    <>
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
       Any shop policy or rules?
         </Typography>
-      </Grid>
-        <Grid item>
+    
         <TextField
           multiline
+          variant="outlined"
+          margin="normal"
+          
+          fullWidth
           rows={5}
           id="shop_policy"
           name="shop_policy"
@@ -2586,40 +2192,25 @@ if(newredirect==true)
           onChange={formik.handleChange}
           
         />
-        </Grid>
-  </Grid></div>
+      </>
 
 
-  <Grid
-              container
-              direction="row"
-              justify="center"
-              alignItems="center"
-              spacing={1}
-            >
-            <Grid item>
             <Typography variant="h4" color="textPrimary">
               Location
             </Typography>
-            </Grid>
-            </Grid>
+           
             <br />
-            <div><Grid
-      container
-      direction="row"
-      justify="center"
-      alignItems="center"
-      spacing={1}
-    >
-      
-      <Grid item>
+            <>
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
       Full Address
         </Typography>
-      </Grid>
-        <Grid item>
+     
         <TextField
-          multiline
+         multiline
+         variant="outlined"
+         margin="normal"
+         
+         fullWidth
           rows={5}
           id="location"
           name="location"
@@ -2630,27 +2221,21 @@ if(newredirect==true)
           helperText={formik.touched.location && formik.errors.location}
           
         />
-        </Grid>
-  </Grid></div>
+       </>
   <br />
 
 
-    <div><Grid
-      container
-      direction="row"
-      justify="center"
-      alignItems="center"
-      spacing={1}
-    >
-      
-      <Grid item>
+    <>
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
       City name
         </Typography>
-      </Grid>
-        <Grid item>
+    
         <TextField
           multiline
+          variant="outlined"
+          margin="normal"
+          
+          fullWidth
           rows={1}
           id="city"
           name="city"
@@ -2661,25 +2246,19 @@ if(newredirect==true)
           helperText={formik.touched.city && formik.errors.city}
           
         />
-        </Grid>
-  </Grid></div>
+        </>
   <br />
-  <div><Grid
-      container
-      direction="row"
-      justify="center"
-      alignItems="center"
-      spacing={1}
-    >
-      
-      <Grid item>
+  <>
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
       State name
         </Typography>
-      </Grid>
-        <Grid item>
+     
         <TextField
           multiline
+          variant="outlined"
+          margin="normal"
+          
+          fullWidth
           rows={1}
           id="state"
           name="state"
@@ -2690,26 +2269,20 @@ if(newredirect==true)
           helperText={formik.touched.state && formik.errors.state}
           
         />
-        </Grid>
-  </Grid></div>
+      </>
 
 <br />
-  <div><Grid
-      container
-      direction="row"
-      justify="center"
-      alignItems="center"
-      spacing={1}
-    >
-      
-      <Grid item>
+  <>
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
       Country name
         </Typography>
-      </Grid>
-        <Grid item>
+     
         <TextField
           multiline
+          variant="outlined"
+          margin="normal"
+          
+          fullWidth
           rows={1}
           id="country"
           name="country"
@@ -2720,26 +2293,20 @@ if(newredirect==true)
           helperText={formik.touched.country && formik.errors.country}
           
         />
-        </Grid>
-  </Grid></div>
+        </>
   <br />
 
-  <div><Grid
-      container
-      direction="row"
-      justify="center"
-      alignItems="center"
-      spacing={1}
-    >
-      
-      <Grid item>
+  <>
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
       Landmark
         </Typography>
-      </Grid>
-        <Grid item>
+      
         <TextField
           multiline
+          variant="outlined"
+          margin="normal"
+          
+          fullWidth
           rows={1}
           id="landmark"
           name="landmark"
@@ -2750,26 +2317,20 @@ if(newredirect==true)
           helperText={formik.touched.landmark && formik.errors.landmark}
           
         />
-        </Grid>
-  </Grid></div>
+       </>
 
   <br />
-  <div><Grid
-      container
-      direction="row"
-      justify="center"
-      alignItems="center"
-      spacing={1}
-    >
-      
-      <Grid item>
+  <>
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
       Pincode
         </Typography>
-      </Grid>
-        <Grid item>
+    
         <TextField
           multiline
+          variant="outlined"
+          margin="normal"
+          
+          fullWidth
           rows={1}
           id="pincode"
           name="pincode"
@@ -2780,30 +2341,24 @@ if(newredirect==true)
           helperText={formik.touched.pincode && formik.errors.pincode}
           
         />
-        </Grid>
-  </Grid></div>
+        </>
 
 
   <br />
 
-  <div><Grid
-      container
-      direction="row"
-      justify="center"
-      alignItems="center"
-      spacing={1}
-    >
-      
-      <Grid item>
+  <>
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
       Address proof (pdf format)
         </Typography>
-      </Grid>
-        <Grid item>
-        <input type='file'  id='address_proof' accept='file.pdf' onChange={(event) => {console.log(event.currentTarget.files[0]);
-  formik.setFieldValue('address_proof',event.target.files[0]); setnewfile(true);}}/> 
-        </Grid>
-  </Grid></div>
+   </>  
+       
+
+{
+  myroom.address_proof ? <><a href={myroom.address_proof}><p id="proof">UPLOADED ALREADY</p></a></> :  <><input type='file'  id='address' accept='application/pdf' onChange={(event) => {
+    Filevalidation(event.target.files[0]);}}/> 
+         <p id="proof">NOT UPLOADED</p></>
+ }
+        
 
   <br />
 
@@ -2839,37 +2394,24 @@ if(newredirect==true)
         <MapForm value={formik.values} setvalue={formik.setFieldValue}/>
         <br />
 
-        <Grid
-              container
-              direction="row"
-              justify="center"
-              alignItems="center"
-              spacing={1}
-            >
-            <Grid item>
+       
             <Typography variant="h4" color="textPrimary">
               Neighborhood
             </Typography>
-            </Grid>
-            </Grid>
+           
             <br />
 
-        <div><Grid
-      container
-      direction="row"
-      justify="center"
-      alignItems="center"
-      spacing={1}
-    >
-      
-      <Grid item>
+        <>
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
       Nearby station 1
         </Typography>
-      </Grid>
-        <Grid item>
+     
         <TextField
           multiline
+          variant="outlined"
+          margin="normal"
+          
+          fullWidth
           rows={1}
           id="nearby_station1"
           name="nearby_station1"
@@ -2880,28 +2422,22 @@ if(newredirect==true)
           helperText={formik.touched.nearby_station1 && formik.errors.nearby_station1}
           
         />
-        </Grid>
-  </Grid></div>
+        </>
 
 
   <br />
 
-  <div><Grid
-      container
-      direction="row"
-      justify="center"
-      alignItems="center"
-      spacing={1}
-    >
-      
-      <Grid item>
+  <>
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
       Distance from station 1 (in km)
         </Typography>
-      </Grid>
-        <Grid item>
+     
         <TextField
-          multiline
+         multiline
+         variant="outlined"
+         margin="normal"
+         
+         fullWidth
           rows={1}
           id="distance1"
           name="distance1"
@@ -2913,29 +2449,23 @@ if(newredirect==true)
           helperText={formik.touched.distance1 && formik.errors.distance1}
           
         />
-        </Grid>
-  </Grid></div>
+       </>
 
 
   <br />
 
 
-  <div><Grid
-      container
-      direction="row"
-      justify="center"
-      alignItems="center"
-      spacing={1}
-    >
-      
-      <Grid item>
+  <>
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
       Nearby station 2
         </Typography>
-      </Grid>
-        <Grid item>
+     
         <TextField
           multiline
+          variant="outlined"
+          margin="normal"
+          
+          fullWidth
           rows={1}
           id="nearby_station2"
           name="nearby_station2"
@@ -2946,28 +2476,22 @@ if(newredirect==true)
           helperText={formik.touched.nearby_station2 && formik.errors.nearby_station2}
           
         />
-        </Grid>
-  </Grid></div>
+       </>
 
 
   <br />
 
-  <div><Grid
-      container
-      direction="row"
-      justify="center"
-      alignItems="center"
-      spacing={1}
-    >
-      
-      <Grid item>
+  <>
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
       Distance from station 2 (in km)
         </Typography>
-      </Grid>
-        <Grid item>
+     
         <TextField
-          multiline
+         multiline
+         variant="outlined"
+         margin="normal"
+         
+         fullWidth
           rows={1}
           id="distance2"
           name="distance2"
@@ -2979,8 +2503,7 @@ if(newredirect==true)
           helperText={formik.touched.distance2 && formik.errors.distance2}
           
         />
-        </Grid>
-  </Grid></div>
+       </>
 
   <br />
 
@@ -2991,8 +2514,17 @@ if(newredirect==true)
         <Button color="primary" variant="contained" fullWidth type="submit">
           Submit
         </Button>
+
+        </Grid>
       </form>
+      
+      </div>
+     
+      </Paper>
       </Grid>
+      
+      </Grid>
+    </div>
     </div>
   );
 }

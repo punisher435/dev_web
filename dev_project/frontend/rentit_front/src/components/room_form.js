@@ -343,180 +343,7 @@ const validationSchema = yup.object({
   .string('Please, provide the appropriate answer')
   .required('You must answer this '),
   
-  photo1: yup.mixed().when("edit", {
-      is: false,
-      then: yup.mixed().required("A file is required")
-      .test(
-          "fileSize",
-          "File too large",
-          value => value && value.size <= FILE_SIZE
-      )
-      .test(
-          "fileFormat",
-          "Unsupported Format",
-          value => value && SUPPORTED_FORMATS.includes(value.type)
-      ),
-    }),
-  
-    photo1: yup.mixed().when("input1", {
-      is: true,
-      then: yup.mixed().required("A file is required")
-      .test(
-          "fileSize",
-          "File too large",
-          value => value && value.size <= FILE_SIZE
-      )
-      .test(
-          "fileFormat",
-          "Unsupported Format",
-          value => value && SUPPORTED_FORMATS.includes(value.type)
-      ),
-    }),
-  
-
-    
-    
-  
-  
-    photo2: yup.mixed().when("edit", {
-      is: false,
-      then: yup.mixed().required("A file is required")
-      .test(
-          "fileSize",
-          "File too large",
-          value => value && value.size <= FILE_SIZE
-      )
-      .test(
-          "fileFormat",
-          "Unsupported Format",
-          value => value && SUPPORTED_FORMATS.includes(value.type)
-      ),
-    }),
-  
-    photo2: yup.mixed().when("input2", {
-      is: true,
-      then: yup.mixed().required("A file is required")
-      .test(
-          "fileSize",
-          "File too large",
-          value => value && value.size <= FILE_SIZE
-      )
-      .test(
-          "fileFormat",
-          "Unsupported Format",
-          value => value && SUPPORTED_FORMATS.includes(value.type)
-      ),
-    }),
-  
-    photo3: yup.mixed().when("edit", {
-      is: false,
-      then: yup.mixed().required("A file is required")
-      .test(
-          "fileSize",
-          "File too large",
-          value => value && value.size <= FILE_SIZE
-      )
-      .test(
-          "fileFormat",
-          "Unsupported Format",
-          value => value && SUPPORTED_FORMATS.includes(value.type)
-      ),
-    }),
-  
-    photo3: yup.mixed().when("input3", {
-      is: true,
-      then: yup.mixed().required("A file is required")
-      .test(
-          "fileSize",
-          "File too large",
-          value => value && value.size <= FILE_SIZE
-      )
-      .test(
-          "fileFormat",
-          "Unsupported Format",
-          value => value && SUPPORTED_FORMATS.includes(value.type)
-      ),
-    }),
-  
-    photo4: yup.mixed().when("edit", {
-      is: false,
-      then: yup.mixed().required("A file is required")
-      .test(
-          "fileSize",
-          "File too large",
-          value => value && value.size <= FILE_SIZE
-      )
-      .test(
-          "fileFormat",
-          "Unsupported Format",
-          value => value && SUPPORTED_FORMATS.includes(value.type)
-      ),
-    }),
-  
-    photo4: yup.mixed().when("input4", {
-      is: true,
-      then: yup.mixed().required("A file is required")
-      .test(
-          "fileSize",
-          "File too large",
-          value => value && value.size <= FILE_SIZE
-      )
-      .test(
-          "fileFormat",
-          "Unsupported Format",
-          value => value && SUPPORTED_FORMATS.includes(value.type)
-      ),
-    }),
-  
-    photo5: yup.mixed().when("edit", {
-      is: false,
-      then: yup.mixed().required("A file is required")
-      .test(
-          "fileSize",
-          "File too large",
-          value => value && value.size <= FILE_SIZE
-      )
-      .test(
-          "fileFormat",
-          "Unsupported Format",
-          value => value && SUPPORTED_FORMATS.includes(value.type)
-      ),
-    }),
-  
-    photo5: yup.mixed().when("input5", {
-      is: true,
-      then: yup.mixed().required("A file is required")
-      .test(
-          "fileSize",
-          "File too large",
-          value => value && value.size <= FILE_SIZE
-      )
-      .test(
-          "fileFormat",
-          "Unsupported Format",
-          value => value && SUPPORTED_FORMATS.includes(value.type)
-      ),
-    }),
-  
-  address_proof: yup.mixed().when("edit", {
-      is: false,
-      then: yup.mixed().required("A file is required")
-      .test(
-          "fileFormat",
-          "Unsupported Format",
-          value => value && SUPPORTED_FORMATS1.includes(value.type)
-      ),
-    }),
-  
-    address_proof: yup.mixed().when("newfile", {
-      is: true,
-      then: yup.mixed().required("A file is required")
-      .test(
-          "fileFormat",
-          "Unsupported Format",
-          value => value && SUPPORTED_FORMATS1.includes(value.type)
-      ),
-    }),
+ 
 
     
 });
@@ -585,14 +412,9 @@ function RoomForm (props){
     const hiddenFileInput3 = React.useRef(null);
     const hiddenFileInput4 = React.useRef(null);
     const hiddenFileInput5 = React.useRef(null);
-    const [width,setwidth] = React.useState(100);
+    
 
-    const [input1,setinput1] = React.useState(false);
-    const [input2,setinput2] = React.useState(false);
-    const [input3,setinput3] = React.useState(false);
-    const [input4,setinput4] = React.useState(false);
-    const [input5,setinput5] = React.useState(false);
-    const [newfile,setnewfile] = React.useState(false);
+   
     const [newredirect,setnewredirect] = React.useState(false);
     const [myroom,setroom] = useState({
       wifi:'',
@@ -3810,17 +3632,19 @@ if(newredirect==true)
 
   <br />
 
+  
+
   <>
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
       Address proof (pdf format)
         </Typography>
-     
-        <input type='file'  id='address' accept='application/pdf' onChange={(event) => {
-   Filevalidation(event.target.files[0]);}}/> 
-        </>
+   </>  
+       
 
 {
-  myroom.address_proof ? <p id="proof">UPLOADED ALREADY</p> : <p id="proof">NOT UPLOADED</p>
+  myroom.address_proof ? <><a href={myroom.address_proof}><p id="proof">UPLOADED ALREADY</p></a></> :  <><input type='file'  id='address' accept='application/pdf' onChange={(event) => {
+    Filevalidation(event.target.files[0]);}}/> 
+         <p id="proof">NOT UPLOADED</p></>
  }
         
 

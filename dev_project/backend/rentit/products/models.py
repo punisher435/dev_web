@@ -203,7 +203,7 @@ class rooms(models.Model):
     wishlist=models.IntegerField(default=0)
     cart=models.IntegerField(default=0)
 
-    address_proof = models.FileField(upload_to=upload_file_to) 
+    address_proof = models.FileField(upload_to=upload_file_to,blank=True,null=True) 
 
     objects = models.Manager()
     personal_rooms = rooms_manager()
@@ -328,7 +328,7 @@ class shops(models.Model):
     nearby_station2 = models.TextField(max_length=255)
     distance2 = models.DecimalField(max_digits=3,decimal_places=1,default=0)
     shop_policy = models.TextField(null=True,blank=True)
-    address_proof = models.FileField(upload_to=upload_file_to1,default='/address_proof/rooms/default.pdf') 
+    address_proof = models.FileField(upload_to=upload_file_to1,blank=True,null=True) 
 
     # 
     wishlist=models.IntegerField(default=0)
@@ -492,7 +492,7 @@ class apartments(models.Model):
     nearby_station2 = models.TextField(max_length=255)
     distance2 = models.DecimalField(max_digits=3,decimal_places=1,default=0)
     apartment_policy = models.TextField(null=True,blank=True)
-    address_proof = models.FileField(upload_to=upload_file_to2,default='/address_proof/rooms/default.pdf') 
+    address_proof = models.FileField(upload_to=upload_file_to2,blank=True,null=True) 
 
     #
     wishlist=models.IntegerField(default=0)
