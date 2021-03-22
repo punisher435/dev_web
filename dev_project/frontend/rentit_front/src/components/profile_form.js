@@ -27,10 +27,7 @@ const validationSchema = yup.object({
     .string('Enter your mobile')
     .min(10, 'Mobile should be of minimum 10 characters length')
     .required('Mobile is required'),
-    aadhar: yup
-    .string('Enter your aadhar')
-    .min(12, 'Aadhar should be of minimum 12 characters length')
-    .required('Aadhar is required'),
+   
 
     
 });
@@ -309,7 +306,7 @@ function ProfileForm (props){
           rows={1}
           id="aadhar"
           name="aadhar"
-          label="aadhar"
+          label="aadhar(optional)"
           value={formik.values.aadhar}
           onChange={formik.handleChange}
           error={formik.touched.aadhar && Boolean(formik.errors.aadhar)}
