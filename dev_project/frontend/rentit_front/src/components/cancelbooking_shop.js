@@ -106,7 +106,7 @@ function Bookingcancel(props) {
                 },
               };
               
-                try{const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcehjbda983290whjba/book/${bookingid}/`,config);
+                try{const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcehdawnajk289uadhq/shop/book/${bookingid}/`,config);
              console.log(res.data)
              setmybooking(res.data)
               
@@ -204,25 +204,11 @@ function Bookingcancel(props) {
            >
 
 
-            <Grid item >
+            
               <h3>Do you want to cancel booking no .</h3>
-            </Grid>
-            <Grid
-            container
-            direction="row"
-            justify="center"
-            alignItems="center"
-            >
             
-            
-            <Grid item >
               <h4>{mybooking.booking_id}?</h4>
-            </Grid>
-
-            
-
-            </Grid>
-            <Grid item>
+           
             <FormControl className={classes.formControl}>
                 <InputLabel id="cancellation-reason">Cancellation reason</InputLabel>
                 <Select
@@ -236,9 +222,9 @@ function Bookingcancel(props) {
                 </Select>
                 <FormHelperText>Select your cancellation reason</FormHelperText>
             </FormControl>
-            </Grid>
+            
             <br />
-            <Grid item>
+           
             <FormControl className={classes.formControl}>
                 <InputLabel id="account_type">Account type</InputLabel>
                 <Select
@@ -252,9 +238,9 @@ function Bookingcancel(props) {
                 </Select>
                 <FormHelperText>Select your cancellation reason</FormHelperText>
             </FormControl>
-            </Grid>
+          
             <br />
-            <form className={classes.root} noValidate autoComplete="off">
+           
             <TextField
             id="account_no"
             label="account_no"
@@ -265,6 +251,7 @@ function Bookingcancel(props) {
             onInput={(e) =>{handleme(e);}}
             variant="outlined"
         />
+        <br />
         <TextField
             id="IFSC_code"
             label="IFSC_code"
@@ -275,6 +262,7 @@ function Bookingcancel(props) {
             onInput={(e) =>{handleme(e);}}
             variant="outlined"
         />
+        <br />
         <TextField
             id="bank_name"
             label="bank_name"
@@ -285,6 +273,7 @@ function Bookingcancel(props) {
             onInput={(e) =>{handleme(e);}}
             variant="outlined"
         />
+        <br />
         <TextField
             id="bank_address"
             label="bank_address"
@@ -295,6 +284,7 @@ function Bookingcancel(props) {
             onInput={(e) =>{handleme(e);}}
             variant="outlined"
         />
+        <br />
             <TextField
             id="feedback"
             label="Feedback"
@@ -305,7 +295,7 @@ function Bookingcancel(props) {
             onInput={(e) =>{handleme(e);}}
             variant="outlined"
         />
-            </form>
+           
             <br />
 
 
