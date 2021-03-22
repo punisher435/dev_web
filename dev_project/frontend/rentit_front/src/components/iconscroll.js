@@ -52,20 +52,17 @@ function Scrollroom({post}) {
     fontSize:'13px',
   }
 
-    const MenuItem = ({room}) => {
-        return <RecipeReviewCard post={room} />;
-      };
-      
-      // All items component
-      // Important! add unique key
-
-      const Menu = (posts) =>
-        
-        posts.map(post => {
-          
-          return (
-            <div>
+    const MenuItem = ({post}) => {
+        return (
+          <div>
             <IconContext.Provider value={{ size: "1.5em",}}>
+            <Grid
+  container
+  direction="row"
+  justify="flex-start"
+  alignItems="center"
+  spacing = {1}
+      >
 { 
 post.wifi ? <Grid item md={1}><div><Icon fontSize='small'><WifiIcon /></Icon><p style={mystyle}>Wifi Facility</p></div></Grid> : <Grid item md={1}><div><WifiOffIcon /><p>no Wifi</p></div></Grid>
 }
@@ -124,13 +121,24 @@ post.cctv_building ? <Grid item md={1}><div><BiCctv /><p>CCTV</p></div></Grid> :
 { 
 post.building_guard ? <Grid item md={1}><div><GiGuards /><p>Sequrity guard</p></div></Grid> : <></>
 }
+</Grid>
 </IconContext.Provider>
         </div>
-          );
+        );
+      };
+      
+      // All items component
+      // Important! add unique key
+
+      const Menu = (posts) =>
+        
+        posts.map(post => {
+          
+          return <MenuItem post={post} key="hy"/>;
         })
 
 
-   
+    
         
         
 

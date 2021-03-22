@@ -9,7 +9,7 @@ import RoomIcon from '@material-ui/icons/Room';
 import RoomImage from './newcardimage'
 import Box from '@material-ui/core/Box'
 import ScrollableIcons from './ScrollableIcons'
-import ScrollIcon from './iconscroll';
+import ScrollIcon from './iconscroll'
 import {Link} from 'react-router-dom';
 
 import axios from 'axios';
