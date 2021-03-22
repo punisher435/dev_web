@@ -1,1 +1,9 @@
-x = res1.data.cost_electricity +res1.data.cost_water + res1.data.final_price + res1.data.cost_wifi + res1.data.cost_TV + res1.data.cost_roomTV + res1.data.cost_refridgerator + res1.data.cost_roomrefridgerator + res1.data.cost_purified_water + res1.data.cost_geyser + res1.data.cost_AC + res1.data.cost_cooler + res1.data.cost_breakfast + res1.data.cost_lunch + res1.data.cost_dinner
+wifi:value.,
+    TV:value.,
+   
+    house_refridgerator:value.,
+    
+    purified_water:value.,
+    geyser:value.,
+    AC:value.,
+    cooler:value.,
