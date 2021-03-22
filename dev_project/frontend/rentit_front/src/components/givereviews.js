@@ -335,11 +335,15 @@ const Filevalidation1 = (file1,name) => {
         <br />
           <Grid item>
         <TextField
-          multiline
+           multiline
+           variant="outlined"
+           margin="normal"
+           
+           fullWidth
           rows={3}
           id="review"
           name="review"
-          label="WriteReview"
+          label="Write Review"
           value={formik.values.review}
           onChange={formik.handleChange}
           error={formik.touched.review && Boolean(formik.errors.review)}
@@ -370,11 +374,15 @@ const Filevalidation1 = (file1,name) => {
 
         <Grid item>
         <TextField
-          multiline
+           multiline
+           variant="outlined"
+           margin="normal"
+           
+           fullWidth
           rows={3}
           id="seller_review"
           name="seller_review"
-          label="seller_review"
+          label="Seller Review"
           value={formik.values.seller_review}
           onChange={formik.handleChange}
           error={formik.touched.seller_review && Boolean(formik.errors.seller_review)}
