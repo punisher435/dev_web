@@ -16,6 +16,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Eror from './eror'
 import Paper from '@material-ui/core/Paper';
+import './css/App.css';
 
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
@@ -57,15 +58,10 @@ const validationSchema = yup.object({
  
     // necessary for content to be below app bar
     myclass: {
-      padding:'10%'
+      padding:'6%'
      
   },
-  bgclass: {
-    backgroundColor:`${process.env.REACT_APP_BG_COLOR}`,
-    height:'100vh'
-   
   
-  },
   myclass1: {
     padding:'30px'
 },
@@ -79,7 +75,19 @@ const validationSchema = yup.object({
     erorclass: {
         width:'50%',
         marginLeft:'25%',
-    }
+    },
+    papernewclass:{
+      padding:20,
+      [theme.breakpoints.up('sm')]: {
+        padding:30,
+      },
+     
+    },
+    form: {
+      width: '100%', // Fix IE 11 issue.
+      marginTop: theme.spacing(1),
+     
+    },
   }));
 
 function BankForm (props){
@@ -196,7 +204,7 @@ function BankForm (props){
   }
 
   return (
-    <div className={classes.bgclass}>
+    <div className="formbgclass1">
     <div className={classes.myclass}>
         
         <Grid
@@ -206,7 +214,7 @@ function BankForm (props){
         alignItems="center"
         >
 
-<Paper elevation={5} className={classes.myclass1}>
+<Paper elevation={5} className={classes.papernewclass}>
       <form onSubmit={formik.handleSubmit}>
         
        
@@ -214,6 +222,10 @@ function BankForm (props){
         <Grid item>
         <TextField
           multiline
+          variant="outlined"
+          margin="normal"
+          
+          fullWidth
           rows={1}
           id="account_no"
           name="account_no"
@@ -225,10 +237,14 @@ function BankForm (props){
         />
         </Grid>
 
-        <br />
+        
         <Grid item>
         <TextField
           multiline
+          variant="outlined"
+          margin="normal"
+          
+          fullWidth
           rows={1}
           id="bank_name"
           name="bank_name"
@@ -240,10 +256,13 @@ function BankForm (props){
         />
         </Grid>
 
-        <br />
         <Grid item>
         <TextField
           multiline
+          variant="outlined"
+          margin="normal"
+          
+          fullWidth
           rows={1}
           id="bank_address"
           name="bank_address"
@@ -255,10 +274,14 @@ function BankForm (props){
         />
         </Grid>
 
-        <br />
+       
         <Grid item>
         <TextField
           multiline
+          variant="outlined"
+          margin="normal"
+          
+          fullWidth
           rows={1}
           id="IFSC_code"
           name="IFSC_code"
@@ -270,10 +293,10 @@ function BankForm (props){
         />
         </Grid>
 
-        <br />
+      
 
         <Grid item>
-            <FormControl className={classes.formControl}>
+            <FormControl className={classes.form}>
                 <InputLabel id="account_type">Account type</InputLabel>
                 <Select
                 labelId="account_type"
@@ -291,7 +314,7 @@ function BankForm (props){
  
 
         <Grid item>
-            <FormControl className={classes.formControl}>
+            <FormControl className={classes.form}>
                 <InputLabel id="currency">Currency</InputLabel>
                 <Select
                 labelId="currency"
@@ -306,6 +329,7 @@ function BankForm (props){
             </FormControl>
         </Grid>
  
+        <br />
         <br />
         
         <Button color="primary" variant="contained" fullWidth type="submit">

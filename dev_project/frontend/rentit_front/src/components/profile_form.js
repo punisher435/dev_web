@@ -11,6 +11,7 @@ import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 import Eror from './eror'
 import Paper from '@material-ui/core/Paper';
+import './css/App.css';
 
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
@@ -36,7 +37,7 @@ const validationSchema = yup.object({
 
 const useStyles = makeStyles(theme => ({
   myclass: {
-    padding:'10%'
+    padding:'6%'
    
 },
 bgclass: {
@@ -48,32 +49,30 @@ bgclass: {
 myclass1: {
   padding:'30px'
 },
-    imageclass: {
-      elevation:6,
-      overflow: 'hidden',
-        width: '110px',
-        height: '110px',
-        position:'relative',
-      borderRadius:'50%',
-      [theme.breakpoints.up('sm')]: {
-        borderRadius:'50%',
-        overflow: 'hidden',
-        width: '200px',
-        height: '200px',
-        position:'relative',
-        elevation:6,
-      },
-      [theme.breakpoints.up('md')]: {
-        borderRadius:'50%',
-        overflow: 'hidden',
-        width: '300px',
-        height: '300px',
-        position:'relative',
-        elevation:6,
-      },
-      marginLeft:'1%',
-      marginRight:'1%',
-    },
+imageclass: {
+  overflow: 'hidden',
+    width: '140px',
+    height: '140px',
+    position:'relative',
+  borderRadius:'30%',
+  [theme.breakpoints.up('sm')]: {
+    borderRadius:'30%',
+    overflow: 'hidden',
+    width: '170px',
+    height: '170px',
+    position:'relative',
+  },
+  [theme.breakpoints.up('md')]: {
+    borderRadius:'30%',
+    overflow: 'hidden',
+    width: '200px',
+    height: '200px',
+    position:'relative',
+  },
+  marginRight:'1%',
+  marginLeft:'1%',
+
+},
     erorclass: {
       width:'50%',
       marginLeft:'25%',
@@ -82,6 +81,18 @@ myclass1: {
     padding:0,
     borderRadius:'70%',
     
+    },
+    papernewclass:{
+      padding:20,
+      [theme.breakpoints.up('sm')]: {
+        padding:30,
+      },
+     
+    },
+    form: {
+      width: '100%', // Fix IE 11 issue.
+      marginTop: theme.spacing(1),
+     
     },
 }));
 
@@ -205,7 +216,7 @@ function ProfileForm (props){
   }
 
   return (
-    <div className={classes.bgclass}>
+    <div className="formbgclass1">
     <div className={classes.myclass}>
         
         <Grid
@@ -214,10 +225,18 @@ function ProfileForm (props){
         justify="center"
         alignItems="center"
         >
-          <Paper elevation={5} className={classes.myclass1}>
+          <Paper elevation={5} className={classes.papernewclass}>
       <form onSubmit={formik.handleSubmit}>
 
-      <Grid item className={classes.imageclass}>
+      <Grid
+        container
+        direction="row"
+        justify="center"
+        alignItems="center"
+        >
+
+      
+     
 
       <Button variant='contained' className={classes.buttonclass} onClick={(e) => {hiddenFileInput1.current.click();}}>
         <img src={myprofile.file} className={classes.imageclass}/>
@@ -226,13 +245,17 @@ function ProfileForm (props){
       <input type='file'  ref={hiddenFileInput1} style={{display:'none'}}  id='photo' accept='image/png,image/jpeg,image/jpg' onChange={(event) => {console.log(event.currentTarget.files[0]);
       formik.setFieldValue('photo',event.target.files[0])
       setprofile({...myprofile,file: URL.createObjectURL(event.target.files[0]),photo:event.target.files[0]})}}/> 
-
-      </Grid>
+ 
+    </Grid>
 
         <br />
           <Grid item>
         <TextField
           multiline
+          variant="outlined"
+          margin="normal"
+          
+          fullWidth
           rows={1}
           id="country_code"
           name="country_code"
@@ -245,7 +268,11 @@ function ProfileForm (props){
         </Grid>
         <Grid item>
         <TextField
-          multiline
+         multiline
+         variant="outlined"
+         margin="normal"
+         
+         fullWidth
           rows={1}
           id="mobile"
           name="mobile"
@@ -259,6 +286,10 @@ function ProfileForm (props){
         <Grid item>
         <TextField
           multiline
+          variant="outlined"
+          margin="normal"
+          
+          fullWidth
           rows={1}
           id="alternate_mobile"
           name="alternate_mobile"
@@ -270,7 +301,11 @@ function ProfileForm (props){
 
         <Grid item>
         <TextField
-          multiline
+         multiline
+         variant="outlined"
+         margin="normal"
+         
+         fullWidth
           rows={1}
           id="aadhar"
           name="aadhar"
