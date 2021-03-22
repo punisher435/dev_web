@@ -22,7 +22,7 @@ export default function SearchFields(props) {
 
   const changehandler = event => {
       setvalue(event.target.value);
-      props.setfilters({...props.filters,search:event.target.value});
+      props.setfilters({...props.filters,search:event.target.value.toUpperCase()});
   }
 
   return (
