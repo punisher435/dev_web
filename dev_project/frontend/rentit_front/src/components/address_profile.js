@@ -57,7 +57,7 @@ const validationSchema = yup.object({
  
     // necessary for content to be below app bar
     myclass: {
-        padding:'10%',
+        padding:'5%',
         overflowX:'hidden'
        
     },
@@ -85,6 +85,18 @@ const validationSchema = yup.object({
     },
     gridclass: {
       overflowX:'hidden'
+    },
+    papernewclass:{
+      padding:20,
+      [theme.breakpoints.up('sm')]: {
+        padding:30,
+      },
+     
+    },
+    form: {
+      width: '100%', // Fix IE 11 issue.
+      marginTop: theme.spacing(1),
+     
     },
   }));
 
@@ -153,6 +165,7 @@ function AddressForm (props){
     validationSchema: validationSchema,
     onSubmit: async (values) => {
       
+      
       const config = {
         headers: {
                 'Content-Type': 'application/json',
@@ -202,7 +215,7 @@ function AddressForm (props){
   }
 
   return (
-    <div className={classes.bgclass}>
+    <div className="formbgclass1">
     <div className={classes.myclass}>
       
         
@@ -214,7 +227,7 @@ function AddressForm (props){
         className={classes.gridclass}
         >
 
-<Paper elevation={5} className={classes.myclass1}>
+<Paper elevation={5} className={classes.papernewclass}>
       <form onSubmit={formik.handleSubmit}>
 
       
@@ -223,7 +236,11 @@ function AddressForm (props){
         <br />
         <Grid item>
         <TextField
-          multiline
+           multiline
+           variant="outlined"
+           margin="normal"
+           
+           fullWidth
           rows={1}
           id="address"
           name="address"
@@ -239,6 +256,10 @@ function AddressForm (props){
         <Grid item>
         <TextField
           multiline
+          variant="outlined"
+          margin="normal"
+          
+          fullWidth
           rows={1}
           id="city"
           name="city"
@@ -253,7 +274,11 @@ function AddressForm (props){
         <br />
         <Grid item>
         <TextField
-          multiline
+           multiline
+           variant="outlined"
+           margin="normal"
+           
+           fullWidth
           rows={1}
           id="state"
           name="state"
@@ -268,7 +293,11 @@ function AddressForm (props){
         <br />
         <Grid item>
         <TextField
-          multiline
+           multiline
+           variant="outlined"
+           margin="normal"
+           
+           fullWidth
           rows={1}
           id="landmark"
           name="landmark"
@@ -283,26 +312,31 @@ function AddressForm (props){
         <br />
 
         <Grid item>
-            <FormControl className={classes.formControl}>
-                <InputLabel id="country">Country</InputLabel>
-                <Select
-                labelId="country"
-                id="country"
-                value={formik.values.country}
-                onChange={(e) => formik.setFieldValue('country',e.target.value)}
-                error={formik.touched.country && Boolean(formik.errors.country)}
-                helperText={formik.touched.country && formik.errors.country}
-                >
-                <MenuItem value={'India'}>India</MenuItem>
-                
-                </Select>
-            </FormControl>
+        <TextField
+           multiline
+           variant="outlined"
+           margin="normal"
+           
+           fullWidth
+          rows={1}
+          id="country"
+          name="country"
+          label="country"
+          value={formik.values.country}
+          onChange={formik.handleChange}
+          error={formik.touched.country && Boolean(formik.errors.country)}
+          helperText={formik.touched.country && formik.errors.country}
+        />
         </Grid>
 
         <br />
         <Grid item>
         <TextField
           multiline
+          variant="outlined"
+          margin="normal"
+          
+          fullWidth
           rows={1}
           id="pincode"
           name="pincode"
