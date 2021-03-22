@@ -1,3 +1,15 @@
+
+
+
+
+
+
+
+
+
+
+
+
 import React,{ useState, useEffect} from 'react'
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Dashboarddrawer from '../hocs/layout2'
@@ -18,7 +30,13 @@ import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
 import {Redirect} from 'react-router-dom'
 import {connect} from 'react-redux'
-import FacilityIcon from './facilityiconprovider_apartment'
+import FacilityIcon from './FacilityIconProvider_shop'
+import Typography from '@material-ui/core/Typography';
+import SuccessSnackbars from './success_snackbar'
+import ErrorSnackbars from './error_snackbar'
+import Box from '@material-ui/core/Box';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import InputAdornment from '@material-ui/core/InputAdornment';
 
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
@@ -84,10 +102,20 @@ function Bookingextend(props) {
     const bookingid = props.match.params.bookingid;
     const [error,seterror] = useState(false);
     const [redirect,setredirect] = useState(false);
+    
     const [myroom,setroom] = useState();
     const [mycoupon,setcoupon] = useState('')
+    const [no,setno] = React.useState(0)
+  const [openme,setopenme] = React.useState(false)
+  const [openme1,setopenme1] = React.useState(false)
+
+  const [selectedDate, setSelectedDate] = React.useState(new Date());
+  
+  const [booked,setbooked] = React.useState(true);
+  const [date,setdate] = React.useState()
 
     const [mybooking,setmybooking]= useState()
+    
     const [cancelled,setcancelled]= useState(false)
 
     const [bookdetails,setbookdetails] = React.useState({
@@ -98,24 +126,21 @@ function Bookingextend(props) {
         duration:1,
 
         wifi:'',
-        house_TV:'',
-        room_TV:'',
-        house_refridgerator:'',
-        room_refridgerator:'',
+        TV:'',
+        
         purified_water:'',
-        geyser:'',
+        
         AC:'',
         cooler:'',
-        breakfast:'',
-        lunch:'',
-        dinner:'',
+        
+       
         
         coupon:'',
-        discount:'',
+        discount:0,
         month_price:'',
-        savings:'',
-        monthsavings:'',
-        roomid:'',
+        savings:0,
+        monthsavings:0,
+        apartmentid:'',
         title:'',
         currency:'',
 
@@ -127,7 +152,7 @@ function Bookingextend(props) {
       
         paylater:false,
 
-        capacity:'',
+       
     })
 
     React.useEffect(
@@ -138,70 +163,94 @@ function Bookingextend(props) {
                         'Authorization': `JWT ${localStorage.getItem('access')}`,
                 },
               };
+              var x = 0;
+              var y = '';
               
                 try{const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcensinejfcdajewcn29210/apartment/book/${bookingid}/`,config);
-             console.log(res.data)
+             
              setmybooking(res.data)
 
              try{const res1 = await axios.get(`${process.env.REACT_APP_API_URL}/sourcebvdfesl2746/apartments/${res.data.apartment_id}/`,config);
-             console.log(res1.data)
-             setroom(res1.data)
+             
+              setroom(res1.data)
+              x = x = res1.data.cost_electricity +res1.data.cost_water + res1.data.final_price + res1.data.cost_wifi + res1.data.cost_TV + res1.data.cost_purified_water +  res1.data.cost_AC + res1.data.cost_cooler
+              y = res1.data.currency
+             setdate(res1.data.bookedtill)
               
               }
                 catch{
                   seterror(true);
                 }
              const value = res.data
+             
 
              setbookdetails(
                 {
-                    ...bookdetails,
-                    price:value.price,
-                    date:value.date,
-                    month:value.month,
-                    year:value.year,
-                    duration:value.duration,
+                  ...bookdetails,
+                    currency:y,
+                    price:parseInt(x),
+                    month_price:parseInt(x),
+                    monthsavings:0,
+                    date:value.booked_till.slice(8,10),
+                    month:value.booked_till.slice(5,7),
+                    year:value.booked_till.slice(0,4),
+                    
                     wifi:value.wifi,
                     TV:value.TV,
-                    house_refridgerator:value.house_refridgerator,
-                    laundry:value.laundry,
-                    geyser:value.geyser,
                    
                     purified_water:value.purified_water,
                    
                     AC:value.AC,
                     cooler:value.cooler,
-                  
+                   
                     coupon:'none',
                     discount:value.discount,
-                    month_price:value.month_price,
-                    savings:value.savings,
-                    monthsavings:value.monthsavings,
-                    currency:value.currency,
+                    
+                    
+                    
 
-                    apartmentid:value.apartmentid,
-                    title:value.apartment_name,
-                    address:value.address,
-
+                    apartmentid:value.shop_id,
+                    title:value.room_name,
                     firstname:value.first_name,
                     lastname:value.last_name,
                     mobile:value.mobile,
                     country_code:value.country_code,
                     alternate_mobile:value.alternate_mobile,
 
-
-                 
-
+                    
                     
                 })
               
               }
                 catch{
                   seterror(true);
+                  
+                  
                 }
+
+                
+          
         }
     
     ,[])
+
+    React.useEffect(() => {
+
+      if(date != undefined){
+        if( ( (parseInt(date.slice(8,)) < selectedDate.getDate()-1) && (parseInt(date.slice(5,7))==selectedDate.getMonth()+1) && (parseInt(date.slice(0,4))==selectedDate.getFullYear()) ) || 
+        ( (parseInt(date.slice(5,7))<selectedDate.getMonth()+1) && (parseInt(date.slice(0,4))==selectedDate.getFullYear()) ) ||  (parseInt(date.slice(0,4))<selectedDate.getFullYear()) )
+    {
+        setbooked(false);
+    }
+    else{
+        setbooked(true);
+    }
+
+
+    
+    }
+
+    },[date,myroom,bookdetails.capacity])
 
     React.useEffect(() => {
       if(bookdetails.coupon=='' || mycoupon=='')
@@ -256,13 +305,56 @@ function Bookingextend(props) {
 
     }
     const handleChange = (event) => {
-        setbookdetails({...bookdetails,duration:event.target.value});
+      
+        setbookdetails({...bookdetails,duration:event.target.value,price:bookdetails.month_price*event.target.value});
       };
-      const handleme = e => {
-        setcoupon(e.target.value);
-      }
-    
+     
 
+
+
+      const handlecoupon = async (e) => {
+        e.preventDefault();
+        if(bookdetails.coupon!='none' && no==0)
+        {
+          try{
+              const config = {
+                  headers: {
+                          'Content-Type': 'application/json',
+                          'Authorization': `JWT ${localStorage.getItem('access')}`,
+                  },
+                  params:{
+                      price:bookdetails.price,
+                      discount:bookdetails.discount,
+                      savings:bookdetails.savings,
+                      apartmentid:bookdetails.apartmentid
+                     },
+                };
+      
+              console.log(config)
+              
+              const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourceasindwanuia29910/coupon/apartment/apply/${bookdetails.coupon}/`,config,config);
+      
+            console.log(res.data);
+            setbookdetails({...bookdetails,price:res.data[1],discount:res.data[3],savings:res.data[2]})
+            setno(1);
+            setopenme(true)
+      
+            
+      
+            
+            }
+            catch{
+              setopenme1(true)
+            }
+        }
+      }
+
+
+      const oncouponChange = e => {
+        setcoupon(e.target.value)
+        
+    }
+  
 
     if(error==true)
     {
@@ -278,6 +370,9 @@ function Bookingextend(props) {
     
     return (
         <div>
+
+<SuccessSnackbars openme={openme} setopenme={setopenme} message={'Coupon applied successfully!'}/>
+      <ErrorSnackbars openme={openme1} setopenme={setopenme1} message={'Coupon not applicable!'}/>
           {
             cancelled ? <Backdrop className={classes.backdrop} open={cancelled}>
             <CircularProgress color="inherit" />
@@ -353,29 +448,63 @@ function Bookingextend(props) {
             </FormControl>
             </Grid>
             <br />
-            <Grid item>
+            <Grid item lg={6} md={7}>
             <FacilityIcon post={myroom} bookvalues={bookdetails} setbookvalues={setbookdetails}/>
             </Grid>
             <br />
-            <form className={classes.root} noValidate autoComplete="off">
-            <TextField
-            id="coupon"
-            label="Coupon ( if any )"
-            name="coupon"
-            multiline
-            rows={1}
-            value = {mycoupon}
-            onInput={(e) =>{handleme(e);}}
-            variant="outlined"
-        />
-            </form>
+           
+
+
+
+       
+        
+           
+
+            <Box mt={1} mb={2}>
+    <Grid container alignItems='center'>
+        <Grid item xs={4}>
+            <Typography variant='subtitle1'>
+                Apply Coupon
+            </Typography>
+            <Typography variant='body2' gutterBottom>
+                (Must be applied after you select all the details)
+            </Typography>
+        </Grid>
+                    <Grid item xs={7}>
+                            <FormControl variant="outlined" noValidate>
+                            <InputLabel >Coupon Code</InputLabel>
+                            <OutlinedInput
+                                value={mycoupon}
+                                onInput={ e => oncouponChange(e)}
+                                endAdornment={
+                                    <InputAdornment position="end">
+                                    <Button onClick={e => {handlecoupon(e);}}>
+                                        Check
+                                    </Button>
+                                </InputAdornment>
+                                }
+                                labelWidth={100}
+                                />
+                            </FormControl>
+                    </Grid>
+            </Grid>
+
+
+
+
+
+
+        </Box>
+        <br />
+            <Typography variant="body1">Price : {bookdetails.currency} {bookdetails.price}</Typography>
             <br />
 
             {
-                mybooking.ended || mybooking.extended || props.profile.is_seller===true || mybooking.cancelled ? null : <Button variant="contained" color="secondary" onClick={(e) => {handleclick1(e);}}>
+                booked || mybooking.ended || mybooking.extended || props.profile.is_seller===true || mybooking.cancelled ? null : <Button variant="contained" color="secondary" onClick={(e) => {handleclick1(e);}}>
                 Extend Booking
               </Button>
             }
+          
 
             
 
@@ -401,3 +530,9 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps)(Bookingextend);
+
+
+
+
+
+

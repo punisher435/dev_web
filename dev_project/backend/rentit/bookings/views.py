@@ -207,19 +207,13 @@ class room_booking(viewsets.ViewSet):
                         y=y+1
 
                 
-                me = False
-                if room.gender==request.user.gender:
-                    me=True
-                elif room.gender=='Any':
-                    me=True
-                elif room.gender=='Both Male and Female' and (request.user.gender=='Female' or request.user.gender=='Male'):
-                    me = True
+               
 
                 
                 
 
 
-                if me and y>=data['capacity'] and book_date<=datetime.date.today()+datetime.timedelta(days=15) and room.pausebooking==False and room.removed==False:
+                if y>=data['capacity'] and book_date<=datetime.date.today()+datetime.timedelta(days=15) and room.pausebooking==False and room.removed==False:
                     
 
                     x = room.final_price
@@ -659,17 +653,11 @@ class room_booking(viewsets.ViewSet):
                 
                 print(y)
 
-                me = False
-                if room.gender==request.user.gender:
-                    me=True
-                elif room.gender=='Any':
-                    me=True
-                elif room.gender=='Both Male and Female' and (request.user.gender=='Female' or request.user.gender=='Male'):
-                    me = True
+                
                 
 
 
-                if y>=data['capacity'] and me:
+                if y>=data['capacity']:
                     print('success')
 
                     x = room.final_price
@@ -977,16 +965,10 @@ class shop_booking(viewsets.ViewSet):
                 book_date = datetime.date(data['year'], data['month'], data['date'])
                 d1 = book_date - datetime.timedelta(days=1)
 
-                me = False
-                if room.gender==request.user.gender:
-                    me=True
-                elif room.gender=='Any':
-                    me=True
-                elif room.gender=='Both Male and Female' and (request.user.gender=='Female' or request.user.gender=='Male'):
-                    me = True
+                
                 
 
-                if me and book_date<=datetime.date.today()+datetime.timedelta(days=15) and room.pausebooking==False and room.removed==False and d1>room.bookedtill:
+                if book_date<=datetime.date.today()+datetime.timedelta(days=15) and room.pausebooking==False and room.removed==False and d1>room.bookedtill:
                     
 
                     x = room.final_price
@@ -1225,17 +1207,11 @@ class shop_booking(viewsets.ViewSet):
                 book_date = booking.booked_till + datetime.timedelta(days=1)
                 d1 = book_date - datetime.timedelta(days=1)
 
-                me = False
-                if room.gender==request.user.gender:
-                    me=True
-                elif room.gender=='Any':
-                    me=True
-                elif room.gender=='Both Male and Female' and (request.user.gender=='Female' or request.user.gender=='Male'):
-                    me = True
+                
                    
 
 
-                if booking.booked_till==room.bookedtill and me:
+                if booking.booked_till==room.bookedtill:
                     print('success')
 
                     x = room.final_price
@@ -1466,16 +1442,10 @@ class apartment_booking(viewsets.ViewSet):
                 book_date = datetime.date(data['year'], data['month'], data['date'])
                 d1 = book_date - datetime.timedelta(days=1)
 
-                me = False
-                if room.gender==request.user.gender:
-                    me=True
-                elif room.gender=='Any':
-                    me=True
-                elif room.gender=='Both Male and Female' and (request.user.gender=='Female' or request.user.gender=='Male'):
-                    me = True
+                
                 
 
-                if me and book_date<=datetime.date.today()+datetime.timedelta(days=15) and room.pausebooking==False and room.removed==False and d1>room.bookedtill:
+                if book_date<=datetime.date.today()+datetime.timedelta(days=15) and room.pausebooking==False and room.removed==False and d1>room.bookedtill:
                     
 
                     x = room.final_price
@@ -1728,16 +1698,10 @@ class apartment_booking(viewsets.ViewSet):
                 d1 = book_date - datetime.timedelta(days=1)
                 
 
-                me = False
-                if room.gender==request.user.gender:
-                    me=True
-                elif room.gender=='Any':
-                    me=True
-                elif room.gender=='Both Male and Female' and (request.user.gender=='Female' or request.user.gender=='Male'):
-                    me = True
+                
 
 
-                if booking.booked_till==room.bookedtill and me:
+                if booking.booked_till==room.bookedtill:
                     print('success')
 
                     x = room.final_price
