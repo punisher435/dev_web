@@ -174,6 +174,12 @@ function Bookingextend(props) {
               x = x = res1.data.cost_electricity +res1.data.cost_water + res1.data.final_price + res1.data.cost_wifi + res1.data.cost_TV + res1.data.cost_purified_water +  res1.data.cost_AC + res1.data.cost_cooler
               y = res1.data.currency
              setdate(res1.data.bookedtill)
+
+             var mydate = new Date();
+            mydate.setYear(parseInt(res.data.booked_till.slice(0,4)))
+            mydate.setMonth(parseInt(res.data.booked_till.slice(5,7))-1)
+            mydate.setDate(parseInt(res.data.booked_till.slice(8,))+1)
+            setSelectedDate(mydate)
               
               }
                 catch{
@@ -208,7 +214,7 @@ function Bookingextend(props) {
                     
 
                     shopid:value.shop_id,
-                    title:value.room_name,
+                    title:value.shop_name,
                     firstname:value.first_name,
                     lastname:value.last_name,
                     mobile:value.mobile,
@@ -235,7 +241,7 @@ function Bookingextend(props) {
     React.useEffect(() => {
 
       if(date != undefined){
-        if( ( (parseInt(date.slice(8,)) < selectedDate.getDate()-1) && (parseInt(date.slice(5,7))==selectedDate.getMonth()+1) && (parseInt(date.slice(0,4))==selectedDate.getFullYear()) ) || 
+        if( ( (parseInt(date.slice(8,)) < selectedDate.getDate()) && (parseInt(date.slice(5,7))==selectedDate.getMonth()+1) && (parseInt(date.slice(0,4))==selectedDate.getFullYear()) ) || 
         ( (parseInt(date.slice(5,7))<selectedDate.getMonth()+1) && (parseInt(date.slice(0,4))==selectedDate.getFullYear()) ) ||  (parseInt(date.slice(0,4))<selectedDate.getFullYear()) )
     {
         setbooked(false);
@@ -248,7 +254,7 @@ function Bookingextend(props) {
     
     }
 
-    },[date,myroom,bookdetails.capacity])
+    },[date,myroom,bookdetails.capacity,selectedDate])
 
     React.useEffect(() => {
       if(bookdetails.coupon=='' || mycoupon=='')

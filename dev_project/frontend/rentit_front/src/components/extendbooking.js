@@ -98,6 +98,7 @@ function Bookingextend(props) {
   const [openme1,setopenme1] = React.useState(false)
 
   const [selectedDate, setSelectedDate] = React.useState(new Date());
+  
   const [capacity,setcapacity] = React.useState();
   const [booked,setbooked] = React.useState(true);
   const [date,setdate] = React.useState()
@@ -166,6 +167,13 @@ function Bookingextend(props) {
               setroom(res1.data)
               x = res1.data.cost_electricity +res1.data.cost_water + res1.data.final_price + res1.data.cost_wifi + res1.data.cost_TV + res1.data.cost_roomTV + res1.data.cost_refridgerator + res1.data.cost_roomrefridgerator + res1.data.cost_purified_water + res1.data.cost_geyser + res1.data.cost_AC + res1.data.cost_cooler + res1.data.cost_breakfast + res1.data.cost_lunch + res1.data.cost_dinner
               y = res1.data.currency
+
+            var mydate = new Date();
+            mydate.setYear(parseInt(res.data.booked_till.slice(0,4)))
+            mydate.setMonth(parseInt(res.data.booked_till.slice(5,7))-1)
+            mydate.setDate(parseInt(res.data.booked_till.slice(8,))+1)
+            setSelectedDate(mydate)
+
              setdate(res1.data.bookedtill)
               
               }
@@ -233,7 +241,7 @@ function Bookingextend(props) {
     React.useEffect(() => {
 
       if(date != undefined){
-        if( ( (parseInt(date.slice(8,)) < selectedDate.getDate()-1) && (parseInt(date.slice(5,7))==selectedDate.getMonth()+1) && (parseInt(date.slice(0,4))==selectedDate.getFullYear()) ) || 
+        if( ( (parseInt(date.slice(8,)) < selectedDate.getDate()) && (parseInt(date.slice(5,7))==selectedDate.getMonth()+1) && (parseInt(date.slice(0,4))==selectedDate.getFullYear()) ) || 
         ( (parseInt(date.slice(5,7))<selectedDate.getMonth()+1) && (parseInt(date.slice(0,4))==selectedDate.getFullYear()) ) ||  (parseInt(date.slice(0,4))<selectedDate.getFullYear()) )
     {
         setbooked(false);
@@ -250,7 +258,7 @@ if(myroom.book1!=null || myroom.book1!=undefined)
 {
 
     if(  (parseInt(myroom.book1.slice(0,4))<selectedDate.getFullYear()) || ( parseInt(myroom.book1.slice(0,4))===selectedDate.getFullYear() && parseInt(myroom.book1.slice(5,7))<selectedDate.getMonth()+1 ) ||  
-    ( parseInt(myroom.book1.slice(0,4))===selectedDate.getFullYear() && parseInt(myroom.book1.slice(5,7))===selectedDate.getMonth()+1 && parseInt(myroom.book1.slice(8,))<selectedDate.getDate()-1 )  ) 
+    ( parseInt(myroom.book1.slice(0,4))===selectedDate.getFullYear() && parseInt(myroom.book1.slice(5,7))===selectedDate.getMonth()+1 && parseInt(myroom.book1.slice(8,))<selectedDate.getDate() )  ) 
     {
         x=x+1;
     }
@@ -259,7 +267,7 @@ if(myroom.book1!=null || myroom.book1!=undefined)
 if(myroom.book2!=null || myroom.book2!=undefined)
 {
     if(  (parseInt(myroom.book2.slice(0,4))<selectedDate.getFullYear()) || ( parseInt(myroom.book2.slice(0,4))==selectedDate.getFullYear() && parseInt(myroom.book2.slice(5,7))<selectedDate.getMonth()+1 ) ||  
-    ( parseInt(myroom.book2.slice(0,4))===selectedDate.getFullYear() && parseInt(myroom.book2.slice(5,7))===selectedDate.getMonth()+1 && parseInt(myroom.book2.slice(8,))<selectedDate.getDate()-1 )  ) 
+    ( parseInt(myroom.book2.slice(0,4))===selectedDate.getFullYear() && parseInt(myroom.book2.slice(5,7))===selectedDate.getMonth()+1 && parseInt(myroom.book2.slice(8,))<selectedDate.getDate())  ) 
     {
         x=x+1;
     }
@@ -268,7 +276,7 @@ if(myroom.book2!=null || myroom.book2!=undefined)
 if(myroom.book3!=null || myroom.book3!=undefined)
 {
     if(  (parseInt(myroom.book3.slice(0,4))<selectedDate.getFullYear()) || ( parseInt(myroom.book3.slice(0,4))==selectedDate.getFullYear() && parseInt(myroom.book3.slice(5,7))<selectedDate.getMonth()+1 ) ||  
-    ( parseInt(myroom.book3.slice(0,4))===selectedDate.getFullYear() && parseInt(myroom.book3.slice(5,7))===selectedDate.getMonth()+1 && parseInt(myroom.book3.slice(8,))<selectedDate.getDate()-1 )  ) 
+    ( parseInt(myroom.book3.slice(0,4))===selectedDate.getFullYear() && parseInt(myroom.book3.slice(5,7))===selectedDate.getMonth()+1 && parseInt(myroom.book3.slice(8,))<selectedDate.getDate())  ) 
     {
         x=x+1;
     }
@@ -277,7 +285,7 @@ if(myroom.book3!=null || myroom.book3!=undefined)
 if(myroom.book4!=null || myroom.book4!=undefined)
 {
     if(  (parseInt(myroom.book4.slice(0,4))<selectedDate.getFullYear()) || ( parseInt(myroom.book4.slice(0,4))==selectedDate.getFullYear() && parseInt(myroom.book4.slice(5,7))<selectedDate.getMonth()+1 ) ||  
-    ( parseInt(myroom.book4.slice(0,4))===selectedDate.getFullYear() && parseInt(myroom.book4.slice(5,7))===selectedDate.getMonth()+1 && parseInt(myroom.book4.slice(8,))<selectedDate.getDate()-1 )  ) 
+    ( parseInt(myroom.book4.slice(0,4))===selectedDate.getFullYear() && parseInt(myroom.book4.slice(5,7))===selectedDate.getMonth()+1 && parseInt(myroom.book4.slice(8,))<selectedDate.getDate() )  ) 
     {
         x=x+1;
     }
@@ -286,7 +294,7 @@ if(myroom.book4!=null || myroom.book4!=undefined)
 if(myroom.book5!=null || myroom.book5!=undefined)
 {
     if(  (parseInt(myroom.book5.slice(0,4))<selectedDate.getFullYear()) || ( parseInt(myroom.book5.slice(0,4))==selectedDate.getFullYear() && parseInt(myroom.book5.slice(5,7))<selectedDate.getMonth()+1 ) ||  
-    ( parseInt(myroom.book5.slice(0,4))===selectedDate.getFullYear() && parseInt(myroom.book5.slice(5,7))===selectedDate.getMonth()+1 && parseInt(myroom.book5.slice(8,))<selectedDate.getDate()-1 )  ) 
+    ( parseInt(myroom.book5.slice(0,4))===selectedDate.getFullYear() && parseInt(myroom.book5.slice(5,7))===selectedDate.getMonth()+1 && parseInt(myroom.book5.slice(8,))<selectedDate.getDate())  ) 
     {
         x=x+1;
     }
@@ -295,7 +303,7 @@ if(myroom.book5!=null || myroom.book5!=undefined)
 if(myroom.book6!=null || myroom.book6!=undefined)
 {
     if(  (parseInt(myroom.book6.slice(0,4))<selectedDate.getFullYear()) || ( parseInt(myroom.book6.slice(0,4))==selectedDate.getFullYear() && parseInt(myroom.book6.slice(5,7))<selectedDate.getMonth()+1 ) ||  
-    ( parseInt(myroom.book6.slice(0,4))===selectedDate.getFullYear() && parseInt(myroom.book6.slice(5,7))===selectedDate.getMonth()+1 && parseInt(myroom.book6.slice(8,))<selectedDate.getDate()-1 )  ) 
+    ( parseInt(myroom.book6.slice(0,4))===selectedDate.getFullYear() && parseInt(myroom.book6.slice(5,7))===selectedDate.getMonth()+1 && parseInt(myroom.book6.slice(8,))<selectedDate.getDate())  ) 
     {
         x=x+1;
     }
@@ -304,7 +312,7 @@ if(myroom.book6!=null || myroom.book6!=undefined)
 if(myroom.book7!=null || myroom.book7!=undefined)
 {
     if(  (parseInt(myroom.book7.slice(0,4))<selectedDate.getFullYear()) || ( parseInt(myroom.book7.slice(0,4))==selectedDate.getFullYear() && parseInt(myroom.book7.slice(5,7))<selectedDate.getMonth()+1 ) ||  
-    ( parseInt(myroom.book7.slice(0,4))===selectedDate.getFullYear() && parseInt(myroom.book7.slice(5,7))===selectedDate.getMonth()+1 && parseInt(myroom.book7.slice(8,))<selectedDate.getDate()-1 )  ) 
+    ( parseInt(myroom.book7.slice(0,4))===selectedDate.getFullYear() && parseInt(myroom.book7.slice(5,7))===selectedDate.getMonth()+1 && parseInt(myroom.book7.slice(8,))<selectedDate.getDate())  ) 
     {
         x=x+1;
     }
@@ -313,7 +321,7 @@ if(myroom.book7!=null || myroom.book7!=undefined)
 if(myroom.book8!=null || myroom.book8!=undefined)
 {
     if(  (parseInt(myroom.book8.slice(0,4))<selectedDate.getFullYear()) || ( parseInt(myroom.book8.slice(0,4))==selectedDate.getFullYear() && parseInt(myroom.book8.slice(5,7))<selectedDate.getMonth()+1 ) ||  
-    ( parseInt(myroom.book8.slice(0,4))===selectedDate.getFullYear() && parseInt(myroom.book8.slice(5,7))===selectedDate.getMonth()+1 && parseInt(myroom.book8.slice(8,))<selectedDate.getDate()-1 )  ) 
+    ( parseInt(myroom.book8.slice(0,4))===selectedDate.getFullYear() && parseInt(myroom.book8.slice(5,7))===selectedDate.getMonth()+1 && parseInt(myroom.book8.slice(8,))<selectedDate.getDate())  ) 
     {
         x=x+1;
     }
@@ -322,7 +330,7 @@ if(myroom.book8!=null || myroom.book8!=undefined)
 if(myroom.book9!=null || myroom.book9!=undefined)
 {
     if(  (parseInt(myroom.book9.slice(0,4))<selectedDate.getFullYear()) || ( parseInt(myroom.book9.slice(0,4))==selectedDate.getFullYear() && parseInt(myroom.book9.slice(5,7))<selectedDate.getMonth()+1 ) ||  
-    ( parseInt(myroom.book9.slice(0,4))===selectedDate.getFullYear() && parseInt(myroom.book9.slice(5,7))===selectedDate.getMonth()+1 && parseInt(myroom.book9.slice(8,))<selectedDate.getDate()-1 )  ) 
+    ( parseInt(myroom.book9.slice(0,4))===selectedDate.getFullYear() && parseInt(myroom.book9.slice(5,7))===selectedDate.getMonth()+1 && parseInt(myroom.book9.slice(8,))<selectedDate.getDate())  ) 
     {
         x=x+1;
     }
@@ -331,7 +339,7 @@ if(myroom.book9!=null || myroom.book9!=undefined)
 if(myroom.book10!=null || myroom.book10!=undefined)
 {
     if(  (parseInt(myroom.book10.slice(0,4))<selectedDate.getFullYear()) || ( parseInt(myroom.book10.slice(0,4))==selectedDate.getFullYear() && parseInt(myroom.book10.slice(5,7))<selectedDate.getMonth()+1 ) ||  
-    ( parseInt(myroom.book10.slice(0,4))===selectedDate.getFullYear() && parseInt(myroom.book10.slice(5,7))===selectedDate.getMonth()+1 && parseInt(myroom.book10.slice(8,))<selectedDate.getDate()-1 )  ) 
+    ( parseInt(myroom.book10.slice(0,4))===selectedDate.getFullYear() && parseInt(myroom.book10.slice(5,7))===selectedDate.getMonth()+1 && parseInt(myroom.book10.slice(8,))<selectedDate.getDate())  ) 
     {
         x=x+1;
     }
@@ -349,7 +357,7 @@ if(x<bookdetails.capacity)
     
     }
 
-    },[date,myroom,bookdetails.capacity])
+    },[date,myroom,bookdetails.capacity,selectedDate])
 
     React.useEffect(() => {
       if(bookdetails.coupon=='' || mycoupon=='')
