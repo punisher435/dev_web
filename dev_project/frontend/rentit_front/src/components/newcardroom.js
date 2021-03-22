@@ -9,6 +9,7 @@ import RoomIcon from '@material-ui/icons/Room';
 import RoomImage from './newcardimage'
 import Box from '@material-ui/core/Box'
 import ScrollableIcons from './ScrollableIcons'
+import ScrollIcon from './iconscroll';
 import {Link} from 'react-router-dom';
 
 import axios from 'axios';
@@ -59,10 +60,11 @@ function RecipeReviewCard({post}) {
  
  return (
 <Card className={classes.root}>
+<Link to={`/rooms/${post.room_id}`} target="_blank" style={{textDecoration:'none',color:'black'}}>
    
  <RoomImage post={post} />
 
- <Link to={`/rooms/${post.room_id}`} target="_blank" style={{textDecoration:'none',color:'black'}}>
+ 
 
  <Box ml={1}>
 

@@ -59,10 +59,11 @@ function RecipeReviewCard({post}) {
  
  return (
 <Card className={classes.root}>
+<Link to={`/apartments/${post.apartment_id}`} target="_blank" style={{textDecoration:'none',color:'black'}}>
    
  <RoomImage post={post} />
 
- <Link to={`/apartments/${post.apartment_id}`} target="_blank" style={{textDecoration:'none',color:'black'}}>
+ 
 
  <Box ml={1}>
 
