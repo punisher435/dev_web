@@ -163,6 +163,7 @@ function Bookingextend(props) {
               };
               var x = 0;
               var y = '';
+              var shop = '';
               
                 try{const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcehdawnajk289uadhq/shop/book/${bookingid}/`,config);
              
@@ -174,6 +175,7 @@ function Bookingextend(props) {
               x = x = res1.data.cost_electricity +res1.data.cost_water + res1.data.final_price + res1.data.cost_wifi + res1.data.cost_TV + res1.data.cost_purified_water +  res1.data.cost_AC + res1.data.cost_cooler
               y = res1.data.currency
              setdate(res1.data.bookedtill)
+             shop = res1.data
 
              var mydate = new Date();
             mydate.setYear(parseInt(res.data.booked_till.slice(0,4)))
@@ -199,13 +201,13 @@ function Bookingextend(props) {
                     month:value.booked_till.slice(5,7),
                     year:value.booked_till.slice(0,4),
                     
-                    wifi:value.wifi,
-                    TV:value.TV,
+                    wifi:shop.wifi,
+                    TV:shop.TV,
                    
-                    purified_water:value.purified_water,
+                    purified_water:shop.purified_water,
                    
-                    AC:value.AC,
-                    cooler:value.cooler,
+                    AC:shop.AC,
+                    cooler:shop.cooler,
                    
                     coupon:'none',
                     discount:value.discount,

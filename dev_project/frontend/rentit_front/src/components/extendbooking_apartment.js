@@ -168,6 +168,7 @@ function Bookingextend(props) {
               };
               var x = 0;
               var y = '';
+              var apartment = ''
               
                 try{const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcensinejfcdajewcn29210/apartment/book/${bookingid}/`,config);
              
@@ -176,9 +177,10 @@ function Bookingextend(props) {
              try{const res1 = await axios.get(`${process.env.REACT_APP_API_URL}/sourcebvdfesl2746/apartments/${res.data.apartment_id}/`,config);
              
               setroom(res1.data)
-              x = x = res1.data.cost_electricity +res1.data.cost_water + res1.data.final_price + res1.data.cost_wifi + res1.data.cost_TV + res1.data.cost_purified_water +  res1.data.cost_AC + res1.data.cost_cooler
+              x = res1.data.cost_electricity +res1.data.cost_water+res1.data.cost_laundry + res1.data.final_price + res1.data.cost_wifi + res1.data.cost_TV  + res1.data.cost_refridgerator + res1.data.cost_purified_water + res1.data.cost_geyser + res1.data.cost_AC + res1.data.cost_cooler
               y = res1.data.currency
              setdate(res1.data.bookedtill)
+             apartment = res1.data
 
              var mydate = new Date();
             mydate.setYear(parseInt(res.data.booked_till.slice(0,4)))
@@ -204,15 +206,15 @@ function Bookingextend(props) {
                     month:value.booked_till.slice(5,7),
                     year:value.booked_till.slice(0,4),
                     
-                    wifi:value.wifi,
-                    TV:value.TV,
+                    wifi:apartment.wifi,
+                    TV:apartment.TV,
                   
-                    house_refridgerator:value.house_refridgerator,
+                    house_refridgerator:apartment.house_refridgerator,
                     
-                    purified_water:value.purified_water,
-                    geyser:value.geyser,
-                    AC:value.AC,
-                    cooler:value.cooler,
+                    purified_water:apartment.purified_water,
+                    geyser:apartment.geyser,
+                    AC:apartment.AC,
+                    cooler:apartment.cooler,
                    
                     coupon:'none',
                     discount:value.discount,

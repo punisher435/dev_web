@@ -157,6 +157,7 @@ function Bookingextend(props) {
               };
               var x = 0;
               var y = '';
+              var room = ''
               
                 try{const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcehjbda983290whjba/room/book/${bookingid}/`,config);
              
@@ -167,6 +168,7 @@ function Bookingextend(props) {
               setroom(res1.data)
               x = res1.data.cost_electricity +res1.data.cost_water + res1.data.final_price + res1.data.cost_wifi + res1.data.cost_TV + res1.data.cost_roomTV + res1.data.cost_refridgerator + res1.data.cost_roomrefridgerator + res1.data.cost_purified_water + res1.data.cost_geyser + res1.data.cost_AC + res1.data.cost_cooler + res1.data.cost_breakfast + res1.data.cost_lunch + res1.data.cost_dinner
               y = res1.data.currency
+              room = res1.data
 
             var mydate = new Date();
             mydate.setYear(parseInt(res.data.booked_till.slice(0,4)))
@@ -194,18 +196,18 @@ function Bookingextend(props) {
                     month:value.booked_till.slice(5,7),
                     year:value.booked_till.slice(0,4),
                     
-                    wifi:value.wifi,
-                    house_TV:value.house_TV,
-                    room_TV:value.room_TV,
-                    house_refridgerator:value.house_refridgerator,
-                    room_refridgerator:value.room_refridgerator,
-                    purified_water:value.purified_water,
-                    geyser:value.geyser,
-                    AC:value.AC,
-                    cooler:value.cooler,
-                    breakfast:value.breakfast,
-                    lunch:value.lunch,
-                    dinner:value.dinner,
+                    wifi:room.wifi,
+                    house_TV:room.house_TV,
+                    room_TV:room.room_TV,
+                    house_refridgerator:room.house_refridgerator,
+                    room_refridgerator:room.room_refridgerator,
+                    purified_water:room.purified_water,
+                    geyser:room.geyser,
+                    AC:room.AC,
+                    cooler:room.cooler,
+                    breakfast:room.breakfast,
+                    lunch:room.lunch,
+                    dinner:room.dinner,
                     coupon:'none',
                     discount:value.discount,
                     
