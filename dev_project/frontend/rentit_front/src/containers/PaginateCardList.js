@@ -141,6 +141,7 @@ const App = ({isAuthenticated}) => {
     ordering:'-trust_points',
     gender:'',
     discount:'',
+    landmark:'',
   });
 
   useEffect(() => {
@@ -192,6 +193,11 @@ const App = ({isAuthenticated}) => {
           ordering:filters.ordering,
           gender:filters.gender,
           discount:filters.discount,
+          city:filters.city,
+          state:filters.state,
+          country:filters.country,
+          location:filters.location,
+          landmark:filters.landmark,
 
         },
         config:config

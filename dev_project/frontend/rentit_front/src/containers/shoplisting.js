@@ -127,6 +127,7 @@ const App = ({isAuthenticated}) => {
     search:'',
     shop_cleaning:'',
     ordering:'-trust_points',
+    landmark:'',
   });
 
   useEffect(() => {
@@ -174,6 +175,12 @@ const App = ({isAuthenticated}) => {
           floor_filter:filters.floor_filter,
           search:filters.search,
           ordering:filters.ordering,
+
+          city:filters.city,
+          state:filters.state,
+          country:filters.country,
+          location:filters.location,
+          landmark:filters.landmark,
         },
         config:config
       });

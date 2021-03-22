@@ -268,15 +268,15 @@ function Home() {
 
   if(roomsearch===true)
   {
-      return <Redirect to={`/rooms/?city=${input.city}&state=${input.state}&country=${input.country}&booking_date=${input.date}`} style={{textDecoration:'none',color:'black'}} />
+      return <Redirect to={`/rooms/?city=${input.city.toUpperCase()}&state=${input.state.toUpperCase()}&country=${input.country.toUpperCase()}&booking_date=${input.date}`} style={{textDecoration:'none',color:'black'}} />
   }
   if(shopsearch===true)
   {
-      return <Redirect to={`/shops/?city=${input.city}&state=${input.state}&country=${input.country}&booking_date=${input.date}`} style={{textDecoration:'none',color:'black'}} />
+      return <Redirect to={`/shops/?city=${input.city.toUpperCase()}&state=${input.state.toUpperCase()}&country=${input.country.toUpperCase()}&booking_date=${input.date}`} style={{textDecoration:'none',color:'black'}} />
   }
   if(apartmentsearch===true)
   {
-      return <Redirect to={`/apartments/?city=${input.city}&state=${input.state}&country=${input.country}&booking_date=${input.date}`} style={{textDecoration:'none',color:'black'}} />
+      return <Redirect to={`/apartments/?city=${input.city.toUpperCase()}&state=${input.state.toUpperCase()}&country=${input.country.toUpperCase()}&booking_date=${input.date}`} style={{textDecoration:'none',color:'black'}} />
   }
 
     

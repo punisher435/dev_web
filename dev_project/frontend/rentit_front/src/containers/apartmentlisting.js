@@ -137,6 +137,7 @@ const App = ({isAuthenticated}) => {
     search:'',
     apartment_cleaning:'',
     ordering:'-trust_points',
+    landmark:'',
   });
 
   useEffect(() => {
@@ -195,6 +196,12 @@ const App = ({isAuthenticated}) => {
         TV_filter:filters.TV_filter,
         sofa:filters.sofa,
         apartment_type:filters.apartment_type,
+
+        city:filters.city,
+          state:filters.state,
+          country:filters.country,
+          location:filters.location,
+          landmark:filters.landmark,
         },
         config:config
       });
