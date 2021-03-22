@@ -33,9 +33,11 @@ const AntTabs = withStyles({
 const AntTab = withStyles((theme) => ({
   root: {
     textTransform: 'none',
-    minWidth: '16%',
+    minWidth: '0%',
     fontWeight: theme.typography.fontWeightRegular,
     marginRight: theme.spacing(0),
+    color: 'rgba(0, 0, 0, 0.87)',
+    opacity: 1,
     fontFamily: [
       '-apple-system',
       'BlinkMacSystemFont',
@@ -49,15 +51,15 @@ const AntTab = withStyles((theme) => ({
       '"Segoe UI Symbol"',
     ].join(','),
     '&:hover': {
-      color: '#40a9ff',
+      color: 'rgba(0, 0, 0, 0.87)',
       opacity: 1,
     },
     '&$selected': {
-      color: '#1890ff',
+      color: 'rgba(0, 0, 0, 0.87)',
       fontWeight: theme.typography.fontWeightMedium,
     },
     '&:focus': {
-      color: '#40a9ff',
+      color: 'rgba(0, 0, 0, 0.87)',
     },
   },
   selected: {},
@@ -102,91 +104,91 @@ export default function CustomizedTabs({post}) {
  <IconContext.Provider value={{ size: "1.5em",}}>
          { 
         post.wifi ? 
-        <AntTab label="Wifi Facility" icon={<WifiIcon />} disabled/>
+        <AntTab label="Wifi Facility" icon={<WifiIcon />} />
         // <Grid item ><div><Icon fontSize='small' ><WifiIcon /></Icon><p style={mystyle}>Wifi Facility</p></div></Grid> 
         : <></>
         }
         
         { 
         post.room_TV ? 
-        <AntTab label="Room TV" icon={<TvOutlinedIcon />} disabled/> 
+        <AntTab label="Room TV" icon={<TvOutlinedIcon />} /> 
         // <Grid item ><div><Icon fontSize='small'><TvOutlinedIcon /></Icon><p>Room TV</p></div> </Grid> 
         : <p></p>
         }
         { 
         post.house_TV ? 
-        <AntTab label="House TV" icon={<TvOutlinedIcon />} disabled/>
+        <AntTab label="House TV" icon={<TvOutlinedIcon />} />
         // <Grid item ><div><Icon fontSize='small'><TvOutlinedIcon /></Icon><p>House TV</p></div></Grid> 
         : <></>
         }
         { 
         post.balcony ? 
-        <AntTab label="Balcony" icon={<MeetingRoomOutlinedIcon />} disabled/>
+        <AntTab label="Balcony" icon={<MeetingRoomOutlinedIcon />} />
         : <></>
         }
         { 
         post.separate_washroom ? 
-        <AntTab label="Separate washroom" icon={<BathtubIcon />} disabled/>
+        <AntTab label="Separate washroom" icon={<BathtubIcon />} />
         : <></>
         }
         { 
         post.purified_water ? 
-            <AntTab label="Pure Water" icon={<IoWaterOutline/>} disabled/>
+            <AntTab label="Pure Water" icon={<IoWaterOutline/>} />
         : <></>
         }
         { 
         post.geyser ? 
-        <AntTab label="Hot Water" icon={<HotTubIcon />} disabled/>
+        <AntTab label="Hot Water" icon={<HotTubIcon />} />
         : <></>
         }
         { 
         post.AC ? 
-        <AntTab label="AC" icon={<AcUnitIcon />} disabled/>
+        <AntTab label="AC" icon={<AcUnitIcon />} />
         : <></>
         }
         { 
         post.cooler ? 
-        <AntTab label="Cooler" icon={<ToysIcon />} disabled/>
+        <AntTab label="Cooler" icon={<ToysIcon />} />
         : <></>
         }
         { 
         post.laundry ? 
-        <AntTab label="Laundry" icon={<LocalLaundryServiceIcon />} disabled/>
+        <AntTab label="Laundry" icon={<LocalLaundryServiceIcon />} />
         : <></>
         }
         { 
         post.iron ?
-        <AntTab label="Iron" icon={<WhatshotIcon />} disabled/>
+        <AntTab label="Iron" icon={<WhatshotIcon />} />
         : <></>
         }
         { 
         post.guest_allowed ? 
-        <AntTab label="Breakfast" icon={<AccessibilityIcon />} disabled/>
+        <AntTab label="Breakfast" icon={<AccessibilityIcon />} />
         : <></>
         }
         { 
         post.breakfast ? 
-        <AntTab label="" icon={<FreeBreakfastIcon />} disabled/>
+        <AntTab label="" icon={<FreeBreakfastIcon />} />
         : <></>
         }
         { 
         post.lunch ? 
-        <AntTab label="lunch" icon={<FastfoodIcon />} disabled/>
+        <AntTab label="lunch" icon={<FastfoodIcon />} />
         : <></>
         }
         { 
         post.dinner ? 
-        <AntTab label="dinner" icon={<BiFoodMenu />} disabled/>
+        <AntTab label="dinner" icon={<BiFoodMenu />} />
         : <></>
         }
         { 
         post.cctv_building ? 
-        <AntTab label="CCTV" icon={<BiCctv />} disabled/>
+        <AntTab label="CCTV" icon={<BiCctv />} />
         : <></>
         }
         { 
         post.building_guard ? 
-        <AntTab label="Security guard" icon={<GiGuards />} disabled/>
+        <AntTab label="Security guard" icon={<GiGuards />} />
         : <></>
         }
         </IconContext.Provider>
@@ -274,13 +276,13 @@ export default function CustomizedTabs({post}) {
 //           textColor="primary"
 //           aria-label="scrollable force tabs example"
 //         >
-//           <Tab icon={<PhoneIcon />} disabled/>
-//           <Tab  icon={<FavoriteIcon />} disabled  />
-//           <Tab  icon={<PersonPinIcon />} disabled />
-//           <Tab  icon={<HelpIcon />} disabled />
-//           <Tab  icon={<ShoppingBasket />} disabled />
-//           <Tab  icon={<ThumbDown />} disabled/>
-//           <Tab  icon={<ThumbUp />} disabled />
+//           <Tab icon={<PhoneIcon />} />
+//           <Tab  icon={<FavoriteIcon />}   />
+//           <Tab  icon={<PersonPinIcon />}  />
+//           <Tab  icon={<HelpIcon />}  />
+//           <Tab  icon={<ShoppingBasket />}  />
+//           <Tab  icon={<ThumbDown />} />
+//           <Tab  icon={<ThumbUp />}  />
 //         </Tabs>
       
 //     </div>

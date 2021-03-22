@@ -40,6 +40,7 @@ import CustomizedRatings from './rating_meter';
 import { connect } from 'react-redux'
 import axios from 'axios'
 import SimpleModal1 from '../components/bookcardmodel1_shop';
+import ScrollableIcons from './ScrollableIcons'
 
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
@@ -482,48 +483,12 @@ function NestedGrid({mypost,setmypost,openmycard,setmycard,filters,setfilters,po
         </Typography>
         <CustomizedRatings rating={post.avg_rating}/>
 
-        <div style={mystyle}>
-        <Grid
-        container
-        direction="row"
-        justify="flex-start"
-        alignItems="flex-start"
-        >
-        <IconContext.Provider value={{ size: "1.5em",}}>
-        { 
-        post.wifi ? <Grid item md={1}><div><Icon fontSize='small'><WifiIcon /></Icon><p style={mystyle}>Wifi Facility</p></div></Grid> : <Grid item md={1}><div><WifiOffIcon /><p>no Wifi</p></div></Grid>
-        }
         
+        <ScrollableIcons post={post}/>
+         <br />
 
-        { 
-        post.TV ? <Grid item md={1}><div><Icon fontSize='small'><TvOutlinedIcon /></Icon><p>TV</p></div></Grid> : <div><TvOffOutlinedIcon /><p>No TV</p></div>
-        }
-
-        { 
-        post.balcony!==0 ? <Grid item md={1}><div><Icon fontSize='small'><MeetingRoomOutlinedIcon /></Icon><p>Balcony</p></div></Grid> : <></>
-        }
-        { 
-        post.separate_washroom ? <Grid item md={1}><div><Icon fontSize='small'><BathtubIcon /></Icon><p>Separate washroom</p></div></Grid> : <></>
-        }
-        { 
-        post.purified_water ? <Grid item md={1}><div><IoWaterOutline /><p>Pure Water</p></div></Grid> : <></>
-        }
-
-        { 
-        post.AC ? <Grid item md={1}><div><AcUnitIcon /><p>AC</p></div></Grid> : <></>
-        }
-        { 
-        post.cooler ? <Grid item md={1}><div><ToysIcon /><p>Cooler</p></div></Grid> : <></>
-        }
-
-        { 
-        post.cctv_building ? <Grid item md={1}><div><BiCctv /><p>CCTV</p></div></Grid> : <></>
-        }
-        { 
-        post.building_guard ? <Grid item md={1}><div><GiGuards /><p>Sequrity guard</p></div></Grid> : <></>
-        }
-        </IconContext.Provider>
-        </Grid>
+        <div style={mystyle}>
+        
         <Grid
         container
         direction="row"

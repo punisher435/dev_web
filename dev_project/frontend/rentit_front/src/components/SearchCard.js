@@ -35,6 +35,7 @@ import { IconContext } from "react-icons";
 import { Link} from "react-router-dom";
 import IconButton from '@material-ui/core/IconButton';
 import KitchenIcon from '@material-ui/icons/Kitchen';
+import ScrollableIcons from './ScrollableIcons'
 
 import CustomizedRatings from './rating_meter';
 import { connect } from 'react-redux'
@@ -579,74 +580,12 @@ setspace(b);
         <Typography variant="body2" component="h6">
             Room of {post.capacity} people
         </Typography>
+
+         <ScrollableIcons post={post}/>
+         <br />
+
         <div style={mystyle}>
-        <Grid
-        container
-        direction="row"
-        justify="flex-start"
-        alignItems="flex-start"
-        >
-        <IconContext.Provider value={{ size: "1.5em",}}>
-        { 
-        post.wifi ? <Grid item md={1}><div><Icon fontSize='small'><WifiIcon /></Icon><p style={mystyle}>Wifi Facility</p></div></Grid> : <Grid item md={1}><div><WifiOffIcon /><p>no Wifi</p></div></Grid>
-        }
-        
-        { 
-        post.room_TV ?  <Grid item md={1}><div><Icon fontSize='small'><TvOutlinedIcon /></Icon><p>Room TV</p></div> </Grid> : <p></p>
-        }
-        { 
-        post.house_TV ? <Grid item md={1}><div><Icon fontSize='small'><TvOutlinedIcon /></Icon><p>House TV</p></div></Grid> : <div><TvOffOutlinedIcon /><p>No TV</p></div>
-        }
-        { 
-        post.room_refridgerator ?  <Grid item md={1}><div><Icon fontSize='small'><KitchenIcon /></Icon><p>Room refridgerator</p></div> </Grid> : <p></p>
-        }
-        { 
-        post.house_refridgerator ? <Grid item md={1}><div><Icon fontSize='small'><KitchenIcon /></Icon><p>House refridgerator</p></div></Grid> : <div><TvOffOutlinedIcon /><p>No TV</p></div>
-        }
-        { 
-        post.balcony ? <Grid item md={1}><div><Icon fontSize='small'><MeetingRoomOutlinedIcon /></Icon><p>Balcony</p></div></Grid> : <></>
-        }
-        { 
-        post.separate_washroom ? <Grid item md={1}><div><Icon fontSize='small'><BathtubIcon /></Icon><p>Separate washroom</p></div></Grid> : <></>
-        }
-        { 
-        post.purified_water ? <Grid item md={1}><div><IoWaterOutline /><p>Pure Water</p></div></Grid> : <></>
-        }
-        { 
-        post.geyser ? <Grid item md={1}><div><HotTubIcon /><p>  Hot Water</p></div></Grid> : <></>
-        }
-        { 
-        post.AC ? <Grid item md={1}><div><AcUnitIcon /><p>AC</p></div></Grid> : <></>
-        }
-        { 
-        post.cooler ? <Grid item md={1}><div><ToysIcon /><p>Cooler</p></div></Grid> : <></>
-        }
-        { 
-        post.laundry ? <Grid item md={1}><div><LocalLaundryServiceIcon /><p>Laundry</p></div></Grid> : <></>
-        }
-        { 
-        post.iron ? <Grid item md={1}><div><WhatshotIcon /><p>Iron</p></div></Grid> : <></>
-        }
-        { 
-        post.guest_allowed ? <Grid item md={1}><div><AccessibilityIcon /><p>Guest Allowed</p></div></Grid> : <></>
-        }
-        { 
-        post.breakfast ? <Grid item md={1}><div><FreeBreakfastIcon /><p>Breakfast</p></div></Grid> : <></>
-        }
-        { 
-        post.lunch ? <Grid item md={1}><div><FastfoodIcon /><p>lunch</p></div></Grid> : <></>
-        }
-        { 
-        post.dinner ? <Grid item md={1}><div><BiFoodMenu /><p>dinner</p></div></Grid> : <></>
-        }
-        { 
-        post.cctv_building ? <Grid item md={1}><div><BiCctv /><p>CCTV</p></div></Grid> : <></>
-        }
-        { 
-        post.building_guard ? <Grid item md={1}><div><GiGuards /><p>Sequrity guard</p></div></Grid> : <></>
-        }
-        </IconContext.Provider>
-        </Grid>
+       
         <Grid
         container
         direction="row"
