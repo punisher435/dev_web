@@ -14,6 +14,8 @@ import Eror from './eror'
 import Typography from '@material-ui/core/Typography';
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Paper from '@material-ui/core/Paper';
+import './css/App.css';
 
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
@@ -33,50 +35,7 @@ const validationSchema = yup.object({
   rating: yup
   .number().required(''),
 
-  photo1: yup.mixed().when("input1", {
-    is: true,
-    then: yup.mixed().required("A file is required")
-    .test(
-        "fileSize",
-        "File too large",
-        value => value && value.size <= FILE_SIZE
-    )
-    .test(
-        "fileFormat",
-        "Unsupported Format",
-        value => value && SUPPORTED_FORMATS.includes(value.type)
-    ),
-  }),
-
-  photo2: yup.mixed().when("input2", {
-    is: true,
-    then: yup.mixed().required("A file is required")
-    .test(
-        "fileSize",
-        "File too large",
-        value => value && value.size <= FILE_SIZE
-    )
-    .test(
-        "fileFormat",
-        "Unsupported Format",
-        value => value && SUPPORTED_FORMATS.includes(value.type)
-    ),
-  }),
-
-  photo3: yup.mixed().when("input3", {
-    is: true,
-    then: yup.mixed().required("A file is required")
-    .test(
-        "fileSize",
-        "File too large",
-        value => value && value.size <= FILE_SIZE
-    )
-    .test(
-        "fileFormat",
-        "Unsupported Format",
-        value => value && SUPPORTED_FORMATS.includes(value.type)
-    ),
-  }),
+ 
 
 
 
@@ -87,19 +46,19 @@ const validationSchema = yup.object({
 
 const useStyles = makeStyles(theme => ({
     myclass: {
-        marginTop:'10%'
+        paddingTop:'10%'
     },
     imageclass: {
       overflow: 'hidden',
-        width: '110px',
-        height: '110px',
+        width: '85px',
+        height: '85px',
         position:'relative',
       borderRadius:'50%',
       [theme.breakpoints.up('sm')]: {
         borderRadius:'50%',
         overflow: 'hidden',
-        width: '200px',
-        height: '200px',
+        width: '100px',
+        height: '100px',
         position:'relative',
       },
       [theme.breakpoints.up('md')]: {
@@ -109,12 +68,20 @@ const useStyles = makeStyles(theme => ({
         height: '200px',
         position:'relative',
       },
-      marginLeft:'1%',
       marginRight:'1%',
+      marginLeft:'1%',
+   
     },
     erorclass: {
       width:'50%',
       marginLeft:'25%',
+  },
+  papernewclass:{
+    padding:20,
+    [theme.breakpoints.up('sm')]: {
+      padding:30,
+    },
+   
   },
   buttonclass:{
     padding:0,
@@ -147,9 +114,7 @@ function ReviewForm (props){
     const hiddenFileInput2 = React.useRef(null);
     const hiddenFileInput3 = React.useRef(null);
 
-    const [input1,setinput1] = React.useState(false);
-    const [input2,setinput2] = React.useState(false);
-    const [input3,setinput3] = React.useState(false);
+   
 
     const [loading,setloading] = React.useState(false);
 
@@ -212,6 +177,80 @@ function ReviewForm (props){
     
   });
 
+
+
+const Filevalidation3 = (file1,name) => {
+  
+ 
+  // Check if any file is selected.
+  
+     
+
+          const fsize =file1.size;
+          const file = Math.round((fsize / 1024));
+          // The size of the file.
+          if (file >= 3072) {
+              alert(
+                "File too Big, please select a file less than 5mb");
+          } 
+          else{
+            
+            formik.setFieldValue('photo3',file1);
+            setreview({...myreview,file3: URL.createObjectURL(file1),photo3:file1});
+          }
+      
+  
+}
+
+const Filevalidation2 = (file1,name) => {
+  
+ 
+  // Check if any file is selected.
+  
+     
+
+          const fsize =file1.size;
+          const file = Math.round((fsize / 1024));
+          // The size of the file.
+          if (file >= 3072) {
+              alert(
+                "File too Big, please select a file less than 5mb");
+          } 
+          else{
+            
+            formik.setFieldValue('photo2',file1);
+            setreview({...myreview,file2: URL.createObjectURL(file1),photo2:file1});
+          }
+      
+  
+}
+
+const Filevalidation1 = (file1,name) => {
+  
+ 
+  // Check if any file is selected.
+  
+     
+
+          const fsize =file1.size;
+          const file = Math.round((fsize / 1024));
+          // The size of the file.
+          if (file >= 3072) {
+              alert(
+                "File too Big, please select a file less than 5mb");
+          } 
+          else{
+            
+            formik.setFieldValue('photo1',file1);
+            setreview({...myreview,file1: URL.createObjectURL(file1),photo1:file1});
+          }
+      
+  
+}
+
+
+  
+
   if(redirect==true)
   {
     return <Redirect to='/dashboard/recentbookings' />
@@ -222,23 +261,23 @@ function ReviewForm (props){
   }
 
   return (
+    <div className="formbgclass">
     <div className={classes.myclass}>
             <Backdrop className={classes.backdrop} open={loading}>
         <CircularProgress color="inherit" />
       </Backdrop>
         
+
+       
         <Grid
         container
         direction="column"
         justify="center"
         alignItems="center"
         >
+           <Paper elevation={5} className={classes.papernewclass}>
       <form onSubmit={formik.handleSubmit}>
-        <Grid item>
-          <Typography variant="h5" component="h3" className={classes.newclass}>
-            Room Feedback
-          </Typography>
-        </Grid>
+        
         <br />
 
       <Grid
@@ -255,9 +294,8 @@ function ReviewForm (props){
           <img src={myreview.file1} className={classes.imageclass}/>
           </Button>
         
-        <input type='file'  ref={hiddenFileInput1} style={{display:'none'}}  id='photo1' accept='image/png,image/jpeg,image/jpg' onChange={(event) => {
-  setreview({...myreview,file1: URL.createObjectURL(event.target.files[0])}); formik.setFieldValue('photo1',event.target.files[0]); formik.setFieldValue('input1',true)}}/> 
-        
+          <input type='file'  ref={hiddenFileInput1} style={{display:'none'}}  id='photo1' accept='image/png,image/jpeg,image/jpg' onChange={(event) => {
+          Filevalidation1(event.target.files[0]);}} />
         </Grid>
 
         <Grid item className={classes.imageclass}>
@@ -266,9 +304,8 @@ function ReviewForm (props){
           <img src={myreview.file2} className={classes.imageclass}/>
           </Button>
         
-        <input type='file'  ref={hiddenFileInput2} style={{display:'none'}}  id='photo2' accept='image/png,image/jpeg,image/jpg' onChange={(event) => {
-  setreview({...myreview,file2: URL.createObjectURL(event.target.files[0])});  formik.setFieldValue('photo2',event.target.files[0]);  formik.setFieldValue('input2',true)}}/> 
-        
+          <input type='file'  ref={hiddenFileInput2} style={{display:'none'}}  id='photo2' accept='image/png,image/jpeg,image/jpg' onChange={(event) => {
+  Filevalidation2(event.target.files[0]);}}/> 
         </Grid>
 
         <Grid item className={classes.imageclass}>
@@ -277,12 +314,12 @@ function ReviewForm (props){
           <img src={myreview.file3} className={classes.imageclass}/>
           </Button>
         
-        <input type='file'  ref={hiddenFileInput3} style={{display:'none'}}  id='photo3' accept='image/png,image/jpeg,image/jpg' onChange={(event) => {
-  setreview({...myreview,file3: URL.createObjectURL(event.target.files[0])});  formik.setFieldValue('photo3',event.target.files[0]);  formik.setFieldValue('input3',true)}}/> 
-        
+          <input type='file'  ref={hiddenFileInput3} style={{display:'none'}}  id='photo3' accept='image/png,image/jpeg,image/jpg' onChange={(event) => {
+  Filevalidation3(event.target.files[0]);}}/> 
         </Grid>
 
         </Grid>
+        <br />
 
         <Grid item>
         <Rating
@@ -351,7 +388,9 @@ function ReviewForm (props){
           Submit
         </Button>
       </form>
+      </Paper>
       </Grid>
+      </div> 
     </div>
   );
 }
