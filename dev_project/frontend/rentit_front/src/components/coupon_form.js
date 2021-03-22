@@ -65,7 +65,7 @@ const validationSchema = yup.object({
     myclass: {
      
       [theme.breakpoints.up('md')]: {
-        padding:'10%',
+        padding:'1%',
       },
      
   },
@@ -93,7 +93,23 @@ const validationSchema = yup.object({
     },
     textclass1:{
         float: 'left',
-    }
+    },
+    papernewclass:{
+      padding:20,
+      [theme.breakpoints.up('sm')]: {
+        padding:50,
+      },
+      [theme.breakpoints.up('lg')]: {
+        padding:50,
+        minWidth:600,
+      },
+     
+    },
+    form: {
+      width: '100%', // Fix IE 11 issue.
+      marginTop: theme.spacing(1),
+     
+    },
   }));
 
 function CouponForm (props){
@@ -338,7 +354,7 @@ const handleChange2 = (e,apartmentid,boolean) => {
 
 
   return (
-    <div className={classes.bgclass}>
+    <div className="formbgclass">
     
     <div className={classes.myclass}>
 
@@ -353,14 +369,18 @@ const handleChange2 = (e,apartmentid,boolean) => {
         justify="center"
         alignItems="center"
         >
-          <Paper elevation={5} className={classes.myclass1}>
+          <Paper elevation={5} className={classes.papernewclass}>
       <form onSubmit={formik.handleSubmit}>
         
        
         <br />
-        <Grid item>
+        
         <TextField
           multiline
+          variant="outlined"
+          margin="normal"
+          
+          fullWidth
           rows={1}
           id="coupoun_code"
           name="coupoun_code"
@@ -370,13 +390,12 @@ const handleChange2 = (e,apartmentid,boolean) => {
           error={formik.touched.coupoun_code && Boolean(formik.errors.coupoun_code)}
           helperText={formik.touched.coupoun_code && formik.errors.coupoun_code}
         />
-        </Grid>
-
+       
         <br />
         
         
-          <Grid item>
-        <FormControl className={classes.formControl}>
+         
+        <FormControl className={classes.form}>
         
             <InputLabel id="coupon_type">Coupon type</InputLabel>
             <Select
@@ -392,26 +411,22 @@ const handleChange2 = (e,apartmentid,boolean) => {
             <MenuItem value={'off_price'}>Reduce some money</MenuItem>
             </Select>
         </FormControl>
-      </Grid>
+        <br />
+      
    
 
         
-        <div><br /><Grid
-      container
-      direction="row"
-      justify="flex-start"
-      alignItems="center"
-      spacing={1}
-    >
-      
-      <Grid item>
+        <><br />
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
       Discount Amount 
         </Typography>
-      </Grid>
-        <Grid item>
+      
         <TextField
-          multiline
+           multiline
+           variant="outlined"
+           margin="normal"
+           
+           fullWidth
           rows={1}
           id="off"
           name="off"
@@ -422,25 +437,19 @@ const handleChange2 = (e,apartmentid,boolean) => {
           error={formik.touched.off && Boolean(formik.errors.off)}
           helperText={formik.touched.off && formik.errors.off}
         />
-        </Grid>
-  </Grid></div>
+       </>
 
-  <div><br /><Grid
-      container
-      direction="row"
-      justify="flex-start"
-      alignItems="center"
-      spacing={1}
-    >
-      
-      <Grid item>
+  <><br />
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
       Min price for discount to be applied
         </Typography>
-      </Grid>
-        <Grid item>
+    
         <TextField
-          multiline
+           multiline
+           variant="outlined"
+           margin="normal"
+           
+           fullWidth
           rows={1}
           id="min_price"
           name="min_price"
@@ -451,57 +460,30 @@ const handleChange2 = (e,apartmentid,boolean) => {
           error={formik.touched.min_price && Boolean(formik.errors.min_price)}
           helperText={formik.touched.min_price && formik.errors.min_price}
         />
-        </Grid>
-  </Grid></div>
+       </>
 
-  <div><br /><Grid
-      container
-      direction="row"
-      justify="flex-start"
-      alignItems="center"
-      spacing={1}
-    >
-      
-      <Grid item>
+  <><br />
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
       Valid from
         </Typography>
-      </Grid>
-        <Grid item>
-        <TextField
-          multiline
-          rows={1}
-          id="valid_from"
-          name="valid_from"
-          label="valid_from"
-          value={formik.values.valid_from}
-          error={formik.touched.valid_from && Boolean(formik.errors.valid_from)}
-          helperText={formik.touched.valid_from && formik.errors.valid_from}
-        />
-        </Grid>
-        <Grid item>
+      
+       
       <DateSelect value={formik.values.valid_from} setvalue={formik.setFieldValue} name={'valid_from'} />
-  </Grid>
-  </Grid></div>
+ </>
 
   
 
-  <div><br /><Grid
-      container
-      direction="row"
-      justify="flex-start"
-      alignItems="center"
-      spacing={1}
-    >
-      
-      <Grid item>
+  <><br />
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
       Max. discount amount
         </Typography>
-      </Grid>
-        <Grid item>
+     
         <TextField
           multiline
+          variant="outlined"
+          margin="normal"
+          
+          fullWidth
           rows={1}
           id="max_off_price"
           name="max_off_price"
@@ -512,29 +494,23 @@ const handleChange2 = (e,apartmentid,boolean) => {
           error={formik.touched.max_off_price && Boolean(formik.errors.max_off_price)}
           helperText={formik.touched.max_off_price && formik.errors.max_off_price}
         />
-        </Grid>
-  </Grid></div>
+       </>
 
         <br />
 
 
 
-        <div><br /><Grid
-      container
-      direction="row"
-      justify="flex-start"
-      alignItems="center"
-      spacing={1}
-    >
-      
-      <Grid item>
+        <><br />
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
       life (no. of days)
         </Typography>
-      </Grid>
-        <Grid item>
+     
         <TextField
-          multiline
+           multiline
+           variant="outlined"
+           margin="normal"
+           
+           fullWidth
           rows={1}
           id="life"
           name="life"
@@ -545,15 +521,13 @@ const handleChange2 = (e,apartmentid,boolean) => {
           error={formik.touched.life && Boolean(formik.errors.life)}
           helperText={formik.touched.life && formik.errors.life}
         />
-        </Grid>
-        
-  </Grid></div>
+      </>
 <br />
-  <Grid item>
+  
         <Typography variant="h6" color="textSecondary" >
       Rooms
         </Typography>
-        </Grid>
+       
           {
               myrooms.map((room) => (
                   <div>
@@ -564,7 +538,7 @@ const handleChange2 = (e,apartmentid,boolean) => {
         onChange={e => handleChange(e,room.room_id,formik.values.coupoun_rooms.includes(room.room_id))}
       />
      <Typography variant="body1" color="textSecondary" >
-      {room.room_id}
+      {room.title}
         </Typography>
 
                   </div>
@@ -572,11 +546,11 @@ const handleChange2 = (e,apartmentid,boolean) => {
           }
 
           <br />
-          <Grid item>
+         
           <Typography variant="h6" color="textSecondary" >
       Shops
         </Typography>
-        </Grid>
+       
         <br />
 
 {
@@ -589,18 +563,18 @@ const handleChange2 = (e,apartmentid,boolean) => {
         onChange={e => handleChange1(e,shop.shop_id,formik.values.coupoun_shops.indexOf(shop.shop_id)!==-1)}
       />
      <Typography variant="body1" color="textSecondary" >
-      {shop.shop_id}
+      {shop.title}
         </Typography>
 
         <br /></div>
               ))
           }
 
-<Grid item>
+
           <Typography variant="h6" color="textSecondary" >
       Apartment
         </Typography>
-        </Grid>
+      
         <br />
 
 {
@@ -613,7 +587,7 @@ const handleChange2 = (e,apartmentid,boolean) => {
         onChange={e => handleChange2(e,apartment.apartment_id,formik.values.coupoun_apartments.includes(apartment.apartment_id))}
       />
      <Typography variant="body1" color="textSecondary" >
-      {apartment.apartment_id}
+      {apartment.title}
         </Typography>
 
         <br /></div>
