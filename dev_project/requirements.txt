@@ -1,6 +1,5 @@
 amqp==5.0.5
 anyjson==0.3.3
-apache==0.0.1
 argon2-cffi==20.1.0
 asgiref==3.3.1
 astroid==2.4.2

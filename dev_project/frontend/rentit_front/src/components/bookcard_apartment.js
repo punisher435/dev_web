@@ -49,7 +49,7 @@ function BoolCard({details,isAuthenticated,loginpage,setloginpage,profile}) {
   const [no,setno] = React.useState(0)
   const [openme,setopenme] = React.useState(false)
   const [openme1,setopenme1] = React.useState(false)
-  const [gender,setgender] = React.useState(false)
+ 
   const [bookvalues,setbookvalues] = React.useState({
     price:'',
     date:'',
@@ -133,11 +133,6 @@ savings:details.price - details.final_price,monthsavings:details.price - details
 laundry:details.laundry
 });
 
-if(profile){
-    if(details.gender===profile.gender){setgender(true);}
-        else if(details.gender==='Any'){setgender(true);}
-        else if(details.gender==='Both Male and Female' && (profile.gender==='Female' || profile.gender==='Male')){setgender(true);}
-    }
 
   
   },[date,details,selectedDate,profile])
@@ -373,7 +368,7 @@ if(profile){
 
         </Box>
     {
-        !gender || details.pausebooking || !details.verified || booked ? <Button variant='contained' color="primary" fullWidth >
+         details.pausebooking || !details.verified || booked ? <Button variant='contained' color="primary" fullWidth >
         Unavaiable untill 1 day after {details.bookedtill}
       </Button> :   <Link style={{textDecoration:'none'}} to={{
     pathname: `/apartments/${details.apartment_id}/book`,
