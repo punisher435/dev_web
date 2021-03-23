@@ -210,6 +210,8 @@ function Bookingextend(props) {
                     TV:apartment.TV,
                   
                     house_refridgerator:apartment.house_refridgerator,
+
+                    laundry:apartment.laundry,
                     
                     purified_water:apartment.purified_water,
                     geyser:apartment.geyser,
@@ -387,7 +389,7 @@ function Bookingextend(props) {
       }
         catch{
           setcancelled(false);
-          seterror(true);
+          
         }
         
 

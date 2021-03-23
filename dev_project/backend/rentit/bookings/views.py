@@ -182,180 +182,184 @@ class room_booking(viewsets.ViewSet):
 
     
     def create(self,request,format=None):
+        try:
 
         
-        data = json.loads(request.body.decode('utf-8'))['data']
+            data = json.loads(request.body.decode('utf-8'))['data']
 
-        if request.user.is_seller == False:
+            if request.user.is_seller == False:
 
-            queryset = rooms.objects.all()
-            room = get_object_or_404(queryset,pk=data['roomid'])
+                queryset = rooms.objects.all()
+                room = get_object_or_404(queryset,pk=data['roomid'])
 
-            y = room.capacity-room.booked_by
-            if y<0:
-                y=0
-            book_date = datetime.date(data['year'], data['month'], data['date'])
-            d1 = book_date - datetime.timedelta(days=1)
-            
-            if room.book1!=None:
-                if d1>room.book1:
-                    y=y+1
-            if room.book2!=None:
-                if d1>room.book2:
-                    y=y+1
-            if room.book3!=None:
-                if d1>room.book3:
-                    y=y+1
-            if room.book4!=None:
-                if d1>room.book4:
-                    y=y+1
-            if room.book5!=None:
-                if d1>room.book5:
-                    y=y+1
-            if room.book6!=None:
-                if d1>room.book6:
-                    y=y+1
-            if room.book7!=None:
-                if d1>room.book7:
-                    y=y+1
-            if room.book8!=None:
-                if d1>room.book8:
-                    y=y+1
-            if room.book9!=None:
-                if d1>room.book9:
-                    y=y+1
-            if room.book10!=None:
-                if d1>room.book10:
-                    y=y+1
+                y = room.capacity-room.booked_by
+                if y<0:
+                    y=0
+                book_date = datetime.date(data['year'], data['month'], data['date'])
+                d1 = book_date - datetime.timedelta(days=1)
+                
+                if room.book1!=None:
+                    if d1>room.book1:
+                        y=y+1
+                if room.book2!=None:
+                    if d1>room.book2:
+                        y=y+1
+                if room.book3!=None:
+                    if d1>room.book3:
+                        y=y+1
+                if room.book4!=None:
+                    if d1>room.book4:
+                        y=y+1
+                if room.book5!=None:
+                    if d1>room.book5:
+                        y=y+1
+                if room.book6!=None:
+                    if d1>room.book6:
+                        y=y+1
+                if room.book7!=None:
+                    if d1>room.book7:
+                        y=y+1
+                if room.book8!=None:
+                    if d1>room.book8:
+                        y=y+1
+                if room.book9!=None:
+                    if d1>room.book9:
+                        y=y+1
+                if room.book10!=None:
+                    if d1>room.book10:
+                        y=y+1
 
-            
-            
-
-            
-            
-
-
-            if y>=data['capacity'] and book_date<=datetime.date.today()+datetime.timedelta(days=15) and room.pausebooking==False and room.removed==False:
+                
                 
 
-                x = room.final_price
-                seller_pay = room.seller_price
-                x = x + room.cost_electricity + room.cost_water
-                seller_pay = seller_pay + room.cost_electricity + room.cost_water
-                if data['wifi']:
-                    x=x+room.cost_wifi
-                    seller_pay=seller_pay+room.cost_wifi
-                if data['house_TV']:
-                    x=x+room.cost_TV
-                    seller_pay=seller_pay+room.cost_TV
-                if data['room_TV']:
-                    x=x+room.cost_roomTV
-                    seller_pay=seller_pay+room.cost_roomTV
-                if data['house_refridgerator']:
-                    x=x+room.cost_refridgerator
-                    seller_pay=seller_pay+room.cost_refridgerator
-                if data['room_refridgerator']:
-                    x=x+room.cost_roomrefridgerator
-                    seller_pay=seller_pay+room.cost_roomrefridgerator
-                if data['purified_water']:
-                    x=x+room.cost_purified_water
-                    seller_pay=seller_pay+room.cost_purified_water
-                if data['geyser']:
-                    x=x+room.cost_geyser
-                    seller_pay=seller_pay+room.cost_geyser
-                if data['AC']:
-                    x=x+room.cost_AC
-                    seller_pay=seller_pay+room.cost_AC
-                if data['cooler']:
-                    x=x+room.cost_cooler
-                    seller_pay=seller_pay+room.cost_cooler
-                if data['lunch']:
-                    x=x+room.cost_lunch
-                    seller_pay=seller_pay+room.cost_lunch
-                if data['breakfast']:
-                    x=x+room.cost_breakfast
-                    seller_pay=seller_pay+room.cost_breakfast
-                if data['dinner']:
-                    x=x+room.cost_dinner
-                    seller_pay=seller_pay+room.cost_dinner
-
-                price = x*data['duration']*data['capacity']
-                seller_pay = seller_pay*data['duration']*data['capacity']
-
-                temp_coupon = 'None'
+                
+                
 
 
-                if data['coupon']!='none':
+                if y>=data['capacity'] and book_date<=datetime.date.today()+datetime.timedelta(days=15) and room.pausebooking==False and room.removed==False:
+                    
 
-                    queryset = coupons.objects.all()
-                    try:
-                        coupon = get_object_or_404(queryset,pk=data['coupon'])
+                    x = room.final_price
+                    seller_pay = room.seller_price
+                    x = x + room.cost_electricity + room.cost_water
+                    seller_pay = seller_pay + room.cost_electricity + room.cost_water
+                    if data['wifi']:
+                        x=x+room.cost_wifi
+                        seller_pay=seller_pay+room.cost_wifi
+                    if data['house_TV']:
+                        x=x+room.cost_TV
+                        seller_pay=seller_pay+room.cost_TV
+                    if data['room_TV']:
+                        x=x+room.cost_roomTV
+                        seller_pay=seller_pay+room.cost_roomTV
+                    if data['house_refridgerator']:
+                        x=x+room.cost_refridgerator
+                        seller_pay=seller_pay+room.cost_refridgerator
+                    if data['room_refridgerator']:
+                        x=x+room.cost_roomrefridgerator
+                        seller_pay=seller_pay+room.cost_roomrefridgerator
+                    if data['purified_water']:
+                        x=x+room.cost_purified_water
+                        seller_pay=seller_pay+room.cost_purified_water
+                    if data['geyser']:
+                        x=x+room.cost_geyser
+                        seller_pay=seller_pay+room.cost_geyser
+                    if data['AC']:
+                        x=x+room.cost_AC
+                        seller_pay=seller_pay+room.cost_AC
+                    if data['cooler']:
+                        x=x+room.cost_cooler
+                        seller_pay=seller_pay+room.cost_cooler
+                    if data['lunch']:
+                        x=x+room.cost_lunch
+                        seller_pay=seller_pay+room.cost_lunch
+                    if data['breakfast']:
+                        x=x+room.cost_breakfast
+                        seller_pay=seller_pay+room.cost_breakfast
+                    if data['dinner']:
+                        x=x+room.cost_dinner
+                        seller_pay=seller_pay+room.cost_dinner
 
-                        if request.user not in coupon.used_by.all() and datetime.date.today()<=coupon.expiry_date and datetime.date.today()>=coupon.valid_from and room in coupon.coupoun_rooms.all():
-                            
-                            if price>=coupon.min_price:
+                    price = x*data['duration']*data['capacity']
+                    seller_pay = seller_pay*data['duration']*data['capacity']
 
-                                if coupon.coupon_type=='discount':
-                                    temp = (price*coupon.off)/100
+                    temp_coupon = 'None'
 
-                                    if coupon.max_off_price!=None:
-                                        if temp>coupon.max_off_price:
-                                            temp=coupon.max_off_price
-                                    
-                                    price = price - temp;
-                                    if coupon.admin_coupon == False:
-                                        seller_pay = seller_pay - temp;
 
-                                    data['savings'] = data['savings']+temp
-                                    data['discount'] = data['discount']+coupon.off
+                    if data['coupon']!='none':
 
-                                if coupon.coupon_type=='off_price':
+                        queryset = coupons.objects.all()
+                        try:
+                            coupon = get_object_or_404(queryset,pk=data['coupon'])
+
+                            if request.user not in coupon.used_by.all() and datetime.date.today()<=coupon.expiry_date and datetime.date.today()>=coupon.valid_from and room in coupon.coupoun_rooms.all():
                                 
-                                    price = price - coupon.off;
-                                    if coupon.admin_coupon == False:
-                                        seller_pay = seller_pay - coupon.off;
+                                if price>=coupon.min_price:
 
-                                    data['savings'] = data['savings']+coupon.off
+                                    if coupon.coupon_type=='discount':
+                                        temp = (price*coupon.off)/100
 
-                                coupon.used_by.add(request.user)
-                                temp_coupon = coupon.coupoun_code
-                                coupon.save()
-            
-                    except:
-                        return Response('Coupon not applicable',status=status.HTTP_400_BAD_REQUEST)
+                                        if coupon.max_off_price!=None:
+                                            if temp>coupon.max_off_price:
+                                                temp=coupon.max_off_price
+                                        
+                                        price = price - temp;
+                                        if coupon.admin_coupon == False:
+                                            seller_pay = seller_pay - temp;
+
+                                        data['savings'] = data['savings']+temp
+                                        data['discount'] = data['discount']+coupon.off
+
+                                    if coupon.coupon_type=='off_price':
+                                    
+                                        price = price - coupon.off;
+                                        if coupon.admin_coupon == False:
+                                            seller_pay = seller_pay - coupon.off;
+
+                                        data['savings'] = data['savings']+coupon.off
+
+                                    coupon.used_by.add(request.user)
+                                    temp_coupon = coupon.coupoun_code
+                                    coupon.save()
+                
+                        except:
+                            return Response('Coupon not applicable',status=status.HTTP_400_BAD_REQUEST)
 
 
+
+                        
+                    
+                    
+
+                    print('success')
+
+
+                    end_date = book_date + relativedelta(months=+data['duration'])  
+
+                    x = payment(price,room.currency[2:])
+
+
+                    booking = roomBookings(room_id=room,payment_id=x['id'],coupon=temp_coupon,room_name=room.title,customer_id=request.user,seller_id=room.seller_id,
+                        booked_from=book_date,booked_till=end_date,capacity=data['capacity'],duration=data['duration'],first_name=data['firstname'],last_name=data['lastname'],mobile=data['mobile'],alternate_mobile=data['alternate_mobile'],
+                        country_code=data['country_code'],wifi=data['wifi'],house_TV=data['house_TV'],room_TV=data['room_TV'],house_refridgerator=data['house_refridgerator'],room_refridgerator=data['room_refridgerator'],
+                        purified_water=data['purified_water'],geyser=data['geyser'],AC=data['AC'],cooler=data['cooler'],breakfast=data['breakfast'],lunch=data['lunch'],dinner=data['dinner'],currency=room.currency,
+                        savings=data['savings'],seller_pay=seller_pay,cost=room.price,paid=False,price_to_be_paid=price,discount=data['discount'])
+                        
+                    booking.save()
 
                     
-                
-                
 
-                print('success')
+                    serializer = roomBookingsSerializer(booking)                       
 
+                    return Response(serializer.data,status=status.HTTP_202_ACCEPTED)
 
-                end_date = book_date + relativedelta(months=+data['duration'])  
-
-                x = payment(price,room.currency[2:])
-
-
-                booking = roomBookings(room_id=room,payment_id=x['id'],coupon=temp_coupon,room_name=room.title,customer_id=request.user,seller_id=room.seller_id,
-                    booked_from=book_date,booked_till=end_date,capacity=data['capacity'],duration=data['duration'],first_name=data['firstname'],last_name=data['lastname'],mobile=data['mobile'],alternate_mobile=data['alternate_mobile'],
-                    country_code=data['country_code'],wifi=data['wifi'],house_TV=data['house_TV'],room_TV=data['room_TV'],house_refridgerator=data['house_refridgerator'],room_refridgerator=data['room_refridgerator'],
-                    purified_water=data['purified_water'],geyser=data['geyser'],AC=data['AC'],cooler=data['cooler'],breakfast=data['breakfast'],lunch=data['lunch'],dinner=data['dinner'],currency=room.currency,
-                    savings=data['savings'],seller_pay=seller_pay,cost=room.price,paid=False,price_to_be_paid=price,discount=data['discount'])
                     
-                booking.save()
-
-                
-
-                serializer = roomBookingsSerializer(booking)                       
-
-                return Response(serializer.data,status=status.HTTP_202_ACCEPTED)
-
-                
-            else:
-                print('no input2')
-                return Response('error',status=status.HTTP_400_BAD_REQUEST)
+                else:
+                    print('no input2')
+                    return Response('error',status=status.HTTP_400_BAD_REQUEST)
+            return Response('error',status=status.HTTP_400_BAD_REQUEST)
+        except:
+            return Response('error',status=status.HTTP_400_BAD_REQUEST)
 
             
        
@@ -688,7 +692,7 @@ class room_booking(viewsets.ViewSet):
                 else:
                     return Response('error',status=status.HTTP_400_BAD_REQUEST)
 
-            return Response(request.body,status=status.HTTP_202_ACCEPTED)
+            return Response(request.body,status=HTTP_400_BAD_REQUEST)
 
         except:
 
@@ -882,7 +886,7 @@ class shop_booking(viewsets.ViewSet):
                     print('no input2')
                     return Response('error',status=status.HTTP_400_BAD_REQUEST)
 
-            return Response(request.body,status=status.HTTP_202_ACCEPTED)
+            return Response(request.body,status=HTTP_400_BAD_REQUEST)
 
         except:
 
@@ -1113,7 +1117,7 @@ class shop_booking(viewsets.ViewSet):
                 else:
                     return Response('error',status=status.HTTP_400_BAD_REQUEST)
 
-            return Response(request.body,status=status.HTTP_202_ACCEPTED)
+            return Response(request.body,status=HTTP_400_BAD_REQUEST)
 
         except:
 
@@ -1319,7 +1323,7 @@ class apartment_booking(viewsets.ViewSet):
                     print('no input2')
                     return Response('error',status=status.HTTP_400_BAD_REQUEST)
 
-            return Response(request.body,status=status.HTTP_202_ACCEPTED)
+            return Response(request.body,status=status.HTTP_400_BAD_REQUEST)
 
         except:
 
@@ -1417,8 +1421,9 @@ class apartment_booking(viewsets.ViewSet):
     def update(self,request,pk=None):
 
         try:
-            
+        
             data = json.loads(request.body.decode('utf-8'))['data']
+            
             queryset = apartmentBookings.objects.all()
             queryset = queryset.filter(customer_id=request.user)
             queryset = queryset.filter(extended=False)
@@ -1434,7 +1439,7 @@ class apartment_booking(viewsets.ViewSet):
             data['country_code'] = booking.country_code 
             data['alternate_mobile'] = booking.alternate_mobile 
 
-           
+            
             if request.user.is_seller == False:
 
                 queryset = apartments.objects.all()
@@ -1461,7 +1466,7 @@ class apartment_booking(viewsets.ViewSet):
                     if data['TV']:
                         x=x+room.cost_TV
                         seller_pay=seller_pay+room.cost_TV
-                   
+                    
                     if data['purified_water']:
                         x=x+room.cost_purified_water
                         seller_pay=seller_pay+room.cost_purified_water
@@ -1477,14 +1482,14 @@ class apartment_booking(viewsets.ViewSet):
                     if data['laundry']:
                         x=x+room.cost_laundry
                         seller_pay=seller_pay+room.cost_laundry
-                  
+                    
                     if data['AC']:
                         x=x+room.cost_AC
                         seller_pay=seller_pay+room.cost_AC
                     if data['cooler']:
                         x=x+room.cost_cooler
                         seller_pay=seller_pay+room.cost_cooler
-                   
+                    
 
                     price = x*data['duration']
                     seller_pay = seller_pay*data['duration']
@@ -1543,11 +1548,13 @@ class apartment_booking(viewsets.ViewSet):
                         booked_from=book_date,booked_till=end_date,duration=data['duration'],first_name=data['firstname'],last_name=data['lastname'],mobile=data['mobile'],alternate_mobile=data['alternate_mobile'],
                         country_code=data['country_code'],wifi=data['wifi'],TV=data['TV'],house_refridgerator=data['house_refridgerator'],geyser=data['geyser'],laundry=data['laundry'],
                         purified_water=data['purified_water'],AC=data['AC'],cooler=data['cooler'],currency=room.currency,
-                        savings=data['savings'],paid=False,cost=room.price,seller_pay=seller_pay,price_to_be_paid=price,discount=data['discount'])
-
+                        savings=data['savings'],paid=False,seller_pay=seller_pay,cost=room.price,price_to_be_paid=price,discount=data['discount'])
+                        
                     booking_new.save()  
 
-                                             
+                
+
+                                                
 
                     booking.extended = True
 
@@ -1561,12 +1568,13 @@ class apartment_booking(viewsets.ViewSet):
                 else:
                     return Response('error',status=status.HTTP_400_BAD_REQUEST)
 
-            return Response(request.body,status=status.HTTP_202_ACCEPTED)
+            return Response(request.body,status=status.HTTP_400_BAD_REQUEST)
 
         except:
+            Response(request.body,status=status.HTTP_400_BAD_REQUEST)
 
-            print('no input')
-            return Response('error',status=status.HTTP_400_BAD_REQUEST)
+
+       
 
 
     def partial_update(self,request,pk=None):
