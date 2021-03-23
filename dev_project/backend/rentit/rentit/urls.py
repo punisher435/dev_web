@@ -73,6 +73,8 @@ urlpatterns = [
     path('sourcehdnaj2iu0qejwba9022qjadnba/',include('bookings.urls_manage')),
 
     path('sourcehdawnajk289uadhq/',include('bookings.urls_shop_bookings')),
+    path('sourcwjndqndoni3290902uruwhi2/',include('bookings.urls_manage_shop')),
+
     path('sourcensinejfcdajewcn29210/',include('bookings.urls_apartment_bookings')),
 
     #reviews

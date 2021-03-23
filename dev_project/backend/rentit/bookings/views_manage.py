@@ -284,3 +284,203 @@ class room_payment(viewsets.ViewSet):
 
 
 
+class shop_payment(viewsets.ViewSet):
+
+    authentication_classes = [authentication.JWTAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
+    parser_classes=(MultiPartParser,FormParser)
+
+
+    def update(self,request,pk=None):
+    
+        res = json.loads(request.data["response"])
+
+        ord_id = ""
+        raz_pay_id = ""
+        raz_signature = ""
+
+        for key in res.keys():
+            if key == 'razorpay_order_id':
+                ord_id = res[key]
+            elif key == 'razorpay_payment_id':
+                raz_pay_id = res[key]
+            elif key == 'razorpay_signature':
+                raz_signature = res[key]
+
+        data = {
+        'razorpay_order_id': ord_id,
+        'razorpay_payment_id': raz_pay_id,
+        'razorpay_signature': raz_signature
+        }
+
+        queryset = shopBookings.objects.all()
+        queryset = queryset.filter(customer_id = request.user)
+        booking = queryset.get(payment_id = ord_id)
+
+
+
+        room = get_object_or_404(shops.objects.all(),pk=booking.shop_id.shop_id)
+
+
+        client = razorpay.Client(auth=("rzp_test_pZY7nsJ2sz72Or","jWnoB4EKVm7j3nAngWEx9zaE"))
+
+        check = client.utility.verify_payment_signature(data)
+
+        if check is not None:
+            print("Redirect to error url or error page")
+            return Response({'error': 'Payment failed'},status=status.HTTP_400_BAD_REQUEST)
+
+        
+        #payment success 
+        booking.paid = True
+
+        seller_pay = booking.seller_pay
+
+        seller = get_object_or_404(seller_bank_details.objects.all(),pk=room.seller_id)
+
+        seller_pay = seller_pay - (seller_pay*seller.commission/100)
+
+        seller.total_due_payment = seller.total_due_payment+seller_pay
+
+        seller.save()
+
+        room.trust_points = room.trust_points + (10*booking.duration)
+
+        booking.save()
+
+        queryset = shopBookings.objects.all()
+        queryset = queryset.filter(shop_id = room)
+        queryset = queryset.filter(ended = False)
+        queryset = queryset.filter(cancelled = False)
+        queryset = queryset.filter(paid=True)
+        queryset = queryset.filter(extended=False)
+
+        list1=[]
+
+        for data1 in queryset:
+            list1.append(data1.booked_till)
+            
+
+
+        temp = len(list1)
+
+        if temp==0:
+            room.booked = False
+            room.bookedtill = datetime.date(2000,1,1)
+        else:
+            list1.sort(reverse=True)
+            room.booked = True
+            room.bookedtill = list1[0]
+
+        subject = 'Booking Confirmed'
+        message = 'Booking has been successfull made.'
+        email_send(subject,message,request.user,room.seller_id)
+
+        room.save()
+
+        return Response('Success',status=status.HTTP_202_ACCEPTED)
+
+
+
+
+
+
+class apartment_payment(viewsets.ViewSet):
+
+    authentication_classes = [authentication.JWTAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
+    parser_classes=(MultiPartParser,FormParser)
+
+
+    def update(self,request,pk=None):
+    
+        res = json.loads(request.data["response"])
+
+        ord_id = ""
+        raz_pay_id = ""
+        raz_signature = ""
+
+        for key in res.keys():
+            if key == 'razorpay_order_id':
+                ord_id = res[key]
+            elif key == 'razorpay_payment_id':
+                raz_pay_id = res[key]
+            elif key == 'razorpay_signature':
+                raz_signature = res[key]
+
+        data = {
+        'razorpay_order_id': ord_id,
+        'razorpay_payment_id': raz_pay_id,
+        'razorpay_signature': raz_signature
+        }
+
+        queryset = apartmentBookings.objects.all()
+        queryset = queryset.filter(customer_id = request.user)
+        booking = queryset.get(payment_id = ord_id)
+
+
+
+        room = get_object_or_404(shops.objects.all(),pk=booking.apartment_id.apartment_id)
+
+
+        client = razorpay.Client(auth=("rzp_test_pZY7nsJ2sz72Or","jWnoB4EKVm7j3nAngWEx9zaE"))
+
+        check = client.utility.verify_payment_signature(data)
+
+        if check is not None:
+            print("Redirect to error url or error page")
+            return Response({'error': 'Payment failed'},status=status.HTTP_400_BAD_REQUEST)
+
+        
+        #payment success 
+        booking.paid = True
+
+        seller_pay = booking.seller_pay
+
+        seller = get_object_or_404(seller_bank_details.objects.all(),pk=room.seller_id)
+
+        seller_pay = seller_pay - (seller_pay*seller.commission/100)
+
+        seller.total_due_payment = seller.total_due_payment+seller_pay
+
+        seller.save()
+
+        room.trust_points = room.trust_points + (10*booking.duration)
+
+        booking.save()
+
+        queryset = apartmentBookings.objects.all()
+        queryset = queryset.filter(apartment_id = room)
+        queryset = queryset.filter(ended = False)
+        queryset = queryset.filter(cancelled = False)
+        queryset = queryset.filter(paid=True)
+        queryset = queryset.filter(extended=False)
+
+        list1=[]
+
+        for data1 in queryset:
+            list1.append(data1.booked_till)
+            
+
+
+        temp = len(list1)
+
+        if temp==0:
+            room.booked = False
+            room.bookedtill = datetime.date(2000,1,1)
+        else:
+            list1.sort(reverse=True)
+            room.booked = True
+            room.bookedtill = list1[0]
+
+        subject = 'Booking Confirmed'
+        message = 'Booking has been successfull made.'
+        email_send(subject,message,request.user,room.seller_id)
+
+        room.save()
+
+        return Response('Success',status=status.HTTP_202_ACCEPTED)
+
+
+
+

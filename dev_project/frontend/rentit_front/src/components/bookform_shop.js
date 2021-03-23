@@ -213,6 +213,40 @@ function Checkout(props) {
   ,[props.location.state.property_id,props.profile])
 
 
+
+  const handlePaymentSuccess = async (response) => {
+    try {
+      console.log(response)
+      let bodyData = new FormData();
+
+      // we will send the response we've got from razorpay to the backend to validate the payment
+      bodyData.append("response", JSON.stringify(response));
+
+      await axios({
+        url: `${process.env.REACT_APP_API_URL}/sourcehdnaj2iu0qejwba9022qjadnba/room/book/payment/1/`,
+        method: "PUT",
+        data: bodyData,
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          'Authorization': `JWT ${localStorage.getItem('access')}`,
+        },
+      })
+        .then((res) => {
+          setopen(false)
+            setActiveStep(activeStep + 1);
+            setvalidationerror(false);
+          
+        })
+        .catch((err) => {
+          setopen(true)
+          console.log(err);
+        });
+    } catch (error) {
+      console.log(console.error());
+    }
+  };
+
   const handleNext = () => {
     if(bookdetails.firstname==='' || bookdetails.lastname==='' || bookdetails.mobile.length <10 || bookdetails.country_code==='')
     {

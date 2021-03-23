@@ -150,6 +150,8 @@ class room_booking(viewsets.ViewSet):
             else:
                 queryset = queryset.filter(customer_id = request.user)
 
+            queryset = queryset.filter(paid = True)
+
             serializer = roomBookingsSerializer(queryset,context={'request':request},many=True)
             return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
 
@@ -166,6 +168,8 @@ class room_booking(viewsets.ViewSet):
                 queryset = queryset.filter(seller_id = request.user)
             else:
                 queryset = queryset.filter(customer_id = request.user)
+
+            queryset = queryset.filter(paid = True)
                 
             booking = get_object_or_404(queryset,pk=pk)
 
@@ -736,6 +740,8 @@ class shop_booking(viewsets.ViewSet):
             else:
                 queryset = queryset.filter(customer_id = request.user)
 
+            queryset = queryset.filter(paid = True)
+
             serializer = shopBookingsSerializer(queryset,context={'request':request},many=True)
             return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
 
@@ -752,6 +758,8 @@ class shop_booking(viewsets.ViewSet):
                 queryset = queryset.filter(seller_id = request.user)
             else:
                 queryset = queryset.filter(customer_id = request.user)
+
+            queryset = queryset.filter(paid = True)
                 
             booking = get_object_or_404(queryset,pk=pk)
 
@@ -852,48 +860,24 @@ class shop_booking(viewsets.ViewSet):
                             return Response('Coupon not applicable',status=status.HTTP_400_BAD_REQUEST)
 
 
+        
+                    end_date = book_date + relativedelta(months=+data['duration'])  
 
-                        
-                    x = payment()
+                    x = payment(price,room.currency[2:])
 
-                    if x == 'payment successful':
+                    booking = shopBookings(shop_id=room,payment_id=x['id'],coupon=temp_coupon,shop_name=room.title,customer_id=request.user,seller_id=room.seller_id,
+                    booked_from=book_date,booked_till=end_date,duration=data['duration'],first_name=data['firstname'],last_name=data['lastname'],mobile=data['mobile'],alternate_mobile=data['alternate_mobile'],
+                    country_code=data['country_code'],wifi=data['wifi'],TV=data['TV'],
+                    purified_water=data['purified_water'],AC=data['AC'],cooler=data['cooler'],currency=room.currency,
+                    savings=data['savings'],paid=False,seller_pay=seller_pay,cost=room.price,price_to_be_paid=price,discount=data['discount'])
+                    
+                    booking.save()
+                    
+                    serializer = shopBookingsSerializer(booking)
 
+                    return Response(serializer.data,status=status.HTTP_202_ACCEPTED)
 
-                        seller = get_object_or_404(seller_bank_details.objects.all(),pk=room.seller_id)
-
-                        seller_pay = seller_pay - (seller_pay*seller.commission/100)
-
-                        seller.total_due_payment = seller.total_due_payment+seller_pay
-
-                        seller.save()
-
-                        print('success')
-
-                        end_date = book_date + relativedelta(months=+data['duration'])  
-
-                        booking = shopBookings(shop_id=room,coupon=temp_coupon,shop_name=room.title,customer_id=request.user,seller_id=room.seller_id,
-                        booked_from=book_date,booked_till=end_date,duration=data['duration'],first_name=data['firstname'],last_name=data['lastname'],mobile=data['mobile'],alternate_mobile=data['alternate_mobile'],
-                        country_code=data['country_code'],wifi=data['wifi'],TV=data['TV'],
-                        purified_water=data['purified_water'],AC=data['AC'],cooler=data['cooler'],currency=room.currency,
-                        savings=data['savings'],seller_pay=seller_pay,cost=room.price,price_to_be_paid=price,discount=data['discount'])
-                        
-                        booking.save()
-                        
-                        room.trust_points = room.trust_points + 10*int(data['duration'])
-
-                        room.booked = True
-                        room.bookedtill = end_date
-
-                        subject = 'Booking Confirmed'
-                        message = 'Booking has been successfull made.'
-                        email_send(subject,message,request.user,room.seller_id)
-                        room.save() 
-
-                        return Response('Success',status=status.HTTP_202_ACCEPTED)
-
-                    else:
-                        print('no input1')
-                        return Response('Payment failed',status=status.HTTP_400_BAD_REQUEST)
+                   
                 else:
                     print('no input2')
                     return Response('error',status=status.HTTP_400_BAD_REQUEST)
@@ -915,6 +899,7 @@ class shop_booking(viewsets.ViewSet):
             queryset = queryset.filter(customer_id = request.user)
             queryset = queryset.filter(extended=False)
             queryset = queryset.filter(ended=False)
+            queryset = queryset.filter(paid=True)
             booking = get_object_or_404(queryset,pk=pk)
 
             booking.cancelled=True
@@ -964,6 +949,7 @@ class shop_booking(viewsets.ViewSet):
             queryset = queryset.filter(shop_id = room)
             queryset = queryset.filter(ended = False)
             queryset = queryset.filter(cancelled = False)
+            queryset = queryset.filter(paid=True)
             queryset = queryset.filter(extended=False)
 
             list1=[]
@@ -1096,68 +1082,34 @@ class shop_booking(viewsets.ViewSet):
                             return Response('Coupon not applicable',status=status.HTTP_400_BAD_REQUEST)
 
                         
-                    x = payment()
+                    
+                    print('payment')
 
-                    if x == 'payment successful':
-                        print('payment')
+                    end_date = book_date + relativedelta(months=+data['duration'])  
 
-                        end_date = book_date + relativedelta(months=+data['duration'])  
+                    x = payment(price,room.currency[2:])
 
-                        booking_new = shopBookings(shop_id=room,extended_on=booking,is_extended=True,coupon=temp_coupon,shop_name=room.title,customer_id=request.user,seller_id=room.seller_id,
-                            booked_from=book_date,booked_till=end_date,duration=data['duration'],first_name=data['firstname'],last_name=data['lastname'],mobile=data['mobile'],alternate_mobile=data['alternate_mobile'],
-                            country_code=data['country_code'],wifi=data['wifi'],TV=data['TV'],
-                            purified_water=data['purified_water'],AC=data['AC'],cooler=data['cooler'],currency=room.currency,
-                            savings=data['savings'],cost=room.price,seller_pay=seller_pay,price_to_be_paid=price,discount=data['discount'])
+                    booking_new = shopBookings(shop_id=room,payment_id=x['id'],extended_on=booking,is_extended=True,coupon=temp_coupon,shop_name=room.title,customer_id=request.user,seller_id=room.seller_id,
+                        booked_from=book_date,booked_till=end_date,duration=data['duration'],first_name=data['firstname'],last_name=data['lastname'],mobile=data['mobile'],alternate_mobile=data['alternate_mobile'],
+                        country_code=data['country_code'],wifi=data['wifi'],TV=data['TV'],
+                        purified_water=data['purified_water'],AC=data['AC'],cooler=data['cooler'],currency=room.currency,
+                        savings=data['savings'],paid=False,cost=room.price,seller_pay=seller_pay,price_to_be_paid=price,discount=data['discount'])
 
-                        booking_new.save()  
+                    booking_new.save()  
 
-                        room.trust_points = room.trust_points + 10*int(data['duration'])                          
+                    room.trust_points = room.trust_points + 10*int(data['duration'])                          
 
-                        booking.extended = True
+                    booking.extended = True
 
-                        booking.save()
-
-                        seller = get_object_or_404(seller_bank_details.objects.all(),pk=room.seller_id)
-
-                        seller_pay = seller_pay - (seller_pay*seller.commission/100)
-
-                        seller.total_due_payment = seller.total_due_payment+seller_pay
-
-                        seller.save()
-
-                        subject = 'Booking Extended'
-                        message = 'Booking has been successfull extended.'
-                        email_send(subject,message,request.user,room.seller_id)
-
-                        queryset = shopBookings.objects.all()
-                        queryset = queryset.filter(shop_id = room)
-                        queryset = queryset.filter(ended = False)
-                        queryset = queryset.filter(cancelled = False)
-                        queryset = queryset.filter(extended = False)
-
-                        list1=[]
-
-                        for data1 in queryset:
-                            list1.append(data1.booked_till)
-
-                        temp = len(list1)
-
-                        if temp==0:
-                            room.booked = False
-                            room.bookedtill = datetime.date(2000,1,1)
-                        else:
-                            list1.sort(reverse=True)
-                            room.booked = True
-                            room.bookedtill = list1[0]
-
-                        room.save()
+                    booking.save()
 
 
 
-                        return Response('Success',status=status.HTTP_202_ACCEPTED)
+                    serializer = shopBookingsSerializer(booking_new)
 
-                    else:
-                        return Response('Payment failed',status=status.HTTP_400_BAD_REQUEST)
+                    return Response(serializer.data,status=status.HTTP_202_ACCEPTED)
+
+                   
                 else:
                     return Response('error',status=status.HTTP_400_BAD_REQUEST)
 
@@ -1175,6 +1127,7 @@ class shop_booking(viewsets.ViewSet):
             data = json.loads(request.body.decode('utf-8'))['data']
             queryset = shopBookings.objects.all()
             queryset = queryset.filter(customer_id = request.user)
+            queryset = queryset.filter(paid = True)
             booking = get_object_or_404(queryset,pk=pk)
 
             booking.cancellation_reason = data['reason']
@@ -1212,6 +1165,7 @@ class apartment_booking(viewsets.ViewSet):
                 queryset = queryset.filter(seller_id = request.user)
             else:
                 queryset = queryset.filter(customer_id = request.user)
+            queryset = queryset.filter(paid = True)
 
             serializer = apartmentBookingsSerializer(queryset,context={'request':request},many=True)
             return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
@@ -1229,6 +1183,7 @@ class apartment_booking(viewsets.ViewSet):
                 queryset = queryset.filter(seller_id = request.user)
             else:
                 queryset = queryset.filter(customer_id = request.user)
+            queryset = queryset.filter(paid = True)
                 
             booking = get_object_or_404(queryset,pk=pk)
 
@@ -1341,48 +1296,25 @@ class apartment_booking(viewsets.ViewSet):
                             return Response('Coupon not applicable',status=status.HTTP_400_BAD_REQUEST)
 
 
+ 
 
-                        
-                    x = payment()
+                    end_date = book_date + relativedelta(months=+data['duration'])  
 
-                    if x == 'payment successful':
+                    x = payment(price,room.currency[2:])
 
+                    booking = apartmentBookings(apartment_id=room,payment_id=x['id'],coupon=temp_coupon,apartment_name=room.title,customer_id=request.user,seller_id=room.seller_id,
+                    booked_from=book_date,booked_till=end_date,duration=data['duration'],first_name=data['firstname'],last_name=data['lastname'],mobile=data['mobile'],alternate_mobile=data['alternate_mobile'],
+                    country_code=data['country_code'],wifi=data['wifi'],TV=data['TV'],house_refridgerator=data['house_refridgerator'],geyser=data['geyser'],laundry=data['laundry'],
+                    purified_water=data['purified_water'],AC=data['AC'],cooler=data['cooler'],currency=room.currency,
+                    savings=data['savings'],paid=False,seller_pay=seller_pay,cost=room.price,price_to_be_paid=price,discount=data['discount'])
+                    
+                    booking.save()
+                    
+                    serializer = apartmentBookingsSerializer(booking)
 
-                        seller = get_object_or_404(seller_bank_details.objects.all(),pk=room.seller_id)
+                    return Response(serializer.data,status=status.HTTP_202_ACCEPTED)
 
-                        seller_pay = seller_pay - (seller_pay*seller.commission/100)
-
-                        seller.total_due_payment = seller.total_due_payment+seller_pay
-
-                        seller.save()
-
-                        print('success')
-
-                        end_date = book_date + relativedelta(months=+data['duration'])  
-
-                        booking = apartmentBookings(apartment_id=room,coupon=temp_coupon,apartment_name=room.title,customer_id=request.user,seller_id=room.seller_id,
-                        booked_from=book_date,booked_till=end_date,duration=data['duration'],first_name=data['firstname'],last_name=data['lastname'],mobile=data['mobile'],alternate_mobile=data['alternate_mobile'],
-                        country_code=data['country_code'],wifi=data['wifi'],TV=data['TV'],house_refridgerator=data['house_refridgerator'],geyser=data['geyser'],laundry=data['laundry'],
-                        purified_water=data['purified_water'],AC=data['AC'],cooler=data['cooler'],currency=room.currency,
-                        savings=data['savings'],seller_pay=seller_pay,cost=room.price,price_to_be_paid=price,discount=data['discount'])
-                        
-                        booking.save()
-                        
-                        room.trust_points = room.trust_points + 10*int(data['duration'])
-
-                        room.booked = True
-                        room.bookedtill = end_date
-
-                        subject = 'Booking Confirmed'
-                        message = 'Booking has been successfull made.'
-                        email_send(subject,message,request.user,room.seller_id)
-                        room.save() 
-
-                        return Response('Success',status=status.HTTP_202_ACCEPTED)
-
-                    else:
-                        print('no input1')
-                        return Response('Payment failed',status=status.HTTP_400_BAD_REQUEST)
+                   
                 else:
                     print('no input2')
                     return Response('error',status=status.HTTP_400_BAD_REQUEST)
@@ -1405,6 +1337,7 @@ class apartment_booking(viewsets.ViewSet):
             queryset = queryset.filter(customer_id = request.user)
             queryset = queryset.filter(extended=False)
             queryset = queryset.filter(ended=False)
+            queryset = queryset.filter(paid=True)
             booking = get_object_or_404(queryset,pk=pk)
 
             booking.cancelled=True
@@ -1453,6 +1386,7 @@ class apartment_booking(viewsets.ViewSet):
             queryset = apartmentBookings.objects.all()
             queryset = queryset.filter(apartment_id = room)
             queryset = queryset.filter(ended = False)
+            queryset = queryset.filter(paid=True)
             queryset = queryset.filter(cancelled = False)
             queryset = queryset.filter(extended=False)
 
@@ -1488,6 +1422,7 @@ class apartment_booking(viewsets.ViewSet):
             queryset = apartmentBookings.objects.all()
             queryset = queryset.filter(customer_id=request.user)
             queryset = queryset.filter(extended=False)
+            queryset = queryset.filter(paid=True)
             queryset = queryset.filter(ended=False)
             queryset = queryset.filter(cancelled=False)
             booking = get_object_or_404(queryset,pk=pk)
@@ -1598,68 +1533,31 @@ class apartment_booking(viewsets.ViewSet):
                             return Response('Coupon not applicable',status=status.HTTP_400_BAD_REQUEST)
 
                         
-                    x = payment()
+                    
 
-                    if x == 'payment successful':
-                        print('payment')
+                    end_date = book_date + relativedelta(months=+data['duration'])  
 
-                        end_date = book_date + relativedelta(months=+data['duration'])  
+                    x = payment(price,room.currency[2:])
 
-                        booking_new = apartmentBookings(apartment_id=room,extended_on=booking,is_extended=True,coupon=temp_coupon,apartment_name=room.title,customer_id=request.user,seller_id=room.seller_id,
-                            booked_from=book_date,booked_till=end_date,duration=data['duration'],first_name=data['firstname'],last_name=data['lastname'],mobile=data['mobile'],alternate_mobile=data['alternate_mobile'],
-                            country_code=data['country_code'],wifi=data['wifi'],TV=data['TV'],house_refridgerator=data['house_refridgerator'],geyser=data['geyser'],laundry=data['laundry'],
-                            purified_water=data['purified_water'],AC=data['AC'],cooler=data['cooler'],currency=room.currency,
-                            savings=data['savings'],cost=room.price,seller_pay=seller_pay,price_to_be_paid=price,discount=data['discount'])
+                    booking_new = apartmentBookings(apartment_id=room,payment_id=x['id'],extended_on=booking,is_extended=True,coupon=temp_coupon,apartment_name=room.title,customer_id=request.user,seller_id=room.seller_id,
+                        booked_from=book_date,booked_till=end_date,duration=data['duration'],first_name=data['firstname'],last_name=data['lastname'],mobile=data['mobile'],alternate_mobile=data['alternate_mobile'],
+                        country_code=data['country_code'],wifi=data['wifi'],TV=data['TV'],house_refridgerator=data['house_refridgerator'],geyser=data['geyser'],laundry=data['laundry'],
+                        purified_water=data['purified_water'],AC=data['AC'],cooler=data['cooler'],currency=room.currency,
+                        savings=data['savings'],paid=False,cost=room.price,seller_pay=seller_pay,price_to_be_paid=price,discount=data['discount'])
 
-                        booking_new.save()  
+                    booking_new.save()  
 
-                        room.trust_points = room.trust_points + 10*int(data['duration'])                          
+                    room.trust_points = room.trust_points + 10*int(data['duration'])                          
 
-                        booking.extended = True
+                    booking.extended = True
 
-                        booking.save()
+                    booking.save()
 
-                        seller = get_object_or_404(seller_bank_details.objects.all(),pk=room.seller_id)
+                    serializer = apartmentBookingsSerializer(booking_new)
 
-                        seller_pay = seller_pay - (seller_pay*seller.commission/100)
+                    return Response(serializer.data,status=status.HTTP_202_ACCEPTED)
 
-                        seller.total_due_payment = seller.total_due_payment+seller_pay
-
-                        seller.save()
-
-                        subject = 'Booking Extended'
-                        message = 'Booking has been successfull extended.'
-                        email_send(subject,message,request.user,room.seller_id)
-
-                        queryset = apartmentBookings.objects.all()
-                        queryset = queryset.filter(apartment_id = room)
-                        queryset = queryset.filter(ended = False)
-                        queryset = queryset.filter(cancelled = False)
-                        queryset = queryset.filter(extended = False)
-
-                        list1=[]
-
-                        for data1 in queryset:
-                            list1.append(data1.booked_till)
-
-                        temp = len(list1)
-
-                        if temp==0:
-                            room.booked = False
-                            room.bookedtill = datetime.date(2000,1,1)
-                        else:
-                            list1.sort(reverse=True)
-                            room.booked = True
-                            room.bookedtill = list1[0]
-
-                        room.save()
-
-
-
-                        return Response('Success',status=status.HTTP_202_ACCEPTED)
-
-                    else:
-                        return Response('Payment failed',status=status.HTTP_400_BAD_REQUEST)
+                    
                 else:
                     return Response('error',status=status.HTTP_400_BAD_REQUEST)
 
@@ -1677,6 +1575,7 @@ class apartment_booking(viewsets.ViewSet):
             data = json.loads(request.body.decode('utf-8'))['data']
             queryset = apartmentBookings.objects.all()
             queryset = queryset.filter(customer_id = request.user)
+            queryset = queryset.filter(paid=True)
             booking = get_object_or_404(queryset,pk=pk)
 
             booking.cancellation_reason = data['reason']
