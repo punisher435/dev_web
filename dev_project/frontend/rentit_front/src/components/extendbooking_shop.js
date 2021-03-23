@@ -372,7 +372,7 @@ function Bookingextend(props) {
             address: "Razorpay Corporate Office",
           },
           theme: {
-            color: "#3399cc",
+            color: "#528FF0",
           },
         };
         
