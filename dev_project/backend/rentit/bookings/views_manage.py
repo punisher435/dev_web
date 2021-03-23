@@ -420,7 +420,7 @@ class apartment_payment(viewsets.ViewSet):
 
 
 
-        room = get_object_or_404(shops.objects.all(),pk=booking.apartment_id.apartment_id)
+        room = get_object_or_404(apartments.objects.all(),pk=booking.apartment_id.apartment_id)
 
 
         client = razorpay.Client(auth=("rzp_test_pZY7nsJ2sz72Or","jWnoB4EKVm7j3nAngWEx9zaE"))
