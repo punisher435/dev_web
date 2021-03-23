@@ -13,8 +13,16 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 import os
 from datetime import timedelta
+
+import environ
+# Initialise environment variables
+env = environ.Env()
+environ.Env.read_env()
+
 from . import settings
 from celery.schedules import crontab
+
+
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.

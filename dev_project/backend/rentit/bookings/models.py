@@ -63,6 +63,8 @@ class roomBookings(models.Model):
     breakfast = models.BooleanField()
     lunch = models.BooleanField()
     dinner = models.BooleanField()
+    
+    payment_id = models.CharField(max_length=255)
 
     currency=models.CharField(max_length=255)
     savings = models.IntegerField()
@@ -156,6 +158,8 @@ class shopBookings(models.Model):
    
     AC = models.BooleanField()
     cooler = models.BooleanField()
+
+    payment_id = models.CharField(max_length=255)
     
     currency=models.CharField(max_length=255)
     savings = models.IntegerField()
@@ -245,6 +249,8 @@ class apartmentBookings(models.Model):
     cooler = models.BooleanField()
     
     laundry = models.BooleanField()
+
+    payment_id = models.CharField(max_length=255)
 
     currency=models.CharField(max_length=255)
     savings = models.IntegerField()

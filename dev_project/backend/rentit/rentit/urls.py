@@ -70,6 +70,8 @@ urlpatterns = [
 
     #bookings
     path('sourcehjbda983290whjba/',include('bookings.urls')),
+    path('sourcehdnaj2iu0qejwba9022qjadnba/',include('bookings.urls_manage')),
+
     path('sourcehdawnajk289uadhq/',include('bookings.urls_shop_bookings')),
     path('sourcensinejfcdajewcn29210/',include('bookings.urls_apartment_bookings')),
 
