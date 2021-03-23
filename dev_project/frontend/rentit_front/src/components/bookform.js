@@ -298,11 +298,7 @@ function Checkout(props) {
           
           
           
-          if(res.data==='Success'){
-            setopen(false)
-            setActiveStep(activeStep + 1);
-            setvalidationerror(false);
-          }
+          
 
           var options = {
             key_id: process.env.REACT_APP_RAZORPAY_API_KEY, // in react your environment variable must start with REACT_APP_
@@ -337,7 +333,8 @@ function Checkout(props) {
 
           }
           catch{
-            
+            setopen(false)
+            setActiveStep(5);
             
           }
           

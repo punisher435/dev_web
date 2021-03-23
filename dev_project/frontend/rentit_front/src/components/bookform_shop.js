@@ -138,6 +138,7 @@ function Checkout(props) {
 
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
+  const [myprofile,setmyprofile] = React.useState()
 
  
   const handleBack = () => {
@@ -160,7 +161,7 @@ function Checkout(props) {
           if(props.profile)
           {
             const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcezxradakgdlh/profile/${props.profile.id}/`,config);
-           
+            setmyprofile(res.data)
             var temp = value.coupon
             if(value.coupon==='')
             {
@@ -213,6 +214,11 @@ function Checkout(props) {
   ,[props.location.state.property_id,props.profile])
 
 
+  const loadScript = () => {
+    const script = document.createElement("script");
+    script.src = "https://checkout.razorpay.com/v1/checkout.js";
+    document.body.appendChild(script);
+  };
 
   const handlePaymentSuccess = async (response) => {
     try {
@@ -223,7 +229,7 @@ function Checkout(props) {
       bodyData.append("response", JSON.stringify(response));
 
       await axios({
-        url: `${process.env.REACT_APP_API_URL}/sourcehdnaj2iu0qejwba9022qjadnba/room/book/payment/1/`,
+        url: `${process.env.REACT_APP_API_URL}/sourcwjndqndoni3290902uruwhi2/shop/book/payment/1/`,
         method: "PUT",
         data: bodyData,
         headers: {
@@ -247,7 +253,7 @@ function Checkout(props) {
     }
   };
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if(bookdetails.firstname==='' || bookdetails.lastname==='' || bookdetails.mobile.length <10 || bookdetails.country_code==='')
     {
      
@@ -258,6 +264,10 @@ function Checkout(props) {
       if(activeStep===steps.length-1)
       {
         console.log('done')
+
+        const res = await loadScript();
+
+        var data = '';
 
 
         const bookfunc = async () => {
@@ -273,15 +283,41 @@ function Checkout(props) {
           }
           setopen(true);
           try{const res = await axios.post(`${process.env.REACT_APP_API_URL}/sourcehdawnajk289uadhq/shop/book/`,body,config);
-          if(res.data==='Success'){
-            setopen(false)
-            setActiveStep(activeStep + 1);
-            setvalidationerror(false);
-          }
-          else{
-            setopen(false)
-            setActiveStep(5);
-          }}
+          data = res;
+
+
+          var options = {
+            key_id: process.env.REACT_APP_RAZORPAY_API_KEY, // in react your environment variable must start with REACT_APP_
+            key_secret: process.env.REACT_APP_RAZORPAY_KEY_SECRET,
+            amount: data.data.price_to_be_paid,
+            currency: bookdetails.currency.slice(2,),
+            name: "Org. Name",
+            description: "Test teansaction",
+            image: "", // add image url
+            order_id: data.data.payment_id,
+            handler: function (response) {
+              // we will handle success by calling handlePaymentSuccess method and
+              // will pass the response that we've got from razorpay
+              handlePaymentSuccess(response);
+            },
+            prefill: {
+              name: props.profile.first_name + " " + props.profile.last_name,
+              email:props.profile.email ,
+              contact: myprofile.mobile,
+            },
+            notes: {
+              address: "Razorpay Corporate Office",
+            },
+            theme: {
+              color: "#3399cc",
+            },
+          };
+         
+      
+          var rzp1 = new window.Razorpay(options);
+          rzp1.open();
+         
+        }
           catch{
             setopen(false)
             setActiveStep(5);
