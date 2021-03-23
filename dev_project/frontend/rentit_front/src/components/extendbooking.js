@@ -405,8 +405,9 @@ if(x<bookdetails.capacity)
             
           })
           .catch((err) => {
+            setcancelled(false);
             seterror(true);
-            console.log(err);
+            setredirect(true)
           });
       } catch (error) {
         seterror(true);

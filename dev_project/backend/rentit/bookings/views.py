@@ -1097,7 +1097,7 @@ class shop_booking(viewsets.ViewSet):
 
                     booking_new.save()  
 
-                    room.trust_points = room.trust_points + 10*int(data['duration'])                          
+                                              
 
                     booking.extended = True
 
@@ -1547,7 +1547,7 @@ class apartment_booking(viewsets.ViewSet):
 
                     booking_new.save()  
 
-                    room.trust_points = room.trust_points + 10*int(data['duration'])                          
+                                             
 
                     booking.extended = True
 

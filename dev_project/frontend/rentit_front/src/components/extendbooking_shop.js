@@ -274,8 +274,56 @@ function Bookingextend(props) {
 
     const classes = useStyles();
 
+
+    const loadScript = () => {
+      const script = document.createElement("script");
+      script.src = "https://checkout.razorpay.com/v1/checkout.js";
+      document.body.appendChild(script);
+    };
+  
+    const handlePaymentSuccess = async (response) => {
+      try {
+        console.log(response)
+        let bodyData = new FormData();
+  
+        // we will send the response we've got from razorpay to the backend to validate the payment
+        bodyData.append("response", JSON.stringify(response));
+  
+        await axios({
+          url: `${process.env.REACT_APP_API_URL}/sourcwjndqndoni3290902uruwhi2/shop/book/payment/1/`,
+          method: "PUT",
+          data: bodyData,
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            'Authorization': `JWT ${localStorage.getItem('access')}`,
+          },
+        })
+          .then((res) => {
+            setcancelled(false);
+            setredirect(true)
+            
+          })
+          .catch((err) => {
+            setcancelled(false);
+            seterror(true);
+            setredirect(true)
+          });
+      } catch (error) {
+        seterror(true);
+      }
+           
+      
+    };
+
+
+
     const handleclick1 = async (e) => {
       e.preventDefault();
+
+      const res = await loadScript();
+      var data = '';
+
       if(bookdetails.coupon=='')
       {
         setbookdetails({...bookdetails,coupon:'none'})
@@ -299,8 +347,38 @@ function Bookingextend(props) {
         try{const res = await axios.put(`${process.env.REACT_APP_API_URL}/sourcehdawnajk289uadhq/shop/book/${bookingid}/`,body,config);
         
 
-        setredirect(true)
-        setcancelled(false);
+        data = res;
+        
+        var options = {
+          key_id: process.env.REACT_APP_RAZORPAY_API_KEY, // in react your environment variable must start with REACT_APP_
+          key_secret: process.env.REACT_APP_RAZORPAY_KEY_SECRET,
+          amount: data.data.price_to_be_paid,
+          currency: bookdetails.currency.slice(2,),
+          name: "Org. Name",
+          description: "Test teansaction",
+          image: "", // add image url
+          order_id: data.data.payment_id,
+          handler: function (response) {
+            // we will handle success by calling handlePaymentSuccess method and
+            // will pass the response that we've got from razorpay
+            handlePaymentSuccess(response);
+          },
+          prefill: {
+            name: bookdetails.firstname + " " + bookdetails.lastname,
+            email:props.profile.email ,
+            contact: bookdetails.mobile,
+          },
+          notes: {
+            address: "Razorpay Corporate Office",
+          },
+          theme: {
+            color: "#3399cc",
+          },
+        };
+        
+    
+        var rzp1 = new window.Razorpay(options);
+        rzp1.open();
       
       }
         catch{
