@@ -295,7 +295,7 @@ function Checkout(props) {
           try{const res = await axios.post(`${process.env.REACT_APP_API_URL}/sourcehjbda983290whjba/room/book/`,body,config);
           
           data = res;
-          console.log(res.data)
+          
           
           
           if(res.data==='Success'){
@@ -330,7 +330,7 @@ function Checkout(props) {
               color: "#3399cc",
             },
           };
-          console.log(options)
+         
       
           var rzp1 = new window.Razorpay(options);
           rzp1.open();
