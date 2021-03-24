@@ -58,11 +58,15 @@ function Admin(props) {
 
     const [booking1,setbooking1] = React.useState('')
     const [booking,setbooking] = React.useState()
-    const [type,settype] = React.useState()
+    const [type,settype] = React.useState('')
 
     const [booking2,setbooking2] = React.useState('')
     const [booking22,setbooking22] = React.useState()
-    const [type2,settype2] = React.useState()
+    const [type2,settype2] = React.useState('')
+
+    const [room,setroom] = React.useState('')
+    const [email,setemail] = React.useState()
+    const [type3,settype3] = React.useState('')
 
 
     const [open,setopen] = React.useState()
@@ -224,6 +228,53 @@ function Admin(props) {
       
             }
 
+            const handleclick5 = async (e) => {
+              e.preventDefault();
+              setopen(true);
+        
+              const config = {
+                headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `JWT ${localStorage.getItem('access')}`,
+                },
+                params:{
+                  type:type3,
+                  email:email,
+                },
+              };
+             
+              
+              
+                try{
+        
+                const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcesfnei9uq8ahd012bwq901hababn2/admin_me/seller/1/`,config,config);
+                
+                setroom(res.data)
+                var x, txt = "";
+                res.data.map((booking) => {
+                  for (x in booking) {
+                    txt += ('<strong>' + x + '</strong>'+ " " + booking[x] + "<br />");
+                  };
+                  txt +='<br /><br /><br />'
+                })
+                
+                
+                document.getElementById("seller_room").innerHTML = txt;
+                setopen(false)
+               
+                
+              
+              }
+                catch{
+                 
+                  setopen(false)
+                }
+        
+              }
+
+
+
+            
         
       
      
@@ -259,6 +310,9 @@ function Admin(props) {
                   value={type}
                   onChange={e => {settype(e.target.value)}}
                 >
+                  <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
                   
                   <MenuItem value={'room'}>Room</MenuItem>
                   <MenuItem value={'shop'}>Shop</MenuItem>
@@ -272,8 +326,8 @@ function Admin(props) {
                 
                 fullWidth
                 rows={1}
-                id="account_no"
-                name="account_no"
+                id="booking_id"
+                name="booking_id"
                 label="Room booking id"
                 value={booking1}
                 onInput={(e) => {setbooking1(e.target.value)}}
@@ -301,6 +355,9 @@ function Admin(props) {
                   value={type2}
                   onChange={e => {settype2(e.target.value)}}
                 >
+                  <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
                   
                   <MenuItem value={'room'}>Room</MenuItem>
                   <MenuItem value={'shop'}>Shop</MenuItem>
@@ -314,8 +371,8 @@ function Admin(props) {
                 
                 fullWidth
                 rows={1}
-                id="account_no"
-                name="account_no"
+                id="room_id"
+                name="room_id"
                 label="Room id"
                 value={booking2}
                 onInput={(e) => {setbooking2(e.target.value)}}
@@ -329,6 +386,55 @@ function Admin(props) {
             <Grid item xs={8} >
             <p id="bookingobject22"></p>
             </Grid>
+
+            <br />
+
+            <Grid item xs={8} >
+
+            {
+                props.profile.is_superuser ? <><FormControl className={classes.form}>
+                <InputLabel id="type">Type</InputLabel>
+                <Select
+                  labelId="type"
+                  id="type"
+                  value={type3}
+                  onChange={e => {settype3(e.target.value)}}
+                >
+                  <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+                  
+                  <MenuItem value={'room'}>Room</MenuItem>
+                  <MenuItem value={'shop'}>Shop</MenuItem>
+                  <MenuItem value={'apartment'}>Apartment</MenuItem>
+                </Select>
+                
+              </FormControl><TextField
+                multiline
+                variant="outlined"
+                margin="normal"
+                
+                fullWidth
+                rows={1}
+                id="email"
+                name="email"
+                label="seller email"
+                value={email}
+                onInput={(e) => {setemail(e.target.value)}}
+
+                
+              /><Button variant="contained" onClick={e => {handleclick5(e)}}>Fetch</Button><br /><br />
+               </>
+              : null
+            }
+            </Grid>
+            
+            <Grid item xs={8} >
+            <p id="seller_room"></p>
+            </Grid>
+
+            
+
 
 
            </Grid>

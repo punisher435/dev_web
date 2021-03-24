@@ -29,6 +29,9 @@ from user.models import seller_bank_details
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.decorators.csrf import csrf_protect
 from django.utils.decorators import method_decorator
+from products.api.serializers import room_list_serializer,room_detail_serializer
+from products.api.serializers import shop_list_serializer,shop_detail_serializer
+from products.api.serializers import apartment_list_serializer,apartment_detail_serializer
 
 utc=pytz.UTC
 
@@ -597,6 +600,57 @@ class admin_room(viewsets.ViewSet):
                     return Response('Success',status=status.HTTP_202_ACCEPTED)
             
                     
+            else:
+                return Response('',status=status.HTTP_400_BAD_REQUEST)
+        except:
+            return Response('',status=status.HTTP_400_BAD_REQUEST)
+
+
+
+
+class admin_seller(viewsets.ViewSet):
+    
+    authentication_classes = [authentication.JWTAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
+
+    def retrieve(self,request,pk=None):
+        
+        try:
+            
+
+            if request.user.is_superuser:
+
+                booking_type= request.query_params.get('type')
+                email= request.query_params.get('email')
+
+                if booking_type=='room':
+
+                    queryset = rooms.objects.all()
+                    
+                    queryset = queryset.filter(seller_id__email=email)
+                    
+
+                    serializer = room_list_serializer(queryset,context={'request':request},many=True)
+                    return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+
+                elif booking_type=='shop':
+        
+                    queryset = shops.objects.all()
+                    
+                    queryset = queryset.filter(seller_id__email=email)
+                    
+
+                    serializer = shop_list_serializer(queryset,context={'request':request},many=True)
+                    return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+
+                elif booking_type=='apartment':
+            
+                    queryset = apartments.objects.all()
+                    
+                    queryset = queryset.filter(seller_id__email=email)
+                    
+
+                    serializer = apartment_list_serializer(queryset,context={'request':request},many=True)
             else:
                 return Response('',status=status.HTTP_400_BAD_REQUEST)
         except:
