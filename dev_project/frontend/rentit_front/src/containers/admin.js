@@ -10,6 +10,8 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
+import Backdrop from '@material-ui/core/Backdrop';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -57,9 +59,11 @@ function Admin(props) {
     const [booking1,setbooking1] = React.useState('')
     const [booking,setbooking] = React.useState()
     const [type,settype] = React.useState()
+    const [open,setopen] = React.useState()
 
     const handleclick1 = async (e) => {
       e.preventDefault();
+      setopen(true);
 
       const config = {
         headers: {
@@ -81,20 +85,60 @@ function Admin(props) {
         var x, txt = "";
 
         for (x in res.data) {
-          txt += (x + " " + res.data[x] + "............");
+          txt += ('<strong>' + x + '</strong>'+ " " + res.data[x] + "<br />");
         };
         
         document.getElementById("bookingobject").innerHTML = txt;
+        setopen(false)
        
         
       
       }
         catch{
          
-          
+          setopen(false)
         }
 
       }
+
+      const handleclick2 = async (e) => {
+        e.preventDefault();
+
+        setopen(true)
+  
+        const config = {
+          headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `JWT ${localStorage.getItem('access')}`,
+          },
+          params:{
+            type:type
+          },
+        };
+       
+        
+        
+          try{
+  
+          const res = await axios.put(`${process.env.REACT_APP_API_URL}/sourcesejjnf298sh382g09181vsa91/admin_me/booking/${booking1}/`,config,config);
+          
+          handleclick1(e);
+          setopen(false)
+          
+         
+          
+        
+        }
+          catch{
+           
+            setopen(false)
+            setbooking('Error')
+          }
+  
+        }
+
+        
+      
      
 
 
@@ -103,6 +147,10 @@ function Admin(props) {
         <div>
 
             <br />
+
+            <Backdrop className={classes.backdrop} open={open}>
+            <CircularProgress color="inherit" />
+          </Backdrop>
 
             
             
@@ -144,7 +192,8 @@ function Admin(props) {
                 onInput={(e) => {setbooking1(e.target.value)}}
 
                 
-              /><Button variant="contained" onClick={e => {handleclick1(e)}}>Fetch</Button> </>
+              /><Button variant="contained" onClick={e => {handleclick1(e)}}>Fetch</Button><br /><br />
+              <Button variant="contained" onClick={e => {handleclick2(e)}}>Cancel</Button>  </>
               : null
             }
             </Grid>
