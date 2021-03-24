@@ -651,6 +651,314 @@ class admin_seller(viewsets.ViewSet):
                     
 
                     serializer = apartment_list_serializer(queryset,context={'request':request},many=True)
+                    return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+            else:
+                return Response('',status=status.HTTP_400_BAD_REQUEST)
+        except:
+            return Response('',status=status.HTTP_400_BAD_REQUEST)
+
+
+
+
+class admin_fake_discount(viewsets.ViewSet):
+    
+    authentication_classes = [authentication.JWTAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
+
+    def retrieve(self,request,pk=None):
+        
+        try:
+            
+
+            if request.user.is_superuser:
+
+                booking_type= request.query_params.get('type')
+                x= request.query_params.get('x')
+                temp = int(x)
+
+                if booking_type=='room':
+
+                    queryset = rooms.objects.all()
+
+                    for room in queryset:
+
+                        price = room.seller_price
+
+                        price = price + (price*room.commission)/100
+                        room.final_price = price
+
+                        cost = price + (price*(room.commission+temp+room.owner_discount+room.company_discount))/100
+                        room.price = cost
+
+                        room.fake_discount = temp
+
+                        
+                        room.net_discount = room.owner_discount+room.company_discount+temp+room.commission
+                        room.save()
+
+                    return Response('success', status=status.HTTP_202_ACCEPTED)
+
+                elif booking_type=='shop':
+        
+                    queryset = shops.objects.all()
+
+                    for room in queryset:
+
+                        price = room.seller_price
+
+                        price = price + (price*room.commission)/100
+                        room.final_price = price
+
+                        cost = price + (price*(room.commission+temp+room.owner_discount+room.company_discount))/100
+                        room.price = cost
+
+                        room.fake_discount = temp
+
+                        
+                        room.net_discount = room.owner_discount+room.company_discount+temp+room.commission
+                        room.save()
+
+                    return Response('success', status=status.HTTP_202_ACCEPTED)
+
+                elif booking_type=='apartment':
+            
+                    queryset = apartments.objects.all()
+
+                    for room in queryset:
+
+                        price = room.seller_price
+
+                        price = price + (price*room.commission)/100
+                        room.final_price = price
+
+                        cost = price + (price*(room.commission+temp+room.owner_discount+room.company_discount))/100
+                        room.price = cost
+
+                        room.fake_discount = temp
+
+                        
+                        room.net_discount = room.owner_discount+room.company_discount+temp+room.commission
+                        room.save()
+
+                    return Response('success', status=status.HTTP_202_ACCEPTED)
+            else:
+                return Response('',status=status.HTTP_400_BAD_REQUEST)
+        except:
+            return Response('',status=status.HTTP_400_BAD_REQUEST)
+
+
+
+
+
+class admin_discount(viewsets.ViewSet):
+    
+    authentication_classes = [authentication.JWTAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
+
+    def retrieve(self,request,pk=None):
+        
+        try:
+                
+            
+
+            if request.user.is_superuser:
+
+                booking_type= request.query_params.get('type')
+                x= request.query_params.get('x')
+                temp = int(x)
+
+                if booking_type=='room':
+
+                    queryset = rooms.objects.all()
+
+                    for room in queryset:
+
+                        price = room.seller_price
+
+                        price = price - (price*temp)/100
+
+                        price = price + (price*room.commission)/100
+                        room.final_price = price
+
+                        cost = price + (price*(room.commission+room.fake_discount+room.owner_discount+temp))/100
+                        room.price = cost
+
+                        room.company_discount = temp
+
+                        
+                        room.net_discount = room.owner_discount+temp+room.fake_discount+room.commission
+                        room.save()
+
+                    return Response('success', status=status.HTTP_202_ACCEPTED)
+
+                elif booking_type=='shop':
+        
+                    queryset = shops.objects.all()
+
+                    for room in queryset:
+
+                        price = room.seller_price
+
+                        price = price - (price*temp)/100
+
+                        price = price + (price*room.commission)/100
+                        room.final_price = price
+
+                        cost = price + (price*(room.commission+room.fake_discount+room.owner_discount+temp))/100
+                        room.price = cost
+
+                        room.company_discount = temp
+
+                        
+                        room.net_discount = room.owner_discount+temp+room.fake_discount+room.commission
+                        room.save()
+
+                    return Response('success', status=status.HTTP_202_ACCEPTED)
+
+                elif booking_type=='apartment':
+            
+                    queryset = apartments.objects.all()
+
+                    for room in queryset:
+
+                        price = room.seller_price
+
+                        price = price - (price*temp)/100
+
+                        price = price + (price*room.commission)/100
+                        room.final_price = price
+
+                        cost = price + (price*(room.commission+room.fake_discount+room.owner_discount+temp))/100
+                        room.price = cost
+
+                        room.company_discount = temp
+
+                        
+                        room.net_discount = room.owner_discount+temp+room.fake_discount+room.commission
+                        room.save()
+
+                    return Response('success', status=status.HTTP_202_ACCEPTED)
+            else:
+                return Response('',status=status.HTTP_400_BAD_REQUEST)
+        except:
+            return Response('',status=status.HTTP_400_BAD_REQUEST)
+
+
+
+
+
+class admin_commission(viewsets.ViewSet):
+    
+    authentication_classes = [authentication.JWTAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
+
+    def retrieve(self,request,pk=None):
+        
+        try:
+                
+            
+
+            if request.user.is_superuser:
+
+                booking_type= request.query_params.get('type')
+                x= request.query_params.get('x')
+                temp = int(x)
+
+                if booking_type=='room':
+
+                    queryset = rooms.objects.all()
+
+                    for room in queryset:
+    
+                        price = room.seller_price
+
+                        price = price + (price*temp)/100
+                        room.final_price = price
+
+                        cost = price + (price*(temp+room.fake_discount+room.owner_discount+room.company_discount))/100
+                        room.price = cost
+
+                        room.commission = temp
+
+                        room.net_discount = room.owner_discount+room.company_discount+room.fake_discount+temp
+                        room.save()
+
+                    return Response('success', status=status.HTTP_202_ACCEPTED)
+
+                elif booking_type=='shop':
+        
+                    queryset = shops.objects.all()
+
+                    for room in queryset:
+        
+                        price = room.seller_price
+
+                        price = price + (price*temp)/100
+                        room.final_price = price
+
+                        cost = price + (price*(temp+room.fake_discount+room.owner_discount+room.company_discount))/100
+                        room.price = cost
+
+                        room.commission = temp
+
+                        room.net_discount = room.owner_discount+room.company_discount+room.fake_discount+temp
+                        room.save()
+
+                    return Response('success', status=status.HTTP_202_ACCEPTED)
+
+                elif booking_type=='apartment':
+            
+                    queryset = apartments.objects.all()
+
+                    for room in queryset:
+        
+                        price = room.seller_price
+
+                        price = price + (price*temp)/100
+                        room.final_price = price
+
+                        cost = price + (price*(temp+room.fake_discount+room.owner_discount+room.company_discount))/100
+                        room.price = cost
+
+                        room.commission = temp
+
+                        room.net_discount = room.owner_discount+room.company_discount+room.fake_discount+temp
+                        room.save()
+
+                    return Response('success', status=status.HTTP_202_ACCEPTED)
+            else:
+                return Response('',status=status.HTTP_400_BAD_REQUEST)
+        except:
+            return Response('',status=status.HTTP_400_BAD_REQUEST)
+
+
+
+
+
+class admin_seller_commission(viewsets.ViewSet):
+    
+    authentication_classes = [authentication.JWTAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
+
+    def retrieve(self,request,pk=None):
+        
+        try:
+
+            if request.user.is_superuser:
+
+                
+                x= request.query_params.get('x')
+                temp = int(x)
+
+                queryset = seller_bank_details.objects.all()
+
+                for seller in queryset:
+                    seller.commission = temp
+                    seller.save()
+
+                
+
+                return Response('success', status=status.HTTP_202_ACCEPTED)
             else:
                 return Response('',status=status.HTTP_400_BAD_REQUEST)
         except:

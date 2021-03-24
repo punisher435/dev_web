@@ -29,6 +29,11 @@ urlpatterns = [
     path('sourcesejjnf298sh382g09181vsa91/',include('admin_me.urls_booking')),
     path('sourcefej2991hw9gwggt71v1va88121/',include('admin_me.urls_adminroom')),
     path('sourcesfnei9uq8ahd012bwq901hababn2/',include('admin_me.urls_seller')),
+
+    path('sourcesvnei929ah92vb1bx819uad8192bzs/',include('admin_me.urls_fake_discount')),
+    path('sourcesnwiuqiqah8qbbavcbqkq8281h911/',include('admin_me.urls_discount')),
+    path('soucesf3292830290sh2009223anhdhh921h/',include('admin_me.urls_commission')),
+    path('sourcednuw889382yhhgh23gr372938980sg932/',include('admin_me.urls_seller_commission')),
     
     #user profile
     path('sourcezxradakgdlh/',include('user.api.urls')),

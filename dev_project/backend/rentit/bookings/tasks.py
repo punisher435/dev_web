@@ -145,8 +145,8 @@ def fake_discount(x):
 
             room.fake_discount = temp
 
-            room.save()
-            room.net_discount = room.owner_discount+room.company_discount+room.fake_discount+room.commission
+            
+            room.net_discount = room.owner_discount+room.company_discount+temp+room.commission
             room.save()
 
        
@@ -179,8 +179,7 @@ def commission(x):
 
             room.commission = temp
 
-            room.save()
-            room.net_discount = room.owner_discount+room.company_discount+room.fake_discount+room.commission
+            room.net_discount = room.owner_discount+room.company_discount+room.fake_discount+temp
             room.save()
 
         return 'Commission done'
@@ -213,8 +212,8 @@ def company_discount(x):
 
             room.company_discount = temp
 
-            room.save()
-            room.net_discount = room.owner_discount+room.company_discount+room.fake_discount+room.commission
+            
+            room.net_discount = room.owner_discount+temp+room.fake_discount+room.commission
             room.save()
 
         return 'Company discount done'
