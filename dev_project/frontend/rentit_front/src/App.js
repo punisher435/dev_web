@@ -54,6 +54,9 @@ import ShopListing from './containers/shoplisting'
 import ApartmentListing from './containers/apartmentlisting'
 import MyReviews from './components/seller_reviews'
 import Analytics from './components/analytics'
+import Admin from './containers/admin'
+
+
 require('dotenv').config()
 
 
@@ -134,6 +137,10 @@ function App(props) {
                 <Route exact path='/dashboard/recentbookings/room-bookings/:bookingid/feedback' component={ReviewForm}/>
                 <Route exact path='/dashboard/recentbookings/shop-bookings/:bookingid/feedback' component={ReviewForm}/>
                 <Route exact path='/dashboard/recentbookings/apartment-bookings/:bookingid/feedback' component={ReviewForm}/>
+
+                
+                <Route exact path='/admin/jdwai2021801yadb28ykha2' component={Admin}/>
+
 
               </div>
               </>

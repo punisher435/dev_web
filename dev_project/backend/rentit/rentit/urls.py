@@ -24,6 +24,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.jwt')),
+
+    #admin
+    path('sourcesejjnf298sh382g09181vsa91/',include('admin_me.urls_booking')),
     
     #user profile
     path('sourcezxradakgdlh/',include('user.api.urls')),
