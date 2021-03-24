@@ -27,6 +27,7 @@ urlpatterns = [
 
     #admin
     path('sourcesejjnf298sh382g09181vsa91/',include('admin_me.urls_booking')),
+    path('sourcefej2991hw9gwggt71v1va88121/',include('admin_me.urls_adminroom')),
     
     #user profile
     path('sourcezxradakgdlh/',include('user.api.urls')),

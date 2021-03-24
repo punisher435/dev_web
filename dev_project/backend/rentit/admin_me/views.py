@@ -42,7 +42,7 @@ class admin_booking(viewsets.ViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
     def retrieve(self,request,pk=None):
-
+    
         try:
 
             if request.user.is_superuser:
@@ -377,5 +377,230 @@ class admin_booking(viewsets.ViewSet):
                 return Response('',status=status.HTTP_400_BAD_REQUEST)
         except:
             return Response('',status=status.HTTP_400_BAD_REQUEST)
+
+
+
+class admin_room(viewsets.ViewSet):
+    
+    authentication_classes = [authentication.JWTAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
+
+    def retrieve(self,request,pk=None):
+        
+        try:
+
+            if request.user.is_superuser:
+
+                booking_type= request.query_params.get('type')
+
+                if booking_type=='room':
+
+                    queryset = roomBookings.objects.all()
+                    queryset = queryset.filter(extended=False)
+                    queryset = queryset.filter(ended=False)
+                    queryset = queryset.filter(paid = True)
+                    
+
+                    serializer = roomBookingsSerializer(queryset,context={'request':request},many=True)
+                    return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+
+                elif booking_type=='shop':
+        
+                    queryset = shopBookings.objects.all()
+                    queryset = queryset.filter(extended=False)
+                    queryset = queryset.filter(ended=False)
+                    queryset = queryset.filter(paid = True)
+
+                    serializer = shopBookingsSerializer(queryset,context={'request':request},many=True)
+                    return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+
+                elif booking_type=='apartment':
+            
+                    queryset = apartmentBookings.objects.all()
+                    queryset = queryset.filter(extended=False)
+                    queryset = queryset.filter(ended=False)
+                    queryset = queryset.filter(paid = True)
+
+                    serializer = apartmentBookingsSerializer(queryset,context={'request':request},many=True)
+                    return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+            else:
+                return Response('',status=status.HTTP_400_BAD_REQUEST)
+        except:
+            return Response('',status=status.HTTP_400_BAD_REQUEST)
+
+
+    def update(self,request,pk=None):
+        
+        try:
+
+            if request.user.is_superuser:
+
+                booking_type= request.query_params.get('type')
+
+                if booking_type=='room':
+                    room = get_object_or_404(rooms.objects.all(),pk=pk)
+
+                    queryset = roomBookings.objects.all()
+                    queryset = queryset.filter(room_id = room)
+                    queryset = queryset.filter(ended = False)
+                    queryset = queryset.filter(paid = True)
+                    queryset = queryset.filter(cancelled = False)
+                    queryset = queryset.filter(extended=False)
+
+                    list1=[]
+
+                    for data1 in queryset:
+                        a=0
+                        while a<data1.capacity:
+                            list1.append(data1.booked_till)
+                            a=a+1
+
+
+                    temp = len(list1)
+
+                    if temp<room.capacity:
+                        list1.sort()
+                        room.booked_by=temp
+                        while temp<=10:
+                            list1.append(None)
+                            temp=temp+1
+                        room.booked=False
+                        room.bookedtill=datetime.date(2000,1,1)
+                        room.book1=list1[0]
+                        room.book2=list1[1]
+                        room.book3=list1[2]
+                        room.book4=list1[3]
+                        room.book5=list1[4]
+                        room.book6=list1[5]
+                        room.book7=list1[6]
+                        room.book8=list1[7]
+                        room.book9=list1[8]
+                        room.book10=list1[9]
+
+                    elif temp>=room.capacity:
+                        if temp>10:
+
+                            list1.sort(reverse=True)
+
+                            room.booked_by=room.capacity
+                            room.bookedtill=list1[9]
+                            room.booked=True
+
+                            room.book1=list1[9]
+                            room.book2=list1[8]
+                            room.book3=list1[7]
+                            room.book4=list1[6]
+                            room.book5=list1[5]
+                            room.book6=list1[4]
+                            room.book7=list1[3]
+                            room.book8=list1[2]
+                            room.book9=list1[1]
+                            room.book10=list1[0]
+
+
+                        else:
+
+                            list1.sort()
+                            while temp<=10:
+                                list1.append(None)
+                                temp=temp+1
+                            room.booked_by=room.capacity
+                            room.bookedtill=list1[0]
+                            room.booked=True
+
+                            room.book1=list1[0]
+                            room.book2=list1[1]
+                            room.book3=list1[2]
+                            room.book4=list1[3]
+                            room.book5=list1[4]
+                            room.book6=list1[5]
+                            room.book7=list1[6]
+                            room.book8=list1[7]
+                            room.book9=list1[8]
+                            room.book10=list1[9]
+
+                    
+
+                    room.save()
+
+        
+
+                    return Response('Success',status=status.HTTP_202_ACCEPTED)
+                    
+
+                elif booking_type=='shop':
+                    room = get_object_or_404(shops.objects.all(),pk=pk)
+
+                    queryset = shopBookings.objects.all()
+                    queryset = queryset.filter(shop_id = room)
+                    queryset = queryset.filter(ended = False)
+                    queryset = queryset.filter(cancelled = False)
+                    queryset = queryset.filter(paid=True)
+                    queryset = queryset.filter(extended=False)
+
+                    list1=[]
+
+                    for data1 in queryset:
+                        list1.append(data1.booked_till)
+                        
+
+
+                    temp = len(list1)
+
+                    if temp==0:
+                        room.booked = False
+                        room.bookedtill = datetime.date(2000,1,1)
+                    else:
+                        list1.sort(reverse=True)
+                        room.booked = True
+                        room.bookedtill = list1[0]
+
+                    room.save()
+
+
+                    return Response('Success',status=status.HTTP_202_ACCEPTED)
+        
+                    
+
+                elif booking_type=='apartment':
+                    room = get_object_or_404(apartments.objects.all(),pk=pk)
+
+                    queryset = apartmentBookings.objects.all()
+                    queryset = queryset.filter(apartment_id = room)
+                    queryset = queryset.filter(ended = False)
+                    queryset = queryset.filter(cancelled = False)
+                    queryset = queryset.filter(paid=True)
+                    queryset = queryset.filter(extended=False)
+
+                    list1=[]
+
+                    for data1 in queryset:
+                        list1.append(data1.booked_till)
+                        
+
+
+                    temp = len(list1)
+
+                    if temp==0:
+                        room.booked = False
+                        room.bookedtill = datetime.date(2000,1,1)
+                    else:
+                        list1.sort(reverse=True)
+                        room.booked = True
+                        room.bookedtill = list1[0]
+
+                    room.save()
+
+
+
+
+                    return Response('Success',status=status.HTTP_202_ACCEPTED)
+            
+                    
+            else:
+                return Response('',status=status.HTTP_400_BAD_REQUEST)
+        except:
+            return Response('',status=status.HTTP_400_BAD_REQUEST)
+
 
 

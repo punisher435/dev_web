@@ -59,6 +59,12 @@ function Admin(props) {
     const [booking1,setbooking1] = React.useState('')
     const [booking,setbooking] = React.useState()
     const [type,settype] = React.useState()
+
+    const [booking2,setbooking2] = React.useState('')
+    const [booking22,setbooking22] = React.useState()
+    const [type2,settype2] = React.useState()
+
+
     const [open,setopen] = React.useState()
 
     const handleclick1 = async (e) => {
@@ -137,6 +143,87 @@ function Admin(props) {
   
         }
 
+
+
+        const handleclick3 = async (e) => {
+          e.preventDefault();
+          setopen(true);
+    
+          const config = {
+            headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `JWT ${localStorage.getItem('access')}`,
+            },
+            params:{
+              type:type2
+            },
+          };
+         
+          
+          
+            try{
+    
+            const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcefej2991hw9gwggt71v1va88121/admin_me/room/${booking2}/`,config,config);
+            
+            setbooking22(res.data)
+            var x, txt = "";
+            res.data.map((booking) => {
+              for (x in booking) {
+                txt += ('<strong>' + x + '</strong>'+ " " + booking[x] + "<br />");
+              };
+              txt +='<br /><br /><br />'
+            })
+            
+            
+            document.getElementById("bookingobject22").innerHTML = txt;
+            setopen(false)
+           
+            
+          
+          }
+            catch{
+             
+              setopen(false)
+            }
+    
+          }
+    
+          const handleclick4 = async (e) => {
+            e.preventDefault();
+    
+            setopen(true)
+      
+            const config = {
+              headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': `JWT ${localStorage.getItem('access')}`,
+              },
+              params:{
+                type:type2
+              },
+            };
+           
+            
+            
+              try{
+      
+              const res = await axios.put(`${process.env.REACT_APP_API_URL}/sourcefej2991hw9gwggt71v1va88121/admin_me/room/${booking2}/`,config,config);
+              
+              handleclick3(e);
+              setopen(false)
+              
+             
+              
+            
+            }
+              catch{
+               
+                setopen(false)
+                setbooking22('Error')
+              }
+      
+            }
+
         
       
      
@@ -199,6 +286,48 @@ function Admin(props) {
             </Grid>
             <Grid item xs={8} >
             <p id="bookingobject"></p>
+            </Grid>
+            <br />
+
+
+            <Grid item xs={8} >
+
+{
+                props.profile.is_superuser ? <><FormControl className={classes.form}>
+                <InputLabel id="type">Type</InputLabel>
+                <Select
+                  labelId="type"
+                  id="type"
+                  value={type2}
+                  onChange={e => {settype2(e.target.value)}}
+                >
+                  
+                  <MenuItem value={'room'}>Room</MenuItem>
+                  <MenuItem value={'shop'}>Shop</MenuItem>
+                  <MenuItem value={'apartment'}>Apartment</MenuItem>
+                </Select>
+                
+              </FormControl><TextField
+                multiline
+                variant="outlined"
+                margin="normal"
+                
+                fullWidth
+                rows={1}
+                id="account_no"
+                name="account_no"
+                label="Room id"
+                value={booking2}
+                onInput={(e) => {setbooking2(e.target.value)}}
+
+                
+              /><Button variant="contained" onClick={e => {handleclick3(e)}}>Fetch</Button><br /><br />
+              <Button variant="contained" onClick={e => {handleclick4(e)}}>Refresh</Button>  </>
+              : null
+            }
+            </Grid>
+            <Grid item xs={8} >
+            <p id="bookingobject22"></p>
             </Grid>
 
 
