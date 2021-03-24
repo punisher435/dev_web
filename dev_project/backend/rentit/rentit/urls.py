@@ -34,6 +34,8 @@ urlpatterns = [
     path('sourcesnwiuqiqah8qbbavcbqkq8281h911/',include('admin_me.urls_discount')),
     path('soucesf3292830290sh2009223anhdhh921h/',include('admin_me.urls_commission')),
     path('sourcednuw889382yhhgh23gr372938980sg932/',include('admin_me.urls_seller_commission')),
+
+    path('sourceahwbhduih2198yay92y91gghcxvv28192192034/',include('admin_me.urls_refresh')),
     
     #user profile
     path('sourcezxradakgdlh/',include('user.api.urls')),

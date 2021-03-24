@@ -247,11 +247,11 @@ CELERY_BEAT_SCHEDULE = {
     },
     "scheduled_task": {
         "task":"bookings.tasks.book_end_shop",
-        "schedule":crontab(minute=0,hour=0),
+        "schedule":crontab(minute=1,hour=0),
     },
     "scheduled_task": {
         "task":"bookings.tasks.book_end_apartment",
-        "schedule":crontab(minute=0,hour=0),
+        "schedule":crontab(minute=2,hour=0),
     },
 }
 

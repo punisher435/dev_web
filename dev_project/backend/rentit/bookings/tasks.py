@@ -21,6 +21,7 @@ def book_end():
 
 
         queryset = roomBookings.objects.all()
+        queryset = queryset.filter(paid = False)
         queryset = queryset.filter(ended = False)
         
         for booking in queryset:
@@ -39,6 +40,7 @@ def book_end():
             queryset = roomBookings.objects.all()
             queryset = queryset.filter(room_id = room)
             queryset = queryset.filter(ended = False)
+            queryset = queryset.filter(paid = False)
             queryset = queryset.filter(cancelled = False)
             queryset = queryset.filter(extended = False)
 
@@ -124,103 +126,6 @@ def book_end():
 
 
 
-@shared_task
-def fake_discount(x):
-
-    try:
-
-        temp=x
-
-        queryset = rooms.objects.all()
-
-        for room in queryset:
-
-            price = room.seller_price
-
-            price = price + (price*room.commission)/100
-            room.final_price = price
-
-            cost = price + (price*(room.commission+temp+room.owner_discount+room.company_discount))/100
-            room.price = cost
-
-            room.fake_discount = temp
-
-            
-            room.net_discount = room.owner_discount+room.company_discount+temp+room.commission
-            room.save()
-
-       
-
-        return 'Fake discount done'
-
-    except:
-
-        return 'Error while doing fake discount'
-
-
-@shared_task
-def commission(x):
-
-    try:
-
-        temp = x
-
-        queryset = rooms.objects.all()
-
-        for room in queryset:
-
-            price = room.seller_price
-
-            price = price + (price*temp)/100
-            room.final_price = price
-
-            cost = price + (price*(temp+room.fake_discount+room.owner_discount+room.company_discount))/100
-            room.price = cost
-
-            room.commission = temp
-
-            room.net_discount = room.owner_discount+room.company_discount+room.fake_discount+temp
-            room.save()
-
-        return 'Commission done'
-
-    except:
-
-        return 'Error while doing commission'
-
-
-@shared_task
-def company_discount(x):
-
-    try:
-
-        temp = x
-
-        queryset = rooms.objects.all()
-
-        for room in queryset:
-
-            price = room.seller_price
-
-            price = price - (price*temp)/100
-
-            price = price + (price*room.commission)/100
-            room.final_price = price
-
-            cost = price + (price*(room.commission+room.fake_discount+room.owner_discount+temp))/100
-            room.price = cost
-
-            room.company_discount = temp
-
-            
-            room.net_discount = room.owner_discount+temp+room.fake_discount+room.commission
-            room.save()
-
-        return 'Company discount done'
-
-    except:
-
-        return 'Error while doing company discount'
 
 
 
@@ -232,6 +137,7 @@ def book_end_shop():
 
 
         queryset = shopBookings.objects.all()
+        queryset = queryset.filter(paid = False)
         queryset = queryset.filter(ended = False)
         
         for booking in queryset:
@@ -250,6 +156,7 @@ def book_end_shop():
             queryset = shopBookings.objects.all()
             queryset = queryset.filter(shop_id = room)
             queryset = queryset.filter(ended = False)
+            queryset = queryset.filter(paid = False)
             queryset = queryset.filter(cancelled = False)
             queryset = queryset.filter(extended = False)
 
@@ -287,6 +194,7 @@ def book_end_apartment():
 
 
         queryset = apartmentBookings.objects.all()
+        queryset = queryset.filter(paid = False)
         queryset = queryset.filter(ended = False)
         
         for booking in queryset:
@@ -305,6 +213,7 @@ def book_end_apartment():
             queryset = apartmentBookings.objects.all()
             queryset = queryset.filter(apartment_id = room)
             queryset = queryset.filter(ended = False)
+            queryset = queryset.filter(paid = False)
             queryset = queryset.filter(cancelled = False)
             queryset = queryset.filter(extended = False)
 

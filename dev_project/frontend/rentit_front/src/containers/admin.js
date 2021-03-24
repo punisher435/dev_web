@@ -79,6 +79,8 @@ function Admin(props) {
     const [commission,setcommission] = React.useState()
     const [type6,settype6] = React.useState('')
 
+    const [type7,settype7] = React.useState('')
+
     const [sellercommission,setsellercommission] = React.useState()
 
 
@@ -450,6 +452,48 @@ function Admin(props) {
 
 
 
+
+                      const handleclick10 = async (e) => {
+                        e.preventDefault();
+                        setopen(true);
+                  
+                        const config = {
+                          headers: {
+                                  'Content-Type': 'application/json',
+                                  'Authorization': `JWT ${localStorage.getItem('access')}`,
+                          },
+                          params:{
+                           
+                            type:type7
+                          },
+                        };
+                       
+                        
+                        
+                          try{
+                  
+                          const res = await axios.put(`${process.env.REACT_APP_API_URL}/sourceahwbhduih2198yay92y91gghcxvv28192192034/admin_me/refresh/1/`,config,config);
+                          
+                          
+                          var txt = res.data;
+                          
+                          
+                          
+                          document.getElementById("refreshme").innerHTML = txt;
+                          setopen(false)
+                         
+                          
+                        
+                        }
+                          catch{
+                           
+                            setopen(false)
+                          }
+                  
+                        }
+
+
+
             
         
       
@@ -778,6 +822,51 @@ function Admin(props) {
             <Grid item xs={8} >
             <p id="sellercommissionme"></p>
             </Grid>
+
+            <Grid item xs={8} >
+
+            {
+                props.profile.is_superuser ? <><FormControl className={classes.form}>
+                <InputLabel id="type">Type</InputLabel>
+                <Select
+                  labelId="type"
+                  id="type"
+                  value={type7}
+                  onChange={e => {settype7(e.target.value)}}
+                >
+                  <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+                  
+                  <MenuItem value={'room'}>Room</MenuItem>
+                  <MenuItem value={'shop'}>Shop</MenuItem>
+                  <MenuItem value={'apartment'}>Apartment</MenuItem>
+                </Select>
+                
+              </FormControl><TextField
+                multiline
+                variant="outlined"
+                margin="normal"
+                
+                fullWidth
+                rows={1}
+                id="refresh"
+                name="refresh"
+                label="refresh"
+                value="refresh rooms"
+               
+                
+              /><Button variant="contained" onClick={e => {handleclick10(e)}}>Refresh</Button><br /><br />
+               </>
+              : null
+            }
+            </Grid>
+
+            <Grid item xs={8} >
+            <p id="refreshme"></p>
+            </Grid>
+
+            <br />
             
 
 
