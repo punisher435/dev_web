@@ -995,6 +995,7 @@ class admin_refresh(viewsets.ViewSet):
                         queryset = roomBookings.objects.all()
                         queryset = queryset.filter(room_id = room)
                         queryset = queryset.filter(ended = False)
+                        queryset = queryset.filter(paid=True)
                         queryset = queryset.filter(cancelled = False)
                         queryset = queryset.filter(extended = False)
 
