@@ -872,6 +872,8 @@ class admin_commission(viewsets.ViewSet):
     
                         price = room.seller_price
 
+                        price = price - (price*room.company_discount)/100
+
                         price = price + (price*temp)/100
                         room.final_price = price
 
@@ -892,6 +894,8 @@ class admin_commission(viewsets.ViewSet):
                     for room in queryset:
         
                         price = room.seller_price
+                        price = price - (price*room.company_discount)/100
+
 
                         price = price + (price*temp)/100
                         room.final_price = price
@@ -913,6 +917,8 @@ class admin_commission(viewsets.ViewSet):
                     for room in queryset:
         
                         price = room.seller_price
+                        price = price - (price*room.company_discount)/100
+
 
                         price = price + (price*temp)/100
                         room.final_price = price

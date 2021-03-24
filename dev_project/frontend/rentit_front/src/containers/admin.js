@@ -69,6 +69,19 @@ function Admin(props) {
     const [type3,settype3] = React.useState('')
 
 
+    
+    const [tempdiscount,settempdiscount] = React.useState()
+    const [type4,settype4] = React.useState('')
+
+    const [discount,setdiscount] = React.useState()
+    const [type5,settype5] = React.useState('')
+
+    const [commission,setcommission] = React.useState()
+    const [type6,settype6] = React.useState('')
+
+    const [sellercommission,setsellercommission] = React.useState()
+
+
     const [open,setopen] = React.useState()
 
     const handleclick1 = async (e) => {
@@ -274,6 +287,169 @@ function Admin(props) {
 
 
 
+              const handleclick6 = async (e) => {
+                e.preventDefault();
+                setopen(true);
+          
+                const config = {
+                  headers: {
+                          'Content-Type': 'application/json',
+                          'Authorization': `JWT ${localStorage.getItem('access')}`,
+                  },
+                  params:{
+                    type:type4,
+                    x:tempdiscount,
+                  },
+                };
+               
+                
+                
+                  try{
+          
+                  const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcesvnei929ah92vb1bx819uad8192bzs/admin_me/temp_discount/1/`,config,config);
+                  
+                  
+                  var txt = res.data;
+                  
+                  
+                  
+                  document.getElementById("tempdiscountme").innerHTML = txt;
+                  setopen(false)
+                 
+                  
+                
+                }
+                  catch{
+                   
+                    setopen(false)
+                  }
+          
+                }
+
+
+
+                const handleclick7 = async (e) => {
+                  e.preventDefault();
+                  setopen(true);
+            
+                  const config = {
+                    headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `JWT ${localStorage.getItem('access')}`,
+                    },
+                    params:{
+                      type:type5,
+                      x:discount,
+                    },
+                  };
+                 
+                  
+                  
+                    try{
+            
+                    const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcesnwiuqiqah8qbbavcbqkq8281h911/admin_me/discount/1/`,config,config);
+                    
+                    
+                    var txt = res.data;
+                    
+                    
+                    
+                    document.getElementById("discountme").innerHTML = txt;
+                    setopen(false)
+                   
+                    
+                  
+                  }
+                    catch{
+                     
+                      setopen(false)
+                    }
+            
+                  }
+
+
+                  const handleclick8 = async (e) => {
+                    e.preventDefault();
+                    setopen(true);
+              
+                    const config = {
+                      headers: {
+                              'Content-Type': 'application/json',
+                              'Authorization': `JWT ${localStorage.getItem('access')}`,
+                      },
+                      params:{
+                        type:type6,
+                        x:commission,
+                      },
+                    };
+                   
+                    
+                    
+                      try{
+              
+                      const res = await axios.get(`${process.env.REACT_APP_API_URL}/soucesf3292830290sh2009223anhdhh921h/admin_me/commission/1/`,config,config);
+                      
+                      
+                      var txt = res.data;
+                      
+                      
+                      
+                      document.getElementById("commissionme").innerHTML = txt;
+                      setopen(false)
+                     
+                      
+                    
+                    }
+                      catch{
+                       
+                        setopen(false)
+                      }
+              
+                    }
+
+
+
+                    const handleclick9 = async (e) => {
+                      e.preventDefault();
+                      setopen(true);
+                
+                      const config = {
+                        headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': `JWT ${localStorage.getItem('access')}`,
+                        },
+                        params:{
+                         
+                          x:sellercommission,
+                        },
+                      };
+                     
+                      
+                      
+                        try{
+                
+                        const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcednuw889382yhhgh23gr372938980sg932/admin_me/seller/commission/1/`,config,config);
+                        
+                        
+                        var txt = res.data;
+                        
+                        
+                        
+                        document.getElementById("sellercommissionme").innerHTML = txt;
+                        setopen(false)
+                       
+                        
+                      
+                      }
+                        catch{
+                         
+                          setopen(false)
+                        }
+                
+                      }
+
+
+
             
         
       
@@ -433,6 +609,175 @@ function Admin(props) {
             <p id="seller_room"></p>
             </Grid>
 
+            <br />
+
+            <Grid item xs={8} >
+
+            {
+                props.profile.is_superuser ? <><FormControl className={classes.form}>
+                <InputLabel id="type">Type</InputLabel>
+                <Select
+                  labelId="type"
+                  id="type"
+                  value={type4}
+                  onChange={e => {settype4(e.target.value)}}
+                >
+                  <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+                  
+                  <MenuItem value={'room'}>Room</MenuItem>
+                  <MenuItem value={'shop'}>Shop</MenuItem>
+                  <MenuItem value={'apartment'}>Apartment</MenuItem>
+                </Select>
+                
+              </FormControl><TextField
+                multiline
+                variant="outlined"
+                margin="normal"
+                
+                fullWidth
+                rows={1}
+                id="temp_discount"
+                name="temp_discount"
+                label="Fake discount"
+                value={tempdiscount}
+                onInput={(e) => {settempdiscount(e.target.value)}}
+
+                
+              /><Button variant="contained" onClick={e => {handleclick6(e)}}>Apply</Button><br /><br />
+               </>
+              : null
+            }
+            </Grid>
+
+            <Grid item xs={8} >
+            <p id="tempdiscountme"></p>
+            </Grid>
+            
+            <br />
+
+            <Grid item xs={8} >
+
+            {
+                props.profile.is_superuser ? <><FormControl className={classes.form}>
+                <InputLabel id="type">Type</InputLabel>
+                <Select
+                  labelId="type"
+                  id="type"
+                  value={type5}
+                  onChange={e => {settype5(e.target.value)}}
+                >
+                  <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+                  
+                  <MenuItem value={'room'}>Room</MenuItem>
+                  <MenuItem value={'shop'}>Shop</MenuItem>
+                  <MenuItem value={'apartment'}>Apartment</MenuItem>
+                </Select>
+                
+              </FormControl><TextField
+                multiline
+                variant="outlined"
+                margin="normal"
+                
+                fullWidth
+                rows={1}
+                id="discount"
+                name="discount"
+                label="Company discount"
+                value={discount}
+                onInput={(e) => {setdiscount(e.target.value)}}
+
+                
+              /><Button variant="contained" onClick={e => {handleclick7(e)}}>Apply</Button><br /><br />
+               </>
+              : null
+            }
+            </Grid>
+
+            <Grid item xs={8} >
+            <p id="discountme"></p>
+            </Grid>
+
+            <br />
+
+
+            <Grid item xs={8} >
+
+            {
+                props.profile.is_superuser ? <><FormControl className={classes.form}>
+                <InputLabel id="type">Type</InputLabel>
+                <Select
+                  labelId="type"
+                  id="type"
+                  value={type6}
+                  onChange={e => {settype6(e.target.value)}}
+                >
+                  <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+                  
+                  <MenuItem value={'room'}>Room</MenuItem>
+                  <MenuItem value={'shop'}>Shop</MenuItem>
+                  <MenuItem value={'apartment'}>Apartment</MenuItem>
+                </Select>
+                
+              </FormControl><TextField
+                multiline
+                variant="outlined"
+                margin="normal"
+                
+                fullWidth
+                rows={1}
+                id="discount"
+                name="discount"
+                label="Commission"
+                value={commission}
+                onInput={(e) => {setcommission(e.target.value)}}
+
+                
+              /><Button variant="contained" onClick={e => {handleclick8(e)}}>Apply</Button><br /><br />
+               </>
+              : null
+            }
+            </Grid>
+
+            <Grid item xs={8} >
+            <p id="commissionme"></p>
+            </Grid>
+
+            <br />
+
+
+
+            <Grid item xs={8} >
+
+            {
+                props.profile.is_superuser ? <><TextField
+                multiline
+                variant="outlined"
+                margin="normal"
+                
+                fullWidth
+                rows={1}
+                id="discount"
+                name="discount"
+                label="Seller Commission"
+                value={sellercommission}
+                onInput={(e) => {setsellercommission(e.target.value)}}
+
+                
+              /><Button variant="contained" onClick={e => {handleclick9(e)}}>Apply</Button><br /><br />
+               </>
+              : null
+            }
+            </Grid>
+
+            <Grid item xs={8} >
+            <p id="sellercommissionme"></p>
+            </Grid>
             
 
 
