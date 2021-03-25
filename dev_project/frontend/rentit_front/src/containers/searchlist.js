@@ -39,6 +39,7 @@ import Icon from '@material-ui/core/Icon';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import MapIcon from '@material-ui/icons/Map';
+import '../components/css/App.css'
 
 
 import Mapmount from '../components/Mapmount';
@@ -293,7 +294,7 @@ function ResponsiveDrawer(props) {
     <div className={classes.root}>
       <CssBaseline />
       <Hidden smDown>
-      <AppBar position="fixed" className={classes.appBar}>
+      <AppBar position="fixed" className="navbarclass">
         <Toolbar>
           <IconButton
             color="inherit"
@@ -351,7 +352,7 @@ function ResponsiveDrawer(props) {
       </Hidden>
 
       <Hidden mdUp>
-      <AppBar position="fixed" className={classes.appBar1}>
+      <AppBar position="fixed" className="navbarclass">
         <Toolbar>
           <IconButton
             color="inherit"

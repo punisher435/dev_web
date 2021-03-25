@@ -282,26 +282,26 @@ background-image: linear-gradient(315deg, #eec0c6 0%, #e58c8a 74%);
 
 .formbgclass{
   background: #B2FEFA;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #0ED2F7, #B2FEFA);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #0ED2F7, #B2FEFA); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+background: -webkit-linear-gradient(0deg, #0ED2F7, #B2FEFA);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(0deg, #0ED2F7, #B2FEFA); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
 }
 
 .formbgclass1{
   background: #B2FEFA;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #0ED2F7, #B2FEFA);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #0ED2F7, #B2FEFA); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+background: -webkit-linear-gradient(0deg, #0ED2F7, #B2FEFA);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(0deg, #0ED2F7, #B2FEFA); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 height:100vh;
 }
 
 .navbarclass{
   background: hsla(312, 66%, 76%, 1);
 
-background: linear-gradient(to right, hsla(312, 66%, 76%, 1) 0%, hsla(234, 93%, 67%, 1) 100%);
+background: linear-gradient(0deg, hsla(312, 66%, 76%, 1) 0%, hsla(234, 93%, 67%, 1) 100%);
 
-background: -moz-linear-gradient(to right, hsla(312, 66%, 76%, 1) 0%, hsla(234, 93%, 67%, 1) 100%);
+background: -moz-linear-gradient(0deg, hsla(312, 66%, 76%, 1) 0%, hsla(234, 93%, 67%, 1) 100%);
 
-background: -webkit-linear-gradient(to right, hsla(312, 66%, 76%, 1) 0%, hsla(234, 93%, 67%, 1) 100%);
+background: -webkit-linear-gradient(0deg, hsla(312, 66%, 76%, 1) 0%, hsla(234, 93%, 67%, 1) 100%);
 
 filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#EA98DA", endColorstr="#5B6CF9", GradientType=1 );
 }

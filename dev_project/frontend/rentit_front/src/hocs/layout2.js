@@ -30,6 +30,7 @@ import LocationOnOutlinedIcon from '@material-ui/icons/LocationOnOutlined';
 import AccountBalanceWalletOutlinedIcon from '@material-ui/icons/AccountBalanceWalletOutlined';
 import {Link} from 'react-router-dom'
 import FeedbackOutlinedIcon from '@material-ui/icons/FeedbackOutlined';
+import '../components/css/App.css'
 
 const drawerWidth = 240;
 
@@ -191,7 +192,7 @@ function Dashboarddrawer(props) {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar position="fixed" className={classes.appBar}>
+      <AppBar position="fixed" className="navbarclass">
         <Toolbar>
           <IconButton
             color="inherit"

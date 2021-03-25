@@ -10,6 +10,7 @@ import Box from '@material-ui/core/Box';
 import Wishlistrooms from '../components/wishlistrooms';
 import Wishlistshops from '../components/wishlistshops';
 import Wishlistapartments from '../components/wishlistapartments';
+import '../components/css/App.css'
 
 
 function TabPanel(props) {
@@ -62,7 +63,7 @@ export default function SimpleTabs() {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static" className="navbarclass">
         <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
           <Tab label="Rooms" {...a11yProps(0)} />
           <Tab label="Shops" {...a11yProps(1)} />

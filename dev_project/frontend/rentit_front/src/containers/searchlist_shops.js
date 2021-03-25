@@ -14,6 +14,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Badge from '@material-ui/core/Badge';
+import '../components/css/App.css'
 
 
 import Posts from '../components/post_shops';
@@ -275,7 +276,7 @@ function ResponsiveDrawer(props) {
     <div className={classes.root}>
       <CssBaseline />
       <Hidden smDown>
-      <AppBar position="fixed" className={classes.appBar}>
+      <AppBar position="fixed" className="navbarclass">
         <Toolbar>
           <IconButton
             color="inherit"
@@ -333,7 +334,7 @@ function ResponsiveDrawer(props) {
       </Hidden>
 
       <Hidden mdUp>
-      <AppBar position="fixed" className={classes.appBar1}>
+      <AppBar position="fixed" className="navbarclass">
         <Toolbar>
           <IconButton
             color="inherit"
