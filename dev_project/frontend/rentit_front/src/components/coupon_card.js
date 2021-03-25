@@ -65,11 +65,11 @@ export default function CouponCard({mycoupon}) {
       <Grid
   container
   direction="column"
-  justify="center"
+  justify="flex-start"
   alignItems="flex-start"
-  className="blockcoupon"
+  
 >
-  <br />
+ 
 
   <Grid
   container
