@@ -44,7 +44,7 @@ const useStyles = makeStyles({
   },
   imgclass1:{
     width:'70vw',
-    maxWidth: 100,
+    maxWidth: 80,
 
   }
   
