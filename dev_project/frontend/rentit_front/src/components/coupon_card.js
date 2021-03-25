@@ -58,8 +58,11 @@ export default function CouponCard({mycoupon}) {
     <div className={classes.root}>
       <div className="blockcoupon">
         <div className="couponborder">
+          {
+            mycoupon.coupon_type==='off_price' ? <div className={classes.imgclass1}><img src='/discount_off.png' className={classes.imgclass}/></div> : <div className={classes.imgclass1}><img src='/discount.png' className={classes.imgclass}/></div>
+          }
 
-          <div className={classes.imgclass1}><img src='/discount.png' className={classes.imgclass}/></div>
+          
        
        
       <Grid
@@ -80,8 +83,8 @@ export default function CouponCard({mycoupon}) {
 >
 
         <Typography className={classes.title} color="textSecondary">
-          {mycoupon.currency.slice(0,1)} {mycoupon.off} {
-              mycoupon.coupon_type==='off_price' ? 'off' : '% Discount'
+            {
+              mycoupon.coupon_type==='off_price' ? `${mycoupon.currency.slice(0,1)} ${mycoupon.off} off` : `${mycoupon.off} % Discount`
           }
         </Typography>
 
