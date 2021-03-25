@@ -34,6 +34,7 @@ class coupons(models.Model):
 
     coupon_type=models.CharField( max_length=255,choices=coupon_type_choices)
     off=models.IntegerField(default=0)
+    currency = models.CharField(max_length=255)
 
     min_price=models.IntegerField(default=0)
     max_off_price=models.IntegerField(null=True,blank=True)

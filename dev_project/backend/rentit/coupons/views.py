@@ -8,6 +8,7 @@ import datetime
 from django.db.models import Q
 from rest_framework.pagination import PageNumberPagination
 import json
+from user.models import seller_bank_details
 
 
 
@@ -84,8 +85,10 @@ class coupon_viewset(viewsets.ViewSet):
                 start_date = datetime.date(int(data['valid_from'][0:4]),int(data['valid_from'][5:7]),int(data['valid_from'][8:]))
                 end_date = start_date + datetime.timedelta(days=int(data['life']))
 
-                coupon = coupons(coupoun_code=data['coupoun_code'],seller_id=request.user,valid_from=start_date,expiry_date=end_date,
-                life=int(data['life']),coupon_type=data['coupon_type'],off=int(data['off']),min_price=int(data['min_price']),max_off_price=temp)
+                bank = get_object_or_404(seller_bank_details.objects.all(),user_id=request.user)
+
+                coupon = coupons(coupoun_code=data['coupoun_code'].upper(),seller_id=request.user,valid_from=start_date,expiry_date=end_date,
+                life=int(data['life']),currency=bank.currency,coupon_type=data['coupon_type'],off=int(data['off']),min_price=int(data['min_price']),max_off_price=temp)
                 
                 coupon.save()
 

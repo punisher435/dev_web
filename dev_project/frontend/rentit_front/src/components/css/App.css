@@ -306,3 +306,50 @@ background: -webkit-linear-gradient(0deg, hsla(312, 66%, 76%, 1) 0%, hsla(234, 9
 filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#EA98DA", endColorstr="#5B6CF9", GradientType=1 );
 }
 
+.blockcoupon{
+  width:100%;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  
+  
+ 
+  background: #E74C3C;  /* fallback for old browsers */
+
+}
+
+
+
+.circle2{
+  width: 25px;
+  Height: 50px; 
+  border-radius:0 25px 25px 0; 
+  background-color: #fff;
+
+  
+  
+}
+
+.circle3{
+  width: 25px;
+  Height: 50px; 
+  border-radius:25px 0 0 25px; 
+  background-color: #fff;
+ 
+  border-bottom: none;
+  
+}
+
+
+.couponborder{
+  border-bottom: 1px dashed #000;
+  border-top: 1px dashed #000;
+  
+}
+.borderme{
+
+}
+.titlecoupon{
+  background-color: black;
+
+}
+
