@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
         borderRightWidth: 1,
     },
     qty: {
-        width: '10%',
+        width: '40%',
         borderRightColor: borderColor,
         borderRightWidth: 1,
     },
@@ -37,9 +37,8 @@ const styles = StyleSheet.create({
   const InvoiceTableHeader = () => (
     <View style={styles.container}>
         <Text style={styles.description}>Item Description</Text>
-        <Text style={styles.qty}>Qty</Text>
-        <Text style={styles.rate}>@</Text>
-        <Text style={styles.amount}>Amount</Text>
+        <Text style={styles.qty}>Selected</Text>
+        
     </View>
   );
   

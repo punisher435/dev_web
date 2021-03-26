@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
         paddingLeft: 8,
     },
     qty: {
-        width: '10%',
+        width: '40%',
         borderRightColor: borderColor,
         borderRightWidth: 1,
         textAlign: 'right',
@@ -45,8 +45,7 @@ const InvoiceTableRow = ({items}) => {
         <View style={styles.row} key={item.sno.toString()}>
             <Text style={styles.description}>{item.desc}</Text>
             <Text style={styles.qty}>{item.qty}</Text>
-            <Text style={styles.rate}>{item.rate}</Text>
-            <Text style={styles.amount}>{(item.qty * item.rate).toFixed(2)}</Text>
+            
         </View>
     )
     return (<Fragment>{rows}</Fragment> )
