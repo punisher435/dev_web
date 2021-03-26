@@ -177,7 +177,9 @@ function Selleranalytics({roombookings,shopbookings,apartmentbookings,bank}) {
                     </div>
                     }
                     
-                </Grid>
+                    
+                </Grid> 
+
 
                 <Grid item>
                 {isSmall && 
