@@ -20,6 +20,8 @@ import Hidden from '@material-ui/core/Hidden';
 import Typography from '@material-ui/core/Typography';
 import Details from '../components/detailstable';
 import FacilityDetails from '../components/facilitiestable'
+import Invoice from '../components/invoice'
+import { PDFDownloadLink} from '@react-pdf/renderer';
 
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
@@ -88,10 +90,11 @@ myclass1: {
   
 
 function Bookingdetails(props) {
-  const [invoice,setinvoice] = useState(false)
+  
     const bookingid = props.match.params.bookingid;
     const [error,seterror] = useState(false);
     const [extend,setextend] = useState(false);
+    const [invoiceData,setdata] = useState(false)
 
 
     const [mybooking,setmybooking]= useState()
@@ -109,6 +112,82 @@ function Bookingdetails(props) {
               try{const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcensinejfcdajewcn29210/apartment/book/${bookingid}/`,config);
            console.log(res.data)
            setmybooking(res.data)
+
+           setdata({
+            id: `${res.data.booking_id}`,
+            invoice_no: `${res.data.booking_id}`,
+            
+            company: `${res.data.first_name} ${res.data.last_name}`,
+            
+            phone: `${res.data.country_code} ${res.data.mobile}`,
+            phone2: `${res.data.country_code} ${res.data.alternate_mobile}`,
+            name:`${res.data.apartment_name}`,
+            booked_from: `${res.data.booked_from}`,
+            booked_till:`${res.data.booked_till}`,
+            trans_date: `${res.data.created_at}`,
+            due_date: `${res.data.created_at}`,
+            cancelled:`${res.data.cancelled ? `Yes ${res.data.cancelled_date}` : 'No'}`,
+            extended:`${res.data.extended ? `Yes` : 'No'}`,
+            pay:`${res.data.currency.slice(2,)} ${res.data.price_to_be_paid}`,
+            capacity:`None`,
+            duration:`${res.data.duration}`,
+            paid:`${res.data.paid ? `Yes` : 'No'}`,
+            coupon:`${res.data.coupon}`,
+            refunded:`${res.data.refunded}`,
+            items: [
+              {
+                sno: 1,
+                desc: "WIFI",
+                qty: `${res.data.wifi ? `Yes` : 'No'}`,
+               
+              },
+              {
+                sno: 2,
+                desc: "Refridgerator",
+                qty: `${res.data.house_refridgerator ? `Yes` : 'No'}`,
+               
+              },
+              
+              {
+                sno: 3,
+                desc: "TV",
+                qty: `${res.data.TV ? `Yes` : 'No'}`,
+               
+              },
+              
+              {
+                sno: 4,
+                desc: "AC",
+                qty: `${res.data.AC ? `Yes` : 'No'}`,
+               
+              },
+              {
+                sno: 5,
+                desc: "Cooler",
+                qty: `${res.data.cooler ? `Yes` : 'No'}`,
+               
+              },
+              {
+                sno: 6,
+                desc: "Geyser",
+                qty: `${res.data.geyser ? `Yes` : 'No'}`,
+               
+              },
+              
+              {
+                sno: 7,
+                desc: "Purified Water",
+                qty: `${res.data.purified_water ? `Yes` : 'No'}`,
+               
+              },
+              {
+                sno: 8,
+                desc: "Laundry",
+                qty: `${res.data.laundry ? `Yes` : 'No'}`,
+               
+              },
+            ],
+          })
             
             }
               catch{
@@ -138,10 +217,7 @@ function Bookingdetails(props) {
   {
     return <div className={classes.erorclass}><Eror error='Error' /></div>
   }
-  if(invoice==true)
-  {
-    return <Download />;
-  }
+  
   if(cancelled===true){
     return <Redirect to={`/dashboard/recentbookings/apartment-bookings/cancel/${bookingid}`}/>
   }
@@ -337,10 +413,18 @@ function Bookingdetails(props) {
 
 
 
-<Grid item>
-<br />
-            <button onClick={() => {setinvoice(true);}}>Generate pdf</button> 
-            </Grid>
+            {
+  invoiceData ? <Grid item>
+  <br />
+             
+              <PDFDownloadLink document={<Invoice invoice={invoiceData}/>} fileName={"FileName"}> 
+  
+        <button> Download </button> 
+  
+         </PDFDownloadLink>
+              </Grid> : null
+}
+    
             </div>
             </Paper>
 

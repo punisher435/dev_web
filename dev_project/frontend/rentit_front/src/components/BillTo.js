@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
         <Text>Cancelled : {invoice.cancelled}</Text>
         <Text>Extended : {invoice.extended}</Text>
         <Text>Coupon : {invoice.coupon}</Text>
+        <Text>Paid : {invoice.paid}</Text>
         {
             invoice.refunded==='Yes' ? <Text>Refunded : Yes</Text> : null
         }

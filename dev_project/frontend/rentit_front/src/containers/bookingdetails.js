@@ -92,7 +92,7 @@ myclass1: {
   
 
 function Bookingdetails(props) {
-  const [invoice,setinvoice] = useState(false)
+ 
     const bookingid = props.match.params.bookingid;
     const [error,seterror] = useState(false);
     const [extend,setextend] = useState(false);
@@ -119,7 +119,7 @@ function Bookingdetails(props) {
              setdata({
               id: `${res.data.booking_id}`,
               invoice_no: `${res.data.booking_id}`,
-              balance: "$2,283.74",
+              
               company: `${res.data.first_name} ${res.data.last_name}`,
               
               phone: `${res.data.country_code} ${res.data.mobile}`,
@@ -134,6 +134,7 @@ function Bookingdetails(props) {
               pay:`${res.data.currency.slice(2,)} ${res.data.price_to_be_paid}`,
               capacity:`${res.data.capacity}`,
               duration:`${res.data.duration}`,
+              paid:`${res.data.paid ? `Yes` : 'No'}`,
               coupon:`${res.data.coupon}`,
               refunded:`${res.data.refunded}`,
               items: [
@@ -242,14 +243,7 @@ function Bookingdetails(props) {
     {
       return <div className={classes.erorclass}><Eror error='Error' /></div>
     }
-    if(invoice==true)
-    {
-      return <Redirect to={{
-        pathname: `/dashboard/recentbookings/room-bookings/invoice/${bookingid}`,
-        state: { property_id: invoiceData}
-      }} />
-
-    }  
+  
     if(cancelled===true){
       return <Redirect to={`/dashboard/recentbookings/room-bookings/cancel/${bookingid}`}/>
     }
@@ -451,7 +445,7 @@ function Bookingdetails(props) {
 {
   invoiceData ? <Grid item>
   <br />
-              <button onClick={() => {setinvoice(true);}}>Generate pdf</button> 
+             
               <PDFDownloadLink document={<Invoice invoice={invoiceData}/>} fileName={"FileName"}> 
   
         <button> Download </button> 
