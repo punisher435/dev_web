@@ -18,12 +18,16 @@ import Hidden from '@material-ui/core/Hidden';
 import Typography from '@material-ui/core/Typography';
 import Details from '../components/detailstable';
 import FacilityDetails from '../components/facilitiestable'
+import Invoice from '../components/invoice'
+import { PDFDownloadLink} from '@react-pdf/renderer';
 
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
 
 
 const ref = React.createRef();
+
+
 
 
 
@@ -97,6 +101,8 @@ function Bookingdetails(props) {
     const [mybooking,setmybooking]= useState()
     const [cancelled,setcancelled]= useState(false)
 
+    const [invoiceData,setdata] = useState(false)
+
     React.useEffect(
         async () => {
             const config = {
@@ -109,6 +115,50 @@ function Bookingdetails(props) {
                 try{const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcehjbda983290whjba/room/book/${bookingid}/`,config);
              console.log(res.data)
              setmybooking(res.data)
+
+             setdata({
+              id: `${res.data.booking_id}`,
+              invoice_no: `${res.data.booking_id}`,
+              balance: "$2,283.74",
+              company: "MANTRIX",
+              email:"hey@gmail.com",
+              phone: "+1 (872) 588-3809",
+              address: "922 Campus Road, Drytown, Wisconsin, 1986",
+              trans_date: "2019-09-12",
+              due_date: "2019-10-12",
+              items: [
+                {
+                  sno: 1,
+                  desc: "ad sunt culpa occaecat qui",
+                  qty: 5,
+                  rate: 405.89,
+                },
+                {
+                  sno: 2,
+                  desc: "cillum quis sunt qui aute",
+                  qty: 5,
+                  rate: 373.11,
+                },
+                {
+                  sno: 3,
+                  desc: "ea commodo labore culpa irure",
+                  qty: 5,
+                  rate: 458.61,
+                },
+                {
+                  sno: 4,
+                  desc: "nisi consequat et adipisicing dolor",
+                  qty: 10,
+                  rate: 725.24,
+                },
+                {
+                  sno: 5,
+                  desc: "proident cillum anim elit esse",
+                  qty: 4,
+                  rate: 141.02,
+                },
+              ],
+            })
               
               }
                 catch{
@@ -134,14 +184,20 @@ function Bookingdetails(props) {
     }
 
 
+
+
     if(error==true)
     {
       return <div className={classes.erorclass}><Eror error='Error' /></div>
     }
     if(invoice==true)
     {
-      return <Download />;
-    }
+      return <Redirect to={{
+        pathname: `/dashboard/recentbookings/room-bookings/invoice/${bookingid}`,
+        state: { property_id: invoiceData}
+      }} />
+
+    }  
     if(cancelled===true){
       return <Redirect to={`/dashboard/recentbookings/room-bookings/cancel/${bookingid}`}/>
     }
@@ -340,15 +396,22 @@ function Bookingdetails(props) {
             
               
              
-
+{
+  invoiceData ? <Grid item>
+  <br />
+              <button onClick={() => {setinvoice(true);}}>Generate pdf</button> 
+              <PDFDownloadLink document={<Invoice invoice={invoiceData}/>} fileName={"FileName"}> 
+  
+        <button> Download </button> 
+  
+         </PDFDownloadLink>
+              </Grid> : null
+}
              
 
 
 
-<Grid item>
-<br />
-            <button onClick={() => {setinvoice(true);}}>Generate pdf</button> 
-            </Grid>
+
             </div>
 
             </Paper>

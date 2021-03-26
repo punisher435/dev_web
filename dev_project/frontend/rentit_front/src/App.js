@@ -55,6 +55,7 @@ import ApartmentListing from './containers/apartmentlisting'
 import MyReviews from './components/seller_reviews'
 import Analytics from './components/analytics'
 import Admin from './containers/admin'
+import InvoiceMe from './components/invoicemain';
 
 
 require('dotenv').config()
@@ -137,6 +138,8 @@ function App(props) {
                 <Route exact path='/dashboard/recentbookings/room-bookings/:bookingid/feedback' component={ReviewForm}/>
                 <Route exact path='/dashboard/recentbookings/shop-bookings/:bookingid/feedback' component={ReviewForm}/>
                 <Route exact path='/dashboard/recentbookings/apartment-bookings/:bookingid/feedback' component={ReviewForm}/>
+
+                <Route exact path='/dashboard/recentbookings/room-bookings/invoice/:bookingid' component={InvoiceMe}/>
 
                 
                 <Route exact path='/admin/jdwai2021801yadb28ykha2' component={Admin}/>
