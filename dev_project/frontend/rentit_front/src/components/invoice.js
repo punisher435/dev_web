@@ -31,8 +31,9 @@ const styles = StyleSheet.create({
             <Document>
                 <Page size="A4" style={styles.page}>
                     <Image style={styles.logo} src='/imposter.png' />
-                    <InvoiceTitle title='Invoice'/>
+                    <InvoiceTitle title='Booking Receipt'/>
                     <InvoiceNo invoice={invoice}/>
+                    
                     <BillTo invoice={invoice}/>
                     <InvoiceItemsTable invoice={invoice} />
                     <InvoiceThankYouMsg />
