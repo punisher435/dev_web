@@ -177,9 +177,9 @@ roombookings.map(booking => {
   {
     year: year-4, roombookings: e, shopbookings: se, apartmentbookings:ae,
   },
-  {
-    year: year-5, roombookings: f, shopbookings: sf, apartmentbookings:af,
-  },
+  // {
+  //   year: year-5, roombookings: f, shopbookings: sf, apartmentbookings:af,
+  // },
 
   ];
   const classes = demoStyles();

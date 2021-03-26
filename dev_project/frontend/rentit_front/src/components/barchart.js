@@ -11,6 +11,7 @@ import {
 import { Animation } from '@devexpress/dx-react-chart';
 
 import Hidden from '@material-ui/core/Hidden';
+import  {useMediaQuery} from '@material-ui/core';
 
 
 
@@ -92,13 +93,15 @@ function BarChart({roombookings,shopbookings,apartmentbookings}) {
       
     })
 
+    const isSmall = useMediaQuery("(max-width: 375px)");
+
     const data1 = [
         { year:`${year}` , earnings: parseFloat(a) },
         { year: `${year-1}`, earnings: parseFloat(b) },
         { year: `${year-2}`, earnings: c },
         { year:`${year-3}`, earnings: d },
         { year:`${year-4}`, earnings: e },
-        { year:`${year-5}`, earnings: f },
+        // { year:`${year-5}`, earnings: f },
        
         
       ];
@@ -128,9 +131,10 @@ function BarChart({roombookings,shopbookings,apartmentbookings}) {
 
       <Hidden mdUp>
             <Paper>
-        <Chart
+
+        {isSmall && <Chart
           data={data1}
-          width={350}
+          width={250}
           height={350}
         >
           <ArgumentAxis />
@@ -142,7 +146,25 @@ function BarChart({roombookings,shopbookings,apartmentbookings}) {
           />
           <Title text="Earnings" />
           <Animation />
+          </Chart>
+          }
+
+        {
+          !isSmall && <Chart
+          data={data1}
+          width={330}
+          height={350}>
+          <ArgumentAxis />
+          <ValueAxis max={7} />
+
+          <BarSeries
+            valueField="earnings"
+            argumentField="year"
+          />
+          <Title text="Earnings" />
+          <Animation />
         </Chart>
+      } 
       </Paper>
       </Hidden>
         </div>

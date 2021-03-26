@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
         color:'red',
     },
     graphclass:{
-        width:'112vw',
+        width:'90vw',
         [theme.breakpoints.up('sm')]: {
             width:'80vw',
             maxWidth:440,

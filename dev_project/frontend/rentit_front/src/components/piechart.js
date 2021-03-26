@@ -38,8 +38,8 @@ function PieChart({roombookings,shopbookings,apartmentbookings}) {
       
       const legendItemStyle = {
         flexDirection: 'column',
-        marginLeft: '-2px',
-        marginRight: '-2px',
+        marginLeft: '-8px',
+        marginRight: '-8px',
       };
       const LegendItem = props => (
         <Legend.Item {...props} style={legendItemStyle} />
