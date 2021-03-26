@@ -5,12 +5,12 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import BarChart from './barchart';
 import Hidden from '@material-ui/core/Hidden';
-
-import PieChart from './piechart'
+import  {useMediaQuery} from '@material-ui/core';
+import PieChart from './piechart';
 import Multicolor_chart from './multicolor_chart';
-import PieChart2 from './piechart2'
-import PieChart3 from './piechart3'
-import LineGraph from './linegraph'
+import PieChart2 from './piechart2';
+import PieChart3 from './piechart3';
+import LineGraph from './linegraph';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -39,6 +39,17 @@ const useStyles = makeStyles((theme) => ({
         color:'red',
     },
     graphclass:{
+        width:'112vw',
+        [theme.breakpoints.up('sm')]: {
+            width:'80vw',
+            maxWidth:440,
+          },
+          [theme.breakpoints.up('md')]: {
+            width:'40vw',
+            maxWidth:440,
+          },
+    },
+    graphclass1:{
         width:'80vw',
         [theme.breakpoints.up('sm')]: {
             width:'80vw',
@@ -49,6 +60,7 @@ const useStyles = makeStyles((theme) => ({
             maxWidth:440,
           },
     }
+
   }));
 
 function Selleranalytics({roombookings,shopbookings,apartmentbookings,bank}) {
@@ -76,6 +88,8 @@ function Selleranalytics({roombookings,shopbookings,apartmentbookings,bank}) {
         }
     })
 
+    const isSmall = useMediaQuery("(max-width: 375px)");
+    // const isSmall1 = useMediaQuery("(max-width: 375px)");
 
     const classes = useStyles();
     if(bank && roombookings && shopbookings && apartmentbookings){
@@ -133,45 +147,103 @@ function Selleranalytics({roombookings,shopbookings,apartmentbookings,bank}) {
             alignItems="center"
             spacing={3}
             >
+                
                 <Grid item>
-                    <div className={classes.graphclass}>
-                    <BarChart roombookings={roombookings} shopbookings={shopbookings} apartmentbookings={apartmentbookings}/>
+                    {isSmall && 
+                        <div >
+                        <BarChart roombookings={roombookings} shopbookings={shopbookings} apartmentbookings={apartmentbookings}/>
+                        </div>
+                    }
+                    {
+                        !isSmall &&
+                        <div className={classes.graphclass1}>
+                        <BarChart roombookings={roombookings} shopbookings={shopbookings} apartmentbookings={apartmentbookings}/>
+                        </div>
+                    }
                     
-                    </div>
                 </Grid>
                 
                 <Grid item>
-                    <div className={classes.graphclass}>
-                    <PieChart roombookings={roombookings} shopbookings={shopbookings} apartmentbookings={apartmentbookings}/>
-                    
+                {isSmall && 
+                        <div className={classes.graphclass}>
+                        <PieChart roombookings={roombookings} shopbookings={shopbookings} apartmentbookings={apartmentbookings}/>
+                        
+                        </div>
+                    }
+                    {
+                        !isSmall &&
+                        <div className={classes.graphclass1}>
+                        <PieChart roombookings={roombookings} shopbookings={shopbookings} apartmentbookings={apartmentbookings}/>
                     </div>
+                    }
+                    
                 </Grid>
 
                 <Grid item>
-                    <div className={classes.graphclass}>
+                {isSmall && 
+                        <div className={classes.graphclass}>
+                        <Multicolor_chart roombookings={roombookings} shopbookings={shopbookings} apartmentbookings={apartmentbookings}/>
+                        
+                        </div>
+                    }
+                    {
+                        !isSmall &&
+                        <div className={classes.graphclass1}>
                     <Multicolor_chart roombookings={roombookings} shopbookings={shopbookings} apartmentbookings={apartmentbookings}/>
                     
                     </div>
+                    }
+                    
+                    
                 </Grid>
 
                 <Grid item>
-                    <div className={classes.graphclass}>
+                {isSmall && 
+                        <div className={classes.graphclass}>
+                        <PieChart2 roombookings={roombookings} shopbookings={shopbookings} apartmentbookings={apartmentbookings}/>
+                        
+                        </div>
+                    }
+                    {
+                        !isSmall &&
+                        <div className={classes.graphclass1}>
                     <PieChart2 roombookings={roombookings} shopbookings={shopbookings} apartmentbookings={apartmentbookings}/>
                     
                     </div>
+                    }
+                    
+                    
                 </Grid>
 
                 <Grid item>
-                    <div className={classes.graphclass}>
+                {isSmall && 
+                        <div className={classes.graphclass}>
+                        <PieChart3 roombookings={roombookings} shopbookings={shopbookings} apartmentbookings={apartmentbookings}/>
+                        
+                        </div>
+                    }
+                    {
+                        !isSmall &&
+                        <div className={classes.graphclass1}>
                     <PieChart3 roombookings={roombookings} shopbookings={shopbookings} apartmentbookings={apartmentbookings}/>
                     
                     </div>
+                    }
+                    
+                    
                 </Grid>
                 <Grid item>
-                    <div className={classes.graphclass}>
-                    <LineGraph roombookings={roombookings} shopbookings={shopbookings} apartmentbookings={apartmentbookings}/>
-                    
-                    </div>
+                {isSmall && 
+                        <div >
+                        <LineGraph roombookings={roombookings} shopbookings={shopbookings} apartmentbookings={apartmentbookings}/>
+                        </div>
+                    }
+                    {
+                        !isSmall &&
+                        <div className={classes.graphclass1}>
+                        <LineGraph roombookings={roombookings} shopbookings={shopbookings} apartmentbookings={apartmentbookings}/>
+                        </div>
+                    }
                 </Grid>
             </Grid>
             </Grid>
@@ -187,3 +259,4 @@ function Selleranalytics({roombookings,shopbookings,apartmentbookings,bank}) {
 }
 
 export default Selleranalytics
+
