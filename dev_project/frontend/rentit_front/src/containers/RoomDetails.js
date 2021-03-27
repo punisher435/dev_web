@@ -444,7 +444,7 @@ if(details){
                               <Typography variant='h5'>
                                   Description
                               </Typography>
-                              <RoomDescriptionContent details={details}/>
+                              <RoomDescriptionContent details={details} type="room"/>
                           </Grid>
                           <Grid item xs={12}>
                           <Typography variant='h5'>
@@ -588,7 +588,7 @@ if(details){
             <Typography variant='h5'>
                 Description
             </Typography>
-            <RoomDescriptionContent details={details}/>
+            <RoomDescriptionContent details={details} type="room"/>
           </Grid>
           <Grid item xs={1}></Grid>
           </Grid>

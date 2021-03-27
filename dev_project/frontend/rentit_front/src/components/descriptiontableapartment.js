@@ -58,32 +58,35 @@ export default function BasicTable({room}) {
   const rows = [
     createData('WIFI', `${room.wifi ? 'Yes' : 'No'}` ),
     createData('Purified Water', `${room.purified_water ? 'Yes' : 'No'}` ),
-    createData('House TV', `${room.house_TV ? 'Yes' : 'No'}` ),
-    createData('Room TV', `${room.room_TV ? 'Yes' : 'No'}` ),
+    createData('TV', `${room.TV ? 'Yes' : 'No'}` ),
+    createData('No. of TV in house', `${room.total_TV}` ),
+   
     createData('House refridgerator', `${room.house_refridgerator ? 'Yes' : 'No'}` ),
-    createData('Room refridgerator', `${room.room_refridgerator ? 'Yes' : 'No'}` ),
+    
     createData('Power Backup', `${room.power_backup ? 'Yes' : 'No'}` ),
     createData('Geyser', `${room.geyser ? 'Yes' : 'No'}` ),
+    createData('No. of geyser in house', `${room.total_geyser}` ),
     createData('AC', `${room.AC ? 'Yes' : 'No'}` ),
+    createData('No. of AC in house', `${room.total_AC}` ),
+    createData('Sofa', `${room.sofa ? 'Yes' : 'No'}` ),
     createData('Cooler', `${room.cooler ? 'Yes' : 'No'}` ),
+    createData('No. of coolers in house', `${room.total_cooler}` ),
     createData('Laundry', `${room.laundry ? 'Yes' : 'No'}` ),
-    createData('Iron', `${room.iron ? 'Yes' : 'No'}` ),
-    createData('Room cleaning', `${room.room_cleaning ? 'Yes' : 'No'}` ),
-    createData('Breakfast facility', `${room.breakfast ? 'Yes' : 'No'}` ),
-    createData('Lunch facility', `${room.lunch ? 'Yes' : 'No'}` ),
-    createData('Dinner facility', `${room.dinner ? 'Yes' : 'No'}` ),
-    createData('Vegetarian food', `${room.veg_food ? 'Yes' : 'No'}` ),
-    createData('Non-Vegetarian food', `${room.nonveg_food ? 'Yes' : 'No'}` ),
+    
+    createData('Apartment cleaning', `${room.apartment_cleaning ? 'Yes' : 'No'}` ),
+    
+    
     createData('CCTV in building', `${room.cctv_building ? 'Yes' : 'No'}` ),
     createData('Sequrity Guard in building', `${room.building_guard ? 'Yes' : 'No'}` ),
-    createData('Separate Washroom', `${room.separate_washroom ? 'Yes' : 'No'}` ),
+    
     createData('Electricity', `${room.electricity ? 'Yes' : 'No'}` ),
     createData('Water Facility', `${room.water_facility ? 'Yes' : 'No'}` ),
   ];
 
   const rows1 = [
     createData('Category', room.category ),
-    createData('Capacity', `${room.capacity} people` ),
+    createData('Apartment Type', room.apartment_type ),
+    createData('BHK', `${room.BHK} BHK` ),
     createData('Gender Specificty', `${room.gender}` ),
     createData('Verified', `${room.verified ? 'Yes' : 'No'}` ),
     createData('Address', room.location ),
@@ -98,19 +101,25 @@ export default function BasicTable({room}) {
     createData('Furniture', `${room.furniture}` ),
     createData('Additional Facility', `${room.facility}` ),
     createData('Description', `${room.description}` ),
-    createData('No. of Balcony in room', `${room.balcony}` ),
-    createData('No. of Windows in room', `${room.windows}` ),
-    createData('No. of Fans in room', `${room.fans}` ),
+    createData('No. of Balcony in house', `${room.balcony}` ),
+    createData('No. of Windows in house', `${room.windows}` ),
+    createData('No. of Fans in house', `${room.fans}` ),
     createData('Bed type', `${room.bed_type}` ),
-    createData('Room floor no. (Note: Ground Floor is referred as 0)', `${room.floor_no} ` ),
+    createData('No. of Washroom in house', `${room.washroom}` ),
+    
+    createData('No. of Rooms in house', `${room.total_rooms}` ),
+    createData('No. of beds in house', `${room.total_beds}` ),
+   
+   
+    createData('House floor no. (Note: Ground Floor is referred as 0)', `${room.floor_no} ` ),
+    createData('Total Floors of house', `${room.total_floors}` ),
     
   ];
 
   const rows2 = [
-    createData('Guest Allowed', `${room.guest_allowed ? 'Yes' : 'No'}` ),
-    createData('Guest Policy', room.guest_policy ),
-    createData('Food Policy', room.food_policy ),
-    createData('Room Policy', room.room_policy ),
+   
+   
+    createData('House Policy', room.apartment_policy ),
     
   ];
 
