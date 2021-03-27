@@ -223,6 +223,30 @@ function ProfileForm (props){
     },
   });
 
+
+  const Filevalidation1 = (file1,name) => {
+  
+ 
+    // Check if any file is selected.
+    
+       
+  
+            const fsize =file1.size;
+            const file = Math.round((fsize / 1024));
+            // The size of the file.
+            if (file >= 5120) {
+                alert(
+                  "File too Big, please select a file less than 5mb");
+            } 
+            else{
+              
+              formik.setFieldValue('photo',file1);
+              setprofile({...myprofile,file: URL.createObjectURL(file1),photo:file1});
+            }
+        
+    
+  }
+
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
@@ -273,9 +297,8 @@ function ProfileForm (props){
         <img src={myprofile.file} className={classes.imageclass}/>
         </Button>
 
-      <input type='file'  ref={hiddenFileInput1} style={{display:'none'}}  id='photo' accept='image/png,image/jpeg,image/jpg' onChange={(event) => {console.log(event.currentTarget.files[0]);
-      formik.setFieldValue('photo',event.target.files[0])
-      setprofile({...myprofile,file: URL.createObjectURL(event.target.files[0]),photo:event.target.files[0]})}}/> 
+      <input type='file'  ref={hiddenFileInput1} style={{display:'none'}}  id='photo' accept='image/png,image/jpeg,image/jpg' onChange={(event) => {
+          Filevalidation1(event.target.files[0]);}}/> 
  
     </Grid>
 
