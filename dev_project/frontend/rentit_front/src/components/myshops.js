@@ -24,6 +24,11 @@ import BankCard from './bank_card'
 import AddressCard from './address_card'
 import ShopCard from './shop_card'
 import AddShopCard from './addshopcard';
+import SpeedDial from '@material-ui/lab/SpeedDial';
+import SpeedDialIcon from '@material-ui/lab/SpeedDialIcon';
+import SpeedDialAction from '@material-ui/lab/SpeedDialAction';
+
+import CreateOutlinedIcon from '@material-ui/icons/CreateOutlined';
 
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
@@ -86,6 +91,22 @@ const useStyles = makeStyles((theme) => ({
  
 
   },
+  speedDial: {
+    position: 'absolute',
+    '&.MuiSpeedDial-directionUp, &.MuiSpeedDial-directionLeft': {
+      bottom: theme.spacing(2),
+      right: theme.spacing(2),
+    },
+    '&.MuiSpeedDial-directionDown, &.MuiSpeedDial-directionRight': {
+      top: theme.spacing(2),
+      left: theme.spacing(2),
+    },
+  },
+  exampleWrapper: {
+    position: 'relative',
+    marginTop: theme.spacing(3),
+    height: 100,
+  },
 }));
   
 
@@ -93,6 +114,17 @@ function Myshops(props) {
 
     const [error,seterror] = useState(false)
     const [myshops,setshops] = useState()
+
+    const [hidden, setHidden] = React.useState(false);
+    const [open, setOpen] = React.useState(false);
+    const [direction, setDirection] = React.useState('up');
+    const [redirect, setRedirect] = React.useState(false)
+
+    const actions = [
+   
+      { icon: <CreateOutlinedIcon />, name: 'Add a room' },
+    ];
+  
    
 
     React.useEffect(
@@ -122,6 +154,18 @@ function Myshops(props) {
     
     ,[props.isAuthenticated])
 
+    const handleClose = () => {
+      setOpen(false);
+    };
+  
+    const handleOpen = () => {
+      setOpen(true);
+    };
+    const handleredirect = () => {
+      setRedirect(true);
+    };
+
+
 
     const classes = useStyles();
 
@@ -130,6 +174,14 @@ function Myshops(props) {
     if(error==true)
     {
       return <div className={classes.erorclass}><Eror error='Error' /></div>
+    }
+
+    if(redirect)
+    {
+      return <Redirect  to={{
+        pathname: `/dashboard/my_shops/edit`,
+        state: { property_id: null }
+      }} style={{textDecoration:'none'}} />
     }
 
     if(props.isAuthenticated && myshops){
@@ -157,8 +209,30 @@ function Myshops(props) {
                         return <Grid item><ShopCard myshop={shop} /></Grid>;
                     })
             }
-            <Grid item><AddShopCard info={props.profile}/></Grid>
+           
             </Grid>
+
+            <div className={classes.exampleWrapper}>
+        <SpeedDial
+          ariaLabel="SpeedDial example"
+          className={classes.speedDial}
+          hidden={hidden}
+          icon={<SpeedDialIcon />}
+          onClose={handleClose}
+          onOpen={handleOpen}
+          open={open}
+          direction={direction}
+        >
+          {actions.map((action) => (
+            <SpeedDialAction
+              key={action.name}
+              icon={action.icon}
+              tooltipTitle={action.name}
+              onClick={handleredirect}
+            />
+          ))}
+        </SpeedDial>
+      </div>
             
             
 
