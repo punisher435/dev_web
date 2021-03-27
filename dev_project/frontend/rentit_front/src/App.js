@@ -138,7 +138,6 @@ function App(props) {
                 <Route exact path='/dashboard/recentbookings/shop-bookings/:bookingid/feedback' component={ReviewForm}/>
                 <Route exact path='/dashboard/recentbookings/apartment-bookings/:bookingid/feedback' component={ReviewForm}/>
 
-                
                 <Route exact path='/admin/jdwai2021801yadb28ykha2' component={Admin}/>
 
 

@@ -18,12 +18,16 @@ import Hidden from '@material-ui/core/Hidden';
 import Typography from '@material-ui/core/Typography';
 import Details from '../components/detailstable';
 import FacilityDetails from '../components/facilitiestable'
+import Invoice from '../components/invoice'
+import { PDFDownloadLink} from '@react-pdf/renderer';
 
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
 
 
 const ref = React.createRef();
+
+
 
 
 
@@ -88,7 +92,7 @@ myclass1: {
   
 
 function Bookingdetails(props) {
-  const [invoice,setinvoice] = useState(false)
+ 
     const bookingid = props.match.params.bookingid;
     const [error,seterror] = useState(false);
     const [extend,setextend] = useState(false);
@@ -96,6 +100,8 @@ function Bookingdetails(props) {
 
     const [mybooking,setmybooking]= useState()
     const [cancelled,setcancelled]= useState(false)
+
+    const [invoiceData,setdata] = useState(false)
 
     React.useEffect(
         async () => {
@@ -109,6 +115,103 @@ function Bookingdetails(props) {
                 try{const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcehjbda983290whjba/room/book/${bookingid}/`,config);
              console.log(res.data)
              setmybooking(res.data)
+
+             setdata({
+              id: `${res.data.booking_id}`,
+              invoice_no: `${res.data.booking_id}`,
+              
+              company: `${res.data.first_name} ${res.data.last_name}`,
+              
+              phone: `${res.data.country_code} ${res.data.mobile}`,
+              phone2: `${res.data.country_code} ${res.data.alternate_mobile}`,
+              name:`${res.data.room_name}`,
+              booked_from: `${res.data.booked_from}`,
+              booked_till:`${res.data.booked_till}`,
+              trans_date: `${res.data.created_at}`,
+              due_date: `${res.data.created_at}`,
+              cancelled:`${res.data.cancelled ? `Yes ${res.data.cancelled_date}` : 'No'}`,
+              extended:`${res.data.extended ? `Yes` : 'No'}`,
+              pay:`${res.data.currency.slice(2,)} ${res.data.price_to_be_paid}`,
+              capacity:`${res.data.capacity}`,
+              duration:`${res.data.duration}`,
+              paid:`${res.data.paid ? `Yes` : 'No'}`,
+              coupon:`${res.data.coupon}`,
+              refunded:`${res.data.refunded}`,
+              items: [
+                {
+                  sno: 1,
+                  desc: "WIFI",
+                  qty: `${res.data.wifi ? `Yes` : 'No'}`,
+                 
+                },
+                {
+                  sno: 2,
+                  desc: "House Refridgerator",
+                  qty: `${res.data.house_refridgerator ? `Yes` : 'No'}`,
+                 
+                },
+                {
+                  sno: 3,
+                  desc: "Room Refridgerator",
+                  qty: `${res.data.room_refridgerator ? `Yes` : 'No'}`,
+                 
+                },
+                {
+                  sno: 4,
+                  desc: "House TV",
+                  qty: `${res.data.house_TV ? `Yes` : 'No'}`,
+                 
+                },
+                {
+                  sno: 5,
+                  desc: "Room TV",
+                  qty: `${res.data.room_TV ? `Yes` : 'No'}`,
+                 
+                },
+                {
+                  sno: 6,
+                  desc: "AC",
+                  qty: `${res.data.AC ? `Yes` : 'No'}`,
+                 
+                },
+                {
+                  sno: 7,
+                  desc: "Cooler",
+                  qty: `${res.data.cooler ? `Yes` : 'No'}`,
+                 
+                },
+                {
+                  sno: 8,
+                  desc: "Geyser",
+                  qty: `${res.data.geyser ? `Yes` : 'No'}`,
+                 
+                },
+                {
+                  sno: 9,
+                  desc: "Breakfast",
+                  qty: `${res.data.breakfast ? `Yes` : 'No'}`,
+                 
+                },
+                {
+                  sno: 10,
+                  desc: "Lunch",
+                  qty: `${res.data.lunch ? `Yes` : 'No'}`,
+                 
+                },
+                {
+                  sno: 11,
+                  desc: "Dinner",
+                  qty: `${res.data.dinner ? `Yes` : 'No'}`,
+                 
+                },
+                {
+                  sno: 12,
+                  desc: "Purified Water",
+                  qty: `${res.data.purified_water ? `Yes` : 'No'}`,
+                 
+                },
+              ],
+            })
               
               }
                 catch{
@@ -134,14 +237,13 @@ function Bookingdetails(props) {
     }
 
 
+
+
     if(error==true)
     {
       return <div className={classes.erorclass}><Eror error='Error' /></div>
     }
-    if(invoice==true)
-    {
-      return <Download />;
-    }
+  
     if(cancelled===true){
       return <Redirect to={`/dashboard/recentbookings/room-bookings/cancel/${bookingid}`}/>
     }
@@ -340,15 +442,22 @@ function Bookingdetails(props) {
             
               
              
-
+{
+  invoiceData ? <Grid item>
+  <br />
+             
+              <PDFDownloadLink document={<Invoice invoice={invoiceData}/>} fileName={"FileName"}> 
+  
+        <button> Download </button> 
+  
+         </PDFDownloadLink>
+              </Grid> : null
+}
              
 
 
 
-<Grid item>
-<br />
-            <button onClick={() => {setinvoice(true);}}>Generate pdf</button> 
-            </Grid>
+
             </div>
 
             </Paper>

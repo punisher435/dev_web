@@ -88,6 +88,7 @@ class roomBookings(models.Model):
     bank_name = models.CharField(max_length=255,null=True, blank=True)
     bank_address = models.TextField(null=True, blank=True)
     account_type = models.CharField(max_length=255,null=True,blank=True)
+    refund_id = models.CharField(max_length=255,null=True,blank=True)
 
 
     extended = models.BooleanField(default=False)
@@ -183,6 +184,7 @@ class shopBookings(models.Model):
     bank_name = models.CharField(max_length=255,null=True, blank=True)
     bank_address = models.TextField(null=True, blank=True)
     account_type = models.CharField(max_length=255,null=True,blank=True)
+    refund_id = models.CharField(max_length=255,null=True,blank=True)
 
     extended = models.BooleanField(default=False)
     is_extended = models.BooleanField(default=False)
@@ -274,6 +276,7 @@ class apartmentBookings(models.Model):
     bank_name = models.CharField(max_length=255,null=True, blank=True)
     bank_address = models.TextField(null=True, blank=True)
     account_type = models.CharField(max_length=255,null=True,blank=True)
+    refund_id = models.CharField(max_length=255,null=True,blank=True)
 
     extended = models.BooleanField(default=False)
     is_extended = models.BooleanField(default=False)
