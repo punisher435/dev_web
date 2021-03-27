@@ -29,20 +29,7 @@ export default function SimpleSelect3({filters,setfilters}) {
 
   return (
     <div>
-      <TextField
-           multiline
-           variant="outlined"
-           margin="normal"
-           fullWidth
-          rows={1}
-          id="location"
-          name="location"
-          label="location"
-          value={filters.location}
-          onInput={e => handleChange(e)}
-         
-          
-        />
+     
       <TextField
            multiline
            variant="outlined"
