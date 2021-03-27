@@ -1,29 +1,20 @@
 import React,{ useState, useEffect} from 'react'
-import { withStyles, makeStyles } from '@material-ui/core/styles';
+import {makeStyles } from '@material-ui/core/styles';
 import Dashboarddrawer from '../hocs/layout2'
 import axios from 'axios'
 import Eror from '../components/eror'
 import Grid from '@material-ui/core/Grid';
 
-import Barcode from 'react-barcode'
-import Download from '../components/invoicefile'
-import Button from '@material-ui/core/Button';
-import Backdrop from '@material-ui/core/Backdrop';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import TextField from '@material-ui/core/TextField';
+
 import {Redirect} from 'react-router-dom'
 import {connect} from 'react-redux'
 
-import ProfileCard from './profilecard'
-import BankCard from './bank_card'
-import AddressCard from './address_card'
 import ApartmentCard from './apartmentcard'
-import AddApartmentCard from './addapartmentcard';
+import SpeedDial from '@material-ui/lab/SpeedDial';
+import SpeedDialIcon from '@material-ui/lab/SpeedDialIcon';
+import SpeedDialAction from '@material-ui/lab/SpeedDialAction';
+
+import CreateOutlinedIcon from '@material-ui/icons/CreateOutlined';
 
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
@@ -84,6 +75,22 @@ const useStyles = makeStyles((theme) => ({
   myclass: {
   
   },
+  speedDial: {
+    position: 'absolute',
+    '&.MuiSpeedDial-directionUp, &.MuiSpeedDial-directionLeft': {
+      bottom: theme.spacing(2),
+      right: theme.spacing(2),
+    },
+    '&.MuiSpeedDial-directionDown, &.MuiSpeedDial-directionRight': {
+      top: theme.spacing(2),
+      left: theme.spacing(2),
+    },
+  },
+  exampleWrapper: {
+    position: 'relative',
+    marginTop: theme.spacing(3),
+    height: 100,
+  },
 }));
   
 
@@ -91,6 +98,16 @@ function Myapartments(props) {
 
     const [error,seterror] = useState(false)
     const [myapartments,setapartments] = useState()
+
+    const [hidden, setHidden] = React.useState(false);
+    const [open, setOpen] = React.useState(false);
+    const [direction, setDirection] = React.useState('up');
+    const [redirect, setRedirect] = React.useState(false)
+
+    const actions = [
+   
+      { icon: <CreateOutlinedIcon />, name: 'Add a room' },
+    ];
    
 
     React.useEffect(
@@ -120,6 +137,17 @@ function Myapartments(props) {
     
     ,[props.isAuthenticated])
 
+    const handleClose = () => {
+      setOpen(false);
+    };
+  
+    const handleOpen = () => {
+      setOpen(true);
+    };
+    const handleredirect = () => {
+      setRedirect(true);
+    };
+
 
     const classes = useStyles();
 
@@ -128,6 +156,14 @@ function Myapartments(props) {
     if(error==true)
     {
       return <div className={classes.erorclass}><Eror error='Error' /></div>
+    }
+
+    if(redirect)
+    {
+      return <Redirect  to={{
+        pathname: `/dashboard/my_apartments/edit`,
+        state: { property_id: null }
+      }} style={{textDecoration:'none'}} />
     }
 
     if(props.isAuthenticated && myapartments){
@@ -154,9 +190,32 @@ function Myapartments(props) {
                         return <Grid item><ApartmentCard myapartment={apartment} /></Grid>;
                     })
             }
-            <Grid item><AddApartmentCard info={props.profile}/></Grid>
+
+           
             
             </Grid>
+
+            <div className={classes.exampleWrapper}>
+        <SpeedDial
+          ariaLabel="SpeedDial example"
+          className={classes.speedDial}
+          hidden={hidden}
+          icon={<SpeedDialIcon />}
+          onClose={handleClose}
+          onOpen={handleOpen}
+          open={open}
+          direction={direction}
+        >
+          {actions.map((action) => (
+            <SpeedDialAction
+              key={action.name}
+              icon={action.icon}
+              tooltipTitle={action.name}
+              onClick={handleredirect}
+            />
+          ))}
+        </SpeedDial>
+      </div>
 
             
             </main>
