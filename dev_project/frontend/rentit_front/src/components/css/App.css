@@ -288,9 +288,8 @@ background: linear-gradient(0deg, #0ED2F7, #B2FEFA); /* W3C, IE 10+/ Edge, Firef
 }
 
 .formbgclass1{
-  background: #B2FEFA;  /* fallback for old browsers */
-background: -webkit-linear-gradient(0deg, #0ED2F7, #B2FEFA);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(0deg, #0ED2F7, #B2FEFA); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background-color: #ffa69e;
+  background-image: linear-gradient(315deg, #ffa69e 0%, #5d4954 74%);
 height:100vh;
 }
 
