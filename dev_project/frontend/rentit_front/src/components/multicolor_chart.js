@@ -17,10 +17,18 @@ import {
 
 import { Stack, Animation } from '@devexpress/dx-react-chart';
 
+import { withStyles, makeStyles } from '@material-ui/core/styles';
 
 
 
 
+const useStyles = makeStyles((theme) => ({
+    
+  font: {
+    fontSize:'40px'
+  },
+}));
+  
 
 
 function Multicolor_chart({roombookings,shopbookings,apartmentbookings}) {
@@ -143,6 +151,7 @@ apartmentbookings.map(booking2 => {
 
   ];
 
+  const classes = useStyles();
 
 
     return (
@@ -150,27 +159,31 @@ apartmentbookings.map(booking2 => {
              <Paper>
         <Chart
           data={data}
-          style={{ paddingLeft: '20px' }}
+          style={{ paddingLeft: '20px' , fontSize:'70px'}}
+          className={classes.font}
         >
-          <ArgumentAxis tickFormat={() => tick => tick} />
+          <ArgumentAxis tickFormat={() => tick => tick} className={classes.font}/>
 
           <AreaSeries
             name="Room bookings"
             valueField="roombookings"
             argumentField="year"
             seriesComponent={Area}
+            className={classes.font}
           />
           <AreaSeries
             name="Shop bookings"
             valueField="shopbookings"
             argumentField="year"
             seriesComponent={Area}
+            className={classes.font}
           />
           <AreaSeries
             name="Apartment bookings"
             valueField="apartmentbookings"
             argumentField="year"
             seriesComponent={Area}
+            className={classes.font}
           />
           
           <Animation />
