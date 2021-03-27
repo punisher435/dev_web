@@ -41,6 +41,7 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import MapIcon from '@material-ui/icons/Map';
 import '../components/css/App.css'
 
+import Location from '../components/locationfilter';
 
 import Mapmount from '../components/Mapmount';
 
@@ -222,6 +223,16 @@ function ResponsiveDrawer(props) {
       </ListItem>
       <ListItem className={classes.mystyle}>
       <Trustpointsfilter filters={props.filters} setfilters={props.setfilters}/>
+      </ListItem>
+      <Divider />
+
+      <ListItem className={classes.mystyle}>
+      <Typography variant="h6">
+          Location
+      </Typography>
+      </ListItem>
+      <ListItem className={classes.mystyle}>
+      <Location filters={props.filters} setfilters={props.setfilters}/>
       </ListItem>
       <Divider />
 

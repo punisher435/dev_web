@@ -107,16 +107,21 @@ const App = ({isAuthenticated}) => {
     balcony_filter:'',
     separate_washroom:'',
     category:'',
+
     location:'',
     city:temp1,
     state:temp2,
+    landmark:'',
+    pincode:'',
+    country:temp3,
+
     wifi:'',
     gender:'',
     discount:'',
    
 
     electricity:'',
-    country:temp3,
+    
     min_price:'',
     max_price:'',
    
@@ -127,7 +132,7 @@ const App = ({isAuthenticated}) => {
     search:'',
     shop_cleaning:'',
     ordering:'-trust_points',
-    landmark:'',
+    
   });
 
   useEffect(() => {
@@ -176,11 +181,13 @@ const App = ({isAuthenticated}) => {
           search:filters.search,
           ordering:filters.ordering,
 
-          city:filters.city,
-          state:filters.state,
-          country:filters.country,
-          location:filters.location,
-          landmark:filters.landmark,
+          city:filters.city.toUpperCase(),
+          state:filters.state.toUpperCase(),
+          country:filters.country.toUpperCase(),
+          location:filters.location.toUpperCase(),
+          landmark:filters.landmark.toUpperCase(),
+          pincode:filters.pincode,
+          
         },
         config:config
       });

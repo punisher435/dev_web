@@ -62,7 +62,7 @@ class room_filter(rest_filters.FilterSet):
 
     class Meta:
         model = rooms
-        fields = ['room_cleaning','discount','gender','windows_filter','bookedtill_filter','nonveg_food','veg_food','guest_allowed','iron','laundry','cooler','AC','room_TV','power_backup','floor_filter','purified_water','min_rating','cctv_building','bed_type','building_guard','balcony_filter','separate_washroom','category','location','city','state','wifi','breakfast','lunch','dinner','house_TV','power_backup','geyser','electricity','country','min_price','max_price','capacity_filter','trust_points_filter','booked']
+        fields = ['room_cleaning','discount','gender','windows_filter','bookedtill_filter','nonveg_food','veg_food','guest_allowed','iron','laundry','cooler','AC','room_TV','power_backup','floor_filter','purified_water','min_rating','cctv_building','bed_type','building_guard','balcony_filter','separate_washroom','category','location','city','state','country','pincode','wifi','breakfast','lunch','dinner','house_TV','power_backup','geyser','electricity','country','min_price','max_price','capacity_filter','trust_points_filter','booked']
 
 
 class room_viewset(viewsets.ReadOnlyModelViewSet):
@@ -256,7 +256,8 @@ class my_room_viewset(viewsets.ViewSet):
             room.room_policy=request.data["room_policy"]  
             room.gender=request.data["gender"]  
             room.location=request.data["location"].upper()   
-            room.landmark=request.data["landmark"].upper()          
+            room.landmark=request.data["landmark"].upper()       
+            room.pincode=request.data["pincode"]           
 
             room.save()
 
@@ -346,7 +347,7 @@ class shop_filter(rest_filters.FilterSet):
 
     class Meta:
         model = shops
-        fields = ['shop_cleaning','discount','gender','cctv_building','AC','cooler','TV','building_guard','min_rating','separate_washroom','purified_water','floor_filter','room_filter','windows_filter','bookedtill_filter','water_facility','wifi','power_backup','electricity','category','location','city','state','country','pincode','min_price','max_price','trust_points_filter','booked']
+        fields = ['shop_cleaning','discount','gender','cctv_building','AC','cooler','TV','building_guard','min_rating','separate_washroom','purified_water','floor_filter','room_filter','windows_filter','bookedtill_filter','water_facility','wifi','power_backup','electricity','category','location','city','state','country','landmark','pincode','min_price','max_price','trust_points_filter','booked']
 
             
 class shop_viewset(viewsets.ReadOnlyModelViewSet):
@@ -508,7 +509,8 @@ class my_shop_viewset(viewsets.ViewSet):
             room.shop_policy=request.data["shop_policy"]   
 
             room.location=request.data["location"].upper()    
-            room.landmark=request.data["landmark"].upper()          
+            room.landmark=request.data["landmark"].upper() 
+            room.pincode=request.data["pincode"]          
 
             room.save()
 
@@ -602,7 +604,7 @@ class apartment_filter(rest_filters.FilterSet):
 
     class Meta:
         model = apartments
-        fields = ['apartment_cleaning','discount','gender','geyser_filter','washroom_filter','bed_type','laundry','TV','geyser','purified_water','cooler','house_refridgerator','AC','apartment_type','sofa','floor_filter','room_filter','balcony_filter','washroom','cctv_building','building_guard','min_rating','bookedtill_filter','geyser','power_backup','TV','water_facility','electricity','category','location','city','state','country','pincode','min_price','max_price','BHK_filter','trust_points_filter','booked']
+        fields = ['apartment_cleaning','discount','gender','geyser_filter','washroom_filter','bed_type','laundry','TV','geyser','purified_water','cooler','house_refridgerator','AC','apartment_type','sofa','floor_filter','room_filter','balcony_filter','washroom','cctv_building','building_guard','min_rating','bookedtill_filter','geyser','power_backup','TV','water_facility','electricity','category','location','city','state','country','landmark','pincode','min_price','max_price','BHK_filter','trust_points_filter','booked']
 
 
 class apartment_viewset(viewsets.ReadOnlyModelViewSet):
@@ -784,7 +786,8 @@ class my_apartment_viewset(viewsets.ViewSet):
             room.sofa=bool(request.data["sofa"]=='true')   
 
             room.location=request.data["location"].upper()    
-            room.landmark=request.data["landmark"].upper()         
+            room.landmark=request.data["landmark"].upper()   
+            room.pincode=request.data["pincode"]        
 
             room.save()
 
