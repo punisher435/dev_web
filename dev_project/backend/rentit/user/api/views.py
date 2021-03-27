@@ -73,8 +73,9 @@ class profile_viewset(viewsets.ViewSet):
             profile.save()
             
             return Response('success',status=status.HTTP_201_CREATED)
-        except:
-            return Response('ERROR',status=status.HTTP_400_BAD_REQUEST)
+        except Exception as e:
+            
+            return Response(str(e)[50:],status=status.HTTP_400_BAD_REQUEST)
         
 
 

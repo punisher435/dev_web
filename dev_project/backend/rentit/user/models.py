@@ -84,10 +84,10 @@ def upload_to(instance, filename):
 class customUser_profile(models.Model):
     user_id=models.OneToOneField(customUser,on_delete=models.PROTECT, primary_key=True)
     country_code=models.CharField(max_length=255,default='+91')
-    mobile=models.CharField(max_length=255)
-    aadhar=models.CharField(max_length=255)
+    mobile=models.CharField(max_length=255,unique=True)
+    aadhar=models.CharField(max_length=255,unique=True)
     alternate_mobile=models.CharField(max_length=255,null=True,blank=True)
-    photo=models.ImageField(_("Image"),upload_to=upload_to,default='/images/profile_pics/default.jpg')
+    photo=models.ImageField(_("Image"),upload_to=upload_to,null=True,blank=True)
 
     objects=profile_manager()
 

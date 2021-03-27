@@ -12,6 +12,8 @@ import {Redirect} from 'react-router-dom'
 import Eror from './eror'
 import Paper from '@material-ui/core/Paper';
 import './css/App.css';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
@@ -24,13 +26,23 @@ const validationSchema = yup.object({
     .required('Country code is required'),
 
     mobile: yup
-    .string('Enter your mobile')
+    .number('Enter your mobile')
     .min(10, 'Mobile should be of minimum 10 characters length')
+    .required('Mobile is required'),
+
+    aadhar: yup
+    .number('Enter your aadhar')
+    .min(12, 'Mobile should be of minimum 12 characters length')
     .required('Mobile is required'),
    
 
     
 });
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
 
 const useStyles = makeStyles(theme => ({
   myclass: {
@@ -111,6 +123,8 @@ function ProfileForm (props){
     const [redirect,setredirect] = useState(false)
     const [error,seterror] = useState(false)
     const hiddenFileInput1 = React.useRef(null);
+    const [open1,setopen1] = React.useState(false);
+    const [message,setmessage] = React.useState(false);
    
 
     useEffect(
@@ -140,7 +154,7 @@ function ProfileForm (props){
               
               }
                 catch{
-      
+                 
                 }
         }
     }
@@ -179,29 +193,43 @@ function ProfileForm (props){
       
       if(edit===true)
       {
-        try{const res = await axios.put(`${process.env.REACT_APP_API_URL}/sourcezxradakgdlh/profile/${props.profile.id}/`,form_data,config);
-              
+        await axios.put(`${process.env.REACT_APP_API_URL}/sourcezxradakgdlh/profile/${props.profile.id}/`,form_data,config)
+        .then((res) => {
           setredirect(true)
-              
-              }
-                catch{
-                  console.log('error')
-                  seterror(true)
-                }
+        })
+        .catch((err) => {
+          setmessage(`Your ${err.response.data} is linked to some other account!`)
+          
+          setopen1(true);
+
+        })
       }
       else{
-        try{const res = await axios.post(`${process.env.REACT_APP_API_URL}/sourcezxradakgdlh/profile/`,form_data,config);
-              
-        setredirect(true)
+        await axios.post(`${process.env.REACT_APP_API_URL}/sourcezxradakgdlh/profile/`,form_data,config)
+        .then((res) => {
+          setredirect(true)
+        })
+        .catch((err) => {
+          setmessage(`Your ${err.response.data} is linked to some other account!`)
+          setopen1(true);
 
-              }
-                catch{
-                  console.log('error')
-                  seterror(true)
-                }
+        })
+              
+        
+
+              
+                
       }
     },
   });
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setopen1(false);
+  };
 
   if(redirect==true)
   {
@@ -215,6 +243,12 @@ function ProfileForm (props){
   return (
     <div className="formbgclass1">
     <div className={classes.myclass}>
+
+    <Snackbar open={open1} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="error">
+          {message}
+        </Alert>
+        </Snackbar>
         
         <Grid
         container
@@ -306,7 +340,7 @@ function ProfileForm (props){
           rows={1}
           id="aadhar"
           name="aadhar"
-          label="aadhar(optional)"
+          label="aadhar"
           value={formik.values.aadhar}
           onChange={formik.handleChange}
           error={formik.touched.aadhar && Boolean(formik.errors.aadhar)}
