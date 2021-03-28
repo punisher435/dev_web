@@ -94,7 +94,10 @@ export default function SimpleCard(props) {
           <Grid item>
               <Typography variant='subtitle1'>
                   <Box fontWeight="fontWeightMedium" ml={1} mr={1} fontSize={12 }>
-                    {compliment}
+                    {
+                      props.reviews>=1 ? `${compliment}` : null
+                    }
+                    
                   </Box>
               </Typography>
           </Grid>
