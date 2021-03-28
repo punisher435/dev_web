@@ -56,6 +56,9 @@ const useStyles = makeStyles((theme) => ({
   iconstyle1:{
     marginRight:'30px',
   },
+  newmyclass: {
+    marginTop:'15px',
+  },
   iconstyle2:{
     marginRight:'20px',
   },
@@ -491,38 +494,40 @@ function ResponsiveDrawer(props) {
 
 
       <main className={classes.content}>
-        <div className={classes.toolbar} />
+       
 
-        <Hidden smDown>
-        <Grid
-        container
-        direction="row"
-        justify="space-around"
-        alignItems="center"
-        >
+       
           {
-            props.mapview ? null : <div className={classes.myclass}><div className={classes.myclass2}><SearchFields filters={props.filters} setfilters={props.setfilters} /></div>
-            <div className={classes.myclass2}><SimpleSelectfinal filters={props.filters} setfilters={props.setfilters} /></div></div> 
+            props.mapview ? null :  <Hidden smDown>
+            <Grid
+            container
+            direction="row"
+            justify="space-around"
+            alignItems="center"
+            className={classes.newmyclass}
+            ><div className={classes.myclass}><div className={classes.myclass2}><SearchFields filters={props.filters} setfilters={props.setfilters} /></div>
+            <div className={classes.myclass2}><SimpleSelectfinal filters={props.filters} setfilters={props.setfilters} /></div></div> </Grid>
+        </Hidden>
           }
            
 
-        </Grid>
-        </Hidden>
+        
 
-        <Hidden mdUp>
+        
+           {
+            props.mapview ? null : <>
+            <Hidden mdUp>
         <Grid
         container
         direction="row"
         justify="flex-end"
         alignItems="center"
-        >
-           {
-            props.mapview ? null : <>
-            <SimpleSelectfinal filters={props.filters} setfilters={props.setfilters} /></> 
+        className={classes.newmyclass}
+        ><SimpleSelectfinal filters={props.filters} setfilters={props.setfilters} /></Grid>
+        </Hidden></> 
           }
           
-        </Grid>
-        </Hidden>
+        
 
             {
               props.mapview ? <Mapmount filters={props.filters} setfilters={props.setfilters}/> : <div><Posts  mypost={props.mypost} setmypost={props.setmypost} openmycard={props.openmycard} setmycard={props.setmycard} posts={props.posts}  setfilters={props.setfilters} filters={props.filters} loading={props.loading} wishlistitems={props.wishlistitems} cartitems={props.cartitems} changeitemswishlist={props.changeitemswishlist} changeitemscart={props.changeitemscart}/>
