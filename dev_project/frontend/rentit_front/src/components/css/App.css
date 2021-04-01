@@ -37,6 +37,16 @@
   
   
 }
+.locate1 {
+  position: relative;
+  top: 17rem;
+  left: 1rem;
+  font-size:50%;
+  
+  
+}
+
+
 .locate img {
 
  
@@ -48,6 +58,14 @@
   user-select: none;
   cursor: pointer;
   border: none;
+}
+.zclassmap{
+  margin-top:0px;
+  
+}
+#map1{
+  
+ overflow: visible !important;
 }
 
 
@@ -64,6 +82,22 @@
   left: 0; 
   
 } 
+
+.sticky{
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  
+}
+
+.sticky1{
+  
+  height: 600px;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  
+}
 
 
 @media only screen and (max-width: 300px)

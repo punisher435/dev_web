@@ -51,6 +51,9 @@ import SimpleSnackbar1 from '../components/cartsmackbar';
 
 import RenteneAppBar from '../components/Navbar'
 
+import ReviewSeller from '../components/seller_reviews_pop';
+import Button from '@material-ui/core/Button';
+
 
 
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
@@ -180,6 +183,8 @@ function FullWidthGrid(props) {
   const [wishlist,changewishlist] = useState(false)
   const [nav,setnav] = useState(false)
   const [coupons,setcoupons] = useState([])
+
+  const [open,changeopen] = useState(false)
 
 
 
@@ -378,6 +383,8 @@ if(details){
       <SimpleSnackbar open={open1} setOpen={setOpen1}/>
        <SimpleSnackbar1 open={open2} setOpen={setOpen2}/>
 
+       <ReviewSeller open={open} change={changeopen} id={details.seller_id}/>
+
       <Hidden smDown>
       <Grid container>
 
@@ -451,7 +458,7 @@ if(details){
                               <Typography variant='h5'>
                                   Description
                               </Typography>
-                              <RoomDescriptionContent details={details}/>
+                              <RoomDescriptionContent details={details} type="shop"/>
                           </Grid>
                           <Grid item xs={12}>
                           <Typography variant='h5'>
@@ -470,6 +477,12 @@ if(details){
                           <Grid item xs = {12}>
                             <RatingAndReviews  reviews={reviews} params={params1} setparams={setparams} no={parseFloat(details.reviews)} rating={parseFloat(details.avg_rating)}/>
                           </Grid>
+
+                          <Grid item>
+                          <br />
+                          <Button color="primary" variant="contained" onClick={(e) => {e.preventDefault();changeopen(true);}} >Owner Reviews</Button>
+                          
+                          </Grid>
                       </Grid>
                     </Box>
                 </Grid>
@@ -487,6 +500,7 @@ if(details){
         </Container>
       
         <Grid item xs={12} sm={12}>
+          <br />
         <Typography component="div" style={{ backgroundColor: '#cfe8fc', height: '30vh' }} />
         </Grid>
               
@@ -595,7 +609,7 @@ if(details){
             <Typography variant='h5'>
                 Description
             </Typography>
-            <RoomDescriptionContent details={details}/>
+            <RoomDescriptionContent details={details} type="shop"/>
           </Grid>
           <Grid item xs={1}></Grid>
           </Grid>
@@ -624,6 +638,17 @@ if(details){
           </Grid>
           
           </Grid>
+
+          <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+          >
+          
+          <br />
+         <Button color="primary" variant="contained" onClick={(e) => {e.preventDefault();changeopen(true);}} >Owner Reviews</Button>
+         </Grid> 
          
           
 

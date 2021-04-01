@@ -4,6 +4,8 @@ import Typography from '@material-ui/core/Typography';
 import LocationOnOutlinedIcon from '@material-ui/icons/LocationOnOutlined';
 import Icon from '@material-ui/core/Icon';
 import Description from './descriptiontable';
+import Descriptionshop from './descriptiontableshop';
+import Descriptionapartment from './descriptiontableapartment';
 
 
 
@@ -12,9 +14,17 @@ function App(props) {
   const extraContent =
   <div>
 
-    
-
-      <Description room={props.details} />
+    <br />
+      {
+        props.type === 'room' ? <Description room={props.details} /> :null
+      }
+      {
+        props.type === 'shop' ? <Descriptionshop room={props.details} /> :null
+      }
+      {
+        props.type === 'apartment' ? <Descriptionapartment room={props.details} /> :null
+      }
+      
   </div>
   const linkName=readMore?'Read Less':'Read More'
   return (

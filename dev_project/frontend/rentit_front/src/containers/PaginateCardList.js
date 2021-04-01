@@ -118,9 +118,14 @@ const App = ({isAuthenticated}) => {
     balcony:'',
     separate_washroom:'',
     category:temp,
+
     location:'',
     city:temp1,
     state:temp2,
+    country:temp3,
+    landmark:'',
+    pincode:'',
+
     wifi:'',
     breakfast:'',
     lunch:'',
@@ -128,7 +133,7 @@ const App = ({isAuthenticated}) => {
     house_TV:'',
     geyser:'',
     electricity:'',
-    country:temp3,
+    
     min_price:'',
     max_price:'',
     capacity_filter:'',
@@ -141,7 +146,7 @@ const App = ({isAuthenticated}) => {
     ordering:'-trust_points',
     gender:'',
     discount:'',
-    landmark:'',
+    
   });
 
   useEffect(() => {
@@ -193,11 +198,13 @@ const App = ({isAuthenticated}) => {
           ordering:filters.ordering,
           gender:filters.gender,
           discount:filters.discount,
-          city:filters.city,
-          state:filters.state,
-          country:filters.country,
-          location:filters.location,
-          landmark:filters.landmark,
+
+          city:filters.city.toUpperCase(),
+          state:filters.state.toUpperCase(),
+          country:filters.country.toUpperCase(),
+          location:filters.location.toUpperCase(),
+          landmark:filters.landmark.toUpperCase(),
+          pincode:filters.pincode,
 
         },
         config:config

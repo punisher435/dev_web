@@ -5,6 +5,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import TextField from '@material-ui/core/TextField';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -18,60 +19,89 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SimpleSelect3(props) {
+export default function SimpleSelect3({filters,setfilters}) {
   const classes = useStyles();
 
-  const handleChange = (event) => {
-    props.setfilters({...props.filters,country:event.target.value});
+  const handleChange = (e) => {
+    setfilters({...filters,[e.target.name]:e.target.value});
   };
-  const handleChange2 = (event) => {
-    props.setfilters({...props.filters,state:event.target.value});
-  };
-  const handleChange3 = (event) => {
-    props.setfilters({...props.filters,city:event.target.value});
-  };
+ 
 
   return (
     <div>
-      <FormControl className={classes.formControl}>
-        <InputLabel id="country">Country</InputLabel>
-        <Select
-          labelId="country-label"
-          id="country-select"
-          value={props.filters.country}
-          onChange={handleChange}
-        >
-          <MenuItem value={''}>None</MenuItem>
-          
-        </Select>
-      </FormControl>
-
-      <FormControl className={classes.formControl}>
-        <InputLabel id="state">State</InputLabel>
-        <Select
-          labelId="state-label"
-          id="state-select"
-          value={props.filters.state}
-          onChange={handleChange2}
-        >
-          <MenuItem value={''}>None</MenuItem>
-          
-        </Select>
-      </FormControl>
-
-      <FormControl className={classes.formControl}>
-        <InputLabel id="city">City</InputLabel>
-        <Select
-          labelId="city-label"
-          id="city-select"
-          value={props.filters.city}
-          onChange={handleChange3}
-        >
-          <MenuItem value={''}>None</MenuItem>
-          
-        </Select>
-      </FormControl>
      
+      <TextField
+           multiline
+           variant="outlined"
+           margin="normal"
+           fullWidth
+          rows={1}
+          id="city"
+          name="city"
+          label="city"
+          value={filters.city}
+          onInput={e => handleChange(e)}
+         
+          
+        />
+
+<TextField
+           multiline
+           variant="outlined"
+           margin="normal"
+           fullWidth
+          rows={1}
+          id="state"
+          name="state"
+          label="state"
+          value={filters.state}
+          onInput={e => handleChange(e)}
+         
+          
+        />
+
+<TextField
+           multiline
+           variant="outlined"
+           margin="normal"
+           fullWidth
+          rows={1}
+          id="country"
+          name="country"
+          label="country"
+          value={filters.country}
+          onInput={e => handleChange(e)}
+         
+          
+        />
+        <TextField
+           multiline
+           variant="outlined"
+           margin="normal"
+           fullWidth
+          rows={1}
+          id="landmark"
+          name="landmark"
+          label="landmark"
+          value={filters.landmark}
+          onInput={e => handleChange(e)}
+         
+          
+        />
+        <TextField
+           multiline
+           variant="outlined"
+           margin="normal"
+           fullWidth
+          rows={1}
+          id="pincode"
+          name="pincode"
+          label="pincode"
+          value={filters.pincode}
+          onInput={e => handleChange(e)}
+         
+          
+        />
     </div>
   );
 }

@@ -116,9 +116,14 @@ const App = ({isAuthenticated}) => {
     balcony:'',
     separate_washroom:'',
     category:'',
+
     location:'',
     city:temp1,
     state:temp2,
+    country:temp3,
+    landmark:'',
+    pincode:'',
+
     wifi:'',
     gender:'',
     discount:'',
@@ -126,7 +131,7 @@ const App = ({isAuthenticated}) => {
     TV:'',
     geyser:'',
     electricity:'',
-    country:temp3,
+    
     min_price:'',
     max_price:'',
     BHK_filter:'',
@@ -137,7 +142,7 @@ const App = ({isAuthenticated}) => {
     search:'',
     apartment_cleaning:'',
     ordering:'-trust_points',
-    landmark:'',
+   
   });
 
   useEffect(() => {
@@ -197,11 +202,12 @@ const App = ({isAuthenticated}) => {
         sofa:filters.sofa,
         apartment_type:filters.apartment_type,
 
-        city:filters.city,
-          state:filters.state,
-          country:filters.country,
-          location:filters.location,
-          landmark:filters.landmark,
+        city:filters.city.toUpperCase(),
+          state:filters.state.toUpperCase(),
+          country:filters.country.toUpperCase(),
+          location:filters.location.toUpperCase(),
+          landmark:filters.landmark.toUpperCase(),
+          pincode:filters.pincode,
         },
         config:config
       });

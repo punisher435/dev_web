@@ -1,29 +1,24 @@
 import React,{ useState, useEffect} from 'react'
-import { withStyles, makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Dashboarddrawer from '../hocs/layout2'
 import axios from 'axios'
 import Eror from '../components/eror'
 import Grid from '@material-ui/core/Grid';
 
-import Barcode from 'react-barcode'
-import Download from '../components/invoicefile'
-import Button from '@material-ui/core/Button';
-import Backdrop from '@material-ui/core/Backdrop';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import TextField from '@material-ui/core/TextField';
-import {Redirect} from 'react-router-dom'
+
+import {Redirect,Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 
-import ProfileCard from './profilecard'
-import BankCard from './bank_card'
-import AddressCard from './address_card'
+
 import RoomCard from './room_card'
-import AddRoomCard from './addroomcard';
+
+
+
+import SpeedDial from '@material-ui/lab/SpeedDial';
+import SpeedDialIcon from '@material-ui/lab/SpeedDialIcon';
+import SpeedDialAction from '@material-ui/lab/SpeedDialAction';
+
+import CreateOutlinedIcon from '@material-ui/icons/CreateOutlined';
 
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
@@ -31,6 +26,8 @@ axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
 
 
 const drawerWidth = 240;
+
+
 
 const useStyles = makeStyles((theme) => ({
     
@@ -73,6 +70,11 @@ const useStyles = makeStyles((theme) => ({
     zIndex: theme.zIndex.drawer + 1,
     color: '#fff',
   },
+  exampleWrapper: {
+    position: 'relative',
+    marginTop: theme.spacing(3),
+    height: 100,
+  },
   formControl: {
     margin: theme.spacing(1),
     minWidth: 120,
@@ -85,13 +87,45 @@ const useStyles = makeStyles((theme) => ({
    
 
   },
+  fab: {
+    margin: theme.spacing(2),
+  },
+  absolute: {
+    position: 'absolute',
+    bottom: theme.spacing(2),
+    right: theme.spacing(3),
+  },
+  
+  speedDial: {
+    position: 'absolute',
+    '&.MuiSpeedDial-directionUp, &.MuiSpeedDial-directionLeft': {
+      bottom: theme.spacing(2),
+      right: theme.spacing(2),
+    },
+    '&.MuiSpeedDial-directionDown, &.MuiSpeedDial-directionRight': {
+      top: theme.spacing(2),
+      left: theme.spacing(2),
+    },
+  },
 }));
   
 
 function Myrooms(props) {
+  const classes = useStyles();
+
+  const actions = [
+   
+    { icon: <CreateOutlinedIcon />, name: 'Add a room' },
+  ];
 
     const [error,seterror] = useState(false)
     const [myrooms,setrooms] = useState()
+    const [hidden, setHidden] = React.useState(false);
+    const [open, setOpen] = React.useState(false);
+    const [direction, setDirection] = React.useState('up');
+    const [redirect, setRedirect] = React.useState(false)
+
+   
    
 
     React.useEffect(
@@ -103,12 +137,12 @@ function Myrooms(props) {
                 },
               };
               
-              if(props.isAuthenticated && props.profile)
+              if(props.isAuthenticated)
               
               {
                
                 try{const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcewdsfdaegds/my_rooms/`,config);
-              
+                console.log('hy')
                 setrooms(res.data)
                 console.log(res.data)
               
@@ -124,13 +158,33 @@ function Myrooms(props) {
     ,[props.isAuthenticated])
 
 
-    const classes = useStyles();
+    
+
+    const handleClose = () => {
+      setOpen(false);
+    };
+  
+    const handleOpen = () => {
+      setOpen(true);
+    };
+    const handleredirect = () => {
+      setRedirect(true);
+    };
+
 
     
 
     if(error==true)
     {
       return <div className={classes.erorclass}><Eror error='Error' /></div>
+    }
+   
+    if(redirect)
+    {
+      return <Redirect to={{
+        pathname: `/dashboard/my_rooms/edit`,
+        state: { property_id: null }
+      }} style={{textDecoration:'none'}} />
     }
 
     if(props.isAuthenticated && myrooms){
@@ -157,10 +211,31 @@ function Myrooms(props) {
                         return <Grid item><RoomCard myroom={room} /></Grid>;
                     })
             }
-            <Grid item><AddRoomCard info={props.profile}/></Grid>
+            
 
             </Grid>
-            
+
+            <div className={classes.exampleWrapper}>
+        <SpeedDial
+          ariaLabel="SpeedDial example"
+          className={classes.speedDial}
+          hidden={hidden}
+          icon={<SpeedDialIcon />}
+          onClose={handleClose}
+          onOpen={handleOpen}
+          open={open}
+          direction={direction}
+        >
+          {actions.map((action) => (
+            <SpeedDialAction
+              key={action.name}
+              icon={action.icon}
+              tooltipTitle={action.name}
+              onClick={handleredirect}
+            />
+          ))}
+        </SpeedDial>
+      </div>
             
 
             

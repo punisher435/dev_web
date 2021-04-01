@@ -24,11 +24,14 @@ import "@reach/combobox/styles.css";
 
 import useScript from '../hooks/usescript';
 import { Link } from "react-router-dom";
+import './css/App.css';
 
 const libraries = ["places"];
 const mapContainerStyle = {
-  height: "90vh",
+  height: "100vh",
   width: "100%",
+ 
+  
 };
 const center = {
   lat: 20.5937,
@@ -61,7 +64,7 @@ export default function App({point,url}) {
   useEffect(
     () => {
       setmarkers(point)
-      console.log(point);
+     
     },[point]
   )
 
@@ -95,16 +98,17 @@ console.log('markerss',marker);
 const mystyle1 = {
   width:'100%',
   height:100,
+
 }
   return (
-    <div>
+    <div className="zclassmap">
      
 
       <Locate panTo={panTo} />
       <Search panTo={panTo} mapRef={mapRef} />
 
       <GoogleMap
-        id="map"
+        id="map1"
         mapContainerStyle={mapContainerStyle}
         zoom={5}
         center={center}
@@ -144,7 +148,7 @@ const mystyle1 = {
             style={mystyle1}
           >
             <div>
-              <Link to={`/${url}/${selected.properties.roomId}`} target="_blank">
+              <Link to={`/${url}/${selected.properties.roomId}`} target="_blank" style={{textDecoration:'none'}}>
               <Button>
               <h2>
                 {selected.properties.category}
