@@ -23,6 +23,15 @@ import ApartmentIcon from '@material-ui/icons/Apartment';
 import TextField from '@material-ui/core/TextField';
 import DatePick from '../components/datepick'
 import Button from '@material-ui/core/Button';
+import  {useMediaQuery} from '@material-ui/core';
+import { Divider } from '@material-ui/core';
+import Box from '@material-ui/core/Box';
+import "../components/css/App.css"
+import bgd from "../components/css/abc.png"
+import FacebookIcon from '@material-ui/icons/Facebook';
+import InstagramIcon from '@material-ui/icons/Instagram';
+import MailIcon from '@material-ui/icons/Mail';
+import TwitterIcon from '@material-ui/icons/Twitter';
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
 
@@ -31,24 +40,56 @@ const useStyles = makeStyles((theme) => ({
         marginLeft:'4%'
     },
     myclass1: {
-        marginLeft:'2%'
+        marginLeft:'2%',
+        
+    },
+    myclass2: {
+        // backgroundColor: '#2d3436',
+        backgroundColor: '#081C15',
+        paddingLeft:'1%',
     },
     textclass: {
         color:'white',
         padding:'10px',
     },
+    textclass2:{
+
+    },
     bgclass:{
-        backgroundColor: '#2d3436',
-        backgroundImage: 'linear-gradient(315deg, #2d3436 0%, #000000 74%)',
+        backgroundColor: '#457B9D',
+        // backgroundImage: '#457B9D',
         elevation:30,
     },
-
+    bgclass1:{
+        backgroundColor: '#575757',
+    },
+    bgclass2:{
+        backgroundImage: `url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnyKdT_YR9I2OOqWE_Am3fAifdWNYW0EN7Lw&usqp=CAU")` ,
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+        width:'90vw',
+        maxWidth:'1200px',
+        opacity: '0.4'
+    },
+    white:{
+        backgroundColor: '#ffffff'
+    },
     headerclass:{
         
       },
       containerclass:{
        
       },
+      footer1:{
+        backgroundColor: '#081C15',
+        // backgroundImage: `url(${bgd})`, 
+        // backgroundImage: `url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnyKdT_YR9I2OOqWE_Am3fAifdWNYW0EN7Lw&usqp=CAU")` ,
+        
+      },
+      footer2:{
+        backgroundColor: '#081C15',
+    },
       paperclass:{
           width:'100%',
           height:'100%',
@@ -59,6 +100,7 @@ const useStyles = makeStyles((theme) => ({
       paperclass1:{
           width:'90vw',
           maxWidth:'1200px',
+          backgroundColor: '#575757',
       },
 
       root12: {
@@ -77,6 +119,8 @@ function Home() {
     const [shop,setshop] = React.useState([])
     const [apartment,setapartment] = React.useState([])
     const [coupons,setcoupons] = React.useState([])
+    const isSmall = useMediaQuery("(max-width: 600px)");
+
 
     React.useEffect(async() => {
         const config = {
@@ -216,7 +260,7 @@ function Home() {
             },
             config:config
           });
-          
+          console.log(res.data.results);
           setcoupons(res.data.results);
           
           
@@ -301,7 +345,8 @@ function Home() {
             alignItems="center"
             
             >
-            <Paper elevation={5} className={classes.paperclass1}>
+                {/* <div className={demowrap}></div> */}
+            <Paper elevation={5} className={classes.bgclass2}>
                 <br />
             
             <Grid
@@ -337,15 +382,24 @@ function Home() {
            
             
             >
-            <div className={classes.root12}>
-            <TextField id="city" label="City" variant="outlined" name="city" value={input.city} onInput={handleinput}/>
-            </div>
-            <div className={classes.root12}>
-            <TextField id="state" label="State" variant="outlined" name="state" value={input.state} onInput={handleinput}/>
-            </div>
-            <div className={classes.root12}>
-            <TextField id="country" label="Country" variant="outlined" name="country" value={input.country} onInput={handleinput}/>
-            </div>
+                {/* <div className={classes.white}> */}
+
+                    {/* <div className={classes.root12}> */}
+                    <TextField id="city" label="City" variant="outlined" name="city" value={input.city} onInput={handleinput}/>
+                    {/* </div> */}
+                {/* </div> */}
+                {/* <div className={classes.white}> */}
+
+                    {/* <div className={classes.root12}> */}
+                    <TextField id="state" label="State" variant="outlined" name="state" value={input.state} onInput={handleinput}/>
+                    {/* </div> */}
+                {/* </div> */}
+                {/* <div className={classes.white}> */}
+
+                    {/* <div className={classes.root12}> */}
+                    <TextField id="country" label="Country" variant="outlined" name="country" value={input.country} onInput={handleinput}/>
+                    {/* </div> */}
+            
 
             </Grid>
 
@@ -393,7 +447,9 @@ function Home() {
                 className={classes.myclass}
                 >
                 <Typography variant='h6'>
-                    <Link to='/rooms/?category=Deluxe+room' style={{textDecoration:'none',color:'black'}}>Our Deluxe Rooms...</Link>
+                    <Box fontSize={25}>
+                        <Link to='/rooms/?category=Deluxe+room' style={{textDecoration:'none',color:'black'}}>Our Deluxe Rooms...</Link>
+                    </Box>
                 </Typography>
                 </div>
                 <br />
@@ -411,7 +467,10 @@ function Home() {
                 className={classes.myclass}
                 >
                 <Typography variant='h6'>
+                    <Box fontSize={25}>
+
                     <Link to='/rooms/?category=Classic+room' style={{textDecoration:'none',color:'black'}}>Our Classic Rooms...</Link>
+                    </Box>
                 </Typography>
                 </div>
                 <br />
@@ -428,7 +487,9 @@ function Home() {
                 className={classes.myclass}
                 >
                 <Typography variant='h6'>
+                    <Box fontSize={25}>
                     <Link to='/rooms/?category=Single' style={{textDecoration:'none',color:'black'}}>Our Single Rooms...</Link>
+                    </Box>
                 </Typography>
                 </div>
                 <br />
@@ -441,7 +502,11 @@ function Home() {
                 className={classes.myclass}
                 >
                 <Typography variant='h6'>
+                    <Box fontSize={25}>
+
                     <Link to='/shops/' style={{textDecoration:'none',color:'black'}}>Our Shops...</Link>
+                    </Box>
+
                 </Typography>
                 </div>
                 <br />
@@ -455,7 +520,10 @@ function Home() {
                 className={classes.myclass}
                 >
                 <Typography variant='h6'>
+                    <Box fontSize={25}>
+
                     <Link to='/apartments/' style={{textDecoration:'none',color:'black'}}>Our Housing...</Link>
+                    </Box>
                 </Typography>
                 </div>
                 <br />
@@ -465,80 +533,190 @@ function Home() {
             
             <Paper elevation={5} className={classes.paperclass}>
             <div className={classes.bgclass}>
-            <div
-                className={classes.myclass}
-                >
+            <div   className={classes.myclass}>
             <Typography variant='h6' className={classes.textclass}>
+                <Box fontSize={25}>
+
                 %Offers and discount
+                </Box>
             </Typography>
             </div>
             </div>
             </Paper>
             <br />
-
             {
                 coupons.length>=1 ? <>
                 
                 <div className={classes.myclass1}>
                 <Scrollcoupons rooms={coupons}/></div> <br /></> : null
             }
+            <div>
+            </div>
 
 
-            <Grid
-            container
-            direction="row"
-            justify="center"
-            alignItems="center"
-            className={classes.gridclass1}
-            spacing={1}
-            >
-                <Grid item xs={4} >
-                <Paper elevation={5} className='gridme1' >
-                <Grid
-            container
-            direction="row"
-            justify="center"
-            alignItems="center"
-            >
-                hy
-            </Grid>
-            </Paper>
-                </Grid>
+            <div className={classes.myclass2}>
+            <Typography variant='h6'className={classes.textclass} >
+                <Box lineHeight={2} fontSize={28}>
+                La Kavatos Production
+                </Box>
+            </Typography>
+            </div>
 
-                <Grid item xs={4} >
-                <Paper elevation={5} className='gridme1' >
-                <Grid
+                {/* <br></br> */}
+    <div className={classes.footer1}>
+
+        <Grid
             container
             direction="row"
-            justify="center"
-            alignItems="center"
+            justify="space-evenly"
+            alignItems="flex-start"
+            spacing={4}
             >
-                hy
-            </Grid>
-            </Paper>
-                </Grid>
 
                 
-                <Grid item xs={4} >
-                <Paper elevation={5} className='gridme1'>
+            <Grid item xs={12} sm={3}>
+                <Grid
+                container
+                direction="row"
+                justify="flex-start"
+                alignItems="flex-start"
+                >
+                <Grid item xs={12}>
+                    <Typography variant='h6' className={classes.textclass}>
+                        <Box lineHeight={1} fontSize={25}>
+                        Rentit
+                        </Box>
+                    </Typography>
+                </Grid>
+                
+                
+                <Grid item >
+                        <Box  fontSize={25} mr={2}>
+                        <Link href="#" onClick='#' >
+                            <FacebookIcon color='white'/>
+                        </Link>
+                        </Box>
+                </Grid>
+                <Grid item >
+                        
+                        <Box  fontSize={25} mr={2}>
+                        <Link href="#" onClick='#' >
+                            <InstagramIcon/>
+                        </Link>
+                        </Box>
+                </Grid>
+                <Grid item >
+                        <Box  fontSize={25} mr={2}>
+                        <Link href="#" onClick='#' >
+                            <MailIcon/>
+                        </Link>
+                        </Box>
+                </Grid>
+                <Grid item >
+                        <Box  fontSize={25} >
+                        <Link href="#" onClick='#' >
+                            <TwitterIcon/>
+                        </Link>
+                        </Box>
+                </Grid>
+                
+            </Grid>
+        </Grid>
+
+
+        <Grid item xs={12} sm={2}>
+        <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="flex-start"
+            >
+                <Grid item xs={12}>
+                    <Typography variant='h6' className={classes.textclass}>
+                        <Box lineHeight={0}>
+
+                        Hit Counter
+                        </Box>
+                    </Typography>
+                </Grid>
+                <Grid item xs={12}>
+                    <Typography variant='subtitle1' className={classes.textclass}>
+                <Box lineHeight={1} fontSize={15}>
+                        (No. of rooms booked from our website)
+                </Box>
+                    </Typography>
+                </Grid>
+            </Grid>
+                </Grid>
+                {/* <Divider orientation="vertical" flexItem={true} light={true}/> */}
+
+                <Grid item xs={12} sm={2}>
+                {/* <Paper elevation={5} > */}
                 <Grid
             container
             direction="row"
             justify="center"
-            alignItems="center"
+            alignItems="flex-start"
             >
-                hy
+                <Grid item xs={12}>
+                    <Typography variant='h6' className={classes.textclass}>
+                        About Us
+                    </Typography>
+                </Grid>
             </Grid>
-            </Paper>
+            {/* </Paper> */}
+                </Grid>
+                {/* <Divider orientation="vertical" flexItem  light/> */}
+                
+                
+                <Grid item xs={12} sm={3}>
+                {/* <Paper elevation={5}> */}
+                <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="flex-start"
+            >
+                <Grid item xs={12}>
+                    <Typography variant='h6' className={classes.textclass}>
+                        Terms and conditions
+                    </Typography>
                 </Grid>
                 
             </Grid>
-         
+            {/* </Paper> */}
+                
+                </Grid>
+            </Grid>
+                {/* <Divider  /> */}
+         {/* <div >
+         <Box  ml={3}>
+             <br></br>
+             <Typography variant='h6' className={classes.textclass}>
+                <Box >
+                    Contact Us :-
+                 </Box>
+             </Typography>
+             <Typography variant='subtitle1' className={classes.textclass}>
+                <Box  >
+                     Email
+                 </Box>
+             </Typography>
+             <Typography variant='subtitle1' className={classes.textclass}>
+                <Box  > 
+                     Phone no.
+                 </Box>
+             </Typography>
+             <br></br>
+         </Box>
+         </div> */}
+         </div>
+             
 
             
             
                         
-        </div>
+    </div>
     )
 }
 

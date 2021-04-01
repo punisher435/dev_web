@@ -349,4 +349,26 @@ filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#EA98DA", en
   background-color: black;
 
 }
+.bgclass2 {
+  position: relative;
+  color: white;
+  /*Note, you can change the color to your choice depending on your 
+  image and what color blends with it*/
+}
+.bgclass2::after{
+  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnyKdT_YR9I2OOqWE_Am3fAifdWNYW0EN7Lw&usqp=CAU")no-repeat fixed top;
+  
+    /* also change the blend mode to what suits you, from darken, to other 
+    many options as you deem fit*/
+    background-size: cover;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    z-index: -1;
+    /* width:'90vw', */
+    max-width:'1200px',
+  
+}
 
