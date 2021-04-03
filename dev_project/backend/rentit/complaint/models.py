@@ -30,6 +30,8 @@ class room_complaints(models.Model):
     message = models.TextField()
     photo1=models.ImageField(_("Image"),upload_to=upload_to_room_complaint,null=True,blank=True)
 
+    reply = models.TextField(null=True,blank=True)
+
     customer_fullfilled = models.BooleanField(default=False)
     seller_fullfilled = models.BooleanField(default=False)
 

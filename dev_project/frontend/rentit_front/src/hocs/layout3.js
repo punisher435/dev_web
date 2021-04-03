@@ -31,6 +31,7 @@ import AccountBalanceWalletOutlinedIcon from '@material-ui/icons/AccountBalanceW
 import {Link} from 'react-router-dom'
 import FeedbackOutlinedIcon from '@material-ui/icons/FeedbackOutlined';
 import '../components/css/App.css'
+import CommentOutlinedIcon from '@material-ui/icons/CommentOutlined';
 
 const drawerWidth = 240;
 
@@ -173,6 +174,11 @@ function Dashboarddrawer(props) {
         <Link to='/dashboard/profile' style={{textDecoration:'none',color:'black'}}><ListItem button key="My Profile">
             <ListItemIcon><PersonOutlinedIcon /></ListItemIcon>
             <ListItemText primary="My Profile" />
+        </ListItem></Link>
+
+        <Link to='/dashboard/complaints/room' style={{textDecoration:'none',color:'black'}}><ListItem button key="My Profile">
+            <ListItemIcon><CommentOutlinedIcon /></ListItemIcon>
+            <ListItemText primary="Room complaints" />
         </ListItem></Link>
 
         
