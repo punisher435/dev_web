@@ -19,6 +19,7 @@ import AccessibilityIcon from '@material-ui/icons/Accessibility';
 import WhatshotIcon from '@material-ui/icons/Whatshot';
 import BathtubIcon from '@material-ui/icons/Bathtub';
 import { IconContext } from "react-icons";
+import WifiOutlinedIcon from '@material-ui/icons/WifiOutlined';
 // import Box from '@material-ui/core/Box'
 
 const AntTabs = withStyles({
@@ -104,187 +105,95 @@ export default function CustomizedTabs({post}) {
  <IconContext.Provider value={{ size: "1.5em",}}>
          { 
         post.wifi ? 
-        <AntTab label="Wifi Facility" icon={<WifiIcon />} />
-        // <Grid item ><div><Icon fontSize='small' ><WifiIcon /></Icon><p style={mystyle}>Wifi Facility</p></div></Grid> 
-        : <></>
+        <AntTab label="Wifi Facility" icon={<WifiOutlinedIcon />} /> 
+        : null
         }
         
         { 
         post.room_TV ? 
         <AntTab label="Room TV" icon={<TvOutlinedIcon />} /> 
-        // <Grid item ><div><Icon fontSize='small'><TvOutlinedIcon /></Icon><p>Room TV</p></div> </Grid> 
-        : <p></p>
+        : null
         }
         { 
         post.house_TV ? 
         <AntTab label="House TV" icon={<TvOutlinedIcon />} />
-        // <Grid item ><div><Icon fontSize='small'><TvOutlinedIcon /></Icon><p>House TV</p></div></Grid> 
-        : <></>
+        : null
         }
         { 
         post.balcony ? 
         <AntTab label="Balcony" icon={<MeetingRoomOutlinedIcon />} />
-        : <></>
+        : null
         }
         { 
         post.separate_washroom ? 
         <AntTab label="Separate washroom" icon={<BathtubIcon />} />
-        : <></>
+        : null
         }
         { 
         post.purified_water ? 
             <AntTab label="Pure Water" icon={<IoWaterOutline/>} />
-        : <></>
+        : null
         }
         { 
         post.geyser ? 
         <AntTab label="Hot Water" icon={<HotTubIcon />} />
-        : <></>
+        : null
         }
         { 
         post.AC ? 
         <AntTab label="AC" icon={<AcUnitIcon />} />
-        : <></>
+        : null
         }
         { 
         post.cooler ? 
         <AntTab label="Cooler" icon={<ToysIcon />} />
-        : <></>
+        : null
         }
         { 
         post.laundry ? 
         <AntTab label="Laundry" icon={<LocalLaundryServiceIcon />} />
-        : <></>
+        : null
         }
         { 
         post.iron ?
         <AntTab label="Iron" icon={<WhatshotIcon />} />
-        : <></>
+        : null
         }
         { 
         post.guest_allowed ? 
         <AntTab label="Breakfast" icon={<AccessibilityIcon />} />
-        : <></>
+        : null
         }
         { 
         post.breakfast ? 
         <AntTab label="" icon={<FreeBreakfastIcon />} />
-        : <></>
+        : null
         }
         { 
         post.lunch ? 
         <AntTab label="lunch" icon={<FastfoodIcon />} />
-        : <></>
+        : null
         }
         { 
         post.dinner ? 
         <AntTab label="dinner" icon={<BiFoodMenu />} />
-        : <></>
+        : null
         }
         { 
         post.cctv_building ? 
         <AntTab label="CCTV" icon={<BiCctv />} />
-        : <></>
+        : null
         }
         { 
         post.building_guard ? 
         <AntTab label="Security guard" icon={<GiGuards />} />
-        : <></>
+        : null
         }
         </IconContext.Provider>
         </AntTabs>
-        {/* <Typography className={classes.padding} /> */}
       </div>
       
     </div>
   );
 }
 
-
-
-// import React from 'react';
-// import PropTypes from 'prop-types';
-// import { makeStyles } from '@material-ui/core/styles';
-// import AppBar from '@material-ui/core/AppBar';
-// import Tabs from '@material-ui/core/Tabs';
-// import Tab from '@material-ui/core/Tab';
-// import PhoneIcon from '@material-ui/icons/Phone';
-// import FavoriteIcon from '@material-ui/icons/Favorite';
-// import PersonPinIcon from '@material-ui/icons/PersonPin';
-// import HelpIcon from '@material-ui/icons/Help';
-// import ShoppingBasket from '@material-ui/icons/ShoppingBasket';
-// import ThumbDown from '@material-ui/icons/ThumbDown';
-// import ThumbUp from '@material-ui/icons/ThumbUp';
-// import Typography from '@material-ui/core/Typography';
-// import Box from '@material-ui/core/Box';
-
-// function TabPanel(props) {
-//   const { children, value, index, ...other } = props;
-
-//   return (
-//     <div
-//       role="tabpanel"
-//       hidden={value !== index}
-//       id={`scrollable-force-tabpanel-${index}`}
-//       aria-labelledby={`scrollable-force-tab-${index}`}
-//       {...other}
-//     >
-//       {value === index && (
-//         <Box p={0}>
-//           <Typography>{children}</Typography>
-//         </Box>
-//       )}
-//     </div>
-//   );
-// }
-
-// TabPanel.propTypes = {
-//   children: PropTypes.node,
-//   index: PropTypes.any.isRequired,
-//   value: PropTypes.any.isRequired,
-// };
-
-// function a11yProps(index) {
-//   return {
-//     id: `scrollable-force-tab-${index}`,
-//     'aria-controls': `scrollable-force-tabpanel-${index}`,
-//   };
-// }
-
-// const useStyles = makeStyles((theme) => ({
-//   root: {
-//     flexGrow: 1,
-//     width: '100%',
-//     backgroundColor: theme.palette.background.paper,
-//   },
-// }));
-
-// export default function ScrollableTabsButtonForce() {
-//   const classes = useStyles();
-//   const [value, setValue] = React.useState(0);
-
-//   const handleChange = (event, newValue) => {
-//     setValue(newValue);
-//   };
-
-//   return (
-//     <div className={classes.root}>
-//         <Tabs
-//           variant="scrollable"
-//           scrollButtons="on"
-//           indicatorColor="primary"
-//           textColor="primary"
-//           aria-label="scrollable force tabs example"
-//         >
-//           <Tab icon={<PhoneIcon />} />
-//           <Tab  icon={<FavoriteIcon />}   />
-//           <Tab  icon={<PersonPinIcon />}  />
-//           <Tab  icon={<HelpIcon />}  />
-//           <Tab  icon={<ShoppingBasket />}  />
-//           <Tab  icon={<ThumbDown />} />
-//           <Tab  icon={<ThumbUp />}  />
-//         </Tabs>
-      
-//     </div>
-//   );
-// }
