@@ -12,8 +12,11 @@ import Grid from '@material-ui/core/Grid';
 const useStyles = makeStyles({
   root: {
    
-    width: 300,
-    margin:10,
+    width: 250,
+    marginBottom: 5,
+    marginLeft: 20,
+    marginRight: 20,
+    marginTop: 5,
     boxShadow: '10px 10px 5px grey',
     
   },
@@ -23,18 +26,18 @@ const useStyles = makeStyles({
     transform: 'scale(0.8)',
   },
   title: {
-    fontSize: 30,
+    fontSize: 23,
     color: 'white',
     fontWeight: 'bold',
   },
 
   title1: {
-    fontSize: 15,
+    fontSize: 12,
     color: 'white',
     fontWeight: 'bold',
   },
   pos: {
-    marginBottom: 12,
+    marginBottom: 5,
   },
   coupontext:{
     color: 'white',
