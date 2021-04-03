@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     'bookings',
     'coupons',
     'admin_me',
+    'complaint',
 ]
 
 MIDDLEWARE = [

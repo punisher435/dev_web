@@ -96,6 +96,9 @@ urlpatterns = [
     #seller_reviews
     path('sourceuserjcnssjwhd9329hdw/',include('user.urls')),
 
+    #complaints
+    path('sourcenjjbrtrtd7668ugf787t87t9yuigff/',include('complaint.urls_room')),
+
 ]
 
 urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
