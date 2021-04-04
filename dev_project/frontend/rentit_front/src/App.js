@@ -56,6 +56,7 @@ import MyReviews from './components/seller_reviews'
 import Analytics from './components/analytics'
 import Admin from './containers/admin'
 import Complaintroom from './components/mycomplaints'
+import Complaintroomdetails from './containers/complaintdetails'
 
 
 require('dotenv').config()
@@ -143,6 +144,7 @@ function App(props) {
 
 
                 <Route exact path='/dashboard/complaints/room' component={Complaintroom}/>
+                <Route exact path='/complaints/room/:complaint_id' component={Complaintroomdetails}/>
 
 
               </div>

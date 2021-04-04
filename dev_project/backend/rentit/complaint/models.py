@@ -22,7 +22,9 @@ class room_complaints(models.Model):
     room_id = models.ForeignKey(rooms,on_delete=models.PROTECT,related_name="complaint_room_id")
     room_name = models.CharField(max_length=255)
     customer_id= models.ForeignKey(user,on_delete=models.PROTECT,related_name="complaint_room_customer_id")
-    seller_id= models.ForeignKey(user,on_delete=models.PROTECT,related_name="complaint_room_seller_id")
+    customer_name = models.CharField(max_length=255)
+    seller_id = models.ForeignKey(user,on_delete=models.PROTECT,related_name="complaint_room_seller_id")
+    seller_name = models.CharField(max_length=255)
 
     created_at = models.DateTimeField(auto_now_add=True)
 

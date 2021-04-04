@@ -58,6 +58,7 @@ class room_complaint(viewsets.ViewSet):
 
 
     def retrieve(self,request,pk=None):
+        
         try:
             queryset = room_complaints.objects.all()
             if request.user.is_seller:

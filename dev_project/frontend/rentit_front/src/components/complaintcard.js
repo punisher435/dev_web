@@ -10,6 +10,7 @@ import Avatar from '@material-ui/core/Avatar';
 import Chip from '@material-ui/core/Chip';
 import FaceIcon from '@material-ui/icons/Face';
 import DoneIcon from '@material-ui/icons/Done'
+import {Link} from 'react-router-dom'
 
 const useStyles = makeStyles({
   root: {
@@ -101,7 +102,7 @@ export default function OutlinedCard({complaint}) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">View Details</Button>
+        <Link to={`/complaints/room/${complaint.complaint_id}`} style={{textDecoration:'none'}} ><Button size="small">View Details</Button></Link>
       </CardActions>
 
       </div>  
