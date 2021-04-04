@@ -197,7 +197,8 @@ function ProfileForm (props){
           setredirect(true)
         })
         .catch((err) => {
-          setmessage(`Your ${err.response.data} is linked to some other account!`)
+          setmessage(`Error`)
+          setopen1(true)
          
         })
               
@@ -243,7 +244,7 @@ function ProfileForm (props){
 
   if(redirect==true)
   {
-    return <Redirect to='/dashboard/profile' />
+    return <Redirect to='/dashboard/complaints/room' />
   }
   if(error===true)
   {
