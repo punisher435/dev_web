@@ -40,3 +40,67 @@ class room_complaints(models.Model):
     customer_fullfilled = models.BooleanField(default=False)
     seller_fullfilled = models.BooleanField(default=False)
 
+
+def upload_to_shop_complaint(instance, filename):
+    return 'complaints/shops/{filename}'.format(filename=filename)
+
+class shop_complaints(models.Model):
+    complaint_id = models.UUIDField( 
+         primary_key = True, 
+         default = uuid.uuid4, 
+         editable = False,
+         unique = True)
+
+    shop_id = models.ForeignKey(shops,on_delete=models.PROTECT,related_name="complaint_shop_id")
+    shop_name = models.CharField(max_length=255)
+    customer_id= models.ForeignKey(user,on_delete=models.PROTECT,related_name="complaint_shop_customer_id")
+    customer_name = models.CharField(max_length=255)
+    seller_id = models.ForeignKey(user,on_delete=models.PROTECT,related_name="complaint_shop_seller_id")
+    seller_name = models.CharField(max_length=255)
+
+    customer_contact = models.CharField(max_length=255)
+    seller_contact = models.CharField(max_length=255)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    subject = models.CharField(max_length=255)
+    message = models.TextField()
+    photo1=models.ImageField(_("Image"),upload_to=upload_to_shop_complaint,null=True,blank=True)
+
+    reply = models.TextField(null=True,blank=True)
+
+    customer_fullfilled = models.BooleanField(default=False)
+    seller_fullfilled = models.BooleanField(default=False)
+
+
+def upload_to_apartment_complaint(instance, filename):
+    return 'complaints/apartments/{filename}'.format(filename=filename)
+
+class apartment_complaints(models.Model):
+    complaint_id = models.UUIDField( 
+         primary_key = True, 
+         default = uuid.uuid4, 
+         editable = False,
+         unique = True)
+
+    apartment_id = models.ForeignKey(apartments,on_delete=models.PROTECT,related_name="complaint_apartment_id")
+    apartment_name = models.CharField(max_length=255)
+    customer_id= models.ForeignKey(user,on_delete=models.PROTECT,related_name="complaint_apartment_customer_id")
+    customer_name = models.CharField(max_length=255)
+    seller_id = models.ForeignKey(user,on_delete=models.PROTECT,related_name="complaint_apartment_seller_id")
+    seller_name = models.CharField(max_length=255)
+
+    customer_contact = models.CharField(max_length=255)
+    seller_contact = models.CharField(max_length=255)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    subject = models.CharField(max_length=255)
+    message = models.TextField()
+    photo1=models.ImageField(_("Image"),upload_to=upload_to_apartment_complaint,null=True,blank=True)
+
+    reply = models.TextField(null=True,blank=True)
+
+    customer_fullfilled = models.BooleanField(default=False)
+    seller_fullfilled = models.BooleanField(default=False)
+
