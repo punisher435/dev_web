@@ -187,7 +187,7 @@ function Myrooms(props) {
       }} style={{textDecoration:'none'}} />
     }
 
-    if(props.isAuthenticated && myrooms){
+    if(props.profile && myrooms){
     
     
     return (
@@ -215,27 +215,29 @@ function Myrooms(props) {
 
             </Grid>
 
-            <div className={classes.exampleWrapper}>
-        <SpeedDial
-          ariaLabel="SpeedDial example"
-          className={classes.speedDial}
-          hidden={hidden}
-          icon={<SpeedDialIcon />}
-          onClose={handleClose}
-          onOpen={handleOpen}
-          open={open}
-          direction={direction}
-        >
-          {actions.map((action) => (
-            <SpeedDialAction
-              key={action.name}
-              icon={action.icon}
-              tooltipTitle={action.name}
-              onClick={handleredirect}
-            />
-          ))}
-        </SpeedDial>
-      </div>
+            {
+              props.profile.is_seller===false ?  <div className={classes.exampleWrapper}>
+              <SpeedDial
+                ariaLabel="SpeedDial example"
+                className={classes.speedDial}
+                hidden={hidden}
+                icon={<SpeedDialIcon />}
+                onClose={handleClose}
+                onOpen={handleOpen}
+                open={open}
+                direction={direction}
+              >
+                {actions.map((action) => (
+                  <SpeedDialAction
+                    key={action.name}
+                    icon={action.icon}
+                    tooltipTitle={action.name}
+                    onClick={handleredirect}
+                  />
+                ))}
+              </SpeedDial>
+            </div> : null
+            }
             
 
             
