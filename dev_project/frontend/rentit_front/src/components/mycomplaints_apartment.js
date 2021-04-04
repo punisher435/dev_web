@@ -182,7 +182,7 @@ function Myrooms(props) {
     if(redirect)
     {
       return <Redirect to={{
-        pathname: `/dashboard/complaints/apartment/create`,
+        pathname: `/dashboard/complaints/housing/create`,
        
       }} style={{textDecoration:'none'}} />
     }

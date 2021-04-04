@@ -55,9 +55,18 @@ import ApartmentListing from './containers/apartmentlisting'
 import MyReviews from './components/seller_reviews'
 import Analytics from './components/analytics'
 import Admin from './containers/admin'
+
 import Complaintroom from './components/mycomplaints'
 import Complaintroomdetails from './containers/complaintdetails'
 import Complaintform from './containers/complaint_form'
+
+import Complaintshop from './components/mycomplaints_shop'
+import Complaintshopdetails from './containers/complaintdetails_shop'
+import Complaintformshop from './containers/complaint_form_shop'
+
+import Complainthousing from './components/mycomplaints_apartment'
+import Complainthousingdetails from './containers/complaintdetails_apartment'
+import Complaintformhousing from './containers/complaint_form_apartment'
 
 
 require('dotenv').config()
@@ -147,6 +156,14 @@ function App(props) {
                 <Route exact path='/dashboard/complaints/room' component={Complaintroom}/>
                 <Route exact path='/complaints/room/:complaint_id' component={Complaintroomdetails}/>
                 <Route exact path='/dashboard/complaints/room/create' component={Complaintform}/>
+
+                <Route exact path='/dashboard/complaints/shop' component={Complaintshop}/>
+                <Route exact path='/complaints/shop/:complaint_id' component={Complaintshopdetails}/>
+                <Route exact path='/dashboard/complaints/shop/create' component={Complaintformshop}/>
+
+                <Route exact path='/dashboard/complaints/housing' component={Complainthousing}/>
+                <Route exact path='/complaints/housing/:complaint_id' component={Complainthousingdetails}/>
+                <Route exact path='/dashboard/complaints/housing/create' component={Complaintformhousing}/>
 
 
               </div>
