@@ -106,6 +106,8 @@ export default function CustomizedTabs({post}) {
          { 
         post.wifi ? 
         <AntTab label="Wifi Facility" icon={<WifiOutlinedIcon />} /> 
+        // <AntTab label="Room TV" icon={<TvOutlinedIcon />} /> 
+        
         : null
         }
         

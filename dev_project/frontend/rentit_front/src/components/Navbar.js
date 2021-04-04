@@ -14,6 +14,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
+import Box from '@material-ui/core/Box';
 
 import { Link, NavLink,Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -289,7 +290,7 @@ function RenteneAppBar(props) {
         <Toolbar>
         <NavLink className={`nav-link ${styles.textclass}`} exact to='/'>
           <Typography className={classes.title} variant="h6" noWrap>
-            Rent=ene
+            Rentit
           </Typography>
           </NavLink>
           <NavLink className={`nav-link ${styles.textclass}`} exact to='/about'>
@@ -304,12 +305,16 @@ function RenteneAppBar(props) {
           {
             props.isAuthenticated ? null : <><NavLink className={`nav-link ${styles.textclass3}`} exact to='/login'>
             <Typography className={classes.body} variant="h6" noWrap>
+              <Box mt={1}>
               Login
+              </Box>
             </Typography>
             </NavLink>
             <NavLink className={`nav-link ${styles.textclass3}`} exact to='/signup'>
             <Typography className={classes.body} variant="h6" noWrap>
+            <Box mt={1}>
               Sign up
+              </Box>
             </Typography>
             </NavLink></>
           }
