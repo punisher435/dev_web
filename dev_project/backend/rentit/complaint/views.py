@@ -78,6 +78,57 @@ class room_complaint(viewsets.ViewSet):
 
     def create(self,request):
         print(request.data)
+
+    def update(self,request,pk=None):
+
+        try:
+
+            data = json.loads(request.body.decode('utf-8'))['data']
+
+            queryset = room_complaints.objects.all()
+            
+            queryset = queryset.filter(seller_id= request.user)
+            complaint = get_object_or_404(queryset,pk=pk)
+           
+            if complaint.reply!=None or complaint.reply!='':
+                complaint.reply = data
+                complaint.save()
+            
+
+            serializer = room_complaints_serializer(complaint,context={'request':request})
+
+            return Response(serializer.data,status=status.HTTP_202_ACCEPTED)
+
+        except:
+
+            return Response('ERROR', status=status.HTTP_400_BAD_REQUEST)
+
+    def partial_update(self,request,pk=None):
+        try:
+
+
+            queryset = room_complaints.objects.all()
+            
+            if request.user.is_seller:
+                queryset = queryset.filter(seller_id= request.user)
+                complaint = get_object_or_404(queryset,pk=pk)
+                complaint.seller_fullfilled = True
+            else:
+                queryset = queryset.filter(customer_id= request.user)
+                complaint = get_object_or_404(queryset,pk=pk)
+                complaint.customer_fullfilled = True
+
+            complaint.save()            
+
+            serializer = room_complaints_serializer(complaint,context={'request':request})
+
+            return Response(serializer.data,status=status.HTTP_202_ACCEPTED)
+
+        except:
+
+            return Response('ERROR', status=status.HTTP_400_BAD_REQUEST)
+
+
         
 
 

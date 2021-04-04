@@ -84,7 +84,7 @@ function Complaintdetails(props) {
                 try{const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcenjjbrtrtd7668ugf787t87t9yuigff/complaints/room/${complaintid}/`,config);
                 
                 setcomplaint(res.data)
-                console.log(res.data)
+               
 
                 setrows([
                   createData('Issued by', res.data.customer_name),
@@ -133,12 +133,27 @@ function Complaintdetails(props) {
        
         try{const res = await axios.put(`${process.env.REACT_APP_API_URL}/sourcenjjbrtrtd7668ugf787t87t9yuigff/complaints/room/${complaintid}/`,body,config);
         
-        
+        setcomplaint(res.data)
+               
+
+                setrows([
+                  createData('Issued by', res.data.customer_name),
+                  createData('Issued on', res.data.room_name),
+                  createData('Owner', res.data.seller_name),
+                  createData('Issued date', res.data.created_at.slice(0,10)),
+                  createData('Customer status', `${res.data.customer_fullfilled ? 'Closed' :'Open'}`),
+                  createData('Seller status', `${res.data.seller_fullfilled ? 'Closed' :'Open'}`),
+                  createData('Closed', `${res.data.seller_fullfilled && res.data.customer_fullfilled ? 'Yes' :'No'}`),
+                  
+                  
+                ])
         
       
       }
         catch{
-            seterror(true)
+
+          seterror(true)
+            
         }
     }
 
@@ -154,6 +169,9 @@ function Complaintdetails(props) {
               'Authorization': `JWT ${localStorage.getItem('access')}`,
       },
     };
+    const body = {
+      data:'',
+    }
 
     
     
@@ -161,14 +179,29 @@ function Complaintdetails(props) {
     
     {
      
-      try{const res = await axios.patch(`${process.env.REACT_APP_API_URL}/sourcenjjbrtrtd7668ugf787t87t9yuigff/complaints/room/${complaintid}/`,config);
+      try{const res = await axios.patch(`${process.env.REACT_APP_API_URL}/sourcenjjbrtrtd7668ugf787t87t9yuigff/complaints/room/${complaintid}/`,body,config);
       
-      
+      setcomplaint(res.data)
+               
+
+                setrows([
+                  createData('Issued by', res.data.customer_name),
+                  createData('Issued on', res.data.room_name),
+                  createData('Owner', res.data.seller_name),
+                  createData('Issued date', res.data.created_at.slice(0,10)),
+                  createData('Customer status', `${res.data.customer_fullfilled ? 'Closed' :'Open'}`),
+                  createData('Seller status', `${res.data.seller_fullfilled ? 'Closed' :'Open'}`),
+                  createData('Closed', `${res.data.seller_fullfilled && res.data.customer_fullfilled ? 'Yes' :'No'}`),
+                  
+                  
+                ])
       
     
     }
       catch{
-          seterror(true)
+
+        seterror(true)
+         
       }
   }
 
