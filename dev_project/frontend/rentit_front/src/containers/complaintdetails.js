@@ -25,7 +25,18 @@ const useStyles = makeStyles((theme) => ({
       border: '1px solid black',
       padding:10,
       borderRadius:'20%'
+    },
+    imgclass:{
+      width:'90vw',
+      maxWidth:'400px',
+      
+    },
+    myclass:{
+      width:'80vw',
+      maxWidth:'500px',
+
     }
+
     
    
   }));
@@ -96,7 +107,7 @@ function Complaintdetails(props) {
     }
 
 
-    if(complaint && rows)
+    if(complaint && rows && props.profile)
 {
     return (
         <div>
@@ -110,7 +121,10 @@ function Complaintdetails(props) {
         justify="center"
         alignItems="center"
         >
-          
+          <Grid item className={classes.imgclass}>
+          <img src={complaint.photo1} />
+          </Grid>
+          <br />
 
             <Grid item xs={10}>
             <Tablecomp comp={complaint.complaint_id} rows={rows}/>
@@ -131,25 +145,41 @@ function Complaintdetails(props) {
           </Typography>
           <br />
 
-          <Grid item>
-          <Typography variant='body1' className={classes.textclass}>
-            {complaint.message}
-          </Typography>
-          </Grid>
+          <div className={classes.myclass}>
+          <TextField
+            id="message"
+            label="Complaint message"
+            multiline
+            
+            value={complaint.message}
+            variant="outlined"
+            onInput={(e) => {e.preventDefault();}}
+            fullWidth
+          />  
+          </div>
 
           <br />
 
-          <Grid item>
-          <Typography variant='body1' className={classes.textclass}>
-            {complaint.reply==='' ? 'Your reply' : complaint.reply}
-          </Typography>
-          </Grid>
+          <div className={classes.myclass}>
+          <TextField
+            id="reply1"
+            label="Your reply"
+            multiline
+            fullWidth
+            
+            value={complaint.reply}
+            variant="outlined"
+            onInput={(e) => {e.preventDefault();}}
+          /> 
+          </div> 
+
+          
         </Grid>
 
         <br />
 
         {
-          complaint.reply==='' ?   <Grid
+          complaint.reply==='' && props.profile.is_seller ?   <Grid
           container
           direction="column"
           justify="center"
