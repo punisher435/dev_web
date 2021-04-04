@@ -7,6 +7,8 @@ import axios from 'axios'
 import {makeStyles } from '@material-ui/core/styles';
 import Tablecomp from '../components/complainttable';
 import TextField from '@material-ui/core/TextField';
+import SimpleModal from '../components/imagemodal';
+import Button from '@material-ui/core/Button';
 
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
@@ -29,12 +31,19 @@ const useStyles = makeStyles((theme) => ({
     imgclass:{
       width:'90vw',
       maxWidth:'400px',
+     
       
     },
     myclass:{
       width:'80vw',
       maxWidth:'500px',
 
+    },
+    buttonclass:{
+      padding:0,
+      width:'90vw',
+      maxWidth:'400px',
+      
     }
 
     
@@ -57,6 +66,7 @@ function Complaintdetails(props) {
     const [error,seterror] = useState(false)
     const [rows,setrows] = useState(false)
     const [reply,setreply] = useState('')
+    const [open,changeopen] = useState(false)
 
     React.useEffect(
         async () => {
@@ -97,8 +107,72 @@ function Complaintdetails(props) {
               
         }
     }
+
+
+   
     
     ,[props.isAuthenticated,complaintid])
+
+
+    const handleclick1 = async (e) => {
+      e.preventDefault();
+      const config = {
+        headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `JWT ${localStorage.getItem('access')}`,
+        },
+      };
+
+      const body = {
+        data:reply,
+      }
+      
+      if(props.profile.is_seller)
+      
+      {
+       
+        try{const res = await axios.put(`${process.env.REACT_APP_API_URL}/sourcenjjbrtrtd7668ugf787t87t9yuigff/complaints/room/${complaintid}/`,body,config);
+        
+        
+        
+      
+      }
+        catch{
+            seterror(true)
+        }
+    }
+
+  }
+
+
+
+  const handleclick2 = async (e) => {
+    e.preventDefault();
+    const config = {
+      headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `JWT ${localStorage.getItem('access')}`,
+      },
+    };
+
+    
+    
+    if(props.profile.is_seller)
+    
+    {
+     
+      try{const res = await axios.patch(`${process.env.REACT_APP_API_URL}/sourcenjjbrtrtd7668ugf787t87t9yuigff/complaints/room/${complaintid}/`,config);
+      
+      
+      
+    
+    }
+      catch{
+          seterror(true)
+      }
+  }
+
+}
 
 
     if(error==true)
@@ -111,6 +185,7 @@ function Complaintdetails(props) {
 {
     return (
         <div>
+          <SimpleModal open={open} change={changeopen} photo={complaint.photo1}/>
           <br />
           <br />
             
@@ -122,7 +197,7 @@ function Complaintdetails(props) {
         alignItems="center"
         >
           <Grid item className={classes.imgclass}>
-          <img src={complaint.photo1} />
+          <Button onClick={(e) => {e.preventDefault();changeopen(true)}} className={classes.buttonclass}><img src={complaint.photo1} /></Button>
           </Grid>
           <br />
 
@@ -184,18 +259,47 @@ function Complaintdetails(props) {
           direction="column"
           justify="center"
           alignItems="center"
-          >
+          
+          ><div className={classes.myclass}>
             <TextField
             id="reply"
-            label="Your reply"
+            label="Write your reply"
             multiline
+            fullWidth
             rows={4}
             value={reply}
             variant="outlined"
             onInput={(e) => {e.preventDefault();setreply(e.target.value)}}
           />  
-          </Grid> : null
+          <Grid item><br /></Grid>
+         
+           <Button variant="contained" color="primary" onClick={(e) =>{handleclick1(e);}}>
+        Submit
+      </Button>
+      </div> 
+          </Grid>  : null
         }
+
+
+
+<br />
+<br />
+<Grid
+          container
+          direction="column"
+          justify="center"
+          alignItems="center"
+          
+          >
+
+
+<Button variant="contained" color="secondary" onClick={(e) =>{handleclick2(e);}}>
+        Close complaint
+      </Button>
+
+          </Grid>
+  <br />
+     
 
        
         
