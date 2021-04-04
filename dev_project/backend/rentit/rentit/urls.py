@@ -98,6 +98,8 @@ urlpatterns = [
 
     #complaints
     path('sourcenjjbrtrtd7668ugf787t87t9yuigff/',include('complaint.urls_room')),
+    path('sourcendshf93u029320hfuibh83u12edsygcyg2/',include('complaint.urls_shop')),
+    path('sourceadwh812y18hwdbzbx98121hgebayusbv9891/',include('complaint.urls_apartment')),
 
 ]
 
