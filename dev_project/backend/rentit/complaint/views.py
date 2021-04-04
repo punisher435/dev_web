@@ -255,7 +255,7 @@ class shop_complaint(viewsets.ViewSet):
                 queryset = shopBookings.objects.all()
                 queryset = queryset.filter(customer_id = request.user)
 
-                room = get_object_or_404(rooms.objects.all(),pk=request.data['room_id'])
+                room = get_object_or_404(shops.objects.all(),pk=request.data['room_id'])
             
 
                 x=False
@@ -426,7 +426,7 @@ class apartment_complaint(viewsets.ViewSet):
                 queryset = apartmentBookings.objects.all()
                 queryset = queryset.filter(customer_id = request.user)
 
-                room = get_object_or_404(rooms.objects.all(),pk=request.data['room_id'])
+                room = get_object_or_404(apartments.objects.all(),pk=request.data['room_id'])
             
 
                 x=False

@@ -102,7 +102,7 @@ export default function OutlinedCard({complaint}) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Link to={`/complaints/apartment/${complaint.complaint_id}`} style={{textDecoration:'none'}} ><Button size="small">View Details</Button></Link>
+        <Link to={`/complaints/housing/${complaint.complaint_id}`} style={{textDecoration:'none'}} ><Button size="small">View Details</Button></Link>
       </CardActions>
 
       </div>  

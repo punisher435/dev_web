@@ -294,18 +294,22 @@ function Complaintdetails(props) {
 
           <br />
 
-          <div className={classes.myclass}>
-          <TextField
-            id="reply1"
-            label="Your reply"
-            multiline
-            fullWidth
-            
-            value={complaint.reply}
-            variant="outlined"
-            onInput={(e) => {e.preventDefault();}}
-          /> 
-          </div> 
+          {
+            !complaint.reply || complaint.reply==='' ? null : <div className={classes.myclass}>
+            <TextField
+              id="reply1"
+              label="Your reply"
+              multiline
+              fullWidth
+              
+              value={complaint.reply}
+              variant="outlined"
+              onInput={(e) => {e.preventDefault();}}
+            /> 
+            </div>
+          }
+
+          
 
           
         </Grid>
@@ -313,7 +317,7 @@ function Complaintdetails(props) {
         <br />
 
         {
-          complaint.reply==='' && props.profile.is_seller ?   <Grid
+          (!complaint.reply || complaint.reply==='') && props.profile.is_seller ?   <Grid
           container
           direction="column"
           justify="center"
