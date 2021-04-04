@@ -81,7 +81,7 @@ class room_complaint(viewsets.ViewSet):
         try:
         
 
-            if request.user.is_seller==True:
+            if request.user.is_seller==False:
 
                 queryset = roomBookings.objects.all()
                 queryset = queryset.filter(customer_id = request.user)
@@ -250,7 +250,7 @@ class shop_complaint(viewsets.ViewSet):
         try:
         
 
-            if request.user.is_seller==True:
+            if request.user.is_seller==False:
 
                 queryset = shopBookings.objects.all()
                 queryset = queryset.filter(customer_id = request.user)
@@ -277,12 +277,12 @@ class shop_complaint(viewsets.ViewSet):
                     complaint.save()
 
                     subject = 'Complaint Issued'
-                    message = 'A complaint has been issued for your room. You can check the details in your dashboard.'
+                    message = 'A complaint has been issued for your shop. You can check the details in your dashboard.'
                     email_send(subject,message,room.seller_id)
 
 
                     subject = 'Complaint Issued'
-                    message = 'A complaint has been issued for the room. You can check the details in your dashboard.'
+                    message = 'A complaint has been issued for the shop. You can check the details in your dashboard.'
                     email_send(subject,message,request.user)
 
                     serializer = shop_complaints_serializer(complaint,context={'request':request})
@@ -339,12 +339,12 @@ class shop_complaint(viewsets.ViewSet):
 
             if complaint.seller_fullfilled and complaint.customer_fullfilled:
                 subject = 'Complaint Closed'
-                message = 'The complaint has been closed for your room. You can check the details in your dashboard.'
+                message = 'The complaint has been closed for your shop. You can check the details in your dashboard.'
                 email_send(subject,message,complaint.seller_contact)
 
 
                 subject = 'Complaint Closed'
-                message = 'The complaint has been closed for the room. You can check the details in your dashboard.'
+                message = 'The complaint has been closed for the shop. You can check the details in your dashboard.'
                 email_send(subject,message,request.user)
             
             
@@ -421,7 +421,7 @@ class apartment_complaint(viewsets.ViewSet):
         try:
         
 
-            if request.user.is_seller==True:
+            if request.user.is_seller==False:
 
                 queryset = apartmentBookings.objects.all()
                 queryset = queryset.filter(customer_id = request.user)
@@ -448,12 +448,12 @@ class apartment_complaint(viewsets.ViewSet):
                     complaint.save()
 
                     subject = 'Complaint Issued'
-                    message = 'A complaint has been issued for your room. You can check the details in your dashboard.'
+                    message = 'A complaint has been issued for your house. You can check the details in your dashboard.'
                     email_send(subject,message,room.seller_id)
 
 
                     subject = 'Complaint Issued'
-                    message = 'A complaint has been issued for the room. You can check the details in your dashboard.'
+                    message = 'A complaint has been issued for the house. You can check the details in your dashboard.'
                     email_send(subject,message,request.user)
 
                     serializer = apartment_complaints_serializer(complaint,context={'request':request})
@@ -510,12 +510,12 @@ class apartment_complaint(viewsets.ViewSet):
 
             if complaint.seller_fullfilled and complaint.customer_fullfilled:
                 subject = 'Complaint Closed'
-                message = 'The complaint has been closed for your room. You can check the details in your dashboard.'
+                message = 'The complaint has been closed for your house. You can check the details in your dashboard.'
                 email_send(subject,message,complaint.seller_contact)
 
 
                 subject = 'Complaint Closed'
-                message = 'The complaint has been closed for the room. You can check the details in your dashboard.'
+                message = 'The complaint has been closed for the house. You can check the details in your dashboard.'
                 email_send(subject,message,request.user)
             
            
