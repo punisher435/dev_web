@@ -9,6 +9,8 @@ import Tablecomp from '../components/complainttable';
 import TextField from '@material-ui/core/TextField';
 import SimpleModal from '../components/imagemodal';
 import Button from '@material-ui/core/Button';
+import Backdrop from '@material-ui/core/Backdrop';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
@@ -44,7 +46,11 @@ const useStyles = makeStyles((theme) => ({
       width:'90vw',
       maxWidth:'400px',
       
-    }
+    },
+    backdrop: {
+      zIndex: theme.zIndex.drawer + 1,
+      color: '#fff',
+    },
 
     
    
@@ -67,6 +73,7 @@ function Complaintdetails(props) {
     const [rows,setrows] = useState(false)
     const [reply,setreply] = useState('')
     const [open,changeopen] = useState(false)
+    const [load,setload] = useState(false)
 
     React.useEffect(
         async () => {
@@ -128,8 +135,10 @@ function Complaintdetails(props) {
       }
       
       if(props.profile.is_seller)
+     
       
       {
+        setload(true);
        
         try{const res = await axios.put(`${process.env.REACT_APP_API_URL}/sourcenjjbrtrtd7668ugf787t87t9yuigff/complaints/room/${complaintid}/`,body,config);
         
@@ -147,10 +156,14 @@ function Complaintdetails(props) {
                   
                   
                 ])
+
+                setload(false)
         
       
       }
         catch{
+
+          setload(false)
 
           seterror(true)
             
@@ -178,6 +191,8 @@ function Complaintdetails(props) {
     if(props.profile.is_seller)
     
     {
+
+      setload(true)
      
       try{const res = await axios.patch(`${process.env.REACT_APP_API_URL}/sourcenjjbrtrtd7668ugf787t87t9yuigff/complaints/room/${complaintid}/`,body,config);
       
@@ -196,9 +211,11 @@ function Complaintdetails(props) {
                   
                 ])
       
-    
+                setload(false)
     }
       catch{
+
+        setload(false)
 
         seterror(true)
          
@@ -218,6 +235,12 @@ function Complaintdetails(props) {
 {
     return (
         <div>
+
+<Backdrop className={classes.backdrop} open={load}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
+
+
           <SimpleModal open={open} change={changeopen} photo={complaint.photo1}/>
           <br />
           <br />
@@ -325,10 +348,20 @@ function Complaintdetails(props) {
           
           >
 
+{
+  props.profile.is_seller && complaint.seller_fullfilled===false ? <Button variant="contained" color="secondary" onClick={(e) =>{handleclick2(e);}}>
+  Close complaint
+</Button> : null
+}
 
-<Button variant="contained" color="secondary" onClick={(e) =>{handleclick2(e);}}>
-        Close complaint
-      </Button>
+{
+  props.profile.is_seller===false && complaint.customer_fullfilled===false ? <Button variant="contained" color="secondary" onClick={(e) =>{handleclick2(e);}}>
+  Close complaint
+</Button> : null
+}
+    
+    
+    
 
           </Grid>
   <br />
