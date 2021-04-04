@@ -182,8 +182,8 @@ function Myrooms(props) {
     if(redirect)
     {
       return <Redirect to={{
-        pathname: `/dashboard/my_rooms/edit`,
-        state: { property_id: null }
+        pathname: `/dashboard/complaints/room/create`,
+       
       }} style={{textDecoration:'none'}} />
     }
 
