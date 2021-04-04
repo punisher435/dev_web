@@ -27,6 +27,7 @@ from .serializer import room_complaints_serializer
 from products.models import rooms,shops,apartments
 
 from email1 import email_send
+from bookings.models import roomBookings,shopBookings,apartmentBookings
 
 utc=pytz.UTC
 
@@ -77,7 +78,45 @@ class room_complaint(viewsets.ViewSet):
             return Response('ERROR', status=status.HTTP_400_BAD_REQUEST)
 
     def create(self,request):
-        print(request.data)
+        try:
+        
+
+            if request.user.is_seller==True:
+
+                queryset = roomBookings.objects.all()
+                queryset = queryset.filter(customer_id = request.user)
+
+                room = get_object_or_404(rooms.objects.all(),pk=request.data['room_id'])
+            
+
+                x=False
+
+                for booking in queryset:
+                    if booking.room_id == room:
+                        x=True
+                    
+                        break
+
+                if x ==True:
+                    
+
+                    complaint = room_complaints(room_id=room,room_name=room.title,customer_id=request.user,
+                    customer_name=request.user.first_name+' '+ request.user.last_name,seller_id=room.seller_id,
+                    seller_name=room.seller_id.first_name+' '+ room.seller_id.last_name,subject=request.data["subject"],
+                    message=request.data["message"],photo1=request.data["photo"])
+
+                    complaint.save()
+
+                    serializer = room_complaints_serializer(complaint,context={'request':request})
+
+                    return Response(serializer.data,status=status.HTTP_201_CREATED)
+
+            return Response('Error',status=status.HTTP_400_BAD_REQUEST)
+
+        except:
+            return Response('Error',status=status.HTTP_400_BAD_REQUEST)
+
+
 
     def update(self,request,pk=None):
 

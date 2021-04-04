@@ -198,8 +198,7 @@ function ProfileForm (props){
         })
         .catch((err) => {
           setmessage(`Your ${err.response.data} is linked to some other account!`)
-          setopen1(true);
-
+         
         })
               
         
