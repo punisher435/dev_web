@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import axios from 'axios'
 import {makeStyles } from '@material-ui/core/styles';
 import Tablecomp from '../components/complainttable';
+import TextField from '@material-ui/core/TextField';
 
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
@@ -20,8 +21,8 @@ const useStyles = makeStyles((theme) => ({
       width:'50%',
       marginLeft:'25%',
     },
-    bgmyclass:{
-      backgroundColor:'black',
+    textclass:{
+      border: '1px solid black',
       padding:10,
       borderRadius:'20%'
     }
@@ -44,6 +45,7 @@ function Complaintdetails(props) {
     const [complaint,setcomplaint] = useState(false)
     const [error,seterror] = useState(false)
     const [rows,setrows] = useState(false)
+    const [reply,setreply] = useState('')
 
     React.useEffect(
         async () => {
@@ -115,6 +117,7 @@ function Complaintdetails(props) {
             </Grid>
             
         </Grid>
+        <br />
 
         <Grid
         container
@@ -122,11 +125,50 @@ function Complaintdetails(props) {
         justify="center"
         alignItems="center"
         >
-          <Typography variant='h6' color="secondary">
+
+          <Typography variant='h5' color="secondary">
             {complaint.subject}
           </Typography>
+          <br />
+
+          <Grid item>
+          <Typography variant='body1' className={classes.textclass}>
+            {complaint.message}
+          </Typography>
+          </Grid>
+
+          <br />
+
+          <Grid item>
+          <Typography variant='body1' className={classes.textclass}>
+            {complaint.reply==='' ? 'Your reply' : complaint.reply}
+          </Typography>
+          </Grid>
         </Grid>
-            
+
+        <br />
+
+        {
+          complaint.reply==='' ?   <Grid
+          container
+          direction="column"
+          justify="center"
+          alignItems="center"
+          >
+            <TextField
+            id="reply"
+            label="Your reply"
+            multiline
+            rows={4}
+            value={reply}
+            variant="outlined"
+            onInput={(e) => {e.preventDefault();setreply(e.target.value)}}
+          />  
+          </Grid> : null
+        }
+
+       
+        
         </div>
     )}
     else{
