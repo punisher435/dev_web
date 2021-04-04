@@ -101,7 +101,8 @@ function Complaintdetails(props) {
                   createData('Customer status', `${res.data.customer_fullfilled ? 'Closed' :'Open'}`),
                   createData('Seller status', `${res.data.seller_fullfilled ? 'Closed' :'Open'}`),
                   createData('Closed', `${res.data.seller_fullfilled && res.data.customer_fullfilled ? 'Yes' :'No'}`),
-                  
+                  createData('Owner contact', res.data.seller_contact),
+                  createData('Issuer contact', res.data.customer_contact),
                   
                 ])
                 
@@ -153,7 +154,8 @@ function Complaintdetails(props) {
                   createData('Customer status', `${res.data.customer_fullfilled ? 'Closed' :'Open'}`),
                   createData('Seller status', `${res.data.seller_fullfilled ? 'Closed' :'Open'}`),
                   createData('Closed', `${res.data.seller_fullfilled && res.data.customer_fullfilled ? 'Yes' :'No'}`),
-                  
+                  createData('Owner contact', res.data.seller_contact),
+                  createData('Issuer contact', res.data.customer_contact),
                   
                 ])
 
@@ -207,7 +209,8 @@ function Complaintdetails(props) {
                   createData('Customer status', `${res.data.customer_fullfilled ? 'Closed' :'Open'}`),
                   createData('Seller status', `${res.data.seller_fullfilled ? 'Closed' :'Open'}`),
                   createData('Closed', `${res.data.seller_fullfilled && res.data.customer_fullfilled ? 'Yes' :'No'}`),
-                  
+                  createData('Owner contact', res.data.seller_contact),
+                  createData('Issuer contact', res.data.customer_contact),
                   
                 ])
       

@@ -103,7 +103,7 @@ class room_complaint(viewsets.ViewSet):
                     complaint = room_complaints(room_id=room,room_name=room.title,customer_id=request.user,
                     customer_name=request.user.first_name+' '+ request.user.last_name,seller_id=room.seller_id,
                     seller_name=room.seller_id.first_name+' '+ room.seller_id.last_name,subject=request.data["subject"],
-                    message=request.data["message"],photo1=request.data["photo"])
+                    message=request.data["message"],photo1=request.data["photo"],seller_contact=room.seller_id,customer_contact=request.user)
 
                     complaint.save()
 

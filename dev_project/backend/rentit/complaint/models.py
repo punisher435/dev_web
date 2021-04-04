@@ -26,6 +26,9 @@ class room_complaints(models.Model):
     seller_id = models.ForeignKey(user,on_delete=models.PROTECT,related_name="complaint_room_seller_id")
     seller_name = models.CharField(max_length=255)
 
+    customer_contact = models.CharField(max_length=255)
+    seller_contact = models.CharField(max_length=255)
+
     created_at = models.DateTimeField(auto_now_add=True)
 
     subject = models.CharField(max_length=255)
