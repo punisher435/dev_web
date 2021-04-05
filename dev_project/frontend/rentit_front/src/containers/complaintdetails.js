@@ -37,13 +37,13 @@ const useStyles = makeStyles((theme) => ({
       
     },
     imgclass1:{
-      width:'20vw',
+      width:'35vw',
       maxWidth:'200px',
      
       
     },
     imgclass2:{
-      width:'20vw',
+      width:'35vw',
       maxWidth:'200px',
      
       
@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
     },
     buttonclass1:{
       padding:0,
-      width:'20vw',
+      width:'35vw',
       maxWidth:'200px',
 
       
@@ -81,11 +81,15 @@ const useStyles = makeStyles((theme) => ({
     message:{
       padding:10,
       backgroundColor:'#dbf6e9',
+      marginLeft:'1vw',
+    
     },
 
     message1:{
       padding:10,
       backgroundColor:'#9ddfd3',
+      marginRight:'1vw',
+      
     },
 
     
