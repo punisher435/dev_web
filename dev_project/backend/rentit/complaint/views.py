@@ -21,8 +21,8 @@ from django_filters import rest_framework as rest_filters
 from rest_framework import filters
 from rest_framework.pagination import PageNumberPagination
 
-from .models import room_complaints,shop_complaints,apartment_complaints
-from .serializer import room_complaints_serializer,shop_complaints_serializer,apartment_complaints_serializer
+from .models import room_complaints,shop_complaints,apartment_complaints,message_class
+from .serializer import room_complaints_serializer,shop_complaints_serializer,apartment_complaints_serializer,message_serializer
 
 from products.models import rooms,shops,apartments
 
@@ -131,18 +131,26 @@ class room_complaint(viewsets.ViewSet):
 
         try:
 
-            data = json.loads(request.body.decode('utf-8'))['data']
-
             queryset = room_complaints.objects.all()
             
-            queryset = queryset.filter(seller_id= request.user)
-            complaint = get_object_or_404(queryset,pk=pk)
-           
-            if complaint.reply!=None or complaint.reply!='':
-                complaint.reply = data
-                complaint.save()
-
+            if request.user.is_seller:
+                queryset = queryset.filter(seller_id= request.user)
+                complaint = get_object_or_404(queryset,pk=pk)
+            else:
+                queryset = queryset.filter(customer_id= request.user)
+                complaint = get_object_or_404(queryset,pk=pk)
             
+            if request.user.is_seller:
+                message = message_class(sender_id=request.user,receiver_id=complaint.customer_id,
+                message=request.data["message"],photo=request.data["photo"])
+                message.save()
+            else:
+                message = message_class(sender_id=request.user,receiver_id=complaint.seller_id,
+                message=request.data["message"],photo=request.data["photo"])
+                message.save()
+            complaint.messages.add(message)
+            complaint.save()
+
             serializer = room_complaints_serializer(complaint,context={'request':request})
 
             return Response(serializer.data,status=status.HTTP_202_ACCEPTED)
@@ -527,6 +535,72 @@ class apartment_complaint(viewsets.ViewSet):
         except:
 
             return Response('ERROR', status=status.HTTP_400_BAD_REQUEST)
+
+
+
+class get_message(viewsets.ViewSet):
+
+    authentication_classes = [authentication.JWTAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
+    parser_classes=(MultiPartParser,FormParser)
+
+    def retrieve(self,request,pk=None):
+        
+
+        try:
+            type1= request.query_params.get('type')
+
+            if type1=='room':
+                queryset = room_complaints.objects.all()
+                if request.user.is_seller:
+                    queryset = queryset.filter(seller_id= request.user)
+                    complaint = get_object_or_404(queryset,pk=pk)
+                else:
+                    queryset = queryset.filter(customer_id= request.user)
+                    complaint = get_object_or_404(queryset,pk=pk)
+
+                
+
+                serializer = message_serializer(complaint.messages.all(),context={'request':request},many=True)
+
+                return Response(serializer.data,status=status.HTTP_202_ACCEPTED)
+
+            elif type1=='shop':
+                queryset = shop_complaints.objects.all()
+                if request.user.is_seller:
+                    queryset = queryset.filter(seller_id= request.user)
+                    complaint = get_object_or_404(queryset,pk=pk)
+                else:
+                    queryset = queryset.filter(customer_id= request.user)
+                    complaint = get_object_or_404(queryset,pk=pk)
+
+                
+
+                serializer = message_serializer(complaint.messages.all(),context={'request':request},many=True)
+
+                return Response(serializer.data,status=status.HTTP_202_ACCEPTED)
+
+            elif type1=='apartment':
+                queryset = apartment_complaints.objects.all()
+                if request.user.is_seller:
+                    queryset = queryset.filter(seller_id= request.user)
+                    complaint = get_object_or_404(queryset,pk=pk)
+                else:
+                    queryset = queryset.filter(customer_id= request.user)
+                    complaint = get_object_or_404(queryset,pk=pk)
+
+                
+
+                serializer = message_serializer(complaint.messages.all(),context={'request':request},many=True)
+
+                return Response(serializer.data,status=status.HTTP_202_ACCEPTED)
+
+
+
+        except:
+
+            return Response('ERROR', status=status.HTTP_400_BAD_REQUEST)
+    
 
 
         

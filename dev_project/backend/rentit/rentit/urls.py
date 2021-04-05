@@ -101,6 +101,8 @@ urlpatterns = [
     path('sourcendshf93u029320hfuibh83u12edsygcyg2/',include('complaint.urls_shop')),
     path('sourceadwh812y18hwdbzbx98121hgebayusbv9891/',include('complaint.urls_apartment')),
 
+    path('sourceadhwu178y2819gysag9812yg73467vbs3y28yga/',include('complaint.urls_messages')),
+
 ]
 
 urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

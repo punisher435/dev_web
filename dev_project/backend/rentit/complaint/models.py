@@ -9,6 +9,26 @@ user=get_user_model()
 
 # Create your models here.
 
+
+
+
+def upload_to_me(instance, filename):
+    return 'complaints/me/{filename}'.format(filename=filename)
+
+
+
+class message_class(models.Model):
+
+    sender_id= models.ForeignKey(user,on_delete=models.PROTECT,related_name="message_sender_id")
+    receiver_id = models.ForeignKey(user,on_delete=models.PROTECT,related_name="message_receiver_id")
+    created_at = models.DateTimeField(auto_now_add=True)
+    message = models.TextField(null=True,blank=True)
+    photo=models.ImageField(_("Image"),upload_to=upload_to_me,null=True,blank=True)
+
+
+
+
+
 def upload_to_room_complaint(instance, filename):
     return 'complaints/rooms/{filename}'.format(filename=filename)
 
@@ -34,6 +54,8 @@ class room_complaints(models.Model):
     subject = models.CharField(max_length=255)
     message = models.TextField()
     photo1=models.ImageField(_("Image"),upload_to=upload_to_room_complaint,null=True,blank=True)
+
+    messages = models.ManyToManyField(message_class,related_name="room_message")
 
     reply = models.TextField(null=True,blank=True)
 
@@ -62,6 +84,7 @@ class shop_complaints(models.Model):
     seller_contact = models.CharField(max_length=255)
 
     created_at = models.DateTimeField(auto_now_add=True)
+    messages = models.ManyToManyField(message_class,related_name="shop_message")
 
     subject = models.CharField(max_length=255)
     message = models.TextField()
@@ -94,6 +117,7 @@ class apartment_complaints(models.Model):
     seller_contact = models.CharField(max_length=255)
 
     created_at = models.DateTimeField(auto_now_add=True)
+    messages = models.ManyToManyField(message_class,related_name="apartment_message")
 
     subject = models.CharField(max_length=255)
     message = models.TextField()
@@ -103,4 +127,10 @@ class apartment_complaints(models.Model):
 
     customer_fullfilled = models.BooleanField(default=False)
     seller_fullfilled = models.BooleanField(default=False)
+
+
+
+
+
+
 
