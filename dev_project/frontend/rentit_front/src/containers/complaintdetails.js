@@ -86,6 +86,7 @@ const useStyles = makeStyles((theme) => ({
       maxWidth:'700px',
       backgroundColor:'white',
       overflowY: 'scroll',
+      border: '1px solid black',
     },
     message:{
       padding:10,
@@ -358,25 +359,7 @@ function Complaintdetails(props) {
           <SimpleModal open={open1} change={changeopen1} photo={showphoto}/>
           <br />
           <br />
-            
-           
-        <Grid
-        container
-        direction="column"
-        justify="center"
-        alignItems="center"
-        >
-          <Grid item className={classes.imgclass}>
-          <Button onClick={(e) => {e.preventDefault();changeopen(true)}} className={classes.buttonclass}><img src={complaint.photo1} /></Button>
-          </Grid>
-          <br />
 
-            <Grid item xs={10}>
-            <Tablecomp comp={complaint.complaint_id} rows={rows}/>
-            </Grid>
-            
-        </Grid>
-        <br />
 
         <Grid
         container
@@ -411,9 +394,28 @@ function Complaintdetails(props) {
 
           
         </Grid>
+            
+           
+        <Grid
+        container
+        direction="column"
+        justify="center"
+        alignItems="center"
+        >
+          <Grid item className={classes.imgclass}>
+          <Button onClick={(e) => {e.preventDefault();changeopen(true)}} className={classes.buttonclass}><img src={complaint.photo1} /></Button>
+          </Grid>
+          <br />
 
+            <Grid item xs={10}>
+            <Tablecomp comp={complaint.complaint_id} rows={rows}/>
+            </Grid>
+            
+        </Grid>
         <br />
 
+
+        
         <Grid
           container
           direction="column"

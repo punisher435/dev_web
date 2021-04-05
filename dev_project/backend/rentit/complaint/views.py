@@ -308,19 +308,27 @@ class shop_complaint(viewsets.ViewSet):
 
         try:
 
-            data = json.loads(request.body.decode('utf-8'))['data']
-
             queryset = shop_complaints.objects.all()
             
-            queryset = queryset.filter(seller_id= request.user)
-            complaint = get_object_or_404(queryset,pk=pk)
-           
-            if complaint.reply!=None or complaint.reply!='':
-                complaint.reply = data
-                complaint.save()
+            if request.user.is_seller:
+                queryset = queryset.filter(seller_id= request.user)
+                complaint = get_object_or_404(queryset,pk=pk)
+            else:
+                queryset = queryset.filter(customer_id= request.user)
+                complaint = get_object_or_404(queryset,pk=pk)
             
+            if request.user.is_seller:
+                message = message_class(sender_id=request.user,receiver_id=complaint.customer_id,
+                message=request.data["message"],photo=request.data["photo"])
+                message.save()
+            else:
+                message = message_class(sender_id=request.user,receiver_id=complaint.seller_id,
+                message=request.data["message"],photo=request.data["photo"])
+                message.save()
+            complaint.messages.add(message)
+            complaint.save()
 
-            serializer = shop_complaints_serializer(complaint,context={'request':request})
+            serializer = message_serializer(complaint.messages.all(),context={'request':request},many=True)
 
             return Response(serializer.data,status=status.HTTP_202_ACCEPTED)
 
@@ -479,19 +487,27 @@ class apartment_complaint(viewsets.ViewSet):
 
         try:
 
-            data = json.loads(request.body.decode('utf-8'))['data']
-
             queryset = apartment_complaints.objects.all()
             
-            queryset = queryset.filter(seller_id= request.user)
-            complaint = get_object_or_404(queryset,pk=pk)
-           
-            if complaint.reply!=None or complaint.reply!='':
-                complaint.reply = data
-                complaint.save()
+            if request.user.is_seller:
+                queryset = queryset.filter(seller_id= request.user)
+                complaint = get_object_or_404(queryset,pk=pk)
+            else:
+                queryset = queryset.filter(customer_id= request.user)
+                complaint = get_object_or_404(queryset,pk=pk)
             
+            if request.user.is_seller:
+                message = message_class(sender_id=request.user,receiver_id=complaint.customer_id,
+                message=request.data["message"],photo=request.data["photo"])
+                message.save()
+            else:
+                message = message_class(sender_id=request.user,receiver_id=complaint.seller_id,
+                message=request.data["message"],photo=request.data["photo"])
+                message.save()
+            complaint.messages.add(message)
+            complaint.save()
 
-            serializer = apartment_complaints_serializer(complaint,context={'request':request})
+            serializer = message_serializer(complaint.messages.all(),context={'request':request},many=True)
 
             return Response(serializer.data,status=status.HTTP_202_ACCEPTED)
 
