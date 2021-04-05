@@ -18,6 +18,7 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import FormControl from '@material-ui/core/FormControl';
 import SendIcon from '@material-ui/icons/Send';
 import IconButton from '@material-ui/core/IconButton';
+import AttachFileIcon from '@material-ui/icons/AttachFile';
 
 
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
@@ -125,6 +126,7 @@ function Complaintdetails(props) {
     const [load,setload] = useState(false)
     const [message,setmessage] = useState(false)
     const [done,setdone] = useState(false)
+    const hiddenFileInput1 = React.useRef(null);
 
     const [open1,changeopen1] = useState(false)
     const [showphoto,setshowphoto] = useState('')
@@ -473,13 +475,18 @@ function Complaintdetails(props) {
           alignItems="center"
           
           >
-<input type='file' id='photo' accept='image/png,image/jpeg,image/jpg' onChange={(event) => {
+<input type='file' ref={hiddenFileInput1} style={{display:'none'}} id='photo' accept='image/png,image/jpeg,image/jpg' onChange={(event) => {
           event.preventDefault();Filevalidation1(event.target.files[0]);}}/> 
 
           <br />
              
           
-
+          <Grid
+  container
+  direction="row"
+  justify="center"
+  alignItems="center"
+>
       <FormControl variant="outlined" noValidate className={classes.myclass}>
                             <InputLabel >Message</InputLabel>
                             <OutlinedInput
@@ -496,6 +503,12 @@ function Complaintdetails(props) {
                                 labelWidth={100}
                                 />
                             </FormControl>
+          
+
+          
+          <IconButton onClick={(e) => {hiddenFileInput1.current.click();}}><AttachFileIcon /></IconButton>
+
+          </Grid>
           </Grid>
 
        
