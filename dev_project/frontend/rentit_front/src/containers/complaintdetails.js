@@ -114,6 +114,9 @@ function Complaintdetails(props) {
     const [message,setmessage] = useState(false)
     const [done,setdone] = useState(false)
 
+    const [open1,changeopen1] = useState(false)
+    const [showphoto,setshowphoto] = useState('')
+
     React.useEffect(
         async () => {
           const config = {
@@ -344,6 +347,8 @@ function Complaintdetails(props) {
 
 
           <SimpleModal open={open} change={changeopen} photo={complaint.photo1}/>
+
+          <SimpleModal open={open1} change={changeopen1} photo={showphoto}/>
           <br />
           <br />
             
@@ -425,14 +430,14 @@ function Complaintdetails(props) {
                     direction="column"
                     justify="center"
                     alignItems="flex-start"
-                  ><div className={classes.message}><div className={classes.imgclass1}><Button onClick={(e) => {e.preventDefault();changeopen(true)}} className={classes.buttonclass1}><img src={mes.photo} /></Button></div>
+                  ><div className={classes.message}><div className={classes.imgclass1}><Button onClick={(e) => {e.preventDefault();setshowphoto(mes.photo);changeopen1(true);}} className={classes.buttonclass1}><img src={mes.photo} /></Button></div>
                     <p>{mes.message}</p></div><br /></Grid> : 
                     <Grid
                     container
                     direction="column"
                     justify="center"
                     alignItems="flex-end"
-                  ><div className={classes.message1}><div className={classes.imgclass2}><Button onClick={(e) => {e.preventDefault();changeopen(true)}} className={classes.buttonclass1}><img src={mes.photo} /></Button></div>
+                  ><div className={classes.message1}><div className={classes.imgclass2}><Button onClick={(e) => {e.preventDefault();setshowphoto(mes.photo);changeopen1(true);}} className={classes.buttonclass1}><img src={mes.photo} /></Button></div>
                     <p>{mes.message}</p></div><br /></Grid>
                   
 
