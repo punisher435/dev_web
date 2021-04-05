@@ -64,7 +64,7 @@ class customUser(AbstractBaseUser, PermissionsMixin):
     objects_new = models.Manager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS= ['first_name','last_name','gender','is_seller','is_superuser','profile_completed','bank_completed','address_completed']
+    REQUIRED_FIELDS= ['first_name','last_name','gender','is_seller','is_superuser','is_staff','profile_completed','bank_completed','address_completed']
 
     def get_full_name(self):
         return self.first_name + ' ' + self.last_name

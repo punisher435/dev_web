@@ -319,9 +319,9 @@ function Complaintdetails(props) {
 
     
     
-    if(props.profile.is_seller)
     
-    {
+    
+    
 
       setload(true)
      
@@ -352,7 +352,7 @@ function Complaintdetails(props) {
         seterror(true)
          
       }
-  }
+  
 
 }
 
