@@ -224,6 +224,7 @@ function Complaintdetails(props) {
                 
               
                 setphoto(file1);
+                document.getElementById("attached_file").innerHTML = file1.name;
               }
           
       
@@ -244,6 +245,8 @@ function Complaintdetails(props) {
       }
       
       if(reply!=='' || photo!=='')
+
+      document.getElementById("attached_file").innerHTML = "";
      
       
       {
@@ -507,7 +510,7 @@ function Complaintdetails(props) {
 
           
           <IconButton onClick={(e) => {hiddenFileInput1.current.click();}}><AttachFileIcon /></IconButton>
-
+          <p id="attached_file"></p>
           </Grid>
           </Grid>
 
