@@ -20,7 +20,7 @@ def upload_to_me(instance, filename):
 class message_class(models.Model):
 
     sender_id= models.ForeignKey(user,on_delete=models.PROTECT,related_name="message_sender_id")
-    receiver_id = models.ForeignKey(user,on_delete=models.PROTECT,related_name="message_receiver_id")
+    receiver_id = models.ManyToManyField(user,related_name="message_receiver")
     created_at = models.DateTimeField(auto_now_add=True)
     message = models.TextField(null=True,blank=True)
     photo=models.ImageField(_("Image"),upload_to=upload_to_me,null=True,blank=True)
@@ -43,11 +43,11 @@ class room_complaints(models.Model):
     room_name = models.CharField(max_length=255)
     customer_id= models.ForeignKey(user,on_delete=models.PROTECT,related_name="complaint_room_customer_id")
     customer_name = models.CharField(max_length=255)
-    seller_id = models.ForeignKey(user,on_delete=models.PROTECT,related_name="complaint_room_seller_id")
-    seller_name = models.CharField(max_length=255)
+    seller_id = models.ManyToManyField(user,related_name="room_id_seller")
+    
 
     customer_contact = models.CharField(max_length=255)
-    seller_contact = models.CharField(max_length=255)
+  
 
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -77,11 +77,11 @@ class shop_complaints(models.Model):
     shop_name = models.CharField(max_length=255)
     customer_id= models.ForeignKey(user,on_delete=models.PROTECT,related_name="complaint_shop_customer_id")
     customer_name = models.CharField(max_length=255)
-    seller_id = models.ForeignKey(user,on_delete=models.PROTECT,related_name="complaint_shop_seller_id")
-    seller_name = models.CharField(max_length=255)
+    seller_id = models.ManyToManyField(user,related_name="shop_id_seller")
+   
 
     customer_contact = models.CharField(max_length=255)
-    seller_contact = models.CharField(max_length=255)
+   
 
     created_at = models.DateTimeField(auto_now_add=True)
     messages = models.ManyToManyField(message_class,related_name="shop_message")
@@ -110,11 +110,11 @@ class apartment_complaints(models.Model):
     apartment_name = models.CharField(max_length=255)
     customer_id= models.ForeignKey(user,on_delete=models.PROTECT,related_name="complaint_apartment_customer_id")
     customer_name = models.CharField(max_length=255)
-    seller_id = models.ForeignKey(user,on_delete=models.PROTECT,related_name="complaint_apartment_seller_id")
-    seller_name = models.CharField(max_length=255)
+    seller_id = models.ManyToManyField(user,related_name="apartment_id_seller")
+    
 
     customer_contact = models.CharField(max_length=255)
-    seller_contact = models.CharField(max_length=255)
+    
 
     created_at = models.DateTimeField(auto_now_add=True)
     messages = models.ManyToManyField(message_class,related_name="apartment_message")

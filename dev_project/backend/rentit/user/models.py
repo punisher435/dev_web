@@ -61,6 +61,8 @@ class customUser(AbstractBaseUser, PermissionsMixin):
 
     objects = UserAccountManager()
 
+    objects_new = models.Manager()
+
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS= ['first_name','last_name','gender','is_seller','is_superuser','profile_completed','bank_completed','address_completed']
 

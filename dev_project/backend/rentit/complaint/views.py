@@ -29,7 +29,12 @@ from products.models import rooms,shops,apartments
 from email1 import email_send
 from bookings.models import roomBookings,shopBookings,apartmentBookings
 
+
+
+
+from django.contrib.auth import get_user_model
 utc=pytz.UTC
+user=get_user_model()
 
 
 
@@ -42,10 +47,12 @@ class room_complaint(viewsets.ViewSet):
 
 
     def list(self,request):
+
+       
         try:
             queryset = room_complaints.objects.all()
-            if request.user.is_seller:
-                queryset = queryset.filter(seller_id= request.user)
+            if request.user.is_superuser or request.user.is_staff:
+                None
             else:
                 queryset = queryset.filter(customer_id= request.user)
 
@@ -62,8 +69,7 @@ class room_complaint(viewsets.ViewSet):
         
         try:
             queryset = room_complaints.objects.all()
-            if request.user.is_seller:
-                queryset = queryset.filter(seller_id= request.user)
+            if request.user.is_superuser or request.user.is_staff:
                 complaint = get_object_or_404(queryset,pk=pk)
             else:
                 queryset = queryset.filter(customer_id= request.user)
@@ -78,6 +84,9 @@ class room_complaint(viewsets.ViewSet):
             return Response('ERROR', status=status.HTTP_400_BAD_REQUEST)
 
     def create(self,request):
+       
+
+        
         try:
         
 
@@ -101,20 +110,26 @@ class room_complaint(viewsets.ViewSet):
                     
 
                     complaint = room_complaints(room_id=room,room_name=room.title,customer_id=request.user,
-                    customer_name=request.user.first_name+' '+ request.user.last_name,seller_id=room.seller_id,
-                    seller_name=room.seller_id.first_name+' '+ room.seller_id.last_name,subject=request.data["subject"],
-                    message=request.data["message"],photo1=request.data["photo"],seller_contact=room.seller_id,customer_contact=request.user)
+                    customer_name=request.user.first_name+' '+ request.user.last_name,
+                    subject=request.data["subject"],
+                    message=request.data["message"],photo1=request.data["photo"],customer_contact=request.user.email)
 
                     complaint.save()
 
-                    subject = 'Complaint Issued'
-                    message = 'A complaint has been issued for your room. You can check the details in your dashboard.'
-                    email_send(subject,message,room.seller_id)
+                    set1 = user.objects_new.all()
+
+                    for user1 in set1:
+                        if user1.is_superuser or user1.is_staff:
+                            complaint.seller_id.add(user1)
+                    
+                    complaint.save()
+
+                   
 
 
                     subject = 'Complaint Issued'
                     message = 'A complaint has been issued for the room. You can check the details in your dashboard.'
-                    email_send(subject,message,request.user)
+                    email_send(subject,message,request.user.email)
 
                     serializer = room_complaints_serializer(complaint,context={'request':request})
 
@@ -129,26 +144,38 @@ class room_complaint(viewsets.ViewSet):
 
     def update(self,request,pk=None):
 
+        
         try:
 
             queryset = room_complaints.objects.all()
             
-            if request.user.is_seller:
-                queryset = queryset.filter(seller_id= request.user)
+            if request.user.is_superuser or request.user.is_staff:
+                
                 complaint = get_object_or_404(queryset,pk=pk)
             else:
                 queryset = queryset.filter(customer_id= request.user)
                 complaint = get_object_or_404(queryset,pk=pk)
             
-            if request.user.is_seller:
-                message = message_class(sender_id=request.user,receiver_id=complaint.customer_id,
+            if request.user.is_superuser or request.user.is_staff:
+                
+                message = message_class(sender_id=request.user,
                 message=request.data["message"],photo=request.data["photo"])
+                message.save()
+                print(complaint.customer_id)
+
+                message.receiver_id.add(complaint.customer_id)
                 message.save()
             else:
-                message = message_class(sender_id=request.user,receiver_id=complaint.seller_id,
+            
+                message = message_class(sender_id=request.user,
                 message=request.data["message"],photo=request.data["photo"])
                 message.save()
+                for user1 in complaint.seller_id.all():
+                    message.receiver_id.add(user1)
+                message.save()
+
             complaint.messages.add(message)
+
             complaint.save()
 
             serializer = message_serializer(complaint.messages.all(),context={'request':request},many=True)
@@ -165,8 +192,7 @@ class room_complaint(viewsets.ViewSet):
 
             queryset = room_complaints.objects.all()
             
-            if request.user.is_seller:
-                queryset = queryset.filter(seller_id= request.user)
+            if request.user.is_superuser and request.user.is_staff:
                 complaint = get_object_or_404(queryset,pk=pk)
                 complaint.seller_fullfilled = True
             else:
@@ -177,9 +203,7 @@ class room_complaint(viewsets.ViewSet):
             complaint.save()      
 
             if complaint.seller_fullfilled and complaint.customer_fullfilled:
-                subject = 'Complaint Closed'
-                message = 'The complaint has been closed for your room. You can check the details in your dashboard.'
-                email_send(subject,message,complaint.seller_contact)
+                
 
 
                 subject = 'Complaint Closed'
@@ -219,10 +243,12 @@ class shop_complaint(viewsets.ViewSet):
 
 
     def list(self,request):
+
+       
         try:
             queryset = shop_complaints.objects.all()
-            if request.user.is_seller:
-                queryset = queryset.filter(seller_id= request.user)
+            if request.user.is_superuser or request.user.is_staff:
+                None
             else:
                 queryset = queryset.filter(customer_id= request.user)
 
@@ -239,8 +265,7 @@ class shop_complaint(viewsets.ViewSet):
         
         try:
             queryset = shop_complaints.objects.all()
-            if request.user.is_seller:
-                queryset = queryset.filter(seller_id= request.user)
+            if request.user.is_superuser or request.user.is_staff:
                 complaint = get_object_or_404(queryset,pk=pk)
             else:
                 queryset = queryset.filter(customer_id= request.user)
@@ -255,6 +280,9 @@ class shop_complaint(viewsets.ViewSet):
             return Response('ERROR', status=status.HTTP_400_BAD_REQUEST)
 
     def create(self,request):
+       
+
+        
         try:
         
 
@@ -278,20 +306,26 @@ class shop_complaint(viewsets.ViewSet):
                     
 
                     complaint = shop_complaints(shop_id=room,shop_name=room.title,customer_id=request.user,
-                    customer_name=request.user.first_name+' '+ request.user.last_name,seller_id=room.seller_id,
-                    seller_name=room.seller_id.first_name+' '+ room.seller_id.last_name,subject=request.data["subject"],
-                    message=request.data["message"],photo1=request.data["photo"],seller_contact=room.seller_id,customer_contact=request.user)
+                    customer_name=request.user.first_name+' '+ request.user.last_name,
+                    subject=request.data["subject"],
+                    message=request.data["message"],photo1=request.data["photo"],customer_contact=request.user.email)
 
                     complaint.save()
 
-                    subject = 'Complaint Issued'
-                    message = 'A complaint has been issued for your shop. You can check the details in your dashboard.'
-                    email_send(subject,message,room.seller_id)
+                    set1 = user.objects_new.all()
+
+                    for user1 in set1:
+                        if user1.is_superuser or user1.is_staff:
+                            complaint.seller_id.add(user1)
+                    
+                    complaint.save()
+
+                   
 
 
                     subject = 'Complaint Issued'
                     message = 'A complaint has been issued for the shop. You can check the details in your dashboard.'
-                    email_send(subject,message,request.user)
+                    email_send(subject,message,request.user.email)
 
                     serializer = shop_complaints_serializer(complaint,context={'request':request})
 
@@ -306,26 +340,38 @@ class shop_complaint(viewsets.ViewSet):
 
     def update(self,request,pk=None):
 
+        
         try:
 
             queryset = shop_complaints.objects.all()
             
-            if request.user.is_seller:
-                queryset = queryset.filter(seller_id= request.user)
+            if request.user.is_superuser or request.user.is_staff:
+                
                 complaint = get_object_or_404(queryset,pk=pk)
             else:
                 queryset = queryset.filter(customer_id= request.user)
                 complaint = get_object_or_404(queryset,pk=pk)
             
-            if request.user.is_seller:
-                message = message_class(sender_id=request.user,receiver_id=complaint.customer_id,
+            if request.user.is_superuser or request.user.is_staff:
+                
+                message = message_class(sender_id=request.user,
                 message=request.data["message"],photo=request.data["photo"])
+                message.save()
+                print(complaint.customer_id)
+
+                message.receiver_id.add(complaint.customer_id)
                 message.save()
             else:
-                message = message_class(sender_id=request.user,receiver_id=complaint.seller_id,
+            
+                message = message_class(sender_id=request.user,
                 message=request.data["message"],photo=request.data["photo"])
                 message.save()
+                for user1 in complaint.seller_id.all():
+                    message.receiver_id.add(user1)
+                message.save()
+
             complaint.messages.add(message)
+
             complaint.save()
 
             serializer = message_serializer(complaint.messages.all(),context={'request':request},many=True)
@@ -342,8 +388,7 @@ class shop_complaint(viewsets.ViewSet):
 
             queryset = shop_complaints.objects.all()
             
-            if request.user.is_seller:
-                queryset = queryset.filter(seller_id= request.user)
+            if request.user.is_superuser and request.user.is_staff:
                 complaint = get_object_or_404(queryset,pk=pk)
                 complaint.seller_fullfilled = True
             else:
@@ -354,16 +399,14 @@ class shop_complaint(viewsets.ViewSet):
             complaint.save()      
 
             if complaint.seller_fullfilled and complaint.customer_fullfilled:
-                subject = 'Complaint Closed'
-                message = 'The complaint has been closed for your shop. You can check the details in your dashboard.'
-                email_send(subject,message,complaint.seller_contact)
+                
 
 
                 subject = 'Complaint Closed'
                 message = 'The complaint has been closed for the shop. You can check the details in your dashboard.'
                 email_send(subject,message,request.user)
             
-            
+      
 
             serializer = shop_complaints_serializer(complaint,context={'request':request})
 
@@ -372,7 +415,6 @@ class shop_complaint(viewsets.ViewSet):
         except:
 
             return Response('ERROR', status=status.HTTP_400_BAD_REQUEST)
-
 
 
 
@@ -398,10 +440,12 @@ class apartment_complaint(viewsets.ViewSet):
 
 
     def list(self,request):
+
+       
         try:
             queryset = apartment_complaints.objects.all()
-            if request.user.is_seller:
-                queryset = queryset.filter(seller_id= request.user)
+            if request.user.is_superuser or request.user.is_staff:
+                None
             else:
                 queryset = queryset.filter(customer_id= request.user)
 
@@ -418,8 +462,7 @@ class apartment_complaint(viewsets.ViewSet):
         
         try:
             queryset = apartment_complaints.objects.all()
-            if request.user.is_seller:
-                queryset = queryset.filter(seller_id= request.user)
+            if request.user.is_superuser or request.user.is_staff:
                 complaint = get_object_or_404(queryset,pk=pk)
             else:
                 queryset = queryset.filter(customer_id= request.user)
@@ -434,6 +477,9 @@ class apartment_complaint(viewsets.ViewSet):
             return Response('ERROR', status=status.HTTP_400_BAD_REQUEST)
 
     def create(self,request):
+       
+
+        
         try:
         
 
@@ -457,20 +503,26 @@ class apartment_complaint(viewsets.ViewSet):
                     
 
                     complaint = apartment_complaints(apartment_id=room,apartment_name=room.title,customer_id=request.user,
-                    customer_name=request.user.first_name+' '+ request.user.last_name,seller_id=room.seller_id,
-                    seller_name=room.seller_id.first_name+' '+ room.seller_id.last_name,subject=request.data["subject"],
-                    message=request.data["message"],photo1=request.data["photo"],seller_contact=room.seller_id,customer_contact=request.user)
+                    customer_name=request.user.first_name+' '+ request.user.last_name,
+                    subject=request.data["subject"],
+                    message=request.data["message"],photo1=request.data["photo"],customer_contact=request.user.email)
 
                     complaint.save()
 
-                    subject = 'Complaint Issued'
-                    message = 'A complaint has been issued for your house. You can check the details in your dashboard.'
-                    email_send(subject,message,room.seller_id)
+                    set1 = user.objects_new.all()
+
+                    for user1 in set1:
+                        if user1.is_superuser or user1.is_staff:
+                            complaint.seller_id.add(user1)
+                    
+                    complaint.save()
+
+                   
 
 
                     subject = 'Complaint Issued'
-                    message = 'A complaint has been issued for the house. You can check the details in your dashboard.'
-                    email_send(subject,message,request.user)
+                    message = 'A complaint has been issued for the apartment. You can check the details in your dashboard.'
+                    email_send(subject,message,request.user.email)
 
                     serializer = apartment_complaints_serializer(complaint,context={'request':request})
 
@@ -485,26 +537,38 @@ class apartment_complaint(viewsets.ViewSet):
 
     def update(self,request,pk=None):
 
+        
         try:
 
             queryset = apartment_complaints.objects.all()
             
-            if request.user.is_seller:
-                queryset = queryset.filter(seller_id= request.user)
+            if request.user.is_superuser or request.user.is_staff:
+                
                 complaint = get_object_or_404(queryset,pk=pk)
             else:
                 queryset = queryset.filter(customer_id= request.user)
                 complaint = get_object_or_404(queryset,pk=pk)
             
-            if request.user.is_seller:
-                message = message_class(sender_id=request.user,receiver_id=complaint.customer_id,
+            if request.user.is_superuser or request.user.is_staff:
+                
+                message = message_class(sender_id=request.user,
                 message=request.data["message"],photo=request.data["photo"])
+                message.save()
+                print(complaint.customer_id)
+
+                message.receiver_id.add(complaint.customer_id)
                 message.save()
             else:
-                message = message_class(sender_id=request.user,receiver_id=complaint.seller_id,
+            
+                message = message_class(sender_id=request.user,
                 message=request.data["message"],photo=request.data["photo"])
                 message.save()
+                for user1 in complaint.seller_id.all():
+                    message.receiver_id.add(user1)
+                message.save()
+
             complaint.messages.add(message)
+
             complaint.save()
 
             serializer = message_serializer(complaint.messages.all(),context={'request':request},many=True)
@@ -521,8 +585,7 @@ class apartment_complaint(viewsets.ViewSet):
 
             queryset = apartment_complaints.objects.all()
             
-            if request.user.is_seller:
-                queryset = queryset.filter(seller_id= request.user)
+            if request.user.is_superuser and request.user.is_staff:
                 complaint = get_object_or_404(queryset,pk=pk)
                 complaint.seller_fullfilled = True
             else:
@@ -530,19 +593,17 @@ class apartment_complaint(viewsets.ViewSet):
                 complaint = get_object_or_404(queryset,pk=pk)
                 complaint.customer_fullfilled = True
 
-            complaint.save()       
+            complaint.save()      
 
             if complaint.seller_fullfilled and complaint.customer_fullfilled:
-                subject = 'Complaint Closed'
-                message = 'The complaint has been closed for your house. You can check the details in your dashboard.'
-                email_send(subject,message,complaint.seller_contact)
+                
 
 
                 subject = 'Complaint Closed'
-                message = 'The complaint has been closed for the house. You can check the details in your dashboard.'
+                message = 'The complaint has been closed for the apartment. You can check the details in your dashboard.'
                 email_send(subject,message,request.user)
             
-           
+      
 
             serializer = apartment_complaints_serializer(complaint,context={'request':request})
 
@@ -554,8 +615,13 @@ class apartment_complaint(viewsets.ViewSet):
 
 
 
-class get_message(viewsets.ViewSet):
 
+
+
+
+
+class get_message(viewsets.ViewSet):
+    
     authentication_classes = [authentication.JWTAuthentication]
     permission_classes = [permissions.IsAuthenticated]
     parser_classes=(MultiPartParser,FormParser)
@@ -568,8 +634,7 @@ class get_message(viewsets.ViewSet):
 
             if type1=='room':
                 queryset = room_complaints.objects.all()
-                if request.user.is_seller:
-                    queryset = queryset.filter(seller_id= request.user)
+                if request.user.is_superuser or request.user.is_staff:
                     complaint = get_object_or_404(queryset,pk=pk)
                 else:
                     queryset = queryset.filter(customer_id= request.user)
@@ -583,8 +648,8 @@ class get_message(viewsets.ViewSet):
 
             elif type1=='shop':
                 queryset = shop_complaints.objects.all()
-                if request.user.is_seller:
-                    queryset = queryset.filter(seller_id= request.user)
+                if request.user.is_superuser or request.user.is_staff:
+                   
                     complaint = get_object_or_404(queryset,pk=pk)
                 else:
                     queryset = queryset.filter(customer_id= request.user)
@@ -598,8 +663,8 @@ class get_message(viewsets.ViewSet):
 
             elif type1=='apartment':
                 queryset = apartment_complaints.objects.all()
-                if request.user.is_seller:
-                    queryset = queryset.filter(seller_id= request.user)
+                if request.user.is_superuser or request.user.is_staff:
+
                     complaint = get_object_or_404(queryset,pk=pk)
                 else:
                     queryset = queryset.filter(customer_id= request.user)

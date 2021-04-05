@@ -277,7 +277,7 @@ function Complaintdetails(props) {
 
           setload(false)
 
-          seterror(true)
+          
             
         }
     }
