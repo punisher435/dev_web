@@ -1,4 +1,23 @@
-import React,{ useState, useEffect} from 'react'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  import React,{ useState, useEffect} from 'react'
 import {connect} from 'react-redux'
 import Eror from '../components/eror'
 import Typography from '@material-ui/core/Typography';
@@ -11,6 +30,15 @@ import SimpleModal from '../components/imagemodal';
 import Button from '@material-ui/core/Button';
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import '../components/css/App.css';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import InputLabel from '@material-ui/core/InputLabel';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import FormControl from '@material-ui/core/FormControl';
+import SendIcon from '@material-ui/icons/Send';
+import IconButton from '@material-ui/core/IconButton';
+import AttachFileIcon from '@material-ui/icons/AttachFile';
+
 
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
@@ -36,6 +64,18 @@ const useStyles = makeStyles((theme) => ({
      
       
     },
+    imgclass1:{
+      width:'35vw',
+      maxWidth:'200px',
+     
+      
+    },
+    imgclass2:{
+      width:'35vw',
+      maxWidth:'200px',
+     
+      
+    },
     myclass:{
       width:'80vw',
       maxWidth:'500px',
@@ -47,9 +87,38 @@ const useStyles = makeStyles((theme) => ({
       maxWidth:'400px',
       
     },
+    buttonclass1:{
+      padding:0,
+      width:'35vw',
+      maxWidth:'200px',
+
+      
+    },
     backdrop: {
       zIndex: theme.zIndex.drawer + 1,
       color: '#fff',
+    },
+    divclass: {
+      width:'90vw',
+      height:'50vh',
+      maxHeight:'900px',
+      maxWidth:'700px',
+      backgroundColor:'white',
+      overflowY: 'scroll',
+      border: '1px solid black',
+    },
+    message:{
+      padding:10,
+      backgroundColor:'#dbf6e9',
+     
+    
+    },
+
+    message1:{
+      padding:10,
+      backgroundColor:'#9ddfd3',
+      
+      
     },
 
     
@@ -72,17 +141,27 @@ function Complaintdetails(props) {
     const [error,seterror] = useState(false)
     const [rows,setrows] = useState(false)
     const [reply,setreply] = useState('')
+    const [photo,setphoto] = useState('')
     const [open,changeopen] = useState(false)
     const [load,setload] = useState(false)
+    const [message,setmessage] = useState(false)
+    const [done,setdone] = useState(false)
+    const hiddenFileInput1 = React.useRef(null);
+
+    const [open1,changeopen1] = useState(false)
+    const [showphoto,setshowphoto] = useState('')
 
     React.useEffect(
         async () => {
-            const config = {
-                headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `JWT ${localStorage.getItem('access')}`,
-                },
-              };
+          const config = {
+            headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `JWT ${localStorage.getItem('access')}`,
+            },
+            params:{
+              type:'apartment'
+            },
+          };
               
               if(props.isAuthenticated && complaintid)
               
@@ -91,11 +170,12 @@ function Complaintdetails(props) {
                 try{const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourceadwh812y18hwdbzbx98121hgebayusbv9891/complaints/apartment/${complaintid}/`,config);
                 
                 setcomplaint(res.data)
+                
                
 
                 setrows([
                   createData('Issued by', res.data.customer_name),
-                  createData('Issued on', res.data.shop_name),
+                  createData('Issued on', res.data.apartment_name),
                   createData('Owner', res.data.seller_name),
                   createData('Issued date', res.data.created_at.slice(0,10)),
                   createData('Customer status', `${res.data.customer_fullfilled ? 'Closed' :'Open'}`),
@@ -105,6 +185,30 @@ function Complaintdetails(props) {
                   createData('Issuer contact', res.data.customer_contact),
                   
                 ])
+
+                
+
+
+                try{
+
+                  
+                  
+                  const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourceadhwu178y2819gysag9812yg73467vbs3y28yga/complaints/messages/${complaintid}/`,config);
+                
+                setmessage(res.data)
+                console.log(res.data)
+                setdone(true)
+               
+
+              
+
+               
+                
+              
+              }
+              catch{
+                
+              }
                 
               
               }
@@ -122,6 +226,31 @@ function Complaintdetails(props) {
     ,[props.isAuthenticated,complaintid])
 
 
+    const Filevalidation1 = (file1,name) => {
+  
+ 
+      // Check if any file is selected.
+      
+         
+    
+              const fsize =file1.size;
+              const file = Math.round((fsize / 1024));
+              // The size of the file.
+              if (file >= 5120) {
+                  alert(
+                    "File too Big, please select a file less than 5mb");
+              } 
+              else{
+                
+              
+                setphoto(file1);
+                document.getElementById("attached_file").innerHTML = file1.name;
+              }
+          
+      
+    }
+
+
     const handleclick1 = async (e) => {
       e.preventDefault();
       const config = {
@@ -135,31 +264,31 @@ function Complaintdetails(props) {
         data:reply,
       }
       
-      if(props.profile.is_seller)
+      if(reply!=='' || photo!=='')
+
+      document.getElementById("attached_file").innerHTML = "";
      
       
       {
         setload(true);
-       
-        try{const res = await axios.put(`${process.env.REACT_APP_API_URL}/sourceadwh812y18hwdbzbx98121hgebayusbv9891/complaints/apartment/${complaintid}/`,body,config);
+
+        let form_data = new FormData();
+      
+        form_data.append('message',reply)
         
-        setcomplaint(res.data)
+        form_data.append('photo',photo)
+       
+        try{const res = await axios.put(`${process.env.REACT_APP_API_URL}/sourceadwh812y18hwdbzbx98121hgebayusbv9891/complaints/apartment/${complaintid}/`,form_data,config);
+        
+        setmessage(res.data)
                
 
-                setrows([
-                  createData('Issued by', res.data.customer_name),
-                  createData('Issued on', res.data.apartment_name),
-                  createData('Owner', res.data.seller_name),
-                  createData('Issued date', res.data.created_at.slice(0,10)),
-                  createData('Customer status', `${res.data.customer_fullfilled ? 'Closed' :'Open'}`),
-                  createData('Seller status', `${res.data.seller_fullfilled ? 'Closed' :'Open'}`),
-                  createData('Closed', `${res.data.seller_fullfilled && res.data.customer_fullfilled ? 'Yes' :'No'}`),
-                  createData('Owner contact', res.data.seller_contact),
-                  createData('Issuer contact', res.data.customer_contact),
-                  
-                ])
+                
+                
 
                 setload(false)
+                setreply('')
+                setphoto('')
         
       
       }
@@ -201,18 +330,18 @@ function Complaintdetails(props) {
       setcomplaint(res.data)
                
 
-                setrows([
-                  createData('Issued by', res.data.customer_name),
-                  createData('Issued on', res.data.apartment_name),
-                  createData('Owner', res.data.seller_name),
-                  createData('Issued date', res.data.created_at.slice(0,10)),
-                  createData('Customer status', `${res.data.customer_fullfilled ? 'Closed' :'Open'}`),
-                  createData('Seller status', `${res.data.seller_fullfilled ? 'Closed' :'Open'}`),
-                  createData('Closed', `${res.data.seller_fullfilled && res.data.customer_fullfilled ? 'Yes' :'No'}`),
-                  createData('Owner contact', res.data.seller_contact),
-                  createData('Issuer contact', res.data.customer_contact),
-                  
-                ])
+      setrows([
+        createData('Issued by', res.data.customer_name),
+        createData('Issued on', res.data.apartment_name),
+        createData('Owner', res.data.seller_name),
+        createData('Issued date', res.data.created_at.slice(0,10)),
+        createData('Customer status', `${res.data.customer_fullfilled ? 'Closed' :'Open'}`),
+        createData('Seller status', `${res.data.seller_fullfilled ? 'Closed' :'Open'}`),
+        createData('Closed', `${res.data.seller_fullfilled && res.data.customer_fullfilled ? 'Yes' :'No'}`),
+        createData('Owner contact', res.data.seller_contact),
+        createData('Issuer contact', res.data.customer_contact),
+        
+      ])
       
                 setload(false)
     }
@@ -234,7 +363,7 @@ function Complaintdetails(props) {
     }
 
 
-    if(complaint && rows && props.profile)
+    if(complaint && rows && props.profile && done)
 {
     return (
         <div>
@@ -245,27 +374,11 @@ function Complaintdetails(props) {
 
 
           <SimpleModal open={open} change={changeopen} photo={complaint.photo1}/>
+
+          <SimpleModal open={open1} change={changeopen1} photo={showphoto}/>
           <br />
-          <br />
-            
-           
-        <Grid
-        container
-        direction="column"
-        justify="center"
-        alignItems="center"
-        >
-          <Grid item className={classes.imgclass}>
-          <Button onClick={(e) => {e.preventDefault();changeopen(true)}} className={classes.buttonclass}><img src={complaint.photo1} /></Button>
-          </Grid>
           <br />
 
-            <Grid item xs={10}>
-            <Tablecomp comp={complaint.complaint_id} rows={rows}/>
-            </Grid>
-            
-        </Grid>
-        <br />
 
         <Grid
         container
@@ -294,54 +407,135 @@ function Complaintdetails(props) {
 
           <br />
 
-          {
-            !complaint.reply || complaint.reply==='' ? null : <div className={classes.myclass}>
-            <TextField
-              id="reply1"
-              label="Your reply"
-              multiline
-              fullWidth
-              
-              value={complaint.reply}
-              variant="outlined"
-              onInput={(e) => {e.preventDefault();}}
-            /> 
-            </div>
-          }
+         
 
           
 
           
         </Grid>
+            
+           
+        <Grid
+        container
+        direction="column"
+        justify="center"
+        alignItems="center"
+        >
+          <Grid item className={classes.imgclass}>
+          <Button onClick={(e) => {e.preventDefault();changeopen(true)}} className={classes.buttonclass}><img src={complaint.photo1} /></Button>
+          </Grid>
+          <br />
 
+            <Grid item xs={10}>
+            <Tablecomp comp={complaint.complaint_id} rows={rows}/>
+            </Grid>
+            
+        </Grid>
         <br />
 
-        {
-          (!complaint.reply || complaint.reply==='') && props.profile.is_seller ?   <Grid
+
+        
+        <Grid
           container
           direction="column"
           justify="center"
           alignItems="center"
           
-          ><div className={classes.myclass}>
-            <TextField
-            id="reply"
-            label="Write your reply"
-            multiline
-            fullWidth
-            rows={4}
-            value={reply}
-            variant="outlined"
-            onInput={(e) => {e.preventDefault();setreply(e.target.value)}}
-          />  
-          <Grid item><br /></Grid>
-         
-           <Button variant="contained" color="primary" onClick={(e) =>{handleclick1(e);}}>
-        Submit
-      </Button>
-      </div> 
-          </Grid>  : null
-        }
+          >
+
+            
+
+            <div className={classes.divclass}>
+            <br />
+             
+              {
+                message.map((mes) => (
+                  
+                  
+                  
+                    mes.sender_id!==props.profile.id ?  <Grid
+                    container
+                    direction="column"
+                    justify="center"
+                    alignItems="flex-start"
+                  ><Grid
+                  container
+                  direction="row"
+                  justify="flex-start"
+                  alignItems="center"
+                ><div className="triangle-left" /><div className={classes.message}><div className={classes.imgclass1}><Button onClick={(e) => {e.preventDefault();setshowphoto(mes.photo);changeopen1(true);}} className={classes.buttonclass1}><img src={mes.photo} /></Button></div>
+                    <p>{mes.message}</p></div></Grid><br /></Grid> : 
+                    <Grid
+                    container
+                    direction="column"
+                    justify="center"
+                    alignItems="flex-end"
+                  ><Grid
+                  container
+                  direction="row"
+                  justify="flex-end"
+                  alignItems="center"
+                ><div className={classes.message1}><div className={classes.imgclass2}><Button onClick={(e) => {e.preventDefault();setshowphoto(mes.photo);changeopen1(true);}} className={classes.buttonclass1}><img src={mes.photo} /></Button></div>
+                    <p>{mes.message}</p></div><div className="triangle-right" /></Grid><br /></Grid>
+                  
+
+                  
+                 
+                ))
+              }
+            </div>
+          </Grid>
+
+
+        <br />
+
+       
+
+
+        <Grid
+          container
+          direction="column"
+          justify="center"
+          alignItems="center"
+          
+          >
+<input type='file' ref={hiddenFileInput1} style={{display:'none'}} id='photo' accept='image/png,image/jpeg,image/jpg' onChange={(event) => {
+          event.preventDefault();Filevalidation1(event.target.files[0]);}}/> 
+
+          <br />
+             
+          
+          <Grid
+  container
+  direction="row"
+  justify="center"
+  alignItems="center"
+>
+      <FormControl variant="outlined" noValidate className={classes.myclass}>
+                            <InputLabel >Message</InputLabel>
+                            <OutlinedInput
+                                value={reply}
+                                onInput={(e) => {e.preventDefault();setreply(e.target.value)}}
+            
+                                endAdornment={
+                                    <InputAdornment position="end">
+                                    <IconButton onClick={(e) =>{handleclick1(e);}}>
+                                       <SendIcon />
+                                    </IconButton>
+                                </InputAdornment>
+                                }
+                                labelWidth={100}
+                                />
+                            </FormControl>
+          
+
+          
+          <IconButton onClick={(e) => {hiddenFileInput1.current.click();}}><AttachFileIcon /></IconButton>
+          <p id="attached_file"></p>
+          </Grid>
+          </Grid>
+
+       
 
 
 <br />
@@ -392,3 +586,5 @@ const mapStateToProps = state => ({
   });
   
   export default connect(mapStateToProps)(Complaintdetails)
+
+
