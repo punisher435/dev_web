@@ -151,7 +151,7 @@ class room_complaint(viewsets.ViewSet):
             complaint.messages.add(message)
             complaint.save()
 
-            serializer = room_complaints_serializer(complaint,context={'request':request})
+            serializer = message_serializer(complaint.messages.all(),context={'request':request},many=True)
 
             return Response(serializer.data,status=status.HTTP_202_ACCEPTED)
 
