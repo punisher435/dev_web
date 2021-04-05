@@ -11,6 +11,7 @@ import SimpleModal from '../components/imagemodal';
 import Button from '@material-ui/core/Button';
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import '../components/css/App.css';
 
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
@@ -81,14 +82,14 @@ const useStyles = makeStyles((theme) => ({
     message:{
       padding:10,
       backgroundColor:'#dbf6e9',
-      marginLeft:'1vw',
+     
     
     },
 
     message1:{
       padding:10,
       backgroundColor:'#9ddfd3',
-      marginRight:'1vw',
+      
       
     },
 
@@ -424,15 +425,25 @@ function Complaintdetails(props) {
                     direction="column"
                     justify="center"
                     alignItems="flex-start"
-                  ><div className={classes.message}><div className={classes.imgclass1}><Button onClick={(e) => {e.preventDefault();setshowphoto(mes.photo);changeopen1(true);}} className={classes.buttonclass1}><img src={mes.photo} /></Button></div>
-                    <p>{mes.message}</p></div><br /></Grid> : 
+                  ><Grid
+                  container
+                  direction="row"
+                  justify="flex-start"
+                  alignItems="center"
+                ><div className="triangle-left" /><div className={classes.message}><div className={classes.imgclass1}><Button onClick={(e) => {e.preventDefault();setshowphoto(mes.photo);changeopen1(true);}} className={classes.buttonclass1}><img src={mes.photo} /></Button></div>
+                    <p>{mes.message}</p></div></Grid><br /></Grid> : 
                     <Grid
                     container
                     direction="column"
                     justify="center"
                     alignItems="flex-end"
-                  ><div className={classes.message1}><div className={classes.imgclass2}><Button onClick={(e) => {e.preventDefault();setshowphoto(mes.photo);changeopen1(true);}} className={classes.buttonclass1}><img src={mes.photo} /></Button></div>
-                    <p>{mes.message}</p></div><br /></Grid>
+                  ><Grid
+                  container
+                  direction="row"
+                  justify="flex-end"
+                  alignItems="center"
+                ><div className={classes.message1}><div className={classes.imgclass2}><Button onClick={(e) => {e.preventDefault();setshowphoto(mes.photo);changeopen1(true);}} className={classes.buttonclass1}><img src={mes.photo} /></Button></div>
+                    <p>{mes.message}</p></div><div className="triangle-right" /></Grid><br /></Grid>
                   
 
                   

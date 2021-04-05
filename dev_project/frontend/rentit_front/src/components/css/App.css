@@ -99,6 +99,24 @@
   
 }
 
+.triangle-left {
+	width: 0;
+	height: 0;
+	border-top: 8px solid transparent;
+	border-right: 16px solid #dbf6e9;
+	border-bottom: 8px solid transparent;
+  
+}
+
+.triangle-right {
+	width: 0;
+	height: 0;
+	border-top: 8px solid transparent;
+	border-left: 16px solid #9ddfd3;
+	border-bottom: 8px solid transparent;
+ 
+}
+
 
 @media only screen and (max-width: 300px)
 {.container_class{
