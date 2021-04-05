@@ -322,12 +322,12 @@ function Complaintdetails(props) {
       setrows([
         createData('Issued by', res.data.customer_name),
         createData('Issued on', res.data.shop_name),
-        createData('Owner', res.data.seller_name),
+       
         createData('Issued date', res.data.created_at.slice(0,10)),
         createData('Customer status', `${res.data.customer_fullfilled ? 'Closed' :'Open'}`),
-        createData('Seller status', `${res.data.seller_fullfilled ? 'Closed' :'Open'}`),
+        createData('Our status', `${res.data.seller_fullfilled ? 'Closed' :'Open'}`),
         createData('Closed', `${res.data.seller_fullfilled && res.data.customer_fullfilled ? 'Yes' :'No'}`),
-        createData('Owner contact', res.data.seller_contact),
+      
         createData('Issuer contact', res.data.customer_contact),
         
       ])

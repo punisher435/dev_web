@@ -80,7 +80,7 @@ export default function OutlinedCard({complaint}) {
 
 {complaint.customer_fullfilled===false && complaint.seller_fullfilled ? <Chip
         icon={<FaceIcon />}
-        label="Closed from seller's side"
+        label="Closed from our side"
         
         color="primary"
     
