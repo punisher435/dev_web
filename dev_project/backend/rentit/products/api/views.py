@@ -60,9 +60,52 @@ class room_filter(rest_filters.FilterSet):
     bookedtill_filter = rest_filters.DateFilter(field_name='bookedtill', lookup_expr='lt')
     discount = rest_filters.NumberFilter(field_name='net_discount',lookup_expr='gte')
 
+    city1 = rest_filters.CharFilter(method='get_city',field_name='net_discount')
+    state1 = rest_filters.CharFilter(method='get_state',field_name='net_discount')
+    country1 = rest_filters.CharFilter(method='get_country',field_name='net_discount')
+    landmark1 = rest_filters.CharFilter(method='get_landmark',field_name='net_discount')
+    pincode1 = rest_filters.CharFilter(method='get_pincode',field_name='net_discount')
+    location1 = rest_filters.CharFilter(method='get_location',field_name='net_discount')
+
+    def get_city(self,queryset,field_name,value,):
+        if value:
+            
+            queryset = queryset.filter(city__icontains=value)
+        return queryset
+
+    def get_state(self,queryset,field_name,value,):
+        if value:
+            
+            queryset = queryset.filter(state__icontains=value)
+        return queryset
+
+    def get_country(self,queryset,field_name,value,):
+        if value:
+            
+            queryset = queryset.filter(country__icontains=value)
+        return queryset
+
+    def get_landmark(self,queryset,field_name,value,):
+        if value:
+            
+            queryset = queryset.filter(landmark__icontains=value)
+        return queryset
+
+    def get_pincode(self,queryset,field_name,value,):
+        if value:
+            
+            queryset = queryset.filter(pincode__icontains=value)
+        return queryset
+
+    def get_location(self,queryset,field_name,value,):
+        if value:
+            
+            queryset = queryset.filter(location__icontains=value)
+        return queryset
+
     class Meta:
         model = rooms
-        fields = ['room_cleaning','discount','gender','windows_filter','bookedtill_filter','nonveg_food','veg_food','guest_allowed','iron','laundry','cooler','AC','room_TV','power_backup','floor_filter','purified_water','min_rating','cctv_building','bed_type','building_guard','balcony_filter','separate_washroom','category','location','city','state','country','pincode','wifi','breakfast','lunch','dinner','house_TV','power_backup','geyser','electricity','country','min_price','max_price','capacity_filter','trust_points_filter','booked']
+        fields = ['room_cleaning','landmark1','discount','gender','windows_filter','bookedtill_filter','nonveg_food','veg_food','guest_allowed','iron','laundry','cooler','AC','room_TV','power_backup','floor_filter','purified_water','min_rating','cctv_building','bed_type','building_guard','balcony_filter','separate_washroom','category','location1','city1','state1','country1','pincode1','wifi','breakfast','lunch','dinner','house_TV','power_backup','geyser','electricity','country1','min_price','max_price','capacity_filter','trust_points_filter','booked']
 
 
 class room_viewset(viewsets.ReadOnlyModelViewSet):
@@ -648,11 +691,54 @@ class apartment_filter(rest_filters.FilterSet):
     balcony_filter = rest_filters.NumberFilter(field_name='balcony',lookup_expr='gte')
     discount = rest_filters.NumberFilter(field_name='net_discount',lookup_expr='gte')
 
+    city1 = rest_filters.CharFilter(method='get_city',field_name='net_discount')
+    state1 = rest_filters.CharFilter(method='get_state',field_name='net_discount')
+    country1 = rest_filters.CharFilter(method='get_country',field_name='net_discount')
+    landmark1 = rest_filters.CharFilter(method='get_landmark',field_name='net_discount')
+    pincode1 = rest_filters.CharFilter(method='get_pincode',field_name='net_discount')
+    location1 = rest_filters.CharFilter(method='get_location',field_name='net_discount')
+
+    def get_city(self,queryset,field_name,value,):
+        if value:
+            
+            queryset = queryset.filter(city__icontains=value)
+        return queryset
+
+    def get_state(self,queryset,field_name,value,):
+        if value:
+            
+            queryset = queryset.filter(state__icontains=value)
+        return queryset
+
+    def get_country(self,queryset,field_name,value,):
+        if value:
+            
+            queryset = queryset.filter(country__icontains=value)
+        return queryset
+
+    def get_landmark(self,queryset,field_name,value,):
+        if value:
+            
+            queryset = queryset.filter(landmark__icontains=value)
+        return queryset
+
+    def get_pincode(self,queryset,field_name,value,):
+        if value:
+            
+            queryset = queryset.filter(pincode__icontains=value)
+        return queryset
+
+    def get_location(self,queryset,field_name,value,):
+        if value:
+            
+            queryset = queryset.filter(location__icontains=value)
+        return queryset
+
     
 
     class Meta:
         model = apartments
-        fields = ['apartment_cleaning','discount','gender','geyser_filter','washroom_filter','bed_type','laundry','TV','geyser','purified_water','cooler','house_refridgerator','AC','apartment_type','sofa','floor_filter','room_filter','balcony_filter','washroom','cctv_building','building_guard','min_rating','bookedtill_filter','geyser','power_backup','TV','water_facility','electricity','category','location','city','state','country','landmark','pincode','min_price','max_price','BHK_filter','trust_points_filter','booked']
+        fields = ['apartment_cleaning','discount','gender','geyser_filter','washroom_filter','bed_type','laundry','TV','geyser','purified_water','cooler','house_refridgerator','AC','apartment_type','sofa','floor_filter','room_filter','balcony_filter','washroom','cctv_building','building_guard','min_rating','bookedtill_filter','geyser','power_backup','TV','water_facility','electricity','category','location1','city1','state1','country1','landmark1','pincode1','min_price','max_price','BHK_filter','trust_points_filter','booked']
 
 
 class apartment_viewset(viewsets.ReadOnlyModelViewSet):

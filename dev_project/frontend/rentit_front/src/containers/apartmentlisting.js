@@ -202,12 +202,12 @@ const App = ({isAuthenticated}) => {
         sofa:filters.sofa,
         apartment_type:filters.apartment_type,
 
-        city:filters.city.toUpperCase(),
-          state:filters.state.toUpperCase(),
-          country:filters.country.toUpperCase(),
-          location:filters.location.toUpperCase(),
-          landmark:filters.landmark.toUpperCase(),
-          pincode:filters.pincode,
+        city1:filters.city.toUpperCase(),
+          state1:filters.state.toUpperCase(),
+          country1:filters.country.toUpperCase(),
+          location1:filters.location.toUpperCase(),
+          landmark1:filters.landmark.toUpperCase(),
+          pincode1:filters.pincode,
         },
         config:config
       });
