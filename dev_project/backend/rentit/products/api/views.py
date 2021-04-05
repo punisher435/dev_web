@@ -343,11 +343,57 @@ class shop_filter(rest_filters.FilterSet):
     windows_filter = rest_filters.NumberFilter(field_name='windows',lookup_expr='gte')
     discount = rest_filters.NumberFilter(field_name='net_discount',lookup_expr='gte')
 
+    city1 = rest_filters.CharFilter(method='get_city',field_name='net_discount')
+    state1 = rest_filters.CharFilter(method='get_state',field_name='net_discount')
+    country1 = rest_filters.CharFilter(method='get_country',field_name='net_discount')
+    landmark1 = rest_filters.CharFilter(method='get_landmark',field_name='net_discount')
+    pincode1 = rest_filters.CharFilter(method='get_pincode',field_name='net_discount')
+    location1 = rest_filters.CharFilter(method='get_location',field_name='net_discount')
+
+    def get_city(self,queryset,field_name,value,):
+        if value:
+            
+            queryset = queryset.filter(city__icontains=value)
+        return queryset
+
+    def get_state(self,queryset,field_name,value,):
+        if value:
+            
+            queryset = queryset.filter(state__icontains=value)
+        return queryset
+
+    def get_country(self,queryset,field_name,value,):
+        if value:
+            
+            queryset = queryset.filter(country__icontains=value)
+        return queryset
+
+    def get_landmark(self,queryset,field_name,value,):
+        if value:
+            
+            queryset = queryset.filter(landmark__icontains=value)
+        return queryset
+
+    def get_pincode(self,queryset,field_name,value,):
+        if value:
+            
+            queryset = queryset.filter(pincode__icontains=value)
+        return queryset
+
+    def get_location(self,queryset,field_name,value,):
+        if value:
+            
+            queryset = queryset.filter(location__icontains=value)
+        return queryset
+
     
 
     class Meta:
         model = shops
-        fields = ['shop_cleaning','discount','gender','cctv_building','AC','cooler','TV','building_guard','min_rating','separate_washroom','purified_water','floor_filter','room_filter','windows_filter','bookedtill_filter','water_facility','wifi','power_backup','electricity','category','location','city','state','country','landmark','pincode','min_price','max_price','trust_points_filter','booked']
+        fields = ['shop_cleaning','discount','gender','city1','state1','country1','landmark1','pincode1','location','cctv_building','AC','cooler','TV','building_guard','min_rating','separate_washroom','purified_water','floor_filter','room_filter','windows_filter','bookedtill_filter','water_facility','wifi','power_backup','electricity','category','min_price','max_price','trust_points_filter','booked']
+
+
+    
 
             
 class shop_viewset(viewsets.ReadOnlyModelViewSet):
@@ -364,6 +410,8 @@ class shop_viewset(viewsets.ReadOnlyModelViewSet):
     query_set = query_set.filter(pausebooking=False)
     queryset = query_set.filter(removed=False)
     serializer_class = shop_list_serializer
+
+    
 
 
 
