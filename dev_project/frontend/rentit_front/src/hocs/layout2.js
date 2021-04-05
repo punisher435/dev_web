@@ -171,25 +171,44 @@ function Dashboarddrawer(props) {
           </ListItem></Link> : null
         }
 
-        <Link to='/dashboard/profile' style={{textDecoration:'none',color:'black'}}><ListItem button key="My Profile">
-            <ListItemIcon><PersonOutlinedIcon /></ListItemIcon>
-            <ListItemText primary="My Profile" />
-        </ListItem></Link>
+<Link to='/dashboard/profile' style={{textDecoration:'none',color:'black'}}><ListItem button key="My Profile">
+          <ListItemIcon><PersonOutlinedIcon /></ListItemIcon>
+          <ListItemText primary="My Profile" />
+      </ListItem></Link> 
+
+
+
+       
+        {
+          seller ? null :  <Link to='/dashboard/complaints/room' style={{textDecoration:'none',color:'black'}}><ListItem button key="Room complaints">
+          <ListItemIcon><CommentOutlinedIcon /></ListItemIcon>
+          <ListItemText primary="Room complaints" />
+      </ListItem></Link>
+        }
+
+
+{
+          seller ? null :  <Link to='/dashboard/complaints/shop' style={{textDecoration:'none',color:'black'}}><ListItem button key="Shop complaints">
+          <ListItemIcon><CommentOutlinedIcon /></ListItemIcon>
+          <ListItemText primary="Shop complaints" />
+      </ListItem></Link>
+        }
+
+
+{
+          seller ? null :  <Link to='/dashboard/complaints/housing' style={{textDecoration:'none',color:'black'}}><ListItem button key="Housing complaints">
+          <ListItemIcon><CommentOutlinedIcon /></ListItemIcon>
+          <ListItemText primary="housing complaints" />
+      </ListItem></Link>
+        }
+
         
-        <Link to='/dashboard/complaints/room' style={{textDecoration:'none',color:'black'}}><ListItem button key="Room complaints">
-            <ListItemIcon><CommentOutlinedIcon /></ListItemIcon>
-            <ListItemText primary="Room complaints" />
-        </ListItem></Link>
+        
+       
 
-        <Link to='/dashboard/complaints/shop' style={{textDecoration:'none',color:'black'}}><ListItem button key="Shop complaints">
-            <ListItemIcon><CommentOutlinedIcon /></ListItemIcon>
-            <ListItemText primary="Shop complaints" />
-        </ListItem></Link>
+        
 
-        <Link to='/dashboard/complaints/housing' style={{textDecoration:'none',color:'black'}}><ListItem button key="Housing complaints">
-            <ListItemIcon><CommentOutlinedIcon /></ListItemIcon>
-            <ListItemText primary="housing complaints" />
-        </ListItem></Link>
+       
         
 
        
