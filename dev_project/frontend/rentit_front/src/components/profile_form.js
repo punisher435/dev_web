@@ -369,23 +369,28 @@ function ProfileForm (props){
         />
         </Grid>
 
-        <Grid item>
-        <TextField
-         multiline
-         variant="outlined"
-         margin="normal"
-         
-         fullWidth
-          rows={1}
-          id="aadhar"
-          name="aadhar"
-          label="aadhar"
-          value={formik.values.aadhar}
-          onChange={formik.handleChange}
-          error={formik.touched.aadhar && Boolean(formik.errors.aadhar)}
-          helperText={formik.touched.aadhar && formik.errors.aadhar}
-        />
-        </Grid>
+
+        {
+          formik.values.country_code==='+91' ? <Grid item>
+          <TextField
+           multiline
+           variant="outlined"
+           margin="normal"
+           
+           fullWidth
+            rows={1}
+            id="aadhar"
+            name="aadhar"
+            label="aadhar"
+            value={formik.values.aadhar}
+            onChange={formik.handleChange}
+            error={formik.touched.aadhar && Boolean(formik.errors.aadhar)}
+            helperText={formik.touched.aadhar && formik.errors.aadhar}
+          />
+          </Grid> : null
+        }
+
+        
         <br />
         
         <Button color="primary" variant="contained" fullWidth type="submit">

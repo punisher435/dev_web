@@ -43,6 +43,9 @@ const useStyles = makeStyles((theme) => ({
         marginLeft:'2%',
         
     },
+    navclass:{
+        opacity:'1 !important',
+    },
     myclass2: {
         // backgroundColor: '#2d3436',
         backgroundColor: '#081C15',
@@ -356,13 +359,14 @@ function Home() {
             alignItems="center"
             
             >
-            <Paper square elevation={0}>
+            <Paper square elevation={0} className={classes.navclass}>
             <Tabs
                 value={value}
                 indicatorColor="primary"
                 textColor="primary"
                 onChange={handleChange}
                 aria-label="disabled tabs example"
+                className={classes.navclass}
             >
                 <Tab label="Rooms" icon={<MeetingRoomIcon />} value='Rooms'/>
                 <Tab label="Shops" icon={<StorefrontIcon />} value='Shops'/>
@@ -379,6 +383,7 @@ function Home() {
             direction="row"
             justify="center"
             alignItems="center"
+            
            
             
             >
