@@ -53,8 +53,8 @@ class profile_viewset(viewsets.ViewSet):
             USER.save()
             
             return Response('success',status=status.HTTP_201_CREATED)
-        except:
-            return Response('ERROR',status=status.HTTP_400_BAD_REQUEST)
+        except Exception as e:
+            return Response(str(e),status=status.HTTP_400_BAD_REQUEST)
 
     def update(self,request,pk=None,*args,**kwargs):
         try:
@@ -75,7 +75,7 @@ class profile_viewset(viewsets.ViewSet):
             return Response('success',status=status.HTTP_201_CREATED)
         except Exception as e:
             
-            return Response(str(e)[50:],status=status.HTTP_400_BAD_REQUEST)
+            return Response(str(e),status=status.HTTP_400_BAD_REQUEST)
         
 
 

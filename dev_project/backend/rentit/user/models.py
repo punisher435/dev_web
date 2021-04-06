@@ -87,7 +87,7 @@ class customUser_profile(models.Model):
     user_id=models.OneToOneField(customUser,on_delete=models.PROTECT, primary_key=True)
     country_code=models.CharField(max_length=255,default='+91')
     mobile=models.CharField(max_length=255,unique=True)
-    aadhar=models.CharField(max_length=255,unique=True)
+    aadhar=models.CharField(max_length=255,unique=True,null=True,blank=True)
     alternate_mobile=models.CharField(max_length=255,null=True,blank=True)
     photo=models.ImageField(_("Image"),upload_to=upload_to,null=True,blank=True)
 

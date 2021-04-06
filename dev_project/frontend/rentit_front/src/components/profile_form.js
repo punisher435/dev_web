@@ -30,10 +30,7 @@ const validationSchema = yup.object({
     .min(10, 'Mobile should be of minimum 10 characters length')
     .required('Mobile is required'),
 
-    aadhar: yup
-    .number('Enter your aadhar')
-    .min(12, 'Mobile should be of minimum 12 characters length')
-    .required('Mobile is required'),
+   
    
 
     
@@ -175,6 +172,17 @@ function ProfileForm (props){
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
+
+      var temp = true;
+
+      if(values.country_code=='+91' && values.aadhar.length!=12)
+{
+
+ temp=false;
+}
+
+      if(temp===true)
+      {
       let form_data = new FormData();
       form_data.append('user_id',values.user_id)
       form_data.append('country_code',values.country_code)
@@ -210,7 +218,7 @@ function ProfileForm (props){
           setredirect(true)
         })
         .catch((err) => {
-          setmessage(`Your ${err.response.data} is linked to some other account!`)
+          setmessage(`${err.response.data}!`)
           setopen1(true);
 
         })
@@ -220,6 +228,14 @@ function ProfileForm (props){
               
                 
       }
+
+    }
+    else{
+      setmessage(`Aadhar should be valid!`)
+          setopen1(true);
+    }
+   
+
     },
   });
 
