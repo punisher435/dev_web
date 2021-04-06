@@ -45,6 +45,15 @@ const useStyles = makeStyles((theme) => ({
     },
     navclass:{
         opacity:'1 !important',
+        
+        textAlign: 'center',
+    },
+
+    navclass1:{
+        opacity:'1 !important',
+        position:'relative',
+        textAlign: 'center',
+        width:'90vw',
     },
     myclass2: {
         // backgroundColor: '#2d3436',
@@ -57,6 +66,9 @@ const useStyles = makeStyles((theme) => ({
     },
     textclass2:{
 
+    },
+    gridclassnew:{
+        paddingTop:'3%',
     },
     bgclass:{
         backgroundColor: '#457B9D',
@@ -340,6 +352,14 @@ function Home() {
             </div>
             <br />
 
+            <Grid
+            container
+            direction="column"
+            justify="center"
+            alignItems="center"
+            
+            >
+
             <div className="searchcardme">
             <Grid
             container
@@ -349,8 +369,17 @@ function Home() {
             
             >
                 {/* <div className={demowrap}></div> */}
-            <Paper elevation={5} className={classes.bgclass2}>
+            <Paper elevation={5} className="backgroundclass1">
                 <br />
+
+                <Grid
+            container
+            direction="column"
+            justify="center"
+            alignItems="center"
+            className={classes.gridclassnew}
+            
+            >
             
             <Grid
             container
@@ -383,27 +412,28 @@ function Home() {
             direction="row"
             justify="center"
             alignItems="center"
+            className={classes.navclass}
             
            
             
             >
                 {/* <div className={classes.white}> */}
 
-                    {/* <div className={classes.root12}> */}
+                    <div className={classes.root12}>
                     <TextField id="city" label="City" variant="outlined" name="city" value={input.city} onInput={handleinput}/>
-                    {/* </div> */}
+                     </div>
                 {/* </div> */}
                 {/* <div className={classes.white}> */}
 
-                    {/* <div className={classes.root12}> */}
+                    <div className={classes.root12}>
                     <TextField id="state" label="State" variant="outlined" name="state" value={input.state} onInput={handleinput}/>
-                    {/* </div> */}
+                    </div>
                 {/* </div> */}
                 {/* <div className={classes.white}> */}
 
-                    {/* <div className={classes.root12}> */}
+                    <div className={classes.root12}>
                     <TextField id="country" label="Country" variant="outlined" name="country" value={input.country} onInput={handleinput}/>
-                    {/* </div> */}
+                    </div>
             
 
             </Grid>
@@ -413,6 +443,7 @@ function Home() {
             direction="row"
             justify="center"
             alignItems="center"
+            className={classes.navclass}
             
             >
 
@@ -429,6 +460,7 @@ function Home() {
             direction="row"
             justify="center"
             alignItems="center"
+            className={classes.navclass}
             
             >
 
@@ -437,11 +469,13 @@ function Home() {
             </Grid>
             <br />
 
-            
+            </Grid>
                 
             </Paper>
             </Grid>
             </div>
+
+            </Grid>
 
             <br />
             <br />

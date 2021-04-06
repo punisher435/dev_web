@@ -1,3 +1,7 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 .columns{
   display: flex;
   margin-top: 50px;
@@ -108,6 +112,33 @@
   
 }
 
+.backgroundclass1{
+  position: relative; 
+  
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+  
+.backgroundclass1::before {  
+      content: "";
+      background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnyKdT_YR9I2OOqWE_Am3fAifdWNYW0EN7Lw&usqp=CAU");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      width:100%;
+      max-width:1200px;
+      opacity: 0.4;
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      bottom: 0px;
+      left: 0px;
+      
+  }
+
+
 .triangle-right {
 	width: 0;
 	height: 0;
@@ -115,6 +146,12 @@
 	border-left: 16px solid #9ddfd3;
 	border-bottom: 8px solid transparent;
  
+}
+
+.searchcardme{
+  width:90vw;
+  max-width:1200px;
+  
 }
 
 
