@@ -136,6 +136,8 @@ function Home() {
     const [coupons,setcoupons] = React.useState([])
     const isSmall = useMediaQuery("(max-width: 600px)");
 
+    const [totalbookings,settotalbookings] = React.useState('')
+
 
     React.useEffect(async() => {
         const config = {
@@ -203,6 +205,26 @@ function Home() {
           });
           
           setsingleroom(res.data.results);
+          
+          }
+          catch{
+            
+          }
+    },[])
+
+
+    React.useEffect(async() => {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+          };
+          try{const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourceashe929209has8h2bsgv2a89/booking/`,{
+            
+            config:config
+          });
+          
+          settotalbookings(res.data);
           
           }
           catch{
@@ -681,7 +703,7 @@ function Home() {
                 <Grid item xs={12}>
                     <Typography variant='subtitle1' className={classes.textclass}>
                 <Box lineHeight={1} fontSize={15}>
-                        (No. of rooms booked from our website)
+                        {totalbookings} (No. of bookings from our website)
                 </Box>
                     </Typography>
                 </Grid>

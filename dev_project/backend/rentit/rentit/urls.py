@@ -103,6 +103,11 @@ urlpatterns = [
 
     path('sourceadhwu178y2819gysag9812yg73467vbs3y28yga/',include('complaint.urls_messages')),
 
+
+    #total bookings
+    path('sourceashe929209has8h2bsgv2a89/',include('bookings.urls_home')),
+
+
 ]
 
 urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
