@@ -862,76 +862,144 @@ class admin_commission(viewsets.ViewSet):
 
                 booking_type= request.query_params.get('type')
                 x= request.query_params.get('x')
+                comm_type= request.query_params.get('comm')
                 temp = int(x)
 
                 if booking_type=='room':
 
-                    queryset = rooms.objects.all()
+                    if comm_type=='percent':
 
-                    for room in queryset:
-    
-                        price = room.seller_price
+                        queryset = rooms.objects.all()
 
-                        price = price - (price*room.company_discount)/100
+                        for room in queryset:
+        
+                            price = room.seller_price
 
-                        price = price + (price*temp)/100
-                        room.final_price = price
+                            price = price - (price*room.company_discount)/100
 
-                        cost = price + (price*(temp+room.fake_discount+room.owner_discount+room.company_discount))/100
-                        room.price = cost
+                            price = price + (price*temp)/100
+                            room.final_price = price
 
-                        room.commission = temp
+                            cost = price + (price*(temp+room.fake_discount+room.owner_discount+room.company_discount))/100
+                            room.price = cost
 
-                        room.net_discount = room.owner_discount+room.company_discount+room.fake_discount+temp
-                        room.save()
+                            room.commission = temp
 
-                    return Response('success', status=status.HTTP_202_ACCEPTED)
+                            room.net_discount = room.owner_discount+room.company_discount+room.fake_discount+temp
+                            room.save()
+
+                        return Response('success', status=status.HTTP_202_ACCEPTED)
+                    elif comm_type=='fix':
+
+                        queryset = rooms.objects.all()
+
+                        for room in queryset:
+        
+                            price = room.seller_price
+
+                            price = price - (price*room.company_discount)/100
+                            price = price + (price*room.commission)/100
+
+                            price = price + temp
+                            room.final_price = price
+
+                            cost = price + (price*(room.commission+room.fake_discount+room.owner_discount+room.company_discount))/100
+                            room.price = cost
+
+                            room.save()
+
+                        return Response('success', status=status.HTTP_202_ACCEPTED)
+
 
                 elif booking_type=='shop':
         
-                    queryset = shops.objects.all()
+                    if comm_type=='percent':
+    
+                        queryset = shops.objects.all()
 
-                    for room in queryset:
+                        for room in queryset:
         
-                        price = room.seller_price
-                        price = price - (price*room.company_discount)/100
+                            price = room.seller_price
 
+                            price = price - (price*room.company_discount)/100
 
-                        price = price + (price*temp)/100
-                        room.final_price = price
+                            price = price + (price*temp)/100
+                            room.final_price = price
 
-                        cost = price + (price*(temp+room.fake_discount+room.owner_discount+room.company_discount))/100
-                        room.price = cost
+                            cost = price + (price*(temp+room.fake_discount+room.owner_discount+room.company_discount))/100
+                            room.price = cost
 
-                        room.commission = temp
+                            room.commission = temp
 
-                        room.net_discount = room.owner_discount+room.company_discount+room.fake_discount+temp
-                        room.save()
+                            room.net_discount = room.owner_discount+room.company_discount+room.fake_discount+temp
+                            room.save()
 
-                    return Response('success', status=status.HTTP_202_ACCEPTED)
+                        return Response('success', status=status.HTTP_202_ACCEPTED)
+                    elif comm_type=='fix':
+
+                        queryset = shops.objects.all()
+
+                        for room in queryset:
+        
+                            price = room.seller_price
+
+                            price = price - (price*room.company_discount)/100
+                            price = price + (price*room.commission)/100
+
+                            price = price + temp
+                            room.final_price = price
+
+                            cost = price + (price*(room.commission+room.fake_discount+room.owner_discount+room.company_discount))/100
+                            room.price = cost
+
+                            room.save()
+
+                        return Response('success', status=status.HTTP_202_ACCEPTED)
 
                 elif booking_type=='apartment':
             
-                    queryset = apartments.objects.all()
+                    if comm_type=='percent':
+    
+                        queryset = apartments.objects.all()
 
-                    for room in queryset:
+                        for room in queryset:
         
-                        price = room.seller_price
-                        price = price - (price*room.company_discount)/100
+                            price = room.seller_price
 
+                            price = price - (price*room.company_discount)/100
 
-                        price = price + (price*temp)/100
-                        room.final_price = price
+                            price = price + (price*temp)/100
+                            room.final_price = price
 
-                        cost = price + (price*(temp+room.fake_discount+room.owner_discount+room.company_discount))/100
-                        room.price = cost
+                            cost = price + (price*(temp+room.fake_discount+room.owner_discount+room.company_discount))/100
+                            room.price = cost
 
-                        room.commission = temp
+                            room.commission = temp
 
-                        room.net_discount = room.owner_discount+room.company_discount+room.fake_discount+temp
-                        room.save()
+                            room.net_discount = room.owner_discount+room.company_discount+room.fake_discount+temp
+                            room.save()
 
-                    return Response('success', status=status.HTTP_202_ACCEPTED)
+                        return Response('success', status=status.HTTP_202_ACCEPTED)
+                    elif comm_type=='fix':
+
+                        queryset = apartments.objects.all()
+
+                        for room in queryset:
+        
+                            price = room.seller_price
+
+                            price = price - (price*room.company_discount)/100
+                            price = price + (price*room.commission)/100
+
+                            price = price + temp
+                            room.final_price = price
+
+                            cost = price + (price*(room.commission+room.fake_discount+room.owner_discount+room.company_discount))/100
+                            room.price = cost
+
+                            room.save()
+
+                        return Response('success', status=status.HTTP_202_ACCEPTED)
             else:
                 return Response('',status=status.HTTP_400_BAD_REQUEST)
         except:

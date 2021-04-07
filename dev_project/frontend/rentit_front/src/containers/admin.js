@@ -82,6 +82,7 @@ function Admin(props) {
     const [type7,settype7] = React.useState('')
 
     const [sellercommission,setsellercommission] = React.useState()
+    const [comm_type1,setcomm_type] = React.useState('percent')
 
 
     const [open,setopen] = React.useState()
@@ -382,6 +383,7 @@ function Admin(props) {
                       params:{
                         type:type6,
                         x:commission,
+                        comm_type:comm_type1,
                       },
                     };
                    
@@ -768,7 +770,25 @@ function Admin(props) {
                   <MenuItem value={'apartment'}>Apartment</MenuItem>
                 </Select>
                 
-              </FormControl><TextField
+              </FormControl>
+              
+              <FormControl className={classes.form}>
+                <InputLabel id="type">Commission Type</InputLabel>
+                <Select
+                  labelId="type"
+                  id="type"
+                  value={comm_type1}
+                  onChange={e => {setcomm_type(e.target.value)}}
+                >
+                  
+                  <MenuItem value={'percent'}>Percent</MenuItem>
+                  <MenuItem value={'fix'}>Fix amount</MenuItem>
+                 
+                </Select>
+                
+              </FormControl>
+              
+              <TextField
                 multiline
                 variant="outlined"
                 margin="normal"
