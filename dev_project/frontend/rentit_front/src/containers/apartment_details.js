@@ -51,6 +51,7 @@ import RenteneAppBar from '../components/Navbar'
 
 import ReviewSeller from '../components/seller_reviews_pop';
 import Button from '@material-ui/core/Button';
+import ScrollableIcons from '../components/ScrollableIcons'
 
 
 
@@ -462,7 +463,9 @@ if(details){
                           <Typography variant='h5'>
                                   Facilities
                               </Typography>
-                            <Facility post={details}/>
+                              <br />
+                              <ScrollableIcons post={details}/><br />
+                         <br />
                           </Grid>
                          
                           
@@ -591,7 +594,9 @@ if(details){
           <Typography variant='h5'>
                                   Facilities
                               </Typography>
-                            <Facilitymobile post={details}/>            
+                              <br />
+                              <ScrollableIcons post={details}/>
+                         
           </Grid>
           <Grid item xs={1}></Grid>
           </Grid>

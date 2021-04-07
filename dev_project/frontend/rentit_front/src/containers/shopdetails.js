@@ -33,6 +33,7 @@ import IconButton from '@material-ui/core/IconButton';
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import { connect } from 'react-redux'
+import ScrollableIcons from '../components/ScrollableIcons'
 
 
 
@@ -464,7 +465,9 @@ if(details){
                           <Typography variant='h5'>
                                   Facilities
                               </Typography>
-                            <Facility post={details}/>
+                              <br />
+                              <ScrollableIcons post={details}/><br />
+                         <br />
                           </Grid>
                          
                           
@@ -593,7 +596,9 @@ if(details){
           <Typography variant='h5'>
                                   Facilities
                               </Typography>
-                            <Facilitymobile post={details}/>            
+                              <br />
+                              <ScrollableIcons post={details}/>
+                        
           </Grid>
           <Grid item xs={1}></Grid>
           </Grid>
