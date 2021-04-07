@@ -24,7 +24,8 @@ import './css/App.css'
 const libraries = ["places"];
 const mapContainerStyle = {
   height: "40vh",
-  width: "40vw",
+
+  width: "50vw",
   position:'relative',
 };
 

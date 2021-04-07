@@ -469,13 +469,14 @@ if(details){
                           </Grid>
                          
                           
-                          <Grid item xs = {12} className={classes.api}>
+                        
                             <br />
                             
                             <div className={classes.apiclass}><Mapview value={details} /></div>
-                          </Grid>
+                        
 
                           <Grid item xs = {12}>
+                            <br /><br />
                             <RatingAndReviews  reviews={reviews} params={params1} setparams={setparams} no={parseFloat(details.reviews)} rating={parseFloat(details.avg_rating)}/>
                           </Grid>
 
