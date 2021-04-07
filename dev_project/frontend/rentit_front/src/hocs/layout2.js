@@ -32,6 +32,7 @@ import {Link} from 'react-router-dom'
 import FeedbackOutlinedIcon from '@material-ui/icons/FeedbackOutlined';
 import '../components/css/App.css'
 import CommentOutlinedIcon from '@material-ui/icons/CommentOutlined';
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 
 const drawerWidth = 240;
 
@@ -200,6 +201,15 @@ function Dashboarddrawer(props) {
           <ListItemIcon><CommentOutlinedIcon /></ListItemIcon>
           <ListItemText primary="housing complaints" />
       </ListItem></Link>
+        }
+
+
+
+{
+          props.profile.is_superuser ?  <Link to='/admin/jdwai2021801yadb28ykha2sad1893812/awuhd812832232w7dyqw1/ada' style={{textDecoration:'none',color:'black'}}><ListItem button key="Housing complaints">
+          <ListItemIcon><SupervisorAccountIcon /></ListItemIcon>
+          <ListItemText primary="Admin" />
+      </ListItem></Link> : null
         }
 
         

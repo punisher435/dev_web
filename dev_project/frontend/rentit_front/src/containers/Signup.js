@@ -26,6 +26,9 @@ import MuiAlert from '@material-ui/lab/Alert';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 
+import Backdrop from '@material-ui/core/Backdrop';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 const validationSchema = yup.object({
   
   first_name: yup
@@ -108,6 +111,7 @@ const Signup = ({ signup, isAuthenticated }) => {
     const [message,setmess] = useState('')
     const [display,setdisplay] = useState(false)
     const [display1,setdisplay1] = useState(false)
+    const [open,setopen] = useState(false)
 
     function Alert(props) {
       return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -147,6 +151,7 @@ const Signup = ({ signup, isAuthenticated }) => {
       },
       validationSchema: validationSchema,
       onSubmit: async (values) => {
+        setopen(true);
         
         
         const { first_name,last_name,is_seller, email, password, re_password,gender } = values;
@@ -156,13 +161,14 @@ const Signup = ({ signup, isAuthenticated }) => {
         if (password === re_password) {
             signup({ first_name,last_name, email,is_seller, password, re_password,gender })
             .then(temp => {
-              
+              setopen(false);
               setdisplay(true)
               setAccountCreated(true)
+              
 
               })
               .catch(err => {
-                
+                setopen(false);
                 setmess(err.message);
                 setdisplay1(true)
 
@@ -170,6 +176,9 @@ const Signup = ({ signup, isAuthenticated }) => {
            
             
            
+        }
+        else{
+          setopen(false);
         }
   
         
@@ -185,6 +194,10 @@ const Signup = ({ signup, isAuthenticated }) => {
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline />
+
+            <Backdrop className={classes.backdrop} open={open}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
 
             <Snackbar open={display} autoHideDuration={6000} onClose={handleClose}>
             <Alert onClose={handleClose} severity="success">

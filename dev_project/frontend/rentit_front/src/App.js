@@ -150,7 +150,7 @@ function App(props) {
                 <Route exact path='/dashboard/recentbookings/shop-bookings/:bookingid/feedback' component={ReviewForm}/>
                 <Route exact path='/dashboard/recentbookings/apartment-bookings/:bookingid/feedback' component={ReviewForm}/>
 
-                <Route exact path='/admin/jdwai2021801yadb28ykha2' component={Admin}/>
+                <Route exact path='/admin/jdwai2021801yadb28ykha2sad1893812/awuhd812832232w7dyqw1/ada' component={Admin}/>
 
 
                 <Route exact path='/dashboard/complaints/room' component={Complaintroom}/>

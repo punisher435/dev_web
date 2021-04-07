@@ -372,6 +372,7 @@ function Home() {
                     <Welcome />
                 </div>
             </div>
+            
             <br />
 
             <Grid
