@@ -55,6 +55,9 @@ const useStyles = makeStyles((theme) => ({
         textAlign: 'center',
         width:'90vw',
     },
+    newclass12:{
+    paddingLeft:'3%',
+    },
     myclass2: {
         // backgroundColor: '#2d3436',
         backgroundColor: '#081C15',
@@ -632,11 +635,14 @@ function Home() {
             direction="row"
             justify="space-evenly"
             alignItems="flex-start"
-            spacing={4}
+            className={classes.newclass12}
+            
             >
 
+                <br />
+
                 
-            <Grid item xs={12} sm={3}>
+            <Grid item xs={12} sm={3}><br />
                 <Grid
                 container
                 direction="row"
@@ -683,6 +689,7 @@ function Home() {
                 </Grid>
                 
             </Grid>
+            <br/>
         </Grid>
 
 
@@ -708,7 +715,7 @@ function Home() {
                 </Box>
                     </Typography>
                 </Grid>
-            </Grid>
+            </Grid><br/>
                 </Grid>
                 {/* <Divider orientation="vertical" flexItem={true} light={true}/> */}
 
@@ -725,7 +732,7 @@ function Home() {
                         About Us
                     </Typography>
                 </Grid>
-            </Grid>
+            </Grid><br/>
             {/* </Paper> */}
                 </Grid>
                 {/* <Divider orientation="vertical" flexItem  light/> */}
@@ -745,7 +752,7 @@ function Home() {
                     </Typography>
                 </Grid>
                 
-            </Grid>
+            </Grid><br/>
             {/* </Paper> */}
                 
                 </Grid>
