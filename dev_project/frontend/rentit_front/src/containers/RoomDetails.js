@@ -37,6 +37,7 @@ import IconButton from '@material-ui/core/IconButton';
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import RenteneAppBar from '../components/Navbar'
+import ScrollableIcons from '../components/ScrollableIcons'
 
 
 
@@ -454,12 +455,13 @@ if(details){
                           <Typography variant='h5'>
                                   Facilities
                               </Typography>
-                            <Facility post={details}/>
+                              <br />
+                              <ScrollableIcons post={details}/><br />
+                         <br />
                           </Grid>
                          
-                          
                           <Grid item xs = {12} className={classes.api}>
-                            <br />
+                           
                             
                             <div className={classes.apiclass}><Mapview value={details} /></div>
                           </Grid>
@@ -587,7 +589,9 @@ if(details){
           <Typography variant='h5'>
                                   Facilities
                               </Typography>
-                            <Facilitymobile post={details}/>            
+                              <br />
+                              <ScrollableIcons post={details}/>
+                           
           </Grid>
           <Grid item xs={1}></Grid>
           </Grid>
