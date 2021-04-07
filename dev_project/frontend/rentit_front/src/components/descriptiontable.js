@@ -28,7 +28,7 @@ const StyledTableCell = withStyles((theme) => ({
 
 const useStyles = makeStyles({
   table: {
-    
+   
   },
   font:{
       fontWeight: 'bold',
@@ -41,7 +41,11 @@ const useStyles = makeStyles({
     fontSize:'20px',
     
    
-}
+},
+table1:{
+  
+
+},
 });
 
 function createData(name, value) {
@@ -190,11 +194,11 @@ export default function BasicTable({room}) {
 
         <TableBody>
           {rows3.map((row) => (
-            <StyledTableRow key={row.name}>
+            <StyledTableRow key={row.name} className={classes.table1}>
               <StyledTableCell component="th" scope="row" className={classes.font}>
                 {row.name}
               </StyledTableCell>
-              <StyledTableCell align="center">{row.value}</StyledTableCell>
+              <StyledTableCell align="center" className={classes.table1}>{row.value}</StyledTableCell>
               
             </StyledTableRow>
           ))}
