@@ -161,7 +161,7 @@ function Myapartments(props) {
     if(redirect)
     {
       return <Redirect  to={{
-        pathname: `/dashboard/my_apartments/edit`,
+        pathname: `/dashboard/my_housing/edit`,
         state: { property_id: null }
       }} style={{textDecoration:'none'}} />
     }

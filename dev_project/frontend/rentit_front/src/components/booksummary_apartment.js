@@ -113,7 +113,7 @@ export default function Review({bookdetails,setbookdetails}) {
         </Grid>
         <Grid item container direction="column" xs={12} sm={6}>
           <Typography variant="h6" gutterBottom className={classes.title}>
-            Apartment details
+            Housing details
           </Typography>
           <Grid container>
             

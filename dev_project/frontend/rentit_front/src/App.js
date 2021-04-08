@@ -100,9 +100,9 @@ function App(props) {
                 <Route exact path='/shops/:shopid' component={Shops}/>
                 <Route exact path='/shops/:shopid/book/' component={Checkout_shop} />
 
-                <Route exact path='/apartments' component={ApartmentListing}/>
-                <Route exact path='/apartments/:apartmentid' component={Apartments}/>
-                <Route exact path='/apartments/:apartmentid/book/' component={Checkout_apartment} />
+                <Route exact path='/housing' component={ApartmentListing}/>
+                <Route exact path='/housing/:apartmentid' component={Apartments}/>
+                <Route exact path='/housing/:apartmentid/book/' component={Checkout_apartment} />
 
                 <Route exact path='/dashboard/analytics' component={Analytics}/>
 
@@ -114,10 +114,10 @@ function App(props) {
                 <Route exact path='/dashboard/my_shops/edit' component={ShopForm}/>
                 <Route exact path='/dashboard/my_shops/delete' component={ConfirmDelete}/>
                 <Route exact path='/dashboard/my_shops/pause_booking' component={ConfirmPause}/>
-                <Route exact path='/dashboard/my_apartments' component={Myapartments}/>
-                <Route exact path='/dashboard/my_apartments/edit' component={ApartmentForm}/>
-                <Route exact path='/dashboard/my_apartments/delete' component={ConfirmDelete}/>
-                <Route exact path='/dashboard/my_apartments/pause_booking' component={ConfirmPause}/>
+                <Route exact path='/dashboard/my_housing' component={Myapartments}/>
+                <Route exact path='/dashboard/my_housing/edit' component={ApartmentForm}/>
+                <Route exact path='/dashboard/my_housing/delete' component={ConfirmDelete}/>
+                <Route exact path='/dashboard/my_housing/pause_booking' component={ConfirmPause}/>
 
                 <Route exact path='/dashboard/my_reviews' component={MyReviews}/>
 
@@ -135,7 +135,7 @@ function App(props) {
                 <Route exact path='/dashboard/recentbookings' component={RecentBooking1}/>
                 <Route exact path='/dashboard/recentbookings/room-bookings/:bookingid' component={Bookingdetails}/>
                 <Route exact path='/dashboard/recentbookings/shop-bookings/:bookingid' component={Bookingdetails_shop}/>
-                <Route exact path='/dashboard/recentbookings/apartment-bookings/:bookingid' component={Bookingdetails_apartment}/>
+                <Route exact path='/dashboard/recentbookings/housing-bookings/:bookingid' component={Bookingdetails_apartment}/>
 
                 <Route exact path='/dashboard/recentbookings/room-bookings/cancel/:bookingid' component={Bookingcancel}/>
                 <Route exact path='/dashboard/recentbookings/room-bookings/extend/:bookingid' component={Bookingextend}/>
@@ -143,12 +143,12 @@ function App(props) {
                 <Route exact path='/dashboard/recentbookings/shop-bookings/cancel/:bookingid' component={Bookingcancel_shop}/>
                 <Route exact path='/dashboard/recentbookings/shop-bookings/extend/:bookingid' component={Bookingextend_shop}/>
 
-                <Route exact path='/dashboard/recentbookings/apartment-bookings/cancel/:bookingid' component={Bookingcancel_apartment}/>
-                <Route exact path='/dashboard/recentbookings/apartment-bookings/extend/:bookingid' component={Bookingextend_apartment}/>
+                <Route exact path='/dashboard/recentbookings/housing-bookings/cancel/:bookingid' component={Bookingcancel_apartment}/>
+                <Route exact path='/dashboard/recentbookings/housing-bookings/extend/:bookingid' component={Bookingextend_apartment}/>
 
                 <Route exact path='/dashboard/recentbookings/room-bookings/:bookingid/feedback' component={ReviewForm}/>
                 <Route exact path='/dashboard/recentbookings/shop-bookings/:bookingid/feedback' component={ReviewForm}/>
-                <Route exact path='/dashboard/recentbookings/apartment-bookings/:bookingid/feedback' component={ReviewForm}/>
+                <Route exact path='/dashboard/recentbookings/housing-bookings/:bookingid/feedback' component={ReviewForm}/>
 
                 <Route exact path='/admin/jdwai2021801yadb28ykha2sad1893812/awuhd812832232w7dyqw1/ada' component={Admin}/>
 

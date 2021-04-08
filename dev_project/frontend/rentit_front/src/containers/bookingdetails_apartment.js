@@ -219,10 +219,10 @@ function Bookingdetails(props) {
   }
   
   if(cancelled===true){
-    return <Redirect to={`/dashboard/recentbookings/apartment-bookings/cancel/${bookingid}`}/>
+    return <Redirect to={`/dashboard/recentbookings/housing-bookings/cancel/${bookingid}`}/>
   }
   if(extend===true){
-    return <Redirect to={`/dashboard/recentbookings/apartment-bookings/extend/${bookingid}`}/>
+    return <Redirect to={`/dashboard/recentbookings/housing-bookings/extend/${bookingid}`}/>
   }
     if(mybooking && props.profile){
     
@@ -310,7 +310,7 @@ function Bookingdetails(props) {
    <Grid item >
             {
                 mybooking.apartment_review || mybooking.cancelled ? null :  <Link to={{
-                  pathname: `/dashboard/recentbookings/apartment-bookings/${mybooking.booking_id}/feedback`,
+                  pathname: `/dashboard/recentbookings/housing-bookings/${mybooking.booking_id}/feedback`,
                   state: { property_id:'apartment' }
                 }} style={{textDecoration:'none'}}><Button variant="contained" padding="auto"color="secondary" >
                 Give Feedback

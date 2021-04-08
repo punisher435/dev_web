@@ -231,7 +231,7 @@ function ResponsiveDrawer(props) {
 
       <ListItem className={classes.mystyle}>
       <Typography variant="h6">
-          Location (exact)
+          Location
       </Typography>
       </ListItem>
       <ListItem className={classes.mystyle}>

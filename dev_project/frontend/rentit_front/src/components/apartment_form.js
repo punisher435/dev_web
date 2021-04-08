@@ -1199,7 +1199,7 @@ if(newredirect==true)
 
   if(redirect==true)
   {
-    return <Redirect to='/dashboard/my_apartments' />
+    return <Redirect to='/dashboard/my_housing' />
   }
   if(error===true)
   {
@@ -1344,7 +1344,7 @@ if(newredirect==true)
           rows={1}
           id="title"
           name="title"
-          label="Apartment name"
+          label="House name"
           value={formik.values.title}
           onChange={formik.handleChange}
           error={formik.touched.title && Boolean(formik.errors.title)}
@@ -1358,7 +1358,7 @@ if(newredirect==true)
 
        
         <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-            No. of windows in the apartment
+            No. of windows in the house
           </Typography>
        
           <div>   
@@ -1378,7 +1378,7 @@ if(newredirect==true)
 
     
         <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-            No. of balcony in the apartment
+            No. of balcony in the House
           </Typography>
         
           <div>   
@@ -1398,7 +1398,7 @@ if(newredirect==true)
 
 
     <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-        Who you want this apartment to rent?
+        Who you want this House to rent?
       </Typography>
     
     <FormControl className={classes.form}>
@@ -1425,7 +1425,7 @@ if(newredirect==true)
 
     
         <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-            No. of fans in the apartment
+            No. of fans in the House
           </Typography>
        
           <div>   
@@ -1445,12 +1445,12 @@ if(newredirect==true)
 
        
         <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-            Apartment type
+        House type
           </Typography>
       
         <FormControl className={classes.form}>
         
-            <InputLabel id="apartment_type">Apartment type</InputLabel>
+            <InputLabel id="apartment_type">House type</InputLabel>
             <Select
             labelId="apartment_type"
             id="apartment_type"
@@ -1474,7 +1474,7 @@ if(newredirect==true)
 
    
         <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-            Floor no. of apartment
+            Floor no. of House
           </Typography>
       
           <div>   
@@ -1494,7 +1494,7 @@ if(newredirect==true)
 
  
         <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-            No. of washrooms in the apartment
+            No. of washrooms in the House
           </Typography>
        
           <div>   
@@ -1514,7 +1514,7 @@ if(newredirect==true)
 
     
         <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-            No. of rooms in the apartment
+            No. of rooms in the House
           </Typography>
     
           <div>   
@@ -1534,7 +1534,7 @@ if(newredirect==true)
 
    
         <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-            No. of floors in the apartment
+            No. of floors in the House
           </Typography>
       
           <div>   
@@ -1554,7 +1554,7 @@ if(newredirect==true)
 
   
         <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-            BHK of the apartment
+            BHK of the House
           </Typography>
       
           <div>   
@@ -1578,7 +1578,7 @@ if(newredirect==true)
 
    
         <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-            Bed type provided in the apartment
+            Bed type provided in the House
           </Typography>
       
         <FormControl className={classes.form}>
@@ -1603,7 +1603,7 @@ if(newredirect==true)
 
    
         <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-            No. of beds in the apartment
+            No. of beds in the House
           </Typography>
       
           <div>   
@@ -1622,7 +1622,7 @@ if(newredirect==true)
     <br />
 
         <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-            No. of TV in the apartment
+            No. of TV in the House
           </Typography>
        
           <div>   
@@ -1642,7 +1642,7 @@ if(newredirect==true)
 
   
         <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-            No. of AC in the apartment
+            No. of AC in the House
           </Typography>
         
           <div>   
@@ -1662,7 +1662,7 @@ if(newredirect==true)
 
   
         <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-            No. of cooler in the apartment
+            No. of cooler in the House
           </Typography>
       
           <div>   
@@ -1682,7 +1682,7 @@ if(newredirect==true)
 
   
         <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-            No. of geyser in the apartment
+            No. of geyser in the House
           </Typography>
       
           <div>   
@@ -1730,7 +1730,7 @@ if(newredirect==true)
 
     <><br />
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-      Length of the apartment
+      Length of the House
         </Typography>
      
         <TextField
@@ -1753,7 +1753,7 @@ if(newredirect==true)
 
   <><br />
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-      Breadth of the apartment
+      Breadth of the House
         </Typography>
       
         <TextField
@@ -1776,7 +1776,7 @@ if(newredirect==true)
 
   <><br />
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-      Height of the apartment
+      Height of the House
         </Typography>
      
         <TextField
@@ -1799,7 +1799,7 @@ if(newredirect==true)
 
   <><br />
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-      Furniture in the apartment
+      Furniture in the House
         </Typography>
       
         <TextField
@@ -1821,7 +1821,7 @@ if(newredirect==true)
 
   <><br />
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-      Description of the apartment
+      Description of the House
         </Typography>
      
         <TextField
@@ -2613,18 +2613,18 @@ if(newredirect==true)
 
 
             <Typography variant="h6" color="textPrimary">
-               Apartment cleaning
+            House cleaning
             </Typography>
       
             <br />
      
         <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-            Do you provide Apartment cleaning ?
+            Do you provide House cleaning ?
         </Typography>
       
         <FormControl className={classes.form}>
         
-            <InputLabel id="apartment_cleaning">Apartment cleaning</InputLabel>
+            <InputLabel id="apartment_cleaning">House cleaning</InputLabel>
             <Select
             labelId="apartment_cleaning"
             id="apartment_cleaning"
@@ -2646,7 +2646,7 @@ if(newredirect==true)
     {
       formik.values.apartment_cleaning ? <><br />
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-      Cost of apartment cleaning facility (in per cleaning)
+      Cost of House cleaning facility (in per cleaning)
         </Typography>
       
         <TextField
@@ -2825,7 +2825,7 @@ if(newredirect==true)
 
 
             <Typography variant="h4" color="textPrimary">
-              Regarding apartment
+              Regarding House
             </Typography>
      
             <br />
@@ -2833,7 +2833,7 @@ if(newredirect==true)
 
     <>
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-      Any apartment policy or rules?
+      Any House policy or rules?
         </Typography>
      
         <TextField

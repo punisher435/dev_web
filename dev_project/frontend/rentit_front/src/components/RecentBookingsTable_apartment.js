@@ -110,7 +110,7 @@ export default function CustomizedTables2({bookings,setbookings,title}) {
       <Grid item>
         <Typography variant="h5" color="inherit" noWrap className={classes.title}>
           <Box mt={1} ml={1} mb={1} fontWeight="fontWeightBold">
-                Apartment Bookings History
+          Housing Bookings History
           </Box>
         </Typography>
 
@@ -125,7 +125,7 @@ export default function CustomizedTables2({bookings,setbookings,title}) {
             <StyledTableCell>BOOKED ON</StyledTableCell>
             <StyledTableCell align="right">PRIMARY GUEST</StyledTableCell>
             <StyledTableCell align="right">BOOKING ID</StyledTableCell>
-            <StyledTableCell align="right">APARTMENT NAME</StyledTableCell>
+            <StyledTableCell align="right">HOUSING NAME</StyledTableCell>
             <StyledTableCell align="right">PRICE</StyledTableCell>
             <StyledTableCell align="right">BOOKING STATUS</StyledTableCell>
             <StyledTableCell align="right">DETAILS</StyledTableCell>

@@ -543,7 +543,7 @@ function NestedGrid({ mypost,setmypost,openmycard,setmycard,filters,setfilters,p
         </Grid>
         
         <Grid item md={7} xs={12}>
-        <Link to={`/apartments/${post.apartment_id}`} target="_blank" style={{textDecoration:'none'}}>
+        <Link to={`/housing/${post.apartment_id}`} target="_blank" style={{textDecoration:'none'}}>
           <NameCard/>
           </Link>
         </Grid>

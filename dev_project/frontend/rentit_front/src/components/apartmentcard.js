@@ -31,7 +31,7 @@ export default function ApartmentCard({myapartment}) {
   return (
       <div>
     <Card className={classes.root}>
-    <Link to={`/apartments/${myapartment.apartment_id}`} target="_blank" style={{textDecoration:'none',color:'black'}}>
+    <Link to={`/housing/${myapartment.apartment_id}`} target="_blank" style={{textDecoration:'none',color:'black'}}>
       <CardActionArea>
         <CardMedia
           className={classes.media}
@@ -63,13 +63,13 @@ export default function ApartmentCard({myapartment}) {
       <CardActions>
         
         <Link to={{
-    pathname: `/dashboard/my_apartments/edit`,
+    pathname: `/dashboard/my_housing/edit`,
     state: { property_id: myapartment.apartment_id}
   }} style={{textDecoration:'none'}}><Button size="small" color="primary">
           Edit
         </Button></Link>
         <Link to={{
-    pathname: `/dashboard/my_apartments/delete`,
+    pathname: `/dashboard/my_housing/delete`,
     state: { property_id: myapartment.apartment_id,url:'sourceddnvslf54d/my_apartments' ,url1:'my_apartments' }
   }} style={{textDecoration:'none'}}><Button size="small" color="primary" >
           Delete
@@ -77,12 +77,12 @@ export default function ApartmentCard({myapartment}) {
         
       {
         myapartment.pausebooking ? <Link to={{
-          pathname: `/dashboard/my_apartments/pause_booking`,
+          pathname: `/dashboard/my_housing/pause_booking`,
           state: { property_id: myapartment.apartment_id,url:'sourceddnvslf54d/my_apartments',url1:'my_apartments' }
         }} style={{textDecoration:'none'}}><Button size="small" color="primary">
                 Resume Booking
               </Button></Link> :  <Link to={{
-    pathname: `/dashboard/my_apartments/pause_booking`,
+    pathname: `/dashboard/my_housing/pause_booking`,
     state: { property_id: myapartment.apartment_id,url:'sourceddnvslf54d/my_apartments',url1:'my_apartments' }
   }} style={{textDecoration:'none'}}><Button size="small" color="primary">
           Pause Booking

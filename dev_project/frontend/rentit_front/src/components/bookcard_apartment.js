@@ -371,7 +371,7 @@ laundry:details.laundry
          details.pausebooking || !details.verified || booked ? <Button variant='contained' color="primary" fullWidth >
         Unavaiable untill 1 day after {details.bookedtill}
       </Button> :   <Link style={{textDecoration:'none'}} to={{
-    pathname: `/apartments/${details.apartment_id}/book`,
+    pathname: `/housing/${details.apartment_id}/book`,
     state: { property_id: bookvalues }
   }}><Button variant='contained' color="secondary" fullWidth>
           Continue to book
