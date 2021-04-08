@@ -360,7 +360,7 @@ function Home() {
   }
   if(apartmentsearch===true)
   {
-      return <Redirect to={`/apartments/?city=${input.city.toUpperCase()}&state=${input.state.toUpperCase()}&country=${input.country.toUpperCase()}&booking_date=${input.date}`} style={{textDecoration:'none',color:'black'}} />
+      return <Redirect to={`/housing/?city=${input.city.toUpperCase()}&state=${input.state.toUpperCase()}&country=${input.country.toUpperCase()}&booking_date=${input.date}`} style={{textDecoration:'none',color:'black'}} />
   }
 
     
