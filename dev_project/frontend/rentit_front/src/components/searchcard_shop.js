@@ -193,6 +193,8 @@ function NestedGrid({mypost,setmypost,openmycard,setmycard,filters,setfilters,po
 
   const [mybookcard,openbookcard] =  useState(false)
   const [loginpage,setloginpage] =  useState(false)
+  const [newdate,setnewdate] = useState(new Date(Date.now()))
+  
 
   const handlebookcard = e => {
     e.preventDefault();
@@ -240,6 +242,11 @@ function NestedGrid({mypost,setmypost,openmycard,setmycard,filters,setfilters,po
     useEffect(async () => {
 
       const date = post.bookedtill;
+      var tempnew = new Date(Date.now());
+      tempnew.setFullYear(parseInt(date.slice(0,4)));
+      tempnew.setMonth(parseInt(date.slice(5,7))-1);
+      tempnew.setDate(parseInt(date.slice(8,))+1);
+      setnewdate(tempnew);
       if(filters){
         setdate(filters.bookedtill);
       }
@@ -273,7 +280,7 @@ function NestedGrid({mypost,setmypost,openmycard,setmycard,filters,setfilters,po
     }
 
     }
-      ,[isAuthenticated],[post])
+      ,[isAuthenticated,post])
 
   
     return (
@@ -515,7 +522,7 @@ function NestedGrid({mypost,setmypost,openmycard,setmycard,filters,setfilters,po
         <Grid item md={3}>
           { 
           !post.verified || booked ? <Button variant="outlined" color="secondary">
-          Not Avaiable until 1 day after {post.bookedtill} 
+         Not Avaiable until {`${newdate.getDate()}-${parseInt(newdate.getMonth())+1}-${newdate.getFullYear()}`} 
         </Button> :<Button variant="contained" color="secondary" onClick={e => {handlebookcard(e);}}>
             Book Now 
         </Button>

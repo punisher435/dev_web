@@ -194,6 +194,9 @@ function NestedGrid({ mypost,setmypost,openmycard,setmycard,filters,setfilters,p
   const [mybookcard,openbookcard] =  useState(false)
   const [loginpage,setloginpage] =  useState(false)
 
+  const [newdate,setnewdate] = useState(new Date(Date.now()))
+  
+
   const handlebookcard = e => {
     e.preventDefault();
 
@@ -241,6 +244,11 @@ function NestedGrid({ mypost,setmypost,openmycard,setmycard,filters,setfilters,p
     useEffect(async () => {
 
       const date = post.bookedtill;
+      var tempnew = new Date(Date.now());
+      tempnew.setFullYear(parseInt(date.slice(0,4)));
+      tempnew.setMonth(parseInt(date.slice(5,7))-1);
+      tempnew.setDate(parseInt(date.slice(8,))+1);
+      setnewdate(tempnew);
       if(filters){
         setdate(filters.bookedtill);
       }
@@ -262,7 +270,7 @@ function NestedGrid({ mypost,setmypost,openmycard,setmycard,filters,setfilters,p
       try {
       await axios.get(`${process.env.REACT_APP_API_URL}/sourcenasdknahi29ad/wishlist/apartments/${post.apartment_id}/`,config,config)
       .then(res => {
-          console.log('wishlist',res.data)
+          
         changewishlist(res.data);
       })
       .catch(err => {
@@ -275,7 +283,7 @@ function NestedGrid({ mypost,setmypost,openmycard,setmycard,filters,setfilters,p
     }
 
     }
-      ,[isAuthenticated],[post])
+      ,[isAuthenticated,post])
 
   
     return (
@@ -517,7 +525,7 @@ function NestedGrid({ mypost,setmypost,openmycard,setmycard,filters,setfilters,p
         <Grid item md={3}>
           { 
           !post.verified || booked ? <Button variant="outlined" color="secondary">
-          Not Avaiable until 1 day after {post.bookedtill} 
+          Not Avaiable until {`${newdate.getDate()}-${parseInt(newdate.getMonth())+1}-${newdate.getFullYear()}`} 
         </Button> :<Button variant="contained" color="secondary" onClick={e => {handlebookcard(e);}}>
             Book Now 
         </Button>
