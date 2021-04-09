@@ -18,6 +18,8 @@ import {
   ComboboxOption,
 } from "@reach/combobox";
 import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 
 
 import "@reach/combobox/styles.css";
@@ -40,6 +42,15 @@ const center = {
 
 
 
+
+const useStyles = makeStyles(theme => ({
+  windowclass:{
+    width:'100%',
+   
+  },
+  }));
+
+
 export default function App({point,url}) {
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -49,6 +60,9 @@ export default function App({point,url}) {
   const [selected, setSelected] = React.useState(null);
 
   const [marker,setmarkers] = React.useState([]);
+
+  const theme = useTheme();
+  const classes = useStyles();
 
  /*  const onMapClick = React.useCallback((e) => {
     setMarkers((current) => [
@@ -145,14 +159,16 @@ const mystyle1 = {
             onCloseClick={() => {
               setSelected(null);
             }}
-            style={mystyle1}
+           
+            className={classes.windowclass}
           >
             <div>
               <Link to={`/${url}/${selected.properties.roomId}`} target="_blank" style={{textDecoration:'none'}}>
               <Button>
-              <h2>
-                {selected.properties.category}
-              </h2>
+              <Typography variant="h6">
+              {selected.properties.title},
+                 {` ${selected.properties.category}`}
+              </Typography>
               </Button>
               </Link>
             </div>

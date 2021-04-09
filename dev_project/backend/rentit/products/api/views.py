@@ -734,6 +734,7 @@ class apartment_filter(rest_filters.FilterSet):
             queryset = queryset.filter(location__icontains=value)
         return queryset
 
+   
     
 
     class Meta:
