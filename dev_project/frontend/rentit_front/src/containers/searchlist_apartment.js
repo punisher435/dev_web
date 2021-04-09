@@ -40,6 +40,7 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import MapIcon from '@material-ui/icons/Map';
 import BHKfilter from '../components/BHKfilter'
 import Location from '../components/locationfilter'
+import Typefilter from '../components/apartment_type'
 
 
 import Mapmount from '../components/mapmount_apartment';
@@ -199,6 +200,16 @@ function ResponsiveDrawer(props) {
       </ListItem>
       <ListItem className={classes.mystyle}>
       <MaterialUIPickers1 checked={checked} setChecked={setChecked} filters={props.filters} setfilters={props.setfilters}/>
+      </ListItem>
+      <Divider />
+
+      <ListItem className={classes.mystyle}>
+      <Typography variant="h6">
+          Housing Type
+      </Typography>
+      </ListItem>
+      <ListItem className={classes.mystyle}>
+      <Typefilter filters={props.filters} setfilters={props.setfilters}/>
       </ListItem>
       <Divider />
 

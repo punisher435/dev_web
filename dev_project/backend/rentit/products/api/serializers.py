@@ -49,7 +49,7 @@ class minmax_shop_serializer(serializers.ModelSerializer):
 class shop_location(serializers.ModelSerializer):
     class Meta:
         model = shops
-        fields = ['latitude','longitude','shop_id','category','title']
+        fields = ['latitude','longitude','shop_id','title']
 
 
 
@@ -75,4 +75,4 @@ class minmax_apartment_serializer(serializers.ModelSerializer):
 class apartment_location(serializers.ModelSerializer):
     class Meta:
         model = apartments
-        fields = ['latitude','longitude','apartment_id','category','title']
+        fields = ['latitude','longitude','apartment_id','apartment_type','title']

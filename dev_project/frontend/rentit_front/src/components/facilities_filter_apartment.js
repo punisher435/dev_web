@@ -129,22 +129,7 @@ export default function SimpleSelect2(props) {
         </Select>
       </FormControl>
 
-      <FormControl className={classes.formControl}>
-        <InputLabel id="sofa">Apartment Type</InputLabel>
-        <Select
-          labelId="sofa"
-          id="sofa"
-          value={props.filters.apartment_type}
-          onChange={handleChange19}
-        >
-          <MenuItem value={''}>Any</MenuItem>
-          <MenuItem value={'Flat'}>Flat</MenuItem>
-          <MenuItem value={'Bunglow'}>Bunglow</MenuItem>
-          <MenuItem value={'Villa'}>Villa</MenuItem>
-          <MenuItem value={'Mansion'}>Mansion</MenuItem>
-          <MenuItem value={'Farm House'}>Farm House</MenuItem>
-        </Select>
-      </FormControl>
+
 
       <FormControl className={classes.formControl}>
         <InputLabel id="purified_water">Purified water</InputLabel>
@@ -263,7 +248,7 @@ export default function SimpleSelect2(props) {
 
 
       <FormControl className={classes.formControl}>
-        <InputLabel id="room_cleaning">apartment cleaning</InputLabel>
+        <InputLabel id="room_cleaning">House cleaning</InputLabel>
         <Select
           labelId="room_cleaning_list"
           id="room_cleaning_id"

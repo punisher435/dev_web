@@ -166,7 +166,7 @@ const mystyle1 = {
               <Link to={`/${url}/${selected.properties.roomId}`} target="_blank" style={{textDecoration:'none'}}>
               <Button>
               <Typography variant="h6">
-              {selected.properties.title},
+              {selected.properties.title}{selected.category=='' ? null : ','}
                  {` ${selected.properties.category}`}
               </Typography>
               </Button>
