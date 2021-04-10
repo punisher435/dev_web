@@ -7,6 +7,7 @@ import CustomizedTables1 from './RecentBookingsTable_shop'
 import CustomizedTables2 from './RecentBookingsTable_apartment'
 import {connect} from 'react-redux'
 import axios from 'axios'
+import {Redirect} from 'react-router-dom';
 
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
@@ -85,6 +86,11 @@ function RecentBooking1(props) {
         }
     
     ,[])
+
+    if(props.isAuthenticated===false)
+    {
+      return <Redirect to="/login" />;
+    }
 
     return (
         <div>

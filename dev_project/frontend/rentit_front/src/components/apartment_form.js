@@ -1203,6 +1203,11 @@ const Filevalidation6 = (file1,name) => {
   
 }
 
+if(props.isAuthenticated===false)
+    {
+      return <Redirect to="/login" />;
+    }
+
 if(newredirect==true)
 {
   return <Redirect to='/dashboard/profile' />

@@ -171,6 +171,11 @@ function Myrooms(props) {
       setRedirect(true);
     };
 
+    if(props.isAuthenticated===false)
+    {
+      return <Redirect to="/login" />;
+    }
+
 
     
 
@@ -186,6 +191,8 @@ function Myrooms(props) {
         state: { property_id: null }
       }} style={{textDecoration:'none'}} />
     }
+
+
 
     if(props.isAuthenticated && myrooms){
     

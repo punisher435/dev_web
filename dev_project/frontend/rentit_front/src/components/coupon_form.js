@@ -297,6 +297,11 @@ function CouponForm (props){
     }
   ,[formik.values.life])
 
+  if(props.isAuthenticated===false)
+    {
+      return <Redirect to="/login" />;
+    }
+
   if(redirect==true)
   {
     return <Redirect to='/dashboard/my_coupons' />

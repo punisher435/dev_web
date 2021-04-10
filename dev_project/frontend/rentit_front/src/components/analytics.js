@@ -176,6 +176,11 @@ function Analytics(props) {
       return <div className={classes.erorclass}><Eror error='Error' /></div>
     }
 
+    if(props.isAuthenticated===false)
+    {
+      return <Redirect to="/login" />;
+    }
+
     if(props.profile && bookings && shopbookings && apartmentbookings){
     
     

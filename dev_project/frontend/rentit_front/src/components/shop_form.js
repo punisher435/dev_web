@@ -999,6 +999,11 @@ const Filevalidation5 = (file1,name) => {
   
 }
 
+if(props.isAuthenticated===false)
+    {
+      return <Redirect to="/login" />;
+    }
+
 
 
 if(newredirect==true)

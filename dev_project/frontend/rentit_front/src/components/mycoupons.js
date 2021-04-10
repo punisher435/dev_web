@@ -155,7 +155,10 @@ function MyCoupons(props) {
 
     const classes = useStyles();
 
-    
+    if(props.isAuthenticated===false)
+    {
+      return <Redirect to="/login" />;
+    }
 
     if(error==true)
     {
