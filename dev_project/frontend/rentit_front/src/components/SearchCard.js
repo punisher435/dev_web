@@ -380,7 +380,7 @@ setspace(b);
     }
 
     }
-      ,[isAuthenticated,post])
+      ,[])
 
   
     return (
@@ -616,22 +616,22 @@ setspace(b);
             {y}% off
           </Typography>
         </Grid>
-        <Grid item md={3}>
+       
           { 
-          booked ? <></> :<p className={classes.textroot5}>Hurry! {space} space left</p>
+          booked ? <></> :  <Grid item md={3}><p className={classes.textroot5}>Hurry! {space} space left</p> </Grid>
         }
-        </Grid>
-        <Grid item md={3}>
-          { 
-          !post.verified || booked ? <Button variant="outlined" color="secondary">
+       
+        
+       { 
+          !post.verified || booked ? <><Grid item md={1}></Grid><Grid item md={4}><Button variant="outlined" color="secondary">
          Not Avaiable until {`${newdate11.getDate()}-${parseInt(newdate11.getMonth())+1}-${newdate11.getFullYear()}`} 
-        </Button> :<Button variant="contained" color="secondary" onClick={e => {handlebookcard(e);}}>
+        </Button></Grid></>  : <><Grid item md={3}><Button variant="contained" color="secondary" onClick={e => {handlebookcard(e);}}>
             Book Now 
-        </Button>
+        </Button></Grid></>
         }
         
           
-        </Grid> 
+        
 
 
         </Grid>

@@ -521,22 +521,22 @@ function NestedGrid({ mypost,setmypost,openmycard,setmycard,filters,setfilters,p
             {y}% off
           </Typography>
         </Grid>
-        <Grid item md={3}>
+       
           { 
-          booked ? <></> :<p className={classes.textroot5}>Hurry! book now</p>
+          booked ? <></> : <Grid item md={3}><p className={classes.textroot5}>Hurry! book now</p> </Grid>
         }
-        </Grid>
-        <Grid item md={3}>
-          { 
-          !post.verified || booked ? <Button variant="outlined" color="secondary">
-          Not Avaiable until {`${newdate11.getDate()}-${parseInt(newdate11.getMonth())+1}-${newdate11.getFullYear()}`} 
-        </Button> :<Button variant="contained" color="secondary" onClick={e => {handlebookcard(e);}}>
+       
+       
+        { 
+          !post.verified || booked ? <><Grid item md={1}></Grid><Grid item md={4}><Button variant="outlined" color="secondary">
+         Not Avaiable until {`${newdate11.getDate()}-${parseInt(newdate11.getMonth())+1}-${newdate11.getFullYear()}`} 
+        </Button></Grid></>  : <><Grid item md={3}><Button variant="contained" color="secondary" onClick={e => {handlebookcard(e);}}>
             Book Now 
-        </Button>
+        </Button></Grid></>
         }
         
           
-        </Grid> 
+    
 
 
         </Grid>
