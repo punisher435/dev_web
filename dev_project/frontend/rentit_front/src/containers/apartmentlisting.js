@@ -132,8 +132,8 @@ const App = ({isAuthenticated}) => {
     geyser:'',
     electricity:'',
     
-    min_price:'',
-    max_price:'',
+    min_price:0,
+    max_price:400000,
     BHK_filter:'',
     trust_points_filter:'',
     booked:false,
@@ -219,7 +219,8 @@ const App = ({isAuthenticated}) => {
       
       setmax_price(res2.data.max_price);
       setmin_price(res2.data.min_price);
-      console.log(res.data.results)
+     
+     
       setPosts(res.data.results);
       setLoading(false);
       settotalPosts(res.data.count);
@@ -229,7 +230,7 @@ const App = ({isAuthenticated}) => {
       }
     }
     };
-    console.log('hy')
+   
 
 
     fetchPosts();

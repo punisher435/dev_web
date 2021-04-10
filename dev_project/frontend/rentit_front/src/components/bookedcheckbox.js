@@ -5,7 +5,7 @@ export default function Checkboxes({ filters,setfilters,checked,setChecked }) {
 
   const handleChange = (event) => {
     setChecked(event.target.checked);
-    console.log(event);
+    
 
     if(event.target.checked===true){
       setfilters({...filters,booked:'',bookedtill:''});

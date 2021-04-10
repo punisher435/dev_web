@@ -194,7 +194,16 @@ function NestedGrid({ mypost,setmypost,openmycard,setmycard,filters,setfilters,p
   const [mybookcard,openbookcard] =  useState(false)
   const [loginpage,setloginpage] =  useState(false)
 
-  const [newdate,setnewdate] = useState(new Date(Date.now()))
+  const [newdate11,setnewdate11] = useState(new Date(Date.now()))
+
+  useEffect(() => {
+    var tempnew11 = new Date(Date.now());
+    tempnew11.setFullYear(parseInt(post.bookedtill.slice(0,4)));
+    tempnew11.setMonth(parseInt(post.bookedtill.slice(5,7))-1);
+    tempnew11.setDate(parseInt(post.bookedtill.slice(8,))+1);
+    setnewdate11(tempnew11);
+  },[])
+
   const handlebookcard = e => {
     e.preventDefault();
 
@@ -240,11 +249,7 @@ function NestedGrid({ mypost,setmypost,openmycard,setmycard,filters,setfilters,p
     useEffect(async () => {
 
       const date = post.bookedtill;
-      var tempnew = new Date(Date.now());
-      tempnew.setFullYear(parseInt(date.slice(0,4)));
-      tempnew.setMonth(parseInt(date.slice(5,7))-1);
-      tempnew.setDate(parseInt(date.slice(8,))+1);
-      setnewdate(tempnew);
+      
       if(filters){
         setdate(filters.bookedtill);
       }
@@ -568,7 +573,7 @@ setspace(b);
         </Grid>
         <Grid item md={1}>
         { 
-        wishlist ? <Grid item md={1}><IconButton color='error' onClick={(event) => {handleclick(event);}} className={classes.iconroot1}><FavoriteIcon /></IconButton></Grid> : <Grid item md={1}><IconButton color='error' onClick={(event) => {handleclick1(event);}} className={classes.iconroot1}><FavoriteBorderOutlinedIcon /></IconButton></Grid>
+        wishlist ? <Grid item md={1}><IconButton onClick={(event) => {handleclick(event);}} className={classes.iconroot1}><FavoriteIcon /></IconButton></Grid> : <Grid item md={1}><IconButton onClick={(event) => {handleclick1(event);}} className={classes.iconroot1}><FavoriteBorderOutlinedIcon /></IconButton></Grid>
         }
         </Grid>
        
@@ -583,7 +588,7 @@ setspace(b);
         <Typography variant="body2" component="h2">
             -   near {post.landmark}
         </Typography>
-        <CustomizedRatings rating={post.avg_rating}/>
+        <CustomizedRatings rating={parseInt(post.avg_rating)}/>
         <Typography variant="body2" component="h6">
             Room of {post.capacity} people
         </Typography>
@@ -619,7 +624,7 @@ setspace(b);
         <Grid item md={3}>
           { 
           !post.verified || booked ? <Button variant="outlined" color="secondary">
-         Not Avaiable until {`${newdate.getDate()}-${parseInt(newdate.getMonth())+1}-${newdate.getFullYear()}`} 
+         Not Avaiable until {`${newdate11.getDate()}-${parseInt(newdate11.getMonth())+1}-${newdate11.getFullYear()}`} 
         </Button> :<Button variant="contained" color="secondary" onClick={e => {handlebookcard(e);}}>
             Book Now 
         </Button>

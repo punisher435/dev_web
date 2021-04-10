@@ -41,7 +41,7 @@ const App = ({isAuthenticated}) => {
   {
     temp3=myparam3
   }
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState();
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(2);
@@ -122,8 +122,8 @@ const App = ({isAuthenticated}) => {
 
     electricity:'',
     
-    min_price:'',
-    max_price:'',
+    min_price:0,
+    max_price:400000,
    
     trust_points_filter:'',
     booked:false,
@@ -268,6 +268,7 @@ const App = ({isAuthenticated}) => {
   }
 
 
+  if(posts){
   return (
     <div>
     <Bookcardmodel open={openmycard} change={setmycard} details={mypost} loginpage={loginpage} setloginpage={setloginpage}/>
@@ -291,6 +292,10 @@ const App = ({isAuthenticated}) => {
       </Grid>
       </div>
   );
+      }
+      else{
+        return <div></div>;
+      }
 };
 
 

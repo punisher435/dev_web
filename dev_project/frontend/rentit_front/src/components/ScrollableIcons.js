@@ -97,15 +97,15 @@ export default function CustomizedTabs({post}) {
         <AntTabs 
         variant='scrollable'
         aria-label="ant example"
-        value={value}
-        onClick={handleChange}>
+        value={false}
+       >
 
 
             
  <IconContext.Provider value={{ size: "1.5em",}}>
          { 
         post.wifi ? 
-        <AntTab label="Wifi Facility" icon={<WifiOutlinedIcon />} /> 
+        <AntTab label="Wifi Facility" value="Wifi Facility" icon={<WifiOutlinedIcon />} /> 
         // <AntTab label="Room TV" icon={<TvOutlinedIcon />} /> 
         
         : null

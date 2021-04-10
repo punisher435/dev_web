@@ -18,10 +18,11 @@ function valuetext(value) {
 
 export default function RangeSlider(props) {
   const classes = useStyles();
-  const value = [props.filters.min_price,props.filters.max_price];
+  var value = [props.filters.min_price,props.filters.max_price];
+  
 
   const handleChange = (event, newValue) => {
-    console.log(newValue);
+   
     props.setfilters({...props.filters,max_price:newValue[1],min_price:newValue[0]});
   };
 

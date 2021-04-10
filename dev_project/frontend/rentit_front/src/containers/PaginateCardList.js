@@ -134,8 +134,8 @@ const App = ({isAuthenticated}) => {
     geyser:'',
     electricity:'',
     
-    min_price:'',
-    max_price:'',
+    min_price:0,
+    max_price:400000,
     capacity_filter:'',
     trust_points_filter:'',
     booked:false,
