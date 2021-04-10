@@ -88,7 +88,7 @@ export default function CustomizedTabs({post}) {
 
   const handleChange = (event, newValue) => {
     event.preventDefault();
-    setValue(newValue);
+  
   };
 
   return (
@@ -98,6 +98,7 @@ export default function CustomizedTabs({post}) {
         variant='scrollable'
         aria-label="ant example"
         value={false}
+        onClick={handleChange}
        >
 
 

@@ -22,6 +22,7 @@ export default function Checkboxes({ filters,setfilters,checked,setChecked }) {
         checked={checked}
         onChange={handleChange}
         inputProps={{ 'aria-label': 'primary checkbox' }}
+        color="primary"
        
       />
     </div>
