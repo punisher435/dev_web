@@ -117,7 +117,7 @@ function RecipeReviewCard({isAuthenticated,post,setOpen1,setOpen2,wishlistitems,
         direction="row"
         justify="flex-start"
         alignItems="flex-start"
-        spacing="2"
+       
         >
     
         <Grid item md={4}>

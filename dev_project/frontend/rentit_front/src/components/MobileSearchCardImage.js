@@ -149,12 +149,12 @@ export default function NestedGrid({isAuthenticated,post,wishlist,changewishlist
                     <Grid item xs={1}>
                         { 
                         wishlist ? <Grid item xs={1}>
-                            <IconButton color='#f44336'  onClick={(event) => {handleclick(event);}} className={classes.iconroot}>
+                            <IconButton  onClick={(event) => {handleclick(event);}} className={classes.iconroot}>
                             <FavoriteIcon />
                             </IconButton>
                             </Grid> :
                             <Grid item xs={1}>
-                                <IconButton color='#f44336'  onClick={(event) => {handleclick1(event);}} fontSize="large" className={classes.iconroot}>
+                                <IconButton onClick={(event) => {handleclick1(event);}} fontSize="large" className={classes.iconroot}>
                                     <FavoriteBorderOutlinedIcon />
                                     </IconButton>
                                     </Grid>
@@ -176,7 +176,7 @@ export default function NestedGrid({isAuthenticated,post,wishlist,changewishlist
 <Grid item xs={12}>
 <Grid
   container
-  direction="col"
+ 
   justify="center"
   spacing = {0}
 >

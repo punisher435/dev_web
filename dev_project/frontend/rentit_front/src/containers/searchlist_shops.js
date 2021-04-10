@@ -499,8 +499,8 @@ function ResponsiveDrawer(props) {
         alignItems="center"
         >
            {
-            props.mapview ? null : <>
-            <SimpleSelectfinal filters={props.filters} setfilters={props.setfilters} /></> 
+            props.mapview ? null : 
+            <SimpleSelectfinal filters={props.filters} setfilters={props.setfilters} />
           }
           
         </Grid>
