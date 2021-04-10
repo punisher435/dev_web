@@ -23,6 +23,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import RemoveIcon from '@material-ui/icons/Remove';
 import AddIcon from '@material-ui/icons/Add';
 import Paper from '@material-ui/core/Paper';
+import Rules from './roomrules';
 import './css/App.css';
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
@@ -309,6 +310,16 @@ function ShopForm (props){
     const hiddenFileInput3 = React.useRef(null);
     const hiddenFileInput4 = React.useRef(null);
     const hiddenFileInput5 = React.useRef(null);
+
+    const [openmodal, setopenmodal] = React.useState(true);
+
+    const handleOpenmodal = () => {
+      setopenmodal(true);
+    };
+
+    const closemodal = () => {
+      setopenmodal(false);
+    };
 
     const [newredirect,setnewredirect] = React.useState(false);
     const [myroom,setroom] = useState({
@@ -1010,6 +1021,8 @@ if(newredirect==true)
 
     <div className="formbgclass">
     <div className={classes.myclass}>
+
+    <Rules open={openmodal} handleopen={handleOpenmodal} handleclose={closemodal} />
 
       <Backdrop className={classes.backdrop} open={load}>
         <CircularProgress color="inherit" />
@@ -2505,6 +2518,12 @@ if(newredirect==true)
 
 
 
+
+  <Button color="default" variant="contained" fullWidth onClick={(e) => {e.preventDefault();handleOpenmodal();}}>
+          View Instructions
+        </Button>
+
+        <br />
   
         
         <Button color="primary" variant="contained" fullWidth type="submit">

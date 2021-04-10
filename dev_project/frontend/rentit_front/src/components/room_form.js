@@ -26,6 +26,8 @@ import RemoveIcon from '@material-ui/icons/Remove';
 import AddIcon from '@material-ui/icons/Add';
 import './css/App.css';
 
+import Rules from './roomrules';
+
 const FILE_SIZE = 1600 * 1024;
 const SUPPORTED_FORMATS = [
   "image/jpg",
@@ -412,6 +414,16 @@ function RoomForm (props){
     const hiddenFileInput3 = React.useRef(null);
     const hiddenFileInput4 = React.useRef(null);
     const hiddenFileInput5 = React.useRef(null);
+
+    const [openmodal, setopenmodal] = React.useState(true);
+
+      const handleOpenmodal = () => {
+        setopenmodal(true);
+      };
+
+      const closemodal = () => {
+        setopenmodal(false);
+      };
     
 
    
@@ -1307,6 +1319,8 @@ if(newredirect==true)
   return (
     <div className="formbgclass">
     <div className={classes.myclass}>
+
+      <Rules open={openmodal} handleopen={handleOpenmodal} handleclose={closemodal} />
 
       <Backdrop className={classes.backdrop} open={load}>
         <CircularProgress color="inherit" />
@@ -3793,8 +3807,12 @@ if(newredirect==true)
   
 
 
+          
+  <Button color="default" variant="contained" fullWidth onClick={(e) => {e.preventDefault();handleOpenmodal();}}>
+          View Instructions
+        </Button>
 
-  
+        <br />
  
         <Button color="primary" variant="contained" fullWidth type="submit">
           Submit

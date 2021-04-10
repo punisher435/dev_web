@@ -24,6 +24,7 @@ import RemoveIcon from '@material-ui/icons/Remove';
 import AddIcon from '@material-ui/icons/Add';
 import Paper from '@material-ui/core/Paper';
 import './css/App.css';
+import Rules from './roomrules';
 
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
@@ -377,6 +378,17 @@ function ApartmentForm (props){
     const hiddenFileInput4 = React.useRef(null);
     const hiddenFileInput5 = React.useRef(null);
     const hiddenFileInput6 = React.useRef(null);
+
+    const [openmodal, setopenmodal] = React.useState(true);
+
+    const handleOpenmodal = () => {
+      setopenmodal(true);
+    };
+
+    const closemodal = () => {
+      setopenmodal(false);
+    };
+
 
    
     const [myroom,setroom] = useState({
@@ -1209,6 +1221,8 @@ if(newredirect==true)
   return (
     <div className="formbgclass">
     <div className={classes.myclass}>
+
+    <Rules open={openmodal} handleopen={handleOpenmodal} handleclose={closemodal} />
 
       <Backdrop className={classes.backdrop} open={load}>
         <CircularProgress color="inherit" />
@@ -3168,7 +3182,11 @@ if(newredirect==true)
   <br />
 
 
+  <Button color="default" variant="contained" fullWidth onClick={(e) => {e.preventDefault();handleOpenmodal();}}>
+          View Instructions
+        </Button>
 
+        <br />
   
         
         <Button color="primary" variant="contained" fullWidth type="submit">
