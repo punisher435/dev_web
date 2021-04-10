@@ -113,7 +113,7 @@ function Analytics(props) {
 
               
                 try{const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcehjbda983290whjba/room/book/`,config,config);
-             console.log(res.data)
+            
              setbookings(res.data)
               
               }
@@ -122,7 +122,7 @@ function Analytics(props) {
                 }
 
                 try{const res1 = await axios.get(`${process.env.REACT_APP_API_URL}/sourcehdawnajk289uadhq/shop/book/`,config,config);
-                console.log(res1.data)
+               
                 setshopbookings(res1.data)
                  
                  }
@@ -131,7 +131,7 @@ function Analytics(props) {
                    }
 
                    try{const res2 = await axios.get(`${process.env.REACT_APP_API_URL}/sourcensinejfcdajewcn29210/apartment/book/`,config,config);
-                   console.log(res2.data)
+                  
                    setapartmentbookings(res2.data)
                     
                     }
@@ -195,7 +195,7 @@ function Analytics(props) {
 
             {
                 props.profile.is_seller ? <Grid item><SellerAnalytics roombookings={bookings} bank={bank} shopbookings={shopbookings} apartmentbookings={apartmentbookings} /></Grid> 
-                : <Grid item><Customeranalytics roombookings={bookings} shopbookings={shopbookings} apartmentbookings={apartmentbookings} /> </Grid>
+                : null
             }
             </Grid>
 

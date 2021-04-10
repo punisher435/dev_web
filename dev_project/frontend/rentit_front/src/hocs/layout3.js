@@ -129,10 +129,12 @@ function Dashboarddrawer(props) {
       <Divider />
       <List>
         
-      <Link to='/dashboard/analytics' style={{textDecoration:'none',color:'black'}}><ListItem button key="Analytics">
-            <ListItemIcon><EqualizerOutlinedIcon/></ListItemIcon>
-            <ListItemText primary="Analytics" />
-        </ListItem></Link>
+      {
+         seller ?  <Link to='/dashboard/analytics' style={{textDecoration:'none',color:'black'}}><ListItem button key="Analytics">
+         <ListItemIcon><EqualizerOutlinedIcon/></ListItemIcon>
+         <ListItemText primary="Analytics" />
+     </ListItem></Link> : null
+       }
 
         <Link to='/dashboard/recentbookings' style={{textDecoration:'none',color:'black'}}><ListItem button key="Bookings">
             <ListItemIcon><ViewListOutlinedIcon /></ListItemIcon>
