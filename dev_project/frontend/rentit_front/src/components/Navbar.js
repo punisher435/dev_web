@@ -82,6 +82,10 @@ const useStyles = makeStyles((theme) => ({
   inputRoot: {
     color: 'inherit',
   },
+  logoclass:{
+   width:130,
+   
+  },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
     // vertical padding + font size from searchIcon
@@ -289,9 +293,8 @@ function RenteneAppBar(props) {
       <AppBar className="navbarclass">
         <Toolbar>
         <NavLink className={`nav-link ${styles.textclass}`} exact to='/'>
-          <Typography className={classes.title} variant="h6" noWrap>
-            Rentit
-          </Typography>
+          <div className={classes.logoclass}><img src="/logo.png" /></div>
+          
           </NavLink>
           <NavLink className={`nav-link ${styles.textclass}`} exact to='/about'>
           <Typography className={classes.body} variant="h6" noWrap>
