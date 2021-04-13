@@ -649,12 +649,8 @@ function Home() {
                 justify="flex-start"
                 alignItems="flex-start"
                 >
-                <Grid item xs={12}>
-                    <Typography variant='h6' className={classes.textclass}>
-                        <Box lineHeight={1} fontSize={25}>
-                        Rentit
-                        </Box>
-                    </Typography>
+                <Grid item xs={11}>
+                <div className={classes.logoclass}><img src="/logo.png" /></div>
                 </Grid>
                 
                 
