@@ -1,4 +1,4 @@
-import React,{ useState,useEffect } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
@@ -12,7 +12,7 @@ import ScrollableIcons from './ScrollableIcons'
 import {Link} from 'react-router-dom';
 
 import axios from 'axios';
-import { connect } from 'react-redux'
+
 
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;

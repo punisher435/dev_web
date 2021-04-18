@@ -6,7 +6,7 @@ import Eror from '../components/eror'
 import Grid from '@material-ui/core/Grid';
 
 
-import {Redirect,Link} from 'react-router-dom'
+import {Redirect} from 'react-router-dom'
 import {connect} from 'react-redux'
 
 
@@ -142,9 +142,9 @@ function Myrooms(props) {
               {
                
                 try{const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcenjjbrtrtd7668ugf787t87t9yuigff/complaints/room/`,config);
-                console.log('hy')
+          
                 setrooms(res.data)
-                console.log(res.data)
+              
               
               }
                 catch{

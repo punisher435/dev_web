@@ -1,4 +1,4 @@
-import React,{ useState, useEffect} from 'react'
+import React,{ useState} from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import Dashboarddrawer from '../hocs/layout2'
 import axios from 'axios'
@@ -127,7 +127,7 @@ function MyCoupons(props) {
                 try{const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcesfnsjfn231/mycoupons/`,config);
               
                 setcoupons(res.data)
-                console.log(res.data)
+              
         
               
               }

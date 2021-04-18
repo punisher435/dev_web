@@ -128,7 +128,7 @@ function Myshops(props) {
                 try{const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcekfhkt274fs/my_shops/`,config);
               
                 setshops(res.data)
-                console.log(res.data)
+               
               
               }
                 catch{

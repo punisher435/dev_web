@@ -9,14 +9,14 @@ import Paper from '@material-ui/core/Paper';
 import Rating from '@material-ui/lab/Rating';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
+
 import ListItemText from '@material-ui/core/ListItemText';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
+
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
@@ -117,7 +117,7 @@ export default function VerticalDividers({no, rating,reviews,params,setparams}) 
     else if(review.rating==5){e=e+1;}
   })
 
-  console.log(reviews)
+
 
   reviews.map((review) =>  {
     if(review.photo1)

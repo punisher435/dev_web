@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react';
-import ReactDOM from 'react-dom';
+
 import { makeStyles,useTheme } from '@material-ui/core/styles';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
@@ -190,7 +190,7 @@ function ProfileForm (props){
       form_data.append('alternate_mobile',values.alternate_mobile)
       form_data.append('aadhar',values.aadhar)
       form_data.append('photo',values.photo)
-      console.log(form_data.entries())
+    
       const config = {
         headers: {
                 'Content-Type': 'multipart/form-data',

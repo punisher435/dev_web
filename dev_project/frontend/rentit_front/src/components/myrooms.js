@@ -1,4 +1,4 @@
-import React,{ useState, useEffect} from 'react'
+import React,{ useState} from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import Dashboarddrawer from '../hocs/layout2'
 import axios from 'axios'
@@ -6,7 +6,7 @@ import Eror from '../components/eror'
 import Grid from '@material-ui/core/Grid';
 
 
-import {Redirect,Link} from 'react-router-dom'
+import {Redirect} from 'react-router-dom'
 import {connect} from 'react-redux'
 
 
@@ -142,9 +142,9 @@ function Myrooms(props) {
               {
                
                 try{const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcewdsfdaegds/my_rooms/`,config);
-                console.log('hy')
+             
                 setrooms(res.data)
-                console.log(res.data)
+                
               
               }
                 catch{

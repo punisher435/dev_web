@@ -1,4 +1,4 @@
-import React,{useEffect,useState} from 'react'
+import React,{useState} from 'react'
 import Dashboarddrawer from '../hocs/layout2'
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -58,7 +58,7 @@ function RecentBooking1(props) {
 
               
                 try{const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcehjbda983290whjba/room/book/`,config,config);
-             console.log(res.data)
+          
              setbookings(res.data)
               
               }
@@ -67,7 +67,7 @@ function RecentBooking1(props) {
                 }
 
                 try{const res1 = await axios.get(`${process.env.REACT_APP_API_URL}/sourcehdawnajk289uadhq/shop/book/`,config,config);
-                console.log(res1.data)
+              
                 setshopbookings(res1.data)
                  
                  }
@@ -76,7 +76,7 @@ function RecentBooking1(props) {
                    }
 
                    try{const res2 = await axios.get(`${process.env.REACT_APP_API_URL}/sourcensinejfcdajewcn29210/apartment/book/`,config,config);
-                   console.log(res2.data)
+                 
                    setapartmentbookings(res2.data)
                     
                     }
