@@ -346,23 +346,21 @@ function ProfileForm (props){
 
 
         <FormControl variant="outlined" className={classes.form} >
-        <InputLabel id="demo-sroom_id">Age</InputLabel>
+        <InputLabel id="demo-sroom_id">Booking ID</InputLabel>
         <Select
           labelId="demo-sroom_id"
           id="room_id"
           value={formik.values.room_id}
           onChange={(e) => {e.preventDefault();formik.setFieldValue('room_id', e.target.value)}}
-          label="Select room"
+          label="Select Booking"
           error={formik.touched.room_id && Boolean(formik.errors.room_id)}
           helperText={formik.touched.room_id && formik.errors.room_id}
         >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
+         
 
           {
               bookings.map((booking) => (
-                <MenuItem value={booking.room_id}>{booking.room_name}</MenuItem>
+                <MenuItem value={booking.booking_id}>{booking.booking_id}</MenuItem>
               ))
           }
           

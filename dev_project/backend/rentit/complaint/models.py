@@ -1,5 +1,6 @@
 from django.db import models
 from products.models import rooms,shops,apartments
+from bookings.models import roomBookings,shopBookings,apartmentBookings
 from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
 
@@ -39,7 +40,7 @@ class room_complaints(models.Model):
          editable = False,
          unique = True)
 
-    room_id = models.ForeignKey(rooms,on_delete=models.PROTECT,related_name="complaint_room_id")
+    room_id = models.ForeignKey(roomBookings,on_delete=models.PROTECT,related_name="complaint_roombooking_id")
     room_name = models.CharField(max_length=255)
     customer_id= models.ForeignKey(user,on_delete=models.PROTECT,related_name="complaint_room_customer_id")
     customer_name = models.CharField(max_length=255)
@@ -73,7 +74,7 @@ class shop_complaints(models.Model):
          editable = False,
          unique = True)
 
-    shop_id = models.ForeignKey(shops,on_delete=models.PROTECT,related_name="complaint_shop_id")
+    shop_id = models.ForeignKey(shopBookings,on_delete=models.PROTECT,related_name="complaint_shopbooking_id")
     shop_name = models.CharField(max_length=255)
     customer_id= models.ForeignKey(user,on_delete=models.PROTECT,related_name="complaint_shop_customer_id")
     customer_name = models.CharField(max_length=255)
@@ -106,7 +107,7 @@ class apartment_complaints(models.Model):
          editable = False,
          unique = True)
 
-    apartment_id = models.ForeignKey(apartments,on_delete=models.PROTECT,related_name="complaint_apartment_id")
+    apartment_id = models.ForeignKey(apartmentBookings,on_delete=models.PROTECT,related_name="complaint_apartmentbooking_id")
     apartment_name = models.CharField(max_length=255)
     customer_id= models.ForeignKey(user,on_delete=models.PROTECT,related_name="complaint_apartment_customer_id")
     customer_name = models.CharField(max_length=255)

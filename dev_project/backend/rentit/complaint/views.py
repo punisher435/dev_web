@@ -84,6 +84,8 @@ class room_complaint(viewsets.ViewSet):
             return Response('ERROR', status=status.HTTP_400_BAD_REQUEST)
 
     def create(self,request):
+
+        
        
 
         
@@ -95,21 +97,17 @@ class room_complaint(viewsets.ViewSet):
                 queryset = roomBookings.objects.all()
                 queryset = queryset.filter(customer_id = request.user)
 
-                room = get_object_or_404(rooms.objects.all(),pk=request.data['room_id'])
+                room = get_object_or_404(queryset,pk=request.data['room_id'])
             
 
-                x=False
+                x=True
 
-                for booking in queryset:
-                    if booking.room_id == room:
-                        x=True
-                    
-                        break
+                
 
                 if x ==True:
                     
 
-                    complaint = room_complaints(room_id=room,room_name=room.title,customer_id=request.user,
+                    complaint = room_complaints(room_id=room,room_name=room.room_name,customer_id=request.user,
                     customer_name=request.user.first_name+' '+ request.user.last_name,
                     subject=request.data["subject"],
                     message=request.data["message"],photo1=request.data["photo"],customer_contact=request.user.email)
@@ -291,21 +289,17 @@ class shop_complaint(viewsets.ViewSet):
                 queryset = shopBookings.objects.all()
                 queryset = queryset.filter(customer_id = request.user)
 
-                room = get_object_or_404(shops.objects.all(),pk=request.data['room_id'])
+                room = get_object_or_404(queryset,pk=request.data['room_id'])
             
 
-                x=False
+                x=True
 
-                for booking in queryset:
-                    if booking.shop_id == room:
-                        x=True
-                    
-                        break
+                
 
                 if x ==True:
                     
 
-                    complaint = shop_complaints(shop_id=room,shop_name=room.title,customer_id=request.user,
+                    complaint = shop_complaints(shop_id=room,shop_name=room.shop_name,customer_id=request.user,
                     customer_name=request.user.first_name+' '+ request.user.last_name,
                     subject=request.data["subject"],
                     message=request.data["message"],photo1=request.data["photo"],customer_contact=request.user.email)
@@ -488,21 +482,16 @@ class apartment_complaint(viewsets.ViewSet):
                 queryset = apartmentBookings.objects.all()
                 queryset = queryset.filter(customer_id = request.user)
 
-                room = get_object_or_404(apartments.objects.all(),pk=request.data['room_id'])
+                room = get_object_or_404(queryset,pk=request.data['room_id'])
             
 
-                x=False
+                x=True
 
-                for booking in queryset:
-                    if booking.apartment_id == room:
-                        x=True
-                    
-                        break
-
+                
                 if x ==True:
                     
 
-                    complaint = apartment_complaints(apartment_id=room,apartment_name=room.title,customer_id=request.user,
+                    complaint = apartment_complaints(apartment_id=room,apartment_name=room.apartment_name,customer_id=request.user,
                     customer_name=request.user.first_name+' '+ request.user.last_name,
                     subject=request.data["subject"],
                     message=request.data["message"],photo1=request.data["photo"],customer_contact=request.user.email)
