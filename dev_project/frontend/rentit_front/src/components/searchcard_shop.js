@@ -7,34 +7,17 @@ import Icon from '@material-ui/core/Icon'
 import CardMedia from '@material-ui/core/CardMedia'
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import MeetingRoomOutlinedIcon from '@material-ui/icons/MeetingRoomOutlined';
-import AcUnitIcon from '@material-ui/icons/AcUnit';
-import WifiOffIcon from '@material-ui/icons/WifiOff';
-import WifiIcon from '@material-ui/icons/Wifi';
+
 import RoomIcon from '@material-ui/icons/Room';
-import TvOutlinedIcon from '@material-ui/icons/TvOutlined';
-import TvOffOutlinedIcon from '@material-ui/icons/TvOffOutlined';
-import { IoWaterOutline } from 'react-icons/io5';
-import HotTubIcon from '@material-ui/icons/HotTub';
-import ToysIcon from '@material-ui/icons/Toys';
-import LocalLaundryServiceIcon from '@material-ui/icons/LocalLaundryService';
-import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import { BiFoodMenu } from "react-icons/bi"
-import FastfoodIcon from '@material-ui/icons/Fastfood';
-import FreeBreakfastIcon from '@material-ui/icons/FreeBreakfast';
-import { BiCctv } from "react-icons/bi";
-import { GiGuards } from "react-icons/gi";
-import AccessibilityIcon from '@material-ui/icons/Accessibility';
-import WhatshotIcon from '@material-ui/icons/Whatshot';
-import BathtubIcon from '@material-ui/icons/Bathtub';
+
 import { grey } from '@material-ui/core/colors';
-import { IconContext } from "react-icons";
+
 import { Link} from "react-router-dom";
 import IconButton from '@material-ui/core/IconButton';
-import KitchenIcon from '@material-ui/icons/Kitchen';
+
 
 import CustomizedRatings from './rating_meter';
 import { connect } from 'react-redux'

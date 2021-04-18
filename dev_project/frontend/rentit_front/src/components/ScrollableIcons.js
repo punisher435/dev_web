@@ -4,7 +4,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import MeetingRoomOutlinedIcon from '@material-ui/icons/MeetingRoomOutlined';
 import AcUnitIcon from '@material-ui/icons/AcUnit';
-import WifiIcon from '@material-ui/icons/Wifi';
+
 import TvOutlinedIcon from '@material-ui/icons/TvOutlined';
 import { IoWaterOutline } from 'react-icons/io5';
 import HotTubIcon from '@material-ui/icons/HotTub';

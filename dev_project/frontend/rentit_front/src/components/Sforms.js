@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import SellerForm from './SellerForm'
-import SellerAddress from './SellerAddress'
-import SellerPayment from './SellerPayment'
+
 
 export class Sforms extends Component {
     state={

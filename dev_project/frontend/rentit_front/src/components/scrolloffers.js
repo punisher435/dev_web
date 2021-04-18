@@ -1,30 +1,12 @@
 import React from 'react';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import MeetingRoomOutlinedIcon from '@material-ui/icons/MeetingRoomOutlined';
-import AcUnitIcon from '@material-ui/icons/AcUnit';
-import WifiIcon from '@material-ui/icons/Wifi';
-import TvOutlinedIcon from '@material-ui/icons/TvOutlined';
-import { IoWaterOutline } from 'react-icons/io5';
-import HotTubIcon from '@material-ui/icons/HotTub';
-import ToysIcon from '@material-ui/icons/Toys';
-import LocalLaundryServiceIcon from '@material-ui/icons/LocalLaundryService';
-import { BiFoodMenu } from "react-icons/bi"
-import FastfoodIcon from '@material-ui/icons/Fastfood';
-import FreeBreakfastIcon from '@material-ui/icons/FreeBreakfast';
-import { BiCctv } from "react-icons/bi";
-import { GiGuards } from "react-icons/gi";
-import AccessibilityIcon from '@material-ui/icons/Accessibility';
-import WhatshotIcon from '@material-ui/icons/Whatshot';
-import BathtubIcon from '@material-ui/icons/Bathtub';
-import { IconContext } from "react-icons";
+import { makeStyles} from '@material-ui/core/styles';
+
 import CouponCard from "./coupon_card1";
-import Grid from '@material-ui/core/Grid';
+
 // import Box from '@material-ui/core/Box'
 
 
-import Offercard from "./offercard"; 
+
 
 import ScrollMenu from 'react-horizontal-scrolling-menu';
 import './css/App.css';

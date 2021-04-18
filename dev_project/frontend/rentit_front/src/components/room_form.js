@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react';
-import ReactDOM from 'react-dom';
+
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
@@ -11,10 +11,10 @@ import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 import Eror from './eror'
 import MapForm from './map_form'
-import Hidden from '@material-ui/core/Hidden';
+
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
+
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Typography from '@material-ui/core/Typography';
@@ -1014,7 +1014,7 @@ function RoomForm (props){
               }
                 catch{
                   setload(false)  
-                  console.log('error')
+                 
                   seterror(true)
                  
                 }
@@ -1027,7 +1027,7 @@ function RoomForm (props){
               }
                 catch{
                   setload(false)  
-                  console.log('error')
+               
                   seterror(true)
                  
                 }

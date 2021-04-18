@@ -4,7 +4,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import BarChart from './barchart';
-import Hidden from '@material-ui/core/Hidden';
+
 import  {useMediaQuery} from '@material-ui/core';
 import PieChart from './piechart';
 import Multicolor_chart from './multicolor_chart';

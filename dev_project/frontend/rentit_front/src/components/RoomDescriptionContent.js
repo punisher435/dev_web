@@ -1,8 +1,7 @@
 import React,{useState} from 'react';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import LocationOnOutlinedIcon from '@material-ui/icons/LocationOnOutlined';
-import Icon from '@material-ui/core/Icon';
+
 import Description from './descriptiontable';
 import Descriptionshop from './descriptiontableshop';
 import Descriptionapartment from './descriptiontableapartment';

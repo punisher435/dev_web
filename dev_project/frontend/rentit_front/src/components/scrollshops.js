@@ -1,6 +1,6 @@
 import React from 'react';
 import ScrollMenu from 'react-horizontal-scrolling-menu';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { makeStyles} from '@material-ui/core/styles';
 import './css/App.css';
 import RecipeReviewCard from './newcardshop';
 
