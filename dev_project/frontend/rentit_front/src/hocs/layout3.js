@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Divider from '@material-ui/core/Divider';
@@ -15,7 +15,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
-import { deepPurple } from '@material-ui/core/colors';
+
 import Avatar from '@material-ui/core/Avatar';
 import axios from 'axios'
 import AccountCircle from '@material-ui/icons/AccountCircle';
@@ -25,8 +25,7 @@ import MeetingRoomOutlinedIcon from '@material-ui/icons/MeetingRoomOutlined';
 import StorefrontOutlinedIcon from '@material-ui/icons/StorefrontOutlined';
 import HomeWorkOutlinedIcon from '@material-ui/icons/HomeWorkOutlined';
 import PersonOutlinedIcon from '@material-ui/icons/PersonOutlined';
-import AccountBalanceOutlinedIcon from '@material-ui/icons/AccountBalanceOutlined';
-import LocationOnOutlinedIcon from '@material-ui/icons/LocationOnOutlined';
+
 import AccountBalanceWalletOutlinedIcon from '@material-ui/icons/AccountBalanceWalletOutlined';
 import {Link} from 'react-router-dom'
 import FeedbackOutlinedIcon from '@material-ui/icons/FeedbackOutlined';
