@@ -6,7 +6,7 @@ import ResponsiveDrawer from './searchlist_apartment';
 import Eror from '../components/eror';
 
 import { connect } from 'react-redux'
-import { getDayOfYear } from 'date-fns';
+
 import {Redirect} from 'react-router-dom'
 
 import Bookcardmodel from '../components/bookcardmodel1_apartment';
