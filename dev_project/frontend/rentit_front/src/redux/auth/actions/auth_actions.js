@@ -78,7 +78,7 @@ export const load_user = () => async dispatch => {
                 payload: res.data
             });
         } catch (err) {
-            console.log(err);
+           
             dispatch({
                 type: USER_LOADED_FAIL
             });
@@ -178,7 +178,7 @@ export const verify = (uid, token) => async dispatch => {
     }
 
     const body = JSON.stringify({ uid, token }); 
-    console.log(body);
+   
 
     try {
         const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/users/activation/`, body, config);
