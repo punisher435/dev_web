@@ -84,7 +84,7 @@ export default function App({point,url}) {
 
   useScript('https://unpkg.com/@googlemaps/markerclustererplus/dist/index.min.js');
 
-console.log('markerss',marker);
+
 
 
     
@@ -233,11 +233,11 @@ function Search({ panTo,mapRef }) {
 
     try {
       const results = await getGeocode({ address });
-      console.log(results)
+      
       const { lat, lng } = await getLatLng(results[0]);
       panTo({ lat, lng });
     } catch (error) {
-      console.log("Error: ", error);
+      
     }
   };
 

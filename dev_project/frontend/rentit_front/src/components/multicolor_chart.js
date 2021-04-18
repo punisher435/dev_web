@@ -17,7 +17,7 @@ import {
 
 import { Stack, Animation } from '@devexpress/dx-react-chart';
 
-import { withStyles, makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
 
 

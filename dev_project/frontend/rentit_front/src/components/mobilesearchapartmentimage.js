@@ -5,7 +5,7 @@ import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardMedia from '@material-ui/core/CardMedia';
 import { grey } from '@material-ui/core/colors';
-import Icon from '@material-ui/core/Icon'
+
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import IconButton from '@material-ui/core/IconButton';
@@ -77,7 +77,7 @@ export default function NestedGrid({isAuthenticated,post,wishlist,changewishlist
           };
           const res = await axios.delete(`${process.env.REACT_APP_API_URL}/sourcenasdknahi29ad/wishlist/apartments/${post.apartment_id}/`,config);
 
-          if(res.data == 'Removed from wishlist'){changewishlist(false); changeitemswishlist(wishlistitems-1); console.log(wishlistitems);}
+          if(res.data == 'Removed from wishlist'){changewishlist(false); changeitemswishlist(wishlistitems-1); }
         }
       }else{
         setOpen1(true);
@@ -103,7 +103,7 @@ export default function NestedGrid({isAuthenticated,post,wishlist,changewishlist
           };
           const res = await axios.post(`${process.env.REACT_APP_API_URL}/sourcenasdknahi29ad/wishlist/apartments/`,config,config);
 
-          if(res.data == 'Added to wishlist'){changewishlist(true); changeitemswishlist(wishlistitems+1); console.log(wishlistitems);}
+          if(res.data == 'Added to wishlist'){changewishlist(true); changeitemswishlist(wishlistitems+1);}
         }
       }else{
         setOpen1(true);

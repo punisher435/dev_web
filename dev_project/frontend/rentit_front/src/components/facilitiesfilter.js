@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
+
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
@@ -21,9 +21,7 @@ const useStyles = makeStyles((theme) => ({
 export default function SimpleSelect2(props) {
   const classes = useStyles();
 
-  const handleChange = (event) => {
-    props.setfilters({...props.filters,balcony:event.target.value});
-  };
+ 
   const handleChange1 = (event) => {
     props.setfilters({...props.filters,separate_washroom:event.target.value});
   };

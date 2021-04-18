@@ -61,7 +61,7 @@ function Mapmount({filters,setfilters}) {
               });
           
               
-              console.log(res.data)
+             
               const points = res.data.map(room => ({
                 type: "Feature",
                 properties: { cluster: false, roomId: room.room_id, category: room.category,title: room.title },

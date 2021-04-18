@@ -3,7 +3,7 @@ import {
   GoogleMap,
   useLoadScript,
   Marker,
-  InfoWindow,
+
 } from "@react-google-maps/api";
 import usePlacesAutocomplete, {
   getGeocode,
@@ -16,7 +16,7 @@ import {
   ComboboxList,
   ComboboxOption,
 } from "@reach/combobox";
-import { formatRelative } from "date-fns";
+
 
 import "@reach/combobox/styles.css";
 import './css/App.css'
@@ -24,10 +24,7 @@ import './css/App.css'
 const libraries = ["places"];
 
 
-const mapContainerStyle1 = {
-  height: "50vh",
-  width: 500,
-};
+
 
 var center = {
   lat: 20.5937,

@@ -1,15 +1,15 @@
 
 
 
-import React, { Component, Fragment } from 'react';
+import React, {  Fragment } from 'react';
 import {PDFViewer} from '@react-pdf/renderer'
 import Invoice from './invoice'
-import { PDFDownloadLink} from '@react-pdf/renderer';
+
 
 function InvoiceMe(props) {
 
   const invoiceData = props.location.state.property_id;
-  console.log(invoiceData)
+
   if(invoiceData){
   return (
     <div id="invoice">

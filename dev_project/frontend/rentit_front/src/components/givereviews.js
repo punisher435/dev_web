@@ -1,5 +1,5 @@
-import React,{useState,useEffect} from 'react';
-import ReactDOM from 'react-dom';
+import React,{useState} from 'react';
+
 import { makeStyles,useTheme } from '@material-ui/core/styles';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
@@ -152,7 +152,7 @@ function ReviewForm (props){
       form_data.append('photo3',values.photo3)
       form_data.append('bookingid',bookingid)
       form_data.append('type',type)
-      console.log(form_data.entries())
+     
       const config = {
         headers: {
                 'Content-Type': 'multipart/form-data',
@@ -170,7 +170,7 @@ function ReviewForm (props){
               }
                 catch{
                   setloading(false)
-                  console.log('error')
+              
                   seterror(true)
                 }
       }

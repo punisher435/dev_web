@@ -57,7 +57,7 @@ function Mapmount({filters,setfilters}) {
               });
           
               
-              console.log(res.data)
+            
               const points = res.data.map(room => ({
                 type: "Feature",
                 properties: { cluster: false, roomId: room.shop_id, category:'',title: room.title },
@@ -68,8 +68,7 @@ function Mapmount({filters,setfilters}) {
                 }
               }));
               setrooms(points);
-              console.log(rooms);
-              console.log(points);
+           
             }
               
               catch{
@@ -77,7 +76,7 @@ function Mapmount({filters,setfilters}) {
               }
             
             setloading(false);
-            console.log(rooms);
+           
 
         }
     ,[filters])
@@ -94,7 +93,7 @@ function Mapmount({filters,setfilters}) {
 
     if(rooms!=={})
     {
-        console.log('hy');
+      
         return <Mapview url={'shops'} point={rooms}/>
     }
 

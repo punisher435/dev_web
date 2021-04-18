@@ -1,8 +1,8 @@
-import React ,{ useState }from 'react';
+import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Icon from '@material-ui/core/Icon'
 import Typography from '@material-ui/core/Typography';
-import MeetingRoomOutlinedIcon from '@material-ui/icons/MeetingRoomOutlined';
+
 import AcUnitIcon from '@material-ui/icons/AcUnit';
 import WifiIcon from '@material-ui/icons/Wifi';
 import TvOutlinedIcon from '@material-ui/icons/TvOutlined';
@@ -10,14 +10,7 @@ import { IoWaterOutline } from 'react-icons/io5';
 import HotTubIcon from '@material-ui/icons/HotTub';
 import ToysIcon from '@material-ui/icons/Toys';
 import LocalLaundryServiceIcon from '@material-ui/icons/LocalLaundryService';
-import { BiFoodMenu } from "react-icons/bi"
-import FastfoodIcon from '@material-ui/icons/Fastfood';
-import FreeBreakfastIcon from '@material-ui/icons/FreeBreakfast';
-import { BiCctv } from "react-icons/bi";
-import { GiGuards } from "react-icons/gi";
-import AccessibilityIcon from '@material-ui/icons/Accessibility';
-import WhatshotIcon from '@material-ui/icons/Whatshot';
-import BathtubIcon from '@material-ui/icons/Bathtub';
+
 import { IconContext } from "react-icons";
 import Box from '@material-ui/core/Box'
 import Checkbox from '@material-ui/core/Checkbox';

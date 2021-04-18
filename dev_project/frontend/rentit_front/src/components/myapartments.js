@@ -1,4 +1,4 @@
-import React,{ useState, useEffect} from 'react'
+import React,{ useState} from 'react'
 import {makeStyles } from '@material-ui/core/styles';
 import Dashboarddrawer from '../hocs/layout2'
 import axios from 'axios'
@@ -124,7 +124,7 @@ function Myapartments(props) {
                 try{const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourceddnvslf54d/my_apartments/`,config);
               
                 setapartments(res.data)
-                console.log(res.data)
+              
               
               }
                 catch{

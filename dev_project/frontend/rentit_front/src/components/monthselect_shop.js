@@ -35,13 +35,13 @@ export default function ControlledOpenSelect({bookvalues,setbookvalues}) {
   const [open, setOpen] = React.useState(false);
 
   const handleChange = (event) => {
-    console.log(event.target.value)
+   
     if(event.target.value=='')
     {
       setbookvalues({...bookvalues,duration:'',coupon:'',price:bookvalues.month_price});
     }
     else{setbookvalues({...bookvalues,coupon:'',duration:event.target.value,price:bookvalues.month_price*event.target.value,savings:bookvalues.monthsavings*event.target.value});}
-    console.log(bookvalues)
+   
   };
 
   const handleClose = () => {

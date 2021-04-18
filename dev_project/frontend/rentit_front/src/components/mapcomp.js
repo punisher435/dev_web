@@ -3,20 +3,9 @@ import {
   GoogleMap,
   useLoadScript,
   Marker,
-  InfoWindow,
+
 } from "@react-google-maps/api";
-import usePlacesAutocomplete, {
-  getGeocode,
-  getLatLng,
-} from "use-places-autocomplete";
-import {
-  Combobox,
-  ComboboxInput,
-  ComboboxPopover,
-  ComboboxList,
-  ComboboxOption,
-} from "@reach/combobox";
-import { formatRelative } from "date-fns";
+
 
 import "@reach/combobox/styles.css";
 import './css/App.css'
@@ -48,7 +37,7 @@ export default function App({value}) {
 
   if (loadError) return "Error";
   if (!isLoaded) return "Loading...";
-  console.log(value)
+
  
 
 
