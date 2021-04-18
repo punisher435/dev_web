@@ -105,7 +105,7 @@ function BarChart({roombookings,shopbookings,apartmentbookings}) {
        
         
       ];
-      console.log(a,b,c,d,e,f,g,h,i,j)
+     
 
     return (
         <div>

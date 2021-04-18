@@ -4,30 +4,14 @@ import Dashboarddrawer from '../hocs/layout3'
 import axios from 'axios'
 import Eror from '../components/eror'
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
 
-import Barcode from 'react-barcode'
-import Download from '../components/invoicefile'
-import Button from '@material-ui/core/Button';
-import Backdrop from '@material-ui/core/Backdrop';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import TextField from '@material-ui/core/TextField';
 import {Redirect} from 'react-router-dom'
 import {connect} from 'react-redux'
 
-import ProfileCard from './profilecard'
-import BankCard from './bank_card'
-import AddressCard from './address_card'
-import RoomCard from './room_card'
-import AddRoomCard from './addroomcard';
+
 
 import SellerAnalytics from './selleranalytics'
-import Customeranalytics from './customeranalytics'
+
 
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
@@ -156,7 +140,7 @@ function Analytics(props) {
             try{const res1 = await axios.get(`${process.env.REACT_APP_API_URL}/sourceadbahdvjs218/my_bank_details/${props.profile.id}/`,config);
           
             setbank(res1.data)
-            console.log(res1.data)
+          
           
           }
             catch{

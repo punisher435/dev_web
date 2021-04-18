@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react';
-import ReactDOM from 'react-dom';
+
 import { makeStyles } from '@material-ui/core/styles';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
@@ -9,11 +9,7 @@ import Grid from '@material-ui/core/Grid';
 import axios from 'axios'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
+
 import Eror from './eror'
 import Paper from '@material-ui/core/Paper';
 
@@ -186,7 +182,7 @@ function AddressForm (props){
               
               }
                 catch{
-                  console.log('error')
+               
                   seterror(true)
                 }
       }
@@ -197,7 +193,7 @@ function AddressForm (props){
         
               }
                 catch{
-                  console.log('error')
+               
                   seterror(true)
                 }
       }

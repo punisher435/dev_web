@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react';
-import ReactDOM from 'react-dom';
+
 import { makeStyles } from '@material-ui/core/styles';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
@@ -11,7 +11,7 @@ import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
+
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Eror from './eror'
@@ -152,7 +152,7 @@ function CouponForm (props){
               if(props.profile)
               {
                 try{const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcesfnsjfn231/mycoupons/${couponid}/`,config);
-                console.log('data',res.data)
+               
                 setcoupon({
                     coupoun_code:res.data.coupoun_code,
                     coupon_type:res.data.coupon_type,
@@ -183,7 +183,7 @@ function CouponForm (props){
                   try{const res1 = await axios.get(`${process.env.REACT_APP_API_URL}/sourcewdsfdaegds/my_rooms/`,config);
                 
                   setrooms(res1.data)
-                  console.log(res1.data)
+                 
                 
                 }
                   catch{
@@ -193,7 +193,7 @@ function CouponForm (props){
                   try{const res2 = await axios.get(`${process.env.REACT_APP_API_URL}/sourcekfhkt274fs/my_shops/`,config);
               
                   setshops(res2.data)
-                  console.log(res2.data)
+                 
                 
                 }
                   catch{
@@ -202,7 +202,7 @@ function CouponForm (props){
                   try{const res3 = await axios.get(`${process.env.REACT_APP_API_URL}/sourceddnvslf54d/my_apartments/`,config);
               
                   setapartments(res3.data)
-                  console.log(res3.data)
+                
                 
                 }
                   catch{
@@ -255,7 +255,7 @@ function CouponForm (props){
               }
                 catch{
                   setloading(false)  
-                  console.log('error')
+                 
                   seterror(true)
                   
                 }
@@ -314,10 +314,7 @@ function CouponForm (props){
 
   const handleChange = (e,roomid,boolean) => {
       
-      console.log('hy')
-      console.log(boolean)
-      console.log(formik.values.coupoun_rooms)
-      console.log(typeof formik.values.coupoun_rooms)
+     
       if(boolean)
       {
           /* formik.setFieldValue('coupoun_rooms',formik.values.coupoun_rooms.splice(formik.values.coupoun_rooms.indexOf(roomid)-1,1)) */
@@ -329,10 +326,7 @@ function CouponForm (props){
 
   const handleChange1 = async (e,shopid,boolean) => {
     
-    console.log('hy')
-    console.log(boolean)
     
-    console.log(typeof formik.values.coupoun_shops)
     if(boolean)
     {
        /*  await formik.setFieldValue('coupoun_shops',formik.values.coupoun_shops.splice(formik.values.coupoun_shops.indexOf(shopid),1)) */
@@ -340,14 +334,11 @@ function CouponForm (props){
     else{
       await formik.setFieldValue('coupoun_shops',formik.values.coupoun_shops.concat(shopid))
     }
-    console.log(formik.values.coupoun_shops)
+    
 }
 const handleChange2 = (e,apartmentid,boolean) => {
     
-    console.log('hy')
-    console.log(boolean)
-    console.log(formik.values.coupoun_apartment)
-    console.log(typeof formik.values.coupoun_apartments)
+   
     if(boolean)
     {
         /* formik.setFieldValue('coupoun_apartments',formik.values.coupoun_apartments.splice(formik.values.coupoun_apartments.indexOf(apartmentid)-1,1)) */

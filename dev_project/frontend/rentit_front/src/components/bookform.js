@@ -232,7 +232,7 @@ function Checkout(props) {
 
   const handlePaymentSuccess = async (response) => {
     try {
-      console.log(response)
+    
       let bodyData = new FormData();
 
       // we will send the response we've got from razorpay to the backend to validate the payment
@@ -256,10 +256,10 @@ function Checkout(props) {
         })
         .catch((err) => {
           setopen(true)
-          console.log(err);
+        
         });
     } catch (error) {
-      console.log(console.error());
+    
     }
   };
 
@@ -275,7 +275,7 @@ function Checkout(props) {
       if(activeStep===steps.length-1)
       {
         const res = await loadScript();
-        console.log('done')
+       
 
         var data = '';
 
@@ -343,7 +343,7 @@ function Checkout(props) {
           bookfunc();
       }
       else{
-        console.log(bookdetails)
+      
         setActiveStep(activeStep + 1);
         setvalidationerror(false);
       }

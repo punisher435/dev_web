@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react';
-import ReactDOM from 'react-dom';
+
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
@@ -13,7 +13,7 @@ import Eror from './eror'
 import MapForm from './map_form'
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
+
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Typography from '@material-ui/core/Typography';
@@ -518,7 +518,7 @@ function ApartmentForm (props){
               {
                 if(props.profile.is_seller && props.profile.profile_completed && props.profile.bank_completed && props.profile.address_completed){
                 try{const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourceddnvslf54d/my_apartments/${roomid}/`,config);
-                console.log(res.data)
+               
                 setroom({
                   wifi:res.data.wifi,
                   cost_wifi:res.data.cost_wifi,
@@ -750,7 +750,7 @@ function ApartmentForm (props){
     validationSchema: validationSchema,
     onSubmit: async (values) => {
       let form_data = new FormData();
-      console.log(values)
+    
       setload(true)
       form_data.append('title',values.title)
       form_data.append('wifi',values.wifi)
@@ -877,7 +877,7 @@ function ApartmentForm (props){
 
    
       
-      console.log(form_data.entries())
+     
       const config = {
         headers: {
                 'Content-Type': 'multipart/form-data',
@@ -895,7 +895,7 @@ function ApartmentForm (props){
               }
                 catch{
                   setload(false)  
-                  console.log('error')
+               
                   seterror(true)
                  
                 }
@@ -908,7 +908,7 @@ function ApartmentForm (props){
               }
                 catch{
                   setload(false)  
-                  console.log('error')
+               
                   seterror(true)
                   
                  

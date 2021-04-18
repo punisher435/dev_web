@@ -1,8 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
-import ReactImageMagnify from 'react-image-magnify';
-import style from './css/imagemodel.module.css';
+
 import BookCard from './bookcard_apartment'
 
 function getModalStyle() {

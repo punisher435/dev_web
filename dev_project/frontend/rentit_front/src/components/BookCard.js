@@ -18,15 +18,14 @@ import MonthSelect from './MonthSelect'
 import FacilityIcon from './FacilityIconProvider'
 import Capacityselect from './capacityselect'
 import axios from 'axios'
-import Snackbar from '@material-ui/core/Snackbar';
+
 import SuccessSnackbars from './success_snackbar'
 import ErrorSnackbars from './error_snackbar'
 
 import { connect } from 'react-redux'
 
-import {Redirect,Link} from 'react-router-dom';
-import Capacityfilter from './capacityselect';
-import ScrollArea from 'react-scrollbar'; 
+import {Link} from 'react-router-dom';
+
 
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
@@ -249,11 +248,11 @@ setcapacity(x);
                    },
               };
 
-            console.log(config)
+         
             
             const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcesawdajwnr32w2/coupon/room/apply/${bookvalues.coupon}/`,config,config);
 
-          console.log(res.data);
+       
           setbookvalues({...bookvalues,price:res.data[1],discount:res.data[3],savings:res.data[2]})
           setno(1);
           setopenme(true)

@@ -16,16 +16,16 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import FormControl from '@material-ui/core/FormControl';
 import MonthSelect from './monthselect_shop'
 import FacilityIcon from './FacilityIconProvider_shop'
-import Capacityselect from './capacityselect'
+
 import axios from 'axios'
-import Snackbar from '@material-ui/core/Snackbar';
+
 import SuccessSnackbars from './success_snackbar'
 import ErrorSnackbars from './error_snackbar'
 
 import { connect } from 'react-redux'
 
-import {Redirect,Link} from 'react-router-dom';
-import Capacityfilter from './capacityselect';
+import {Link} from 'react-router-dom';
+
 import ScrollArea from 'react-scrollbar'; 
 
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
@@ -147,11 +147,11 @@ savings:details.price - details.final_price,monthsavings:details.price - details
                    },
               };
 
-            console.log(config)
+           
             
             const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcefsejfnsjcn9302/coupon/shop/apply/${bookvalues.coupon}/`,config,config);
 
-          console.log(res.data);
+       
           setbookvalues({...bookvalues,price:res.data[1],discount:res.data[3],savings:res.data[2]})
           setno(1);
           setopenme(true)

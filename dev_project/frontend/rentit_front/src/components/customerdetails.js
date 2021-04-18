@@ -2,8 +2,7 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
+
 
 
 
@@ -14,20 +13,7 @@ export default function AddressForm({bookdetails,setbookdetails,setpayment,profi
     setbookdetails({ ...bookdetails, [e.target.name]: e.target.value });
   }
 
-   const handleChange = e => {
-
-    if(bookdetails.paylater===false)
-    {
-      setpayment('Make pay later request');
-      {setbookdetails({...bookdetails,paylater:!bookdetails.paylater});}
-    }
-    if(bookdetails.paylater===true)
-    {
-      setpayment('Pay now');
-      {setbookdetails({...bookdetails,paylater:!bookdetails.paylater});}
-    }
-
-   }
+   
 
   return (
     <React.Fragment>
