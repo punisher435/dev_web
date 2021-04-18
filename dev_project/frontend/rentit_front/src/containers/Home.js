@@ -1,11 +1,11 @@
 import React from 'react'
 import Welcome from './Welcome'
-import CardList from './CardList'
+
 import 'bootstrap/dist/css/bootstrap.min.css'; 
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { makeStyles} from '@material-ui/core/styles';
 import 'antd/dist/antd.css';
 import axios from 'axios'
-import RecipeReviewCard from '../components/newcardroom';
+
 import Grid from '@material-ui/core/Grid';
 import Scrollroom from '../components/scrollroom';
 import Scrollshop from '../components/scrollshops';
@@ -24,10 +24,10 @@ import TextField from '@material-ui/core/TextField';
 import DatePick from '../components/datepick'
 import Button from '@material-ui/core/Button';
 import  {useMediaQuery} from '@material-ui/core';
-import { Divider } from '@material-ui/core';
+
 import Box from '@material-ui/core/Box';
 import "../components/css/App.css"
-import bgd from "../components/css/abc.png"
+
 import FacebookIcon from '@material-ui/icons/Facebook';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import MailIcon from '@material-ui/icons/Mail';
@@ -300,7 +300,7 @@ function Home() {
             },
             config:config
           });
-          console.log(res.data.results);
+        
           setcoupons(res.data.results);
           
           

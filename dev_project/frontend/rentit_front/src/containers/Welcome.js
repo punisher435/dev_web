@@ -1,8 +1,7 @@
 import React from 'react'
 import { Carousel } from 'react-bootstrap';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
-import Form from 'react-bootstrap/Form';
-import {Row, Col} from 'react-bootstrap'
+import { makeStyles } from '@material-ui/core/styles';
+
 import '../components/css/App.css'
 
 const useStyles = makeStyles((theme) => ({

@@ -1,4 +1,4 @@
-import React,{ useState} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -21,13 +21,13 @@ import Posts from '../components/post_shops';
 import Checkboxes from '../components/bookedcheckbox';
 import PaginationOutlined from '../components/PaginationOutlined';
 import RangeSlider from '../components/priceslider'
-import SimpleSelect from '../components/categoryselect_shop';
+
 
 import SimpleSelect2 from '../components/facilitiesfilter_shop';
 import SimpleSelect3 from '../components/sequrityfilter';
 import MaterialUIPickers1 from '../components/datefilter';
 import RadioButtonsGroup from '../components/minratingfilter';
-import Capacityfilter from '../components/Capacityfilter';
+
 import Trustpointsfilter from '../components/mintrustpoints';
 import Windowsfilter from '../components/minwindows_shop';
 import Floorfilter from '../components/floorfilter';
@@ -36,9 +36,9 @@ import SearchFields from '../components/searchfilter';
 import SearchFields2 from '../components/searchfilter2';
 import SimpleSelectfinal from '../components/sort';
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
-import Icon from '@material-ui/core/Icon';
+
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+
 import MapIcon from '@material-ui/icons/Map';
 import Location from '../components/locationfilter';
 

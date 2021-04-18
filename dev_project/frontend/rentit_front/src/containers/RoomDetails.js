@@ -8,18 +8,16 @@ import Box from '@material-ui/core/Box'
 import SpecificRoomCarousel from '../components/SpecificRoomCarousel'
 import RatingAndReviews from '../components/RatingAndReviews'
 import RoomDescriptionContent from '../components/RoomDescriptionContent'
-import GoogleApiWrapper from '../components/GoogleMapAPI'
-import GoogleApiWrapper1 from '../components/mobilemaps'
+
 import BookCard from '../components/BookCard'
 import RatingWithCompliment from '../components/RatingWithCompliment'
-import Facility from '../components/FacilityList'
-import Facilitymobile from '../components/mobilefacilitieslist'
+
 import Hidden from '@material-ui/core/Hidden';
 import BottomAppBar from '../components/mobileappbar';
 import Divider from '@material-ui/core/Divider';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import Paper from '@material-ui/core/Paper';
+
 import Icon from '@material-ui/core/Icon';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 
@@ -44,8 +42,7 @@ import ScrollableIcons from '../components/ScrollableIcons'
 import axios from 'axios';
 import '../components/css/App.css';
 
-import CustomizedRatings from '../components/rating_meter';
-import LocalOfferOutlinedIcon from '@material-ui/icons/LocalOfferOutlined';
+
 import {Redirect} from 'react-router-dom'
 import ReviewSeller from '../components/seller_reviews_pop';
 import Button from '@material-ui/core/Button';
@@ -149,9 +146,7 @@ const useStyles = makeStyles((theme) => ({
 function FullWidthGrid(props) {
 
 
- /*  let query = useQuery();
-  var roomid=query.get('roomid');
-  console.log(roomid); */
+ 
 
   const roomid = props.match.params.roomid;
 
@@ -192,11 +187,11 @@ function FullWidthGrid(props) {
       const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourceaxcnfrudadv34/rooms/${roomid}/`,config);
       
       try{
-          console.log(res.data);
+         
         
           setDetails(res.data);
           setLoading(false);
-          console.log(details);
+          
 
       }  catch (err) {
         // Handle Error Here
@@ -229,7 +224,7 @@ function FullWidthGrid(props) {
     });
     
    
-        console.log('review',res1.data.results);
+       
         setReviews(res1.data.results);
         
         
@@ -247,7 +242,7 @@ function FullWidthGrid(props) {
     });
     
    
-        console.log('coupon',res12.data);
+       
         setcoupons(res12.data);
         
         

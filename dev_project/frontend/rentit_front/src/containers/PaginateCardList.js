@@ -7,7 +7,7 @@ import Eror from '../components/eror';
 import Bookcardmodel from '../components/bookcardmodel1';
 
 import { connect } from 'react-redux'
-import { getDayOfYear } from 'date-fns';
+
 import {Redirect} from 'react-router-dom'
 
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;

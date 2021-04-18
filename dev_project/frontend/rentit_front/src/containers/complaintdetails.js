@@ -1,4 +1,4 @@
-import React,{ useState, useEffect} from 'react'
+import React,{ useState} from 'react'
 import {connect} from 'react-redux'
 import Eror from '../components/eror'
 import Typography from '@material-ui/core/Typography';
@@ -177,7 +177,7 @@ function Complaintdetails(props) {
                   const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourceadhwu178y2819gysag9812yg73467vbs3y28yga/complaints/messages/${complaintid}/`,config);
                 
                 setmessage(res.data)
-                console.log(res.data)
+               
                 setdone(true)
                
 

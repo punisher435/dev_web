@@ -8,7 +8,7 @@ import Bookcardmodel from '../components/bookcardmodel1_shop';
 import {Redirect} from 'react-router-dom'
 
 import { connect } from 'react-redux'
-import { getDayOfYear } from 'date-fns';
+
 
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
@@ -199,7 +199,7 @@ const App = ({isAuthenticated}) => {
       
       setmax_price(res2.data.max_price);
       setmin_price(res2.data.min_price);
-      console.log(res.data.results)
+     
       setPosts(res.data.results);
       setLoading(false);
       settotalPosts(res.data.count);
@@ -209,7 +209,7 @@ const App = ({isAuthenticated}) => {
       }
     }
     };
-    console.log('hy')
+  
 
 
     fetchPosts();
