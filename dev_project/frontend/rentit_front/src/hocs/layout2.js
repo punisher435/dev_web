@@ -47,13 +47,11 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
   },
   drawer: {
-    backgroundColor: "#5b6467",
-backgroundImage: "linear-gradient(315deg, #5b6467 0%, #8b939a 74%)",
+    
     [theme.breakpoints.up('sm')]: {
       width: drawerWidth,
       flexShrink: 0,
-      backgroundColor: "#5b6467",
-      backgroundImage: "linear-gradient(315deg, #5b6467 0%, #8b939a 74%)",
+    
     },
   },
   appBar: {
