@@ -31,10 +31,8 @@ const MenuProps = {
 
 
 const StyledTableCell = withStyles((theme) => ({
-  head: {
-    backgroundColor: '#6C757D',
-    color: theme.palette.common.white,
-    // height: ,
+  head:{
+    color:'white',
   },
   body: {
     fontSize: 14,
@@ -72,7 +70,9 @@ const useStyles = makeStyles({
     backgroundColor:'blue !important',
   },
   tablerow: {
-    backgroundColor:'blue !important',
+    backgroundColor: "#000000",
+    backgroundImage: "linear-gradient(315deg, #000000 0%, #414141 74%);",
+    
   },
   button: {
     display: 'block',
@@ -93,6 +93,9 @@ const useStyles = makeStyles({
   },
   title:{
     fontSize: 'calc(14px + .5vw)',
+  },
+  headtextclass:{
+    color:'white',
   }
   
 });
