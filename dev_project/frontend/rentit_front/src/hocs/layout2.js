@@ -47,9 +47,13 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
   },
   drawer: {
+    backgroundColor: "#5b6467",
+backgroundImage: "linear-gradient(315deg, #5b6467 0%, #8b939a 74%)",
     [theme.breakpoints.up('sm')]: {
       width: drawerWidth,
       flexShrink: 0,
+      backgroundColor: "#5b6467",
+      backgroundImage: "linear-gradient(315deg, #5b6467 0%, #8b939a 74%)",
     },
   },
   appBar: {
@@ -68,6 +72,8 @@ const useStyles = makeStyles((theme) => ({
   toolbar: theme.mixins.toolbar,
   drawerPaper: {
     width: drawerWidth,
+    backgroundColor: "#000000",
+    backgroundImage: "linear-gradient(315deg, #000000 0%, #414141 74%);",
   },
   content: {
     flexGrow: 1,
@@ -76,6 +82,9 @@ const useStyles = makeStyles((theme) => ({
   myclass: {
     color:'white',
   },
+  layouttextclass: {
+    color:'white',
+  }
 }));
 
 function Dashboarddrawer(props) {
@@ -131,54 +140,54 @@ function Dashboarddrawer(props) {
 
        {
          seller ?  <Link to='/dashboard/analytics' style={{textDecoration:'none',color:'black'}}><ListItem button key="Analytics">
-         <ListItemIcon><EqualizerOutlinedIcon/></ListItemIcon>
-         <ListItemText primary="Analytics" />
+         <ListItemIcon className={classes.layouttextclass}><EqualizerOutlinedIcon/></ListItemIcon>
+         <ListItemText primary="Analytics" className={classes.layouttextclass}/>
      </ListItem></Link> : null
        }
 
      
 
         <Link to='/dashboard/recentbookings' style={{textDecoration:'none',color:'black'}}><ListItem button key="Bookings">
-            <ListItemIcon><ViewListOutlinedIcon /></ListItemIcon>
-            <ListItemText primary="Bookings" />
+            <ListItemIcon className={classes.layouttextclass}><ViewListOutlinedIcon /></ListItemIcon>
+            <ListItemText primary="Bookings" className={classes.layouttextclass}/>
         </ListItem></Link>
 
         {
           seller ? <Link to='/dashboard/my_rooms' style={{textDecoration:'none',color:'black'}}><ListItem button key="My Rooms">
-          <ListItemIcon><MeetingRoomOutlinedIcon /></ListItemIcon>
-          <ListItemText primary="My Rooms" />
+          <ListItemIcon className={classes.layouttextclass}><MeetingRoomOutlinedIcon /></ListItemIcon>
+          <ListItemText primary="My Rooms" className={classes.layouttextclass}/>
           </ListItem></Link> : null
         }
         {
           seller ? <Link to='/dashboard/my_shops' style={{textDecoration:'none',color:'black'}}><ListItem button key="My Shops">
-          <ListItemIcon><StorefrontOutlinedIcon /></ListItemIcon>
-          <ListItemText primary="My Shops" />
+          <ListItemIcon className={classes.layouttextclass}><StorefrontOutlinedIcon /></ListItemIcon>
+          <ListItemText primary="My Shops" className={classes.layouttextclass}/>
           </ListItem></Link> : null
         }
         {
           seller ? <Link to='/dashboard/my_housing' style={{textDecoration:'none',color:'black'}}><ListItem button key="My Apartments">
-          <ListItemIcon><HomeWorkOutlinedIcon /></ListItemIcon>
-          <ListItemText primary="My Houses" />
+          <ListItemIcon className={classes.layouttextclass}><HomeWorkOutlinedIcon /></ListItemIcon>
+          <ListItemText primary="My Houses" className={classes.layouttextclass}/>
           </ListItem></Link> : null
         }
 
         {
           seller ? <Link to='/dashboard/my_coupons' style={{textDecoration:'none',color:'black'}}><ListItem button key="My Coupons">
-          <ListItemIcon><AccountBalanceWalletOutlinedIcon /></ListItemIcon>
-          <ListItemText primary="My Coupons" />
+          <ListItemIcon className={classes.layouttextclass}><AccountBalanceWalletOutlinedIcon /></ListItemIcon>
+          <ListItemText primary="My Coupons" className={classes.layouttextclass}/>
           </ListItem></Link> : null
         }
 
         {
           seller ? <Link to='/dashboard/my_reviews' style={{textDecoration:'none',color:'black'}}><ListItem button key="My Coupons">
-          <ListItemIcon><FeedbackOutlinedIcon /></ListItemIcon>
-          <ListItemText primary="Feedback" />
+          <ListItemIcon className={classes.layouttextclass}><FeedbackOutlinedIcon /></ListItemIcon>
+          <ListItemText primary="Feedback" className={classes.layouttextclass}/>
           </ListItem></Link> : null
         }
 
 <Link to='/dashboard/profile' style={{textDecoration:'none',color:'black'}}><ListItem button key="My Profile">
-          <ListItemIcon><PersonOutlinedIcon /></ListItemIcon>
-          <ListItemText primary="My Profile" />
+          <ListItemIcon className={classes.layouttextclass}><PersonOutlinedIcon /></ListItemIcon>
+          <ListItemText primary="My Profile" className={classes.layouttextclass}/>
       </ListItem></Link> 
 
 
@@ -186,24 +195,24 @@ function Dashboarddrawer(props) {
        
         {
           seller ? null :  <Link to='/dashboard/complaints/room' style={{textDecoration:'none',color:'black'}}><ListItem button key="Room complaints">
-          <ListItemIcon><CommentOutlinedIcon /></ListItemIcon>
-          <ListItemText primary="Room complaints" />
+          <ListItemIcon className={classes.layouttextclass}><CommentOutlinedIcon /></ListItemIcon>
+          <ListItemText primary="Room complaints" className={classes.layouttextclass}/>
       </ListItem></Link>
         }
 
 
 {
           seller ? null :  <Link to='/dashboard/complaints/shop' style={{textDecoration:'none',color:'black'}}><ListItem button key="Shop complaints">
-          <ListItemIcon><CommentOutlinedIcon /></ListItemIcon>
-          <ListItemText primary="Shop complaints" />
+          <ListItemIcon className={classes.layouttextclass}><CommentOutlinedIcon /></ListItemIcon>
+          <ListItemText primary="Shop complaints" className={classes.layouttextclass} />
       </ListItem></Link>
         }
 
 
 {
           seller ? null :  <Link to='/dashboard/complaints/housing' style={{textDecoration:'none',color:'black'}}><ListItem button key="Housing complaints">
-          <ListItemIcon><CommentOutlinedIcon /></ListItemIcon>
-          <ListItemText primary="housing complaints" />
+          <ListItemIcon className={classes.layouttextclass}><CommentOutlinedIcon /></ListItemIcon>
+          <ListItemText primary="housing complaints" className={classes.layouttextclass} />
       </ListItem></Link>
         }
 
@@ -211,8 +220,8 @@ function Dashboarddrawer(props) {
 
 {
           props.profile.is_superuser ?  <Link to='/admin/jdwai2021801yadb28ykha2sad1893812/awuhd812832232w7dyqw1/ada' style={{textDecoration:'none',color:'black'}}><ListItem button key="Housing complaints">
-          <ListItemIcon><SupervisorAccountIcon /></ListItemIcon>
-          <ListItemText primary="Admin" />
+          <ListItemIcon className={classes.layouttextclass}><SupervisorAccountIcon /></ListItemIcon>
+          <ListItemText primary="Admin" className={classes.layouttextclass}/>
       </ListItem></Link> : null
         }
 

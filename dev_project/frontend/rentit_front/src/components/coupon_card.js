@@ -14,6 +14,9 @@ const useStyles = makeStyles({
     boxShadow: '10px 10px 5px grey',
     
   },
+  buttonclassnew:{
+    color:'white',
+  },
   bullet: {
     display: 'inline-block',
     margin: '0 2px',
@@ -174,19 +177,19 @@ export default function CouponCard({mycoupon}) {
           
        
         
-      
+      <br />
       
       
       <Link to={{
     pathname: `/dashboard/my_coupons/edit`,
     state: { property_id: mycoupon.coupoun_code}
-  }} style={{textDecoration:'none'}}><Button size="small" color="primary">
+  }} style={{textDecoration:'none'}}><Button size="small" className={classes.buttonclassnew}>
           Edit
         </Button></Link>
         <Link to={{
     pathname: `/dashboard/my_coupons/delete`,
     state: { property_id:mycoupon.coupoun_code,url:'sourcesfnsjfn231/mycoupons' ,url1:'my_coupons' }
-  }} style={{textDecoration:'none'}}><Button size="small" color="primary" >
+  }} style={{textDecoration:'none'}}><Button size="small" className={classes.buttonclassnew}>
           Delete
         </Button></Link>
         </div>

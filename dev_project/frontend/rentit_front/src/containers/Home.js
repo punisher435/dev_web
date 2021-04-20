@@ -505,18 +505,23 @@ function Home() {
 
             <br />
             <br />
+
+            
+            <br />
             
 
             {
-                luxrooms.length>=1 ? <><div
-                className={classes.myclass}
-                >
-                <Typography variant='h6'>
-                    <Box fontSize={25}>
-                        <Link to='/rooms/?category=Deluxe+room' style={{textDecoration:'none',color:'black'}}>Our Deluxe Rooms...</Link>
-                    </Box>
+                luxrooms.length>=1 ? <><Paper elevation={5} className={classes.paperclass}>
+                <div className="navbarclass1">
+                <div   className={classes.myclass}>
+                <Typography variant='h6' className={classes.textclass}>
+                <Box fontSize={25}>
+                            <Link to='/rooms/?category=Deluxe+room' style={{textDecoration:'none',color:'white'}}>Our Deluxe Rooms...</Link>
+                        </Box>
                 </Typography>
                 </div>
+                </div>
+                </Paper>
                 <br />
                 <div className={classes.myclass1}>
                 <Scrollroom rooms={luxrooms}/>
@@ -525,19 +530,23 @@ function Home() {
     
                 <br /></> : null
             }
+
+
             
             
             {
-                classroom.length>=1 ? <><div
-                className={classes.myclass}
-                >
-                <Typography variant='h6'>
-                    <Box fontSize={25}>
+                classroom.length>=1 ? <><Paper elevation={5} className={classes.paperclass}>
+                <div className="navbarclass1">
+                <div   className={classes.myclass}>
+                <Typography variant='h6' className={classes.textclass}>
+                <Box fontSize={25}>
 
-                    <Link to='/rooms/?category=Classic+room' style={{textDecoration:'none',color:'black'}}>Our Classic Rooms...</Link>
+                    <Link to='/rooms/?category=Classic+room' style={{textDecoration:'none',color:'white'}}>Our Classic Rooms...</Link>
                     </Box>
                 </Typography>
                 </div>
+                </div>
+                </Paper>
                 <br />
                 <div className={classes.myclass1}>
                 <Scrollroom rooms={classroom}/>
@@ -548,56 +557,65 @@ function Home() {
             
 
             {
-                singleroom.length>=1 ? <><div
-                className={classes.myclass}
-                >
-                <Typography variant='h6'>
-                    <Box fontSize={25}>
-                    <Link to='/rooms/?category=Single' style={{textDecoration:'none',color:'black'}}>Our Single Rooms...</Link>
+                singleroom.length>=1 ? <><Paper elevation={5} className={classes.paperclass}>
+                <div className="navbarclass1">
+                <div   className={classes.myclass}>
+                <Typography variant='h6' className={classes.textclass}>
+                <Box fontSize={25}>
+                    <Link to='/rooms/?category=Single' style={{textDecoration:'none',color:'white'}}>Our Single Rooms...</Link>
                     </Box>
                 </Typography>
                 </div>
+                </div>
+                </Paper>
                 <br />
                 <div className={classes.myclass1}>
                 <Scrollroom rooms={singleroom}/></div> <br /></> : null
             }
 
+
+
             {
-                shop.length>=1 ? <><div
-                className={classes.myclass}
-                >
-                <Typography variant='h6'>
-                    <Box fontSize={25}>
+                shop.length>=1 ? <><Paper elevation={5} className={classes.paperclass}>
+                <div className="navbarclass1">
+                <div   className={classes.myclass}>
+                <Typography variant='h6' className={classes.textclass}>
+                <Box fontSize={25}>
 
-                    <Link to='/shops/' style={{textDecoration:'none',color:'black'}}>Our Shops...</Link>
+                    <Link to='/shops/' style={{textDecoration:'none',color:'white'}}>Our Shops...</Link>
                     </Box>
-
                 </Typography>
                 </div>
+                </div>
+                </Paper>
                 <br />
                 <div className={classes.myclass1}>
                 <Scrollshop rooms={shop}/></div> <br /></> : null
             }
 
 
-            {
-                apartment.length>=1 ? <><div
-                className={classes.myclass}
-                >
-                <Typography variant='h6'>
-                    <Box fontSize={25}>
 
-                    <Link to='/apartments/' style={{textDecoration:'none',color:'black'}}>Our Housing...</Link>
-                    </Box>
+
+            {
+                apartment.length>=1 ? <><Paper elevation={5} className={classes.paperclass}>
+                <div className="navbarclass1">
+                <div   className={classes.myclass}>
+                <Typography variant='h6' className={classes.textclass}>
+                <Box fontSize={25}>
+
+<Link to='/apartments/' style={{textDecoration:'none',color:'white'}}>Our Housing...</Link>
+</Box>
                 </Typography>
                 </div>
+                </div>
+                </Paper>
                 <br />
                 <div className={classes.myclass1}>
                 <Scrollapartment rooms={apartment}/></div> <br /></> : null
             }
             
             <Paper elevation={5} className={classes.paperclass}>
-            <div className={classes.bgclass}>
+            <div className="navbarclass1">
             <div   className={classes.myclass}>
             <Typography variant='h6' className={classes.textclass}>
                 <Box fontSize={25}>
@@ -619,16 +637,13 @@ function Home() {
             </div>
 
 
-            <div className={classes.myclass2}>
-            <Typography variant='h6'className={classes.textclass} >
-                <Box lineHeight={2} fontSize={28}>
-                La Kavatos Production
-                </Box>
-            </Typography>
-            </div>
+            
 
                 {/* <br></br> */}
-    <div className={classes.footer1}>
+    <div className="footerclass">
+
+        <br />
+        <br />
 
         <Grid
             container

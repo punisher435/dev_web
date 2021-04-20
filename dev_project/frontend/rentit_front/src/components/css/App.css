@@ -384,15 +384,49 @@ height:100vh;
 }
 
 .navbarclass{
-  background: hsla(312, 66%, 76%, 1);
+  background: hsla(347, 70%, 55%, 1);
 
-background: linear-gradient(0deg, hsla(312, 66%, 76%, 1) 0%, hsla(234, 93%, 67%, 1) 100%);
+  background: linear-gradient(0deg, hsla(347, 70%, 55%, 1) 0%, hsla(349, 72%, 45%, 1) 100%);
+  
+  background: -moz-linear-gradient(0deg, hsla(347, 70%, 55%, 1) 0%, hsla(349, 72%, 45%, 1) 100%);
+  
+  background: -webkit-linear-gradient(0deg, hsla(347, 70%, 55%, 1) 0%, hsla(349, 72%, 45%, 1) 100%);
+  
+  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#DD3D5F", endColorstr="#C3203E", GradientType=1 );
 
-background: -moz-linear-gradient(0deg, hsla(312, 66%, 76%, 1) 0%, hsla(234, 93%, 67%, 1) 100%);
 
-background: -webkit-linear-gradient(0deg, hsla(312, 66%, 76%, 1) 0%, hsla(234, 93%, 67%, 1) 100%);
 
-filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#EA98DA", endColorstr="#5B6CF9", GradientType=1 );
+
+
+
+
+
+
+}
+.navbarclass1{
+  background: hsla(347, 70%, 55%, 1);
+
+  background: linear-gradient(0deg, hsla(347, 70%, 55%, 1) 0%, hsla(349, 72%, 45%, 1) 100%);
+  
+  background: -moz-linear-gradient(0deg, hsla(347, 70%, 55%, 1) 0%, hsla(349, 72%, 45%, 1) 100%);
+  
+  background: -webkit-linear-gradient(0deg, hsla(347, 70%, 55%, 1) 0%, hsla(349, 72%, 45%, 1) 100%);
+  
+  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#DD3D5F", endColorstr="#C3203E", GradientType=1 );
+
+
+
+
+
+
+}
+
+.footerclass{
+  background-color: #000000;
+  
+
+
+
 }
 
 .blockcoupon{
@@ -402,10 +436,17 @@ filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#EA98DA", en
   
   
  
-  background: #E74C3C;  /* fallback for old browsers */
+  background: #141E30;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #243B55, #141E30);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #243B55, #141E30); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
+ 
 }
 
+.tablepanel{
+  background-color: #000000;
+background-image: linear-gradient(315deg, #000000 0%, #414141 74%);
+}
 
 
 .circle2{

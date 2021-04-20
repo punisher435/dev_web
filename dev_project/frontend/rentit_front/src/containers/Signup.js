@@ -70,7 +70,7 @@ function Copyright() {
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(8),
+    paddingTop: theme.spacing(8),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -93,6 +93,13 @@ const useStyles = makeStyles((theme) => ({
   selectEmpty: {
     marginTop: theme.spacing(2),
   },
+  bgclass:{
+    backgroundImage:"url('https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1951&q=80')",
+    width:'100vw',
+    height:'100vh',
+    objectFit:'fill',
+  
+  }
 }));
 
 
@@ -192,7 +199,8 @@ const Signup = ({ signup, isAuthenticated }) => {
         return <Redirect to='/login/?signup=success' />;
     
     return (
-        <Container component="main" maxWidth="xs">
+      <div className={classes.bgclass}>
+        <Container component="main" maxWidth="xs" >
             <CssBaseline />
 
             <Backdrop className={classes.backdrop} open={open}>
@@ -345,6 +353,7 @@ const Signup = ({ signup, isAuthenticated }) => {
             <Copyright />
             </Box>
         </Container>
+        </div>
         );
 
 };
