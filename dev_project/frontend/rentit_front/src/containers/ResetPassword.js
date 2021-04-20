@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { reset_password } from '../redux/auth/actions/auth_actions';
+import '../components/css/App.css';
+import Button from '@material-ui/core/Button';
 
 const ResetPassword = (props) => {
     const [requestSent, setRequestSent] = useState(false);
@@ -26,7 +28,8 @@ const ResetPassword = (props) => {
     return (
         <div className='container mt-5'>
             <h1>Request Password Reset:</h1>
-            <form onSubmit={e => onSubmit(e)}>
+            <br />
+            <form>
                 <div className='form-group'>
                     <input 
                         className='form-control'
@@ -38,8 +41,9 @@ const ResetPassword = (props) => {
                         required
                     />
                 </div>
-                <button className='btn btn-primary' type='submit'>Reset Password</button>
+                
             </form>
+            <Button color="primary" className='buttonmainclass' variant="contained" onClick={e => onSubmit(e)}>Reset Password</Button>
         </div>
     );
 };

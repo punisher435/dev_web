@@ -25,6 +25,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+import '../components/css/App.css';
 
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -237,6 +238,7 @@ const Signup = ({ signup, isAuthenticated }) => {
                     name="first_name"
                     variant="outlined"
                    
+                   
                     fullWidth
                     id="first_name"
                     label="First Name"
@@ -336,7 +338,7 @@ const Signup = ({ signup, isAuthenticated }) => {
                 fullWidth
                 variant="contained"
                 color="primary"
-                className={classes.submit}
+                className={`${classes.submit} buttonmainclass`}
                 >
                 Sign Up
                 </Button>

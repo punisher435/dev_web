@@ -19,6 +19,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
+import '../components/css/App.css';
 
 const validationSchema = yup.object({
   
@@ -46,7 +47,7 @@ function Copyright() {
       <Typography variant="body2" color="textSecondary" align="center">
         {'Copyright © '}
         <Link to='/'>
-          Rentit
+          Rent=ene
         </Link>{' '}
         {new Date().getFullYear()}
         {'.'}
@@ -315,7 +316,7 @@ const Login = ({ login, isAuthenticated }) => {
                   fullWidth
                   variant="contained"
                   color="primary"
-                  className={classes.submit}
+                  className={`${classes.submit} buttonmainclass`}
                 >
                   Sign In
                 </Button>
