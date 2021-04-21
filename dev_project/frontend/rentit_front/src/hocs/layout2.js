@@ -67,7 +67,9 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   // necessary for content to be below app bar
-  toolbar: theme.mixins.toolbar,
+  toolbar: {
+    paddingTop:10,
+  },
   drawerPaper: {
     width: drawerWidth,
     backgroundColor: "#000000",
@@ -83,7 +85,10 @@ const useStyles = makeStyles((theme) => ({
   },
   layouttextclass: {
     color:'white',
-  }
+  },
+  igclass:{
+width:230,
+  },
 }));
 
 function Dashboarddrawer(props) {
@@ -133,9 +138,11 @@ function Dashboarddrawer(props) {
   const drawer = (
     <div>
       <div className={classes.toolbar} />
-      <Divider />
+      
+      <div className={classes.igclass}><Link style={{textDecoration:'none'}} to='/' ><img src="/logo.png" /></Link></div>
+      <br />
       <List>
-
+      
 
        {
          seller ?  <Link to='/dashboard/analytics' style={{textDecoration:'none',color:'black'}}><ListItem button key="Analytics">

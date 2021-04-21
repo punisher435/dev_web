@@ -47,13 +47,11 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
   },
   drawer: {
-    backgroundColor: "#5b6467",
-backgroundImage: "linear-gradient(315deg, #5b6467 0%, #8b939a 74%)",
+    
     [theme.breakpoints.up('sm')]: {
       width: drawerWidth,
       flexShrink: 0,
-      backgroundColor: "#5b6467",
-      backgroundImage: "linear-gradient(315deg, #5b6467 0%, #8b939a 74%)",
+    
     },
   },
   appBar: {
@@ -69,11 +67,14 @@ backgroundImage: "linear-gradient(315deg, #5b6467 0%, #8b939a 74%)",
     },
   },
   // necessary for content to be below app bar
-  toolbar: theme.mixins.toolbar,
+  toolbar: {
+    paddingTop:10,
+  },
   drawerPaper: {
     width: drawerWidth,
     backgroundColor: "#000000",
     backgroundImage: "linear-gradient(315deg, #000000 0%, #414141 74%);",
+  
   },
   content: {
     flexGrow: 1,
@@ -84,7 +85,10 @@ backgroundImage: "linear-gradient(315deg, #5b6467 0%, #8b939a 74%)",
   },
   layouttextclass: {
     color:'white',
-  }
+  },
+  igclass:{
+width:230,
+  },
 }));
 
 function Dashboarddrawer(props) {
@@ -134,9 +138,11 @@ function Dashboarddrawer(props) {
   const drawer = (
     <div>
       <div className={classes.toolbar} />
-      <Divider />
+      
+      <div className={classes.igclass}><Link style={{textDecoration:'none'}} to='/' ><img src="/logo.png" /></Link></div>
+      <br />
       <List>
-
+      
 
        {
          seller ?  <Link to='/dashboard/analytics' style={{textDecoration:'none',color:'black'}}><ListItem button key="Analytics">
