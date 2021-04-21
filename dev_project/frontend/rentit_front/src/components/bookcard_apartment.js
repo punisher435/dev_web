@@ -185,7 +185,7 @@ laundry:details.laundry
       <div>
       <SuccessSnackbars openme={openme} setopenme={setopenme} message={'Coupon applied successfully!'}/>
       <ErrorSnackbars openme={openme1} setopenme={setopenme1} message={'Coupon not applicable!'}/>
-    <Card elevation={4}>
+    <Card elevation={10}>
         {
             isAuthenticated ? null : <Grid container alignItems='center' justify='space-around'  style={{ backgroundColor: '#cfe8fc'}}>
             <Grid item>

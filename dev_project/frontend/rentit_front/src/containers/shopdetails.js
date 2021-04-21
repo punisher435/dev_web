@@ -33,6 +33,8 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import { connect } from 'react-redux'
 import ScrollableIcons from '../components/ScrollableIcons'
 
+import Footer from '../components/footer'
+
 
 
 import axios from 'axios';
@@ -496,16 +498,14 @@ if(details){
                 </Grid>
 
             </Grid>
-            
+            <br />
         </Container>
       
-        <Grid item xs={12} sm={12}>
-          <br />
-        <Typography component="div" style={{ backgroundColor: '#cfe8fc', height: '30vh' }} />
-        </Grid>
-              
+        
+            
 
       </Grid>
+      <Footer /> 
       </Hidden>
 
 
@@ -640,6 +640,7 @@ if(details){
           </Grid>
           
           </Grid>
+          <br />
 
           <Grid
             container
@@ -651,13 +652,16 @@ if(details){
           <br />
          <Button color="primary" variant="contained" onClick={(e) => {e.preventDefault();changeopen(true);}} >Owner Reviews</Button>
          </Grid> 
+
+         <br />
+         <Footer />
          
           
 
           
 
           
-          <Grid item xs={12} className={classes.margingrid}></Grid>
+       
         
 
        

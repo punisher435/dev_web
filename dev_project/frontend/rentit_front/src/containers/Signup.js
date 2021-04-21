@@ -100,7 +100,10 @@ const useStyles = makeStyles((theme) => ({
     height:'100vh',
     objectFit:'fill',
   
-  }
+  },
+  textclass:{
+    
+  },
 }));
 
 
@@ -237,8 +240,8 @@ const Signup = ({ signup, isAuthenticated }) => {
                     autoComplete="fname"
                     name="first_name"
                     variant="outlined"
-                   
-                   
+                  
+                    className={classes.textclass}
                     fullWidth
                     id="first_name"
                     label="First Name"

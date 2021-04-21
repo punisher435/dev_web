@@ -72,6 +72,7 @@ const useStyles = makeStyles((theme) => ({
     width: drawerWidth,
     backgroundColor: "#000000",
     backgroundImage: "linear-gradient(315deg, #000000 0%, #414141 74%);",
+  
   },
   content: {
     flexGrow: 1,
