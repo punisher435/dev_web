@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   myclass:{
-    color:`${process.env.REACT_APP_COLOR}`
+   color:`${process.env.REACT_APP_COLOR}`
   }
 }));
 
@@ -25,7 +25,7 @@ export default function PaginationOutlined({paginate,postsPerPage,currentPage,to
 
   return (
     <div className={classes.root}>
-      <Pagination count={x} variant="outlined" className={classes.myclass} page={currentPage} onChange={handleChange} />
+      <Pagination count={x} variant="outlined" className={classes.myclass} page={currentPage} onChange={handleChange} color="secondary" />
     </div>
   );
 }

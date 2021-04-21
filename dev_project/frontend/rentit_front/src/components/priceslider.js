@@ -8,7 +8,7 @@ const useStyles = makeStyles({
     width: 300,
   },
   myclass: {
-    Color:`${process.env.REACT_APP_COLOR}`,
+    color:`${process.env.REACT_APP_COLOR}`,
   }
 });
 
