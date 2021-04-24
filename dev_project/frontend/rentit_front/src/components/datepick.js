@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
         
           margin: theme.spacing(1),
           width: '23ch',
-          color:'red',
+         
          
           padding:5,
          
@@ -28,37 +28,63 @@ const useStyles = makeStyles((theme) => ({
     root: {
       margin: theme.spacing(2),
       width: 300,
-      "& .MuiInputBase-root": {
-        color: 'red',
+      "& .MuiOutlinedInput-notchedOutline":{
+        borderColor: 'black',
+        borderWidth: 2,
+      },
+      "& .MuiOutlinedInput-root":{
+        borderColor: 'black',
+        borderWidth: 2,
+      },
+      "& .MuiOutlinedInput-root":{
+        borderColor: 'black',
+        borderWidth: 2,
+      },
+      "& .Mui-focused": {
+        color: 'black',
+        borderColor: 'black',
+        borderWidth: 2,
+        fontWeight: 'bold',
+
         
         
         height: 60,
         "& input": {
           textAlign: "center",
-         
+          borderColor: 'black',
+        borderWidth: 2,
+        fontWeight: 'bold',
+
         }
       },
 
       '& input:valid + fieldset': {
-        borderColor: 'red',
+        borderColor: 'black',
         borderWidth: 2,
+        fontWeight: 'bold',
+
         
       },
       '& input:invalid + fieldset': {
-        borderColor: 'red',
+        borderColor: 'black',
         borderWidth: 2,
+        fontWeight: 'bold',
+
       },
       '& input:valid:focus + fieldset': {
         borderLeftWidth: 6,
-        borderColor: 'red',
+        borderColor: 'black',
         padding: '4px !important', // override inline-style
+        fontWeight: 'bold',
+
       },
       "& .MuiFormLabel-root": {
-        color: 'red',
+        color: 'black',
+        fontWeight: 'bold',
        
       }
     }
-  }))(KeyboardDatePicker);
+  }))( KeyboardDatePicker);
 
 export default function DateSelect({value,setvalue,name}) {
     const classes = useStyles();

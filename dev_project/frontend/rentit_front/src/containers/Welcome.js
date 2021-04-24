@@ -32,7 +32,7 @@ function Welcome(){
             
                 <img
                 className={classes.imgclass}
-                src="https://cdn.suwalls.com/wallpapers/photography/hotel-room-27502-1920x1200.jpg"
+                src="https://image.freepik.com/free-photo/living-room-arrangement-with-yoga-mat_23-2148741917.jpg"
                 alt="Rent=ene"
                 />
                 <Grid

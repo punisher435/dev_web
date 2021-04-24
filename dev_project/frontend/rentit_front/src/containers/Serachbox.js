@@ -34,7 +34,7 @@ const StyledTextField = withStyles((theme) => ({
       margin: theme.spacing(2),
       width: 300,
       "& .MuiInputBase-root": {
-        color: 'red',
+        color: 'black',
         
         
         height: 60,
@@ -45,21 +45,22 @@ const StyledTextField = withStyles((theme) => ({
       },
 
       '& input:valid + fieldset': {
-        borderColor: 'red',
+        borderColor: 'black',
         borderWidth: 2,
         
       },
       '& input:invalid + fieldset': {
-        borderColor: 'red',
+        borderColor: 'black',
         borderWidth: 2,
       },
       '& input:valid:focus + fieldset': {
         borderLeftWidth: 6,
-        borderColor: 'red',
+        borderColor: 'black',
         padding: '4px !important', // override inline-style
       },
       "& .MuiFormLabel-root": {
-        color: 'red',
+        color: 'black',
+        fontWeight: 'bold',
        
       }
     }
@@ -78,14 +79,23 @@ const useStyles = makeStyles((theme) => ({
         opacity:'1 !important',
         
         textAlign: 'center',
-        color:'red',
+        color:'black',
+        fontWeight: 'bold'
+    },
+
+    navclass122:{
+        opacity:'1 !important',
+        
+        textAlign: 'center',
+        color:'black',
+        fontWeight: 'bold'
     },
 
     navclass1:{
         opacity:'1 !important',
         position:'relative',
         textAlign: 'center',
-        width:'90vw',
+        
     },
     newclass12:{
     paddingLeft:'3%',
@@ -231,7 +241,7 @@ function Serachbox() {
             
             >
 
-            <div className="searchcardme">
+            <div >
             <Grid
             container
             direction="row"
@@ -248,7 +258,7 @@ function Serachbox() {
             direction="column"
             justify="center"
             alignItems="center"
-            className={classes.gridclassnew}
+            
             
             >
             
@@ -262,14 +272,15 @@ function Serachbox() {
             
             <Tabs
                 value={value}
-                
+                indicatorColor="primary"
+          
                 onChange={handleChange}
                 aria-label="disabled tabs example"
                 className={classes.navclass}
             >
-                <Tab label="Rooms" icon={<MeetingRoomIcon />} value='Rooms'/>
-                <Tab label="Shops" icon={<StorefrontIcon />} value='Shops'/>
-                <Tab label="Housing" icon={<ApartmentIcon />} value='Housing'/>
+                <Tab label="Rooms" icon={<MeetingRoomIcon />} className={classes.navclass122} value='Rooms'/>
+                <Tab label="Shops" icon={<StorefrontIcon />}  className={classes.navclass122} value='Shops'/>
+                <Tab label="Housing" icon={<ApartmentIcon />}  className={classes.navclass122} value='Housing'/>
             </Tabs>
             
             </Grid>
