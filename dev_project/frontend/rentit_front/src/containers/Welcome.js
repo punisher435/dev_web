@@ -1,7 +1,8 @@
 import React from 'react'
 import { Carousel } from 'react-bootstrap';
 import { makeStyles } from '@material-ui/core/styles';
-
+import Seachbox from './Serachbox';
+import Grid from '@material-ui/core/Grid';
 import '../components/css/App.css'
 
 const useStyles = makeStyles((theme) => ({
@@ -34,6 +35,18 @@ function Welcome(){
                 src="https://cdn.suwalls.com/wallpapers/photography/hotel-room-27502-1920x1200.jpg"
                 alt="Rent=ene"
                 />
+                <Grid
+                container
+                direction="row"
+                justify="center"
+                alignItems="center"
+                className="searchbox2"
+                >
+                <div className="searchbox1"><Seachbox /></div>
+
+                </Grid>
+                
+                
                 <div className="container_class">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#fff" fill-opacity="1" d="M0,128L60,112C120,96,240,64,360,58.7C480,53,600,75,720,101.3C840,128,960,160,1080,170.7C1200,181,1320,171,1380,165.3L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
             </div>
