@@ -32,6 +32,7 @@ import FeedbackOutlinedIcon from '@material-ui/icons/FeedbackOutlined';
 import '../components/css/App.css'
 import CommentOutlinedIcon from '@material-ui/icons/CommentOutlined';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+import ArrowBackOutlinedIcon from '@material-ui/icons/ArrowBackOutlined';
 
 const drawerWidth = 240;
 
@@ -65,6 +66,14 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('sm')]: {
       display: 'none',
     },
+  },
+  menuButton1: {
+    [theme.breakpoints.up('sm')]: {
+      marginLeft: '250px',
+    },
+    
+    marginRight: theme.spacing(0),
+    color:'white'
   },
   // necessary for content to be below app bar
   toolbar: {
@@ -266,11 +275,13 @@ function Dashboarddrawer(props) {
           >
             <MenuIcon />
           </IconButton>
+          <Link style={{textDecoration:'none'}} to='/' ><IconButton className={classes.menuButton1}><ArrowBackOutlinedIcon /></IconButton></Link>
           <Typography variant="h6" noWrap className={classes.myclass}>
             Dashboard
           </Typography>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
+            
             {
             props.profile ? <Avatar className={classes.purple} alt={props.profile.first_name.toUpperCase()} src={pic} /> : <AccountCircle />
             }
