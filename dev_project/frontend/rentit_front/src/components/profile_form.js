@@ -14,6 +14,11 @@ import Paper from '@material-ui/core/Paper';
 import './css/App.css';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
+import Typography from '@material-ui/core/Typography';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
+
 
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
@@ -100,6 +105,21 @@ imageclass: {
       marginTop: theme.spacing(1),
      
     },
+    myclass11:{
+     
+    width: '140px',
+  
+  [theme.breakpoints.up('sm')]: {
+    
+    width: '170px',
+   
+  },
+  [theme.breakpoints.up('md')]: {
+  
+    width: '200px',
+   
+  },
+    },
 }));
 
 function ProfileForm (props){
@@ -113,7 +133,9 @@ function ProfileForm (props){
       aadhar:'',
       user_id:'',
       photo:'',
-      file:"/account-icon-8.png"
+      file:"/account-icon-8.png",
+      front:null,
+      back:null,
     })
 
     const [edit,setedit] = useState(false)
@@ -144,7 +166,7 @@ function ProfileForm (props){
                   aadhar:res.data.aadhar,
                   user_id:props.profile.id,
                   photo:res.data.photo,
-                  file:res.data.photo
+                  file:res.data.photo,
                 })
                 setedit(true);
                 
@@ -169,20 +191,24 @@ function ProfileForm (props){
       alternate_mobile:myprofile.alternate_mobile,
       aadhar:myprofile.aadhar,
       photo:'null',
+      front:myprofile.front,
+      back:myprofile.back,
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
 
       var temp = true;
 
-      if(values.country_code=='+91' && values.aadhar.length!=12)
-{
+   
 
- temp=false;
+if(props.profile.is_seller && edit===false && (values.front===null || values.back===null || (values.country_code==='+91' && values.aadhar.length!=12)  ) )
+{
+    temp=false;
 }
 
       if(temp===true)
       {
+       
       let form_data = new FormData();
       form_data.append('user_id',values.user_id)
       form_data.append('country_code',values.country_code)
@@ -190,6 +216,14 @@ function ProfileForm (props){
       form_data.append('alternate_mobile',values.alternate_mobile)
       form_data.append('aadhar',values.aadhar)
       form_data.append('photo',values.photo)
+      if(values.front!=null)
+      {
+        form_data.append('front',values.front)
+      }
+      if(values.back!=null)
+      {
+        form_data.append('back',values.back)
+      }
     
       const config = {
         headers: {
@@ -231,7 +265,7 @@ function ProfileForm (props){
 
     }
     else{
-      setmessage(`Aadhar should be valid!`)
+      setmessage(`Identification proof photos are required and if your country code is +91, then aadhar no. is also required`)
           setopen1(true);
     }
    
@@ -263,6 +297,51 @@ function ProfileForm (props){
     
   }
 
+  const Filevalidation2 = (file1,name) => {
+  
+ 
+    // Check if any file is selected.
+    
+       
+  
+            const fsize =file1.size;
+            const file = Math.round((fsize / 1024));
+            // The size of the file.
+            if (file >= 5120) {
+                alert(
+                  "File too Big, please select a file less than 5mb");
+            } 
+            else{
+              
+              formik.setFieldValue('front',file1);
+              
+            }
+        
+    
+  }
+  const Filevalidation3 = (file1,name) => {
+  
+ 
+    // Check if any file is selected.
+    
+       
+  
+            const fsize =file1.size;
+            const file = Math.round((fsize / 1024));
+            // The size of the file.
+            if (file >= 5120) {
+                alert(
+                  "File too Big, please select a file less than 5mb");
+            } 
+            else{
+              
+              formik.setFieldValue('back',file1);
+              
+            }
+        
+    
+  }
+
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
@@ -280,6 +359,8 @@ function ProfileForm (props){
     return <div className={classes.erorclass}><Eror error={'Cannot update profile'} /></div>;
   }
 
+  if(props.profile)
+  {
   return (
     <div className="formbgclass1">
     <div className={classes.myclass}>
@@ -319,23 +400,30 @@ function ProfileForm (props){
     </Grid>
 
         <br />
-          <Grid item>
-        <TextField
-          multiline
-          variant="outlined"
-          margin="normal"
+
+        {
+          props.profile.profile_completed===false ? <Grid item>
+          <FormControl className={classes.form}>
+          <InputLabel htmlFor="age-native-simple">Country code</InputLabel>
+          <Select
+            native
+            value={formik.values.country_code}
+            onChange={(e) => {e.preventDefault();formik.setFieldValue('country_code', e.target.value);}}
+            error={formik.touched.country_code && Boolean(formik.errors.country_code)}
+            helperText={formik.touched.country_code && formik.errors.country_code}
+            
+          >
+           
+            <option value={'+91'}>+91</option>
+            
           
-          fullWidth
-          rows={1}
-          id="country_code"
-          name="country_code"
-          label="Country code"
-          value={formik.values.country_code}
-          onChange={formik.handleChange}
-          error={formik.touched.country_code && Boolean(formik.errors.country_code)}
-          helperText={formik.touched.country_code && formik.errors.country_code}
-        />
-        </Grid>
+          </Select>
+        </FormControl>
+          </Grid> : null
+        }
+
+        
+         
         <Grid item>
         <TextField
          multiline
@@ -371,7 +459,7 @@ function ProfileForm (props){
 
 
         {
-          formik.values.country_code==='+91' ? <Grid item>
+          formik.values.country_code==='+91' && props.profile.is_seller && props.profile.profile_completed===false ? <Grid item>
           <TextField
            multiline
            variant="outlined"
@@ -389,6 +477,32 @@ function ProfileForm (props){
           />
           </Grid> : null
         }
+<br />
+
+
+
+{
+           props.profile.is_seller && props.profile.profile_completed===false ? <>
+           <Grid item>
+             <Typography variant="body1">Upload front view of identification proof</Typography>
+           </Grid>
+          <Grid item>
+        <input type='file'  id='front' accept='image/png,image/jpeg,image/jpg' className={classes.myclass11} onChange={(event) => {
+          Filevalidation2(event.target.files[0]);}}/> 
+          </Grid></> : null
+        }
+<br />
+
+{
+           props.profile.is_seller && props.profile.profile_completed===false ? <>
+           <Grid item>
+             <Typography variant="body1">Upload back view of identification proof</Typography>
+           </Grid>
+          <Grid item>
+        <input type='file'  id='back' accept='image/png,image/jpeg,image/jpg' className={classes.myclass11} onChange={(event) => {
+          Filevalidation3(event.target.files[0]);}}/> 
+          </Grid></> : null
+        }
 
         
         <br />
@@ -403,6 +517,11 @@ function ProfileForm (props){
     </div>
   );
 }
+else{
+  return <div></div>;
+}
+}
+
 
 
 

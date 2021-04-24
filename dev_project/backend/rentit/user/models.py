@@ -95,8 +95,8 @@ class customUser_profile(models.Model):
     alternate_mobile=models.CharField(max_length=255,null=True,blank=True)
     photo=models.ImageField(_("Image"),upload_to=upload_to,null=True,blank=True)
 
-    front=models.ImageField(_("Image"),upload_to=upload_to_front,null=True,blank=True)
-    back=models.ImageField(_("Image"),upload_to=upload_to_front,null=True,blank=True)
+    front=models.ImageField(_("Identification proof front"),upload_to=upload_to_front,null=True,blank=True)
+    back=models.ImageField(_("Identification proof back"),upload_to=upload_to_front,null=True,blank=True)
 
     objects=profile_manager()
 
