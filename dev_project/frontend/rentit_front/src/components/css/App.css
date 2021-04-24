@@ -79,13 +79,7 @@
   cursor: pointer;
 }
 
-.svg_me { 
-  display: inline-block; 
-  position: absolute; 
-  top: 0; 
-  left: 0; 
-  
-} 
+
 
 .sticky{
   position: -webkit-sticky;
@@ -182,6 +176,63 @@
  
  
 }
+
+
+
+@media only screen and (min-width: 320px) and (max-width: 750px)
+{
+  .container_class1{
+  
+    position: absolute; 
+    width: 100%; 
+    
+   
+    overflow: hidden; 
+    top: 0; 
+   
+    margin-top:720px;
+  }
+}
+
+
+@media only screen and (max-width: 321px)
+{.container_class1{
+  
+  position: absolute; 
+  width: 100%; 
+  
+ 
+  overflow: hidden; 
+  top: 0; 
+ 
+  margin-top:750px;
+}}
+
+@media only screen and (min-width: 750px)
+{.container_class1{
+  
+  position: absolute; 
+  width: 100%; 
+  
+ 
+  overflow: hidden; 
+  top: 0; 
+ 
+  margin-top:650px;
+}}
+
+@media only screen and (min-width: 1200px)
+{.container_class1{
+  
+  position: absolute; 
+  width: 100%; 
+  
+ 
+  overflow: hidden; 
+  top: 0; 
+ 
+  margin-top:550px;
+}}
 
 
 @media only screen and (max-width: 300px)
