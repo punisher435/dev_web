@@ -21,7 +21,7 @@ import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
 import StorefrontIcon from '@material-ui/icons/Storefront';
 import ApartmentIcon from '@material-ui/icons/Apartment';
 import TextField from '@material-ui/core/TextField';
-import DatePick from '../components/datepick'
+import DatePick from '../components/datepick_light'
 import Button from '@material-ui/core/Button';
 import  {useMediaQuery} from '@material-ui/core';
 
@@ -376,138 +376,10 @@ function Home() {
                 </div>
             </div>
             
-            <br />
-
-            <Grid
-            container
-            direction="column"
-            justify="center"
-            alignItems="center"
-            
-            >
-
-            <div className="searchcardme">
-            <Grid
-            container
-            direction="row"
-            justify="center"
-            alignItems="center"
-            
-            >
-                {/* <div className={demowrap}></div> */}
-            <Paper elevation={5} className="backgroundclass1">
-                <br />
-
-                <Grid
-            container
-            direction="column"
-            justify="center"
-            alignItems="center"
-            className={classes.gridclassnew}
-            
-            >
-            
-            <Grid
-            container
-            direction="row"
-            justify="center"
-            alignItems="center"
-            
-            >
-            <Paper square elevation={0} className={classes.navclass}>
-            <Tabs
-                value={value}
-                indicatorColor="primary"
-                textColor="primary"
-                onChange={handleChange}
-                aria-label="disabled tabs example"
-                className={classes.navclass}
-            >
-                <Tab label="Rooms" icon={<MeetingRoomIcon />} value='Rooms'/>
-                <Tab label="Shops" icon={<StorefrontIcon />} value='Shops'/>
-                <Tab label="Housing" icon={<ApartmentIcon />} value='Housing'/>
-            </Tabs>
-            </Paper>
-            </Grid>
-            <br />
             
             
 
-            <Grid
-            container
-            direction="row"
-            justify="center"
-            alignItems="center"
-            className={classes.navclass}
             
-           
-            
-            >
-                {/* <div className={classes.white}> */}
-
-                    <div className={classes.root12}>
-                    <TextField id="city" label="City" variant="outlined" name="city" value={input.city} onInput={handleinput}/>
-                     </div>
-                {/* </div> */}
-                {/* <div className={classes.white}> */}
-
-                    <div className={classes.root12}>
-                    <TextField id="state" label="State" variant="outlined" name="state" value={input.state} onInput={handleinput}/>
-                    </div>
-                {/* </div> */}
-                {/* <div className={classes.white}> */}
-
-                    <div className={classes.root12}>
-                    <TextField id="country" label="Country" variant="outlined" name="country" value={input.country} onInput={handleinput}/>
-                    </div>
-            
-
-            </Grid>
-
-            <Grid
-            container
-            direction="row"
-            justify="center"
-            alignItems="center"
-            className={classes.navclass}
-            
-            >
-
-            <DatePick value={input} setvalue={setinput} name={'date'} />
-
-            </Grid>
-
-            <br />
-
-            
-
-            <Grid
-            container
-            direction="row"
-            justify="center"
-            alignItems="center"
-            className={classes.navclass}
-            
-            >
-
-            <Button variant="contained" color="primary" onClick={handleclick}>Search</Button>
-
-            </Grid>
-            <br />
-
-            </Grid>
-                
-            </Paper>
-            </Grid>
-            </div>
-
-            </Grid>
-
-            <br />
-            <br />
-
-            
-            <br />
             
 
             {
@@ -635,6 +507,137 @@ function Home() {
             }
             <div>
             </div>
+
+
+
+            <br />
+            <Grid
+            container
+            direction="column"
+            justify="center"
+            alignItems="center"
+            
+            >
+
+            <div className="searchcardme">
+            <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+            
+            >
+                {/* <div className={demowrap}></div> */}
+            <Paper elevation={5} className="backgroundclass1">
+                <br />
+
+                <Grid
+            container
+            direction="column"
+            justify="center"
+            alignItems="center"
+            className={classes.gridclassnew}
+            
+            >
+            
+            <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+            
+            >
+            <Paper square elevation={0} className={classes.navclass}>
+            <Tabs
+                value={value}
+                indicatorColor="primary"
+                textColor="primary"
+                onChange={handleChange}
+                aria-label="disabled tabs example"
+                className={classes.navclass}
+            >
+                <Tab label="Rooms" icon={<MeetingRoomIcon />} value='Rooms'/>
+                <Tab label="Shops" icon={<StorefrontIcon />} value='Shops'/>
+                <Tab label="Housing" icon={<ApartmentIcon />} value='Housing'/>
+            </Tabs>
+            </Paper>
+            </Grid>
+            <br />
+            
+            
+
+            <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+            className={classes.navclass}
+            
+           
+            
+            >
+                {/* <div className={classes.white}> */}
+
+                    <div className={classes.root12}>
+                    <TextField id="city" label="City" variant="outlined" name="city" value={input.city} onInput={handleinput}/>
+                     </div>
+                {/* </div> */}
+                {/* <div className={classes.white}> */}
+
+                    <div className={classes.root12}>
+                    <TextField id="state" label="State" variant="outlined" name="state" value={input.state} onInput={handleinput}/>
+                    </div>
+                {/* </div> */}
+                {/* <div className={classes.white}> */}
+
+                    <div className={classes.root12}>
+                    <TextField id="country" label="Country" variant="outlined" name="country" value={input.country} onInput={handleinput}/>
+                    </div>
+            
+
+            </Grid>
+
+            <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+            className={classes.navclass}
+            
+            >
+
+            <DatePick value={input} setvalue={setinput} name={'date'} />
+
+            </Grid>
+
+            <br />
+
+            
+
+            <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+            className={classes.navclass}
+            
+            >
+
+            <Button variant="contained" color="primary" onClick={handleclick}>Search</Button>
+
+            </Grid>
+            <br />
+
+            </Grid>
+                
+            </Paper>
+            </Grid>
+            </div>
+
+            </Grid>
+
+            <br />
+            <br />
 
 
             
