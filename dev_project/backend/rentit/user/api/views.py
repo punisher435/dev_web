@@ -39,18 +39,32 @@ class profile_viewset(viewsets.ViewSet):
 
     def create(self,request,format=None):
         try:
+            if request.user.is_seller:
+                temp = None
+                if request.data["photo"] != 'null':
+                    temp = request.data["photo"]
 
-            temp = None
-            if request.data["photo"] != 'null':
-                temp = request.data["photo"]
+                profile = customUser_profile(user_id=request.user,mobile=request.data["mobile"],alternate_mobile=request.data["alternate_mobile"],
+                aadhar=request.data["aadhar"],front=request.data["front"],country_code=request.data["country_code"],
+                photo=temp,back=request.data["back"])
 
-            profile = customUser_profile(user_id=request.user,mobile=request.data["mobile"],alternate_mobile=request.data["alternate_mobile"],
-            aadhar=request.data["aadhar"],country_code=request.data["country_code"],photo=temp)
+                profile.save()
+                USER=User.objects.get(email=request.user)
+                USER.profile_completed=True
+                USER.save()
 
-            profile.save()
-            USER=User.objects.get(email=request.user)
-            USER.profile_completed=True
-            USER.save()
+            else:
+                temp = None
+                if request.data["photo"] != 'null':
+                    temp = request.data["photo"]
+
+                profile = customUser_profile(user_id=request.user,mobile=request.data["mobile"],alternate_mobile=request.data["alternate_mobile"],
+                country_code=request.data["country_code"],photo=temp)
+
+                profile.save()
+                USER=User.objects.get(email=request.user)
+                USER.profile_completed=True
+                USER.save()
             
             return Response('success',status=status.HTTP_201_CREATED)
         except Exception as e:
@@ -65,10 +79,8 @@ class profile_viewset(viewsets.ViewSet):
             if request.data["photo"] != 'null':
                 profile.photo = request.data['photo']
 
-            profile.country_code = request.data["country_code"]
             profile.mobile = request.data["mobile"]
             profile.alternate_mobile = request.data["alternate_mobile"]
-            profile.aadhar = request.data["aadhar"]
 
             profile.save()
             

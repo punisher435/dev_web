@@ -83,6 +83,10 @@ def upload_to(instance, filename):
     return 'images/profile_pics/{filename}'.format(filename=filename)
 
 
+def upload_to_front(instance, filename):
+    return 'images/identification_proof/{filename}'.format(filename=filename)
+
+
 class customUser_profile(models.Model):
     user_id=models.OneToOneField(customUser,on_delete=models.PROTECT, primary_key=True)
     country_code=models.CharField(max_length=255,default='+91')
@@ -90,6 +94,9 @@ class customUser_profile(models.Model):
     aadhar=models.CharField(max_length=255,unique=True,null=True,blank=True)
     alternate_mobile=models.CharField(max_length=255,null=True,blank=True)
     photo=models.ImageField(_("Image"),upload_to=upload_to,null=True,blank=True)
+
+    front=models.ImageField(_("Image"),upload_to=upload_to_front,null=True,blank=True)
+    back=models.ImageField(_("Image"),upload_to=upload_to_front,null=True,blank=True)
 
     objects=profile_manager()
 
