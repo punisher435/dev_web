@@ -19,7 +19,7 @@ import TextField from '@material-ui/core/TextField';
 import DatePick from '../components/datepick'
 import Button from '@material-ui/core/Button';
 import {Link,Redirect} from 'react-router-dom'
-import { makeStyles} from '@material-ui/core/styles';
+import {withStyles, makeStyles} from '@material-ui/core/styles';
 
 
 
@@ -28,6 +28,42 @@ import "../components/css/App.css"
 
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
+
+const StyledTextField = withStyles((theme) => ({
+    root: {
+      margin: theme.spacing(2),
+      width: 300,
+      "& .MuiInputBase-root": {
+        color: 'red',
+        
+        
+        height: 60,
+        "& input": {
+          textAlign: "center",
+         
+        }
+      },
+
+      '& input:valid + fieldset': {
+        borderColor: 'red',
+        borderWidth: 2,
+        
+      },
+      '& input:invalid + fieldset': {
+        borderColor: 'red',
+        borderWidth: 2,
+      },
+      '& input:valid:focus + fieldset': {
+        borderLeftWidth: 6,
+        borderColor: 'red',
+        padding: '4px !important', // override inline-style
+      },
+      "& .MuiFormLabel-root": {
+        color: 'red',
+       
+      }
+    }
+  }))(TextField);
 
 
 const useStyles = makeStyles((theme) => ({
@@ -42,6 +78,7 @@ const useStyles = makeStyles((theme) => ({
         opacity:'1 !important',
         
         textAlign: 'center',
+        color:'red',
     },
 
     navclass1:{
@@ -225,8 +262,7 @@ function Serachbox() {
             
             <Tabs
                 value={value}
-                indicatorColor="primary"
-                textColor="primary"
+                
                 onChange={handleChange}
                 aria-label="disabled tabs example"
                 className={classes.navclass}
@@ -254,19 +290,19 @@ function Serachbox() {
                 {/* <div className={classes.white}> */}
 
                     <div className={classes.root12}>
-                    <TextField id="city" label="City" variant="outlined" name="city" value={input.city} onInput={handleinput}/>
+                    <StyledTextField id="city" label="City" variant="outlined" name="city" value={input.city} onInput={handleinput}/>
                      </div>
                 {/* </div> */}
                 {/* <div className={classes.white}> */}
 
                     <div className={classes.root12}>
-                    <TextField id="state" label="State" variant="outlined" name="state" value={input.state} onInput={handleinput}/>
+                    <StyledTextField id="state" label="State" variant="outlined" name="state" value={input.state} onInput={handleinput}/>
                     </div>
                 {/* </div> */}
                 {/* <div className={classes.white}> */}
 
                     <div className={classes.root12}>
-                    <TextField id="country" label="Country" variant="outlined" name="country" value={input.country} onInput={handleinput}/>
+                    <StyledTextField id="country" label="Country" variant="outlined" name="country" value={input.country} onInput={handleinput}/>
                     </div>
             
 

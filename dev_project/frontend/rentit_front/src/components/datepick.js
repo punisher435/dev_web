@@ -14,11 +14,51 @@ const useStyles = makeStyles((theme) => ({
         
           margin: theme.spacing(1),
           width: '23ch',
+          color:'red',
+         
+          padding:5,
          
        
       },
   
   }));
+
+
+  const StyledTextField = withStyles((theme) => ({
+    root: {
+      margin: theme.spacing(2),
+      width: 300,
+      "& .MuiInputBase-root": {
+        color: 'red',
+        
+        
+        height: 60,
+        "& input": {
+          textAlign: "center",
+         
+        }
+      },
+
+      '& input:valid + fieldset': {
+        borderColor: 'red',
+        borderWidth: 2,
+        
+      },
+      '& input:invalid + fieldset': {
+        borderColor: 'red',
+        borderWidth: 2,
+      },
+      '& input:valid:focus + fieldset': {
+        borderLeftWidth: 6,
+        borderColor: 'red',
+        padding: '4px !important', // override inline-style
+      },
+      "& .MuiFormLabel-root": {
+        color: 'red',
+       
+      }
+    }
+  }))(KeyboardDatePicker);
 
 export default function DateSelect({value,setvalue,name}) {
     const classes = useStyles();
@@ -56,7 +96,9 @@ export default function DateSelect({value,setvalue,name}) {
 
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils} className={classes.root12}>
-        <KeyboardDatePicker
+        <StyledTextField
+        variant="inline"
+        inputVariant="outlined"
         className={classes.root12}
           margin="normal"
           id="date-picker-dialog"
