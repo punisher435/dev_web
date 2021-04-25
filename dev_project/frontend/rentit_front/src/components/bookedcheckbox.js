@@ -23,7 +23,30 @@ export default function Checkboxes({ filters,setfilters,checked,setChecked }) {
       setfilters({...filters,booked:'',bookedtill:''});
     }
     if(event.target.checked===false){
-      setfilters({...filters,booked:''});
+      
+      const date = new Date(Date.now())
+
+    var x;
+    var y;
+    if(parseInt(date.getMonth()+1)<10)
+    {
+      x = `0${date.getMonth()+1}`;
+    }
+    if(parseInt(date.getMonth()+1)>=10)
+    {
+      x = `${date.getMonth()+1}`;
+    }
+    if(parseInt(date.getDate())<10)
+    {
+      y = `0${date.getDate()}`;
+    }
+    if(parseInt(date.getDate())>=10)
+    {
+      y = `${date.getDate()}`;
+    }
+
+    var temp4=`${date.getFullYear()}-${x}-${y}`
+    setfilters({...filters,booked:'',bookedtill:temp4});
     }
     
   };
