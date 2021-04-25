@@ -118,16 +118,10 @@
   
 .backgroundclass1::before {  
       content: "";
-      background: hsla(0, 24%, 86%, 1);
-
-      background: linear-gradient(0deg, hsla(0, 24%, 86%, 1) 0%, hsla(349, 48%, 63%, 1) 77%, hsla(349, 39%, 51%, 1) 100%);
-      
-      background: -moz-linear-gradient(0deg, hsla(0, 24%, 86%, 1) 0%, hsla(349, 48%, 63%, 1) 77%, hsla(349, 39%, 51%, 1) 100%);
-      
-      background: -webkit-linear-gradient(0deg, hsla(0, 24%, 86%, 1) 0%, hsla(349, 48%, 63%, 1) 77%, hsla(349, 39%, 51%, 1) 100%);
-      filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#E4D3D3", endColorstr="#CD7283", GradientType=1 );
-
-
+      background-image: url("https://image.freepik.com/free-photo/living-room-arrangement-with-yoga-mat_23-2148741917.jpg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
 
       width:100%;
       max-width:1200px;

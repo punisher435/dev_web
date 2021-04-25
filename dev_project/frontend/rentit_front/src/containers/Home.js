@@ -2,7 +2,7 @@ import React from 'react'
 import Welcome from './Welcome'
 
 import 'bootstrap/dist/css/bootstrap.min.css'; 
-import { makeStyles} from '@material-ui/core/styles';
+import { withStyles,makeStyles} from '@material-ui/core/styles';
 import 'antd/dist/antd.css';
 import axios from 'axios'
 
@@ -21,17 +21,15 @@ import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
 import StorefrontIcon from '@material-ui/icons/Storefront';
 import ApartmentIcon from '@material-ui/icons/Apartment';
 import TextField from '@material-ui/core/TextField';
-import DatePick from '../components/datepick_light'
+import DatePick from '../components/datepick'
 import Button from '@material-ui/core/Button';
 import  {useMediaQuery} from '@material-ui/core';
 
 import Box from '@material-ui/core/Box';
 import "../components/css/App.css"
 
-import FacebookIcon from '@material-ui/icons/Facebook';
-import InstagramIcon from '@material-ui/icons/Instagram';
-import MailIcon from '@material-ui/icons/Mail';
-import TwitterIcon from '@material-ui/icons/Twitter';
+
+import Footer from '../components/footer';
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
 
@@ -47,14 +45,23 @@ const useStyles = makeStyles((theme) => ({
         opacity:'1 !important',
         
         textAlign: 'center',
+        color:'black',
+        fontWeight: 'bold'
     },
-
     navclass1:{
         opacity:'1 !important',
         position:'relative',
         textAlign: 'center',
         width:'90vw',
     },
+    navclass122:{
+        opacity:'1 !important',
+        
+        textAlign: 'center',
+        color:'black',
+        fontWeight: 'bold'
+    },
+
     newclass12:{
     paddingLeft:'3%',
     },
@@ -82,13 +89,13 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: '#575757',
     },
     bgclass2:{
-        backgroundImage: `url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnyKdT_YR9I2OOqWE_Am3fAifdWNYW0EN7Lw&usqp=CAU")` ,
+        backgroundImage: `url("https://image.freepik.com/free-photo/living-room-arrangement-with-yoga-mat_23-2148741917.jpg")` ,
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
         backgroundSize: 'cover',
         width:'90vw',
         maxWidth:'1200px',
-        opacity: '0.4'
+        
     },
     white:{
         backgroundColor: '#ffffff'
@@ -127,6 +134,44 @@ const useStyles = makeStyles((theme) => ({
       },
   
   }));
+
+
+  const StyledTextField = withStyles((theme) => ({
+    root: {
+      margin: theme.spacing(2),
+     
+      "& .MuiInputBase-root": {
+        color: 'black',
+        
+        
+        height: 60,
+        "& input": {
+          textAlign: "center",
+         
+        }
+      },
+
+      '& input:valid + fieldset': {
+        borderColor: 'black',
+        borderWidth: 2,
+        
+      },
+      '& input:invalid + fieldset': {
+        borderColor: 'black',
+        borderWidth: 2,
+      },
+      '& input:valid:focus + fieldset': {
+        borderLeftWidth: 6,
+        borderColor: 'black',
+        padding: '4px !important', // override inline-style
+      },
+      "& .MuiFormLabel-root": {
+        color: 'black',
+        fontWeight: 'bold',
+       
+      }
+    }
+  }))(TextField);
 
 
 function Home() {
@@ -216,24 +261,7 @@ function Home() {
     },[])
 
 
-    React.useEffect(async() => {
-        const config = {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-          };
-          try{const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourceashe929209has8h2bsgv2a89/booking/`,{
-            
-            config:config
-          });
-          
-          settotalbookings(res.data);
-          
-          }
-          catch{
-            
-          }
-    },[])
+  
 
     React.useEffect(async() => {
         const config = {
@@ -551,14 +579,14 @@ function Home() {
             <Tabs
                 value={value}
                 indicatorColor="primary"
-                textColor="primary"
+                
                 onChange={handleChange}
                 aria-label="disabled tabs example"
                 className={classes.navclass}
             >
-                <Tab label="Rooms" icon={<MeetingRoomIcon />} value='Rooms'/>
-                <Tab label="Shops" icon={<StorefrontIcon />} value='Shops'/>
-                <Tab label="Housing" icon={<ApartmentIcon />} value='Housing'/>
+                <Tab label="Rooms" icon={<MeetingRoomIcon />} className={classes.navclass122} value='Rooms'/>
+                <Tab label="Shops" icon={<StorefrontIcon />} className={classes.navclass122} value='Shops'/>
+                <Tab label="Housing" icon={<ApartmentIcon />} className={classes.navclass122} value='Housing'/>
             </Tabs>
             </Paper>
             </Grid>
@@ -579,19 +607,19 @@ function Home() {
                 {/* <div className={classes.white}> */}
 
                     <div className={classes.root12}>
-                    <TextField id="city" label="City" variant="outlined" name="city" value={input.city} onInput={handleinput}/>
+                    <StyledTextField id="city" label="City" variant="outlined" name="city" value={input.city} onInput={handleinput}/>
                      </div>
                 {/* </div> */}
                 {/* <div className={classes.white}> */}
 
                     <div className={classes.root12}>
-                    <TextField id="state" label="State" variant="outlined" name="state" value={input.state} onInput={handleinput}/>
+                    <StyledTextField id="state" label="State" variant="outlined" name="state" value={input.state} onInput={handleinput}/>
                     </div>
                 {/* </div> */}
                 {/* <div className={classes.white}> */}
 
                     <div className={classes.root12}>
-                    <TextField id="country" label="Country" variant="outlined" name="country" value={input.country} onInput={handleinput}/>
+                    <StyledTextField id="country" label="Country" variant="outlined" name="country" value={input.country} onInput={handleinput}/>
                     </div>
             
 
@@ -643,134 +671,7 @@ function Home() {
             
 
                 {/* <br></br> */}
-    <div className="footerclass">
-
-        <br />
-        <br />
-
-        <Grid
-            container
-            direction="row"
-            justify="space-evenly"
-            alignItems="flex-start"
-            className={classes.newclass12}
-            
-            >
-
-                <br />
-
-                
-            <Grid item xs={12} sm={3}><br />
-                <Grid
-                container
-                direction="row"
-                justify="flex-start"
-                alignItems="flex-start"
-                >
-                <Grid item xs={11}>
-                <div className={classes.logoclass}><img src="/logo.png" /></div>
-                </Grid>
-                
-                
-                <Grid item >
-                        <Box  fontSize={25} mr={2}>
-                        <Link href="#" onClick='#' >
-                            <FacebookIcon color='white'/>
-                        </Link>
-                        </Box>
-                </Grid>
-                <Grid item >
-                        
-                        <Box  fontSize={25} mr={2}>
-                        <Link href="#" onClick='#' >
-                            <InstagramIcon/>
-                        </Link>
-                        </Box>
-                </Grid>
-                <Grid item >
-                        <Box  fontSize={25} mr={2}>
-                        <Link href="#" onClick='#' >
-                            <MailIcon/>
-                        </Link>
-                        </Box>
-                </Grid>
-                <Grid item >
-                        <Box  fontSize={25} >
-                        <Link href="#" onClick='#' >
-                            <TwitterIcon/>
-                        </Link>
-                        </Box>
-                </Grid>
-                
-            </Grid>
-            <br/>
-        </Grid>
-
-
-        <Grid item xs={12} sm={2}>
-        <Grid
-            container
-            direction="row"
-            justify="center"
-            alignItems="flex-start"
-            >
-                <Grid item xs={12}>
-                    <Typography variant='h6' className={classes.textclass}>
-                        <Box lineHeight={0}>
-
-                        Hit Counter
-                        </Box>
-                    </Typography>
-                </Grid>
-                <Grid item xs={12}>
-                    <Typography variant='subtitle1' className={classes.textclass}>
-                <Box lineHeight={1} fontSize={15}>
-                        {totalbookings} (No. of bookings from our website)
-                </Box>
-                    </Typography>
-                </Grid>
-            </Grid><br/>
-                </Grid>
-                {/* <Divider orientation="vertical" flexItem={true} light={true}/> */}
-
-                <Grid item xs={12} sm={2}>
-                {/* <Paper elevation={5} > */}
-                <Grid
-            container
-            direction="row"
-            justify="center"
-            alignItems="flex-start"
-            >
-                <Grid item xs={12}>
-                    <Typography variant='h6' className={classes.textclass}>
-                        About Us
-                    </Typography>
-                </Grid>
-            </Grid><br/>
-            {/* </Paper> */}
-                </Grid>
-                {/* <Divider orientation="vertical" flexItem  light/> */}
-                
-                
-                <Grid item xs={12} sm={3}>
-                {/* <Paper elevation={5}> */}
-                <Grid
-            container
-            direction="row"
-            justify="center"
-            alignItems="flex-start"
-            >
-                <Grid item xs={12}>
-                    <Typography variant='h6' className={classes.textclass}>
-                        Terms and conditions
-                    </Typography>
-                </Grid>
-                
-            </Grid><br/>
-            {/* </Paper> */}
-                
-                </Grid>
-            </Grid>
+    <Footer />
                 {/* <Divider  /> */}
          {/* <div >
          <Box  ml={3}>
@@ -793,7 +694,7 @@ function Home() {
              <br></br>
          </Box>
          </div> */}
-         </div>
+       
              
 
             

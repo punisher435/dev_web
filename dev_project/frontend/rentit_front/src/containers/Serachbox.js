@@ -32,7 +32,7 @@ axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
 const StyledTextField = withStyles((theme) => ({
     root: {
       margin: theme.spacing(2),
-      width: 300,
+      
       "& .MuiInputBase-root": {
         color: 'black',
         
