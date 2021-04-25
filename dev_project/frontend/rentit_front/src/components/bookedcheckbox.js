@@ -23,7 +23,7 @@ export default function Checkboxes({ filters,setfilters,checked,setChecked }) {
       setfilters({...filters,booked:'',bookedtill:''});
     }
     if(event.target.checked===false){
-      setfilters({...filters,booked:false});
+      setfilters({...filters,booked:''});
     }
     
   };

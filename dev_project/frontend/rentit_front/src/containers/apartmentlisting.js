@@ -136,7 +136,7 @@ const App = ({isAuthenticated}) => {
     max_price:400000,
     BHK_filter:'',
     trust_points_filter:'',
-    booked:false,
+    booked:'',
     windows:'',
     bookedtill:temp4,
     search:'',
