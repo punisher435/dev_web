@@ -525,7 +525,7 @@ const handleChange2 = (e,apartmentid,boolean) => {
         </Typography>
        
           {
-              myrooms.map((room) => (
+              edit===false && myrooms.map((room) => (
                   <div>
                       <Checkbox
         checked={formik.values.coupoun_rooms.includes(room.room_id)}
@@ -550,7 +550,7 @@ const handleChange2 = (e,apartmentid,boolean) => {
         <br />
 
 {
-              myshops.map((shop) => (
+              edit===false && myshops.map((shop) => (
                   <div>
                       <Checkbox
         checked={formik.values.coupoun_shops.indexOf(shop.shop_id)!==-1}
@@ -574,7 +574,7 @@ const handleChange2 = (e,apartmentid,boolean) => {
         <br />
 
 {
-              myapartments.map((apartment) => (
+             edit===false && myapartments.map((apartment) => (
                   <div>
                       <Checkbox
         checked={formik.values.coupoun_apartments.includes(apartment.apartment_id)}

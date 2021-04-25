@@ -1,6 +1,6 @@
 import React,{ useState, useEffect} from 'react'
 import { withStyles, makeStyles } from '@material-ui/core/styles';
-import Dashboarddrawer from '../hocs/layout3'
+import Dashboarddrawer from '../hocs/layout2'
 import axios from 'axios'
 import Eror from '../components/eror'
 import Grid from '@material-ui/core/Grid';
