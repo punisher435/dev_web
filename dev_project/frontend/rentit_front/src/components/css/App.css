@@ -509,6 +509,7 @@ filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#1891CD", en
 
 .footerclass{
   background-color: #000000;
+    background-image: linear-gradient(90deg, #000000 0%, #414141 74%);
   
 
 

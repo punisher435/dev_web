@@ -411,7 +411,7 @@ function Bookingdetails(props) {
   invoiceData ? <Grid item>
   <br />
              
-              <PDFDownloadLink document={<Invoice invoice={invoiceData}/>} fileName={"FileName"}> 
+              <PDFDownloadLink document={<Invoice invoice={invoiceData}/>} fileName={"FileName"}fileName={`Booking(${mybooking.booking_id})`}> 
   
               <Button variant="contained" color="primary"> Download </Button> 
   
