@@ -95,6 +95,7 @@ urlpatterns = [
 
     #seller_reviews
     path('sourceuserjcnssjwhd9329hdw/',include('user.urls')),
+    path('sourcedsjeui829u3u89hd98y42gsvsggwww/',include('user.urls_seller_me')),
 
     #complaints
     path('sourcenjjbrtrtd7668ugf787t87t9yuigff/',include('complaint.urls_room')),

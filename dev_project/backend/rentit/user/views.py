@@ -22,10 +22,31 @@ class StandardResultsSetPagination(PageNumberPagination):
     max_page_size = 10
 
 
+class StandardResultsSetPagination1(PageNumberPagination):
+    page_size = 3
+    page_size_query_param = 'page_size'
+    max_page_size = 3
+
+
 
 class seller_reviews(viewsets.ReadOnlyModelViewSet):
 
     pagination_class = StandardResultsSetPagination
+    filter_backends=(filters.OrderingFilter,)
+    ordering_fields = ['timestamp','rating']
+    ordering = ['-rating']
+    serializer_class = Seller_rating_and_reviews_serializer
+
+    def get_queryset(self):
+        seller = self.request.query_params.get('seller_id')
+        query_set = seller_rating_and_reviews.objects.all()
+        query_set = query_set.filter(seller_id=seller)
+        return query_set
+
+
+class seller_reviews_short(viewsets.ReadOnlyModelViewSet):
+    
+    pagination_class = StandardResultsSetPagination1
     filter_backends=(filters.OrderingFilter,)
     ordering_fields = ['timestamp','rating']
     ordering = ['-rating']

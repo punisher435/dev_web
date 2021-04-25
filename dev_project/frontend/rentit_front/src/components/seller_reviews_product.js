@@ -103,7 +103,7 @@ function MyReviews({id}) {
               {
                
                 try{
-                    const res1 = await axios.get(`${process.env.REACT_APP_API_URL}/sourceuserjcnssjwhd9329hdw/seller/reviews/`,{
+                    const res1 = await axios.get(`${process.env.REACT_APP_API_URL}/sourcedsjeui829u3u89hd98y42gsvsggwww/seller/product/reviews/`,{
                       params:{
                         seller_id:id,
                         page:params1.page,
