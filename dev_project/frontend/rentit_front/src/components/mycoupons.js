@@ -1,5 +1,5 @@
 import React,{ useState} from 'react'
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles,makeStyles } from '@material-ui/core/styles';
 import Dashboarddrawer from '../hocs/layout2'
 import axios from 'axios'
 import Eror from '../components/eror'
@@ -20,6 +20,27 @@ import CreateOutlinedIcon from '@material-ui/icons/CreateOutlined';
 
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
+
+const StyledFabField = withStyles((theme) => ({
+  root: {
+    position: 'absolute',
+    color:`${process.env.REACT_APP_COLOR}`,
+    
+    '& .MuiFab-primary':{
+      backgroundColor:`${process.env.REACT_APP_COLOR}`,
+    },
+    '& .MuiSpeedDial-directionUp, &.MuiSpeedDial-directionLeft': {
+      bottom: theme.spacing(2),
+      right: theme.spacing(2),
+      color:`${process.env.REACT_APP_COLOR}`,
+    },
+    '& .MuiSpeedDial-directionDown, &.MuiSpeedDial-directionRight': {
+      top: theme.spacing(2),
+      left: theme.spacing(2),
+      color:`${process.env.REACT_APP_COLOR}`,
+    },
+  }
+}))(SpeedDial);
 
 
 
@@ -204,7 +225,7 @@ function MyCoupons(props) {
             </Grid>
 
             <div className={classes.exampleWrapper}>
-        <SpeedDial
+        <StyledFabField
           ariaLabel="SpeedDial example"
           className={classes.speedDial}
           hidden={hidden}
@@ -222,7 +243,7 @@ function MyCoupons(props) {
               onClick={handleredirect}
             />
           ))}
-        </SpeedDial>
+        </StyledFabField>
       </div>
             
             

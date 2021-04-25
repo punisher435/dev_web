@@ -1,5 +1,5 @@
 import React,{ useState} from 'react'
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles,makeStyles } from '@material-ui/core/styles';
 import Dashboarddrawer from '../hocs/layout2'
 import axios from 'axios'
 import Eror from '../components/eror'
@@ -26,6 +26,27 @@ axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
 
 
 const drawerWidth = 240;
+
+const StyledFabField = withStyles((theme) => ({
+  root: {
+    position: 'absolute',
+    color:`${process.env.REACT_APP_COLOR}`,
+    
+    '& .MuiFab-primary':{
+      backgroundColor:`${process.env.REACT_APP_COLOR}`,
+    },
+    '& .MuiSpeedDial-directionUp, &.MuiSpeedDial-directionLeft': {
+      bottom: theme.spacing(2),
+      right: theme.spacing(2),
+      color:`${process.env.REACT_APP_COLOR}`,
+    },
+    '& .MuiSpeedDial-directionDown, &.MuiSpeedDial-directionRight': {
+      top: theme.spacing(2),
+      left: theme.spacing(2),
+      color:`${process.env.REACT_APP_COLOR}`,
+    },
+  }
+}))(SpeedDial);
 
 
 
@@ -74,6 +95,7 @@ const useStyles = makeStyles((theme) => ({
     position: 'relative',
     marginTop: theme.spacing(3),
     height: 100,
+    
   },
   formControl: {
     margin: theme.spacing(1),
@@ -98,13 +120,19 @@ const useStyles = makeStyles((theme) => ({
   
   speedDial: {
     position: 'absolute',
+    color:`${process.env.REACT_APP_COLOR}`,
+    '&.MuiFab':{
+      backgroundColor:`${process.env.REACT_APP_COLOR}`,
+    },
     '&.MuiSpeedDial-directionUp, &.MuiSpeedDial-directionLeft': {
       bottom: theme.spacing(2),
       right: theme.spacing(2),
+      color:`${process.env.REACT_APP_COLOR}`,
     },
     '&.MuiSpeedDial-directionDown, &.MuiSpeedDial-directionRight': {
       top: theme.spacing(2),
       left: theme.spacing(2),
+      color:`${process.env.REACT_APP_COLOR}`,
     },
   },
 }));
@@ -223,7 +251,7 @@ function Myrooms(props) {
             </Grid>
 
             <div className={classes.exampleWrapper}>
-        <SpeedDial
+        <StyledFabField
           ariaLabel="SpeedDial example"
           className={classes.speedDial}
           hidden={hidden}
@@ -241,7 +269,7 @@ function Myrooms(props) {
               onClick={handleredirect}
             />
           ))}
-        </SpeedDial>
+        </StyledFabField>
       </div>
             
 
