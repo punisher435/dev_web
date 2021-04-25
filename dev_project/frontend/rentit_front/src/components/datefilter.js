@@ -14,7 +14,7 @@ export default function MaterialUIPickers1(props) {
   React.useEffect(
     () => {
       var date1 = new Date(Date.now());
-      if(props.filters)
+      if(props.filters.bookedtill!='')
       {
         date1.setYear(parseInt(props.filters.bookedtill.slice(0,4)))
         date1.setMonth(parseInt(props.filters.bookedtill.slice(5,7))-1)
