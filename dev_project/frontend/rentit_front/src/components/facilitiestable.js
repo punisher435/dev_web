@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles,makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -8,6 +8,24 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
+const StyledTableCell = withStyles((theme) => ({
+  head: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  body: {
+    fontSize: 14,
+  },
+}))(TableCell);
+
+const StyledTableRow = withStyles((theme) => ({
+  root: {
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.action.hover,
+    },
+  },
+}))(TableRow);
+
 const useStyles = makeStyles({
   table: {
     width:'70vw',
@@ -15,6 +33,9 @@ const useStyles = makeStyles({
 
   },
 });
+
+
+
 
 
 
@@ -27,135 +48,135 @@ export default function BasicTable({mybooking,profile,type}) {
         
         <TableBody>
           
-            <TableRow key='wifi'>
-              <TableCell component="th" scope="row">
+            <StyledTableRow key='wifi'>
+              <StyledTableCell component="th" scope="row">
                 WIFI
-              </TableCell>
-              <TableCell align="right"> {mybooking.wifi ? 'Selected' : 'Not Selected'} </TableCell>
+              </StyledTableCell>
+              <StyledTableCell align="right"> {mybooking.wifi ? 'Selected' : 'Not Selected'} </StyledTableCell>
               
-            </TableRow>
+            </StyledTableRow>
             {
-              type==='room' ? <TableRow key='house_TV'>
-              <TableCell component="th" scope="row">
+              type==='room' ? <StyledTableRow key='house_TV'>
+              <StyledTableCell component="th" scope="row">
                 House TV
-              </TableCell>
-              <TableCell align="right"> {mybooking.house_TV ? 'Selected' : 'Not Selected'} </TableCell>
+              </StyledTableCell>
+              <StyledTableCell align="right"> {mybooking.house_TV ? 'Selected' : 'Not Selected'} </StyledTableCell>
               
-            </TableRow> : null
+            </StyledTableRow> : null
             }
 
             {
-              type==='room' ? <TableRow key='room_TV'>
-              <TableCell component="th" scope="row">
+              type==='room' ? <StyledTableRow key='room_TV'>
+              <StyledTableCell component="th" scope="row">
                 Room TV
-              </TableCell>
-              <TableCell align="right"> {mybooking.room_TV ? 'Selected' : 'Not Selected'} </TableCell>
+              </StyledTableCell>
+              <StyledTableCell align="right"> {mybooking.room_TV ? 'Selected' : 'Not Selected'} </StyledTableCell>
               
-            </TableRow> : null
+            </StyledTableRow> : null
             }
 
 {
-              type==='shop' || type==='apartment' ? <TableRow key='TV'>
-              <TableCell component="th" scope="row">
+              type==='shop' || type==='apartment' ? <StyledTableRow key='TV'>
+              <StyledTableCell component="th" scope="row">
                 TV
-              </TableCell>
-              <TableCell align="right"> {mybooking.TV ? 'Selected' : 'Not Selected'} </TableCell>
+              </StyledTableCell>
+              <StyledTableCell align="right"> {mybooking.TV ? 'Selected' : 'Not Selected'} </StyledTableCell>
               
-            </TableRow> : null
+            </StyledTableRow> : null
             }
 
             {
-              type==='room' || type==='apartment' ? <TableRow key='house_refridgerator'>
-              <TableCell component="th" scope="row">
+              type==='room' || type==='apartment' ? <StyledTableRow key='house_refridgerator'>
+              <StyledTableCell component="th" scope="row">
                 House refridgerator
-              </TableCell>
-              <TableCell align="right"> {mybooking.house_refridgerator ? 'Selected' : 'Not Selected'} </TableCell>
+              </StyledTableCell>
+              <StyledTableCell align="right"> {mybooking.house_refridgerator ? 'Selected' : 'Not Selected'} </StyledTableCell>
               
-            </TableRow> : null
+            </StyledTableRow> : null
             }
 
             {
-              type==='room' ? <TableRow key='room_refridgerator'>
-              <TableCell component="th" scope="row">
+              type==='room' ? <StyledTableRow key='room_refridgerator'>
+              <StyledTableCell component="th" scope="row">
                 Room refridgerator
-              </TableCell>
-              <TableCell align="right"> {mybooking.room_refridgerator ? 'Selected' : 'Not Selected'} </TableCell>
+              </StyledTableCell>
+              <StyledTableCell align="right"> {mybooking.room_refridgerator ? 'Selected' : 'Not Selected'} </StyledTableCell>
               
-            </TableRow> : null
+            </StyledTableRow> : null
             }
 
-            <TableRow key='purified_water'>
-              <TableCell component="th" scope="row">
+            <StyledTableRow key='purified_water'>
+              <StyledTableCell component="th" scope="row">
                 Purified water
-              </TableCell>
-              <TableCell align="right"> {mybooking.purified_water ? 'Selected' : 'Not Selected'} </TableCell>
+              </StyledTableCell>
+              <StyledTableCell align="right"> {mybooking.purified_water ? 'Selected' : 'Not Selected'} </StyledTableCell>
               
-            </TableRow>
+            </StyledTableRow>
 
             {
-              type==='room' || type==='apartment' ? <TableRow key='geyser'>
-              <TableCell component="th" scope="row">
+              type==='room' || type==='apartment' ? <StyledTableRow key='geyser'>
+              <StyledTableCell component="th" scope="row">
                Geyser
-              </TableCell>
-              <TableCell align="right"> {mybooking.geyser ? 'Selected' : 'Not Selected'} </TableCell>
+              </StyledTableCell>
+              <StyledTableCell align="right"> {mybooking.geyser ? 'Selected' : 'Not Selected'} </StyledTableCell>
               
-            </TableRow> : null
+            </StyledTableRow> : null
             }
 
-          <TableRow key='AC'>
-              <TableCell component="th" scope="row">
+          <StyledTableRow key='AC'>
+              <StyledTableCell component="th" scope="row">
                 AC
-              </TableCell>
-              <TableCell align="right"> {mybooking.AC ? 'Selected' : 'Not Selected'} </TableCell>
+              </StyledTableCell>
+              <StyledTableCell align="right"> {mybooking.AC ? 'Selected' : 'Not Selected'} </StyledTableCell>
               
-            </TableRow>
+            </StyledTableRow>
 
-            <TableRow key='cooler'>
-              <TableCell component="th" scope="row">
+            <StyledTableRow key='cooler'>
+              <StyledTableCell component="th" scope="row">
                 Cooler
-              </TableCell>
-              <TableCell align="right"> {mybooking.cooler ? 'Selected' : 'Not Selected'} </TableCell>
+              </StyledTableCell>
+              <StyledTableCell align="right"> {mybooking.cooler ? 'Selected' : 'Not Selected'} </StyledTableCell>
               
-            </TableRow>
+            </StyledTableRow>
 
             {
-              type==='room' ? <TableRow key='breakfast'>
-              <TableCell component="th" scope="row">
+              type==='room' ? <StyledTableRow key='breakfast'>
+              <StyledTableCell component="th" scope="row">
                 Breakfast
-              </TableCell>
-              <TableCell align="right"> {mybooking.breakfast ? 'Selected' : 'Not Selected'} </TableCell>
+              </StyledTableCell>
+              <StyledTableCell align="right"> {mybooking.breakfast ? 'Selected' : 'Not Selected'} </StyledTableCell>
               
-            </TableRow> : null
+            </StyledTableRow> : null
             }
 
             {
-              type==='room' ? <TableRow key='lunch'>
-              <TableCell component="th" scope="row">
+              type==='room' ? <StyledTableRow key='lunch'>
+              <StyledTableCell component="th" scope="row">
                 Lunch
-              </TableCell>
-              <TableCell align="right"> {mybooking.lunch ? 'Selected' : 'Not Selected'} </TableCell>
+              </StyledTableCell>
+              <StyledTableCell align="right"> {mybooking.lunch ? 'Selected' : 'Not Selected'} </StyledTableCell>
               
-            </TableRow> : null
+            </StyledTableRow> : null
             }
 
             {
-              type==='room' ? <TableRow key='dinner'>
-              <TableCell component="th" scope="row">
+              type==='room' ? <StyledTableRow key='dinner'>
+              <StyledTableCell component="th" scope="row">
                 Dinner
-              </TableCell>
-              <TableCell align="right"> {mybooking.dinner ? 'Selected' : 'Not Selected'} </TableCell>
+              </StyledTableCell>
+              <StyledTableCell align="right"> {mybooking.dinner ? 'Selected' : 'Not Selected'} </StyledTableCell>
               
-            </TableRow> : null
+            </StyledTableRow> : null
             }
             
             {
-              type==='shop' ? <TableRow key='laundry'>
-              <TableCell component="th" scope="row">
+              type==='shop' ? <StyledTableRow key='laundry'>
+              <StyledTableCell component="th" scope="row">
                 Laundry
-              </TableCell>
-              <TableCell align="right"> {mybooking.laundry ? 'Selected' : 'Not Selected'} </TableCell>
+              </StyledTableCell>
+              <StyledTableCell align="right"> {mybooking.laundry ? 'Selected' : 'Not Selected'} </StyledTableCell>
               
-            </TableRow> : null
+            </StyledTableRow> : null
             }
 
 

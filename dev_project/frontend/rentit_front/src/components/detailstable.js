@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import {withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -7,6 +7,24 @@ import TableContainer from '@material-ui/core/TableContainer';
 
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+
+const StyledTableCell = withStyles((theme) => ({
+  head: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  body: {
+    fontSize: 14,
+  },
+}))(TableCell);
+
+const StyledTableRow = withStyles((theme) => ({
+  root: {
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.action.hover,
+    },
+  },
+}))(TableRow);
 
 const useStyles = makeStyles({
   table: {
@@ -27,206 +45,200 @@ export default function BasicTable({booking,profile,name}) {
         
         <TableBody>
           
-            <TableRow key='name'>
-              <TableCell component="th" scope="row">
+            <StyledTableRow key='name'>
+              <StyledTableCell component="th" scope="row">
                 Customer name
-              </TableCell>
-              <TableCell align="right">{booking.first_name + ' ' + booking.last_name}</TableCell>
+              </StyledTableCell>
+              <StyledTableCell align="right">{booking.first_name + ' ' + booking.last_name}</StyledTableCell>
               
-            </TableRow>
+            </StyledTableRow>
 
-            <TableRow key='mobile'>
-              <TableCell component="th" scope="row">
+            <StyledTableRow key='mobile'>
+              <StyledTableCell component="th" scope="row">
                 Mobile no.
-              </TableCell>
-              <TableCell align="right">{booking.country_code}  {booking.mobile}</TableCell>
+              </StyledTableCell>
+              <StyledTableCell align="right">{booking.country_code}  {booking.mobile}</StyledTableCell>
               
-            </TableRow>
+            </StyledTableRow>
 
-            <TableRow key='alternate_mobile'>
-              <TableCell component="th" scope="row">
+            <StyledTableRow key='alternate_mobile'>
+              <StyledTableCell component="th" scope="row">
                Alternate Mobile no.
-              </TableCell>
-              <TableCell align="right">{booking.country_code}  {booking.alternate_mobile}</TableCell>
+              </StyledTableCell>
+              <StyledTableCell align="right">{booking.country_code}  {booking.alternate_mobile}</StyledTableCell>
               
-            </TableRow>
+            </StyledTableRow>
 
-            <TableRow key='product_name'>
-              <TableCell component="th" scope="row">
+            <StyledTableRow key='product_name'>
+              <StyledTableCell component="th" scope="row">
                 Name
-              </TableCell>
-              <TableCell align="right">{name.slice(0,15)}</TableCell>
+              </StyledTableCell>
+              <StyledTableCell align="right">{name}</StyledTableCell>
               
-            </TableRow>
+            </StyledTableRow>
 
-            <TableRow key='product_name2'>
-              <TableCell component="th" scope="row">
-                Name
-              </TableCell>
-              <TableCell align="right">{name.slice(15,30)}</TableCell>
-              
-            </TableRow>
-            <TableRow key='booked_from'>
-              <TableCell component="th" scope="row">
+            
+            <StyledTableRow key='booked_from'>
+              <StyledTableCell component="th" scope="row">
                Booked from
-              </TableCell>
-              <TableCell align="right">{booking.booked_from}</TableCell>
+              </StyledTableCell>
+              <StyledTableCell align="right">{booking.booked_from}</StyledTableCell>
               
-            </TableRow>
+            </StyledTableRow>
 
-            <TableRow key='booked_till'>
-              <TableCell component="th" scope="row">
+            <StyledTableRow key='booked_till'>
+              <StyledTableCell component="th" scope="row">
                Booked till
-              </TableCell>
-              <TableCell align="right">{booking.booked_till}</TableCell>
+              </StyledTableCell>
+              <StyledTableCell align="right">{booking.booked_till}</StyledTableCell>
               
-            </TableRow>
+            </StyledTableRow>
             {
-                booking.capacity ? <TableRow key='capacity'>
-                <TableCell component="th" scope="row">
+                booking.capacity ? <StyledTableRow key='capacity'>
+                <StyledTableCell component="th" scope="row">
                  Capacity
-                </TableCell>
-                <TableCell align="right">{booking.capacity}</TableCell>
+                </StyledTableCell>
+                <StyledTableCell align="right">{booking.capacity}</StyledTableCell>
                 
-              </TableRow> :null
+              </StyledTableRow> :null
             }
 
-            <TableRow key='duration'>
-              <TableCell component="th" scope="row">
+            <StyledTableRow key='duration'>
+              <StyledTableCell component="th" scope="row">
                Duration
-              </TableCell>
-              <TableCell align="right">{booking.duration} Months</TableCell>
+              </StyledTableCell>
+              <StyledTableCell align="right">{booking.duration} Months</StyledTableCell>
               
-            </TableRow>
+            </StyledTableRow>
 
-            <TableRow key='coupon'>
-              <TableCell component="th" scope="row">
+            <StyledTableRow key='coupon'>
+              <StyledTableCell component="th" scope="row">
                Coupon
-              </TableCell>
-              <TableCell align="right">{booking.coupon}</TableCell>
+              </StyledTableCell>
+              <StyledTableCell align="right">{booking.coupon}</StyledTableCell>
               
-            </TableRow>
+            </StyledTableRow>
 
             
 
             {
-                profile.is_seller ? <TableRow key='paid'>
-                <TableCell component="th" scope="row">
+                profile.is_seller ? <StyledTableRow key='paid'>
+                <StyledTableCell component="th" scope="row">
                  Paid
-                </TableCell>
-                <TableCell align="right">{booking.paid ? 'Yes' : 'No'}</TableCell>
+                </StyledTableCell>
+                <StyledTableCell align="right">{booking.paid ? 'Yes' : 'No'}</StyledTableCell>
                 
-              </TableRow> :null
+              </StyledTableRow> :null
             }
 
             {
-                profile.is_seller ? <TableRow key='payment'>
-                <TableCell component="th" scope="row">
+                profile.is_seller ? <StyledTableRow key='payment'>
+                <StyledTableCell component="th" scope="row">
                  Amount 
-                </TableCell>
-                <TableCell align="right">{booking.currency} {booking.seller_pay}</TableCell>
+                </StyledTableCell>
+                <StyledTableCell align="right">{booking.currency} {booking.seller_pay}</StyledTableCell>
                 
-              </TableRow> :null
+              </StyledTableRow> :null
             }
 
             {
-                booking.cancelled ? <TableRow key='cancelled'>
-                <TableCell component="th" scope="row">
+                booking.cancelled ? <StyledTableRow key='cancelled'>
+                <StyledTableCell component="th" scope="row">
                  Cancelled
-                </TableCell>
-                <TableCell align="right">{booking.cancelled ? 'Yes' : 'No'}</TableCell>
+                </StyledTableCell>
+                <StyledTableCell align="right">{booking.cancelled ? 'Yes' : 'No'}</StyledTableCell>
                 
-              </TableRow> :null
+              </StyledTableRow> :null
             } 
 
 {
-                booking.cancelled ? <TableRow key='cancelled'>
-                <TableCell component="th" scope="row">
+                booking.cancelled ? <StyledTableRow key='cancelled'>
+                <StyledTableCell component="th" scope="row">
                  Cancellation date
-                </TableCell>
-                <TableCell align="right">{booking.cancelled_date.slice(0,10)}</TableCell>
+                </StyledTableCell>
+                <StyledTableCell align="right">{booking.cancelled_date.slice(0,10)}</StyledTableCell>
                 
-              </TableRow> :null
+              </StyledTableRow> :null
             }
 
             {
-                booking.cancelled ? <TableRow key='cancelled'>
-                <TableCell component="th" scope="row">
+                booking.cancelled ? <StyledTableRow key='cancelled'>
+                <StyledTableCell component="th" scope="row">
                  Cancellation time
-                </TableCell>
-                <TableCell align="right">{booking.cancelled_date.slice(11,19)}</TableCell>
+                </StyledTableCell>
+                <StyledTableCell align="right">{booking.cancelled_date.slice(11,19)}</StyledTableCell>
                 
-              </TableRow> :null
+              </StyledTableRow> :null
             }  
 
             {
-                booking.cancelled && profile.is_seller ? <TableRow key='cancelled'>
-                <TableCell component="th" scope="row">
+                booking.cancelled && profile.is_seller ? <StyledTableRow key='cancelled'>
+                <StyledTableCell component="th" scope="row">
                  Cancellation Reason
-                </TableCell>
-                <TableCell align="right">{booking.cancellation_reason}</TableCell>
+                </StyledTableCell>
+                <StyledTableCell align="right">{booking.cancellation_reason}</StyledTableCell>
                 
-              </TableRow> :null
+              </StyledTableRow> :null
             } 
 
 {
-                booking.cancelled ? <TableRow key='cancelled'>
-                <TableCell component="th" scope="row">
+                booking.cancelled ? <StyledTableRow key='cancelled'>
+                <StyledTableCell component="th" scope="row">
                  Refund amount
-                </TableCell>
-                <TableCell align="right">{booking.currency} {booking.refund_amount}</TableCell>
+                </StyledTableCell>
+                <StyledTableCell align="right">{booking.currency} {booking.refund_amount}</StyledTableCell>
                 
-              </TableRow> :null
+              </StyledTableRow> :null
             } 
 
 
 {
-                booking.is_extended ? <TableRow key='is_extended'>
-                <TableCell component="th" scope="row">
+                booking.is_extended ? <StyledTableRow key='is_extended'>
+                <StyledTableCell component="th" scope="row">
                  Extension of other booking
-                 </TableCell>
-                <TableCell align="right">{booking.is_extended ? 'Yes' : 'No'}</TableCell>
+                 </StyledTableCell>
+                <StyledTableCell align="right">{booking.is_extended ? 'Yes' : 'No'}</StyledTableCell>
                 
-              </TableRow> :null
+              </StyledTableRow> :null
             } 
 
 {
-                booking.extended_on ? <TableRow key='extended_on'>
-                <TableCell component="th" scope="row">
+                booking.extended_on ? <StyledTableRow key='extended_on'>
+                <StyledTableCell component="th" scope="row">
                  Extended On
-                </TableCell>
-                <TableCell align="right">{booking.extended_on}</TableCell>
+                </StyledTableCell>
+                <StyledTableCell align="right">{booking.extended_on}</StyledTableCell>
                 
-              </TableRow> :null
+              </StyledTableRow> :null
             } 
 
 {
-                booking.extended ? <TableRow key='extended'>
-                <TableCell component="th" scope="row">
+                booking.extended ? <StyledTableRow key='extended'>
+                <StyledTableCell component="th" scope="row">
                 Extended
-                </TableCell>
-                <TableCell align="right">{booking.extended ? 'Yes' : 'No'}</TableCell>
+                </StyledTableCell>
+                <StyledTableCell align="right">{booking.extended ? 'Yes' : 'No'}</StyledTableCell>
                 
-              </TableRow> :null
+              </StyledTableRow> :null
             } 
             {
-                booking.paylater ? <TableRow key='paylater'>
-                <TableCell component="th" scope="row">
+                booking.paylater ? <StyledTableRow key='paylater'>
+                <StyledTableCell component="th" scope="row">
                 Pay later
-                </TableCell>
-                <TableCell align="right">{booking.paylater ? 'Yes' : 'No'}</TableCell>
+                </StyledTableCell>
+                <StyledTableCell align="right">{booking.paylater ? 'Yes' : 'No'}</StyledTableCell>
                 
-              </TableRow> :null
+              </StyledTableRow> :null
             } 
 
 {
-                booking.paylater_date ? <TableRow key='paylater_date'>
-                <TableCell component="th" scope="row">
+                booking.paylater_date ? <StyledTableRow key='paylater_date'>
+                <StyledTableCell component="th" scope="row">
                 Pay later date
-                </TableCell>
-                <TableCell align="right">{booking.paylater_date ? 'Yes' : 'No'}</TableCell>
+                </StyledTableCell>
+                <StyledTableCell align="right">{booking.paylater_date ? 'Yes' : 'No'}</StyledTableCell>
                 
-              </TableRow> :null
+              </StyledTableRow> :null
             } 
             
           

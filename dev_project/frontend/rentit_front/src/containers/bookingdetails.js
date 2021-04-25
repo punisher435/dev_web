@@ -5,7 +5,7 @@ import axios from 'axios'
 import Eror from '../components/eror'
 import Grid from '@material-ui/core/Grid';
 
-import Barcode from 'react-barcode'
+
 
 import Button from '@material-ui/core/Button';
 
@@ -353,12 +353,7 @@ function Bookingdetails(props) {
 
     
            
-            <Hidden mdDown>
-            <Grid item >
-            <Barcode width={1} height={40} value={mybooking.booking_id} />
-            </Grid>
-            </Hidden>
-
+            
             
 
             <Grid
@@ -447,7 +442,7 @@ function Bookingdetails(props) {
              
               <PDFDownloadLink document={<Invoice invoice={invoiceData}/>} fileName={"FileName"}> 
   
-        <button> Download </button> 
+        <Button variant="contained" color="primary"> Download </Button> 
   
          </PDFDownloadLink>
               </Grid> : null
