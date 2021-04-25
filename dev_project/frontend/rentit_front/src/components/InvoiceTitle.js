@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
         marginTop: 24,
     },
     reportTitle:{
-        color: '#61dafb',
+        color: `${process.env.REACT_APP_INVOICE_COLOR}`,
         letterSpacing: 4,
         fontSize: 25,
         textAlign: 'center',

@@ -18,8 +18,8 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
     }, 
     logo: {
-        width: 74,
-        height: 66,
+        width: 200,
+        
         marginLeft: 'auto',
         marginRight: 'auto'
     }
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
         
             <Document>
                 <Page size="A4" style={styles.page}>
-                    <Image style={styles.logo} src='/imposter.png' />
+                    <Image style={styles.logo} src='/logo.png' />
                     <InvoiceTitle title='Booking Receipt'/>
                     <InvoiceNo invoice={invoice}/>
                     
