@@ -531,15 +531,15 @@ filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#1891CD", en
 
 
 .buttonmainclass{
-  background: hsla(347, 70%, 55%, 1);
+  background: hsla(200, 79%, 45%, 1);
 
-  background: linear-gradient(0deg, hsla(347, 70%, 55%, 1) 0%, hsla(349, 72%, 45%, 1) 100%);
-  
-  background: -moz-linear-gradient(0deg, hsla(347, 70%, 55%, 1) 0%, hsla(349, 72%, 45%, 1) 100%);
-  
-  background: -webkit-linear-gradient(0deg, hsla(347, 70%, 55%, 1) 0%, hsla(349, 72%, 45%, 1) 100%);
-  
-  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#DD3D5F", endColorstr="#C3203E", GradientType=1 );
+background: linear-gradient(0deg, hsla(200, 79%, 45%, 1) 0%, hsla(200, 79%, 45%, 1) 100%);
+
+background: -moz-linear-gradient(0deg, hsla(200, 79%, 45%, 1) 0%, hsla(200, 79%, 45%, 1) 100%);
+
+background: -webkit-linear-gradient(0deg, hsla(200, 79%, 45%, 1) 0%, hsla(200, 79%, 45%, 1) 100%);
+
+filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#1891CD", endColorstr="#1891CD", GradientType=1 );
 
 
 }

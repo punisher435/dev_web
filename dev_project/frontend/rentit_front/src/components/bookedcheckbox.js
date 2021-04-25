@@ -1,5 +1,17 @@
 import React from 'react';
 import Checkbox from '@material-ui/core/Checkbox';
+import { withStyles } from '@material-ui/core/styles';
+import { green } from '@material-ui/core/colors';
+
+const GreenCheckbox = withStyles({
+  root: {
+    
+    '&$checked': {
+      color: `${process.env.REACT_APP_COLOR}`,
+    },
+  },
+  checked: {},
+})((props) => <Checkbox color="default" {...props} />);
 
 export default function Checkboxes({ filters,setfilters,checked,setChecked }) {
 
@@ -18,7 +30,7 @@ export default function Checkboxes({ filters,setfilters,checked,setChecked }) {
 
   return (
     <div>
-      <Checkbox
+      <GreenCheckbox
         checked={checked}
         onChange={handleChange}
         inputProps={{ 'aria-label': 'primary checkbox' }}

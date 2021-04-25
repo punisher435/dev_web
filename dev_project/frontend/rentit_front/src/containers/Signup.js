@@ -60,7 +60,7 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link to='/'>
+      <Link to='/' style={{textDecoration:'none',color:`${process.env.REACT_APP_COMPLIMENT_COLOR}`}}>
         Rent=ene
       </Link>{' '}
       {new Date().getFullYear()}
@@ -78,7 +78,7 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: `${process.env.REACT_APP_COLOR}`,
   },
   form: {
     width: '100%', // Fix IE 11 issue.
@@ -347,7 +347,7 @@ const Signup = ({ signup, isAuthenticated }) => {
                 </Button>
                 <Grid container justify="flex-end">
                 <Grid item>
-                    <Link to='/login'>
+                    <Link to='/login' style={{textDecoration:'none',color:`${process.env.REACT_APP_COMPLIMENT_COLOR}`}}>
                     Already have an account? Sign in
                     </Link>
                 </Grid>

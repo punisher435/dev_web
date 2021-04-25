@@ -138,6 +138,16 @@ const useStyles = makeStyles((theme) => ({
     color: 'white',
     padding:0,
     margin:0,
+  },
+  iconstyle11: {
+    color: 'white',
+    padding:0,
+    [theme.breakpoints.only('sm')]: {
+      marginLeft:300,
+    },
+    [theme.breakpoints.only('lg')]: {
+      marginLeft:300,
+    },
   }
 }));
 
@@ -324,7 +334,7 @@ function ResponsiveDrawer(props) {
             {/* THE APPBAR CONTENT SHOULD BE HERE */}
       
       <Link to='/'>
-      <IconButton className={classes.iconstyle}>
+      <IconButton className={classes.iconstyle11}>
       <KeyboardBackspaceIcon fontSize='large'/>
       </IconButton>
       </Link>
@@ -382,7 +392,7 @@ function ResponsiveDrawer(props) {
             {/* THE APPBAR CONTENT SHOULD BE HERE */}
       
       <Link to='/'>
-      <IconButton className={classes.iconstyle}>
+      <IconButton className={classes.iconstyle11}>
       <KeyboardBackspaceIcon fontSize='large'/>
       </IconButton>
       </Link>

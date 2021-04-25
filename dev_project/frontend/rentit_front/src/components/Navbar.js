@@ -81,7 +81,7 @@ const useStyles = makeStyles((theme) => ({
     color: 'inherit',
   },
   logoclass:{
-   width:250,
+   width:220,
    
   },
   inputInput: {
