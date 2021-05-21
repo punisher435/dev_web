@@ -96,7 +96,7 @@ function App(props) {
                 <Route exact path='/rooms/:roomid/book/' component={Checkout} />
                 <Route exact path='/recentBooking' component={ConfirmPause}/>
 
-                <Route exact path='/terms-and-conditions' component={Terms}/>
+                <Route exact path='/policies' component={Terms}/>
 
 
                 <Route exact path='/shops' component={ShopListing}/>
