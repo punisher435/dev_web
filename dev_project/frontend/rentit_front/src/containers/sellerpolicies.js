@@ -9,10 +9,28 @@ import { connect } from 'react-redux'
 
 const useStyles = makeStyles((theme) => ({
    
-  myclass:{
+    myclass:{
+        fontSize: '23px',
+        [theme.breakpoints.down('md')]: {
+          fontSize: '20px',
+        },
+    },
+    myclass2:{
       fontSize: '23px',
-  }
-  }));
+      [theme.breakpoints.down('md')]: {
+          fontSize: '20px',
+        },
+  },
+  
+  myclass3:{
+      [theme.breakpoints.down('md')]: {
+          fontSize: '35px',
+        },
+  },
+    myclass1:{
+      fontWeight: 'bold',
+    },
+    }));
 
 
 
@@ -27,7 +45,7 @@ function Sellerpolicies() {
         justify="center"
         alignItems="center"
         >
-            <Typography variant="h3">Seller Policies</Typography>
+            <Typography variant="h3" className={classes.myclass3}>Seller Policies</Typography>
             </Grid>
             <br/>
             <br/>
@@ -43,7 +61,7 @@ function Sellerpolicies() {
             <Grid item xs={12}>
 
       
-            <li className={classes.myclass}><Typography variant="h5">It is mandatory to upload valid photo identification proof when filling the form to 
+            <li className={classes.myclass}><Typography variant="h5" className={classes.myclass2}>It is mandatory to upload valid photo identification proof when filling the form to 
                 list your rooms/hostel/shops/apartment. 
                 The identification proofs accepted are Aadhar Card, Driving License, Voter ID Card, and Passport. </Typography></li>
 
@@ -62,7 +80,7 @@ function Sellerpolicies() {
             <Grid item xs={12}>
 
       
-            <li className={classes.myclass}><Typography variant="h5">Our agent will verify your property, and once it is verified, it will be listed on our website for renting.  </Typography></li>
+            <li className={classes.myclass}><Typography variant="h5" className={classes.myclass2}>Our agent will verify your property, and once it is verified, it will be listed on our website for renting.  </Typography></li>
 
         
         </Grid>
@@ -79,7 +97,7 @@ function Sellerpolicies() {
             <Grid item xs={12}>
 
       
-            <li className={classes.myclass}><Typography variant="h5">
+            <li className={classes.myclass}><Typography variant="h5" className={classes.myclass2}>
                 
             Customers will be given the option to pay online or through cash at the time of settling in. 
             <ul>
@@ -109,7 +127,7 @@ In case of any problem in transferring money, you can contact us. <br/>
             <Grid item xs={12}>
 
       
-            <li className={classes.myclass}><Typography variant="h5">
+            <li className={classes.myclass}><Typography variant="h5" className={classes.myclass2}>
                 
             If a customer cancels his booking, then the following will be the refund amount:
             <ul>
@@ -150,7 +168,7 @@ In case of any problem in transferring money, you can contact us. <br/>
             <Grid item xs={12}>
 
       
-            <li className={classes.myclass}><Typography variant="h5">In case of any additional rules and guidelines, mail us on our company's official e-mail id. 
+            <li className={classes.myclass}><Typography variant="h5" className={classes.myclass2}>In case of any additional rules and guidelines, mail us on our company's official e-mail id. 
 <br/><strong>NOTE:</strong> This will be shared with our customers on our website. 
 *Rentene does not allow its sellers to cause any harm to its customers in case of any adherence to the seller's rules and guidelines.* </Typography></li>
 
@@ -170,7 +188,7 @@ In case of any problem in transferring money, you can contact us. <br/>
             <Grid item xs={12}>
 
       
-            <li className={classes.myclass}><Typography variant="h5"> You're not allowed to disclose any private information between us to any customer. In case you are found doing so, legal action will be taken against you. 
+            <li className={classes.myclass}><Typography variant="h5" className={classes.myclass2}> You're not allowed to disclose any private information between us to any customer. In case you are found doing so, legal action will be taken against you. 
 
   </Typography></li>
 
@@ -190,7 +208,7 @@ In case of any problem in transferring money, you can contact us. <br/>
             <Grid item xs={12}>
 
       
-            <li className={classes.myclass}><Typography variant="h5">The price of property entered at the time of filling out the form will be given to you no matter what price we show on the website (Price shown on the website might include our percentage of share).
+            <li className={classes.myclass}><Typography variant="h5" className={classes.myclass2}>The price of property entered at the time of filling out the form will be given to you no matter what price we show on the website (Price shown on the website might include our percentage of share).
   </Typography></li>
 
         
@@ -209,7 +227,7 @@ In case of any problem in transferring money, you can contact us. <br/>
             <Grid item xs={12}>
 
       
-            <li className={classes.myclass}><Typography variant="h5">In case of discounts given by us (e.g., discount coupons), the discount amount will be cut from our bank account, and you will get your full money of the property. 
+            <li className={classes.myclass}><Typography variant="h5" className={classes.myclass2}>In case of discounts given by us (e.g., discount coupons), the discount amount will be cut from our bank account, and you will get your full money of the property. 
   </Typography></li>
 
         
@@ -228,7 +246,7 @@ In case of any problem in transferring money, you can contact us. <br/>
             <Grid item xs={12}>
 
       
-            <li className={classes.myclass}><Typography variant="h5">   If you want to give a discount on your property, then the discount money will be cut from your share, not our company's account.
+            <li className={classes.myclass}><Typography variant="h5" className={classes.myclass2}>   If you want to give a discount on your property, then the discount money will be cut from your share, not our company's account.
 So, the amount of money you'll get = Actual price of the property – Discount price.
   </Typography></li>
 
@@ -252,7 +270,7 @@ So, the amount of money you'll get = Actual price of the property – Discount p
             <Grid item xs={12}>
 
       
-            <li className={classes.myclass}><Typography variant="h5">    If someone comes to you asking to rent your property in person, then you're requested to make him book the property from our website.
+            <li className={classes.myclass}><Typography variant="h5"  className={classes.myclass2}>    If someone comes to you asking to rent your property in person, then you're requested to make him book the property from our website.
 If they don't rent the property from our website, you have to notify us that this particular property of yours has been booked so that we can remove that property from non-booked ones.
 <br/><strong>NOTE:</strong> If you don't notify us and someone else books that same property from our website, you'll be held responsible for this. And then you have to refund the total amount to our customer.  </Typography></li>
 
@@ -273,7 +291,7 @@ If they don't rent the property from our website, you have to notify us that thi
             <Grid item xs={12}>
 
       
-            <li className={classes.myclass}><Typography variant="h5"> Any kind of vulgarity and obscenity in language/photo while filling the form will lead us to prohibit you from using our website to rent your property. 
+            <li className={classes.myclass}><Typography variant="h5"  className={classes.myclass2}> Any kind of vulgarity and obscenity in language/photo while filling the form will lead us to prohibit you from using our website to rent your property. 
   </Typography></li>
 
         

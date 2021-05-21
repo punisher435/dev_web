@@ -11,7 +11,25 @@ const useStyles = makeStyles((theme) => ({
    
   myclass:{
       fontSize: '23px',
-  }
+      [theme.breakpoints.down('md')]: {
+        fontSize: '20px',
+      },
+  },
+  myclass2:{
+    fontSize: '23px',
+    [theme.breakpoints.down('md')]: {
+        fontSize: '20px',
+      },
+},
+
+myclass3:{
+    [theme.breakpoints.down('md')]: {
+        fontSize: '35px',
+      },
+},
+  myclass1:{
+    fontWeight: 'bold',
+  },
   }));
 
 function Customerpolicies() {
@@ -26,7 +44,7 @@ function Customerpolicies() {
         justify="center"
         alignItems="center"
         >
-            <Typography variant="h3">Customer Policies</Typography>
+            <Typography variant="h3" className={classes.myclass3}>Customer Policies</Typography>
             </Grid>
             <br/>
             <br/>
@@ -44,7 +62,7 @@ function Customerpolicies() {
             <Grid item xs={12}>
 
       
-            <li className={classes.myclass}><Typography variant="h5">All customers must present valid photo identification proof at the time of check-in. 
+            <li className={classes.myclass}><Typography variant="h5" className={classes.myclass2}>All customers must present valid photo identification proof at the time of check-in. 
             The identification proofs accepted are Aadhar Card, Driving License, Voter ID Card, and Passport. </Typography></li>
 
         
@@ -62,7 +80,7 @@ function Customerpolicies() {
             <Grid item xs={12}>
 
       
-            <li className={classes.myclass}><Typography variant="h5">If you face any difficulty at check-in and the issue is not resolved by the Hostel/property authorities, you are requested to contact us immediately. We will verify the issue and take the necessary actions.  </Typography></li>
+            <li className={classes.myclass}><Typography variant="h5" className={classes.myclass2}>If you face any difficulty at check-in and the issue is not resolved by the Hostel/property authorities, you are requested to contact us immediately. We will verify the issue and take the necessary actions.  </Typography></li>
 
         
         </Grid>
@@ -79,7 +97,7 @@ function Customerpolicies() {
             <Grid item xs={12}>
 
       
-            <li className={classes.myclass}><Typography variant="h5">Some hostels/rooms/any
+            <li className={classes.myclass}><Typography variant="h5" className={classes.myclass2}>Some hostels/rooms/any
              property are gender-specific. So you are requested to read the description of a particular property.  </Typography></li>
 
         
@@ -98,7 +116,7 @@ function Customerpolicies() {
             <Grid item xs={12}>
 
       
-            <li className={classes.myclass}><Typography variant="h5">Some hostels/rooms/any property have multiple
+            <li className={classes.myclass}><Typography variant="h5" className={classes.myclass2}>Some hostels/rooms/any property have multiple
              occupancies. So you are requested to read the description. </Typography></li>
 
         
@@ -117,7 +135,7 @@ function Customerpolicies() {
             <Grid item xs={12}>
 
       
-            <li className={classes.myclass}><Typography variant="h5">  You have the option of paying online, you can use Debit Card/Credit Card/UPI/Net Banking. 
+            <li className={classes.myclass}><Typography variant="h5" className={classes.myclass2}>  You have the option of paying online, you can use Debit Card/Credit Card/UPI/Net Banking. 
 In case of any problem during payment, you can contact us.</Typography></li>
 
         
@@ -136,7 +154,7 @@ In case of any problem during payment, you can contact us.</Typography></li>
             <Grid item xs={12}>
 
       
-            <li className={classes.myclass}><Typography variant="h5"> Early check-in is not possible.
+            <li className={classes.myclass}><Typography variant="h5" className={classes.myclass2}> Early check-in is not possible.
              You are only allowed to check in on the date you mentioned while booking the room/any property.  You may check-in after your booking date as well but before the booking end date.</Typography></li>
             
         
@@ -155,7 +173,7 @@ In case of any problem during payment, you can contact us.</Typography></li>
             <Grid item xs={12}>
 
       
-            <li className={classes.myclass}><Typography variant="h5">     You will not be allowed to stay
+            <li className={classes.myclass}><Typography variant="h5" className={classes.myclass2}>     You will not be allowed to stay
              after the end of your booking period. You are supposed to leave on the other day of the last day of your booking.
 In case you don't want to leave, you may extend your booking. </Typography></li>
 
@@ -187,7 +205,7 @@ In case you don't want to leave, you may extend your booking. </Typography></li>
             <Grid item xs={12}>
 
       
-            <li className={classes.myclass}><Typography variant="h5">     You can extend your booking as long as
+            <li className={classes.myclass}><Typography variant="h5" className={classes.myclass2}>     You can extend your booking as long as
              that room/property is not booked by someone else on or after the end date of your booking. </Typography></li>
 
         
@@ -207,7 +225,7 @@ In case you don't want to leave, you may extend your booking. </Typography></li>
             <Grid item xs={12}>
 
       
-            <li className={classes.myclass}><Typography variant="h5">   The maximum booking extension limit is two years. 
+            <li className={classes.myclass}><Typography variant="h5" className={classes.myclass2}>   The maximum booking extension limit is two years. 
             
             
             </Typography></li>
@@ -228,7 +246,7 @@ In case you don't want to leave, you may extend your booking. </Typography></li>
             <Grid item xs={12}>
 
       
-            <li className={classes.myclass}><Typography variant="h5">You may again select the facilities that you want to use while extending your booking period. 
+            <li className={classes.myclass}><Typography variant="h5" className={classes.myclass2}>You may again select the facilities that you want to use while extending your booking period. 
             
             </Typography></li>
 
@@ -258,7 +276,7 @@ In case you don't want to leave, you may extend your booking. </Typography></li>
             <Grid item xs={12}>
 
       
-            <li className={classes.myclass}><Typography variant="h5">    You can cancel your booking on our website.  </Typography></li>
+            <li className={classes.myclass}><Typography variant="h5" className={classes.myclass2}>    You can cancel your booking on our website.  </Typography></li>
 
         
         </Grid>
@@ -277,7 +295,7 @@ In case you don't want to leave, you may extend your booking. </Typography></li>
             <Grid item xs={12}>
 
       
-            <li className={classes.myclass}><Typography variant="h5">  The applicable refund amount will be credited to you within 5-7 working days. 
+            <li className={classes.myclass}><Typography variant="h5" className={classes.myclass2}>  The applicable refund amount will be credited to you within 5-7 working days. 
             
             </Typography></li>
 
@@ -297,7 +315,7 @@ In case you don't want to leave, you may extend your booking. </Typography></li>
             <Grid item xs={12}>
 
       
-            <li className={classes.myclass}><Typography variant="h5">Following will be the refund amount in case of cancellation:
+            <li className={classes.myclass}><Typography variant="h5" className={classes.myclass2}>Following will be the refund amount in case of cancellation:
 
             <ul>
 
