@@ -67,6 +67,7 @@ import Complaintformshop from './containers/complaint_form_shop'
 import Complainthousing from './components/mycomplaints_apartment'
 import Complainthousingdetails from './containers/complaintdetails_apartment'
 import Complaintformhousing from './containers/complaint_form_apartment'
+import Terms from './containers/terms';
 
 
 require('dotenv').config()
@@ -94,6 +95,8 @@ function App(props) {
                 <Route exact path='/wishlist' component={SimpleTabs}/>
                 <Route exact path='/rooms/:roomid/book/' component={Checkout} />
                 <Route exact path='/recentBooking' component={ConfirmPause}/>
+
+                <Route exact path='/terms-and-conditions' component={Terms}/>
 
 
                 <Route exact path='/shops' component={ShopListing}/>
