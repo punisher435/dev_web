@@ -11,7 +11,7 @@ import Paper from '@material-ui/core/Paper';
 const useStyles = makeStyles((theme) => ({
    
     paperclass:{
-        width:'80vw',
+        width:'90vw',
         maxWidth:1300,
         padding:20,
 
@@ -34,7 +34,7 @@ const classes=useStyles();
         <Paper elevation={5} className={classes.paperclass}>
             <br />
         {
-           !isAuthenticated || !profile.is_seller ? <Customer /> : <Sellerpolicies />
+          !profile.is_seller ? <Customer /> : <Sellerpolicies />
         }
          <br />
         </Paper>
@@ -43,7 +43,24 @@ const classes=useStyles();
         </div>
     )}
     else{
-        return <div></div>
+        return (
+            <div>
+        <br/>
+        <Grid
+        container
+        direction="row"
+        justify="center"
+        alignItems="center"
+        >
+        <Paper elevation={5} className={classes.paperclass}>
+            <br />
+            <Customer /> 
+         <br />
+        </Paper>
+       </Grid>
+            
+        </div>
+        )
     }
 }
 
