@@ -28,6 +28,8 @@ import  {useMediaQuery} from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import "../components/css/App.css"
 
+import CookieConsent from "react-cookie-consent";
+
 
 import Footer from '../components/footer';
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
@@ -404,7 +406,18 @@ function Home() {
                 </div>
             </div>
             
-            
+            <CookieConsent
+                location="bottom"
+                buttonText="Got it"
+                cookieName="myAwesomeCookieName2"
+                style={{ background: "#2B373B" }}
+                buttonStyle={{ color: "Transparent", fontSize: "14px", border:"2px solid #FFFFFF" }}
+                expires={150}
+                debug={true}
+            >
+                This website uses cookies to enhance the user experience.{" "}
+                <span style={{ fontSize: "13px" }}><a style={{textDecoration: "underline"}}>Read more</a></span>
+            </CookieConsent>
             
 
             
