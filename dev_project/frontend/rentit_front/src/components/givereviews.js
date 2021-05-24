@@ -15,6 +15,7 @@ import Typography from '@material-ui/core/Typography';
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Paper from '@material-ui/core/Paper';
+import Add from '../addroom.png';
 import './css/App.css';
 
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
@@ -100,11 +101,11 @@ function ReviewForm (props){
       seller_rating:0,
       seller_review:'',
       photo1:'',
-      file1:"/addroom.png",
+      file1:Add,
       photo2:'',
-      file2:"/addroom.png",
+      file2:Add,
       photo3:'',
-      file3:"/addroom.png",
+      file3:Add,
     })
 
     

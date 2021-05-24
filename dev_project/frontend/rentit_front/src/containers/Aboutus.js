@@ -7,9 +7,10 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 
 
+
 const useStyles = makeStyles((theme) => ({
    myclass:{
-    backgroundImage:'url(/112.jpg)',
+    backgroundImage:'url(../112.jpg)',
     height:'1000px',
     
     backgroundSize:'cover',
@@ -17,13 +18,13 @@ const useStyles = makeStyles((theme) => ({
     
    },
    myclass1:{
-    backgroundImage:'url(/114.jpg)',
+    backgroundImage:'url(../114.jpg)',
     height:'1000px',
     
     backgroundSize:'cover'
    },
    myclass2:{
-    backgroundImage:'url(/115.jpg)',
+    backgroundImage:'url(../115.jpg)',
     height:'1000px',
     
     backgroundSize:'cover'

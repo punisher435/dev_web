@@ -24,6 +24,7 @@ import RemoveIcon from '@material-ui/icons/Remove';
 import AddIcon from '@material-ui/icons/Add';
 import Paper from '@material-ui/core/Paper';
 import Rules from './roomrules';
+import Add from '../addroom.png';
 import './css/App.css';
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
@@ -397,11 +398,11 @@ function ShopForm (props){
       photo3:'',
       photo4:'',
       photo5:'',
-      file1:"/addroom.png",
-      file2:"/addroom.png",
-      file3:"/addroom.png",
-      file4:"/addroom.png",
-      file5:"/addroom.png",
+      file1:Add,
+      file2:Add,
+      file3:Add,
+      file4:Add,
+      file5:Add,
     })
 
     const [edit,setedit] = useState(false)

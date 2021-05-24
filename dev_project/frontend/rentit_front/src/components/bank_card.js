@@ -31,7 +31,7 @@ export default function BankCard({bank,info}) {
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image="/bank.jpg"
+          image="../bank.jpg"
           title="Photo"
         />
         <CardContent>

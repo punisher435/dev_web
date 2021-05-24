@@ -23,6 +23,7 @@ import { deepPurple } from '@material-ui/core/colors';
 import axios from 'axios';
 import FavoriteOutlinedIcon from '@material-ui/icons/FavoriteOutlined';
 import './css/App.css'
+import logo from '../logo.png';
 
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
@@ -291,7 +292,7 @@ function RenteneAppBar(props) {
       <AppBar className="navbarclass">
         <Toolbar>
         <NavLink className={`nav-link ${styles.textclass}`} exact to='/'>
-          <div className={classes.logoclass}><img src="/logo.png" /></div>
+          <div className={classes.logoclass}><img src={logo} /></div>
           
           </NavLink>
           <NavLink className={`nav-link ${styles.textclass}`} exact to='/about-us'>

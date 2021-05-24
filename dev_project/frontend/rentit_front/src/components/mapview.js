@@ -27,6 +27,7 @@ import "@reach/combobox/styles.css";
 import useScript from '../hooks/usescript';
 import { Link } from "react-router-dom";
 import './css/App.css';
+import my from '../my.png'
 
 const libraries = ["places"];
 const mapContainerStyle = {
@@ -144,7 +145,7 @@ const mystyle1 = {
             }}
             clusterer={clusterer}
             icon={{
-              url: `/location.png`,
+              url: `../location.png`,
               origin: new window.google.maps.Point(0, 0),
               anchor: new window.google.maps.Point(15, 15),
               scaledSize: new window.google.maps.Size(30, 35),
@@ -202,7 +203,7 @@ function Locate({ panTo }) {
         );
       }}
     >
-      <img src="/my.png" alt="my location" style={mystyle}/>
+      <img src={my} alt="my location" style={mystyle}/>
     </button>
   );
 }

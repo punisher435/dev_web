@@ -20,6 +20,7 @@ import {
 
 import "@reach/combobox/styles.css";
 import './css/App.css'
+import my from '../my.png'
 
 const libraries = ["places"];
 
@@ -114,7 +115,7 @@ const mapContainerStyle = {
               position={{ lat: parseFloat(value.latitude), lng:parseFloat(value.longitude) }}
              
               icon={{
-                url: `/location.png`,
+                url: `../location.png`,
                 origin: new window.google.maps.Point(0, 0),
                 anchor: new window.google.maps.Point(15, 15),
                 scaledSize: new window.google.maps.Size(30, 35),
@@ -130,7 +131,7 @@ const mapContainerStyle = {
                 setSelected(marker);
               }}
               icon={{
-                url: `/location.png`,
+                url: `../location.png`,
                 origin: new window.google.maps.Point(0, 0),
                 anchor: new window.google.maps.Point(15, 15),
                 scaledSize: new window.google.maps.Size(30, 35),
@@ -170,7 +171,7 @@ const mapContainerStyle = {
               setSelected(marker);
             }}
             icon={{
-              url: `/location.png`,
+              url: `../location.png`,
               origin: new window.google.maps.Point(0, 0),
               anchor: new window.google.maps.Point(15, 15),
               scaledSize: new window.google.maps.Size(30, 35),
@@ -207,7 +208,7 @@ function Locate({ panTo }) {
         );
       }}
     >
-      <img src="/my.png" alt="my location" style={mystyle}/>
+      <img src={my} alt="my location" style={mystyle}/>
     </button>
   );
 }

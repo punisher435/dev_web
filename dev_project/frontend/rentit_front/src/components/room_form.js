@@ -25,7 +25,7 @@ import Paper from '@material-ui/core/Paper';
 import RemoveIcon from '@material-ui/icons/Remove';
 import AddIcon from '@material-ui/icons/Add';
 import './css/App.css';
-
+import Add from '../addroom.png';
 import Rules from './roomrules';
 
 const FILE_SIZE = 1600 * 1024;
@@ -543,11 +543,11 @@ function RoomForm (props){
       photo3:'',
       photo4:'',
       photo5:'',
-      file1:"/addroom.png",
-      file2:"/addroom.png",
-      file3:"/addroom.png",
-      file4:"/addroom.png",
-      file5:"/addroom.png",
+      file1:Add,
+      file2:Add,
+      file3:Add,
+      file4:Add,
+      file5:Add,
     })
 
     const [edit,setedit] = useState(false)

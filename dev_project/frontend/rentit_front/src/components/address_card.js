@@ -31,7 +31,7 @@ export default function AddressCard({address,info}) {
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image="/address.png"
+          image="../address.png"
           title="Photo"
         />
         <CardContent>

@@ -25,6 +25,7 @@ import AddIcon from '@material-ui/icons/Add';
 import Paper from '@material-ui/core/Paper';
 import './css/App.css';
 import Rules from './roomrules';
+import Add from '../addroom.png';
 
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
@@ -478,12 +479,12 @@ function ApartmentForm (props){
       photo4:'',
       photo5:'',
       photo6:'',
-      file1:"/addroom.png",
-      file2:"/addroom.png",
-      file3:"/addroom.png",
-      file4:"/addroom.png",
-      file5:"/addroom.png",
-      file6:"/addroom.png",
+      file1:Add,
+      file2:Add,
+      file3:Add,
+      file4:Add,
+      file5:Add,
+      file6:Add,
 
       total_rooms:1,
       total_floors:1,

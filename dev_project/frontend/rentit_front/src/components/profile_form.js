@@ -133,7 +133,7 @@ function ProfileForm (props){
       aadhar:'',
       user_id:'',
       photo:'',
-      file:"/account-icon-8.png",
+      file:"../account-icon-8.png",
       front:null,
       back:null,
     })
