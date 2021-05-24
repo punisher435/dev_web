@@ -134,7 +134,7 @@ function ProfileForm (props){
       aadhar:'',
       user_id:'',
       photo:'',
-      file:"Acc",
+      file:Acc,
       front:null,
       back:null,
     })
