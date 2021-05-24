@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState} from 'react'
 import Welcome from './Welcome'
 
 import 'bootstrap/dist/css/bootstrap.min.css'; 
@@ -24,6 +24,8 @@ import TextField from '@material-ui/core/TextField';
 import DatePick from '../components/datepick'
 import Button from '@material-ui/core/Button';
 import  {useMediaQuery} from '@material-ui/core';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 
 import Box from '@material-ui/core/Box';
 import "../components/css/App.css"
@@ -176,7 +178,7 @@ const useStyles = makeStyles((theme) => ({
   }))(TextField);
 
 
-function Home() {
+function Home(props) {
     const classes = useStyles();
     const [luxrooms,setluxrooms] = React.useState([])
     const [classroom,setclassroom] = React.useState([])
@@ -186,7 +188,33 @@ function Home() {
     const [coupons,setcoupons] = React.useState([])
     const isSmall = useMediaQuery("(max-width: 600px)");
 
+    const [display,setdisplay] = useState(false);
+    var warning=false;
+    if(props.location.state)
+    {warning = props.location.state.property_id;}
+
     const [totalbookings,settotalbookings] = React.useState('')
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        setdisplay(false);
+      };
+
+    React.useEffect(() => {
+        if(warning==true)
+        {
+          setdisplay(true);
+        }
+        else{
+          setdisplay(false);
+        }
+      },[warning])
+  
+      function Alert(props) {
+        return <MuiAlert elevation={6} variant="filled" {...props} />;
+      }
 
 
     React.useEffect(async() => {
@@ -420,6 +448,11 @@ function Home() {
             </CookieConsent>
             
 
+            <Snackbar open={display} autoHideDuration={6000} onClose={handleClose}>
+            <Alert onClose={handleClose} severity="info">
+              A seller can't place a booking
+            </Alert>
+          </Snackbar>
             
             
 

@@ -354,11 +354,17 @@ function Checkout(props) {
   {
     if(props.profile.is_seller===true)
     {
-      return <Redirect to='/'/>;
+      return <Redirect to={{
+        pathname: '/',
+        state: { property_id: true }
+      }}/>;
     }
     if(props.profile.profile_completed===false)
     {
-      return <Redirect to='/'/>;
+      return <Redirect to={{
+        pathname: '/dashboard/profile',
+        state: { property_id: true }
+      }}/>;
     }
 
   }
