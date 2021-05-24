@@ -27,7 +27,8 @@ class wishlist_room(viewsets.ViewSet):
     parser_classes=(MultiPartParser,FormParser)
 
     def list(self, request,format=None):
-        queryset = wishlist.objects.all()
+        
+        
         try:
             wishlist_object = get_object_or_404(queryset,pk=request.user.pk)
 
@@ -105,11 +106,12 @@ class wishlist_room(viewsets.ViewSet):
             return Response(False,status=status.HTTP_400_BAD_REQUEST)
 
     def update(self,request,pk=None):
+        
         try:
             wishlist_object = wishlist.objects.get(pk=request.user.pk)
             return Response(wishlist_object.items, status=status.HTTP_202_ACCEPTED)
         except:
-            return Response(None,status=status.HTTP_400_BAD_REQUEST)
+            return Response(0,status=status.HTTP_400_BAD_REQUEST)
 
 
 

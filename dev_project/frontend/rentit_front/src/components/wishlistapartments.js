@@ -45,7 +45,7 @@ function Wishlistapartments({isAuthenticated,access}) {
                 setpost(res.data);
             }
             catch{
-                seterror('Oops! an error occurred');
+                
             }
         setloading(false);
         }

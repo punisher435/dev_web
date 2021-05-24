@@ -61,7 +61,7 @@ function Wishlistrooms({isAuthenticated,access}) {
               
             }
             catch{
-                seterror('Oops! an error occurred');
+               
             }
         setloading(false);
         }
