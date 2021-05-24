@@ -33,6 +33,7 @@ import '../components/css/App.css'
 import CommentOutlinedIcon from '@material-ui/icons/CommentOutlined';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import ArrowBackOutlinedIcon from '@material-ui/icons/ArrowBackOutlined';
+import Logo from '../logo.png';
 
 const drawerWidth = 240;
 
@@ -148,7 +149,7 @@ function Dashboarddrawer(props) {
     <div>
       <div className={classes.toolbar} />
       
-      <div className={classes.igclass}><Link style={{textDecoration:'none'}} to='/' ><img src="/logo.png" /></Link></div>
+      <div className={classes.igclass}><Link style={{textDecoration:'none'}} to='/' ><img src={Logo} /></Link></div>
       <br />
       <List>
       

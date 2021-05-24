@@ -22,6 +22,8 @@ import FacebookIcon from '@material-ui/icons/Facebook';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import MailIcon from '@material-ui/icons/Mail';
 import TwitterIcon from '@material-ui/icons/Twitter';
+import Logo from '../logo.png';
+
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
 
@@ -177,7 +179,7 @@ const Layout = (props) => {
         alignItems="flex-start"
         >
         <Grid item xs={11}>
-        <div className={classes.logoclass}><img src="/logo.png" /></div>
+        <div className={classes.logoclass}><img src={Logo} /></div>
         </Grid>
         
         

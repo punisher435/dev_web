@@ -5,6 +5,7 @@ import BillTo from './BillTo'
 import InvoiceNo from './InvoiceNo'
 import InvoiceItemsTable from './InvoiceItemsTable'
 import InvoiceThankYouMsg from './InvoiceThankYouMsg'
+import Logo from '../logo.png';
 
 
 const styles = StyleSheet.create({
@@ -30,7 +31,7 @@ const styles = StyleSheet.create({
         
             <Document>
                 <Page size="A4" style={styles.page}>
-                    <Image style={styles.logo} src='/logo.png' />
+                    <Image style={styles.logo} src={Logo} />
                     <InvoiceTitle title='Booking Receipt'/>
                     <InvoiceNo invoice={invoice}/>
                     
