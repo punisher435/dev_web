@@ -42,11 +42,12 @@ export default function TransitionsModal({open,handleopen,handleclose}) {
         <Fade in={open}>
           <div className={classes.paper}>
             <h2 id="roomrules_title">Instructions</h2>
-            <ul>
+           
+            <ol>
                 <li>
-                    
+                
                 </li>
-            </ul>
+            </ol>
             
           </div>
         </Fade>
