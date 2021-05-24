@@ -49,7 +49,7 @@ export default function SimpleCard(props) {
                   classes.rr
                 } >
                   <Box textAlign="center">
-                  {props.rating}
+                  {props.rating ? props.rating : 0}
                   <StarRoundedIcon/>
                   </Box>
                 </Typography>
