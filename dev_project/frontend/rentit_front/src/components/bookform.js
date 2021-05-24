@@ -305,9 +305,9 @@ function Checkout(props) {
             key_secret: process.env.REACT_APP_RAZORPAY_KEY_SECRET,
             amount: data.data.price_to_be_paid,
             currency: bookdetails.currency.slice(2,),
-            name: "Org. Name",
-            description: "Test teansaction",
-            image: "", // add image url
+            name: "Rent=ene",
+            description: "Booking payment",
+            image: "/logo.png", // add image url
             order_id: data.data.payment_id,
             handler: function (response) {
               // we will handle success by calling handlePaymentSuccess method and
