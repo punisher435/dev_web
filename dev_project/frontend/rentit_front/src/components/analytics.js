@@ -85,6 +85,28 @@ function Analytics(props) {
     const [shopbookings,setshopbookings] = useState([])
     const [apartmentbookings,setapartmentbookings] = useState([])
     const [bank,setbank] = useState()
+    const [newredirect,setnewredirect] = useState(false);
+
+    React.useEffect(() => {
+      if(props.profile)
+      {
+        if(!props.profile.profile_completed || !props.profile.bank_completed || !props.profile.address_completed)
+        {
+          setnewredirect(true);
+        }
+        else{
+          setnewredirect(false);
+        }
+      }
+      else{
+        setnewredirect(false);
+      }
+    },[props.profile])
+
+    
+
+
+   
 
     React.useEffect(
         async () => {
@@ -151,6 +173,9 @@ function Analytics(props) {
     },[props.profile])
 
 
+    
+
+
     const classes = useStyles();
 
     
@@ -158,6 +183,13 @@ function Analytics(props) {
     if(error==true)
     {
       return <div className={classes.erorclass}><Eror error='Error' /></div>
+    }
+    if(newredirect==true)
+    {
+      return <Redirect to={{
+        pathname: '/dashboard/profile',
+        state: { property_id: true }
+      }}/> ;
     }
 
     if(props.isAuthenticated===false)
