@@ -595,7 +595,10 @@ function Bookingextend(props) {
             }
           
 
-            
+          <br />
+          <Typography>
+            Please note that the price will be increased due to transaction charges of payment gateway and taxes
+            </Typography>
 
             
 

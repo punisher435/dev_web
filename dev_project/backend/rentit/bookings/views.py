@@ -715,9 +715,7 @@ class room_booking(viewsets.ViewSet):
 
                    
 
-                    booking.extended = True
-
-                    booking.save()
+                    
 
                     serializer = roomBookingsSerializer(booking_new)                       
 
@@ -1166,9 +1164,7 @@ class shop_booking(viewsets.ViewSet):
 
                                               
 
-                    booking.extended = True
-
-                    booking.save()
+                
 
 
 
@@ -1646,9 +1642,7 @@ class apartment_booking(viewsets.ViewSet):
 
                                                 
 
-                    booking.extended = True
-
-                    booking.save()
+                    
 
                     serializer = apartmentBookingsSerializer(booking_new)
 
