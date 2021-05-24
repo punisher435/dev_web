@@ -49,8 +49,8 @@ def payment(amount,currency):
 
     # create razorpay order
     payment = client.order.create({"amount": int(amount) * 100, 
-                                   "currency": currency, 
-                                   "payment_capture": "1"})
+                                   "currency": currency,
+                                   })
 
     return payment
 
