@@ -22,6 +22,12 @@ const useStyles = makeStyles((theme) => ({
     
     backgroundSize:'cover'
    },
+   myclass2:{
+    backgroundImage:'url(/115.jpg)',
+    height:'1000px',
+    
+    backgroundSize:'cover'
+   },
    imgclass:{
     width:'30vw',
     maxWidth:3000,
@@ -49,6 +55,24 @@ headclass1:{
     color:'#42413e',
     marginRight:'40px',
     marginTop:'100px',
+},
+headclass2:{
+    fontFamily:"'Farro', serif",
+    fontSize:'100px',
+    fontWeight:'bold',
+    
+    color:'#42413e',
+    marginRight:'250px',
+    marginTop:'30px',
+},
+headclass3:{
+    fontFamily:"'Farro', serif",
+    fontSize:'100px',
+    fontWeight:'bold',
+    
+    color:'#42413e',
+    marginRight:'40px',
+    
 },
 gridclass:{
    
@@ -120,6 +144,37 @@ How Rentene helps <br />property owners?
 How Rentene helps property owners?
 <br />
 </Typography>
+</Grid></Grid>
+            </div>
+            
+
+
+            <div className={`${classes.myclass2}`}>
+
+            <Grid
+  container
+  direction="row"
+  justify="flex-end"
+  alignItems="flex-end"
+>
+            <Grid item className={classes.gridclass1} >
+            <Typography className={classes.headclass2} >
+
+Rentene for 
+</Typography>
+</Grid></Grid>
+
+<Grid
+  container
+  direction="row"
+  justify="flex-end"
+  alignItems="center"
+>
+            <Grid item className={classes.gridclass1} >
+            <Typography className={classes.headclass3} >
+
+Students and Achievers
+<br /></Typography>
 </Grid></Grid>
             </div>
             

@@ -271,7 +271,7 @@ const Layout = (props) => {
     >
         <Grid item xs={12}>
             <Typography variant='h6' className={classes.textclass}>
-                Terms and conditions
+                <Link to='/policies' style={{textDecoration:'None',color:'white'}}> {props.profile ? props.profile.is_seller ? 'Owner Policy' : 'Customer Policy' : 'Customer Policy'}</Link>
             </Typography>
         </Grid>
         
@@ -307,4 +307,10 @@ const Layout = (props) => {
     );
 };
 
-export default connect(null, { checkAuthenticated, load_user })(Layout);
+
+const mapStateToProps = state => ({
+    isAuthenticated: state.authreducers.isAuthenticated,
+    profile : state.authreducers.user
+  });
+
+export default connect(mapStateToProps, { checkAuthenticated, load_user })(Layout);
