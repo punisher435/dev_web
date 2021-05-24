@@ -438,8 +438,8 @@ function Home(props) {
                 location="bottom"
                 buttonText="Got it"
                 cookieName="myAwesomeCookieName2"
-                style={{ background: "#b6c9f0" ,color:'black'}}
-                buttonStyle={{ backgroundColor: "Transparent", fontSize: "14px", border:"2px solid #FFFFFF" }}
+                style={{ background: "#b6c9f0" ,color:'#FFFFFF'}}
+                buttonStyle={{ backgroundColor: "Transparent", fontSize: "14px", border:"2px solid #FFFFFF",color:'#FFFFFF' }}
                 expires={150}
                 debug={true}
             >
