@@ -7,12 +7,15 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Logo from '../logo.png';
 import add1 from '../112.jpg';
+import add2 from '../114.jpg';
+import add3 from '../115.jpg';
+
 
 
 
 const useStyles = makeStyles((theme) => ({
    myclass:{
-    backgroundImage:'url(../112.jpg)',
+    backgroundImage: `url(${add1})`,
     height:'1000px',
     
     backgroundSize:'cover',
@@ -20,13 +23,13 @@ const useStyles = makeStyles((theme) => ({
     
    },
    myclass1:{
-    backgroundImage:'url(../114.jpg)',
+    backgroundImage:`url(${add2})`,
     height:'1000px',
     
     backgroundSize:'cover'
    },
    myclass2:{
-    backgroundImage:'url(../115.jpg)',
+    backgroundImage:`url(${add3})`,
     height:'1000px',
     
     backgroundSize:'cover'

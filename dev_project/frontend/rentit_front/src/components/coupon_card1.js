@@ -5,6 +5,8 @@ import Typography from '@material-ui/core/Typography';
 
 import './css/App.css';
 import Grid from '@material-ui/core/Grid';
+import Discount from '../discount_off.png'
+import Discount1 from '../discount.png'
 
 const useStyles = makeStyles({
   root: {
@@ -60,7 +62,7 @@ export default function CouponCard({mycoupon}) {
       <div className="blockcoupon">
         <div className="couponborder">
           {
-            mycoupon.coupon_type==='off_price' ? <div className={classes.imgclass1}><img src='/discount_off.png' className={classes.imgclass}/></div> : <div className={classes.imgclass1}><img src='/discount.png' className={classes.imgclass}/></div>
+            mycoupon.coupon_type==='off_price' ? <div className={classes.imgclass1}><img src={Discount} className={classes.imgclass}/></div> : <div className={classes.imgclass1}><img src={Discount1} className={classes.imgclass}/></div>
           }
 
           

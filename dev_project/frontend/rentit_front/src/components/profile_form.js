@@ -18,6 +18,7 @@ import Typography from '@material-ui/core/Typography';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
+import Acc from '../account-icon-8.png';
 
 
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
@@ -133,7 +134,7 @@ function ProfileForm (props){
       aadhar:'',
       user_id:'',
       photo:'',
-      file:"../account-icon-8.png",
+      file:"Acc",
       front:null,
       back:null,
     })
