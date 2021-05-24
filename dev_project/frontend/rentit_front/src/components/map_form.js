@@ -114,12 +114,7 @@ const mapContainerStyle = {
               key={`${parseFloat(value.latitude)}-${parseFloat(value.longitude)}`}
               position={{ lat: parseFloat(value.latitude), lng:parseFloat(value.longitude) }}
              
-              icon={{
-                url: `../location.png`,
-                origin: new window.google.maps.Point(0, 0),
-                anchor: new window.google.maps.Point(15, 15),
-                scaledSize: new window.google.maps.Size(30, 35),
-              }}
+              
             />
           
          
@@ -130,12 +125,7 @@ const mapContainerStyle = {
               onClick={() => {
                 setSelected(marker);
               }}
-              icon={{
-                url: `../location.png`,
-                origin: new window.google.maps.Point(0, 0),
-                anchor: new window.google.maps.Point(15, 15),
-                scaledSize: new window.google.maps.Size(30, 35),
-              }}
+              
             />
           ))}
   
@@ -170,12 +160,7 @@ const mapContainerStyle = {
             onClick={() => {
               setSelected(marker);
             }}
-            icon={{
-              url: `../location.png`,
-              origin: new window.google.maps.Point(0, 0),
-              anchor: new window.google.maps.Point(15, 15),
-              scaledSize: new window.google.maps.Size(30, 35),
-            }}
+           
           />
         ))}
 

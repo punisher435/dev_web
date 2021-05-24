@@ -144,12 +144,7 @@ const mystyle1 = {
               setSelected(marker);
             }}
             clusterer={clusterer}
-            icon={{
-              url: `../location.png`,
-              origin: new window.google.maps.Point(0, 0),
-              anchor: new window.google.maps.Point(15, 15),
-              scaledSize: new window.google.maps.Size(30, 35),
-            }}
+            
           />
         ))} 
         </MarkerClusterer>
