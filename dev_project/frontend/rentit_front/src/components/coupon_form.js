@@ -136,7 +136,20 @@ function CouponForm (props){
     const [myshops,setshops] =useState([])
     const [myapartments,setapartments] =useState([])
     const [loading,setloading] = useState(false)
-    
+    const [newredirect,setnewredirect] = React.useState(false);
+
+    React.useEffect(() => {
+      if(props.profile)
+      {
+        if(props.profile)
+        {
+          if(!props.profile.profile_completed || !props.profile.bank_completed || !props.profile.address_completed)
+          {
+            setnewredirect(true);
+          }
+        }
+      }
+    },[props.profile])
 
    
 
@@ -301,6 +314,14 @@ function CouponForm (props){
     {
       return <Redirect to="/login" />;
     }
+
+    if(newredirect==true)
+{
+  return <Redirect to={{
+    pathname: '/dashboard/profile',
+    state: { property_id: true }
+  }}/>
+}
 
   if(redirect==true)
   {

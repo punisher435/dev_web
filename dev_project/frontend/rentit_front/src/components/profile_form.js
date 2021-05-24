@@ -469,7 +469,7 @@ if(props.profile.is_seller && edit===false && (values.front===null || values.bac
             rows={1}
             id="aadhar"
             name="aadhar"
-            label="aadhar"
+            label="Identification proof id"
             value={formik.values.aadhar}
             onChange={formik.handleChange}
             error={formik.touched.aadhar && Boolean(formik.errors.aadhar)}

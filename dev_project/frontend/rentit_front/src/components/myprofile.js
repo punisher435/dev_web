@@ -12,6 +12,8 @@ import {connect} from 'react-redux'
 import ProfileCard from './profilecard'
 import BankCard from './bank_card'
 import AddressCard from './address_card'
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
@@ -82,6 +84,10 @@ function Myprofile(props) {
     const [myprofile,setprofile] = useState()
     const [bank,setbank] = useState(false)
     const [address,setaddress] = useState(false)
+    const [display,setdisplay] = useState(false);
+    var warning=false;
+    if(props.location.state)
+    {warning = props.location.state.property_id;}
    
 
     React.useEffect(
@@ -130,6 +136,29 @@ function Myprofile(props) {
     
     ,[props.profile])
 
+    React.useEffect(() => {
+      if(warning==true)
+      {
+        setdisplay(true);
+      }
+      else{
+        setdisplay(false);
+      }
+    },[warning])
+
+    function Alert(props) {
+      return <MuiAlert elevation={6} variant="filled" {...props} />;
+    }
+
+
+    const handleClose = (event, reason) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+  
+      setdisplay(false);
+    };
+
 
     const classes = useStyles();
 
@@ -151,6 +180,12 @@ function Myprofile(props) {
              <Dashboarddrawer/>
             <main className={classes.content}>
             <div className={classes.toolbar} />
+
+            <Snackbar open={display} autoHideDuration={6000} onClose={handleClose}>
+            <Alert onClose={handleClose} severity="info">
+              You need to complete your profile first!
+            </Alert>
+          </Snackbar>
 
             <Grid
             container

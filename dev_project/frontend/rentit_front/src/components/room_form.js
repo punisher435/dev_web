@@ -1307,7 +1307,10 @@ if(props.isAuthenticated===false)
 
 if(newredirect==true)
 {
-  return <Redirect to='/dashboard/profile' />
+  return <Redirect to={{
+    pathname: '/dashboard/profile',
+    state: { property_id: true }
+  }}/>
 }
 
   if(redirect==true)
