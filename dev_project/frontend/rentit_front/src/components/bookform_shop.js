@@ -168,10 +168,14 @@ function Checkout(props) {
               temp = 'none';     
             }
 
+            var t=value.price;
+            var t1=((t*3)/100);
+            var t2=((t1*18)/100);
+            t=t+t1+t2;
             setbookdetails(
                 {
                   ...bookdetails,
-                    price:value.price,
+                    price:t,
                     date:value.date,
                     month:value.month,
                     year:value.year,

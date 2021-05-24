@@ -37,6 +37,7 @@ export default function Review({bookdetails,setbookdetails}) {
     { name: 'Booked till', desc: '', price: `${bookdetails.date}/${z}/${w}` },
     { name: 'Discount', desc: '', price: `${bookdetails.discount}%` },
     { name: 'Coupon applied', desc: '', price: `${bookdetails.coupon}%` },
+    { name: 'Please note that the price is increased due to transaction charges of payment gateway', price: `` },
   ];
 
 
