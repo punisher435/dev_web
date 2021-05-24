@@ -294,7 +294,7 @@ function RenteneAppBar(props) {
           <div className={classes.logoclass}><img src="/logo.png" /></div>
           
           </NavLink>
-          <NavLink className={`nav-link ${styles.textclass}`} exact to='/about'>
+          <NavLink className={`nav-link ${styles.textclass}`} exact to='/about-us'>
           <Typography className={classes.body} variant="h6" noWrap>
             About
           </Typography>

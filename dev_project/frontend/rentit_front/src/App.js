@@ -68,6 +68,7 @@ import Complainthousing from './components/mycomplaints_apartment'
 import Complainthousingdetails from './containers/complaintdetails_apartment'
 import Complaintformhousing from './containers/complaint_form_apartment'
 import Terms from './containers/terms';
+import About from './containers/Aboutus';
 
 
 require('dotenv').config()
@@ -167,7 +168,7 @@ function App(props) {
                 <Route exact path='/dashboard/complaints/housing' component={Complainthousing}/>
                 <Route exact path='/complaints/housing/:complaint_id' component={Complainthousingdetails}/>
                 <Route exact path='/dashboard/complaints/housing/create' component={Complaintformhousing}/>
-
+                <Route exact path='/about-us' component={About} />
 
               </div>
               </>
