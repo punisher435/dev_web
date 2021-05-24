@@ -6,6 +6,7 @@ import Radium, {StyleRoot} from 'radium';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Logo from '../logo.png';
+import add1 from '../112.jpg';
 
 
 

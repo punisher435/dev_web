@@ -8,6 +8,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import {Link} from 'react-router-dom'
+import Add from '../address.png'
 
 const useStyles = makeStyles({
   root: {
@@ -31,7 +32,7 @@ export default function AddressCard({address,info}) {
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image="../address.png"
+          image={Add}
           title="Photo"
         />
         <CardContent>
