@@ -5,6 +5,7 @@ import { bounceInLeft } from 'react-animations';
 import Radium, {StyleRoot} from 'radium';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
+import Logo from '../logo.png';
 
 
 
@@ -107,7 +108,7 @@ function Aboutus() {
     loadScript();loadScript1();
     return (
         <div>
-            <div className={`${classes.myclass}`} style={styles1.bounce}><br/><br/><br/><br/><br/><img src='/logo.png' className={classes.imgclass}/>
+            <div className={`${classes.myclass}`} style={styles1.bounce}><br/><br/><br/><br/><br/><img src={Logo} className={classes.imgclass}/>
             <br />
             <Typography className={classes.textclass} >
 
