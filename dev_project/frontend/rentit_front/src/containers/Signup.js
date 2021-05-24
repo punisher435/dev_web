@@ -109,6 +109,10 @@ const useStyles = makeStyles((theme) => ({
   textclass:{
     
   },
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
+    color: '#fff',
+  },
 }));
 
 
@@ -127,7 +131,7 @@ const Signup = ({ signup, isAuthenticated }) => {
     const [message,setmess] = useState('')
     const [display,setdisplay] = useState(false)
     const [display1,setdisplay1] = useState(false)
-    const [open,setopen] = useState(false)
+    const [open1,setopen1] = useState(false)
 
     function Alert(props) {
       return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -167,7 +171,7 @@ const Signup = ({ signup, isAuthenticated }) => {
       },
       validationSchema: validationSchema,
       onSubmit: async (values) => {
-        setopen(true);
+        setopen1(true);
         
         
         const { first_name,last_name,is_seller, email, password, re_password,gender } = values;
@@ -177,14 +181,14 @@ const Signup = ({ signup, isAuthenticated }) => {
         if (password === re_password) {
             signup({ first_name,last_name, email,is_seller, password, re_password,gender })
             .then(temp => {
-              setopen(false);
+              setopen1(false);
               setdisplay(true)
               setAccountCreated(true)
               
 
               })
               .catch(err => {
-                setopen(false);
+                setopen1(false);
                 setmess(err.message);
                 setdisplay1(true)
 
@@ -194,7 +198,7 @@ const Signup = ({ signup, isAuthenticated }) => {
            
         }
         else{
-          setopen(false);
+          setopen1(false);
         }
   
         
@@ -212,7 +216,7 @@ const Signup = ({ signup, isAuthenticated }) => {
         <Container component="main" maxWidth="xs" >
             <CssBaseline />
 
-            <Backdrop className={classes.backdrop} open={open}>
+            <Backdrop className={classes.backdrop} open={open1}>
         <CircularProgress color="inherit" />
       </Backdrop>
 
