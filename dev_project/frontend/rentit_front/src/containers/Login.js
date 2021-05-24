@@ -47,7 +47,7 @@ function Copyright() {
       <Typography variant="body2" color="textSecondary" align="center">
         {'Copyright © '}
         <Link to='/' style={{textDecoration:'none',color:`${process.env.REACT_APP_COMPLIMENT_COLOR}`}}>
-          Rent=ene
+          Rentene
         </Link>{' '}
         {new Date().getFullYear()}
         {'.'}
@@ -60,7 +60,7 @@ function Copyright() {
       height: '100vh',
     },
     image: {
-      backgroundImage: 'url(https://source.unsplash.com/random)',
+      backgroundImage: 'url(https://image.freepik.com/free-vector/cute-hand-painted-watercolor-background_1020-1088.jpg)',
       backgroundRepeat: 'no-repeat',
       backgroundColor:
         theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],

@@ -61,7 +61,7 @@ function Copyright() {
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
       <Link to='/' style={{textDecoration:'none',color:`${process.env.REACT_APP_COMPLIMENT_COLOR}`}}>
-        Rent=ene
+        Rentene
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -155,7 +155,7 @@ const Signup = ({ signup, isAuthenticated }) => {
   
       setdisplay1(false);
     };
-
+   
     const formik = useFormik({
       
       initialValues: {
@@ -341,7 +341,13 @@ const Signup = ({ signup, isAuthenticated }) => {
                 <Grid item xs={12}>
                 <FormControlLabel
                 control={<Checkbox value={formik.values.is_seller} onChange={e => formik.setFieldValue('is_seller',e.target.checked)} color="primary" />}
-                label="I am a seller."
+                label="I want to rent my property."
+                />
+               
+                <FormControlLabel
+                checked={true} disabled={true}
+                control={<Checkbox color="primary" />}
+                label="I agree to the terms and conditions."
                 />
                 </Grid>
                 </Grid>
