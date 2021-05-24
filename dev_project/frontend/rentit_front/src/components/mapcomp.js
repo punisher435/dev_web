@@ -14,7 +14,7 @@ const libraries = ["places"];
 const mapContainerStyle = {
   height: "40vh",
 
-  width: "50vw",
+  width: "40vw",
   position:'relative',
 };
 
