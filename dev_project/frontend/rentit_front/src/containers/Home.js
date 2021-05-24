@@ -410,13 +410,13 @@ function Home() {
                 location="bottom"
                 buttonText="Got it"
                 cookieName="myAwesomeCookieName2"
-                style={{ background: "#2B373B" }}
-                buttonStyle={{ color: "Transparent", fontSize: "14px", border:"2px solid #FFFFFF" }}
+                style={{ background: "#b6c9f0" ,color:'black'}}
+                buttonStyle={{ backgroundColor: "Transparent", fontSize: "14px", border:"2px solid #FFFFFF" }}
                 expires={150}
                 debug={true}
             >
                 This website uses cookies to enhance the user experience.{" "}
-                <span style={{ fontSize: "13px" }}><a style={{textDecoration: "underline"}}>Read more</a></span>
+                <span style={{ fontSize: "13px" }}></span>
             </CookieConsent>
             
 
