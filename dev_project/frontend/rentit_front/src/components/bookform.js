@@ -135,7 +135,7 @@ function Checkout(props) {
         lastname:'',
         mobile:'',
         country_code:'',
-        alternate_mobile:'',
+        alternate_mobile:null,
       
         paylater:false,
 

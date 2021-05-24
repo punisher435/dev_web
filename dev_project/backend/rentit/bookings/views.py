@@ -182,6 +182,10 @@ class room_booking(viewsets.ViewSet):
 
     
     def create(self,request,format=None):
+
+        
+
+
         try:
 
         
@@ -337,6 +341,9 @@ class room_booking(viewsets.ViewSet):
                     end_date = book_date + relativedelta(months=+data['duration'])  
 
                     x = payment(price,room.currency[2:])
+                    if data['alternate_mobile']=='':
+                    
+                        data['alternate_mobile']=None
 
 
                     booking = roomBookings(room_id=room,payment_id=x['id'],coupon=temp_coupon,room_name=room.title,customer_id=request.user,seller_id=room.seller_id,
@@ -680,6 +687,9 @@ class room_booking(viewsets.ViewSet):
                     end_date = book_date + relativedelta(months=+data['duration'])  
 
                     x = payment(price,room.currency[2:])
+                    if data['alternate_mobile']=='':
+                        
+                        data['alternate_mobile']=None
 
                     booking_new = roomBookings(room_id=room,payment_id=x['id'],extended_on=booking,is_extended=True,coupon=temp_coupon,room_name=room.title,customer_id=request.user,seller_id=room.seller_id,
                         booked_from=book_date,booked_till=end_date,capacity=data['capacity'],duration=data['duration'],first_name=data['firstname'],last_name=data['lastname'],mobile=data['mobile'],alternate_mobile=data['alternate_mobile'],
@@ -878,6 +888,9 @@ class shop_booking(viewsets.ViewSet):
                     end_date = book_date + relativedelta(months=+data['duration'])  
 
                     x = payment(price,room.currency[2:])
+                    if data['alternate_mobile']=='':
+                        
+                        data['alternate_mobile']=None
 
                     booking = shopBookings(shop_id=room,payment_id=x['id'],coupon=temp_coupon,shop_name=room.title,customer_id=request.user,seller_id=room.seller_id,
                     booked_from=book_date,booked_till=end_date,duration=data['duration'],first_name=data['firstname'],last_name=data['lastname'],mobile=data['mobile'],alternate_mobile=data['alternate_mobile'],
@@ -1112,6 +1125,9 @@ class shop_booking(viewsets.ViewSet):
                     end_date = book_date + relativedelta(months=+data['duration'])  
 
                     x = payment(price,room.currency[2:])
+                    if data['alternate_mobile']=='':
+                        
+                        data['alternate_mobile']=None
 
                     booking_new = shopBookings(shop_id=room,payment_id=x['id'],extended_on=booking,is_extended=True,coupon=temp_coupon,shop_name=room.title,customer_id=request.user,seller_id=room.seller_id,
                         booked_from=book_date,booked_till=end_date,duration=data['duration'],first_name=data['firstname'],last_name=data['lastname'],mobile=data['mobile'],alternate_mobile=data['alternate_mobile'],
@@ -1325,6 +1341,9 @@ class apartment_booking(viewsets.ViewSet):
                     end_date = book_date + relativedelta(months=+data['duration'])  
 
                     x = payment(price,room.currency[2:])
+                    if data['alternate_mobile']=='':
+                        
+                        data['alternate_mobile']=None
 
                     booking = apartmentBookings(apartment_id=room,payment_id=x['id'],coupon=temp_coupon,apartment_name=room.title,customer_id=request.user,seller_id=room.seller_id,
                     booked_from=book_date,booked_till=end_date,duration=data['duration'],first_name=data['firstname'],last_name=data['lastname'],mobile=data['mobile'],alternate_mobile=data['alternate_mobile'],
@@ -1570,7 +1589,10 @@ class apartment_booking(viewsets.ViewSet):
                         
                     
 
-                    end_date = book_date + relativedelta(months=+data['duration'])  
+                    end_date = book_date + relativedelta(months=+data['duration'])
+                    if data['alternate_mobile']=='':
+                        
+                        data['alternate_mobile']=None  
 
                     x = payment(price,room.currency[2:])
 
