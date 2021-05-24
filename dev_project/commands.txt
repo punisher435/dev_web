@@ -1,0 +1,10 @@
+sudo systemctl start rabbitmq-server
+systemctl status rabbitmq-server
+
+
+
+celery -A rentit worker -l info
+
+celery -A rentit beat -l INFO --scheduler django_celery_beat.schedulers:DatabaseScheduler
+
+sudo rabbitmqctl stop
