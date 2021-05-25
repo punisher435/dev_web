@@ -379,7 +379,7 @@ class apartments(models.Model):
     BHK=models.IntegerField()
     trust_points=models.BigIntegerField(default=0)
     date_added=models.DateTimeField(auto_now_add=True)
-    date_verified=models.DateTimeField(auto_now_add=True)
+    date_verified=models.DateTimeField(null=True, blank=True)
     net_discount=models.IntegerField(default=0)
     photo1=models.ImageField(_("Image"),upload_to=upload_to_apartments,default='/images/rooms/default.jpg')
     photo2=models.ImageField(_("Image"),upload_to=upload_to_apartments,default='/images/rooms/default.jpg')
