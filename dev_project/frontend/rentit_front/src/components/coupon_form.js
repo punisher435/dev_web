@@ -105,6 +105,10 @@ const validationSchema = yup.object({
       },
      
     },
+    backdrop: {
+      zIndex: theme.zIndex.drawer + 1,
+      color: '#fff',
+    },
     form: {
       width: '100%', // Fix IE 11 issue.
       marginTop: theme.spacing(1),
@@ -135,7 +139,7 @@ function CouponForm (props){
     const [myrooms,setrooms] =useState([])
     const [myshops,setshops] =useState([])
     const [myapartments,setapartments] =useState([])
-    const [loading,setloading] = useState(false)
+    const [loading1,setloading1] = useState(false)
     const [newredirect,setnewredirect] = React.useState(false);
 
     React.useEffect(() => {
@@ -246,7 +250,7 @@ function CouponForm (props){
     validationSchema: validationSchema,
     onSubmit: async (values) => {
 
-      setloading(true)      
+      setloading1(true)      
       const config = {
         headers: {
                 'Content-Type': 'application/json',
@@ -262,12 +266,12 @@ function CouponForm (props){
       if(edit===false)
       {
         try{const res = await axios.post(`${process.env.REACT_APP_API_URL}/sourcesfnsjfn231/mycoupons/`,body,config);
-        setloading(false)        
+        setloading1(false)        
         setredirect(true)
         
               }
                 catch{
-                  setloading(false)  
+                  setloading1(false)  
                  
                   seterror(true)
                   
@@ -375,7 +379,7 @@ const handleChange2 = (e,apartmentid,boolean) => {
     
     <div className={classes.myclass}>
 
-<Backdrop className={classes.backdrop} open={loading}>
+<Backdrop className={classes.backdrop} open={loading1}>
         <CircularProgress color="inherit" />
       </Backdrop>
 

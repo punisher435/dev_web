@@ -108,8 +108,8 @@ class rooms(models.Model):
     category=models.CharField(max_length=255)
     facility=models.TextField()
     description = models.TextField()
-    avg_rating=models.DecimalField(max_digits=2,decimal_places=1,default=0)
-    reviews=models.DecimalField(max_digits=2,decimal_places=1,default=0)
+    avg_rating=models.DecimalField(max_digits=9,decimal_places=1,default=0)
+    reviews=models.DecimalField(max_digits=9,decimal_places=1,default=0)
     cctv_building=models.BooleanField(default=False)
     building_guard=models.BooleanField(default=False)
 
@@ -277,8 +277,8 @@ class shops(models.Model):
     category=models.CharField(max_length=255,null=True, blank=True)
     facility=models.TextField()
     description = models.TextField()
-    avg_rating=models.DecimalField(max_digits=2,decimal_places=1,default=0)
-    reviews=models.DecimalField(max_digits=2,decimal_places=1,default=0)
+    avg_rating=models.DecimalField(max_digits=9,decimal_places=1,default=0)
+    reviews=models.DecimalField(max_digits=9,decimal_places=1,default=0)
 
     cctv_building=models.BooleanField(default=False)
     building_guard=models.BooleanField(default=False)
@@ -419,8 +419,8 @@ class apartments(models.Model):
     facility=models.TextField()
     description = models.TextField()
     fans = models.IntegerField(default=0)
-    avg_rating=models.DecimalField(max_digits=2,decimal_places=1,default=0)
-    reviews=models.DecimalField(max_digits=2,decimal_places=1,default=0)
+    avg_rating=models.DecimalField(max_digits=9,decimal_places=1,default=0)
+    reviews=models.DecimalField(max_digits=9,decimal_places=1,default=0)
     cctv_building=models.BooleanField(default=False)
     building_guard=models.BooleanField(default=False)
 
