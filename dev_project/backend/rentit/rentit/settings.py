@@ -44,7 +44,7 @@ SECRET_KEY = '8f_$#c+!v!v)1@2_l9u-tsjbgk2+*kshhb400j9*@q8375it#_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["rentene111222.herokuapp.com","127.0.0.1"]
 
 
 # Application definition

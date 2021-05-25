@@ -223,7 +223,7 @@ const App = ({isAuthenticated}) => {
       settotalPosts(res.data.count);
       }
       catch{
-        
+        setLoading(false);
       }
     }
     };

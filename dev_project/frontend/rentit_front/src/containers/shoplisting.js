@@ -41,7 +41,7 @@ const App = ({isAuthenticated}) => {
   {
     temp3=myparam3
   }
-  const [posts, setPosts] = useState();
+  const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(2);
@@ -205,6 +205,7 @@ const App = ({isAuthenticated}) => {
       settotalPosts(res.data.count);
       }
       catch{
+        setLoading(false);
         
       }
     }
@@ -268,7 +269,7 @@ const App = ({isAuthenticated}) => {
   }
 
 
-  if(posts){
+ 
   return (
     <div>
     <Bookcardmodel open={openmycard} change={setmycard} details={mypost} loginpage={loginpage} setloginpage={setloginpage}/>
@@ -292,10 +293,8 @@ const App = ({isAuthenticated}) => {
       </Grid>
       </div>
   );
-      }
-      else{
-        return <div></div>;
-      }
+      
+      
 };
 
 
