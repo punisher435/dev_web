@@ -95,6 +95,13 @@ const useStyles = makeStyles((theme) => ({
       width: '20ch',
     },
   },
+  yoclass:{
+    display:'inline',
+  },
+  yo1class:{
+    padding:0,
+    marginRight:10,
+  },
   sectionDesktop: {
     display: 'none',
     [theme.breakpoints.up('md')]: {
@@ -249,25 +256,26 @@ function RenteneAppBar(props) {
       <MenuItem>
       {
         props.focus ? <NavLink className={`nav-link ${styles.textclass2}`} exact to='/wishlist'>
-        <IconButton aria-label="show 4 new mails" color="inherit">
+        <IconButton aria-label="show 4 new mails" color="inherit" className={classes.yo1class}>
           <Badge badgeContent={props.no} color="secondary">
             <FavoriteOutlinedIcon />
           </Badge>
         </IconButton>
-        <p>Wishlist</p>
+        <Typography variant="body1" className={classes.yoclass}>Wishlist</Typography>
         </NavLink> : <NavLink className={`nav-link ${styles.textclass2}`} exact to='/wishlist'>
-        <IconButton aria-label="show 4 new mails" color="inherit">
+        <IconButton aria-label="show 4 new mails" color="inherit" className={classes.yo1class}>
           <Badge badgeContent={wishlist} color="secondary">
             <FavoriteOutlinedIcon />
           </Badge>
         </IconButton>
-        <p>Wishlist</p>
+        <Typography variant="body1" className={classes.yoclass}>Wishlist</Typography>
         </NavLink>
       }
       
       </MenuItem>
-      
-      <MenuItem onClick={handleprofileMenuOpen}>
+
+      {
+        props.isAuthenticated ?  <MenuItem onClick={handleprofileMenuOpen}>
         <IconButton
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"
@@ -278,8 +286,11 @@ function RenteneAppBar(props) {
                 props.profile ? <Avatar className={classes.purple} alt={props.profile.first_name.toUpperCase()} src={pic} /> : <AccountCircle />
               }
         </IconButton>
-        <p>profile</p>
-      </MenuItem>
+        <p>Profile</p>
+      </MenuItem> : null
+      }
+      
+     
     </Menu>
   );
   
@@ -297,7 +308,7 @@ function RenteneAppBar(props) {
           </NavLink>
           <NavLink className={`nav-link ${styles.textclass}`} exact to='/about-us'>
           <Typography className={classes.body} variant="h6" noWrap>
-            About
+            About Us
           </Typography>
           </NavLink>
           <div className={classes.grow} />
