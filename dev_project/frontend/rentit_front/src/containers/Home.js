@@ -26,6 +26,7 @@ import Button from '@material-ui/core/Button';
 import  {useMediaQuery} from '@material-ui/core';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
+import Hidden from '@material-ui/core/Hidden';
 
 import Box from '@material-ui/core/Box';
 import "../components/css/App.css"
@@ -146,7 +147,8 @@ const useStyles = makeStyles((theme) => ({
      
       "& .MuiInputBase-root": {
         color: 'black',
-        
+        width:'30vw',
+        maxWidth:200,
         
         height: 60,
         "& input": {
@@ -639,7 +641,7 @@ function Home(props) {
             <br />
             
             
-
+          <Hidden mdDown>
             <Grid
             container
             direction="row"
@@ -683,6 +685,96 @@ function Home(props) {
             <DatePick value={input} setvalue={setinput} name={'date'} />
 
             </Grid>
+            </Hidden>
+
+
+            <Hidden mdUp>
+            <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+           
+            
+           
+            
+            >
+              
+
+                  
+              <Grid item xs={6}>
+              <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+           
+            
+           
+            
+            >
+                    <StyledTextField id="city" label="City" variant="outlined" name="city" value={input.city} onInput={handleinput}/>
+                    </Grid>
+                    </Grid>
+                    <Grid item xs={6}>
+                    <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+           
+            
+           
+            
+            >
+                    <StyledTextField id="state" label="State" variant="outlined" name="state" value={input.state} onInput={handleinput}/>
+                    </Grid>
+                    </Grid>
+                    </Grid>
+                    <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+           
+            
+           
+            
+            >
+                   <Grid item xs={6}>
+                   <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+           
+            
+           
+            
+            >
+                    <StyledTextField id="country" label="Country" variant="outlined" name="country" value={input.country} onInput={handleinput}/>
+                    </Grid>
+                    </Grid>
+                    <Grid item xs={6}>
+                    <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+           
+            
+           
+            
+            >
+                    <DatePick value={input} setvalue={setinput} name={'date'} />
+                    </Grid></Grid>
+                    </Grid>
+
+          
+            </Hidden>
+           
+
+           
 
             <br />
 
