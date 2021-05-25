@@ -5,31 +5,17 @@ import axios from 'axios'
 import Hidden from '@material-ui/core/Hidden';
 
 
-import SearchCard from './SearchCard'
+import SearchCard from './searchcard_shop'
 import RecipeReviewCard from './card_1';
 import Spinner from './Spinner';
 import Eror from './eror';
 import {Redirect} from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
-import RenteneAppBar from './Navbar'
 
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
 
-const useStyles = makeStyles((theme) => ({
-    
-    navclass:{
-      overflowX:'hidden',
-      position:'absolute',
-    },
-   
-    
-  }));
-  
 
-
-function Wishlistrooms({isAuthenticated,access}) {
-    const classes = useStyles();
+function Wishlistshops({isAuthenticated,access}) {
 
     const [posts,setpost] = useState([]);
     const [error,seterror] = useState('');
@@ -38,8 +24,6 @@ function Wishlistrooms({isAuthenticated,access}) {
     const [open2,setOpen2] = useState(false);
     const [wishlistitems,changeitemswishlist] = useState(0)
     const [cartitems,changeitemscart] = useState(0)
-
-
 
     const myStlye = {
         border: '0px'
@@ -58,10 +42,9 @@ function Wishlistrooms({isAuthenticated,access}) {
             try{
                 const res = await axios.get(`${process.env.REACT_APP_API_URL}/souraawdgrg33w24/wishlist/rooms/`,config,config);
                 setpost(res.data);
-              
             }
             catch{
-               
+                
             }
         setloading(false);
         }
@@ -103,7 +86,6 @@ function Wishlistrooms({isAuthenticated,access}) {
 
     return (
         <div>
-           
 
         <Grid
          container
@@ -113,24 +95,26 @@ function Wishlistrooms({isAuthenticated,access}) {
            spacing={3}
         >
 
-      
+       
+       
 
-       
-       
-            {posts.map(post => (
+        
+            {posts.map(post => (<>
+           
+           
             
-            
-     
+        
         <Grid item>
         <RecipeReviewCard post={post} setOpen1={setOpen1} setOpen2={setOpen2}  wishlistitems={wishlistitems} changeitemswishlist={changeitemswishlist}/>
         </Grid>
-       
-          
+        </>
+            
             ))}
-       
-     
+        
 
-    
+       
+
+      
 
        
 
@@ -146,5 +130,5 @@ const mapStateToProps = state => ({
     access: state.authreducers.access
   });
   
-  export default connect(mapStateToProps)(Wishlistrooms);
+  export default connect(mapStateToProps)(Wishlistshops);
   

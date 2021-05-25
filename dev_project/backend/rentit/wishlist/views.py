@@ -28,7 +28,7 @@ class wishlist_room(viewsets.ViewSet):
 
     def list(self, request,format=None):
         
-        
+        queryset = wishlist.objects.all()
         try:
             wishlist_object = get_object_or_404(queryset,pk=request.user.pk)
 
