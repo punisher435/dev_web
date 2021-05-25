@@ -15,6 +15,8 @@ import os
 from datetime import timedelta
 
 import environ
+
+
 # Initialise environment variables
 env = environ.Env()
 environ.Env.read_env()
@@ -25,8 +27,12 @@ from celery.schedules import crontab
 
 
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -38,7 +44,7 @@ SECRET_KEY = '8f_$#c+!v!v)1@2_l9u-tsjbgk2+*kshhb400j9*@q8375it#_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['rentene111222.herokuapp.com','127.0.0.1']
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -78,6 +84,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 CORS_ORIGIN_ALLOW_ALL = True
 
@@ -177,15 +185,20 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 STATIC_URL = '/static/'
+
+MEDIA_URL = '/media/'
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'build/static'),
 ]
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+
 
 
 SIMPLE_JWT = {
