@@ -205,7 +205,7 @@ const App = ({isAuthenticated}) => {
       settotalPosts(res.data.count);
       }
       catch{
-        setError('An error occurred');
+        
       }
     }
     };
