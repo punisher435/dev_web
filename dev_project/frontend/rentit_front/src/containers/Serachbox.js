@@ -35,7 +35,8 @@ const StyledTextField = withStyles((theme) => ({
       
       "& .MuiInputBase-root": {
         color: 'black',
-        
+        width:'50vw',
+        maxWidth:200,
         
         height: 60,
         "& input": {
