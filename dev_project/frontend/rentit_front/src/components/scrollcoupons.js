@@ -69,7 +69,7 @@ function Scrollroom({rooms}) {
           data={menu}
           
           className={classes.scrollclass}
-          wheel={false}
+          wheel={true}
           alignCenter={false}
          
           

@@ -13,7 +13,7 @@ import './css/App.css';
 
 const useStyles = makeStyles((theme) => ({
   scrollclass:{
-    
+  
   },
 }));
 
@@ -75,6 +75,8 @@ export default function CustomizedTabs1({post}) {
           data={menu}
          
           className={classes.scrollclass}
+          wheel={true}
+          alignCenter={false}
          
           
           

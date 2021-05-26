@@ -431,9 +431,9 @@ if(details){
             </Grid>
 
             <div className={classes.scrollme}>
-            <ListItem>
+         
             <CustomizedTabs1 post={coupons}/>
-            </ListItem>
+           
             </div>
             
             <Divider variant='middle'/>
@@ -564,9 +564,9 @@ if(details){
             </Grid>
 
             <div className={classes.scrollme}>
-            <ListItem>
+           
             <CustomizedTabs1 post={coupons}/>
-            </ListItem>
+          
             </div>
             
             <Divider variant='middle'/>
