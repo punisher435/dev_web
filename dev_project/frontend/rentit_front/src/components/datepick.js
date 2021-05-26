@@ -4,7 +4,7 @@ import DateFnsUtils from '@date-io/date-fns';
 import {
   MuiPickersUtilsProvider,
 
-  KeyboardDatePicker,
+  DatePicker,
 } from '@material-ui/pickers';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 
@@ -94,7 +94,7 @@ const useStyles = makeStyles((theme) => ({
        
       }
     }
-  }))( KeyboardDatePicker);
+  }))( DatePicker);
 
 export default function DateSelect({value,setvalue,name}) {
     const classes = useStyles();
@@ -134,12 +134,13 @@ export default function DateSelect({value,setvalue,name}) {
     <MuiPickersUtilsProvider utils={DateFnsUtils} className={classes.root12}>
         <StyledTextField
         variant="inline"
+        
         inputVariant="outlined"
         className={classes.root12}
           margin="normal"
           id="date-picker-dialog"
           label="select date"
-          // format="MM/dd/yyyy"
+          
           parse='dd-mm-y'
           value={selectedDate}
           onChange={handleDateChange}
@@ -150,6 +151,7 @@ export default function DateSelect({value,setvalue,name}) {
 
           KeyboardButtonProps={{
             'aria-label': 'change date',
+            
           }}
         />
     </MuiPickersUtilsProvider>

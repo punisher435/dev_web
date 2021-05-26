@@ -5,7 +5,7 @@ import Slider from '@material-ui/core/Slider';
 
 const useStyles = makeStyles({
   root: {
-    width: 300,
+    width: 180,
   },
   myclass: {
     color:`${process.env.REACT_APP_COLOR}`,

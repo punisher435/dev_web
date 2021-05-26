@@ -5,9 +5,8 @@ import TextField from '@material-ui/core/TextField';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
-    margin: theme.spacing(1),
-    color:'#f50057',
-    minWidth: 120,
+   
+    width:180,
   },
   selectEmpty: {
     marginTop: theme.spacing(2),
@@ -37,7 +36,7 @@ export default function SimpleSelect3({filters,setfilters}) {
           label="city"
           value={filters.city}
           onInput={e => handleChange(e)}
-         
+         className={classes.formControl}
           
         />
 
@@ -52,7 +51,7 @@ export default function SimpleSelect3({filters,setfilters}) {
           label="state"
           value={filters.state}
           onInput={e => handleChange(e)}
-         
+          className={classes.formControl}
           
         />
 
@@ -67,7 +66,7 @@ export default function SimpleSelect3({filters,setfilters}) {
           label="country"
           value={filters.country}
           onInput={e => handleChange(e)}
-         
+          className={classes.formControl}
           
         />
         <TextField
@@ -81,7 +80,7 @@ export default function SimpleSelect3({filters,setfilters}) {
           label="landmark"
           value={filters.landmark}
           onInput={e => handleChange(e)}
-         
+          className={classes.formControl}
           
         />
         <TextField
@@ -95,7 +94,7 @@ export default function SimpleSelect3({filters,setfilters}) {
           label="pincode"
           value={filters.pincode}
           onInput={e => handleChange(e)}
-         
+          className={classes.formControl}
           
         />
     </div>

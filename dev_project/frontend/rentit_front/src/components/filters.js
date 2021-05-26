@@ -9,7 +9,7 @@ const useStyles = makeStyles({
   root: {
     height: 216,
     flexGrow: 1,
-    maxWidth: 400,
+    maxWidth: 250,
   },
 });
 

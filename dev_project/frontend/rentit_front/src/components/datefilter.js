@@ -7,6 +7,7 @@ import {
  
   KeyboardDatePicker,
 } from '@material-ui/pickers';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 
 export default function MaterialUIPickers1(props) {
   const [selectedDate, setSelectedDate] = React.useState(new Date(Date.now()));
@@ -52,15 +53,60 @@ export default function MaterialUIPickers1(props) {
 
   var newDate = new Date(Date.now() + 14 * 24*60*60*1000);
 
+  const StyledTextField = withStyles((theme) => ({
+    root: {
+     margin:0,
+     padding:0,
+      width:180,
+      "& .MuiOutlinedInput-notchedOutline":{
+        width:180,
+      },
+      "& .MuiOutlinedInput-root":{
+        width:180,
+      },
+      "& .MuiOutlinedInput-root":{
+        width:180,
+      },
+      "& .Mui-focused": {
+        width:180,
+
+        
+       
+        "& input": {
+          width:180,
+        }
+      },
+
+      '& input:valid + fieldset': {
+        width:180,
+        
+        
+      },
+      '& input:invalid + fieldset': {
+        width:180,
+        
+      },
+      '& input:valid:focus + fieldset': {
+       
+        width:180,
+        
+      },
+      "& .MuiFormLabel-root": {
+      
+        width:180,
+      }
+    }
+  }))( KeyboardDatePicker);
+
 
   return (
-    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-      <Grid container justify="space-around">
-        <KeyboardDatePicker
+    < MuiPickersUtilsProvider utils={DateFnsUtils}>
+      <Grid container>
+        <StyledTextField
           margin="normal"
           id="date-picker-dialog"
           label="From"
-          format="yyyy-MM-dd"
+          
           value={selectedDate}
           onChange={handleDateChange}
           minDate={new Date()}
@@ -72,6 +118,6 @@ export default function MaterialUIPickers1(props) {
           }}
         />
       </Grid>
-    </MuiPickersUtilsProvider>
+    </ MuiPickersUtilsProvider>
   );
 }
