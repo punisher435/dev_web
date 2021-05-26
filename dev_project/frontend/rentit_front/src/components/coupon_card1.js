@@ -16,7 +16,7 @@ const useStyles = makeStyles({
     marginLeft: 20,
     marginRight: 20,
     marginTop: 5,
-    boxShadow: '10px 10px 5px grey',
+  
     
   },
   bullet: {

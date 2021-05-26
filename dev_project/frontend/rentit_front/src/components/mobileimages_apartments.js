@@ -110,6 +110,9 @@ const useStyles = makeStyles((theme) => ({
   iconroot: {
     display: 'inline',
   },
+  im1:{
+    
+  },
 
   buttonroot: {
     
@@ -119,7 +122,9 @@ const useStyles = makeStyles((theme) => ({
     fontSize:'25px',
   },
   grid1:{
-    marginTop:'1%'
+    marginTop:'1%',
+    width:'100vw',
+   
   }
 
 }));
@@ -165,16 +170,22 @@ export default function Mobileimages({post}) {
 
 
 
-
 <Grid
   container
-  direction="col"
+  direction="row"
   justify="center"
-  spacing = {1}
+ 
+  className={classes.grid1}
+>
+<Grid
+  container
+  direction="row"
+  justify="center"
+ spacing={1}
   className={classes.grid1}
 >
     
-<Grid item xs={2}>
+<Grid item xs={2} className={classes.img1}>
     <Card >
         <CardActionArea>
           <CardMedia
@@ -197,7 +208,7 @@ export default function Mobileimages({post}) {
 </Grid>
 
 
-<Grid item xs={2}>
+<Grid  item xs={2}  className={classes.img1}>
 <Card>
         <CardActionArea>
           <CardMedia
@@ -220,7 +231,7 @@ export default function Mobileimages({post}) {
         </CardActionArea>
       </Card>
 </Grid>
-<Grid item xs={2}>
+<Grid item xs={2}  className={classes.img1}>
 <Card>
         <CardActionArea>
           <CardMedia
@@ -241,7 +252,7 @@ export default function Mobileimages({post}) {
         </CardActionArea>
       </Card>
 </Grid>
-<Grid item xs={2}>
+<Grid item xs={2}  className={classes.img1}>
 <Card>
         <CardActionArea>
           <CardMedia
@@ -263,7 +274,7 @@ export default function Mobileimages({post}) {
       </Card>
 </Grid>
 
-<Grid item xs={2}>
+<Grid  item xs={2}  className={classes.img1}>
 <Card>
         <CardActionArea>
           <CardMedia
@@ -284,7 +295,7 @@ export default function Mobileimages({post}) {
         </CardActionArea>
       </Card>
 </Grid>
-
+</Grid>
 </Grid>
 
 </Grid>

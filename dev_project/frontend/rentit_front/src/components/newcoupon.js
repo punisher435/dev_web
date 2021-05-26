@@ -134,7 +134,7 @@ export default function CouponCard({mycoupon}) {
     <div>
 
     <Modal open={modal} handleopen={handleOpen} handleclose={handleClose} coupon={mycoupon}/>
-    <Paper elevation={6} className={classes.root}>
+    <Paper elevation={13} className={classes.root}>
     <Button className={classes.button} onClick={(e) => {e.preventDefault();handleOpen();}}>
      
    <div className={ mycoupon.admin_coupon ? classes.root1 : mycoupon.coupon_type==='off_price'? classes.root2 : classes.root3}>
