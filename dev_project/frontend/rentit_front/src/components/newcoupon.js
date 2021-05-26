@@ -77,12 +77,18 @@ const useStyles = makeStyles({
     color:'white',
     fontSize:'20px',
     fontWeight:'bold',
+    textAlign:'center',
+    backgroundColor:'#7eca9c',
+    borderRadius:'10%',
+    paddingTop:4,
+    paddingLeft:4,
+    paddingRight:4,
+    paddingBottom:4,
+    width:'55%',
   },
   couponbg:{
-   backgroundColor:'#7eca9c',
-   borderRadius:'10%',
-   padding:4,
-   width:90,
+  
+  
   },
   button:{
     borderRadius:'10%',
