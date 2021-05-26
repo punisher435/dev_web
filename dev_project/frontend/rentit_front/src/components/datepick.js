@@ -16,8 +16,7 @@ const useStyles = makeStyles((theme) => ({
          
          
          
-          height:60,
-         
+          
        
       },
   
@@ -26,8 +25,8 @@ const useStyles = makeStyles((theme) => ({
 
   const StyledTextField = withStyles((theme) => ({
     root: {
-      margin: theme.spacing(2),
      
+      height: 60,
       "& .MuiOutlinedInput-notchedOutline":{
         borderColor: 'black',
         borderWidth: 2,
