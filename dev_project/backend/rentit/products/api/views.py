@@ -210,7 +210,7 @@ class my_room_viewset(viewsets.ViewSet):
             room.net_discount=int(request.data["owner_discount"])+room.company_discount+room.fake_discount+room.commission
 
             room.final_price=our_price
-
+            room.price=price
             if(request.data["photo1"]!='undefined'):
                 room.photo1=request.data["photo1"] 
             if(request.data["photo2"]!='undefined'):
@@ -532,7 +532,7 @@ class my_shop_viewset(viewsets.ViewSet):
             room.seller_price=seller_price  
             room.owner_discount=int(request.data["owner_discount"]) 
             room.net_discount=int(request.data["owner_discount"])+room.company_discount+room.fake_discount+room.commission
-
+            room.price=price
             room.final_price=our_price
 
             if(request.data["photo1"]!='undefined'):
@@ -836,7 +836,7 @@ class my_apartment_viewset(viewsets.ViewSet):
             room.seller_price=seller_price  
             room.owner_discount=int(request.data["owner_discount"]) 
             room.net_discount=int(request.data["owner_discount"])+room.company_discount+room.fake_discount+room.commission
-
+            room.price=price
             room.final_price=our_price
 
             if(request.data["photo1"]!='undefined'):
