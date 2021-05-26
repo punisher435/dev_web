@@ -104,7 +104,7 @@ function RecipeReviewCard({post}) {
           <Grid item md={4}>
           <Typography
           variant='h6' className={classes.textroot1}>
-          <s>{post.currency.slice(0,1)} {post.final_price}</s>
+          <s>{post.currency.slice(0,1)} {post.price}</s>
           </Typography>
           </Grid>
           <Grid item md={4}>
