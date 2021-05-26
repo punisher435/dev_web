@@ -32,6 +32,7 @@ import Box from '@material-ui/core/Box';
 import "../components/css/App.css"
 
 import CookieConsent from "react-cookie-consent";
+import bg from '../bg1.jpg';
 
 
 import Footer from '../components/footer';
@@ -46,8 +47,61 @@ const useStyles = makeStyles((theme) => ({
         marginLeft:'2%',
         
     },
+    yoyoclass:{
+      backgroundImage: `url(${bg})`,
+      content: "",
+      
+        backgroundRepeat:'no-repeat',
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+
+      width:'100%',
+      maxWidth:'1200px',
+      opacity:1,
+     
+      top: '0px',
+      right: '0px',
+      bottom: '0px',
+      left: '0px',
+
+     
+  
+  
+     
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+
+
+      [theme.breakpoints.up('md')]: {
+        backgroundImage: `url(https://image.freepik.com/free-photo/living-room-arrangement-with-yoga-mat_23-2148741917.jpg)`,
+        content: "",
+        
+          backgroundRepeat:'no-repeat',
+          backgroundPosition: 'center',
+          backgroundSize: 'cover',
+  
+        width:'100%',
+        maxWidth:'1200px',
+        opacity:1,
+       
+        top: '0px',
+        right: '0px',
+        bottom: '0px',
+        left: '0px',
+  
+       
+    
+    
+       
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
+    },
     navclass:{
         opacity:'1 !important',
+        
         
         textAlign: 'center',
         color:'black',
@@ -55,7 +109,7 @@ const useStyles = makeStyles((theme) => ({
     },
     navclass1:{
         opacity:'1 !important',
-        position:'relative',
+        
         textAlign: 'center',
         width:'90vw',
     },
@@ -64,7 +118,9 @@ const useStyles = makeStyles((theme) => ({
         
         textAlign: 'center',
         color:'black',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+
+       
     },
 
     newclass12:{
@@ -147,7 +203,7 @@ const useStyles = makeStyles((theme) => ({
      
       "& .MuiInputBase-root": {
         color: 'black',
-        width:'30vw',
+        width:'37vw',
         maxWidth:200,
         
         height: 60,
@@ -595,7 +651,7 @@ function Home(props) {
             
             >
 
-            <div className="searchcardme">
+            <div className={`searchcardme`}>
             <Grid
             container
             direction="row"
@@ -604,7 +660,7 @@ function Home(props) {
             
             >
                 {/* <div className={demowrap}></div> */}
-            <Paper elevation={5} className="backgroundclass1">
+            <Paper elevation={5} className={`backgroundclass1 ${classes.yoyoclass}`}>
                 <br />
 
                 <Grid
@@ -623,7 +679,7 @@ function Home(props) {
             alignItems="center"
             
             >
-            <Paper square elevation={0} className={classes.navclass}>
+           
             <Tabs
                 value={value}
                 indicatorColor="primary"
@@ -636,12 +692,12 @@ function Home(props) {
                 <Tab label="Shops" icon={<StorefrontIcon />} className={classes.navclass122} value='Shops'/>
                 <Tab label="Housing" icon={<ApartmentIcon />} className={classes.navclass122} value='Housing'/>
             </Tabs>
-            </Paper>
+          
             </Grid>
             <br />
             
             
-          <Hidden mdDown>
+          <Hidden smDown>
             <Grid
             container
             direction="row"

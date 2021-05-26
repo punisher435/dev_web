@@ -1,3 +1,5 @@
+
+
 *, *::before, *::after {
   box-sizing: border-box;
 }
@@ -115,24 +117,8 @@
   align-items: center;
   justify-content: center;
 }
-  
-.backgroundclass1::before {  
-      content: "";
-      background-image: url("https://image.freepik.com/free-photo/living-room-arrangement-with-yoga-mat_23-2148741917.jpg");
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
 
-      width:100%;
-      max-width:1200px;
-      opacity:1;
-      position: absolute;
-      top: 0px;
-      right: 0px;
-      bottom: 0px;
-      left: 0px;
-      
-  }
+
 
 
 

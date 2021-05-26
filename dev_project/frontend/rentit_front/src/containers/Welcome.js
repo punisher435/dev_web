@@ -4,6 +4,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Seachbox from './Serachbox';
 import Grid from '@material-ui/core/Grid';
 import '../components/css/App.css'
+import Hidden from '@material-ui/core/Hidden';
+import bg from '../bg1.jpg';
 
 const useStyles = makeStyles((theme) => ({
    imgclass:{
@@ -54,12 +56,21 @@ function Welcome(){
     <div>
         <Carousel className={classes.myclass} controls={false} indicators={false} fade={true}>
             <Carousel.Item>
-                
+                <Hidden smDown>
                 <img
                 className={classes.imgclass}
                 src="https://image.freepik.com/free-photo/living-room-arrangement-with-yoga-mat_23-2148741917.jpg"
                 alt="Rent=ene"
                 />
+                </Hidden>
+
+                <Hidden mdUp>
+                <img
+                className={classes.imgclass}
+                src={bg}
+                alt="Rent=ene"
+                />
+                </Hidden>
                 <Grid
                 container
                 direction="row"

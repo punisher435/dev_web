@@ -31,21 +31,21 @@ const useStyles = makeStyles((theme) => ({
       "& .MuiOutlinedInput-notchedOutline":{
         borderColor: 'black',
         borderWidth: 2,
-        width:'30vw',
+        width:'37vw',
         maxWidth:200,
         height: 60,
       },
       "& .MuiOutlinedInput-root":{
         borderColor: 'black',
         borderWidth: 2,
-        width:'30vw',
+        width:'37vw',
         maxWidth:200,
         height: 60,
       },
       "& .MuiOutlinedInput-root":{
         borderColor: 'black',
         borderWidth: 2,
-        width:'30vw',
+        width:'37vw',
         maxWidth:200,
         height: 60,
       },
@@ -56,15 +56,13 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: 'bold',
 
         
-        width:'30vw',
-        maxWidth:200,
-        height: 60,
+       
         "& input": {
           textAlign: "center",
           borderColor: 'black',
         borderWidth: 2,
         fontWeight: 'bold',
-        width:'30vw',
+        width:'37vw',
         maxWidth:200,
         height: 60,
         }
@@ -74,27 +72,21 @@ const useStyles = makeStyles((theme) => ({
         borderColor: 'black',
         borderWidth: 2,
         fontWeight: 'bold',
-        width:'30vw',
-        maxWidth:200,
-        height: 60,
+        
         
       },
       '& input:invalid + fieldset': {
         borderColor: 'black',
         borderWidth: 2,
         fontWeight: 'bold',
-        width:'30vw',
-        maxWidth:200,
-        height: 60,
+        
       },
       '& input:valid:focus + fieldset': {
         borderLeftWidth: 6,
         borderColor: 'black',
         padding: '4px !important', // override inline-style
         fontWeight: 'bold',
-        width:'30vw',
-        maxWidth:200,
-        height: 60,
+        
       },
       "& .MuiFormLabel-root": {
         color: 'black',

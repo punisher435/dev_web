@@ -82,7 +82,11 @@ const useStyles = makeStyles((theme) => ({
     color: 'inherit',
   },
   logoclass:{
-   width:220,
+   width:180,
+   marginLeft:-20,
+   [theme.breakpoints.up('md')]: {
+    width:220,
+  },
    
   },
   inputInput: {
