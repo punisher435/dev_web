@@ -2,7 +2,7 @@ import React from 'react';
 import ScrollMenu from 'react-horizontal-scrolling-menu';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import './css/App.css';
-import RecipeReviewCard from './coupon_card1';
+import RecipeReviewCard from './newcoupon';
 
 
 const useStyles = makeStyles((theme) => ({

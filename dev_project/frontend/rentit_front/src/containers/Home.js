@@ -519,7 +519,7 @@ function Home(props) {
                 <div className="navbarclass1">
                 <div   className={classes.myclass}>
                 <Typography variant='h6' className={classes.textclass}>
-                <Box fontSize={25}>
+                <Box fontSize={20}>
                             <Link to='/rooms/?category=Deluxe+room' style={{textDecoration:'none',color:'white'}}>Our Deluxe Rooms...</Link>
                         </Box>
                 </Typography>
@@ -543,7 +543,7 @@ function Home(props) {
                 <div className="navbarclass1">
                 <div   className={classes.myclass}>
                 <Typography variant='h6' className={classes.textclass}>
-                <Box fontSize={25}>
+                <Box fontSize={20}>
 
                     <Link to='/rooms/?category=Classic+room' style={{textDecoration:'none',color:'white'}}>Our Classic Rooms...</Link>
                     </Box>
@@ -565,7 +565,7 @@ function Home(props) {
                 <div className="navbarclass1">
                 <div   className={classes.myclass}>
                 <Typography variant='h6' className={classes.textclass}>
-                <Box fontSize={25}>
+                <Box fontSize={20}>
                     <Link to='/rooms/?category=Single' style={{textDecoration:'none',color:'white'}}>Our Single Rooms...</Link>
                     </Box>
                 </Typography>
@@ -584,7 +584,7 @@ function Home(props) {
                 <div className="navbarclass1">
                 <div   className={classes.myclass}>
                 <Typography variant='h6' className={classes.textclass}>
-                <Box fontSize={25}>
+                <Box fontSize={20}>
 
                     <Link to='/shops/' style={{textDecoration:'none',color:'white'}}>Our Shops...</Link>
                     </Box>
@@ -605,7 +605,7 @@ function Home(props) {
                 <div className="navbarclass1">
                 <div   className={classes.myclass}>
                 <Typography variant='h6' className={classes.textclass}>
-                <Box fontSize={25}>
+                <Box fontSize={20}>
 
 <Link to='/apartments/' style={{textDecoration:'none',color:'white'}}>Our Housing...</Link>
 </Box>
@@ -622,7 +622,7 @@ function Home(props) {
             <div className="navbarclass1">
             <div   className={classes.myclass}>
             <Typography variant='h6' className={classes.textclass}>
-                <Box fontSize={25}>
+                <Box fontSize={20}>
 
                 %Offers and discount
                 </Box>

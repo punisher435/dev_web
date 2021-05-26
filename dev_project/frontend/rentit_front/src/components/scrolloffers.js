@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles} from '@material-ui/core/styles';
 
-import CouponCard from "./coupon_card1";
+import CouponCard from "./newcoupon";
 
 // import Box from '@material-ui/core/Box'
 
