@@ -168,10 +168,10 @@ const Layout = (props) => {
     
     >
 
-        <br />
+      
 
         
-    <Grid item xs={12} sm={3}><br />
+    <Grid item xs={12} sm={3}>
         <Grid
         container
         direction="row"
