@@ -119,9 +119,11 @@ const useStyles = makeStyles((theme) => ({
   
   drawerPaper: {
     width: drawerWidth,
+    overflowX:'hidden',
   },
   drawerPaper1: {
     width: drawerWidth1,
+    overflowX:'hidden',
   },
   content: {
     flexGrow: 1,

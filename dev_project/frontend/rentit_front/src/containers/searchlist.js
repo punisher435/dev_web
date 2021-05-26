@@ -64,11 +64,14 @@ const useStyles = makeStyles((theme) => ({
   },
   root: {
     display: 'flex',
+    
   },
   drawer: {
+    
     [theme.breakpoints.up('lg')]: {
       width: drawerWidth,
       flexShrink: 0,
+    
     },
     
   },
@@ -76,6 +79,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('sm')]: {
       width: drawerWidth1,
       flexShrink: 0,
+      
     },
   },
   appBar: {
@@ -109,6 +113,7 @@ const useStyles = makeStyles((theme) => ({
   // necessary for content to be below app bar
   toolbar: {
     marginTop: theme.spacing(2),
+    
   },
   myclass:{
     marginTop:50,
@@ -122,9 +127,11 @@ const useStyles = makeStyles((theme) => ({
   
   drawerPaper: {
     width: drawerWidth,
+    overflowX:'hidden',
   },
   drawerPaper1: {
     width: drawerWidth1,
+    overflowX:'hidden',
   },
   content: {
     flexGrow: 1,
