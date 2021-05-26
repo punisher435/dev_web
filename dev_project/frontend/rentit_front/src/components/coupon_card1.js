@@ -46,9 +46,12 @@ const useStyles = makeStyles({
     width: '100%',
   },
   imgclass1:{
-    width:'70vw',
-    maxWidth: 80,
+    width:'30vw',
+    maxWidth: 50,
 
+  },
+  coupon:{
+    marginBottom:10,
   }
   
 });
@@ -73,7 +76,7 @@ export default function CouponCard({mycoupon}) {
   direction="column"
   justify="flex-start"
   alignItems="flex-start"
-  
+  className={classes.coupon}
 >
  
 
@@ -82,7 +85,7 @@ export default function CouponCard({mycoupon}) {
   direction="row"
   justify="center"
   alignItems="center"
-  
+  className={classes.coupon}
 >
 
         <Typography className={classes.title} color="textSecondary">
@@ -93,7 +96,7 @@ export default function CouponCard({mycoupon}) {
 
 </Grid>
         
-        <br />
+       
         <Grid
   container
   direction="row"
@@ -165,14 +168,14 @@ export default function CouponCard({mycoupon}) {
         
 
 
-        <br />
+      
 
         <Grid
   container
   direction="row"
   justify="center"
   alignItems="center"
-  
+  className={classes.coupon}
   
 >
   <div className="titlecoupon">
@@ -182,8 +185,8 @@ export default function CouponCard({mycoupon}) {
         </div>
       
 
-</Grid>
-<br />
+</Grid >
+
 
        
       

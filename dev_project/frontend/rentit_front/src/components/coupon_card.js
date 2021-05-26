@@ -12,14 +12,19 @@ import Discount1 from '../discount.png'
 
 
 const useStyles = makeStyles({
-  root: {
-    width:'80vw',
-    maxWidth: 300,
-    boxShadow: '10px 10px 5px grey',
-    
-  },
+  
   buttonclassnew:{
     color:'white',
+  },
+  root: {
+   
+    width: 250,
+    marginBottom: 5,
+    marginLeft: 20,
+    marginRight: 20,
+    marginTop: 5,
+    boxShadow: '10px 10px 5px grey',
+    
   },
   bullet: {
     display: 'inline-block',
@@ -27,18 +32,18 @@ const useStyles = makeStyles({
     transform: 'scale(0.8)',
   },
   title: {
-    fontSize: 30,
+    fontSize: 23,
     color: 'white',
     fontWeight: 'bold',
   },
 
   title1: {
-    fontSize: 15,
+    fontSize: 12,
     color: 'white',
     fontWeight: 'bold',
   },
   pos: {
-    marginBottom: 12,
+    marginBottom: 5,
   },
   coupontext:{
     color: 'white',
@@ -48,9 +53,12 @@ const useStyles = makeStyles({
     width: '100%',
   },
   imgclass1:{
-    width:'70vw',
-    maxWidth: 80,
+    width:'30vw',
+    maxWidth: 50,
 
+  },
+  coupon:{
+    marginBottom:10,
   }
   
 });
@@ -75,7 +83,7 @@ export default function CouponCard({mycoupon}) {
   direction="column"
   justify="flex-start"
   alignItems="flex-start"
-  
+  className={classes.coupon}
 >
  
 
@@ -84,7 +92,7 @@ export default function CouponCard({mycoupon}) {
   direction="row"
   justify="center"
   alignItems="center"
-  
+  className={classes.coupon}
 >
 
         <Typography className={classes.title} color="textSecondary">
@@ -95,7 +103,7 @@ export default function CouponCard({mycoupon}) {
 
 </Grid>
         
-        <br />
+      
         <Grid
   container
   direction="row"
@@ -152,14 +160,14 @@ export default function CouponCard({mycoupon}) {
         
 
 
-        <br />
+       
 
         <Grid
   container
   direction="row"
   justify="center"
   alignItems="center"
-  
+  className={classes.coupon}
   
 >
   <div className="titlecoupon">
@@ -181,7 +189,7 @@ export default function CouponCard({mycoupon}) {
           
        
         
-      <br />
+    
       
       
       <Link to={{
