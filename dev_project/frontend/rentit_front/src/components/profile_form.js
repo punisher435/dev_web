@@ -202,7 +202,7 @@ function ProfileForm (props){
 
    
 
-if(props.profile.is_seller && edit===false && (values.front===null || values.back===null || (values.country_code==='+91' && values.aadhar.length!=12)  ) )
+if(props.profile.is_seller && edit===false && (values.front===null || values.back===null || (values.country_code==='+91' && values.aadhar.length==0)  ) )
 {
     temp=false;
 }
@@ -266,7 +266,7 @@ if(props.profile.is_seller && edit===false && (values.front===null || values.bac
 
     }
     else{
-      setmessage(`Identification proof photos are required and if your country code is +91, then aadhar no. is also required`)
+      setmessage(`All fields except photograph and alternate mobile are required`)
           setopen1(true);
     }
    
