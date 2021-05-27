@@ -451,7 +451,7 @@ const handleChange2 = (e,apartmentid,boolean) => {
           rows={1}
           id="off"
           name="off"
-          label="off"
+          label="Off"
           value={formik.values.off}
           onChange={(e) => {formik.setFieldValue('off',parseInt(e.target.value)); 
           }}
@@ -474,7 +474,7 @@ const handleChange2 = (e,apartmentid,boolean) => {
           rows={1}
           id="min_price"
           name="min_price"
-          label="min_price"
+          label="Min price to be applied on"
           value={formik.values.min_price}
           onChange={(e) => {formik.setFieldValue('min_price',parseInt(e.target.value)); 
           }}
@@ -508,7 +508,7 @@ const handleChange2 = (e,apartmentid,boolean) => {
           rows={1}
           id="max_off_price"
           name="max_off_price"
-          label="max_off_price"
+          label="Max discount price"
           value={formik.values.max_off_price}
           onChange={(e) => {formik.setFieldValue('max_off_price',parseInt(e.target.value)); 
           }}
@@ -535,7 +535,7 @@ const handleChange2 = (e,apartmentid,boolean) => {
           rows={1}
           id="life"
           name="life"
-          label="life"
+          label="Expiry after"
           value={formik.values.life}
           onChange={(e) => {formik.setFieldValue('life',parseInt(e.target.value)); 
           }}

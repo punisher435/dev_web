@@ -416,7 +416,7 @@ function ApartmentForm (props){
       cost_AC:'',
       removable_AC:'',
 
-      gender:'Both Male and Female',
+      gender:'Any',
 
       laundry:'',
       cost_laundry:0,

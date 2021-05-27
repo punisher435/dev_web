@@ -466,7 +466,7 @@ function RoomForm (props){
       laundry:'',
       cost_laundry:0,
 
-      gender:'Both Male and Female',
+      gender:'Any',
 
       geyser:'',
       cost_geyser:'',

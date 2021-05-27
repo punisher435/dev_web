@@ -335,7 +335,7 @@ function ShopForm (props){
       cost_TV:'',
       removable_TV:false,
 
-      gender:'Both Male and Female',
+      gender:'Any',
 
       cooler:'',
       cost_cooler:'',
