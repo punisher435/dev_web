@@ -295,7 +295,7 @@ form: {
  
 },
 papernewclass:{
-  padding:35,
+  padding:25,
   [theme.breakpoints.up('sm')]: {
     padding:30,
   },

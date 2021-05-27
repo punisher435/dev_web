@@ -83,7 +83,7 @@ export default function CustomizedTabs1({post}) {
           arrowClass='myarrow'
           wheel={false}
           transition={0.9}
-          inertiaScrollingSlowdown={1.0}
+          inertiaScrollingSlowdown={0.25}
           
           arrowLeft={ArrowLeft}
           arrowRight={ArrowRight}
@@ -96,7 +96,7 @@ export default function CustomizedTabs1({post}) {
           className={classes.scrollclass}
           wheel={false}
           alignCenter={false}
-          inertiaScrollingSlowdown={1.0}
+          inertiaScrollingSlowdown={0.25}
          
           inertiaScrolling={true}
           
