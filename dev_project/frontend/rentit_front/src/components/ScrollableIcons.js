@@ -20,6 +20,7 @@ import WhatshotIcon from '@material-ui/icons/Whatshot';
 import BathtubIcon from '@material-ui/icons/Bathtub';
 import { IconContext } from "react-icons";
 import WifiOutlinedIcon from '@material-ui/icons/WifiOutlined';
+import WeekendIcon from '@material-ui/icons/Weekend';
 // import Box from '@material-ui/core/Box'
 
 const AntTabs = withStyles({
@@ -164,22 +165,28 @@ export default function CustomizedTabs({post}) {
         }
         { 
         post.guest_allowed ? 
-        <AntTab label="Breakfast" icon={<AccessibilityIcon />} />
+        <AntTab label="Guest Allowed" icon={<AccessibilityIcon />} />
         : null
         }
         { 
         post.breakfast ? 
-        <AntTab label="" icon={<FreeBreakfastIcon />} />
+        <AntTab label="Breakfast" icon={<FreeBreakfastIcon />} />
         : null
         }
         { 
         post.lunch ? 
-        <AntTab label="lunch" icon={<FastfoodIcon />} />
+        <AntTab label="Lunch" icon={<FastfoodIcon />} />
         : null
         }
         { 
         post.dinner ? 
-        <AntTab label="dinner" icon={<BiFoodMenu />} />
+        <AntTab label="Dinner" icon={<BiFoodMenu />} />
+        : null
+        }
+
+{ 
+        post.sofa ? 
+        <AntTab label="Sofa" icon={<WeekendIcon />} />
         : null
         }
         { 

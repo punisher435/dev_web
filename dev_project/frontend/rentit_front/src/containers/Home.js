@@ -12,6 +12,7 @@ import Scrollshop from '../components/scrollshops';
 import Scrollapartment from '../components/scrollapartment';
 import Scrollcoupons from '../components/scrollcoupons';
 import Typography from '@material-ui/core/Typography';
+import { connect } from 'react-redux';
 import {Link,Redirect} from 'react-router-dom'
 import Paper from '@material-ui/core/Paper';
 import '../components/css/App.css';
@@ -491,19 +492,41 @@ function Home(props) {
                     <Welcome />
                 </div>
             </div>
+            {
+
+            }
+
+            {
+              props.isAuthenticated ? null :  <CookieConsent
+              location="bottom"
+              buttonText="Got it"
+              cookieName="csrftoken"
+              style={{ background: "#b6c9f0" ,color:'#FFFFFF'}}
+              buttonStyle={{ backgroundColor: "Transparent", fontSize: "14px", border:"2px solid #FFFFFF",color:'#FFFFFF' }}
+              expires={150}
+              
+          >
+              This website uses cookies to enhance the user experience.{" "}
+              <span style={{ fontSize: "13px" }}></span>
+          </CookieConsent>
+            }
+
+{
+              props.isAuthenticated ? null :  <CookieConsent
+              location="bottom"
+              buttonText="Got it"
+              cookieName="sessionid"
+              style={{ background: "#b6c9f0" ,color:'#FFFFFF'}}
+              buttonStyle={{ backgroundColor: "Transparent", fontSize: "14px", border:"2px solid #FFFFFF",color:'#FFFFFF' }}
+              expires={150}
+              
+          >
+              This website uses cookies to enhance the user experience.{" "}
+              <span style={{ fontSize: "13px" }}></span>
+          </CookieConsent>
+            }
             
-            <CookieConsent
-                location="bottom"
-                buttonText="Got it"
-                cookieName="myAwesomeCookieName2"
-                style={{ background: "#b6c9f0" ,color:'#FFFFFF'}}
-                buttonStyle={{ backgroundColor: "Transparent", fontSize: "14px", border:"2px solid #FFFFFF",color:'#FFFFFF' }}
-                expires={150}
-                debug={true}
-            >
-                This website uses cookies to enhance the user experience.{" "}
-                <span style={{ fontSize: "13px" }}></span>
-            </CookieConsent>
+           
             
 
             <Snackbar open={display} autoHideDuration={6000} onClose={handleClose}>
@@ -898,4 +921,11 @@ function Home(props) {
     )
 }
 
-export default Home
+const mapStateToProps = state => ({
+  isAuthenticated: state.authreducers.isAuthenticated,
+ 
+});
+
+export default connect(mapStateToProps)(Home);
+
+

@@ -273,7 +273,7 @@ const Layout = (props) => {
     >
         <Grid item xs={12}>
             <Typography variant='h6' className={classes.textclass}>
-                <Link to='/policies' style={{textDecoration:'None',color:'white'}}> {props.profile ? props.profile.is_seller ? 'Owner Policy' : 'Guest Policy' : 'Customer Policy'}</Link>
+                <Link to='/policies' style={{textDecoration:'None',color:'white'}}> {props.profile ? props.profile.is_seller ? 'Owner Policy' : 'Guest Policy' : 'Guest Policy'}</Link>
             </Typography>
         </Grid>
         
