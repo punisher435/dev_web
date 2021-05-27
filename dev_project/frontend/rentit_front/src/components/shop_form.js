@@ -250,7 +250,10 @@ const validationSchema = yup.object({
 const useStyles = makeStyles(theme => ({
  
   myclass: {
-    paddingTop:'10%'
+       
+    [theme.breakpoints.up('md')]: {
+      paddingTop:'10%',
+    },
 },
 imageclass: {
   overflow: 'hidden',
@@ -292,7 +295,7 @@ form: {
  
 },
 papernewclass:{
-  padding:6,
+  padding:35,
   [theme.breakpoints.up('sm')]: {
     padding:30,
   },
