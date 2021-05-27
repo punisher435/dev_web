@@ -176,7 +176,7 @@ function RenteneAppBar(props) {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <NavLink className={`nav-link ${styles.textclass2}`} exact to='/dashboard/analytics'><MenuItem onClick={handleMenuClose}>Dashboard</MenuItem></NavLink>
+      <NavLink className={`nav-link ${styles.textclass2}`} exact to={props.profile ? props.profile.is_seller ? '/dashboard/analytics' : '/dashboard/profile' : '/dashboard/profile'}><MenuItem onClick={handleMenuClose}>Dashboard</MenuItem></NavLink>
       
       {
         props.isAuthenticated ? <NavLink className={`nav-link ${styles.textclass2}`} exact to='/#!' onClick={logout_user}><MenuItem onClick={handleMenuClose}>Logout</MenuItem></NavLink> : null

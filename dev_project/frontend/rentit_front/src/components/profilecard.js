@@ -46,9 +46,7 @@ export default function ProfileCard({myprofile,info}) {
           <Typography variant="body2" color="textSecondary" component="p">
             {myprofile.country_code} {myprofile.alternate_mobile}
           </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            Aadhar  {myprofile.aadhar}
-          </Typography>
+         
         </CardContent>
       </CardActionArea>
       <CardActions>

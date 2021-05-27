@@ -137,9 +137,21 @@ function Myprofile(props) {
     ,[props.profile])
 
     React.useEffect(() => {
-      if(warning==true)
+      if(warning==true && props.profile)
       {
-        setdisplay(true);
+        if(props.profile.is_seller)
+        {
+          if(!props.profile.profile_completed || !props.profile.bank_completed || !props.profile.address_completed)
+          {
+            setdisplay(true);
+          }
+        }
+        else{
+          if(!props.profile.profile_completed)
+          {
+            setdisplay(true);
+          }
+        }
       }
       else{
         setdisplay(false);

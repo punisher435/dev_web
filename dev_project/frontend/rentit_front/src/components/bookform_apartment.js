@@ -29,7 +29,7 @@ function Copyright() {
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
       <Link color="inherit" href="https://material-ui.com/">
-        Rent=ene
+        Rentene
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -302,7 +302,7 @@ function Checkout(props) {
             key_secret: process.env.REACT_APP_RAZORPAY_KEY_SECRET,
             amount: data.data.price_to_be_paid,
             currency: bookdetails.currency.slice(2,),
-            name: "Rent=ene",
+            name: "Rentene",
             description: "Booking payment",
             image: "/logo.png", // add image url
             order_id: data.data.payment_id,
