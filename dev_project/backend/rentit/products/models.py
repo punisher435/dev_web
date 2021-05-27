@@ -171,7 +171,7 @@ class rooms(models.Model):
     cost_iron = models.IntegerField(default=0)
 
     guest_allowed = models.BooleanField(default=False)
-    guest_policy=models.CharField(max_length=255,default='null')
+    guest_policy=models.TextField()
 
     veg_food=models.BooleanField(default=True)
     nonveg_food=models.BooleanField(default=True)
