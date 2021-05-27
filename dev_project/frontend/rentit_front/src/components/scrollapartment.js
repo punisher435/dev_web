@@ -79,8 +79,8 @@ function Scrollroom({rooms}) {
           alignCenter={false}
           arrowClass='myarrow'
           wheel={false}
-          transition={0.9}
-          inertiaScrollingSlowdown={0.25}
+          transition={process.env.REACT_APP_Y}
+          inertiaScrollingSlowdown={process.env.REACT_APP_X}
           
           arrowLeft={ArrowLeft}
           arrowRight={ArrowRight}
@@ -89,11 +89,11 @@ function Scrollroom({rooms}) {
         /></Hidden>
          <Hidden lgUp><ScrollMenu
           data={menu}
-          transition={0.9}
+          transition={process.env.REACT_APP_Y}
           className={classes.scrollclass}
           wheel={false}
           alignCenter={false}
-          inertiaScrollingSlowdown={0.25}
+          inertiaScrollingSlowdown={process.env.REACT_APP_X}
          
           inertiaScrolling={true}
           

@@ -178,10 +178,10 @@ class room_payment(viewsets.ViewSet):
 
         #payment success 
         booking.paid = True
-
-        old_booking=get_object_or_404(roomBookings.objects.all(),pk=booking.extended_on)
-        old_booking.extended=True
-        old_booking.save()
+        if booking.is_extended:
+            old_booking=booking.extended_on
+            old_booking.extended=True
+            old_booking.save()
 
         seller_pay = booking.seller_pay
 
@@ -338,9 +338,10 @@ class shop_payment(viewsets.ViewSet):
         #payment success 
         booking.paid = True
 
-        old_booking=booking.extended_on
-        old_booking.extended=True
-        old_booking.save()
+        if booking.is_extended:
+            old_booking=booking.extended_on
+            old_booking.extended=True
+            old_booking.save()
         
         seller_pay = booking.seller_pay
 
@@ -443,9 +444,10 @@ class apartment_payment(viewsets.ViewSet):
         #payment success 
         booking.paid = True
 
-        old_booking=booking.extended_on
-        old_booking.extended=True
-        old_booking.save()
+        if booking.is_extended:
+            old_booking=booking.extended_on
+            old_booking.extended=True
+            old_booking.save()
 
         seller_pay = booking.seller_pay
 
