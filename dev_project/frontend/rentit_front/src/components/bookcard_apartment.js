@@ -96,6 +96,7 @@ function BoolCard({details,isAuthenticated,loginpage,setloginpage,profile}) {
 
   const [booked,setbooked] = React.useState(true);
   const [date,setdate] = React.useState(details.bookedtill)
+  
  /*  date.setDate(date.getDate() + 1); */
 
 
@@ -136,6 +137,16 @@ laundry:details.laundry
 
   
   },[date,details,selectedDate,profile])
+
+  const [newdate11,setnewdate11] = React.useState(new Date(Date.now()))
+
+  React.useEffect(() => {
+    var tempnew11 = new Date(Date.now());
+    tempnew11.setFullYear(parseInt(details.bookedtill.slice(0,4)));
+    tempnew11.setMonth(parseInt(details.bookedtill.slice(5,7))-1);
+    tempnew11.setDate(parseInt(details.bookedtill.slice(8,))+1);
+    setnewdate11(tempnew11);
+  },[])
 
   const handlecoupon = async (e) => {
       e.preventDefault();
@@ -369,7 +380,7 @@ laundry:details.laundry
         </Box>
     {
          details.pausebooking || !details.verified || booked ? <Button variant='contained' color="primary" fullWidth >
-        Unavaiable untill 1 day after {details.bookedtill}
+        Unavaiable untill {`${newdate11.getDate()}-${parseInt(newdate11.getMonth())+1}-${newdate11.getFullYear()}`}
       </Button> :   <Link style={{textDecoration:'none'}} to={{
     pathname: `/housing/${details.apartment_id}/book`,
     state: { property_id: bookvalues }

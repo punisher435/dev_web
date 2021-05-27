@@ -322,9 +322,9 @@ class room_booking(viewsets.ViewSet):
 
                                         data['savings'] = data['savings']+coupon.off
 
-                                    coupon.used_by.add(request.user)
+                                   
                                     temp_coupon = coupon.coupoun_code
-                                    coupon.save()
+                                  
                 
                         except:
                             return Response('Coupon not applicable',status=status.HTTP_400_BAD_REQUEST)
@@ -340,10 +340,10 @@ class room_booking(viewsets.ViewSet):
 
                     end_date = book_date + relativedelta(months=+data['duration'])  
                     t11=price*3
-                    t11=t11/100
-                    t22=t11*18
-                    t22=t22/100
-                    price=price+t11+t22
+                    t11=t11/100.0
+                    t11=round(t11)
+                    
+                    price=price+t11
 
                     x = payment(price,room.currency[2:])
                     if data['alternate_mobile']=='':
@@ -409,28 +409,52 @@ class room_booking(viewsets.ViewSet):
             refund_price = 0
 
             if utc.localize(datetime.datetime.now())<=booking.created_at+datetime.timedelta(days=7) and datetime.date.today()>booking.booked_from:
-                tt1=int(booking.price_to_be_paid)*7
-                refund_price = tt1/10
+                yo1=int(booking.price_to_be_paid)
+                yo1=yo1*100 
+                yo1=yo1/103.0
                 
-                seller_pay = tt1/10
+                tt1=yo1*7.0
+                tt1=tt1/10.0
+                tt1=round(tt1)
+                refund_price = tt1
+                
+                seller_pay = tt1
                 seller = get_object_or_404(seller_bank_details.objects.all(),pk=room.seller_id)
                 seller.total_due_payment = seller.total_due_payment-seller_pay
                 seller.save()
 
             elif utc.localize(datetime.datetime.now())<=booking.created_at+datetime.timedelta(days=5):
                 print('refunded')
-                refund_price = booking.price_to_be_paid
+                yo1=int(booking.price_to_be_paid)
+                yo1=yo1*100 
+                yo1=yo1/103.0
+                yo1=round(yo1)
+                refund_price = yo1
 
-                seller_pay = booking.seller_pay
+                bob=booking.seller_pay
+                bob=bob*3
+                bob=bob/10.0
+                bob=round(bob)
+                seller_pay = bob
                 seller = get_object_or_404(seller_bank_details.objects.all(),pk=room.seller_id)
                 seller.total_due_payment = seller.total_due_payment-seller_pay
                 seller.save()
 
             elif utc.localize(datetime.datetime.now())<=booking.created_at+datetime.timedelta(days=7) and utc.localize(datetime.datetime.now())>booking.created_at+datetime.timedelta(days=5):
-                tt1=int(booking.price_to_be_paid)*7
-                refund_price = tt1/10
+                yo1=int(booking.price_to_be_paid)
+                yo1=yo1*100 
+                yo1=yo1/103.0
                 
-                seller_pay = tt1/10
+                tt1=yo1*7.0
+                tt1=tt1/10.0
+                tt1=round(tt1)
+                refund_price = tt1
+                
+                bob=booking.seller_pay
+                bob=bob*3
+                bob=bob/10.0
+                bob=round(bob)
+                seller_pay = bob
                 seller = get_object_or_404(seller_bank_details.objects.all(),pk=room.seller_id)
                 seller.total_due_payment = seller.total_due_payment-seller_pay
                 seller.save()
@@ -682,9 +706,9 @@ class room_booking(viewsets.ViewSet):
 
                                         data['savings'] = data['savings']+coupon.off
 
-                                    coupon.used_by.add(request.user)
+                                   
                                     temp_coupon = coupon.coupoun_code
-                                    coupon.save()
+                                  
                 
                         except:
                             print('hy')
@@ -693,10 +717,10 @@ class room_booking(viewsets.ViewSet):
 
                     end_date = book_date + relativedelta(months=+data['duration'])  
                     t11=price*3
-                    t11=t11/100
-                    t22=t11*18
-                    t22=t22/100
-                    price=price+t11+t22
+                    t11=t11/100.0
+                    t11=round(t11)
+                   
+                    price=price+t11
 
                     x = payment(price,room.currency[2:])
                     if data['alternate_mobile']=='':
@@ -888,18 +912,18 @@ class shop_booking(viewsets.ViewSet):
 
                                         data['savings'] = data['savings']+coupon.off
 
-                                    coupon.used_by.add(request.user)
+                                    
                                     temp_coupon = coupon.coupoun_code
-                                    coupon.save()
+                                   
                 
                         except:
                             return Response('Coupon not applicable',status=status.HTTP_400_BAD_REQUEST)
 
                     t11=price*3
-                    t11=t11/100
-                    t22=t11*18
-                    t22=t22/100
-                    price=price+t11+t22
+                    t11=t11/100.0
+                    t11=round(t11)
+                   
+                    price=price+t11
         
                     end_date = book_date + relativedelta(months=+data['duration'])  
 
@@ -965,28 +989,52 @@ class shop_booking(viewsets.ViewSet):
             refund_price = 0
 
             if utc.localize(datetime.datetime.now())<=booking.created_at+datetime.timedelta(days=7) and datetime.date.today()>booking.booked_from:
-                tt1=int(booking.price_to_be_paid)*7
-                refund_price = tt1/10
+                yo1=int(booking.price_to_be_paid)
+                yo1=yo1*100 
+                yo1=yo1/103.0
                 
-                seller_pay = tt1/10
+                tt1=yo1*7.0
+                tt1=tt1/10.0
+                tt1=round(tt1)
+                refund_price = tt1
+                
+                seller_pay = tt1
                 seller = get_object_or_404(seller_bank_details.objects.all(),pk=room.seller_id)
                 seller.total_due_payment = seller.total_due_payment-seller_pay
                 seller.save()
 
             elif utc.localize(datetime.datetime.now())<=booking.created_at+datetime.timedelta(days=5):
                 print('refunded')
-                refund_price = booking.price_to_be_paid
+                yo1=int(booking.price_to_be_paid)
+                yo1=yo1*100 
+                yo1=yo1/103.0
+                yo1=round(yo1)
+                refund_price = yo1
 
-                seller_pay = booking.seller_pay
+                bob=booking.seller_pay
+                bob=bob*3
+                bob=bob/10.0
+                bob=round(bob)
+                seller_pay = bob
                 seller = get_object_or_404(seller_bank_details.objects.all(),pk=room.seller_id)
                 seller.total_due_payment = seller.total_due_payment-seller_pay
                 seller.save()
 
             elif utc.localize(datetime.datetime.now())<=booking.created_at+datetime.timedelta(days=7) and utc.localize(datetime.datetime.now())>booking.created_at+datetime.timedelta(days=5):
-                tt1=int(booking.price_to_be_paid)*7
-                refund_price = tt1/10
+                yo1=int(booking.price_to_be_paid)
+                yo1=yo1*100 
+                yo1=yo1/103.0
                 
-                seller_pay = tt1/10
+                tt1=yo1*7.0
+                tt1=tt1/10.0
+                tt1=round(tt1)
+                refund_price = tt1
+                
+                bob=booking.seller_pay
+                bob=bob*3
+                bob=bob/10.0
+                bob=round(bob)
+                seller_pay = bob
                 seller = get_object_or_404(seller_bank_details.objects.all(),pk=room.seller_id)
                 seller.total_due_payment = seller.total_due_payment-seller_pay
                 seller.save()
@@ -1128,9 +1176,9 @@ class shop_booking(viewsets.ViewSet):
 
                                         data['savings'] = data['savings']+coupon.off
 
-                                    coupon.used_by.add(request.user)
+                                   
                                     temp_coupon = coupon.coupoun_code
-                                    coupon.save()
+                                   
                 
                         except:
                             print('hy')
@@ -1143,10 +1191,10 @@ class shop_booking(viewsets.ViewSet):
                     end_date = book_date + relativedelta(months=+data['duration']) 
 
                     t11=price*3
-                    t11=t11/100
-                    t22=t11*18
-                    t22=t22/100
-                    price=price+t11+t22 
+                    t11=t11/100.0
+                    t11=round(t11)
+                  
+                    price=price+t11
 
                     x = payment(price,room.currency[2:])
                     if data['alternate_mobile']=='':
@@ -1351,9 +1399,9 @@ class apartment_booking(viewsets.ViewSet):
 
                                         data['savings'] = data['savings']+coupon.off
 
-                                    coupon.used_by.add(request.user)
+                                   
                                     temp_coupon = coupon.coupoun_code
-                                    coupon.save()
+                                    
                 
                         except:
                             return Response('Coupon not applicable',status=status.HTTP_400_BAD_REQUEST)
@@ -1363,10 +1411,10 @@ class apartment_booking(viewsets.ViewSet):
 
                     end_date = book_date + relativedelta(months=+data['duration'])  
                     t11=price*3
-                    t11=t11/100
-                    t22=t11*18
-                    t22=t22/100
-                    price=price+t11+t22
+                    t11=t11/100.0
+                    t11=round(t11)
+                   
+                    price=price+t11
 
                     x = payment(price,room.currency[2:])
                     if data['alternate_mobile']=='':
@@ -1430,28 +1478,52 @@ class apartment_booking(viewsets.ViewSet):
             refund_price = 0
 
             if utc.localize(datetime.datetime.now())<=booking.created_at+datetime.timedelta(days=7) and datetime.date.today()>booking.booked_from:
-                tt1=int(booking.price_to_be_paid)*7
-                refund_price = tt1/10
+                yo1=int(booking.price_to_be_paid)
+                yo1=yo1*100 
+                yo1=yo1/103.0
                 
-                seller_pay = tt1/10
+                tt1=yo1*7.0
+                tt1=tt1/10.0
+                tt1=round(tt1)
+                refund_price = tt1
+                
+                seller_pay = tt1
                 seller = get_object_or_404(seller_bank_details.objects.all(),pk=room.seller_id)
                 seller.total_due_payment = seller.total_due_payment-seller_pay
                 seller.save()
 
             elif utc.localize(datetime.datetime.now())<=booking.created_at+datetime.timedelta(days=5):
                 print('refunded')
-                refund_price = booking.price_to_be_paid
+                yo1=int(booking.price_to_be_paid)
+                yo1=yo1*100 
+                yo1=yo1/103.0
+                yo1=round(yo1)
+                refund_price = yo1
 
-                seller_pay = booking.seller_pay
+                bob=booking.seller_pay
+                bob=bob*3
+                bob=bob/10.0
+                bob=round(bob)
+                seller_pay = bob
                 seller = get_object_or_404(seller_bank_details.objects.all(),pk=room.seller_id)
                 seller.total_due_payment = seller.total_due_payment-seller_pay
                 seller.save()
 
             elif utc.localize(datetime.datetime.now())<=booking.created_at+datetime.timedelta(days=7) and utc.localize(datetime.datetime.now())>booking.created_at+datetime.timedelta(days=5):
-                tt1=int(booking.price_to_be_paid)*7
-                refund_price = tt1/10
+                yo1=int(booking.price_to_be_paid)
+                yo1=yo1*100 
+                yo1=yo1/103.0
                 
-                seller_pay = tt1/10
+                tt1=yo1*7.0
+                tt1=tt1/10.0
+                tt1=round(tt1)
+                refund_price = tt1
+                
+                bob=booking.seller_pay
+                bob=bob*3
+                bob=bob/10.0
+                bob=round(bob)
+                seller_pay = bob
                 seller = get_object_or_404(seller_bank_details.objects.all(),pk=room.seller_id)
                 seller.total_due_payment = seller.total_due_payment-seller_pay
                 seller.save()
@@ -1607,9 +1679,9 @@ class apartment_booking(viewsets.ViewSet):
 
                                         data['savings'] = data['savings']+coupon.off
 
-                                    coupon.used_by.add(request.user)
+                                    
                                     temp_coupon = coupon.coupoun_code
-                                    coupon.save()
+                                
                 
                         except:
                             print('hy')
@@ -1623,10 +1695,10 @@ class apartment_booking(viewsets.ViewSet):
                         
                         data['alternate_mobile']=None 
                     t11=price*3
-                    t11=t11/100
-                    t22=t11*18
-                    t22=t22/100
-                    price=price+t11+t22 
+                    t11=t11/100.0
+                    t11=round(t11)
+                 
+                    price=price+t11
 
                     x = payment(price,room.currency[2:])
 

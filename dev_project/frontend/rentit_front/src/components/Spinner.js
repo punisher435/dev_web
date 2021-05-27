@@ -1,6 +1,7 @@
 import React from 'react'
 import { css } from "@emotion/core";
 import HashLoader from "react-spinners/HashLoader";
+import Load from '../loading.avi'
 
 
 
@@ -13,14 +14,24 @@ function Spinner({loading}) {
    color: #f50057;
     `;
 
+    
+
     return (
             <div>
-                <HashLoader
-                css={override}
-                size={100}
-                color={"#f50057"}
-                loading={loading}
-                 />
+
+<video width="320" height="240" controls>
+                    <source src={Load} type="video/avi" />
+                   
+                  
+                  </video>
+                {
+                    loading ?  <video width="320" height="240" controls>
+                    <source src={Load} type="video/avi" />
+                    <source src={Load}  type="video/avi" />
+                  
+                  </video> : null
+                }
+              
             </div> 
     );
 }

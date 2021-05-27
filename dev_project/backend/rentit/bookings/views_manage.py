@@ -178,6 +178,14 @@ class room_payment(viewsets.ViewSet):
 
         #payment success 
         booking.paid = True
+
+        if booking.coupon!='None':
+            queryse_t = coupons.objects.all()
+            coupon = get_object_or_404(queryse_t,pk=booking.coupon)
+            coupon.used_by.add(request.user)
+            coupon.save()
+
+
         if booking.is_extended:
             old_booking=booking.extended_on
             old_booking.extended=True
@@ -338,6 +346,12 @@ class shop_payment(viewsets.ViewSet):
         #payment success 
         booking.paid = True
 
+        if booking.coupon!='None':
+            queryse_t = coupons.objects.all()
+            coupon = get_object_or_404(queryse_t,pk=booking.coupon)
+            coupon.used_by.add(request.user)
+            coupon.save()
+
         if booking.is_extended:
             old_booking=booking.extended_on
             old_booking.extended=True
@@ -443,6 +457,12 @@ class apartment_payment(viewsets.ViewSet):
         
         #payment success 
         booking.paid = True
+
+        if booking.coupon!='None':
+            queryse_t = coupons.objects.all()
+            coupon = get_object_or_404(queryse_t,pk=booking.coupon)
+            coupon.used_by.add(request.user)
+            coupon.save()
 
         if booking.is_extended:
             old_booking=booking.extended_on

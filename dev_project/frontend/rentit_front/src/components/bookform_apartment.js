@@ -172,8 +172,10 @@ function Checkout(props) {
             }
             var t=value.price;
             var t1=((t*3)/100);
-            var t2=((t1*18)/100);
-            t=t+t1+t2;
+            var t1=((t*3.0)/100.0);
+            t1=Math.round(t1);
+           
+            t=t+t1;
 
             setbookdetails(
                 {
