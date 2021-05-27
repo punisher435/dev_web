@@ -40,7 +40,7 @@ class wishlist_room(viewsets.ViewSet):
 
             return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
         except:
-            return Response('Error while loading wishlist',status=status.HTTP_200_OK)
+            return Response('Error while loading wishlist',status=status.HTTP_400_BAD_REQUEST)
 
     def create(self,request):
 
