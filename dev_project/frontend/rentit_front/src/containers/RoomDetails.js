@@ -60,6 +60,10 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     backgroundColor: theme.palette.background.paper,
   },
+  root2: {
+    width: '100%',
+    backgroundColor: theme.palette.background.paper,
+  },
   paper: {
     padding: theme.spacing(2),
     textAlign: 'center',
@@ -420,7 +424,7 @@ if(details){
 
 
 
-<List component="nav" className={classes.root1} aria-label="offers">
+<List component="nav" className={classes.root2} aria-label="offers">
           <Grid item >
             <Divider variant='middle'/>
             <ListItem>

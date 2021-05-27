@@ -2,7 +2,10 @@ import React from 'react';
 import { makeStyles} from '@material-ui/core/styles';
 
 import CouponCard from "./newcoupon";
-
+import Button from '@material-ui/core/Button';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+import Hidden from '@material-ui/core/Hidden';
 // import Box from '@material-ui/core/Box'
 
 
@@ -39,14 +42,14 @@ export default function CustomizedTabs1({post}) {
 
     const Arrow = ({ text, className }) => {
         return (
-          <div
+          <Button variant="outlined"
             className={className}
-          >{text}</div>
+          >{text}</Button>
         );
       };
 
-    const ArrowLeft = Arrow({ text: '<', className: 'arrow-prev' });
-    const ArrowRight = Arrow({ text: '>', className: 'arrow-next' });
+    const ArrowLeft = Arrow({ text: <ArrowBackIosIcon />, className: '' });
+    const ArrowRight = Arrow({ text: <ArrowForwardIosIcon />, className: '' });
 
     
     const [menuItems,setitems] = React.useState()
@@ -71,16 +74,33 @@ export default function CustomizedTabs1({post}) {
       
     return (
         <div className="App">
-        <ScrollMenu
+        <Hidden mdDown><ScrollMenu
           data={menu}
          
           className={classes.scrollclass}
-          wheel={true}
-          alignCenter={false}
          
+          alignCenter={false}
+          arrowClass='myarrow'
+          wheel={false}
+          transition={0.9}
+          inertiaScrollingSlowdown={1.0}
           
+          arrowLeft={ArrowLeft}
+          arrowRight={ArrowRight}
+          inertiaScrolling={true}
           
-        />
+        /></Hidden>
+         <Hidden lgUp><ScrollMenu
+          data={menu}
+          transition={0.9}
+          className={classes.scrollclass}
+          wheel={false}
+          alignCenter={false}
+          inertiaScrollingSlowdown={1.0}
+         
+          inertiaScrolling={true}
+          
+        /></Hidden>
       </div>
     )}
     else{
