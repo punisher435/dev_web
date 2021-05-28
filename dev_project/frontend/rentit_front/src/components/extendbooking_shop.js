@@ -14,6 +14,7 @@ import Dashboarddrawer from '../hocs/layout2'
 import axios from 'axios'
 import Eror from '../components/eror'
 import Grid from '@material-ui/core/Grid';
+import Load1 from './Spinner';
 
 
 import Button from '@material-ui/core/Button';
@@ -608,7 +609,7 @@ function Bookingextend(props) {
     )
     }
     else{
-      return <></>;
+      return <><Load1 loading={true} /></>;
     }
 }
 

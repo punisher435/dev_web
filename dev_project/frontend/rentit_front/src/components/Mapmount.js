@@ -4,6 +4,7 @@ import Spinner from './Spinner';
 import Eror from './eror';
 
 import axios from 'axios';
+import Load1 from './Spinner';
 
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
@@ -104,7 +105,7 @@ function Mapmount({filters,setfilters}) {
 
     return (
         <div>
-            
+            <Load1 loading={true} />
         </div>
     )
 }

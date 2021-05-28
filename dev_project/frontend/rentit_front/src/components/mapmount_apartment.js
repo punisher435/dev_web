@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react'
 import Mapview from './mapview';
 import Spinner from './Spinner';
 import Eror from './eror';
+import Load1 from './Spinner';
 
 import axios from 'axios';
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
@@ -111,7 +112,7 @@ function Mapmount({filters,setfilters}) {
 
     return (
         <div>
-            
+            <Load1 loading={true} />
         </div>
     )
 }

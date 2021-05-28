@@ -35,8 +35,8 @@ export default function App({value}) {
 
   
 
-  if (loadError) return "Error";
-  if (!isLoaded) return "Loading...";
+  if (loadError) return <div />;
+  if (!isLoaded) return <div />;
 
  
 

@@ -24,6 +24,9 @@ import ErrorSnackbars from './error_snackbar'
 import Box from '@material-ui/core/Box';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputAdornment from '@material-ui/core/InputAdornment';
+import Load1 from './Spinner';
+
+
 
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
@@ -708,7 +711,7 @@ if(x<bookdetails.capacity)
     )
     }
     else{
-      return <></>;
+      return <><Load1 laoding={true} /></>;
     }
 }
 

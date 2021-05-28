@@ -16,6 +16,8 @@ import {
   ComboboxList,
   ComboboxOption,
 } from "@reach/combobox";
+import Load1 from './Spinner';
+
 
 
 import "@reach/combobox/styles.css";
@@ -83,8 +85,8 @@ const mapContainerStyle = {
 
   
 
-  if (loadError) return "Error";
-  if (!isLoaded) return "Loading...";
+  if (loadError) return "Error while loading map";
+  if (!isLoaded) return <Load1 loading={true} />;
  
 
 
