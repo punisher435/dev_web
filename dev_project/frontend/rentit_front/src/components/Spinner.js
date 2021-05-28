@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid';
 
 
 
+
 function Spinner({loading}) {
 
    const override = css`
@@ -18,9 +19,11 @@ function Spinner({loading}) {
     return (
             <div>
 
+                
+
 
                 {
-                    loading ?                 <Grid
+                    loading ?                <Grid
                     container
                     direction="column"
                     justify="center"
@@ -33,7 +36,7 @@ function Spinner({loading}) {
                     justify="center"
                     alignItems="center"
                     >
-                    <img src={Load} style={{width:300,}}/>
+                    <img src={Load} style={{maxWidth:300,width:'50vw'}}/>
     
                     </Grid></Grid> : null
                 }
