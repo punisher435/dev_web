@@ -3,6 +3,8 @@ import {makeStyles } from '@material-ui/core/styles';
 import Dashboarddrawer from '../hocs/layout2'
 import axios from 'axios'
 import Eror from '../components/eror'
+import Load1 from './Spinner';
+
 
 
 
@@ -163,7 +165,7 @@ function ConfirmDelete(props) {
     )
 }
 else{
-  return <div></div>
+  return <div><Load1 loading={true} /></div>
 }
 }
 

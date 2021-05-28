@@ -20,6 +20,8 @@ import { connect } from 'react-redux'
 import axios from 'axios';
 import Eror from './eror';
 import {Redirect } from 'react-router-dom'
+import Load1 from './Spinner';
+
 
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
@@ -399,7 +401,7 @@ function Checkout(props) {
 
 
         {
-          validationerror ? <Alert severity="error">All required fields need to be filled!</Alert> : null
+          validationerror ? <Alert severity="error">All required fields need to be filled and should be correct!</Alert> : null
         }
 
       <Backdrop className={classes.backdrop} open={open}>
@@ -453,6 +455,9 @@ function Checkout(props) {
       </main>
     </React.Fragment>
   );
+}
+else{
+  return <Load1 loading={true} />
 }
 }
 

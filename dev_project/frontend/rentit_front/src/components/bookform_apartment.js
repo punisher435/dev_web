@@ -13,7 +13,7 @@ import Review from './booksummary_apartment';
 
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
-
+import Load1 from './Spinner';
 import Alert from '@material-ui/lab/Alert';
 
 import { connect } from 'react-redux'
@@ -392,7 +392,7 @@ if(props.profile){
 
 
         {
-          validationerror ? <Alert severity="error">All required fields need to be filled!</Alert> : null
+          validationerror ? <Alert severity="error">All required fields need to be filled and should be correct!</Alert> : null
         }
 
       <Backdrop className={classes.backdrop} open={open}>
@@ -446,6 +446,9 @@ if(props.profile){
       </main>
     </React.Fragment>
   );
+}
+else{
+  return <Load1 loading={true} />
 }
 }
 

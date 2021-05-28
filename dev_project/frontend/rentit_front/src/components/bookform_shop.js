@@ -10,6 +10,7 @@ import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
 import AddressForm from './customerdetails';
 import Review from './booksummary_shop';
+import Load1 from './Spinner';
 
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -386,7 +387,7 @@ function Checkout(props) {
 
 
         {
-          validationerror ? <Alert severity="error">All required fields need to be filled!</Alert> : null
+          validationerror ? <Alert severity="error">All required fields need to be filled and should be correct!</Alert> : null
         }
 
       <Backdrop className={classes.backdrop} open={open}>
@@ -440,6 +441,9 @@ function Checkout(props) {
       </main>
     </React.Fragment>
   );
+}
+else{
+  return <Load1 loading={true} />
 }
 }
 
