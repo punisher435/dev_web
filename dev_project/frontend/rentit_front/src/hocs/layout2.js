@@ -14,6 +14,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { deepPurple } from '@material-ui/core/colors';
+
 import { connect } from 'react-redux';
 
 import Avatar from '@material-ui/core/Avatar';
@@ -44,6 +46,10 @@ const useStyles = makeStyles((theme) => ({
       sectionDesktop: {
         display: 'flex',
         
+      },
+      purple: {
+        color: theme.palette.getContrastText(deepPurple[500]),
+        backgroundColor: deepPurple[500],
       },
   root: {
     display: 'flex',
@@ -283,9 +289,22 @@ function Dashboarddrawer(props) {
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             
-            {
-            props.profile ? <Avatar className={classes.purple} alt={props.profile.first_name.toUpperCase()} src={pic} /> : <AccountCircle />
-            }
+          <IconButton
+              edge="end"
+              aria-label="account of current user"
+             
+              aria-haspopup="true"
+             
+              color="inherit"
+            >
+      
+
+      {
+                props.profile ? <Avatar className={classes.purple} alt={props.profile.first_name.toUpperCase()} src={pic} /> : <Avatar className={classes.purple}><AccountCircle /></Avatar>
+              }
+              
+              
+            </IconButton>
           </div>
         </Toolbar>
       </AppBar>

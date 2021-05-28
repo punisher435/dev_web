@@ -1,7 +1,8 @@
 import React from 'react'
 import { css } from "@emotion/core";
 import HashLoader from "react-spinners/HashLoader";
-import Load from '../loading.avi'
+import Load from '../loading.gif'
+import Grid from '@material-ui/core/Grid';
 
 
 
@@ -16,12 +17,28 @@ function Spinner({loading}) {
 
     return (
             <div>
-                <HashLoader
-                css={override}
-                size={100}
-                color={"#f50057"}
-                loading={loading}
-                 />
+
+
+                {
+                    loading ?                 <Grid
+                    container
+                    direction="column"
+                    justify="center"
+                    alignItems="center"
+                    style={{height:'50vh'}}
+                    >
+                    <Grid
+                    container
+                    direction="row"
+                    justify="center"
+                    alignItems="center"
+                    >
+                    <img src={Load} style={{width:300,}}/>
+    
+                    </Grid></Grid> : null
+                }
+                
+                 
             </div> 
     );
 }
