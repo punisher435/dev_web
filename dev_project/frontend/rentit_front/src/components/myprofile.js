@@ -14,6 +14,7 @@ import BankCard from './bank_card'
 import AddressCard from './address_card'
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
+import Load1 from './Spinner';
 
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
@@ -227,7 +228,7 @@ function Myprofile(props) {
     )
 }
 else{
-  return <div></div>
+  return <div><Load1 loading={true} /></div>
 }
 }
 

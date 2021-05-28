@@ -20,6 +20,8 @@ import {
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
+import Load1 from './Spinner';
+import Eror from './eror';
 
 
 import "@reach/combobox/styles.css";
@@ -107,8 +109,8 @@ export default function App({point,url}) {
     mapRef.current.setZoom(14);
   }, []);
 
-  if (loadError) return "Error";
-  if (!isLoaded) return "Loading...";
+  if (loadError) return <Eror />;
+  if (!isLoaded) return <Load1 loading={true} />;
 
 const mystyle1 = {
   width:'100%',

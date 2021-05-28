@@ -37,6 +37,8 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import RenteneAppBar from '../components/Navbar'
 import ScrollableIcons from '../components/ScrollableIcons'
 import Footer from '../components/footer';
+import Load1 from '../components/Spinner';
+
 
 
 
@@ -676,7 +678,7 @@ if(details){
   );
 }
 else{
-  return <div></div>;
+  return <div><Load1 loading={true} /></div>;
 }
 }
 

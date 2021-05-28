@@ -50,6 +50,7 @@ import RenteneAppBar from '../components/Navbar'
 import ReviewSeller from '../components/seller_reviews_pop';
 import Button from '@material-ui/core/Button';
 import ScrollableIcons from '../components/ScrollableIcons'
+import Load1 from '../components/Spinner';
 
 
 
@@ -669,7 +670,9 @@ if(details){
   );
 }
 else{
-  return <div></div>;
+  return <div>
+    <Load1 loading={true}/>
+  </div>;
 }
 }
 

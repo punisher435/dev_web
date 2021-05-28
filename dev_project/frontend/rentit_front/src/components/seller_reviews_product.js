@@ -6,6 +6,7 @@ import Eror from '../components/eror'
 import Grid from '@material-ui/core/Grid';
 
 
+import Load1 from './Spinner';
 
 import SellerReviews from './seller_rating_and_reviews'
 
@@ -165,7 +166,7 @@ function MyReviews({id}) {
     )
 }
 else{
-  return <div></div>
+  return <div><Load1 loading={true} /></div>
 }
 }
 

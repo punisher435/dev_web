@@ -265,7 +265,7 @@ function RenteneAppBar({ isAuthenticated, logout,profile }) {
         <Toolbar>
         <NavLink className={`nav-link ${styles.textclass}`} exact to='/'>
           <Typography className={classes.title} variant="h6" noWrap>
-            Rent=ene
+            Rentene
           </Typography>
           </NavLink>
           <NavLink className={`nav-link ${styles.textclass}`} exact to='/about'>

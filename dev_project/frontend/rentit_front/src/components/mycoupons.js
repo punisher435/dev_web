@@ -17,6 +17,7 @@ import SpeedDialIcon from '@material-ui/lab/SpeedDialIcon';
 import SpeedDialAction from '@material-ui/lab/SpeedDialAction';
 
 import CreateOutlinedIcon from '@material-ui/icons/CreateOutlined';
+import Load1 from './Spinner';
 
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
@@ -254,7 +255,7 @@ function MyCoupons(props) {
     )
 }
 else{
-  return <div></div>
+  return <div><Load1 loading={true} /></div>
 }
 }
 

@@ -19,6 +19,8 @@ import FormControl from '@material-ui/core/FormControl';
 import SendIcon from '@material-ui/icons/Send';
 import IconButton from '@material-ui/core/IconButton';
 import AttachFileIcon from '@material-ui/icons/AttachFile';
+import Load1 from '../components/Spinner';
+
 
 
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
@@ -555,7 +557,7 @@ function Complaintdetails(props) {
     else{
         return (
             <div>
-
+              <Load1 loading={true} />
             </div>
         )
     }

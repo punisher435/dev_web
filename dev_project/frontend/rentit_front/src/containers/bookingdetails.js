@@ -19,6 +19,8 @@ import Details from '../components/detailstable';
 import FacilityDetails from '../components/facilitiestable'
 import Invoice from '../components/invoice'
 import { PDFDownloadLink} from '@react-pdf/renderer';
+import Load1 from '../components/Spinner';
+
 
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
@@ -465,7 +467,7 @@ function Bookingdetails(props) {
     )
     }
     else{
-      return <></>;
+      return <><Load1 loading={true} /></>;
     }
 }
 

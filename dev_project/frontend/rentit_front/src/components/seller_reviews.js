@@ -11,9 +11,11 @@ import {connect} from 'react-redux'
 
 
 import SellerReviews from './seller_rating_and_reviews'
+import Load1 from './Spinner';
 
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
+
 
 
 
@@ -170,7 +172,7 @@ function MyReviews(props) {
     )
 }
 else{
-  return <div></div>
+  return <div><Load1 loading={true} /></div>
 }
 }
 

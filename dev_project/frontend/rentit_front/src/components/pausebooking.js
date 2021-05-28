@@ -13,6 +13,8 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import {Redirect,Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import Typography from '@material-ui/core/Typography';
+import Load1 from './Spinner';
+
 
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
@@ -160,7 +162,7 @@ function ConfirmPause(props) {
     )
 }
 else{
-  return <div></div>
+  return <div><Load1 loading={true} /></div>
 }
 }
 

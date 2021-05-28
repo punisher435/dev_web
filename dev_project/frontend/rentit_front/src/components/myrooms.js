@@ -11,6 +11,7 @@ import {connect} from 'react-redux'
 
 
 import RoomCard from './room_card'
+import Load1 from './Spinner';
 
 
 
@@ -279,7 +280,7 @@ function Myrooms(props) {
     )
 }
 else{
-  return <div></div>
+  return <div><Load1 loading={true} /></div>
 }
 }
 

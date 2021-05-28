@@ -4,7 +4,7 @@ import Dashboarddrawer from '../hocs/layout2'
 import axios from 'axios'
 import Eror from '../components/eror'
 import Grid from '@material-ui/core/Grid';
-
+import Load1 from './Spinner';
 
 import {Redirect} from 'react-router-dom'
 import {connect} from 'react-redux'
@@ -247,7 +247,7 @@ function Myapartments(props) {
     )
 }
 else{
-  return <div></div>
+  return <div><Load1 loading={true} /></div>
 }
 }
 

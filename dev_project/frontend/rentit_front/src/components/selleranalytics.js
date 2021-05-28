@@ -11,6 +11,8 @@ import Multicolor_chart from './multicolor_chart';
 import PieChart2 from './piechart2';
 import PieChart3 from './piechart3';
 import LineGraph from './linegraph';
+import Load1 from './Spinner';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -255,7 +257,7 @@ function Selleranalytics({roombookings,shopbookings,apartmentbookings,bank}) {
     );}
     else{
         return (<div>
-
+            <Load1 loading={true} />
         </div>);
     }
 }

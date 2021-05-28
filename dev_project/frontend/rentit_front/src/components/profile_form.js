@@ -19,6 +19,8 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import Acc from '../account-icon-8.png';
+import Load1 from './Spinner';
+
 
 
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
@@ -519,7 +521,7 @@ if(props.profile.is_seller && edit===false && (values.front===null || values.bac
   );
 }
 else{
-  return <div></div>;
+  return <div><Load1 loading={true} /></div>;
 }
 }
 
