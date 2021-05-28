@@ -308,9 +308,9 @@ if(props.profile.is_seller && edit===false && (values.front===null || values.bac
             const fsize =file1.size;
             const file = Math.round((fsize / 1024));
             // The size of the file.
-            if (file >= 5120) {
+            if (file >= 10240) {
                 alert(
-                  "File too Big, please select a file less than 5mb");
+                  "File too Big, please select a file less than 10mb");
             } 
             else{
               
@@ -330,9 +330,9 @@ if(props.profile.is_seller && edit===false && (values.front===null || values.bac
             const fsize =file1.size;
             const file = Math.round((fsize / 1024));
             // The size of the file.
-            if (file >= 5120) {
+            if (file >= 10240) {
                 alert(
-                  "File too Big, please select a file less than 5mb");
+                  "File too Big, please select a file less than 10mb");
             } 
             else{
               

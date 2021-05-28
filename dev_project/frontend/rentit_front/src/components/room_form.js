@@ -1171,9 +1171,9 @@ const Filevalidation = (file1) => {
           const fsize =file1.size;
           const file = Math.round((fsize / 1024));
           // The size of the file.
-          if (file >= 2048) {
+          if (file >= 3072) {
               alert(
-                "File too Big, please select a file less than 4mb");
+                "File too Big, please select a file less than 3mb");
           } 
           else{
             
@@ -1196,9 +1196,9 @@ const Filevalidation4 = (file1,name) => {
           const fsize =file1.size;
           const file = Math.round((fsize / 1024));
           // The size of the file.
-          if (file >= 5120) {
+          if (file >= 10240) {
               alert(
-                "File too Big, please select a file less than 5mb");
+                "File too Big, please select a file less than 10mb");
           } 
           else{
             
@@ -1220,9 +1220,9 @@ const Filevalidation3 = (file1,name) => {
           const fsize =file1.size;
           const file = Math.round((fsize / 1024));
           // The size of the file.
-          if (file >= 5120) {
+          if (file >= 10240) {
               alert(
-                "File too Big, please select a file less than 5mb");
+                "File too Big, please select a file less than 10mb");
           } 
           else{
             
@@ -1243,9 +1243,9 @@ const Filevalidation2 = (file1,name) => {
           const fsize =file1.size;
           const file = Math.round((fsize / 1024));
           // The size of the file.
-          if (file >= 5120) {
+          if (file >= 10240) {
               alert(
-                "File too Big, please select a file less than 5mb");
+                "File too Big, please select a file less than 10mb");
           } 
           else{
             
@@ -1266,9 +1266,9 @@ const Filevalidation1 = (file1,name) => {
           const fsize =file1.size;
           const file = Math.round((fsize / 1024));
           // The size of the file.
-          if (file >= 5120) {
+          if (file >= 10240) {
               alert(
-                "File too Big, please select a file less than 5mb");
+                "File too Big, please select a file less than 10mb");
           } 
           else{
             
@@ -1289,9 +1289,9 @@ const Filevalidation5 = (file1,name) => {
           const fsize =file1.size;
           const file = Math.round((fsize / 1024));
           // The size of the file.
-          if (file >= 5120) {
+          if (file >= 10240) {
               alert(
-                "File too Big, please select a file less than 5mb");
+                "File too Big, please select a file less than 10mb");
           } 
           else{
             
@@ -3314,7 +3314,7 @@ if(newredirect==true)
             <br />
     <>
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-      Any discount you want to provide (in %)
+      Any discount you are providing (in %)
         </Typography>
      <div className={classes.form}>
         <TextField
@@ -3336,8 +3336,8 @@ if(newredirect==true)
       <br />
   <>
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-      Price (excluding facilities charge and discount)
-        </Typography>
+      Final Price after discount (excluding the facilities,electricity and water charge that will be added later and wont be counted in discount)
+       </Typography>
      <div className={classes.form}>
         <TextField
           multiline

@@ -175,7 +175,7 @@ class rooms(models.Model):
 
     veg_food=models.BooleanField(default=True)
     nonveg_food=models.BooleanField(default=True)
-    food_policy=models.CharField(max_length=255,default='null')
+    food_policy=models.TextField()
     
     breakfast=models.BooleanField(default=True)
     removable_breakfast=models.BooleanField(default=False)
@@ -313,6 +313,7 @@ class shops(models.Model):
     power_backup=models.BooleanField(default=False)
 
     AC = models.BooleanField(default=False)
+    removable_AC=models.BooleanField(default=False)
     cost_AC = models.IntegerField(default=0)
 
     TV = models.BooleanField(default=False)

@@ -343,6 +343,7 @@ function ShopForm (props){
 
       AC:'',
       cost_AC:'',
+      removable_AC:false,
 
       purified_water:'',
       cost_purified_water:'',
@@ -483,6 +484,7 @@ function ShopForm (props){
 
                   AC:res.data.AC,
                   cost_AC:res.data.cost_AC,
+                  removable_AC:res.data.removable_AC,
 
                   city:res.data.city,
                   state:res.data.state,
@@ -567,6 +569,7 @@ function ShopForm (props){
 
       AC:myroom.AC,
       cost_AC:myroom.cost_AC,
+      removable_AC:myroom.removable_AC,
 
      
       balcony:myroom.balcony,
@@ -633,6 +636,7 @@ function ShopForm (props){
 
       form_data.append('AC',values.AC)
       form_data.append('cost_AC',values.cost_AC)
+      form_data.append('removable_AC',values.removable_AC)
 
       form_data.append('purified_water',values.purified_water)
       form_data.append('cost_purified_water',values.cost_purified_water)
@@ -872,9 +876,9 @@ const Filevalidation = (file1) => {
           const fsize =file1.size;
           const file = Math.round((fsize / 1024));
           // The size of the file.
-          if (file >= 2048) {
+          if (file >= 3072) {
               alert(
-                "File too Big, please select a file less than 4mb");
+                "File too Big, please select a file less than 3mb");
           } 
           else{
             
@@ -897,9 +901,9 @@ const Filevalidation4 = (file1,name) => {
           const fsize =file1.size;
           const file = Math.round((fsize / 1024));
           // The size of the file.
-          if (file >= 5120) {
+          if (file >= 10240) {
               alert(
-                "File too Big, please select a file less than 5mb");
+                "File too Big, please select a file less than 10mb");
           } 
           else{
             
@@ -921,9 +925,9 @@ const Filevalidation3 = (file1,name) => {
           const fsize =file1.size;
           const file = Math.round((fsize / 1024));
           // The size of the file.
-          if (file >= 5120) {
+          if (file >= 10240) {
               alert(
-                "File too Big, please select a file less than 5mb");
+                "File too Big, please select a file less than 10mb");
           } 
           else{
             
@@ -944,9 +948,9 @@ const Filevalidation2 = (file1,name) => {
           const fsize =file1.size;
           const file = Math.round((fsize / 1024));
           // The size of the file.
-          if (file >= 5120) {
+          if (file >= 10240) {
               alert(
-                "File too Big, please select a file less than 5mb");
+                "File too Big, please select a file less than 10mb");
           } 
           else{
             
@@ -967,9 +971,9 @@ const Filevalidation1 = (file1,name) => {
           const fsize =file1.size;
           const file = Math.round((fsize / 1024));
           // The size of the file.
-          if (file >= 5120) {
+          if (file >= 10240) {
               alert(
-                "File too Big, please select a file less than 5mb");
+                "File too Big, please select a file less than 10mb");
           } 
           else{
             
@@ -990,9 +994,9 @@ const Filevalidation5 = (file1,name) => {
           const fsize =file1.size;
           const file = Math.round((fsize / 1024));
           // The size of the file.
-          if (file >= 5120) {
+          if (file >= 10240) {
               alert(
-                "File too Big, please select a file less than 5mb");
+                "File too Big, please select a file less than 10mb");
           } 
           else{
             
@@ -1812,6 +1816,7 @@ if(newredirect==true)
             value={formik.values.AC}
             onChange={(e) => {if(e.target.value===false){formik.setFieldValue('AC',e.target.value);
             formik.setFieldValue('cost_AC',0);
+            formik.setFieldValue('removable_AC',false);
             }
             else{formik.setFieldValue('AC',e.target.value)}}}
             error={formik.touched.AC && Boolean(formik.errors.AC)}
@@ -1849,6 +1854,31 @@ if(newredirect==true)
           helperText={formik.touched.cost_AC && formik.errors.cost_AC}
         />
        </>
+  : null
+    }
+
+{
+      formik.values.AC ? <><br />
+      <Typography variant="body1" color="textSecondary" className={classes.textclass}>
+      Can customers remove this facility?
+        </Typography>
+    
+        <FormControl className={classes.form}>
+        
+            <InputLabel id="removable_AC">Removable AC facility?</InputLabel>
+            <Select
+            labelId="removable_AC"
+            id="removable_AC"
+            value={formik.values.removable_AC}
+            onChange={(e) => {
+            formik.setFieldValue('removable_AC',e.target.value)}}
+           
+            >
+            <MenuItem value={true}>Yes</MenuItem>
+            <MenuItem value={false}>No</MenuItem>
+            </Select>
+        </FormControl>
+        </>
   : null
     }
 
@@ -2139,7 +2169,7 @@ if(newredirect==true)
 
     <><br />
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-      Any discount you want to provide (in %)
+      Any discount you are providing (in %)
         </Typography>
      
         <TextField
@@ -2162,8 +2192,8 @@ if(newredirect==true)
 
   <><br />
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-      Price (excluding facilities charge and discount)
-        </Typography>
+      Final Price after discount (excluding the facilities,electricity and water charge that will be added later and wont be counted in discount)
+      </Typography>
      
         <TextField
          multiline

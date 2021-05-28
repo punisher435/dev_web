@@ -503,7 +503,7 @@ class my_shop_viewset(viewsets.ViewSet):
                 wifi=bool(request.data["wifi"]=='true'),cost_wifi=int(request.data["cost_wifi"]),removable_wifi=bool(request.data["removable_wifi"]=='true'),
                 TV=bool(request.data["TV"]=='true'),cost_TV=int(request.data["cost_TV"]),removable_TV=bool(request.data["removable_TV"]=='true'),
                 cooler=bool(request.data["cooler"]=='true'),cost_cooler=int(request.data["cost_cooler"]),removable_cooler=bool(request.data["removable_cooler"]=='true'),
-                AC=bool(request.data["AC"]=='true'),cost_AC=int(request.data["cost_AC"]),
+                AC=bool(request.data["AC"]=='true'),cost_AC=int(request.data["cost_AC"]),removable_AC=bool(request.data["removable_AC"]=='true'),
                 shop_cleaning=bool(request.data["shop_cleaning"]=='true'),cost_cleaning=int(request.data["cost_cleaning"]),nearby_station1=request.data["nearby_station1"],nearby_station2=request.data["nearby_station2"],distance1=float(request.data["distance1"]),distance2=float(request.data["distance2"]),shop_policy=request.data["shop_policy"],
                 address_proof=request.data["address_proof"],gender=request.data["gender"])
 
@@ -586,7 +586,9 @@ class my_shop_viewset(viewsets.ViewSet):
             room.removable_cooler=bool(request.data["removable_cooler"]=='true')   
 
             room.AC=bool(request.data["AC"]=='true')            
-            room.cost_AC=int(request.data["cost_AC"])                            
+            room.cost_AC=int(request.data["cost_AC"]) 
+            room.removable_AC=bool(request.data["removable_AC"]=='true')       
+                                       
             room.gender=request.data["gender"]
 
                      
