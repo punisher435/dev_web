@@ -427,6 +427,13 @@ background-image: linear-gradient(315deg, #eec0c6 0%, #e58c8a 74%);
 
 
 }
+.yoyoarrow1{
+  right:0;
+  position: absolute;
+}
+
+
+
 
 
 .formbgclass{
@@ -441,7 +448,7 @@ background-image: linear-gradient(315deg, #eec0c6 0%, #e58c8a 74%);
 .formbgclass1{
   background-color: #000000;
   background-image: linear-gradient(315deg, #000000 0%, #414141 74%);
-height:100vh;
+height:120vh;
 background-size: cover;
 background-repeat:no-repeat;
 background-position: center;

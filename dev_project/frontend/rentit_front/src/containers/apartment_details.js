@@ -141,7 +141,7 @@ const useStyles = makeStyles((theme) => ({
   scrollme:{
     whiteSpace: 'nowrap',
     flexWrap: 'nowrap',
-    width:'100vw',
+    width:'125vw',
    
     [theme.breakpoints.up('md')]: {
       whiteSpace: 'nowrap',

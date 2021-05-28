@@ -33,12 +33,12 @@ const useStyles = makeStyles((theme) => ({
     
       width:'100%',
       maxWidth:'400px',
-      height:'50vh',
+      height:'75vh',maxHeight:'731px',
       overflowY: 'scroll',
       overflowx: 'hidden',
       
-      top:'30vh',
-      left:'40vw',
+      top:'25vh',
+      left:'50vw',
     },
  
     

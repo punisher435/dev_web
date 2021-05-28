@@ -75,7 +75,13 @@ require('dotenv').config()
 
 
 function App(props) {
+  var temp=false;
   
+  if (navigator.appVersion.indexOf("Win") != -1)
+  {
+    temp=true;
+    
+  } 
   return (
     <Provider store={store}>
       <Router>

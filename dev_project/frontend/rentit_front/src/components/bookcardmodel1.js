@@ -37,8 +37,8 @@ const useStyles = makeStyles((theme) => ({
       overflowY: 'scroll',
       overflowx: 'hidden',
       
-      top:'15vh',
-      left:'34vw',
+      top:'25vh',
+      left:'50vw',
     },
  
     

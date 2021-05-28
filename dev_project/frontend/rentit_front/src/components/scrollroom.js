@@ -11,7 +11,7 @@ import Hidden from '@material-ui/core/Hidden';
 
 const useStyles = makeStyles((theme) => ({
   scrollclass:{
-    
+    width:'125vw',
   },
 }));
 
@@ -38,13 +38,13 @@ function Scrollroom({rooms}) {
         const Arrow = ({ text, className }) => {
           return (
             <Button variant="outlined"
-              className={className}
+              id={className}
             >{text}</Button>
           );
         };
   
-      const ArrowLeft = Arrow({ text: <ArrowBackIosIcon />, className: '' });
-      const ArrowRight = Arrow({ text: <ArrowForwardIosIcon />, className: '' });
+      const ArrowLeft = Arrow({ text: <ArrowBackIosIcon />, className: 'yoyoarrow2' });
+      const ArrowRight = Arrow({ text: <ArrowForwardIosIcon />, className: 'yoyoarrow1' });
     const [try1,set1] = React.useState(false)
     
     const [menuItems,setitems] = React.useState()
@@ -75,12 +75,12 @@ function Scrollroom({rooms}) {
           className={classes.scrollclass}
          
           alignCenter={false}
-          arrowClass='myarrow'
+          arrowClass='yoyoarrow1'
           wheel={false}
           transition={process.env.REACT_APP_Y}
           inertiaScrollingSlowdown={process.env.REACT_APP_X}
           
-          arrowLeft={ArrowLeft}
+         
           arrowRight={ArrowRight}
           inertiaScrolling={true}
           

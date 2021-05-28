@@ -92,7 +92,7 @@ function getStepContent(step,bookdetails,setbookdetails,setpayment,profile) {
     case 0:
       return <AddressForm bookdetails={bookdetails} profile={profile} setbookdetails={setbookdetails} setpayment={setpayment}/>;
     case 1:
-      return <Review bookdetails={bookdetails} setbookdetails={setbookdetails}/>;
+      return <Review bookdetails={bookdetails} setbookdetails={setbookdetails} />;
     default:
       throw new Error('Unknown step');
   }
@@ -100,7 +100,7 @@ function getStepContent(step,bookdetails,setbookdetails,setpayment,profile) {
 
 function Checkout(props) {
   const [open,setopen] = React.useState(false)
-
+  
   const [validationerror,setvalidationerror] = React.useState(false)
 
     const [bookdetails,setbookdetails] = React.useState({
@@ -330,13 +330,21 @@ function Checkout(props) {
               address: "Razorpay Corporate Office",
             },
             theme: {
-              color: "#528FF0",
+              color: "#000000",
+              
+              
             },
           };
          
       
           var rzp1 = new window.Razorpay(options);
+          var width=window.innerWidth;
+          var height=window.innerHeight;
+          width=width*1.25;
+          height=height*1.25;
+          
           rzp1.open();
+         
 
           }
           catch{
@@ -394,6 +402,7 @@ function Checkout(props) {
 
   if(props.profile){
   return (
+    <div id="bookingmain" >
     <React.Fragment>
       <CssBaseline />
 
@@ -454,6 +463,7 @@ function Checkout(props) {
         <Copyright />
       </main>
     </React.Fragment>
+    </div>
   );
 }
 else{

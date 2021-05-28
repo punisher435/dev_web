@@ -1,5 +1,5 @@
 import React,{Fragment} from 'react';
-import { fade, makeStyles } from '@material-ui/core/styles';
+import { fade, makeStyles ,withStyles} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -25,8 +25,29 @@ import FavoriteOutlinedIcon from '@material-ui/icons/FavoriteOutlined';
 import './css/App.css'
 import logo from '../logo.png';
 
+
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
+
+const StyledMenu = withStyles({
+  paper: {
+    border: "1px solid #d3d4d5",
+    right:15,
+    left:'auto !important'
+    
+  }
+})(props => (
+  <Menu
+    elevation={0}
+    getContentAnchorEl={null}
+    anchorOrigin={{
+      vertical: "bottom",
+      horizontal:"right",
+    }}
+    
+    {...props}
+  />
+));
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -82,7 +103,7 @@ const useStyles = makeStyles((theme) => ({
     color: 'inherit',
   },
   logoclass:{
-   width:180,
+   width:200,
    marginLeft:-20,
    [theme.breakpoints.up('md')]: {
     width:220,
@@ -123,6 +144,9 @@ const useStyles = makeStyles((theme) => ({
     },
   
   },
+  give:{
+   right:0,
+  },
   AppBar: process.env.REACT_APP_THEME,
 }));
 
@@ -148,6 +172,7 @@ function RenteneAppBar(props) {
 
   const handleprofileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
+   
   };
 
   const handleMobileMenuClose = () => {
@@ -161,20 +186,22 @@ function RenteneAppBar(props) {
 
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
+    
   };
 
 
 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
+    < StyledMenu
+     
       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
       id={menuId}
       keepMounted
       transformOrigin={{ vertical: 'top', horizontal: 'right' }}
       open={isMenuOpen}
       onClose={handleMenuClose}
+      className={classes.give}
     >
       <NavLink className={`nav-link ${styles.textclass2}`} exact to={props.profile ? props.profile.is_seller ? '/dashboard/analytics' : '/dashboard/profile' : '/dashboard/profile'}><MenuItem onClick={handleMenuClose}>Dashboard</MenuItem></NavLink>
       
@@ -182,7 +209,7 @@ function RenteneAppBar(props) {
         props.isAuthenticated ? <NavLink className={`nav-link ${styles.textclass2}`} exact to='/#!' onClick={logout_user}><MenuItem onClick={handleMenuClose}>Logout</MenuItem></NavLink> : null
       }
       
-   </Menu>
+   </ StyledMenu>
   );
 
 
@@ -232,14 +259,16 @@ function RenteneAppBar(props) {
 
   const mobileMenuId = 'primary-search-account-menu-mobile';
   const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
+    < StyledMenu
+     
+     
       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
       id={mobileMenuId}
       keepMounted
       transformOrigin={{ vertical: 'top', horizontal: 'right' }}
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
+      className={classes.give}
     >
 
 
@@ -295,7 +324,7 @@ function RenteneAppBar(props) {
       }
       
      
-    </Menu>
+    </ StyledMenu>
   );
   
   
@@ -383,7 +412,7 @@ function RenteneAppBar(props) {
           </div>
         </Toolbar>
       </AppBar>
-      <Toolbar id="back-to-top-anchor" />
+      <Toolbar id="back-to-top-anchor" className={classes.give}/>
       {renderMobileMenu}
       {renderMenu}
       {redirect ? <Redirect to='/' /> : <Fragment></Fragment>}

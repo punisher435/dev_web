@@ -55,9 +55,10 @@ function Copyright() {
     );
   }
   
+  
   const useStyles = makeStyles((theme) => ({
     root: {
-      height: '100vh',
+      height: `120vh`,
     },
     image: {
       backgroundImage: 'url(https://image.freepik.com/free-vector/cute-hand-painted-watercolor-background_1020-1088.jpg)',

@@ -28,7 +28,7 @@ const StyledTableRow = withStyles((theme) => ({
 
 const useStyles = makeStyles({
   table: {
-    width:'70vw',
+    width:'100vw',
     maxWidth:'450px',
 
   },

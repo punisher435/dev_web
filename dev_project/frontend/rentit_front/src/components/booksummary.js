@@ -27,6 +27,7 @@ export default function Review({bookdetails,setbookdetails}) {
   const x = parseInt(bookdetails.duration/12);
   const y = parseInt(bookdetails.duration%12);
   const z = bookdetails.month+y;
+  
   const w = bookdetails.year + x; 
   
 

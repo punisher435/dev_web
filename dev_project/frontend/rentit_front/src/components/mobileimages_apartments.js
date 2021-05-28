@@ -58,17 +58,21 @@ const useStyles = makeStyles((theme) => ({
 
 
   media: {
-    height: 400,
-    width:'100vw',
+    height: 600,
+    width:'125vw',
     [theme.breakpoints.up('sm')]: {
-      width:400,
-      heigth:400,
+      width:'125vw',
+      heigth:650,
     },
   },
 
   media2: {
     height: 100,
-    width:'100%'
+    width:'100%',
+    [theme.breakpoints.up('sm')]: {
+      height: 150,
+      width:'100%'
+    },
   },
 
   textroot: {

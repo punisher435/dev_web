@@ -21,11 +21,12 @@ const useStyles = makeStyles((theme) => ({
     
     width:'100%',
     maxWidth:'400px',
-    height:'65vh',
+    height:'75vh',
     overflowY: 'scroll',
     overflowx: 'hidden',
     maxHeight:'731px',
-    top:'18vh',
+    top:'25vh',
+    left:'10vw',
     
 
     [theme.breakpoints.up('sm')]: {
@@ -37,8 +38,8 @@ const useStyles = makeStyles((theme) => ({
       overflowY: 'scroll',
       overflowx: 'hidden',
       
-      top:'15vh',
-      left:'25vw',
+      top:'28vh',
+      left:'38vw',
     },
  
     

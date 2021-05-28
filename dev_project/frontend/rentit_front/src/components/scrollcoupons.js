@@ -41,10 +41,11 @@ function Scrollroom({rooms}) {
               className={className}
             >{text}</Button>
           );
-        };
+        }
+      
   
-      const ArrowLeft = Arrow({ text: <ArrowBackIosIcon />, className: '' });
-      const ArrowRight = Arrow({ text: <ArrowForwardIosIcon />, className: '' });
+          const ArrowLeft = Arrow({ text: <ArrowBackIosIcon />, className: 'yoyoarrow1' });
+          const ArrowRight = Arrow({ text: <ArrowForwardIosIcon />, className: 'yoyoarrow2' });
     const [try1,set1] = React.useState(false)
     
     const [menuItems,setitems] = React.useState()
@@ -75,12 +76,12 @@ function Scrollroom({rooms}) {
           className={classes.scrollclass}
          
           alignCenter={false}
-          arrowClass='myarrow'
+          arrowClass='yoyoarrow1'
           wheel={false}
           transition={process.env.REACT_APP_Y}
           inertiaScrollingSlowdown={process.env.REACT_APP_X}
           
-          arrowLeft={ArrowLeft}
+         
           arrowRight={ArrowRight}
           inertiaScrolling={true}
           

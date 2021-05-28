@@ -262,7 +262,7 @@ const Filevalidation1 = (file1,name) => {
   }
 
   return (
-    <div className="formbgclass">
+    <div className="formbgclass1">
     <div className={classes.myclass}>
             <Backdrop className={classes.backdrop} open={loading}>
         <CircularProgress color="inherit" />
