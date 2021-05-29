@@ -41,9 +41,9 @@ const useStyles = makeStyles((theme) => ({
         color:'red',
     },
     graphclass:{
-        width:'90vw',
+        width:'100vw',
         [theme.breakpoints.up('sm')]: {
-            width:'80vw',
+            width:'90vw',
             maxWidth:440,
           },
           [theme.breakpoints.up('md')]: {
@@ -52,9 +52,9 @@ const useStyles = makeStyles((theme) => ({
           },
     },
     graphclass1:{
-        width:'80vw',
+        width:'100vw',
         [theme.breakpoints.up('sm')]: {
-            width:'80vw',
+            width:'90vw',
             maxWidth:440,
           },
           [theme.breakpoints.up('md')]: {
@@ -140,6 +140,7 @@ function Selleranalytics({roombookings,shopbookings,apartmentbookings,bank}) {
         </Grid>
 
         </Grid>
+        <br />
         
 
         <Grid
@@ -238,7 +239,7 @@ function Selleranalytics({roombookings,shopbookings,apartmentbookings,bank}) {
                 </Grid>
                 <Grid item>
                 {isSmall && 
-                        <div >
+                        <div  className={classes.graphclass1}>
                         <LineGraph roombookings={roombookings} shopbookings={shopbookings} apartmentbookings={apartmentbookings}/>
                         </div>
                     }
