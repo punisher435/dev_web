@@ -68,6 +68,8 @@ function Admin(props) {
     const [email,setemail] = React.useState()
     const [type3,settype3] = React.useState('')
 
+    const [typee,settypee] = React.useState('')
+
 
     
     const [tempdiscount,settempdiscount] = React.useState()
@@ -83,6 +85,7 @@ function Admin(props) {
 
     const [sellercommission,setsellercommission] = React.useState()
     const [comm_type1,setcomm_type] = React.useState('percent')
+    const[due_book,setdue_book] = React.useState([])
 
 
     const [open,setopen] = React.useState()
@@ -496,6 +499,50 @@ function Admin(props) {
 
 
 
+                        const handleclickk= async (e) => {
+                          e.preventDefault();
+                  
+                          setopen(true)
+                    
+                          const config = {
+                            headers: {
+                                    'Content-Type': 'application/json',
+                                    'Authorization': `JWT ${localStorage.getItem('access')}`,
+                            },
+                            params:{
+                              type:typee
+                            },
+                          };
+                         
+                          
+                          
+                            try{
+                    
+                            const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcwbsauihdw2891hasdbe2b1cft/seller/admin_pay/`,config,config);
+                            console.log(res.data);
+                            setdue_book(res.data);
+                            var x, txt = "";
+
+                            for (x in res.data) {
+                              txt += ('<strong>' + x + '</strong>'+ " " + res.data[x] + "<br />");
+                            };
+                            
+                            document.getElementById("seller_pay").innerHTML = txt;
+                            setopen(false)
+                            
+                           
+                            
+                          
+                          }
+                            catch{
+                             
+                              setopen(false)
+                             
+                            }
+                    
+                          }
+
+
             
         
       
@@ -877,6 +924,45 @@ function Admin(props) {
                
                 
               /><Button variant="contained" onClick={e => {handleclick10(e)}}>Refresh</Button><br /><br />
+               </>
+              : null
+            }
+            </Grid>
+
+            <Grid item xs={8} >
+            <p id="refreshme"></p>
+            </Grid>
+
+            <br />
+
+
+            <Grid item xs={8} >
+            <p id="seller_pay"></p>
+            </Grid>
+
+            <Grid item xs={8} >
+
+            {
+                props.profile.is_superuser ? <><FormControl className={classes.form}>
+                <InputLabel id="typee">Type</InputLabel>
+                <Select
+                  labelId="typee"
+                  id="typee1"
+                  value={typee}
+                  onChange={e => {settypee(e.target.value)}}
+                >
+                  <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+                  
+                  <MenuItem value={'room'}>Room</MenuItem>
+                  <MenuItem value={'shop'}>Shop</MenuItem>
+                  <MenuItem value={'apartment'}>Apartment</MenuItem>
+                </Select>
+                
+              </FormControl>
+              
+              <Button variant="contained" onClick={e => {handleclickk(e)}}>Fetch</Button><br /><br />
                </>
               : null
             }

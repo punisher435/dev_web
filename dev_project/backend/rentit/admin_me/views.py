@@ -1225,3 +1225,111 @@ class admin_refresh(viewsets.ViewSet):
 
 
 
+class Seller_pay(viewsets.ViewSet):
+    
+    authentication_classes = [authentication.JWTAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
+
+    def list(self,request):
+        try:
+
+            if request.user.is_superuser:
+                
+        
+                booking_type= request.query_params.get('type')
+
+                if booking_type=='room':
+
+                    queryset = roomBookings.objects.all()
+                    queryset=queryset.filter(paid =True)
+                   
+                    queryset=queryset.filter(seller_paid = False)
+                        
+                    x = datetime.datetime.now()-datetime.timedelta(days=7)
+                    queryset=queryset.filter(created_at__lte=x)
+
+                    serializer = roomBookingsSerializer(queryset,many=True)
+                    return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+
+                    
+                    
+
+                elif booking_type=='shop':
+                    queryset = shopBookings.objects.all()
+                    queryset=queryset.filter(paid =True)
+                  
+                    queryset=queryset.filter(seller_paid = False)
+                        
+                    x = datetime.datetime.now()-datetime.timedelta(days=7)
+                    queryset=queryset.filter(created_at__lte=x)
+
+                    serializer = shopBookingsSerializer(queryset,many=True)
+                    return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+
+
+
+                elif booking_type=='apartment':
+                    queryset = apartmentBookings.objects.all()
+                    queryset=queryset.filter(paid =True)
+                  
+                    queryset=queryset.filter(seller_paid = False)
+                        
+                    x = datetime.datetime.now()-datetime.timedelta(days=7)
+                    queryset=queryset.filter(created_at__lte=x)
+
+                    serializer = apartmentBookingsSerializer(queryset,many=True)
+                    return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+
+                    
+            else:
+                return Response('error',status=status.HTTP_400_BAD_REQUEST)
+        except:
+            return Response('error',status=status.HTTP_400_BAD_REQUEST)
+
+
+
+    def update(self,request,pk=None):
+        try:
+
+            if request.user.is_superuser:
+        
+                booking_type= request.query_params.get('type')
+
+                if booking_type=='room':
+
+                    queryset = roomBookings.objects.all()
+                    booking= get_object_or_404(queryset,pk=pk)
+
+                    booking.seller_paid=True
+                    booking.save()
+                    
+                    return Response('success', status=status.HTTP_202_ACCEPTED)
+
+                    
+                    
+
+                elif booking_type=='shop':
+                    queryset = shopBookings.objects.all()
+                    booking= get_object_or_404(queryset,pk=pk)
+
+                    booking.seller_paid=True
+                    booking.save()
+                    
+                    return Response('success', status=status.HTTP_202_ACCEPTED)
+
+
+
+                elif booking_type=='apartment':
+                    queryset = apartmentBookings.objects.all()
+                    booking= get_object_or_404(queryset,pk=pk)
+
+                    booking.seller_paid=True
+                    booking.save()
+                    
+                    return Response('success', status=status.HTTP_202_ACCEPTED)
+
+                    
+            else:
+                return Response('error',status=status.HTTP_400_BAD_REQUEST)
+        except:
+            return Response('error',status=status.HTTP_400_BAD_REQUEST)

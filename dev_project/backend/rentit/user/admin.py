@@ -36,13 +36,27 @@ class UserAdmin(BaseUserAdmin):
     filter_horizontal = ()
 
 
+class profileAdmin(admin.ModelAdmin):
+    search_fields=('user_id__email','mobile','aadhar',)
 
+class bankAdmin(admin.ModelAdmin):
+    search_fields=('user_id__email','account_no',)
+    list_filter=('account_type',)
+
+class addressAdmin(admin.ModelAdmin):
+    search_fields=('user_id__email',)
+
+
+class sellerReviewsAdmin(admin.ModelAdmin):
+    search_fields=('seller_id__email','customer_id__email',)
+   
+    
 
 
 
 
 admin.site.register(User, UserAdmin)
-admin.site.register(customUser_profile)
-admin.site.register(seller_bank_details)
-admin.site.register(seller_address)
-admin.site.register(seller_rating_and_reviews)
+admin.site.register(customUser_profile,profileAdmin)
+admin.site.register(seller_bank_details,bankAdmin)
+admin.site.register(seller_address,addressAdmin)
+admin.site.register(seller_rating_and_reviews,sellerReviewsAdmin)

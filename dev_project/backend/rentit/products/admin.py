@@ -8,28 +8,31 @@ from .models import apartments,minmax_apartment
 from django_google_maps import widgets as map_widgets
 from django_google_maps import fields as map_fields
 
-""" class room_admin(admin.ModelAdmin):
-    formfield_overrides = {
-        map_fields.AddressField: {'widget': map_widgets.GoogleMapsAddressWidget},
-    }
- """
-class shop_admin(admin.ModelAdmin):
-    formfield_overrides = {
-        map_fields.AddressField: {'widget': map_widgets.GoogleMapsAddressWidget},
-    }
-class apartment_admin(admin.ModelAdmin):
-    formfield_overrides = {
-        map_fields.AddressField: {'widget': map_widgets.GoogleMapsAddressWidget},
-    }
 
-admin.site.register(rooms)
+
+class roomAdmin(admin.ModelAdmin):
+       
+    search_fields = ('room_id','seller_id__email', )
+    list_filter = ('verified','booked','removed','pausebooking','category',)
+
+class shopAdmin(admin.ModelAdmin):
+       
+    search_fields = ('shop_id','seller_id__email', )
+    list_filter = ('verified','booked','removed','pausebooking','category',)
+
+class apartmentAdmin(admin.ModelAdmin):
+       
+    search_fields = ('apartment_id', 'seller_id__email',)
+    list_filter = ('verified','booked','removed','pausebooking','category',)
+
+admin.site.register(rooms,roomAdmin)
 
 admin.site.register(minmax_room)
 
-admin.site.register(shops)
+admin.site.register(shops,shopAdmin)
 
 admin.site.register(minmax_shop)
 
-admin.site.register(apartments)
+admin.site.register(apartments,apartmentAdmin)
 
 admin.site.register(minmax_apartment)

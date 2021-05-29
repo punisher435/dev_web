@@ -75,6 +75,7 @@ class roomBookings(models.Model):
 
     paid = models.BooleanField(default=True)
     seller_pay = models.BigIntegerField()
+    seller_paid = models.BooleanField(default=False)
 
     invoice = models.FileField(upload_to ='invoices/% Y/% m/% d/',null=True,blank=True)  
 
@@ -171,6 +172,7 @@ class shopBookings(models.Model):
 
     paid = models.BooleanField(default=True)
     seller_pay = models.BigIntegerField()
+    seller_paid = models.BooleanField(default=False)
 
     invoice = models.FileField(upload_to ='invoices/% Y/% m/% d/',null=True,blank=True)  
 
@@ -263,6 +265,7 @@ class apartmentBookings(models.Model):
 
     paid = models.BooleanField(default=True)
     seller_pay = models.BigIntegerField()
+    seller_paid = models.BooleanField(default=False)
 
     invoice = models.FileField(upload_to ='invoices/% Y/% m/% d/',null=True,blank=True)  
 

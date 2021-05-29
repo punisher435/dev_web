@@ -418,27 +418,30 @@ class room_booking(viewsets.ViewSet):
                 tt1=round(tt1)
                 refund_price = tt1
                 
-                seller_pay = tt1
+                bob=booking.seller_pay
+                bob=bob*3
+                bob=bob/10.0
+                bob=round(bob)
+                getbob=booking.seller_pay-bob
+                booking.seller_pay = bob
                 seller = get_object_or_404(seller_bank_details.objects.all(),pk=room.seller_id)
-                seller.total_due_payment = seller.total_due_payment-seller_pay
+                seller.total_due_payment = seller.total_due_payment-getbob
                 seller.save()
 
             elif utc.localize(datetime.datetime.now())<=booking.created_at+datetime.timedelta(days=5):
-                print('refunded')
+              
                 yo1=int(booking.price_to_be_paid)
                 yo1=yo1*100 
                 yo1=yo1/103.0
                 yo1=round(yo1)
                 refund_price = yo1
 
-                bob=booking.seller_pay
-                bob=bob*3
-                bob=bob/10.0
-                bob=round(bob)
-                seller_pay = bob
+               
+                
                 seller = get_object_or_404(seller_bank_details.objects.all(),pk=room.seller_id)
                 seller.total_due_payment = seller.total_due_payment-seller_pay
                 seller.save()
+                booking.seller_pay=0
 
             elif utc.localize(datetime.datetime.now())<=booking.created_at+datetime.timedelta(days=7) and utc.localize(datetime.datetime.now())>booking.created_at+datetime.timedelta(days=5):
                 yo1=int(booking.price_to_be_paid)
@@ -454,9 +457,10 @@ class room_booking(viewsets.ViewSet):
                 bob=bob*3
                 bob=bob/10.0
                 bob=round(bob)
-                seller_pay = bob
+                getbob=booking.seller_pay-bob
+                booking.seller_pay = bob
                 seller = get_object_or_404(seller_bank_details.objects.all(),pk=room.seller_id)
-                seller.total_due_payment = seller.total_due_payment-seller_pay
+                seller.total_due_payment = seller.total_due_payment-getbob
                 seller.save()
 
             booking.refund_amount = refund_price
@@ -998,27 +1002,30 @@ class shop_booking(viewsets.ViewSet):
                 tt1=round(tt1)
                 refund_price = tt1
                 
-                seller_pay = tt1
+                bob=booking.seller_pay
+                bob=bob*3
+                bob=bob/10.0
+                bob=round(bob)
+                getbob=booking.seller_pay-bob
+                booking.seller_pay = bob
                 seller = get_object_or_404(seller_bank_details.objects.all(),pk=room.seller_id)
-                seller.total_due_payment = seller.total_due_payment-seller_pay
+                seller.total_due_payment = seller.total_due_payment-getbob
                 seller.save()
 
             elif utc.localize(datetime.datetime.now())<=booking.created_at+datetime.timedelta(days=5):
-                print('refunded')
+              
                 yo1=int(booking.price_to_be_paid)
                 yo1=yo1*100 
                 yo1=yo1/103.0
                 yo1=round(yo1)
                 refund_price = yo1
 
-                bob=booking.seller_pay
-                bob=bob*3
-                bob=bob/10.0
-                bob=round(bob)
-                seller_pay = bob
+               
+                
                 seller = get_object_or_404(seller_bank_details.objects.all(),pk=room.seller_id)
                 seller.total_due_payment = seller.total_due_payment-seller_pay
                 seller.save()
+                booking.seller_pay=0
 
             elif utc.localize(datetime.datetime.now())<=booking.created_at+datetime.timedelta(days=7) and utc.localize(datetime.datetime.now())>booking.created_at+datetime.timedelta(days=5):
                 yo1=int(booking.price_to_be_paid)
@@ -1034,9 +1041,10 @@ class shop_booking(viewsets.ViewSet):
                 bob=bob*3
                 bob=bob/10.0
                 bob=round(bob)
-                seller_pay = bob
+                getbob=booking.seller_pay-bob
+                booking.seller_pay = bob
                 seller = get_object_or_404(seller_bank_details.objects.all(),pk=room.seller_id)
-                seller.total_due_payment = seller.total_due_payment-seller_pay
+                seller.total_due_payment = seller.total_due_payment-getbob
                 seller.save()
 
             booking.refund_amount = refund_price
@@ -1487,27 +1495,30 @@ class apartment_booking(viewsets.ViewSet):
                 tt1=round(tt1)
                 refund_price = tt1
                 
-                seller_pay = tt1
+                bob=booking.seller_pay
+                bob=bob*3
+                bob=bob/10.0
+                bob=round(bob)
+                getbob=booking.seller_pay-bob
+                booking.seller_pay = bob
                 seller = get_object_or_404(seller_bank_details.objects.all(),pk=room.seller_id)
-                seller.total_due_payment = seller.total_due_payment-seller_pay
+                seller.total_due_payment = seller.total_due_payment-getbob
                 seller.save()
 
             elif utc.localize(datetime.datetime.now())<=booking.created_at+datetime.timedelta(days=5):
-                print('refunded')
+              
                 yo1=int(booking.price_to_be_paid)
                 yo1=yo1*100 
                 yo1=yo1/103.0
                 yo1=round(yo1)
                 refund_price = yo1
 
-                bob=booking.seller_pay
-                bob=bob*3
-                bob=bob/10.0
-                bob=round(bob)
-                seller_pay = bob
+               
+                
                 seller = get_object_or_404(seller_bank_details.objects.all(),pk=room.seller_id)
                 seller.total_due_payment = seller.total_due_payment-seller_pay
                 seller.save()
+                booking.seller_pay=0
 
             elif utc.localize(datetime.datetime.now())<=booking.created_at+datetime.timedelta(days=7) and utc.localize(datetime.datetime.now())>booking.created_at+datetime.timedelta(days=5):
                 yo1=int(booking.price_to_be_paid)
@@ -1523,9 +1534,10 @@ class apartment_booking(viewsets.ViewSet):
                 bob=bob*3
                 bob=bob/10.0
                 bob=round(bob)
-                seller_pay = bob
+                getbob=booking.seller_pay-bob
+                booking.seller_pay = bob
                 seller = get_object_or_404(seller_bank_details.objects.all(),pk=room.seller_id)
-                seller.total_due_payment = seller.total_due_payment-seller_pay
+                seller.total_due_payment = seller.total_due_payment-getbob
                 seller.save()
 
             booking.refund_amount = refund_price
