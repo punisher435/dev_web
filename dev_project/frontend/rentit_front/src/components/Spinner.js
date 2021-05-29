@@ -1,7 +1,7 @@
 import React from 'react'
 import { css } from "@emotion/core";
 import HashLoader from "react-spinners/HashLoader";
-import Load from '../loading.gif'
+import Load from '../loadin.gif'
 import Grid from '@material-ui/core/Grid';
 
 
