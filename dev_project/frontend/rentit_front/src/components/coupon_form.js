@@ -32,25 +32,24 @@ const validationSchema = yup.object({
   .required('You must answer this '),
 
   off: yup
-  .number().integer('please enter integer'),
-
+  .string('Please, provide the appropriate answer')
+  .required('You must answer this '),
   life: yup
-  .number().integer('please enter integer'),
+  .string('Please, provide the appropriate answer')
+  .required('You must answer this '),
 
   min_price: yup
-  .number().integer('please enter integer'),
+  .string('Please, provide the appropriate answer')
+  .required('You must answer this '),
 
-  max_off_price: yup
-  .number().integer('please enter integer'),
+  
   
   
   coupon_type: yup
   .string('Please, provide the appropriate answer')
   .required('You must answer this '),
 
-  valid_from: yup
-  .string('Please, provide the appropriate answer')
-  .required('You must answer this '),
+ 
    
 
     
@@ -118,18 +117,39 @@ const validationSchema = yup.object({
 
 function CouponForm (props){
     const classes = useStyles();
+    var date = new Date(Date.now())
+
+    var x;
+    var y;
+    if(parseInt(date.getMonth()+1)<10)
+    {
+      x = `0${date.getMonth()+1}`;
+    }
+    if(parseInt(date.getMonth()+1)>=10)
+    {
+      x = `${date.getMonth()+1}`;
+    }
+    if(parseInt(date.getDate())<10)
+    {
+      y = `0${date.getDate()}`;
+    }
+    if(parseInt(date.getDate())>=10)
+    {
+      y = `${date.getDate()}`;
+    }
+   
 
     const [mycoupon,setcoupon] = useState({
       coupoun_code:'',
       coupon_type:'',
-      valid_from: '',
+      valid_from: `${date.getFullYear()}-${x}-${y}`,
       life:1,
       coupoun_rooms:[],
       coupoun_shops:[],
       coupoun_apartments:[],    
       off:0,
       min_price:0,
-      max_off_price:0,
+      max_off_price:'',
     })
 
     const [edit,setedit] = useState(false)
@@ -249,7 +269,7 @@ function CouponForm (props){
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
-
+      console.log(values);
       setloading1(true)      
       const config = {
         headers: {
@@ -272,8 +292,8 @@ function CouponForm (props){
               }
                 catch{
                   setloading1(false)  
-                 
-                  seterror(true)
+                 seterror(true);
+                
                   
                 }
       }
@@ -282,37 +302,7 @@ function CouponForm (props){
   });
 
 
-  useEffect(
-    () => {
-      if(formik.values.off!==formik.values.off){formik.setFieldValue('off',0);}
-      
-    
-    }
-  ,[formik.values.off])
-
-  useEffect(
-    () => {
-      if(formik.values.min_price!==formik.values.min_price){formik.setFieldValue('min_price',0);}
-      
-    
-    }
-  ,[formik.values.min_price])
-
-  useEffect(
-    () => {
-      if(formik.values.max_off_price!==formik.values.max_off_price){formik.setFieldValue('max_off_price',0);}
-      
-    
-    }
-  ,[formik.values.max_off_price])
-
-  useEffect(
-    () => {
-      if(formik.values.life!==formik.values.life){formik.setFieldValue('life',0);}
-      
-    
-    }
-  ,[formik.values.life])
+  
 
   if(props.isAuthenticated===false)
     {
@@ -453,7 +443,7 @@ const handleChange2 = (e,apartmentid,boolean) => {
           name="off"
           label="Off"
           value={formik.values.off}
-          onChange={(e) => {formik.setFieldValue('off',parseInt(e.target.value)); 
+          onChange={(e) => {formik.setFieldValue('off',e.target.value); 
           }}
           error={formik.touched.off && Boolean(formik.errors.off)}
           helperText={formik.touched.off && formik.errors.off}
@@ -476,7 +466,7 @@ const handleChange2 = (e,apartmentid,boolean) => {
           name="min_price"
           label="Min price to be applied on"
           value={formik.values.min_price}
-          onChange={(e) => {formik.setFieldValue('min_price',parseInt(e.target.value)); 
+          onChange={(e) => {formik.setFieldValue('min_price',e.target.value); 
           }}
           error={formik.touched.min_price && Boolean(formik.errors.min_price)}
           helperText={formik.touched.min_price && formik.errors.min_price}
@@ -508,12 +498,11 @@ const handleChange2 = (e,apartmentid,boolean) => {
           rows={1}
           id="max_off_price"
           name="max_off_price"
-          label="Max discount price"
+          label="Max discount price(if Any)"
           value={formik.values.max_off_price}
-          onChange={(e) => {formik.setFieldValue('max_off_price',parseInt(e.target.value)); 
+          onChange={(e) => {formik.setFieldValue('max_off_price',e.target.value); 
           }}
-          error={formik.touched.max_off_price && Boolean(formik.errors.max_off_price)}
-          helperText={formik.touched.max_off_price && formik.errors.max_off_price}
+         
         />
        </>
 
@@ -537,7 +526,7 @@ const handleChange2 = (e,apartmentid,boolean) => {
           name="life"
           label="Expiry after"
           value={formik.values.life}
-          onChange={(e) => {formik.setFieldValue('life',parseInt(e.target.value)); 
+          onChange={(e) => {formik.setFieldValue('life',e.target.value); 
           }}
           error={formik.touched.life && Boolean(formik.errors.life)}
           helperText={formik.touched.life && formik.errors.life}

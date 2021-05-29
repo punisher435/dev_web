@@ -70,6 +70,7 @@ class coupon_viewset(viewsets.ViewSet):
             return Response('Error',status=status.HTTP_400_BAD_REQUEST)
 
     def create(self,request):
+        
 
         try:
 
@@ -77,10 +78,13 @@ class coupon_viewset(viewsets.ViewSet):
 
                 data = json.loads(request.body.decode('utf-8'))['data']
 
-                temp = int(data['max_off_price'])
+                if(int(data['off'])==0):
+                    return Response('Error',status=status.HTTP_400_BAD_REQUEST)
 
-                if(temp==0):
-                    temp=None
+                temp=None
+            
+                if(data['max_off_price']!=''):
+                    temp=int(data['max_off_price'])
 
                 start_date = datetime.date(int(data['valid_from'][0:4]),int(data['valid_from'][5:7]),int(data['valid_from'][8:]))
                 end_date = start_date + datetime.timedelta(days=int(data['life']))
@@ -95,12 +99,14 @@ class coupon_viewset(viewsets.ViewSet):
                 queryset = coupons.objects.all()
                 queryset = queryset.filter(seller_id = request.user)
 
-                coupon = get_object_or_404(queryset,pk=data['coupoun_code'])
+                coupon = get_object_or_404(queryset,pk=data['coupoun_code'].upper())
 
                 queryset = rooms.objects.all()
                 queryset = queryset.filter(seller_id = request.user)
+                flag=False
 
                 for room in data['coupoun_rooms']:
+                    flag=True
 
                     room1 = get_object_or_404(queryset,pk=room)
 
@@ -110,7 +116,7 @@ class coupon_viewset(viewsets.ViewSet):
                 queryset = queryset.filter(seller_id = request.user)
 
                 for room in data['coupoun_shops']:
-
+                    flag=True
                     room1 = get_object_or_404(queryset,pk=room)
 
                     coupon.coupoun_shops.add(room1)
@@ -119,14 +125,19 @@ class coupon_viewset(viewsets.ViewSet):
                 queryset = queryset.filter(seller_id = request.user)
 
                 for room in data['coupoun_apartments']:
-
+                    flag=True
                     room1 = get_object_or_404(queryset,pk=room)
 
                     coupon.coupoun_apartments.add(room1)
                 
                 coupon.save()
 
+                if flag==False:
+                    coupon.delete()
+
                 return Response('Success',status=status.HTTP_201_CREATED)
+
+                
             else:
                 return Response('Error',status=status.HTTP_400_BAD_REQUEST)
 
