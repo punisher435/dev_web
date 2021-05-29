@@ -22,8 +22,11 @@ axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
 const useStyles = makeStyles((theme) => ({
 root: {
 
-  width: 280,
-  height: 350,
+  maxWidth: 280,
+  
+  margin: '0 auto',
+float: 'none',
+
 margin: 10,
 float: 'none',
  
@@ -63,29 +66,28 @@ function RecipeReviewCard({post}) {
 <Link to={`/rooms/${post.room_id}`} target="_blank" style={{textDecoration:'none',color:'black'}}>
    
  <RoomImage post={post} />
-
  
-
  <Box ml={1}>
 
-   <Box mb={0}>
-   <Grid container alignItems='flex-start'>
-     <Grid item xs={1}>
-        <Icon color="error"><RoomIcon /></Icon>
+<Box mb={0}>
+<Grid container alignItems='flex-start'>
+  <Grid item xs={1}>
+     <Icon color="error"><RoomIcon /></Icon>
 
-     </Grid>
-     <Grid item xs={11}>
-            <Typography variant="body1" component="h2">
-              <Box mt={1}>
-          {post.location.slice(0,6)}...,{post.city},{post.state}
-          {/* Anand Plaza, First, University Rd, A Block, Udaipur, Rajasthan 313001 */}
-              </Box>
-        </Typography>
+  </Grid>
+  <Grid item xs={11}>
+         <Typography variant="body1" >
+           <Box mt={1}>
+       {post.location},{post.city},{post.district},{post.state},{post.country}
+       {/* Anand Plaza, First, University Rd, A Block, Udaipur, Rajasthan 313001 */}
+           </Box>
+     </Typography>
+     
 
-     </Grid>
-   </Grid>
-   </Box>
-   </Box>
+  </Grid>
+</Grid>
+</Box>
+</Box>
    <ScrollableIcons post={post}/>
   <Box ml={1} mt={1} mb={1}>
     <Grid
@@ -93,7 +95,7 @@ function RecipeReviewCard({post}) {
         direction="row"
         justify="flex-start"
         alignItems="flex-start"
-        spacing="2"
+        spacing={2}
         >
     
         <Grid item md={4}>
