@@ -26,8 +26,18 @@ import Paper from '@material-ui/core/Paper';
 import Rules from './roomrules';
 import Add from '../addroom.png';
 import './css/App.css';
+import './css/Menu.css';
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
+
+const dropdownMenuProps={
+  menuStyle:{
+    border: "1px solid black",
+    borderRadius: "5%",
+    backgroundColor: 'lightgrey',
+    right:0,
+  },
+}
 
 
 const FILE_SIZE = 1600 * 1024;
@@ -303,7 +313,10 @@ papernewclass:{
 },
 nowclass1:{
   width: 'inherit'
-}
+},
+padding:{
+  padding:'60px',
+},
   }));
 
 function ShopForm (props){
@@ -1050,7 +1063,7 @@ if(newredirect==true)
         justify="center"
         alignItems="center"
         >
-      <Grid item lg={5} md={6}>
+      <Grid item lg={5} md={6} xs={12}>
            
            <Paper elevation={5} className={classes.papernewclass}>
            <div id="mapcontainer1">
@@ -1249,6 +1262,10 @@ if(newredirect==true)
         onChange={(e) => formik.setFieldValue('gender',e.target.value)}
         error={formik.touched.gender && Boolean(formik.errors.gender)}
         helperText={formik.touched.gender && formik.errors.gender}
+        
+        MenuProps={{
+          classes: {padding: classes.padding},
+        }}
         >
         <MenuItem value={'Male'}>Male</MenuItem>
         <MenuItem value={'Female'}>Female</MenuItem>

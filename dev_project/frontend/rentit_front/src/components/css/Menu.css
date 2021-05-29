@@ -1,0 +1,7 @@
+@media only screen and (max-width: 908px)
+{
+  .MuiMenu-paper{
+    right:0;
+    left:4vw !important;
+  }
+}
