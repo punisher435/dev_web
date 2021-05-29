@@ -253,9 +253,10 @@ function Home(props) {
 
     React.useEffect(() => {
      // Detect Firefox
-    let chromeAgent = navigator.userAgent.indexOf("Chrome") > -1;
-    
-    setwarnbrowser(!chromeAgent);
+     
+     var isChrome = !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime);
+    setwarnbrowser(!isChrome);
+   
      
     },[])
 
