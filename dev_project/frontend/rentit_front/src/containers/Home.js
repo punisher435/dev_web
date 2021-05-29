@@ -29,10 +29,12 @@ import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import Hidden from '@material-ui/core/Hidden';
 
+
 import Box from '@material-ui/core/Box';
 import "../components/css/App.css"
 
 import CookieConsent from "react-cookie-consent";
+
 import bg from '../bg1.jpg';
 
 
@@ -236,6 +238,7 @@ const useStyles = makeStyles((theme) => ({
     }
   }))(TextField);
 
+  
 
 function Home(props) {
     const classes = useStyles();
@@ -246,6 +249,15 @@ function Home(props) {
     const [apartment,setapartment] = React.useState([])
     const [coupons,setcoupons] = React.useState([])
     const isSmall = useMediaQuery("(max-width: 600px)");
+    const [warnbrowser,setwarnbrowser] = React.useState(false);
+
+    React.useEffect(() => {
+     // Detect Firefox
+    let chromeAgent = navigator.userAgent.indexOf("Chrome") > -1;
+    
+    setwarnbrowser(!chromeAgent);
+     
+    },[])
 
     const [display,setdisplay] = useState(false);
     var warning=false;
@@ -467,6 +479,14 @@ function Home(props) {
       }
   }
 
+  const handleClose111 = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setwarnbrowser(false);
+  };
+
   if(roomsearch===true)
   {
       return <Redirect to={`/rooms/?city=${input.city.toUpperCase()}&state=${input.state.toUpperCase()}&country=${input.country.toUpperCase()}&booking_date=${input.date}`} style={{textDecoration:'none',color:'black'}} />
@@ -485,8 +505,13 @@ function Home(props) {
     
     return (
         <div>
+          
            
-            
+          <Snackbar open={warnbrowser} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose111} severity="info">
+            We recommend using Google Chrome for better user experience!
+        </Alert>
+      </Snackbar>
             <div className={classes.containerclass}>
                 <div className={classes.headerclass}>
                     <Welcome />
