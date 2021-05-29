@@ -31,7 +31,7 @@ export default function AddressForm({bookdetails,setbookdetails,setpayment,profi
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
-        Shipping address
+        Guest Information
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6}>

@@ -47,7 +47,7 @@ export default function BasicTable({booking,profile,name}) {
           
             <StyledTableRow key='name'>
               <StyledTableCell component="th" scope="row">
-                Customer name
+                Guest name
               </StyledTableCell>
               <StyledTableCell align="right">{booking.first_name + ' ' + booking.last_name}</StyledTableCell>
               

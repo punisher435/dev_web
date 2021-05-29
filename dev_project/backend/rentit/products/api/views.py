@@ -62,6 +62,7 @@ class room_filter(rest_filters.FilterSet):
 
     city1 = rest_filters.CharFilter(method='get_city',field_name='net_discount')
     state1 = rest_filters.CharFilter(method='get_state',field_name='net_discount')
+    district1 = rest_filters.CharFilter(method='get_district',field_name='net_discount')
     country1 = rest_filters.CharFilter(method='get_country',field_name='net_discount')
     landmark1 = rest_filters.CharFilter(method='get_landmark',field_name='net_discount')
     pincode1 = rest_filters.CharFilter(method='get_pincode',field_name='net_discount')
@@ -77,6 +78,11 @@ class room_filter(rest_filters.FilterSet):
         if value:
             
             queryset = queryset.filter(state__icontains=value)
+        return queryset
+    def get_district(self,queryset,field_name,value,):
+        if value:
+            
+            queryset = queryset.filter(district__icontains=value)
         return queryset
 
     def get_country(self,queryset,field_name,value,):
@@ -172,9 +178,11 @@ class my_room_viewset(viewsets.ViewSet):
 
                 booked_till = datetime.date(1910,1,1)
 
+                
+
                 room = rooms(title=request.data["title"],seller_id=request.user,bookedtill=booked_till,price=price,seller_price=seller_price,owner_discount=int(request.data["owner_discount"]),net_discount=int(request.data["owner_discount"]),final_price=seller_price,capacity=int(request.data["capacity"]),photo1=request.data["photo1"],photo2=request.data["photo2"],photo3=request.data["photo3"],photo4=request.data["photo4"],photo5=request.data["photo5"],
                 location=request.data["location"].upper(),city=request.data["city"].upper(),state=request.data["state"].upper(),country=request.data["country"].upper(),landmark=request.data["landmark"].upper(),pincode=request.data["pincode"],currency=bank.currency,longitude=float(request.data["longitude"]),latitude=float(request.data["latitude"]),length=int(request.data["length"]),breadth=int(request.data["breadth"]),height=int(request.data["height"]),furniture=request.data["furniture"],category=request.data["category"],
-                facility=request.data["facility"],description=request.data["description"],cctv_building=bool(request.data["cctv_building"]=='true'),building_guard=bool(request.data["building_guard"]=='true'),balcony=int(request.data["balcony"]),separate_washroom=bool(request.data["separate_washroom"]=='true'),windows=int(request.data["windows"]),fans=int(request.data["fans"]),bed_type=request.data["bed_type"],floor_no=int(request.data["floor_no"]),
+                facility=request.data["facility"],district=request.data["district"].upper(),description=request.data["description"],cctv_building=bool(request.data["cctv_building"]=='true'),building_guard=bool(request.data["building_guard"]=='true'),balcony=int(request.data["balcony"]),separate_washroom=bool(request.data["separate_washroom"]=='true'),windows=int(request.data["windows"]),fans=int(request.data["fans"]),bed_type=request.data["bed_type"],floor_no=int(request.data["floor_no"]),
                 cost_electricity=int(request.data["cost_electricity"]),cost_water=int(request.data["cost_water"]),purified_water=bool(request.data["purified_water"]=='true'),removable_purified_water=bool(request.data["removable_purified_water"]=='true'),cost_purified_water=int(request.data["cost_purified_water"]),house_TV=bool(request.data["house_TV"]=='true'),removable_house_TV=bool(request.data["removable_house_TV"]=='true'),
                 cost_TV=int(request.data["cost_TV"]),room_TV=bool(request.data["room_TV"]=='true'),cost_roomTV=int(request.data["cost_roomTV"]),removable_room_TV=bool(request.data["removable_room_TV"]=='true'),house_refridgerator=bool(request.data["house_refridgerator"]=='true'),removable_house_refridgerator=bool(request.data["removable_house_refridgerator"]=='true'),cost_refridgerator=int(request.data["cost_refridgerator"]),
                 room_refridgerator=bool(request.data["room_refridgerator"]=='true'),cost_roomrefridgerator=int(request.data["cost_roomrefridgerator"]),removable_room_refridgerator=bool(request.data["removable_room_refridgerator"]=='true'),power_backup=bool(request.data["power_backup"]=='true'),geyser=bool(request.data["geyser"]=='true'),removable_geyser=bool(request.data["removable_geyser"]=='true'),cost_geyser=int(request.data["cost_geyser"]),
@@ -385,6 +393,7 @@ class shop_filter(rest_filters.FilterSet):
     balcony_filter = rest_filters.NumberFilter(field_name='balcony',lookup_expr='gte')
     windows_filter = rest_filters.NumberFilter(field_name='windows',lookup_expr='gte')
     discount = rest_filters.NumberFilter(field_name='net_discount',lookup_expr='gte')
+    district1 = rest_filters.CharFilter(method='get_district',field_name='net_discount')
 
     city1 = rest_filters.CharFilter(method='get_city',field_name='net_discount')
     state1 = rest_filters.CharFilter(method='get_state',field_name='net_discount')
@@ -397,6 +406,12 @@ class shop_filter(rest_filters.FilterSet):
         if value:
             
             queryset = queryset.filter(city__icontains=value)
+        return queryset
+
+    def get_district(self,queryset,field_name,value,):
+        if value:
+            
+            queryset = queryset.filter(district__icontains=value)
         return queryset
 
     def get_state(self,queryset,field_name,value,):
@@ -499,7 +514,7 @@ class my_shop_viewset(viewsets.ViewSet):
                 facility=request.data["facility"],description=request.data["description"],cctv_building=bool(request.data["cctv_building"]=='true'),building_guard=bool(request.data["building_guard"]=='true'),balcony=int(request.data["balcony"]),separate_washroom=bool(request.data["separate_washroom"]=='true'),windows=int(request.data["windows"]),fans=int(request.data["fans"]),floor_no=int(request.data["floor_no"]),
                 cost_electricity=int(request.data["cost_electricity"]),cost_water=int(request.data["cost_water"]),purified_water=bool(request.data["purified_water"]=='true'),removable_purified_water=bool(request.data["removable_purified_water"]=='true'),cost_purified_water=int(request.data["cost_purified_water"]),
                 washroom=int(request.data["washroom"]),total_rooms=int(request.data["total_rooms"]),total_floors=int(request.data["total_floors"]),
-                power_backup=bool(request.data["power_backup"]=='true'),
+                power_backup=bool(request.data["power_backup"]=='true'),district=request.data["district"].upper(),
                 wifi=bool(request.data["wifi"]=='true'),cost_wifi=int(request.data["cost_wifi"]),removable_wifi=bool(request.data["removable_wifi"]=='true'),
                 TV=bool(request.data["TV"]=='true'),cost_TV=int(request.data["cost_TV"]),removable_TV=bool(request.data["removable_TV"]=='true'),
                 cooler=bool(request.data["cooler"]=='true'),cost_cooler=int(request.data["cost_cooler"]),removable_cooler=bool(request.data["removable_cooler"]=='true'),
@@ -699,6 +714,7 @@ class apartment_filter(rest_filters.FilterSet):
     landmark1 = rest_filters.CharFilter(method='get_landmark',field_name='net_discount')
     pincode1 = rest_filters.CharFilter(method='get_pincode',field_name='net_discount')
     location1 = rest_filters.CharFilter(method='get_location',field_name='net_discount')
+    district1 = rest_filters.CharFilter(method='get_district',field_name='net_discount')
 
     def get_city(self,queryset,field_name,value,):
         if value:
@@ -710,6 +726,11 @@ class apartment_filter(rest_filters.FilterSet):
         if value:
             
             queryset = queryset.filter(state__icontains=value)
+        return queryset
+    def get_district(self,queryset,field_name,value,):
+        if value:
+            
+            queryset = queryset.filter(district__icontains=value)
         return queryset
 
     def get_country(self,queryset,field_name,value,):
@@ -807,7 +828,7 @@ class my_apartment_viewset(viewsets.ViewSet):
                 location=request.data["location"].upper(),city=request.data["city"].upper(),state=request.data["state"].upper(),country=request.data["country"].upper(),landmark=request.data["landmark"].upper(),pincode=request.data["pincode"],currency=bank.currency,longitude=float(request.data["longitude"]),latitude=float(request.data["latitude"]),length=int(request.data["length"]),breadth=int(request.data["breadth"]),height=int(request.data["height"]),furniture=request.data["furniture"],category=request.data["category"],
                 facility=request.data["facility"],description=request.data["description"],cctv_building=bool(request.data["cctv_building"]=='true'),building_guard=bool(request.data["building_guard"]=='true'),balcony=int(request.data["balcony"]),windows=int(request.data["windows"]),fans=int(request.data["fans"]),bed_type=request.data["bed_type"],floor_no=int(request.data["floor_no"]),
                 cost_electricity=int(request.data["cost_electricity"]),cost_water=int(request.data["cost_water"]),purified_water=bool(request.data["purified_water"]=='true'),removable_purified_water=bool(request.data["removable_purified_water"]=='true'),cost_purified_water=int(request.data["cost_purified_water"]),TV=bool(request.data["TV"]=='true'),removable_house_TV=bool(request.data["removable_house_TV"]=='true'),
-                cost_TV=int(request.data["cost_TV"]),house_refridgerator=bool(request.data["house_refridgerator"]=='true'),removable_house_refridgerator=bool(request.data["removable_house_refridgerator"]=='true'),cost_refridgerator=int(request.data["cost_refridgerator"]),
+                cost_TV=int(request.data["cost_TV"]),house_refridgerator=bool(request.data["house_refridgerator"]=='true'),removable_house_refridgerator=bool(request.data["removable_house_refridgerator"]=='true'),cost_refridgerator=int(request.data["cost_refridgerator"]),district=request.data["district"].upper(),
                 power_backup=bool(request.data["power_backup"]=='true'),geyser=bool(request.data["geyser"]=='true'),removable_geyser=bool(request.data["removable_geyser"]=='true'),cost_geyser=int(request.data["cost_geyser"]),
                 wifi=bool(request.data["wifi"]=='true'),cost_wifi=int(request.data["cost_wifi"]),removable_wifi=bool(request.data["removable_wifi"]=='true'),AC=bool(request.data["AC"]=='true'),cost_AC=int(request.data["cost_AC"]),removable_AC=bool(request.data["removable_AC"]=='true'),cooler=bool(request.data["cooler"]=='true'),cost_cooler=int(request.data["cost_cooler"]),removable_cooler=bool(request.data["removable_cooler"]=='true'),laundry=bool(request.data["laundry"]=='true'),cost_laundry=int(request.data["cost_laundry"]),
                 apartment_cleaning=bool(request.data["apartment_cleaning"]=='true'),removable_laundry=bool(request.data["removable_laundry"]=='true'),cost_cleaning=int(request.data["cost_cleaning"]),nearby_station1=request.data["nearby_station1"],nearby_station2=request.data["nearby_station2"],distance1=float(request.data["distance1"]),distance2=float(request.data["distance2"]),apartment_policy=request.data["apartment_policy"],

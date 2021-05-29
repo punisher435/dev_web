@@ -89,6 +89,7 @@ class rooms(models.Model):
     country = models.CharField(max_length=255)
     landmark=models.CharField(max_length=255)
     pincode=models.CharField(max_length=255)
+    district=models.CharField(max_length=255,null=True,blank=True)
     currency=models.CharField(max_length=200,default='₹ INR')
 
     """ address = map_fields.AddressField(max_length=200,blank=True)
@@ -264,6 +265,7 @@ class shops(models.Model):
     country = models.CharField(max_length=255)
     landmark=models.CharField(max_length=255)
     pincode=models.CharField(max_length=255)
+    district=models.CharField(max_length=255,null=True,blank=True)
 
     longitude = models.DecimalField(max_digits=9,decimal_places=6,default=0.0)
     latitude = models.DecimalField(max_digits=9,decimal_places=6,default=0.0)
@@ -406,6 +408,7 @@ class apartments(models.Model):
     country = models.CharField(max_length=255)
     landmark=models.CharField(max_length=255)
     pincode=models.CharField(max_length=255)
+    district=models.CharField(max_length=255,null=True,blank=True)
 
     
     longitude = models.DecimalField(max_digits=9,decimal_places=6,default=0.0)

@@ -92,6 +92,7 @@ export default function BasicTable({room}) {
     createData('Verified', `${room.verified ? 'Yes' : 'No'}` ),
     createData('Address', room.location ),
     createData('City', room.city ),
+    createData('District', room.district ),
     createData('State', room.state ),
     createData('Country', room.country ),
     createData('Landmark', room.landmark ),

@@ -125,6 +125,7 @@ const App = ({isAuthenticated}) => {
     country:temp3,
     landmark:'',
     pincode:'',
+    district:'',
 
     wifi:'',
     breakfast:'',
@@ -205,6 +206,7 @@ const App = ({isAuthenticated}) => {
           location1:filters.location.toUpperCase(),
           landmark1:filters.landmark.toUpperCase(),
           pincode1:filters.pincode,
+          district1:filters.district,
 
         },
         config:config

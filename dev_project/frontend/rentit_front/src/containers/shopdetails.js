@@ -409,7 +409,7 @@ if(details){
                                 {details.title}
                                 </Typography>
                                 <Typography variant="h6" component="h6" gutterBottom >
-                                {details.location}
+                                {details.location},{details.city},{details.district},{details.state},{details.country}
                                 </Typography>
                             </Grid>
                               
@@ -547,7 +547,7 @@ if(details){
                               <Icon color="error" fontSize="inherit"><LocationOnIcon /></Icon>  {details.location}, {details.city}
                                 </Typography>
                                 <Typography variant="body1" component="h6" gutterBottom className={classes.typo3}>
-                                ,  {details.state}, {details.country}
+                                , {details.district}, {details.state}, {details.country}
                                 </Typography>
             </Grid>
 

@@ -36,6 +36,7 @@ class room_filter(rest_filters.FilterSet):
     landmark1 = rest_filters.CharFilter(method='get_landmark',field_name='net_discount')
     pincode1 = rest_filters.CharFilter(method='get_pincode',field_name='net_discount')
     location1 = rest_filters.CharFilter(method='get_location',field_name='net_discount')
+    district1 = rest_filters.CharFilter(method='get_district',field_name='net_discount')
 
     def get_city(self,queryset,field_name,value,):
         if value:
@@ -48,7 +49,11 @@ class room_filter(rest_filters.FilterSet):
             
             queryset = queryset.filter(state__icontains=value)
         return queryset
-
+    def get_district(self,queryset,field_name,value,):
+        if value:
+            
+            queryset = queryset.filter(district__icontains=value)
+        return queryset
     def get_country(self,queryset,field_name,value,):
         if value:
             
@@ -112,6 +117,7 @@ class shop_filter(rest_filters.FilterSet):
     landmark1 = rest_filters.CharFilter(method='get_landmark',field_name='net_discount')
     pincode1 = rest_filters.CharFilter(method='get_pincode',field_name='net_discount')
     location1 = rest_filters.CharFilter(method='get_location',field_name='net_discount')
+    district1 = rest_filters.CharFilter(method='get_district',field_name='net_discount')
 
     def get_city(self,queryset,field_name,value,):
         if value:
@@ -123,6 +129,12 @@ class shop_filter(rest_filters.FilterSet):
         if value:
             
             queryset = queryset.filter(state__icontains=value)
+        return queryset
+
+    def get_district(self,queryset,field_name,value,):
+        if value:
+            
+            queryset = queryset.filter(district__icontains=value)
         return queryset
 
     def get_country(self,queryset,field_name,value,):
@@ -197,6 +209,7 @@ class apartment_filter(rest_filters.FilterSet):
     landmark1 = rest_filters.CharFilter(method='get_landmark',field_name='net_discount')
     pincode1 = rest_filters.CharFilter(method='get_pincode',field_name='net_discount')
     location1 = rest_filters.CharFilter(method='get_location',field_name='net_discount')
+    district1 = rest_filters.CharFilter(method='get_district',field_name='net_discount')
 
     def get_city(self,queryset,field_name,value,):
         if value:
@@ -208,6 +221,12 @@ class apartment_filter(rest_filters.FilterSet):
         if value:
             
             queryset = queryset.filter(state__icontains=value)
+        return queryset
+
+    def get_district(self,queryset,field_name,value,):
+        if value:
+            
+            queryset = queryset.filter(district__icontains=value)
         return queryset
 
     def get_country(self,queryset,field_name,value,):

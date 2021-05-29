@@ -46,6 +46,21 @@ export default function SimpleSelect3({filters,setfilters}) {
            margin="normal"
            fullWidth
           rows={1}
+          id="district"
+          name="district"
+          label="district"
+          value={filters.district}
+          onInput={e => handleChange(e)}
+         className={classes.formControl}
+          
+        />
+
+<TextField
+           multiline
+           variant="outlined"
+           margin="normal"
+           fullWidth
+          rows={1}
           id="state"
           name="state"
           label="state"

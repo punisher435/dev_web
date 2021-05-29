@@ -268,7 +268,9 @@ const validationSchema = yup.object({
   breadth: yup
   .number().integer('please enter integer'),
   
-  
+  district: yup
+  .string('Please, provide the appropriate answer')
+  .required('You must answer this '),
   
   height: yup
   .number().integer('please enter integer'),
@@ -528,6 +530,7 @@ function RoomForm (props){
       latitude:'',
       location:'',
       pincode:'',
+      district:'',
 
       nearby_station1:'',
       nearby_station2:'',
@@ -671,6 +674,7 @@ function RoomForm (props){
                   latitude:res.data.latitude,
                   location:res.data.location,
                   pincode:res.data.pincode,
+                  district:res.data.district,
 
                   nearby_station1:res.data.nearby_station1,
                   nearby_station2:res.data.nearby_station2,
@@ -820,6 +824,7 @@ function RoomForm (props){
       latitude:myroom.latitude,
       location:myroom.location,
       pincode:myroom.pincode,
+      district:myroom.district,
 
       nearby_station1:myroom.nearby_station1,
       nearby_station2:myroom.nearby_station2,
@@ -915,6 +920,7 @@ function RoomForm (props){
       form_data.append('state',values.state)
       form_data.append('country',values.country)
       form_data.append('landmark',values.landmark)
+      form_data.append('district',values.district)
       form_data.append('pincode',values.pincode)
       form_data.append('longitude',values.longitude)
       form_data.append('latitude',values.latitude)
@@ -1147,8 +1153,7 @@ useEffect(
 useEffect(
   () => {
     
-    if(formik.values.distance1!==formik.values.distance1){formik.setFieldValue('distance1',0);}
-    if(formik.values.distance2!==formik.values.distance2){formik.setFieldValue('distance2',0);}
+    
     if(formik.values.cost_breakfast!==formik.values.cost_breakfast){formik.setFieldValue('cost_breakfast',0);}
     if(formik.values.cost_lunch!==formik.values.cost_lunch){formik.setFieldValue('cost_lunch',0);}
     if(formik.values.cost_dinner!==formik.values.cost_dinner){formik.setFieldValue('cost_dinner',0);}
@@ -1157,7 +1162,7 @@ useEffect(
     if(formik.values.cost_cleaning!==formik.values.cost_cleaning){formik.setFieldValue('cost_cleaning',0);}
   
   }
-,[formik.values.distance1,formik.values.distance2,formik.values.cost_breakfast,formik.values.cost_laundry,formik.values.cost_lunch,formik.values.cost_dinner,formik.values.cost_cleaning,formik.values.cost_iron])
+,[formik.values.cost_breakfast,formik.values.cost_laundry,formik.values.cost_lunch,formik.values.cost_dinner,formik.values.cost_cleaning,formik.values.cost_iron])
 
 
 
@@ -3539,6 +3544,8 @@ if(newredirect==true)
   <br />
 
 
+
+
     <>
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
       City name
@@ -3561,6 +3568,35 @@ if(newredirect==true)
         /></div>
         </>
   <br />
+
+
+  <>
+      <Typography variant="body1" color="textSecondary" className={classes.textclass}>
+      District name
+        </Typography>
+     <div className={classes.form}>
+        <TextField
+          multiline
+          variant="outlined"
+          margin="normal"
+          fullWidth
+          rows={1}
+          id="district"
+          name="district"
+          label="district"
+          value={formik.values.district}
+          onChange={formik.handleChange}
+          error={formik.touched.district && Boolean(formik.errors.district)}
+          helperText={formik.touched.district && formik.errors.district}
+          
+        /></div>
+        </>
+
+<br />
+  
+
+
+
   <>
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
       State name

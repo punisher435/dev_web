@@ -75,7 +75,7 @@ function RecipeReviewCard({post}) {
      <Grid item xs={11}>
             <Typography variant="body1" component="h2">
               <Box mt={1}>
-           {post.location},{post.city},{post.state}
+              {post.location.slice(0,6)}...,{post.city},{post.state}
           {/* Anand Plaza, First, University Rd, A Block, Udaipur, Rajasthan 313001 */}
               </Box>
         </Typography>
