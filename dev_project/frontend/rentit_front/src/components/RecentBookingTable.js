@@ -150,7 +150,7 @@ export default function CustomizedTables({bookings,setbookings,title}) {
               <StyledTableCell align="right">{booking.room_name}</StyledTableCell>
               <StyledTableCell align="right">{booking.price_to_be_paid}</StyledTableCell>
               <StyledTableCell align="right">{booking.cancelled ? <p className={classes.endclass}>cancelled</p> : <p className={classes.normalclass}>active</p>}</StyledTableCell>
-              <StyledTableCell align="right"><Link style={{textAlign: 'center',textDecoration:'none'}} to={`/dashboard/recentbookings/room-bookings/${booking.booking_id}`}><Button>View details ...</Button></Link></StyledTableCell>
+              <StyledTableCell align="right"><Link style={{textAlign: 'center',textDecoration:'none'}} to={`/dashboard/recentbookings/room-bookings/${booking.booking_id}`}><Button variant="contained" color="primary">View details ...</Button></Link></StyledTableCell>
             </StyledTableRow>
 
               )
