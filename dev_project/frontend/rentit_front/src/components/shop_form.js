@@ -27,6 +27,9 @@ import Rules from './roomrules';
 import Add from '../addroom.png';
 import './css/App.css';
 import './css/Menu.css';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardMedia from '@material-ui/core/CardMedia';
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
 
@@ -423,6 +426,9 @@ function ShopForm (props){
       file3:Add,
       file4:Add,
       file5:Add,
+
+      video:'',
+      videofile:'',
     })
 
     const [edit,setedit] = useState(false)
@@ -532,6 +538,9 @@ function ShopForm (props){
                   file3:res.data.photo3,
                   file4:res.data.photo4,
                   file5:res.data.photo5,
+
+                  video:res.data.video,
+                  videofile:res.data.video,
                 })
                 setedit(true);
                 
@@ -630,7 +639,7 @@ function ShopForm (props){
       shop_policy:myroom.room_policy,
 
       
-
+      
       
       
     },
@@ -714,6 +723,7 @@ function ShopForm (props){
       form_data.append('breadth',values.breadth)
 
       form_data.append('height',values.height)
+      form_data.append('video',values.video)
 
       
 
@@ -1024,6 +1034,39 @@ const Filevalidation5 = (file1,name) => {
       
   
 }
+
+
+const Filevalidation6 = (file1,name) => {
+  
+ 
+  // Check if any file is selected.
+  
+     
+
+          const fsize =file1.size;
+          const file = Math.round((fsize / 1024));
+          // The size of the file.
+          if (file >= 50240) {
+              alert(
+                "File too Big, please select a file less than 50mb");
+          } 
+          else{
+            
+            formik.setFieldValue('video',file1);
+            setroom({...myroom,videofile: URL.createObjectURL(file1),video:file1});
+          }
+      
+  
+}
+
+const [width1,setwidth1]=React.useState(100);
+const hiddenFileInput6 = React.useRef(null);
+
+React.useEffect(() => {
+  let map = document.getElementById('mapcontainer1').clientWidth;
+  
+  setwidth1(map)
+},[])
 
 if(props.isAuthenticated===false)
     {
@@ -2603,6 +2646,38 @@ if(newredirect==true)
           
         />
        </>
+
+
+  <br />
+
+
+  <Typography variant="body1" color="textSecondary" className={classes.textclass}>
+      Upload a video of your shop (size limit - 50mb)
+        </Typography>
+
+  <Grid item style={{width:width1-25,height:300,}}>
+
+<Button variant='contained' className={classes.buttonclass11} onClick={(e) => {hiddenFileInput6.current.click();}}>
+<Card>
+  <CardActionArea>
+    <CardMedia
+      style={{width:width1-25,height:300,}}
+      component="video"
+      autoPlay
+      src={myroom.videofile}
+      title="Contemplative Reptile"
+    
+    />
+  </CardActionArea>
+</Card>
+  </Button>
+
+<input type='file'  accept="video/mp4" ref={hiddenFileInput6} style={{display:'none'}}  id='video'  onChange={(event) => {
+  console.log(event.target.files[0]);
+Filevalidation6(event.target.files[0]);}}/> 
+
+</Grid>
+
 
   <br />
 

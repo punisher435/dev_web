@@ -24,6 +24,9 @@ import Paper from '@material-ui/core/Paper';
 
 import RemoveIcon from '@material-ui/icons/Remove';
 import AddIcon from '@material-ui/icons/Add';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardMedia from '@material-ui/core/CardMedia';
 import './css/App.css';
 import Add from '../addroom.png';
 import Rules from './roomrules';
@@ -420,6 +423,8 @@ function RoomForm (props){
     const hiddenFileInput4 = React.useRef(null);
     const hiddenFileInput5 = React.useRef(null);
 
+    const hiddenFileInput6 = React.useRef(null);
+
     const [openmodal, setopenmodal] = React.useState(true);
 
       const handleOpenmodal = () => {
@@ -497,6 +502,9 @@ function RoomForm (props){
 
       room_cleaning:'',
       cost_cleaning:'',
+
+      video:'',
+      videofile:'',
 
       capacity:'',
       balcony:0,
@@ -610,6 +618,8 @@ function RoomForm (props){
                   removable_AC:res.data.removable_AC,
 
                   gender:res.data.gender,
+                  video:res.data.video,
+                  videofile:res.data.video,
 
                   iron:res.data.iron,
                   cost_iron:res.data.cost_iron,
@@ -944,6 +954,7 @@ function RoomForm (props){
       form_data.append('photo3',values.photo3)
       form_data.append('photo4',values.photo4)
       form_data.append('photo5',values.photo5)
+      form_data.append('video',values.video)
 
       form_data.append('address_proof',values.address_proof)
 
@@ -1312,6 +1323,37 @@ const Filevalidation5 = (file1,name) => {
       
   
 }
+
+const Filevalidation6 = (file1,name) => {
+  
+ 
+  // Check if any file is selected.
+  
+     
+
+          const fsize =file1.size;
+          const file = Math.round((fsize / 1024));
+          // The size of the file.
+          if (file >= 50240) {
+              alert(
+                "File too Big, please select a file less than 50mb");
+          } 
+          else{
+            
+            formik.setFieldValue('video',file1);
+            setroom({...myroom,videofile: URL.createObjectURL(file1),video:file1});
+          }
+      
+  
+}
+
+const [width1,setwidth1]=React.useState(100);
+
+React.useEffect(() => {
+  let map = document.getElementById('mapcontainer1').clientWidth;
+  
+  setwidth1(map)
+},[])
 
 if(props.isAuthenticated===false)
     {
@@ -3891,6 +3933,36 @@ if(newredirect==true)
           
         /></div>
         </>
+
+  <br />
+
+  <Typography variant="body1" color="textSecondary" className={classes.textclass}>
+      Upload a video of your room (size limit - 50mb)
+        </Typography>
+
+  <Grid item style={{width:width1-25,height:300,}}>
+
+<Button variant='contained' className={classes.buttonclass11} onClick={(e) => {hiddenFileInput6.current.click();}}>
+<Card>
+  <CardActionArea>
+    <CardMedia
+      style={{width:width1-25,height:300,}}
+      component="video"
+      autoPlay
+      src={myroom.videofile}
+      title="Contemplative Reptile"
+    
+    />
+  </CardActionArea>
+</Card>
+  </Button>
+
+<input type='file'  accept="video/mp4" ref={hiddenFileInput6} style={{display:'none'}}  id='video'  onChange={(event) => {
+  console.log(event.target.files[0]);
+Filevalidation6(event.target.files[0]);}}/> 
+
+</Grid>
+
 
   <br />
   

@@ -26,6 +26,9 @@ import Paper from '@material-ui/core/Paper';
 import './css/App.css';
 import Rules from './roomrules';
 import Add from '../addroom.png';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardMedia from '@material-ui/core/CardMedia';
 
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
@@ -494,6 +497,9 @@ function ApartmentForm (props){
       file5:Add,
       file6:Add,
 
+      video:'',
+      videofile:'',
+
       total_rooms:1,
       total_floors:1,
       total_beds:1,
@@ -622,6 +628,9 @@ function ApartmentForm (props){
                   file4:res.data.photo4,
                   file5:res.data.photo5,
                   file6:res.data.photo6,
+
+                  video:res.data.video,
+                  videofile:res.data.video,
 
                   total_rooms:res.data.total_rooms,
                     total_floors:res.data.total_floors,
@@ -852,6 +861,7 @@ function ApartmentForm (props){
       form_data.append('breadth',values.breadth)
 
       form_data.append('height',values.height)
+      form_data.append('video',values.video)
 
       form_data.append('washroom',values.washroom)
       form_data.append('total_rooms',values.total_rooms)
@@ -1212,6 +1222,39 @@ const Filevalidation6 = (file1,name) => {
       
   
 }
+
+
+const Filevalidation7 = (file1,name) => {
+  
+ 
+  // Check if any file is selected.
+  
+     
+
+          const fsize =file1.size;
+          const file = Math.round((fsize / 1024));
+          // The size of the file.
+          if (file >= 50240) {
+              alert(
+                "File too Big, please select a file less than 50mb");
+          } 
+          else{
+            
+            formik.setFieldValue('video',file1);
+            setroom({...myroom,videofile: URL.createObjectURL(file1),video:file1});
+          }
+      
+  
+}
+
+const [width1,setwidth1]=React.useState(100);
+const hiddenFileInput7 = React.useRef(null);
+
+React.useEffect(() => {
+  let map = document.getElementById('mapcontainer1').clientWidth;
+  
+  setwidth1(map)
+},[])
 
 if(props.isAuthenticated===false)
     {
@@ -3223,6 +3266,37 @@ if(newredirect==true)
           
         />
         </>
+
+  <br />
+
+
+  <Typography variant="body1" color="textSecondary" className={classes.textclass}>
+      Upload a video of your apartment (size limit - 50mb)
+        </Typography>
+
+  <Grid item style={{width:width1-25,height:300,}}>
+
+<Button variant='contained' className={classes.buttonclass11} onClick={(e) => {hiddenFileInput6.current.click();}}>
+<Card>
+  <CardActionArea>
+    <CardMedia
+      style={{width:width1-25,height:300,}}
+      component="video"
+      autoPlay
+      src={myroom.videofile}
+      title="Contemplative Reptile"
+    
+    />
+  </CardActionArea>
+</Card>
+  </Button>
+
+<input type='file'  accept="video/mp4" ref={hiddenFileInput6} style={{display:'none'}}  id='video'  onChange={(event) => {
+  console.log(event.target.files[0]);
+Filevalidation6(event.target.files[0]);}}/> 
+
+</Grid>
+
 
   <br />
 
