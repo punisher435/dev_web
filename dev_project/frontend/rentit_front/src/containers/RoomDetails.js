@@ -96,6 +96,9 @@ const useStyles = makeStyles((theme) => ({
   typo3:{
     fontSize: '90%',
   },
+  typo4:{
+    fontSize: '80%',
+  },
   paraclass:{
     marginTop:'15px',
   },
@@ -406,6 +409,17 @@ if(details){
                                 <Typography variant="h6" component="h6" gutterBottom >
                                 {details.location},{details.city},{details.district},{details.state},{details.country}
                                 </Typography>
+                                <Typography variant="body1" >
+          Owner Info:
+        </Typography>
+       
+        <Typography variant="body1" >
+          Name - {details.owner}
+        </Typography>
+     
+        <Typography variant="body1" >
+          Contact - {details.contact}
+        </Typography>
                             </Grid>
                               
                             <Grid item >
@@ -423,7 +437,7 @@ if(details){
         <Grid item>
         
         </Grid>
-
+        
 
 
 <List component="nav" className={classes.root2} aria-label="offers">
@@ -548,6 +562,18 @@ if(details){
                                 <Typography variant="body1" component="h6" gutterBottom className={classes.typo3}>
                                 , {details.district}, {details.state}, {details.country}
                                 </Typography>
+
+                                <Typography variant="body1" className={classes.typo4}>
+          Owner Info:
+        </Typography>
+       
+        <Typography variant="body1" className={classes.typo4}>
+          Name - {details.owner}
+        </Typography>
+     
+        <Typography variant="body1" className={classes.typo4}>
+          Contact - {details.contact}
+        </Typography>
             </Grid>
 
             <Grid item xs={4}>

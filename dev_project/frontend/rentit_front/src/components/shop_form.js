@@ -2730,7 +2730,7 @@ Filevalidation6(event.target.files[0]);}}/>
       error={formik.touched.contact && Boolean(formik.errors.contact)}
       helperText={formik.touched.contact && formik.errors.contact}
       >
-      <MenuItem value={`${profilem.country_code} ${profilem.mobile}`}>{profilem.country_code} {profilem.mobile}</MenuItem>
+      <MenuItem value={`${profilem.country_code} ${profilem.mobile}`}>{profilem.country_code} {profilem.mobile} (recommended)</MenuItem>
       <MenuItem value={`${props.profile.email}`}>{props.profile.email}</MenuItem>
       </Select>
   </FormControl></> : null
