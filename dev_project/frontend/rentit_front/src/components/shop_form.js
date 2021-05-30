@@ -62,6 +62,10 @@ const validationSchema = yup.object({
   .string('Enter your Room name')
   .required('Room name is required'),
 
+  contact: yup
+  .string('Enter your Room name')
+  .required('Room name is required'),
+
   gender: yup
   .string('Enter your Room name')
   .required('Room name is required'),
@@ -368,6 +372,8 @@ function ShopForm (props){
       shop_cleaning:'',
       cost_cleaning:'',
 
+      contact:'',
+
    
       separate_washroom:'',
       title:'',
@@ -462,7 +468,7 @@ function ShopForm (props){
 
                   gender:res.data.gender,
 
-                 
+                  contact:res.data.contact,
 
                   purified_water:res.data.purified_water,
                   cost_purified_water:res.data.cost_purified_water,
@@ -578,7 +584,7 @@ function ShopForm (props){
       cost_purified_water:myroom.cost_purified_water,
       removable_purified_water:myroom.removable_purified_water,
 
-    
+      contact:myroom.contact,
 
       cost_electricity:myroom.cost_electricity,
       cost_water:myroom.cost_water,
@@ -641,6 +647,7 @@ function ShopForm (props){
     validationSchema: validationSchema,
     onSubmit: async (values) => {
       let form_data = new FormData();
+      
      
       setload(true)
       form_data.append('title',values.title)
@@ -673,6 +680,8 @@ function ShopForm (props){
 
       form_data.append('location',values.location)
       form_data.append('gender',values.gender)
+
+      form_data.append('contact',values.contact)
 
       form_data.append('city',values.city)
       form_data.append('state',values.state)
@@ -1062,6 +1071,28 @@ React.useEffect(() => {
   
   setwidth1(map)
 },[])
+
+const [profilem,setprofilem] = React.useState()
+
+
+React.useEffect(
+  async () => {
+
+    const config = {
+        headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `JWT ${localStorage.getItem('access')}`,
+        },
+      };
+      if(props.profile)
+      {
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcezxradakgdlh/profile/${props.profile.id}/`,config);
+       setprofilem(res.data)
+      }
+      
+  }
+  
+,[props.profile])
 
 if(props.isAuthenticated===false)
     {
@@ -2677,6 +2708,33 @@ if(newredirect==true)
 Filevalidation6(event.target.files[0]);}}/> 
 
 </Grid>
+
+<br />
+
+
+{
+    profilem ?  <><Typography variant="body1" color="textSecondary" className={classes.textclass}>
+    Contact info (in case customers wants to inquire about something)
+  </Typography>
+ 
+  <FormControl className={classes.form}>
+  
+      <InputLabel id="contact">Contact*</InputLabel>
+      <Select
+      labelId="contact"
+      id="contact"
+      value={formik.values.contact}
+      onChange={(e) => {
+       
+      formik.setFieldValue('contact',e.target.value)}}
+      error={formik.touched.contact && Boolean(formik.errors.contact)}
+      helperText={formik.touched.contact && formik.errors.contact}
+      >
+      <MenuItem value={`${profilem.country_code} ${profilem.mobile}`}>{profilem.country_code} {profilem.mobile}</MenuItem>
+      <MenuItem value={`${props.profile.email}`}>{props.profile.email}</MenuItem>
+      </Select>
+  </FormControl></> : null
+  }
 
 
   <br />
