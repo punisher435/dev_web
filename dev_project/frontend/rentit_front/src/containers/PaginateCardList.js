@@ -103,6 +103,7 @@ const App = ({isAuthenticated}) => {
     nonveg_food:'',
     veg_food:'',
     guest_allowed:'',
+    total_beds:'',
     iron:'',
     laundry:'',
     cooler:'',
@@ -199,6 +200,7 @@ const App = ({isAuthenticated}) => {
           ordering:filters.ordering,
           gender:filters.gender,
           discount:filters.discount,
+          bed_filter:filters.total_beds,
 
           city1:filters.city.toUpperCase(),
           state1:filters.state.toUpperCase(),

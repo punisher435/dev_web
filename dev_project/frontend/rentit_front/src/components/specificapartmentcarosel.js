@@ -38,6 +38,7 @@ import style from './css/hover.module.css'
 import CustomizedRatings from './rating_meter';
 
 import SimpleModal from './imagemodal';
+import './css/new.css';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -62,6 +63,20 @@ const useStyles = makeStyles((theme) => ({
     borderLeftColor: grey,
   },
 
+  media: {
+    height: 400,
+  },
+
+  media2: {
+    height: 100,
+  },
+  media3: {
+    height: 100,
+   
+   
+  },
+
+
   root2: {
    width:150,
     height: '100%',
@@ -81,14 +96,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
 
-  media: {
-    height: 500,
-  },
-
-  media2: {
-    height: 150,
-  },
-
+ 
   textroot: {
     marginLeft:'2px',
     fontWeight:'bold',
@@ -150,6 +158,7 @@ export default function NestedGrid({post}) {
       d:post.photo4,
       e:post.photo5,
       f:post.photo6,
+      g:post.video,
     })
     const [open,changeopen] = useState(false)
   
@@ -160,13 +169,27 @@ export default function NestedGrid({post}) {
   justify="center"
   alignItems="center"
   spacing = {1}
+  className="zoomtemp"
 >
 
 <SimpleModal open={open} change={changeopen} photo={photos.a}/>
 
 <Grid item xs={12}>
 
-<Card className={classes.root1}>
+{
+  photos.a===post.video ? <Card className={classes.root1}>
+  <CardActionArea>
+    <CardMedia
+      component="video"
+      controls
+      autoPlay
+      className={`${classes.media}`}
+      src={photos.a}
+      title="Contemplative Reptile"
+    
+    />
+  </CardActionArea>
+</Card> : <Card className={classes.root1}>
         <CardActionArea>
           <CardMedia
             className={`${classes.media} ${style.pcimg1}`}
@@ -176,6 +199,9 @@ export default function NestedGrid({post}) {
           />
         </CardActionArea>
     </Card>
+}
+
+
 </Grid>
 
 
@@ -189,33 +215,80 @@ export default function NestedGrid({post}) {
 >
     
 <Grid item xs={2}>
-    <Card >
+{
+  photos.b===post.video ? <Card>
+  <CardActionArea>
+    <CardMedia
+      className={`${classes.media3}`}
+      component="video"
+      autoPlay
+      src={photos.b}
+      title="Contemplative Reptile"
+      onClick={
+        () => {
+          const temp=photos.a;
+          changephotos({
+            ...photos,
+            a:photos.b,
+            b:temp,
+          })
+        }
+      }
+    />
+  </CardActionArea>
+</Card> : <Card>
         <CardActionArea>
           <CardMedia
             className={`${classes.media2} ${style.pcimg2}`}
+           
+          
             image={photos.b}
-            title="Contemplative Reptile" 
+            title="Contemplative Reptile"
             onClick={
               () => {
                 const temp=photos.a;
                 changephotos({
                   ...photos,
                   a:photos.b,
-                  b:temp
+                  b:temp,
                 })
               }
             }
           />
         </CardActionArea>
-    </Card>
+      </Card>
+}
 </Grid>
 
 
 <Grid item xs={2}>
-<Card>
+{
+  photos.c===post.video ? <Card>
+  <CardActionArea>
+    <CardMedia
+      className={`${classes.media3}`}
+      component="video"
+      autoPlay
+      src={photos.c}
+      title="Contemplative Reptile"
+      onClick={
+        () => {
+          const temp=photos.a;
+          changephotos({
+            ...photos,
+            a:photos.c,
+            c:temp,
+          })
+        }
+      }
+    />
+  </CardActionArea>
+</Card> : <Card>
         <CardActionArea>
           <CardMedia
             className={`${classes.media2} ${style.pcimg2}`}
+           
+          
             image={photos.c}
             title="Contemplative Reptile"
             onClick={
@@ -224,21 +297,43 @@ export default function NestedGrid({post}) {
                 changephotos({
                   ...photos,
                   a:photos.c,
-          
-                  c:temp
-
+                  c:temp,
                 })
               }
             }
           />
         </CardActionArea>
       </Card>
+}
 </Grid>
 <Grid item xs={2}>
-<Card>
+{
+  photos.d===post.video ? <Card>
+  <CardActionArea>
+    <CardMedia
+      className={`${classes.media3}`}
+      component="video"
+      autoPlay
+      src={photos.d}
+      title="Contemplative Reptile"
+      onClick={
+        () => {
+          const temp=photos.a;
+          changephotos({
+            ...photos,
+            a:photos.d,
+            d:temp,
+          })
+        }
+      }
+    />
+  </CardActionArea>
+</Card> : <Card>
         <CardActionArea>
           <CardMedia
             className={`${classes.media2} ${style.pcimg2}`}
+           
+          
             image={photos.d}
             title="Contemplative Reptile"
             onClick={
@@ -254,12 +349,36 @@ export default function NestedGrid({post}) {
           />
         </CardActionArea>
       </Card>
+}
 </Grid>
 <Grid item xs={2}>
-<Card>
+{
+  photos.e===post.video ? <Card>
+  <CardActionArea>
+    <CardMedia
+      className={`${classes.media3}`}
+      component="video"
+      autoPlay
+      src={photos.e}
+      title="Contemplative Reptile"
+      onClick={
+        () => {
+          const temp=photos.a;
+          changephotos({
+            ...photos,
+            a:photos.e,
+            e:temp,
+          })
+        }
+      }
+    />
+  </CardActionArea>
+</Card> : <Card>
         <CardActionArea>
           <CardMedia
             className={`${classes.media2} ${style.pcimg2}`}
+           
+          
             image={photos.e}
             title="Contemplative Reptile"
             onClick={
@@ -275,13 +394,39 @@ export default function NestedGrid({post}) {
           />
         </CardActionArea>
       </Card>
+}
 </Grid>
 
+
+
 <Grid item xs={2}>
-<Card>
+{
+  photos.f===post.video ? <Card>
+  <CardActionArea>
+    <CardMedia
+      className={`${classes.media3}`}
+      component="video"
+      autoPlay
+      src={photos.f}
+      title="Contemplative Reptile"
+      onClick={
+        () => {
+          const temp=photos.a;
+          changephotos({
+            ...photos,
+            a:photos.f,
+            f:temp,
+          })
+        }
+      }
+    />
+  </CardActionArea>
+</Card> : <Card>
         <CardActionArea>
           <CardMedia
             className={`${classes.media2} ${style.pcimg2}`}
+           
+          
             image={photos.f}
             title="Contemplative Reptile"
             onClick={
@@ -297,12 +442,62 @@ export default function NestedGrid({post}) {
           />
         </CardActionArea>
       </Card>
+}
 </Grid>
+
+
+<Grid item xs={2}>
+{
+  photos.g===post.video ? <Card>
+  <CardActionArea>
+    <CardMedia
+      className={`${classes.media3}`}
+      component="video"
+      autoPlay
+      src={photos.g}
+      title="Contemplative Reptile"
+      onClick={
+        () => {
+          const temp=photos.a;
+          changephotos({
+            ...photos,
+            a:photos.g,
+            g:temp,
+          })
+        }
+      }
+    />
+  </CardActionArea>
+</Card> : <Card>
+        <CardActionArea>
+          <CardMedia
+            className={`${classes.media2} ${style.pcimg2}`}
+           
+          
+            image={photos.g}
+            title="Contemplative Reptile"
+            onClick={
+              () => {
+                const temp=photos.a;
+                changephotos({
+                  ...photos,
+                  a:photos.g,
+                  g:temp,
+                })
+              }
+            }
+          />
+        </CardActionArea>
+      </Card>
+}
+</Grid>
+
 
 </Grid>
 
 </Grid>
 </Grid>
+
     );
   }
 

@@ -106,6 +106,7 @@ export default function BasicTable({room}) {
     createData('No. of Balcony in room', `${room.balcony}` ),
     createData('No. of Windows in room', `${room.windows}` ),
     createData('No. of Fans in room', `${room.fans}` ),
+    createData('No. of beds in room', `${room.total_beds}` ),
     createData('Bed type', `${room.bed_type}` ),
     createData('Room floor no. (Note: Ground Floor is referred as 0)', `${room.floor_no} ` ),
     

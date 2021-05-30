@@ -16,6 +16,10 @@ User= get_user_model()
 def upload_to(instance, filename):
     return 'images/rooms/{filename}'.format(filename=filename)
 
+
+def upload_to(instance, filename):
+    return 'images/rooms/{filename}'.format(filename=filename)
+
 def upload_to_roomreviews(instance, filename):
     return 'reviews/rooms/{filename}'.format(filename=filename)
 
@@ -34,6 +38,16 @@ def upload_file_to1(instance, filename):
 
 def upload_file_to2(instance, filename):
     return 'address_proof/apartments/{filename}'.format(filename=filename)
+
+
+def upload_to_video_room(instance, filename):
+    return 'videos/rooms/{filename}'.format(filename=filename)
+
+def upload_to_video_shop(instance, filename):
+    return 'videos/shops/{filename}'.format(filename=filename)
+
+def upload_to_video_apartment(instance, filename):
+    return 'videos/apartments/{filename}'.format(filename=filename)
 
 yesterday = datetime.datetime.now() - datetime.timedelta(days = 1)
 
@@ -58,11 +72,13 @@ class rooms(models.Model):
     date_added=models.DateTimeField(auto_now_add=True)
     date_verified=models.DateTimeField(null=True, blank=True)
     net_discount=models.IntegerField(default=0)
-    photo1=models.ImageField(_("Image"),upload_to=upload_to,default='/images/rooms/default.jpg')
-    photo2=models.ImageField(_("Image"),upload_to=upload_to,default='/images/rooms/default.jpg')
-    photo3=models.ImageField(_("Image"),upload_to=upload_to,default='/images/rooms/default.jpg')
-    photo4=models.ImageField(_("Image"),upload_to=upload_to,default='/images/rooms/default.jpg')
-    photo5=models.ImageField(_("Image"),upload_to=upload_to,default='/images/rooms/default.jpg')
+    photo1=models.ImageField(_("Image 1"),upload_to=upload_to,default='/images/rooms/default.jpg')
+    photo2=models.ImageField(_("Image 2"),upload_to=upload_to,default='/images/rooms/default.jpg')
+    photo3=models.ImageField(_("Image 3"),upload_to=upload_to,default='/images/rooms/default.jpg')
+    photo4=models.ImageField(_("Image 4"),upload_to=upload_to,default='/images/rooms/default.jpg')
+    photo5=models.ImageField(_("Image 5"),upload_to=upload_to,default='/images/rooms/default.jpg')
+
+    video=models.ImageField(_("video"),upload_to=upload_to_video_room,default='/videos/rooms/11.mp4')
     
     booked=models.BooleanField(default=False)
     booked_by=models.IntegerField(default=0)
@@ -119,6 +135,7 @@ class rooms(models.Model):
     windows=models.IntegerField(default=0)
     fans=models.IntegerField(default=1)
     bed_type=models.CharField(max_length=255)
+    total_beds=models.IntegerField(default=1)
     floor_no=models.IntegerField(default=1)
 
     electricity=models.BooleanField(default=True)
@@ -247,6 +264,8 @@ class shops(models.Model):
     photo3=models.ImageField(_("Image"),upload_to=upload_to_shops,default='/images/rooms/default.jpg')
     photo4=models.ImageField(_("Image"),upload_to=upload_to_shops,default='/images/rooms/default.jpg')
     photo5=models.ImageField(_("Image"),upload_to=upload_to_shops,default='/images/rooms/default.jpg')
+
+    video=models.ImageField(_("video"),upload_to=upload_to_video_shop,default='/videos/shops/11.mp4')
 
     currency=models.CharField(max_length=200,default='₹ INR')
 
@@ -390,6 +409,8 @@ class apartments(models.Model):
     photo4=models.ImageField(_("Image"),upload_to=upload_to_apartments,default='/images/rooms/default.jpg')
     photo5=models.ImageField(_("Image"),upload_to=upload_to_apartments,default='/images/rooms/default.jpg')
     photo6=models.ImageField(_("Image"),upload_to=upload_to_apartments,default='/images/rooms/default.jpg')
+
+    video=models.ImageField(_("video"),upload_to=upload_to_video_apartment,default='/videos/apartments/11.mp4')
 
     currency=models.CharField(max_length=200,default='₹ INR')
 

@@ -53,6 +53,7 @@ class room_filter(rest_filters.FilterSet):
     max_price = rest_filters.NumberFilter(field_name='final_price',lookup_expr='lte')
     min_rating = rest_filters.NumberFilter(field_name='avg_rating',lookup_expr='gte')
     windows_filter = rest_filters.NumberFilter(field_name='windows',lookup_expr='gte')
+    bed_filter = rest_filters.NumberFilter(field_name='total_beds',lookup_expr='gte')
     capacity_filter = rest_filters.NumberFilter(field_name='capacity',lookup_expr='exact')
     floor_filter = rest_filters.NumberFilter(field_name='floor_no',lookup_expr='exact')
     trust_points_filter = rest_filters.NumberFilter(field_name='trust_points',lookup_expr='gte')
@@ -180,10 +181,10 @@ class my_room_viewset(viewsets.ViewSet):
 
                 
 
-                room = rooms(title=request.data["title"],seller_id=request.user,bookedtill=booked_till,price=price,seller_price=seller_price,owner_discount=int(request.data["owner_discount"]),net_discount=int(request.data["owner_discount"]),final_price=seller_price,capacity=int(request.data["capacity"]),photo1=request.data["photo1"],photo2=request.data["photo2"],photo3=request.data["photo3"],photo4=request.data["photo4"],photo5=request.data["photo5"],
+                room = rooms(title=request.data["title"],seller_id=request.user,bookedtill=booked_till,price=price,seller_price=seller_price,owner_discount=int(request.data["owner_discount"]),net_discount=int(request.data["owner_discount"]),final_price=seller_price,capacity=int(request.data["capacity"]),photo1=request.data["photo1"],photo2=request.data["photo2"],photo3=request.data["photo3"],photo4=request.data["photo4"],photo5=request.data["photo5"],video=request.data["video"],
                 location=request.data["location"].upper(),city=request.data["city"].upper(),state=request.data["state"].upper(),country=request.data["country"].upper(),landmark=request.data["landmark"].upper(),pincode=request.data["pincode"],currency=bank.currency,longitude=float(request.data["longitude"]),latitude=float(request.data["latitude"]),length=int(request.data["length"]),breadth=int(request.data["breadth"]),height=int(request.data["height"]),furniture=request.data["furniture"],category=request.data["category"],
                 facility=request.data["facility"],district=request.data["district"].upper(),description=request.data["description"],cctv_building=bool(request.data["cctv_building"]=='true'),building_guard=bool(request.data["building_guard"]=='true'),balcony=int(request.data["balcony"]),separate_washroom=bool(request.data["separate_washroom"]=='true'),windows=int(request.data["windows"]),fans=int(request.data["fans"]),bed_type=request.data["bed_type"],floor_no=int(request.data["floor_no"]),
-                cost_electricity=int(request.data["cost_electricity"]),cost_water=int(request.data["cost_water"]),purified_water=bool(request.data["purified_water"]=='true'),removable_purified_water=bool(request.data["removable_purified_water"]=='true'),cost_purified_water=int(request.data["cost_purified_water"]),house_TV=bool(request.data["house_TV"]=='true'),removable_house_TV=bool(request.data["removable_house_TV"]=='true'),
+                cost_electricity=int(request.data["cost_electricity"]),total_beds=int(request.data["total_beds"]),cost_water=int(request.data["cost_water"]),purified_water=bool(request.data["purified_water"]=='true'),removable_purified_water=bool(request.data["removable_purified_water"]=='true'),cost_purified_water=int(request.data["cost_purified_water"]),house_TV=bool(request.data["house_TV"]=='true'),removable_house_TV=bool(request.data["removable_house_TV"]=='true'),
                 cost_TV=int(request.data["cost_TV"]),room_TV=bool(request.data["room_TV"]=='true'),cost_roomTV=int(request.data["cost_roomTV"]),removable_room_TV=bool(request.data["removable_room_TV"]=='true'),house_refridgerator=bool(request.data["house_refridgerator"]=='true'),removable_house_refridgerator=bool(request.data["removable_house_refridgerator"]=='true'),cost_refridgerator=int(request.data["cost_refridgerator"]),
                 room_refridgerator=bool(request.data["room_refridgerator"]=='true'),cost_roomrefridgerator=int(request.data["cost_roomrefridgerator"]),removable_room_refridgerator=bool(request.data["removable_room_refridgerator"]=='true'),power_backup=bool(request.data["power_backup"]=='true'),geyser=bool(request.data["geyser"]=='true'),removable_geyser=bool(request.data["removable_geyser"]=='true'),cost_geyser=int(request.data["cost_geyser"]),
                 wifi=bool(request.data["wifi"]=='true'),cost_wifi=int(request.data["cost_wifi"]),removable_wifi=bool(request.data["removable_wifi"]=='true'),AC=bool(request.data["AC"]=='true'),cost_AC=int(request.data["cost_AC"]),removable_AC=bool(request.data["removable_AC"]=='true'),cooler=bool(request.data["cooler"]=='true'),cost_cooler=int(request.data["cost_cooler"]),removable_cooler=bool(request.data["removable_cooler"]=='true'),laundry=bool(request.data["laundry"]=='true'),cost_laundry=int(request.data["cost_laundry"]),
@@ -229,13 +230,17 @@ class my_room_viewset(viewsets.ViewSet):
                 room.photo4=request.data["photo4"] 
             if(request.data["photo5"]!='undefined'):
                 room.photo5=request.data["photo5"] 
+
+            if(request.data["video"]!='undefined'):
+                room.video=request.data["video"] 
             if(request.data["address_proof"]!='undefined'):
                 room.address_proof=request.data["address_proof"] 
                         
             room.location=request.data["location"]                                
             room.longitude=float(request.data["longitude"])            
             room.latitude=float(request.data["latitude"])            
-            room.length=int(request.data["length"])            
+            room.length=int(request.data["length"])  
+            room.total_beds=int(request.data["total_beds"])            
             room.breadth=int(request.data["breadth"])            
             room.height=int(request.data["height"])            
             room.furniture=request.data["furniture"]            
@@ -509,7 +514,7 @@ class my_shop_viewset(viewsets.ViewSet):
                 print(type(bank.currency))
 
 
-                shop = shops(title=request.data["title"],seller_id=request.user,price=price,net_discount=int(request.data["owner_discount"]),seller_price=seller_price,owner_discount=int(request.data["owner_discount"]),final_price=seller_price,photo1=request.data["photo1"],photo2=request.data["photo2"],photo3=request.data["photo3"],photo4=request.data["photo4"],photo5=request.data["photo5"],
+                shop = shops(title=request.data["title"],seller_id=request.user,price=price,net_discount=int(request.data["owner_discount"]),seller_price=seller_price,owner_discount=int(request.data["owner_discount"]),final_price=seller_price,photo1=request.data["photo1"],photo2=request.data["photo2"],photo3=request.data["photo3"],photo4=request.data["photo4"],photo5=request.data["photo5"],video=request.data["video"],
                 location=request.data["location"].upper(),city=request.data["city"].upper(),state=request.data["state"].upper(),country=request.data["country"].upper(),landmark=request.data["landmark"].upper(),pincode=request.data["pincode"],currency=bank.currency,longitude=float(request.data["longitude"]),latitude=float(request.data["latitude"]),length=int(request.data["length"]),breadth=int(request.data["breadth"]),height=int(request.data["height"]),furniture=request.data["furniture"],category=request.data["category"],
                 facility=request.data["facility"],description=request.data["description"],cctv_building=bool(request.data["cctv_building"]=='true'),building_guard=bool(request.data["building_guard"]=='true'),balcony=int(request.data["balcony"]),separate_washroom=bool(request.data["separate_washroom"]=='true'),windows=int(request.data["windows"]),fans=int(request.data["fans"]),floor_no=int(request.data["floor_no"]),
                 cost_electricity=int(request.data["cost_electricity"]),cost_water=int(request.data["cost_water"]),purified_water=bool(request.data["purified_water"]=='true'),removable_purified_water=bool(request.data["removable_purified_water"]=='true'),cost_purified_water=int(request.data["cost_purified_water"]),
@@ -560,6 +565,9 @@ class my_shop_viewset(viewsets.ViewSet):
                 room.photo4=request.data["photo4"] 
             if(request.data["photo5"]!='undefined'):
                 room.photo5=request.data["photo5"] 
+
+            if(request.data["video"]!='undefined'):
+                room.video=request.data["video"] 
             if(request.data["address_proof"]!='undefined'):
                 room.address_proof=request.data["address_proof"] 
                         
@@ -824,7 +832,7 @@ class my_apartment_viewset(viewsets.ViewSet):
 
                 booked_till = datetime.date(2000,1,1)
 
-                room = apartments(title=request.data["title"],seller_id=request.user,net_discount=int(request.data["owner_discount"]),bookedtill=booked_till,price=price,seller_price=seller_price,owner_discount=int(request.data["owner_discount"]),final_price=seller_price,BHK=int(request.data["BHK"]),photo1=request.data["photo1"],photo2=request.data["photo2"],photo3=request.data["photo3"],photo4=request.data["photo4"],photo5=request.data["photo5"],photo6=request.data["photo6"],
+                room = apartments(title=request.data["title"],seller_id=request.user,net_discount=int(request.data["owner_discount"]),bookedtill=booked_till,price=price,seller_price=seller_price,owner_discount=int(request.data["owner_discount"]),final_price=seller_price,BHK=int(request.data["BHK"]),photo1=request.data["photo1"],photo2=request.data["photo2"],photo3=request.data["photo3"],photo4=request.data["photo4"],photo5=request.data["photo5"],photo6=request.data["photo6"],video=request.data["video"],
                 location=request.data["location"].upper(),city=request.data["city"].upper(),state=request.data["state"].upper(),country=request.data["country"].upper(),landmark=request.data["landmark"].upper(),pincode=request.data["pincode"],currency=bank.currency,longitude=float(request.data["longitude"]),latitude=float(request.data["latitude"]),length=int(request.data["length"]),breadth=int(request.data["breadth"]),height=int(request.data["height"]),furniture=request.data["furniture"],category=request.data["category"],
                 facility=request.data["facility"],description=request.data["description"],cctv_building=bool(request.data["cctv_building"]=='true'),building_guard=bool(request.data["building_guard"]=='true'),balcony=int(request.data["balcony"]),windows=int(request.data["windows"]),fans=int(request.data["fans"]),bed_type=request.data["bed_type"],floor_no=int(request.data["floor_no"]),
                 cost_electricity=int(request.data["cost_electricity"]),cost_water=int(request.data["cost_water"]),purified_water=bool(request.data["purified_water"]=='true'),removable_purified_water=bool(request.data["removable_purified_water"]=='true'),cost_purified_water=int(request.data["cost_purified_water"]),TV=bool(request.data["TV"]=='true'),removable_house_TV=bool(request.data["removable_house_TV"]=='true'),
@@ -874,6 +882,8 @@ class my_apartment_viewset(viewsets.ViewSet):
                 room.photo5=request.data["photo5"] 
             if(request.data["photo6"]!='undefined'):
                 room.photo5=request.data["photo6"] 
+            if(request.data["video"]!='undefined'):
+                room.video=request.data["video"] 
             if(request.data["address_proof"]!='undefined'):
                 room.address_proof=request.data["address_proof"] 
                         

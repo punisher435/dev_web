@@ -12,6 +12,7 @@ function Windowsfilter(props) {
 
     const [value,setvalue] = useState('Any') 
     const [value1,setvalue1] = useState('Any') 
+    const [value2,setvalue2] = useState('Any') 
     const handleclick1 = event => {
         if(value==='Any'){
             setvalue(1);
@@ -58,6 +59,31 @@ function Windowsfilter(props) {
             props.setfilters({...props.filters,balcony:temp});
         }
     }
+
+
+    const handleclick5 = event => {
+        if(value2==='Any'){
+            setvalue2(1);
+            props.setfilters({...props.filters,total_beds:1});
+        } else{
+            var temp=value2+1;
+            setvalue2(temp);
+            props.setfilters({...props.filters,total_beds:temp});
+        }
+    }
+    const handleclick6 = event => {
+        if(value2==='Any'){
+            setvalue2('Any');
+        }
+        else if(value2===1){
+                setvalue2('Any');
+                props.setfilters({...props.filters,total_beds:''});
+        } else{
+            var temp=value2-1;
+            setvalue2(temp);
+            props.setfilters({...props.filters,total_beds:temp});
+        }
+    }
     return (
         <div>  
             <div>
@@ -86,6 +112,22 @@ function Windowsfilter(props) {
             {value1}
 
             <Button  onClick={handleclick4}>
+                <RemoveIcon />
+            </Button>
+            </div>
+
+
+            <div>
+             <Typography variant="body1">
+                Min. beds
+            </Typography> 
+            <Button onClick={handleclick5} >
+                <AddIcon />
+            </Button>
+
+            {value2}
+
+            <Button  onClick={handleclick6}>
                 <RemoveIcon />
             </Button>
             </div>

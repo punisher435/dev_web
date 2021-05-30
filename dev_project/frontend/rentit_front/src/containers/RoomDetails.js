@@ -195,7 +195,7 @@ function FullWidthGrid(props) {
       
       try{
          
-        
+       
           setDetails(res.data);
           setLoading(false);
           

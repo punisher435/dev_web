@@ -468,6 +468,8 @@ function RoomForm (props){
       laundry:'',
       cost_laundry:0,
 
+      total_beds:1,
+
       gender:'Any',
 
       geyser:'',
@@ -603,6 +605,7 @@ function RoomForm (props){
                   removable_purified_water:res.data.removable_purified_water,
 
                   AC:res.data.AC,
+                  total_beds:res.data.total_beds,
                   cost_AC:res.data.cost_AC,
                   removable_AC:res.data.removable_AC,
 
@@ -736,6 +739,7 @@ function RoomForm (props){
       removable_house_TV:myroom.removable_house_TV,
 
       gender:myroom.gender,
+      total_beds:myroom.total_beds,
 
       room_TV:myroom.room_TV,
       cost_roomTV:myroom.cost_roomTV,
@@ -906,6 +910,8 @@ function RoomForm (props){
 
       form_data.append('iron',values.iron)
       form_data.append('cost_iron',values.cost_iron)
+
+      form_data.append('total_beds',values.total_beds)
 
       form_data.append('room_cleaning',values.room_cleaning)
       form_data.append('cost_cleaning',values.cost_cleaning)
@@ -1575,6 +1581,11 @@ if(newredirect==true)
 
         <br />
 
+
+            
+
+
+
         <Grid
         container
         direction="column"
@@ -1690,7 +1701,7 @@ if(newredirect==true)
             error={formik.touched.category && Boolean(formik.errors.category)}
             helperText={formik.touched.category && formik.errors.category}
             >
-          <MenuItem value={''}>None</MenuItem>
+          <MenuItem value={'None'}>None</MenuItem>
           <MenuItem value={'Classic room'}>Classic room</MenuItem>
           <MenuItem value={'Deluxe room'}>Deluxe room</MenuItem>
           <MenuItem value={'Single'}>Single</MenuItem>
@@ -1726,6 +1737,36 @@ if(newredirect==true)
         alignItems="flex-start"
         >
 
+       
+        <Typography variant="body1" color="textSecondary" className={classes.textclass}>
+            No. of beds in the room
+          </Typography>
+         
+          <div>   
+            <Button onClick={() => handleclick1('total_beds',formik.values.total_beds,formik.setFieldValue)} >
+                <AddIcon />
+            </Button>
+
+            {formik.values.total_beds}
+
+            <Button  onClick={() => handleclick2('total_beds',formik.values.total_beds,formik.setFieldValue)}>
+                <RemoveIcon />
+            </Button>
+        </div>
+
+        </Grid>
+   
+
+        <br />
+
+
+    <Grid
+        container
+        direction="column"
+        justify="flex-start"
+        alignItems="flex-start"
+        >
+
     
         <Typography variant="body1" color="textSecondary" className={classes.textclass}>
             Bed type provided in the room
@@ -1743,7 +1784,7 @@ if(newredirect==true)
             error={formik.touched.bed_type && Boolean(formik.errors.bed_type)}
             helperText={formik.touched.bed_type && formik.errors.bed_type}
             >
-          <MenuItem value={''}>None</MenuItem>
+           <MenuItem value={'None'}>None</MenuItem>
           <MenuItem value={'Single Bed'}>Single Bed</MenuItem>
           <MenuItem value={'Double Bed'}>Double Bed</MenuItem>
             </Select>
@@ -3317,29 +3358,9 @@ if(newredirect==true)
             
     
             <br />
-    <>
-      <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-      Any discount you are providing (in %)
-        </Typography>
-     <div className={classes.form}>
-        <TextField
-          multiline
-          variant="outlined"
-          margin="normal"
-          fullWidth
-          rows={1}
-          id="owner_discount"
-          name="owner_discount"
-          label="Discount"
-          value={formik.values.owner_discount}
-          onChange={(e) => {formik.setFieldValue('owner_discount',parseInt(e.target.value)); 
-          }}
-          error={formik.touched.owner_discount && Boolean(formik.errors.owner_discount)}
-          helperText={formik.touched.owner_discount && formik.errors.owner_discount}
-        /></div>
-      </>
-      <br />
-  <>
+
+
+            <>
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
       Final Price after discount (excluding the facilities,electricity and water charge that will be added later and wont be counted in discount)
        </Typography>
@@ -3362,6 +3383,29 @@ if(newredirect==true)
        </>
 <br />
 
+    <>
+      <Typography variant="body1" color="textSecondary" className={classes.textclass}>
+      Any discount you are providing (in % please note that the price mentioned above is the final price and discount is to calculate the cost of the room)
+        </Typography>
+     <div className={classes.form}>
+        <TextField
+          multiline
+          variant="outlined"
+          margin="normal"
+          fullWidth
+          rows={1}
+          id="owner_discount"
+          name="owner_discount"
+          label="Discount"
+          value={formik.values.owner_discount}
+          onChange={(e) => {formik.setFieldValue('owner_discount',parseInt(e.target.value)); 
+          }}
+          error={formik.touched.owner_discount && Boolean(formik.errors.owner_discount)}
+          helperText={formik.touched.owner_discount && formik.errors.owner_discount}
+        /></div>
+      </>
+      <br />
+  
   
             <Typography variant="h4" color="textPrimary">
               Food
@@ -3788,7 +3832,7 @@ if(newredirect==true)
           name="distance1"
           label="distance from station 1"
           value={formik.values.distance1}
-          onChange={(e) => {formik.setFieldValue('distance1',parseFloat(e.target.value)); 
+          onChange={(e) => {formik.setFieldValue('distance1',e.target.value); 
           }}
           error={formik.touched.distance1 && Boolean(formik.errors.distance1)}
           helperText={formik.touched.distance1 && formik.errors.distance1}
@@ -3840,7 +3884,7 @@ if(newredirect==true)
           name="distance2"
           label="distance from station 2"
           value={formik.values.distance2}
-          onChange={(e) => {formik.setFieldValue('distance2',parseFloat(e.target.value)); 
+          onChange={(e) => {formik.setFieldValue('distance2',e.target.value); 
           }}
           error={formik.touched.distance2 && Boolean(formik.errors.distance2)}
           helperText={formik.touched.distance2 && formik.errors.distance2}

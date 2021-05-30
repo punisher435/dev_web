@@ -29,6 +29,7 @@ class room_filter(rest_filters.FilterSet):
     balcony_filter = rest_filters.NumberFilter(field_name='balcony',lookup_expr='gte')
     bookedtill_filter = rest_filters.DateFilter(field_name='bookedtill', lookup_expr='lt')
     discount = rest_filters.NumberFilter(field_name='net_discount',lookup_expr='gte')
+    bed_filter = rest_filters.NumberFilter(field_name='total_beds',lookup_expr='gte')
 
     city1 = rest_filters.CharFilter(method='get_city',field_name='net_discount')
     state1 = rest_filters.CharFilter(method='get_state',field_name='net_discount')
