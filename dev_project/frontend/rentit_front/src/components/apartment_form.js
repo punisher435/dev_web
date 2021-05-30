@@ -56,6 +56,10 @@ const validationSchema = yup.object({
   gender: yup
   .string('Enter your Room name')
   .required('Room name is required'),
+
+  contact: yup
+  .string('Enter your Room name')
+  .required('Room name is required'),
   
   wifi: yup
   .boolean()
@@ -459,7 +463,7 @@ function ApartmentForm (props){
       description:'',
       fans:1,
       floor_no:0,
-    
+      contact:'',
 
       city:'',
       state:'',
@@ -552,7 +556,7 @@ function ApartmentForm (props){
                   removable_AC:res.data.removable_AC,
 
                   gender:res.data.gender,
-
+                  contact:res.data.contact,
                   laundry:res.data.laundry,
                   cost_laundry:res.data.cost_laundry,
                   removable_laundry:res.data.removable_laundry,
@@ -673,6 +677,8 @@ function ApartmentForm (props){
       TV:myroom.TV,
       cost_TV:myroom.cost_TV,
       removable_house_TV:myroom.removable_house_TV,
+
+      contact:myroom.contact,
 
       house_refridgerator:myroom.house_refridgerator,
       cost_refridgerator:myroom.cost_refridgerator,
@@ -809,6 +815,8 @@ function ApartmentForm (props){
       form_data.append('cost_electricity',values.cost_electricity)
 
       form_data.append('cost_water',values.cost_water)
+
+      form_data.append('contact',values.contact)
 
       form_data.append('location',values.location)
 
@@ -1251,6 +1259,27 @@ React.useEffect(() => {
   
   setwidth1(map)
 },[])
+
+const [profilem,setprofilem] = React.useState()
+
+React.useEffect(
+  async () => {
+
+    const config = {
+        headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `JWT ${localStorage.getItem('access')}`,
+        },
+      };
+      if(props.profile)
+      {
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcezxradakgdlh/profile/${props.profile.id}/`,config);
+       setprofilem(res.data)
+      }
+      
+  }
+  
+,[props.profile])
 
 if(props.isAuthenticated===false)
     {
@@ -3299,6 +3328,31 @@ if(newredirect==true)
 Filevalidation6(event.target.files[0]);}}/> 
 
 </Grid>
+
+<br />
+
+{
+    profilem ?  <><Typography variant="body1" color="textSecondary" className={classes.textclass}>
+    Contact info (in case customers wants to inquire about something)
+  </Typography>
+ 
+  <FormControl className={classes.form}>
+  
+      <InputLabel id="contact">Contact*</InputLabel>
+      <Select
+      labelId="contact"
+      id="contact"
+      value={formik.values.contact}
+      onChange={(e) => {
+      formik.setFieldValue('contact',e.target.value)}}
+      error={formik.touched.contact && Boolean(formik.errors.contact)}
+      helperText={formik.touched.contact && formik.errors.contact}
+      >
+   <MenuItem value={`${profilem.country_code} ${profilem.mobile}`}>{profilem.country_code} {profilem.mobile}</MenuItem>
+      <MenuItem value={`${props.profile.email}`}>{props.profile.email}</MenuItem>
+      </Select>
+  </FormControl></> : null
+  }
 
 
   <br />

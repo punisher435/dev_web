@@ -148,6 +148,8 @@ class rooms(models.Model):
     removable_purified_water=models.BooleanField(default=False)
     cost_purified_water = models.IntegerField(default=0)
 
+    contact=models.CharField(max_length=255,null=True,blank=True)
+
     house_TV=models.BooleanField(default=False)
     removable_house_TV=models.BooleanField(default=False)
     cost_TV = models.IntegerField(default=0)
@@ -202,6 +204,8 @@ class rooms(models.Model):
     lunch=models.BooleanField(default=True)
     removable_lunch=models.BooleanField(default=False)
     cost_lunch = models.IntegerField(default=0)
+
+    owner=models.CharField(max_length=255,null=True, blank=True)
 
     dinner=models.BooleanField(default=True)
     removable_dinner=models.BooleanField(default=False)
@@ -289,6 +293,8 @@ class shops(models.Model):
     longitude = models.DecimalField(max_digits=9,decimal_places=6,default=0.0)
     latitude = models.DecimalField(max_digits=9,decimal_places=6,default=0.0)
 
+    contact=models.CharField(max_length=255,null=True,blank=True)
+
 
     #facilities and description
     length=models.IntegerField()
@@ -303,6 +309,8 @@ class shops(models.Model):
 
     cctv_building=models.BooleanField(default=False)
     building_guard=models.BooleanField(default=False)
+
+    owner=models.CharField(max_length=255,null=True, blank=True)
 
     washroom=models.IntegerField(default=1)
     separate_washroom=models.BooleanField(default=False)
@@ -422,6 +430,8 @@ class apartments(models.Model):
     commission = models.IntegerField(default=0)
     pausebooking = models.BooleanField(default=False)
 
+    contact=models.CharField(max_length=255,null=True,blank=True)
+
     #address
     location=models.TextField()
     city = models.CharField(max_length=255)
@@ -430,6 +440,8 @@ class apartments(models.Model):
     landmark=models.CharField(max_length=255)
     pincode=models.CharField(max_length=255)
     district=models.CharField(max_length=255,null=True,blank=True)
+
+    owner=models.CharField(max_length=255,null=True, blank=True)
 
     
     longitude = models.DecimalField(max_digits=9,decimal_places=6,default=0.0)
