@@ -129,6 +129,12 @@ export default function SimpleModal1({open,handleopen,handleclose}) {
                <li className={classes.textclass}>
                  The video and images of the room, shop or apartment should cover the whole property and should be recorded in proper light.
                </li>
+
+               <li className={classes.textclass}>
+                 You must mark the location of the property in the map in order to submit the map (it is editable even after submitting the form)
+                 , in case you mark multiple locations then the latest one will be considered.  </li>
+
+              
            </ol>
       
     </div>
