@@ -262,13 +262,7 @@ const validationSchema = yup.object({
   .string('Please, provide the appropriate answer')
   .required('You must answer this '),
   
-  description: yup
-  .string('Please, provide the appropriate answer')
-  .required('You must answer this '),
-  
-  furniture: yup
-  .string('Please, provide the appropriate answer')
-  .required('You must answer this '),
+ 
   
   building_guard: yup
   .boolean()
@@ -305,10 +299,12 @@ const validationSchema = yup.object({
   .number().integer('please enter integer'),
   
   distance1: yup
-  .number().required('please enter this'),
+  .string('Please, provide the appropriate answer')
+  .required('You must answer this '),
   
   distance2: yup
-  .number().required('please enter this'),
+  .string('Please, provide the appropriate answer')
+  .required('You must answer this '),
   
   nearby_station1: yup
   .string('Please, provide the appropriate answer')
@@ -1414,12 +1410,12 @@ if(newredirect==true)
           multiline
           variant="outlined"
           margin="normal"
-          
+          required
           fullWidth
           rows={1}
           id="title"
           name="title"
-          label="House name"
+          label="Title for display"
           value={formik.values.title}
           onChange={formik.handleChange}
           error={formik.touched.title && Boolean(formik.errors.title)}
@@ -1525,7 +1521,7 @@ if(newredirect==true)
       
         <FormControl className={classes.form}>
         
-            <InputLabel id="apartment_type">House type</InputLabel>
+            <InputLabel id="apartment_type">House type*</InputLabel>
             <Select
             labelId="apartment_type"
             id="apartment_type"
@@ -1549,7 +1545,7 @@ if(newredirect==true)
 
    
         <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-            Floor no. of House
+            House floor no. (0 is considered as ground)
           </Typography>
       
           <div>   
@@ -1564,6 +1560,25 @@ if(newredirect==true)
             </Button>
         </div>
      
+
+    <br />
+
+    <Typography variant="body1" color="textSecondary" className={classes.textclass}>
+            No. of floors in the House
+          </Typography>
+      
+          <div>   
+            <Button onClick={() => handleclick1('total_floors',formik.values.total_floors,formik.setFieldValue)} >
+                <AddIcon />
+            </Button>
+
+            {formik.values.total_floors}
+
+            <Button  onClick={() => handleclick2('total_floors',formik.values.total_floors,formik.setFieldValue)}>
+                <RemoveIcon />
+            </Button>
+        </div>
+    
 
     <br />
 
@@ -1608,24 +1623,7 @@ if(newredirect==true)
     <br />
 
    
-        <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-            No. of floors in the House
-          </Typography>
-      
-          <div>   
-            <Button onClick={() => handleclick1('total_floors',formik.values.total_floors,formik.setFieldValue)} >
-                <AddIcon />
-            </Button>
-
-            {formik.values.total_floors}
-
-            <Button  onClick={() => handleclick2('total_floors',formik.values.total_floors,formik.setFieldValue)}>
-                <RemoveIcon />
-            </Button>
-        </div>
-    
-
-    <br />
+       
 
   
         <Typography variant="body1" color="textSecondary" className={classes.textclass}>
@@ -1649,35 +1647,7 @@ if(newredirect==true)
 
 
    
-    
-
-   
-        <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-            Bed type provided in the House
-          </Typography>
-      
-        <FormControl className={classes.form}>
-        
-            <InputLabel id="bed_type">Bed type</InputLabel>
-            <Select
-            labelId="bed_type"
-            id="bed_type"
-            value={formik.values.bed_type}
-            onChange={(e) => formik.setFieldValue('bed_type',e.target.value)}
-            error={formik.touched.bed_type && Boolean(formik.errors.bed_type)}
-            helperText={formik.touched.bed_type && formik.errors.bed_type}
-            >
-          <MenuItem value={''}>None</MenuItem>
-          <MenuItem value={'Single Bed'}>Single Bed</MenuItem>
-          <MenuItem value={'Double Bed'}>Double Bed</MenuItem>
-            </Select>
-        </FormControl>
-     
-
-    <br />
-
-   
-        <Typography variant="body1" color="textSecondary" className={classes.textclass}>
+    <Typography variant="body1" color="textSecondary" className={classes.textclass}>
             No. of beds in the House
           </Typography>
       
@@ -1696,8 +1666,36 @@ if(newredirect==true)
 
     <br />
 
+   
         <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-            No. of TV in the House
+            Bed type provided in the House
+          </Typography>
+      
+        <FormControl className={classes.form}>
+        
+            <InputLabel id="bed_type">Bed type *</InputLabel>
+            <Select
+            labelId="bed_type"
+            id="bed_type"
+            value={formik.values.bed_type}
+            onChange={(e) => formik.setFieldValue('bed_type',e.target.value)}
+            error={formik.touched.bed_type && Boolean(formik.errors.bed_type)}
+            helperText={formik.touched.bed_type && formik.errors.bed_type}
+            >
+          <MenuItem value={'None'}>None</MenuItem>
+          <MenuItem value={'Single Bed'}>Single Bed</MenuItem>
+          <MenuItem value={'Double Bed'}>Double Bed</MenuItem>
+            </Select>
+        </FormControl>
+     
+
+    <br />
+
+   
+       
+
+        <Typography variant="body1" color="textSecondary" className={classes.textclass}>
+            Total TV in the House
           </Typography>
        
           <div>   
@@ -1717,7 +1715,7 @@ if(newredirect==true)
 
   
         <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-            No. of AC in the House
+            Total AC in the House
           </Typography>
         
           <div>   
@@ -1737,7 +1735,7 @@ if(newredirect==true)
 
   
         <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-            No. of cooler in the House
+            Total cooler in the House
           </Typography>
       
           <div>   
@@ -1757,7 +1755,7 @@ if(newredirect==true)
 
   
         <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-            No. of geyser in the House
+            Total geyser in the House
           </Typography>
       
           <div>   
@@ -1787,7 +1785,7 @@ if(newredirect==true)
        
         <FormControl className={classes.form}>
         
-            <InputLabel id="sofa">Sofa</InputLabel>
+            <InputLabel id="sofa">Sofa*</InputLabel>
             <Select
             labelId="sofa"
             id="sofa"
@@ -1805,14 +1803,14 @@ if(newredirect==true)
 
     <><br />
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-      Length of the House
+      Length of the House (in ft)
         </Typography>
      
         <TextField
          multiline
          variant="outlined"
          margin="normal"
-         
+         required
          fullWidth
           rows={1}
           id="length"
@@ -1828,14 +1826,14 @@ if(newredirect==true)
 
   <><br />
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-      Breadth of the House
+      Breadth of the House (in ft)
         </Typography>
       
         <TextField
          multiline
          variant="outlined"
          margin="normal"
-         
+         required
          fullWidth
           rows={1}
           id="breadth"
@@ -1851,14 +1849,14 @@ if(newredirect==true)
 
   <><br />
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-      Height of the House
+      Height of the House (in ft)
         </Typography>
      
         <TextField
           multiline
           variant="outlined"
           margin="normal"
-          
+          required
           fullWidth
           rows={1}
           id="height"
@@ -1935,14 +1933,14 @@ if(newredirect==true)
 
 <div><br />
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-      Cost of electricity facility(if not any, enter 0)
+      Cost of electricity facility (if you dont't charge for this facility or charge it according to the customer's use then enter 0)
         </Typography>
       
         <TextField
           multiline
           variant="outlined"
           margin="normal"
-          
+          required
           fullWidth
           rows={1}
           id="cost_electricity"
@@ -1966,14 +1964,14 @@ if(newredirect==true)
 
 <><br />
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-      Cost of Water facility(if not any, enter 0)
+      Cost of Water facility (if you dont't charge for this facility or charge it according to the customer's use then enter 0)
         </Typography>
      
         <TextField
           multiline
           variant="outlined"
           margin="normal"
-          
+          required
           fullWidth
           rows={1}
           id="cost_water"
@@ -1992,18 +1990,18 @@ if(newredirect==true)
 
             
             <Typography variant="h6" color="textPrimary">
-              WIFI
+              WIFI in the house
             </Typography>
           
             <br />
     
         <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-            Do you have WIFI ?
+            Do you provide WIFI ?
         </Typography>
      
         <FormControl className={classes.form}>
         
-            <InputLabel id="wifi">WIFI</InputLabel>
+            <InputLabel id="wifi">WIFI*</InputLabel>
             <Select
             labelId="wifi"
             id="wifi"
@@ -2027,13 +2025,17 @@ if(newredirect==true)
     {
       formik.values.wifi ? <><br />
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-      Cost of wifi facility(if not enter 0)
+      Cost of wifi facility (if you dont't charge for this facility then enter 0)
         </Typography>
      
         <TextField
           multiline
           rows={1}
+          variant="outlined"
+          margin="normal"
           id="cost_wifi"
+          required
+          fullWidth
           name="cost_wifi"
           label="Cost of wifi facility"
           value={formik.values.cost_wifi}
@@ -2050,12 +2052,12 @@ if(newredirect==true)
 {
       formik.values.wifi ? <><br />
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-      Can customers remove this facility?
-        </Typography>
+      Are customers allowed to remove this facility while booking (facility charge will be removed if they do not choose this facility)
+      </Typography>
       
         <FormControl className={classes.form}>
         
-            <InputLabel id="removable_wifi">Removable wifi facility?</InputLabel>
+            <InputLabel id="removable_wifi">Removable wifi facility?*</InputLabel>
             <Select
             labelId="removable_wifi"
             id="removable_wifi"
@@ -2082,12 +2084,12 @@ if(newredirect==true)
             <br />
     
         <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-            Do you have house TV ?
+            Do you have TV in the house?
         </Typography>
         
         <FormControl className={classes.form}>
         
-            <InputLabel id="TV">House TV</InputLabel>
+            <InputLabel id="TV">House TV*</InputLabel>
             <Select
             labelId="TV"
             id="TV"
@@ -2111,14 +2113,14 @@ if(newredirect==true)
     {
       formik.values.TV ? <><br />
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-      Cost of house TV facility(if not enter 0)
+      Cost of house TV facility (if you dont't charge for this facility then enter 0)
         </Typography>
      
         <TextField
           multiline
           variant="outlined"
           margin="normal"
-          
+          required
           fullWidth
           rows={1}
           id="cost_TV"
@@ -2138,12 +2140,12 @@ if(newredirect==true)
 {
       formik.values.TV ? <><br />
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-      Can customers remove house TV facility?
-        </Typography>
+      Are customers allowed to remove this facility while booking (facility charge will be removed if they do not choose this facility)
+     </Typography>
      
         <FormControl className={classes.form}>
         
-            <InputLabel id="removable_house_TV">Removable house TV facility?</InputLabel>
+            <InputLabel id="removable_house_TV">Removable house TV facility?*</InputLabel>
             <Select
             labelId="removable_house_TV"
             id="removable_house_TV"
@@ -2171,12 +2173,12 @@ if(newredirect==true)
           <br />
    
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-          Do you have house refridgerator ?
+          Do you have refridgerator in the house ?
       </Typography>
      
       <FormControl className={classes.form}>
       
-          <InputLabel id="house_refridgerator">House refridgerator</InputLabel>
+          <InputLabel id="house_refridgerator">House refridgerator*</InputLabel>
           <Select
           labelId="house_refridgerator"
           id="house_refridgerator"
@@ -2199,14 +2201,14 @@ if(newredirect==true)
   {
     formik.values.house_refridgerator ? <><br />
     <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-    Cost of house refridgerator facility(if not enter 0)
+    Cost of house refridgerator facility (if you dont't charge for this facility then enter 0)
       </Typography>
    
       <TextField
         multiline
         variant="outlined"
         margin="normal"
-        
+        required
         fullWidth
         rows={1}
         id="cost_refridgerator"
@@ -2226,12 +2228,12 @@ if(newredirect==true)
 {
     formik.values.house_refridgerator ? <div><br />
     <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-    Can customers remove house refridgerator facility?
-      </Typography>
+    Are customers allowed to remove this facility while booking (facility charge will be removed if they do not choose this facility)
+     </Typography>
    
       <FormControl className={classes.form}>
       
-          <InputLabel id="removable_house_refridgerator">Removable house refridgerator facility?</InputLabel>
+          <InputLabel id="removable_house_refridgerator">Removable house refridgerator facility?*</InputLabel>
           <Select
           labelId="removable_house_refridgerator"
           id="removable_house_refridgerator"
@@ -2257,12 +2259,12 @@ if(newredirect==true)
             <br />
      
         <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-            Do you have purified water ?
+            Do you provide purified water ?
         </Typography>
        
         <FormControl className={classes.form}>
         
-            <InputLabel id="purified_water">purified water</InputLabel>
+            <InputLabel id="purified_water">purified water*</InputLabel>
             <Select
             labelId="purified_water"
             id="purified_water"
@@ -2285,14 +2287,14 @@ if(newredirect==true)
     {
       formik.values.purified_water ? <><br />
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-      Cost of purified water facility(if not enter 0)
+      Cost of purified water facility (if you dont't charge for this facility then enter 0)
         </Typography>
      
         <TextField
            multiline
            variant="outlined"
            margin="normal"
-           
+           required
            fullWidth
           rows={1}
           id="cost_purified_water"
@@ -2317,7 +2319,7 @@ if(newredirect==true)
      
         <FormControl className={classes.form}>
         
-            <InputLabel id="removable_purified_water">Removable purified water facility?</InputLabel>
+            <InputLabel id="removable_purified_water">Removable purified water facility?*</InputLabel>
             <Select
             labelId="removable_purified_water"
             id="removable_purified_water"
@@ -2337,18 +2339,18 @@ if(newredirect==true)
 <br />
 
             <Typography variant="h6" color="textPrimary">
-              AC
+              AC in the house
             </Typography>
          
             <br />
    
         <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-            Do you have AC ?
+            Do you have AC in the house ?
         </Typography>
       
         <FormControl className={classes.form}>
         
-            <InputLabel id="AC">AC</InputLabel>
+            <InputLabel id="AC">AC*</InputLabel>
             <Select
             labelId="AC"
             id="AC"
@@ -2372,14 +2374,14 @@ if(newredirect==true)
     {
       formik.values.AC ? <><br />
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-      Cost of AC facility(if not enter 0)
+      Cost of AC facility (if you dont't charge for this facility then enter 0)
         </Typography>
      
         <TextField
            multiline
            variant="outlined"
            margin="normal"
-           
+           required
            fullWidth
           rows={1}
           id="cost_AC"
@@ -2399,12 +2401,12 @@ if(newredirect==true)
 {
       formik.values.AC ? <><br />
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-      Can customers remove this facility?
-        </Typography>
+      Are customers allowed to remove this facility while booking (facility charge will be removed if they do not choose this facility)
+      </Typography>
      
         <FormControl className={classes.form}>
         
-            <InputLabel id="removable_AC">Removable AC facility?</InputLabel>
+            <InputLabel id="removable_AC">Removable AC facility?*</InputLabel>
             <Select
             labelId="removable_AC"
             id="removable_AC"
@@ -2424,7 +2426,7 @@ if(newredirect==true)
     <br />
 
             <Typography variant="h6" color="textPrimary">
-              Geyser
+              Geyser in the house
             </Typography>
             
             <br />
@@ -2435,7 +2437,7 @@ if(newredirect==true)
       
         <FormControl className={classes.form}>
         
-            <InputLabel id="geyser">geyser</InputLabel>
+            <InputLabel id="geyser">geyser*</InputLabel>
             <Select
             labelId="geyser"
             id="geyser"
@@ -2457,28 +2459,28 @@ if(newredirect==true)
 
 
     {
-      formik.values.geyser ? <div><br />
+      formik.values.geyser ? <><br />
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-      Cost of geyser geyser(if not enter 0)
+      Cost of geyser (if you dont't charge for this facility then enter 0)
         </Typography>
  
         <TextField
            multiline
            variant="outlined"
            margin="normal"
-           
+           required
            fullWidth
           rows={1}
           id="cost_geyser"
           name="cost_geyser"
-          label="Cost of geyser geyser"
+          label="Cost of geyser"
           value={formik.values.cost_geyser}
           onChange={(e) => {formik.setFieldValue('cost_geyser',parseInt(e.target.value)); 
           }}
           error={formik.touched.cost_geyser && Boolean(formik.errors.cost_geyser)}
           helperText={formik.touched.cost_geyser && formik.errors.cost_geyser}
         />
-       </div>
+       </>
   : null
     }
     
@@ -2486,12 +2488,12 @@ if(newredirect==true)
 {
       formik.values.geyser ? <><br />
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-      Can customers remove this geyser?
-        </Typography>
+      Are customers allowed to remove this facility while booking (facility charge will be removed if they do not choose this facility)
+      </Typography>
       
         <FormControl className={classes.form}>
         
-            <InputLabel id="removable_geyser">Removable geyser geyser?</InputLabel>
+            <InputLabel id="removable_geyser">Removable geyser?*</InputLabel>
             <Select
             labelId="removable_geyser"
             id="removable_geyser"
@@ -2510,18 +2512,18 @@ if(newredirect==true)
     }
 <br />
             <Typography variant="h6" color="textPrimary">
-              Cooler
+              Cooler in the house
             </Typography>
        
             <br />
     
         <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-            Do you have cooler ?
+            Do you have cooler in the house ?
         </Typography>
      
         <FormControl className={classes.form}>
         
-            <InputLabel id="cooler">cooler</InputLabel>
+            <InputLabel id="cooler">cooler*</InputLabel>
             <Select
             labelId="cooler"
             id="cooler"
@@ -2545,14 +2547,14 @@ if(newredirect==true)
     {
       formik.values.cooler ? <><br />
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-      Cost of cooler facility(if not enter 0)
+      Cost of cooler facility (if you dont't charge for this facility then enter 0)
         </Typography>
    
         <TextField
            multiline
            variant="outlined"
            margin="normal"
-           
+           required
            fullWidth
           rows={1}
           id="cost_cooler"
@@ -2572,12 +2574,12 @@ if(newredirect==true)
 {
       formik.values.cooler ? <><br />
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-      Can customers remove this facility?
-        </Typography>
+      Are customers allowed to remove this facility while booking (facility charge will be removed if they do not choose this facility)
+       </Typography>
      
         <FormControl className={classes.form}>
         
-            <InputLabel id="removable_cooler">Removable cooler facility?</InputLabel>
+            <InputLabel id="removable_cooler">Removable cooler facility?*</InputLabel>
             <Select
             labelId="removable_cooler"
             id="removable_cooler"
@@ -2599,18 +2601,18 @@ if(newredirect==true)
 
       
             <Typography variant="h6" color="textPrimary">
-              Laundry
+              Laundry in the house
             </Typography>
            
             <br />
      
         <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-            Do you have laundry ?
+            Do you have laundry in the house?
         </Typography>
         
         <FormControl className={classes.form}>
         
-            <InputLabel id="laundry">laundry</InputLabel>
+            <InputLabel id="laundry">laundry*</InputLabel>
             <Select
             labelId="laundry"
             id="laundry"
@@ -2641,7 +2643,7 @@ if(newredirect==true)
            multiline
            variant="outlined"
            margin="normal"
-           
+           required
            fullWidth
           rows={1}
           id="cost_laundry"
@@ -2667,7 +2669,7 @@ if(newredirect==true)
     
         <FormControl className={classes.form}>
         
-            <InputLabel id="removable_laundry">Removable laundry ?</InputLabel>
+            <InputLabel id="removable_laundry">Removable laundry ?*</InputLabel>
             <Select
             labelId="removable_laundry"
             id="removable_laundry"
@@ -2699,7 +2701,7 @@ if(newredirect==true)
       
         <FormControl className={classes.form}>
         
-            <InputLabel id="apartment_cleaning">House cleaning</InputLabel>
+            <InputLabel id="apartment_cleaning">House cleaning*</InputLabel>
             <Select
             labelId="apartment_cleaning"
             id="apartment_cleaning"
@@ -2728,7 +2730,7 @@ if(newredirect==true)
            multiline
            variant="outlined"
            margin="normal"
-           
+           required
            fullWidth
           rows={1}
           id="cost_cleaning"
@@ -2749,12 +2751,12 @@ if(newredirect==true)
 
    
         <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-            Do you have building sequrity guard ?
+            Do you have sequrity quard in the building ?
         </Typography>
       
         <FormControl className={classes.form}>
         
-            <InputLabel id="building_guard">building_guard</InputLabel>
+            <InputLabel id="building_guard">building guard*</InputLabel>
             <Select
             labelId="building_guard"
             id="building_guard"
@@ -2774,12 +2776,12 @@ if(newredirect==true)
 
  
         <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-            Do you have CCTV in building ?
+            Do you have CCTV camera in building ?
         </Typography>
        
         <FormControl className={classes.form}>
         
-            <InputLabel id="cctv_building">cctv_building</InputLabel>
+            <InputLabel id="cctv_building">cctv building*</InputLabel>
             <Select
             labelId="cctv_building"
             id="cctv_building"
@@ -2797,12 +2799,12 @@ if(newredirect==true)
     <br />
 
         <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-            Do you have power backup in building ?
+            Do you have power backup installed in your house in case of power cut?
         </Typography>
         
         <FormControl className={classes.form}>
         
-            <InputLabel id="power_backup">power_backup</InputLabel>
+            <InputLabel id="power_backup">power backup*</InputLabel>
             <Select
             labelId="power_backup"
             id="power_backup"
@@ -2852,7 +2854,7 @@ if(newredirect==true)
 
     <><br />
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-      Any discount you are providing (in %)
+      Any discount you are providing (in % please note that the price mentioned above is the final price and discount is to calculate the cost of the shop)
         </Typography>
      
         <TextField
@@ -2875,7 +2877,8 @@ if(newredirect==true)
 
   <><br />
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-      Final Price after discount (excluding the facilities,electricity and water charge that will be added later and wont be counted in discount)
+      Final Price after discount (excluding the facilities, electricity and water charge that will be added later and won't be counted in discount. However, laundry,iron and shop cleaning services won't be charged. You would have 
+      to take Laundry, iron and shop cleaning charges at the time of use. Other facilities will be charged at the time of booking.)
         </Typography>
    
         <TextField
@@ -2937,14 +2940,14 @@ if(newredirect==true)
             <br />
             <>
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-      Full Address
-        </Typography>
+      Address (Do not enter city, state, district, country and pincode, we have separate rows for that)
+           </Typography>
     
         <TextField
            multiline
            variant="outlined"
            margin="normal"
-           
+           required
            fullWidth
           rows={5}
           id="location"
@@ -2969,7 +2972,7 @@ if(newredirect==true)
            multiline
            variant="outlined"
            margin="normal"
-           
+           required
            fullWidth
           rows={1}
           id="city"
@@ -2993,7 +2996,7 @@ if(newredirect==true)
           multiline
           variant="outlined"
           margin="normal"
-          
+          required
           fullWidth
           rows={1}
           id="district"
@@ -3019,7 +3022,7 @@ if(newredirect==true)
            multiline
            variant="outlined"
            margin="normal"
-           
+           required
            fullWidth
           rows={1}
           id="state"
@@ -3043,7 +3046,7 @@ if(newredirect==true)
            multiline
            variant="outlined"
            margin="normal"
-           
+           required
            fullWidth
           rows={1}
           id="country"
@@ -3067,7 +3070,7 @@ if(newredirect==true)
            multiline
            variant="outlined"
            margin="normal"
-           
+           required
            fullWidth
           rows={1}
           id="landmark"
@@ -3091,7 +3094,7 @@ if(newredirect==true)
            multiline
            variant="outlined"
            margin="normal"
-           
+           required
            fullWidth
           rows={1}
           id="pincode"
@@ -3110,7 +3113,7 @@ if(newredirect==true)
 
   <>
       <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-      Address proof (pdf format)
+      Address proof (pdf format)(required for verification)
         </Typography>
    </>  
        
@@ -3158,7 +3161,7 @@ if(newredirect==true)
 
        
             <Typography variant="h4" color="textPrimary">
-              Neighborhood
+             Locality
             </Typography>
         
             <br />
@@ -3172,7 +3175,7 @@ if(newredirect==true)
            multiline
            variant="outlined"
            margin="normal"
-           
+           required
            fullWidth
           rows={1}
           id="nearby_station1"
@@ -3198,7 +3201,7 @@ if(newredirect==true)
           multiline
           variant="outlined"
           margin="normal"
-          
+          required
           fullWidth
           rows={1}
           id="distance1"
@@ -3226,7 +3229,7 @@ if(newredirect==true)
            multiline
            variant="outlined"
            margin="normal"
-           
+           required
            fullWidth
           rows={1}
           id="nearby_station2"
@@ -3252,7 +3255,7 @@ if(newredirect==true)
            multiline
            variant="outlined"
            margin="normal"
-           
+           required
            fullWidth
           rows={1}
           id="distance2"

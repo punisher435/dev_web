@@ -1,3 +1,5 @@
+import datetime
+
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework import status
@@ -8,6 +10,7 @@ from rest_framework_simplejwt import authentication
 from django.core.mail import send_mail
 from django_filters import rest_framework as rest_filters
 from rest_framework import filters
+
 from rest_framework.pagination import PageNumberPagination
 
 
@@ -156,6 +159,7 @@ class my_room_viewset(viewsets.ViewSet):
         return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
 
     def create(self,request,format=None):
+
         try:
         
         
@@ -512,9 +516,9 @@ class my_shop_viewset(viewsets.ViewSet):
                 bank = get_object_or_404(queryset,pk=request.user.pk)
 
                 print(type(bank.currency))
+                booked_till = datetime.date(2000,1,1)
 
-
-                shop = shops(title=request.data["title"],seller_id=request.user,price=price,net_discount=int(request.data["owner_discount"]),seller_price=seller_price,owner_discount=int(request.data["owner_discount"]),final_price=seller_price,photo1=request.data["photo1"],photo2=request.data["photo2"],photo3=request.data["photo3"],photo4=request.data["photo4"],photo5=request.data["photo5"],video=request.data["video"],
+                shop = shops(title=request.data["title"],bookedtill=booked_till,seller_id=request.user,price=price,net_discount=int(request.data["owner_discount"]),seller_price=seller_price,owner_discount=int(request.data["owner_discount"]),final_price=seller_price,photo1=request.data["photo1"],photo2=request.data["photo2"],photo3=request.data["photo3"],photo4=request.data["photo4"],photo5=request.data["photo5"],video=request.data["video"],
                 location=request.data["location"].upper(),city=request.data["city"].upper(),state=request.data["state"].upper(),country=request.data["country"].upper(),landmark=request.data["landmark"].upper(),pincode=request.data["pincode"],currency=bank.currency,longitude=float(request.data["longitude"]),latitude=float(request.data["latitude"]),length=int(request.data["length"]),breadth=int(request.data["breadth"]),height=int(request.data["height"]),furniture=request.data["furniture"],category=request.data["category"],
                 facility=request.data["facility"],description=request.data["description"],cctv_building=bool(request.data["cctv_building"]=='true'),building_guard=bool(request.data["building_guard"]=='true'),balcony=int(request.data["balcony"]),separate_washroom=bool(request.data["separate_washroom"]=='true'),windows=int(request.data["windows"]),fans=int(request.data["fans"]),floor_no=int(request.data["floor_no"]),
                 cost_electricity=int(request.data["cost_electricity"]),cost_water=int(request.data["cost_water"]),purified_water=bool(request.data["purified_water"]=='true'),removable_purified_water=bool(request.data["removable_purified_water"]=='true'),cost_purified_water=int(request.data["cost_purified_water"]),

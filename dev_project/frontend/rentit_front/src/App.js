@@ -85,8 +85,10 @@ function App(props) {
   return (
     <Provider store={store}>
       <Router>
+      <Switch>
+      <Route exact path='/about-us' component={About} />
           <Layout>
-            <Switch>
+           
               <>
               <div 
               className="App">
@@ -174,12 +176,15 @@ function App(props) {
                 <Route exact path='/dashboard/complaints/housing' component={Complainthousing}/>
                 <Route exact path='/complaints/housing/:complaint_id' component={Complainthousingdetails}/>
                 <Route exact path='/dashboard/complaints/housing/create' component={Complaintformhousing}/>
-                <Route exact path='/about-us' component={About} />
+               
 
               </div>
               </>
-            </Switch>
+            
           </Layout>
+         
+          
+          </Switch>
       </Router>
     </Provider>
   );
