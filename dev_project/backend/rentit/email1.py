@@ -7,3 +7,6 @@ def email_send(subject1,message1,recepient1,seller1=None):
     recepient = recepient1
     seller=seller1
     send_mail(subject,message, EMAIL_HOST_USER, [recepient,seller], fail_silently=False)
+
+
+

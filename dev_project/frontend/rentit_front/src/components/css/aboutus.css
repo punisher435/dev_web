@@ -1,157 +1,165 @@
-.bg1{
+@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&family=Caveat:wght@400;700&family=Lobster&family=Monoton&family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Playfair+Display+SC:ital,wght@0,400;0,700;1,700&family=Playfair+Display:ital,wght@0,400;0,700;1,700&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&family=Source+Sans+Pro:ital,wght@0,400;0,700;1,700&family=Work+Sans:ital,wght@0,400;0,700;1,700&display=swap');
+
+.zoomintemp{
+    -moz-transform: scale(1.25, 1.25);
+  zoom: 1.25;
+  zoom: 125%;
+}
+
+
+.bg1 {
     background-image: url("https://res.cloudinary.com/djbyqrhy9/image/upload/v1622351268/victor-garcia-JONURCNG7fQ-unsplash_l0in01.jpg");
     background-size: cover;
     height: 100vh;
     padding: 10px;
-  
+
 }
 
-.logo{
-    height: 7vh;
+.logo {
+    height: 6vh;
     width: 50vw;
     margin-top: 30px;
 }
 
-.tagline{
-    font-size: 50px;
+.tagline {
+    font-size: 17px;
     text-align: center;
     text-decoration: underline;
     font-style: oblique;
     font-weight: bold;
 }
 
-.head{
-    font-size: 90px;
+.head {
+    font-size: 40px;
     text-align: center;
     font-family: "Bree Serif";
-    line-height: 55px;
-    font-weight: 600;
-    margin-top: 200px;
+    line-height: 20px;
+    font-weight: 300;
+    margin-top: 60px;
 }
 
-.mid{
-    font-size: 45px;
+.mid {
+    font-size: 16px;
     font-family: "Georgia";
     text-decoration: underline;
     font-weight: initial;
 }
 
-.description{
-    font-size: 60px;
+.description {
+    font-size: 21px;
     text-align: center;
     font-family: "Georgia";
 }
 
-.digital{
-    font-size: 80px;
-    color:#414141;
+.digital {
+    font-size: 25px;
+    color: #414141;
     font-family: "Bree Serif";
     transform: scale(1.0);
-    box-shadow: 0 15px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+    box-shadow: 0 15px 20px rgba(0, 0, 0, .12), 0 4px 8px rgba(0, 0, 0, .06);
 }
 
 
-.bg2{
+.bg2 {
     background-image: url("https://res.cloudinary.com/djbyqrhy9/image/upload/v1622353664/minimalistic-bed-with-interior-plant_ljtwf7.jpg");
     background-size: cover;
     height: 100vh;
     padding: 10px;
-    
+
 }
 
-.heading2{
-    font-size: 90px;
+.heading2 {
+    font-size: 38px;
     font-family: "Bree Serif";
     text-align: center;
-    margin-top: 200px;
-    font-weight: 600;
+    margin-top: 60px;
+    font-weight: 300;
 }
 
-.description2{
-    font-size: 60px;
+.description2 {
+    font-size: 21px;
     text-align: center;
     font-family: "Georgia";
     margin-top: 30px;
 }
 
-.bg3{
+.bg3 {
     background-image: url("https://res.cloudinary.com/djbyqrhy9/image/upload/v1622370550/annie-spratt-W0pMGlPogow-unsplash_zblclr.jpg");
     background-size: cover;
     height: 100vh;
     padding: 10px;
 }
 
-.heading3{
-    font-size: 100px;
+.heading3 {
+    font-size: 35px;
     font-family: "Bree Serif";
     text-align: center;
-    margin-top: 100px;
-    font-weight: 600;
-    color:silver;
+    margin-top: 40px;
+    font-weight: 300;
+    color: silver;
 }
 
-.description3{
-    font-size: 60px;
+.description3 {
+    font-size: 21px;
     text-align: center;
     font-family: "Georgia";
     margin-top: 30px;
-    color:silver;
+    color: silver;
 }
 
-.bg4{
+.bg4 {
     background-color: #000000;
     background-image: linear-gradient(130deg, #000000 0%, #414141 90%);
     background-size: cover;
-    height: 180vh;
-    padding: 40px;
+    height: 220vh;
+    padding: 20px;
 }
 
-.bg5{
+.bg5 {
     background-color: white;
-    border-radius: 30px;
-    padding: 25px;
+    border-radius: 20px;
+    padding: 20px;
 }
 
-.image{
+.image {
     height: 40vh;
-    border-radius: 50px;
+    border-radius: 20px;
     width: 100%;
     margin-bottom: 20px;
     transform: scale(1.0);
-    box-shadow: 0 15px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+    box-shadow: 0 15px 20px rgba(0, 0, 0, .12), 0 4px 8px rgba(0, 0, 0, .06);
 }
 
-.heading4{
+.heading4 {
     color: white;
     font-family: "Bree Serif";
-    font-size: 90px;
-    text-align: center;
-    margin-bottom: 50px;
-}
-
-.description4{
     font-size: 32px;
+    text-align: center;
+    margin-bottom: 35px;
 }
 
-.college-name{
+.description4 {
+    font-size: 15px;
+}
+
+.college-name {
     text-decoration: underline;
-    font-size: 30px;
-    margin-bottom: 30px;
+    font-size: 13px;
+    margin-bottom: 20px;
     font-style: italic;
     font-family: Serif;
 }
 
-.name{
-    font-size: 80px;
-    line-height: 40px;
+.name {
+    font-size: 30px;
+    line-height: 10px;
     font-family: "Bree Serif";
     font-weight: 500;
-    margin-top: 10px;
 }
 
-.bg6{
+.bg6 {
     background-color: white;
-    border-radius: 30px;
-    padding: 25px;
-    margin-top: 100px;
+    border-radius: 20px;
+    padding: 20px;
+    margin-top: 50px;
 }

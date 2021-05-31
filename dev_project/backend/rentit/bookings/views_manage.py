@@ -20,7 +20,7 @@ from .serializers import roomBookingsSerializer,shopBookingsSerializer,apartment
 
 from products.models import rooms,shops,apartments
 from coupons.models import coupons
-
+from rentit.settings import EMAIL_HOST_USER
 import celery
 from email1 import email_send
 from user. models import seller_bank_details
@@ -28,6 +28,11 @@ from user. models import seller_bank_details
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.decorators.csrf import csrf_protect
 from django.utils.decorators import method_decorator
+
+
+from django.template import Context
+from django.template.loader import render_to_string, get_template
+from django.core.mail import EmailMessage
 
 utc=pytz.UTC
 
@@ -284,9 +289,20 @@ class room_payment(viewsets.ViewSet):
                 room.book9=list1[8]
                 room.book10=list1[9]
 
-        subject = 'Booking Confirmed'
-        message = 'Booking has been successfull made.'
-        email_send(subject,message,request.user,room.seller_id)
+        
+
+        ctx = {
+        'user': request.user.first_name+' '+request.user.last_name,
+        }
+        message = get_template('bookingconf.html').render(ctx)
+        msg = EmailMessage(
+            'Booking Confirmation',
+            message,
+            EMAIL_HOST_USER,
+            [request.user,room.seller_id],
+        )
+        msg.content_subtype = "html"  # Main content is now text/html
+        msg.send()
 
         room.save()
 

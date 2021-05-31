@@ -31,6 +31,8 @@ import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
 import StorefrontIcon from '@material-ui/icons/Storefront';
 import HomeIcon from '@material-ui/icons/Home';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import LockOpenIcon from '@material-ui/icons/LockOpen';
+import VpnKeyIcon from '@material-ui/icons/VpnKey';
 
 
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
@@ -326,16 +328,22 @@ function RenteneAppBar(props) {
 
 
           {
-            props.isAuthenticated ? null : <><MenuItem><NavLink className={`nav-link ${styles.textclass}`} exact to='/login'>
-            <Typography className={classes.body2} variant="h6" noWrap>
-              Login
-            </Typography>
+            props.isAuthenticated ? null : <><MenuItem><NavLink className={`nav-link ${styles.textclass2}`} exact to='/login'>
+            <IconButton aria-label="show 4 new mails" color="inherit" className={classes.yo1class}>
+            
+                <VpnKeyIcon />
+           
+            </IconButton>
+            <Typography variant="body1" className={classes.yoclass}>Login</Typography>
             </NavLink></MenuItem>
-            <MenuItem><NavLink className={`nav-link ${styles.textclass}`} exact to='/signup'>
-            <Typography className={classes.body2} variant="h6" noWrap>
-              Sign up
-            </Typography>
-            </NavLink></MenuItem></>
+            <MenuItem><NavLink className={`nav-link ${styles.textclass2}`} exact to='/signup'>
+        <IconButton aria-label="show 4 new mails" color="inherit" className={classes.yo1class}>
+         
+            <LockOpenIcon />
+         
+        </IconButton>
+        <Typography variant="body1" className={classes.yoclass}>Sign up</Typography>
+        </NavLink></MenuItem></>
           }
 
 
@@ -470,15 +478,25 @@ function RenteneAppBar(props) {
 
           {
             props.isAuthenticated ? null : <><NavLink className={`nav-link ${styles.textclass3}`} exact to='/login'>
-            <Typography className={classes.body} vHomeIcon HomeIcon ariant="h6" noWrap>
-              <Box mt={1}>
+            <Typography className={classes.body} variant="h6" noWrap>
+              <Box >
+              <IconButton aria-label="show 4 new mails" color="inherit">
+              
+                  <VpnKeyIcon/>
+             
+              </IconButton>
               Login
               </Box>
             </Typography>
             </NavLink>
             <NavLink className={`nav-link ${styles.textclass3}`} exact to='/signup'>
             <Typography className={classes.body} variant="h6" noWrap>
-            <Box mt={1}>
+              <Box >
+              <IconButton aria-label="show 4 new mails" color="inherit">
+              
+                  <LockOpenIcon/>
+             
+              </IconButton>
               Sign up
               </Box>
             </Typography>
