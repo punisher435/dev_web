@@ -31,6 +31,10 @@ margin: 10,
 float: 'none',
  
 },
+textclass:{
+fontSize: '14px',
+whiteSpace: 'pre-wrap',
+},
 media: {
 height: 10,
 paddingTop: '50.25%', // 16:9
@@ -76,7 +80,7 @@ function RecipeReviewCard({post}) {
 
   </Grid>
   <Grid item xs={11}>
-         <Typography variant="body1" >
+         <Typography variant="body1" className={classes.textclass}>
            <Box mt={1}>
        {post.location},{post.city},{post.district},{post.state},{post.country}
        {/* Anand Plaza, First, University Rd, A Block, Udaipur, Rajasthan 313001 */}

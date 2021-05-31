@@ -157,7 +157,8 @@ How Rentene helps <br />property owners?
            
 <Typography className={classes.textclass1} >
 
-How Rentene helps property owners?
+Rentene allows you to showcase yourproperty & connects <br /> you with the best customers all over the world.
+          
 <br />
 </Typography>
 </Grid></Grid>
