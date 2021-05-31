@@ -36,9 +36,20 @@ var center = {
 
 export default function App({value,setvalue}) {
   const [width,setwidth] = React.useState(false);
+  const [markers, setMarkers] = React.useState([]);
 React.useEffect(() => {
   let map = document.getElementById('mapcontainer1').clientWidth;
-  
+  if(value)
+  {
+    setMarkers((current) => [
+    
+      {
+        lat: parseFloat(value.latitude),
+        lng: parseFloat(value.longitude),
+       
+      },
+    ]);
+  }
   setwidth(map)
 },[])
 
@@ -54,14 +65,14 @@ const mapContainerStyle = {
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries,
   });
-  const [markers, setMarkers] = React.useState([]);
+ 
   const [selected, setSelected] = React.useState(null);
 
 
 
   const onMapClick = React.useCallback((e) => {
     setMarkers((current) => [
-      ...current,
+    
       {
         lat: e.latLng.lat(),
         lng: e.latLng.lng(),
@@ -112,12 +123,7 @@ const mapContainerStyle = {
           onLoad={onMapLoad}
         >
 
-          <Marker
-              key={`${parseFloat(value.latitude)}-${parseFloat(value.longitude)}`}
-              position={{ lat: parseFloat(value.latitude), lng:parseFloat(value.longitude) }}
-             
-              
-            />
+       
           
          
           {markers.map((marker) => (

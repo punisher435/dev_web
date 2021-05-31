@@ -3875,11 +3875,7 @@ if(newredirect==true)
       Kindly, mark the location of your house in the map to provide better facilites and optimisation (required*).
      
         </Typography>
-        <Typography variant="body1" color="textSecondary" className={classes.textclass}>
-      
-      Please note that if you have marked multiple times then the latest one will be used as our reference 
-        </Typography>
-        <MapForm value={formik.values} setvalue={formik.setFieldValue}/>
+      <MapForm value={formik.values} setvalue={formik.setFieldValue}/>
         <br />
 
         

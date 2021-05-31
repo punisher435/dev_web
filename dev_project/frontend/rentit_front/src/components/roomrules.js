@@ -91,6 +91,12 @@ export default function SimpleModal1({open,handleopen,handleclose}) {
        <h2 id="roomrules_title">Instructions for filling :</h2>
            
            <ol>
+           <li className={classes.textclass}>
+             Your added property won't be avaiable for booking on the website until it gets verified
+           </li>
+           <li className={classes.textclass}>
+            All * marked fields are required.
+           </li>
                <li className={classes.textclass}>
                       All images,video and address proof are necessary for verification. However you don't have to add them all at once, you can
                       submit the form without uploading them.
@@ -132,9 +138,11 @@ export default function SimpleModal1({open,handleopen,handleclose}) {
 
                <li className={classes.textclass}>
                  You must mark the location of the property in the map in order to submit the map (it is editable even after submitting the form)
-                 , in case you mark multiple locations then the latest one will be considered.  </li>
+  </li>
 
-              
+                 <li className={classes.textclass}>
+           If you want to view these instructions again, then click the button "view instructions" on the bottom of the page
+           </li>
            </ol>
       
     </div>
