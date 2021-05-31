@@ -24,6 +24,13 @@ import axios from 'axios';
 import FavoriteOutlinedIcon from '@material-ui/icons/FavoriteOutlined';
 import './css/App.css'
 import logo from '../logo.png';
+import InfoIcon from '@material-ui/icons/Info';
+
+import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
+
+import StorefrontIcon from '@material-ui/icons/Storefront';
+import HomeIcon from '@material-ui/icons/Home';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
@@ -31,7 +38,7 @@ axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
 
 const StyledMenu = withStyles({
   paper: {
-    border: "1px solid #d3d4d5",
+   
     right:15,
     left:'auto !important'
     
@@ -67,7 +74,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize:'18px',
     color:'white',
     [theme.breakpoints.up('sm')]: {
-      display: 'block',
+      display: 'inline',
     },
   },
   body2:{
@@ -204,7 +211,7 @@ function RenteneAppBar(props) {
       className={classes.give}
     >
       <NavLink className={`nav-link ${styles.textclass2}`} exact to={props.profile ? props.profile.is_seller ? '/dashboard/analytics' : '/dashboard/profile' : '/dashboard/profile'}><MenuItem onClick={handleMenuClose}>Dashboard</MenuItem></NavLink>
-      
+     
       {
         props.isAuthenticated ? <NavLink className={`nav-link ${styles.textclass2}`} exact to='/#!' onClick={logout_user}><MenuItem onClick={handleMenuClose}>Logout</MenuItem></NavLink> : null
       }
@@ -271,6 +278,52 @@ function RenteneAppBar(props) {
       className={classes.give}
     >
 
+      <MenuItem>
+
+      <NavLink className={`nav-link ${styles.textclass2}`} exact to='/rooms'>
+        <IconButton aria-label="show 4 new mails" color="inherit" className={classes.yo1class}>
+        
+            <MeetingRoomIcon />
+          
+        </IconButton>
+        <Typography variant="body1" className={classes.yoclass}>Our Rooms</Typography>
+        </NavLink>
+      </MenuItem>
+
+      <MenuItem>
+
+      <NavLink className={`nav-link ${styles.textclass2}`} exact to='/shops'>
+        <IconButton aria-label="show 4 new mails" color="inherit" className={classes.yo1class}>
+      
+            < StorefrontIcon  />
+         
+        </IconButton>
+        <Typography variant="body1" className={classes.yoclass}>Our Shops</Typography>
+        </NavLink>
+      </MenuItem>
+
+      <MenuItem>
+
+      <NavLink className={`nav-link ${styles.textclass2}`} exact to='/housing'>
+        <IconButton aria-label="show 4 new mails" color="inherit" className={classes.yo1class}>
+        
+            <HomeIcon />
+       
+        </IconButton>
+        <Typography variant="body1" className={classes.yoclass}>Our Housing</Typography>
+        </NavLink>
+      </MenuItem>
+      <MenuItem>
+      <NavLink className={`nav-link ${styles.textclass2}`} exact to='/about-us'>
+      <IconButton aria-label="show 4 new mails" color="inherit" className={classes.yo1class}>
+        
+        <InfoIcon />
+   
+    </IconButton>
+        <Typography variant="body1" className={classes.yoclass}>About us</Typography>
+        </NavLink>
+      </MenuItem>
+
 
           {
             props.isAuthenticated ? null : <><MenuItem><NavLink className={`nav-link ${styles.textclass}`} exact to='/login'>
@@ -284,6 +337,8 @@ function RenteneAppBar(props) {
             </Typography>
             </NavLink></MenuItem></>
           }
+
+
 
 
       <MenuItem>
@@ -308,20 +363,43 @@ function RenteneAppBar(props) {
       </MenuItem>
 
       {
-        props.isAuthenticated ?  <MenuItem onClick={handleprofileMenuOpen}>
+        props.isAuthenticated ? <MenuItem >
+        <NavLink className={`nav-link ${styles.textclass2}`} exact to='/#!' onClick={logout_user}>
+         <IconButton aria-label="show 4 new mails" color="inherit" className={classes.yo1class}>
+         
+            <ExitToAppIcon />
+        
+        </IconButton>
+        <Typography variant="body1" className={classes.yoclass}>Logout</Typography>
+          </NavLink></MenuItem>
+        
+        
+        : null
+      }
+
+
+
+      {
+        props.isAuthenticated ?  <><MenuItem >
+        <NavLink className={`nav-link ${styles.textclass2}`} exact to={props.profile ? props.profile.is_seller ? '/dashboard/analytics' : '/dashboard/profile' : '/dashboard/profile'}>
         <IconButton
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"
           aria-haspopup="true"
           color="inherit"
+          className={classes.yo1class}
         >
           {
                 props.profile ? <Avatar className={classes.purple} alt={props.profile.first_name.toUpperCase()} src={pic} /> : <AccountCircle />
               }
         </IconButton>
-        <p>Profile</p>
-      </MenuItem> : null
+        <Typography variant="body1" className={classes.yoclass}>Dashboard</Typography>
+        </NavLink>
+      </MenuItem>
+      
+      </> : null
       }
+
       
      
     </ StyledMenu>
@@ -339,18 +417,60 @@ function RenteneAppBar(props) {
           <div className={classes.logoclass}><img src={logo} /></div>
           
           </NavLink>
-          <NavLink className={`nav-link ${styles.textclass}`} exact to='/about-us'>
+          <NavLink className={`nav-link ${styles.textclass3} ${classes.body}`} exact to='/about-us'>
+          <IconButton aria-label="show 4 new mails" color="inherit" className={classes.yo1class}>
+        
+        <InfoIcon />
+   
+    </IconButton>
           <Typography className={classes.body} variant="h6" noWrap>
             About Us
           </Typography>
           </NavLink>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
+
+          <NavLink className={`nav-link ${styles.textclass3}`} exact to='/rooms'>
+            <Typography className={classes.body} variant="h6" noWrap>
+              <Box >
+              <IconButton aria-label="show 4 new mails" color="inherit">
+              
+                  < MeetingRoomIcon />
+             
+              </IconButton>
+              Our Rooms
+              </Box>
+            </Typography>
+            </NavLink>
+            <NavLink className={`nav-link ${styles.textclass3}`} exact to='/shops'>
+            <Typography className={classes.body} variant="h6" noWrap>
+              <Box >
+              <IconButton aria-label="show 4 new mails" color="inherit">
+              
+                  <StorefrontIcon/>
+             
+              </IconButton>
+              Our Shops
+              </Box>
+            </Typography>
+            </NavLink>
+            <NavLink className={`nav-link ${styles.textclass3}`} exact to='/housing'>
+            <Typography className={classes.body} variant="h6" noWrap>
+              <Box >
+              <IconButton aria-label="show 4 new mails" color="inherit">
+              
+                  <HomeIcon />
+             
+              </IconButton>
+              Our Housing
+              </Box>
+            </Typography>
+            </NavLink>
           
 
           {
             props.isAuthenticated ? null : <><NavLink className={`nav-link ${styles.textclass3}`} exact to='/login'>
-            <Typography className={classes.body} variant="h6" noWrap>
+            <Typography className={classes.body} vHomeIcon HomeIcon ariant="h6" noWrap>
               <Box mt={1}>
               Login
               </Box>
