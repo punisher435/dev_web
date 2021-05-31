@@ -200,7 +200,7 @@ class my_room_viewset(viewsets.ViewSet):
 
                 ctx = {
                 'user': request.user.first_name+' '+request.user.last_name,
-               
+               'id':room.room_id,
                 }
                 message = get_template('roomadd.html').render(ctx)
                 msg = EmailMessage(
@@ -354,10 +354,19 @@ class my_room_viewset(viewsets.ViewSet):
             room.removed = True
             room.save()
 
-            subject = 'Room Deleted'
-            message = 'Your room has been deleted'
-            recepient = request.user
-            send_mail(subject,message, EMAIL_HOST_USER, [recepient], fail_silently=False)
+            ctx = {
+            'user': request.user.first_name+' '+request.user.last_name,
+            'id':room.room_id,
+            }
+            message = get_template('roomdeleted.html').render(ctx)
+            msg = EmailMessage(
+                'Room Deleted',
+                message,
+                EMAIL_HOST_USER,
+                [request.user],
+            )
+            msg.content_subtype = "html"  # Main content is now text/html
+            msg.send()
 
             return Response("Deleted",status=status.HTTP_200_OK)
         except:
@@ -374,10 +383,19 @@ class my_room_viewset(viewsets.ViewSet):
 
                 room.pausebooking = False
                 room.save()
-                subject = 'Booking resumed'
-                message = 'Bookings on your room is resumed'
-                recepient = request.user
-                send_mail(subject,message, EMAIL_HOST_USER, [recepient], fail_silently=False)
+                ctx = {
+                'user': request.user.first_name+' '+request.user.last_name,
+               'id':room.room_id,
+                }
+                message = get_template('bookingresumed.html').render(ctx)
+                msg = EmailMessage(
+                    'Booking resumed',
+                    message,
+                    EMAIL_HOST_USER,
+                    [request.user],
+                )
+                msg.content_subtype = "html"  # Main content is now text/html
+                msg.send()
 
                 return Response("Success",status=status.HTTP_200_OK)
 
@@ -385,10 +403,19 @@ class my_room_viewset(viewsets.ViewSet):
         
                 room.pausebooking = True
                 room.save()
-                subject = 'Booking paused'
-                message = 'Bookings on your room is paused'
-                recepient = request.user
-                send_mail(subject,message, EMAIL_HOST_USER, [recepient], fail_silently=False)
+                ctx = {
+                'user': request.user.first_name+' '+request.user.last_name,
+               'id':room.room_id,
+                }
+                message = get_template('bookingpaused.html').render(ctx)
+                msg = EmailMessage(
+                    'Booking paused',
+                    message,
+                    EMAIL_HOST_USER,
+                    [request.user],
+                )
+                msg.content_subtype = "html"  # Main content is now text/html
+                msg.send()
 
                 return Response("Success",status=status.HTTP_200_OK)
         except:
@@ -550,7 +577,7 @@ class my_shop_viewset(viewsets.ViewSet):
 
                 ctx = {
                 'user': request.user.first_name+' '+request.user.last_name,
-               
+                 'id':shop.shop_id,
                 }
                 message = get_template('roomadd.html').render(ctx)
                 msg = EmailMessage(
@@ -680,10 +707,19 @@ class my_shop_viewset(viewsets.ViewSet):
             room.removed = True
             room.save()
 
-            subject = 'Shop Deleted'
-            message = 'Your Shop has been deleted'
-            recepient = request.user
-            send_mail(subject,message, EMAIL_HOST_USER, [recepient], fail_silently=False)
+            ctx = {
+            'user': request.user.first_name+' '+request.user.last_name,
+            'id':room.shop_id,
+            }
+            message = get_template('roomdeleted.html').render(ctx)
+            msg = EmailMessage(
+                'Shop deleted',
+                message,
+                EMAIL_HOST_USER,
+                [request.user],
+            )
+            msg.content_subtype = "html"  # Main content is now text/html
+            msg.send()
 
             return Response("Deleted",status=status.HTTP_200_OK)
 
@@ -701,10 +737,19 @@ class my_shop_viewset(viewsets.ViewSet):
 
                 room.pausebooking = False
                 room.save()
-                subject = 'Booking resumed'
-                message = 'Bookings on your shop is resumed'
-                recepient = request.user
-                send_mail(subject,message, EMAIL_HOST_USER, [recepient], fail_silently=False)
+                ctx = {
+                'user': request.user.first_name+' '+request.user.last_name,
+               'id':room.shop_id,
+                }
+                message = get_template('bookingresumed.html').render(ctx)
+                msg = EmailMessage(
+                    'Booking resumed',
+                    message,
+                    EMAIL_HOST_USER,
+                    [request.user],
+                )
+                msg.content_subtype = "html"  # Main content is now text/html
+                msg.send()
 
                 return Response("Success",status=status.HTTP_200_OK)
 
@@ -712,11 +757,20 @@ class my_shop_viewset(viewsets.ViewSet):
         
                 room.pausebooking = True
                 room.save()
-                subject = 'Booking paused'
-                message = 'Bookings on your shops is paused'
-                recepient = request.user
-                send_mail(subject,message, EMAIL_HOST_USER, [recepient], fail_silently=False)
 
+                ctx = {
+                'user': request.user.first_name+' '+request.user.last_name,
+               'id':room.shop_id,
+                }
+                message = get_template('bookingpaused.html').render(ctx)
+                msg = EmailMessage(
+                    'Booking paused',
+                    message,
+                    EMAIL_HOST_USER,
+                    [request.user],
+                )
+                msg.content_subtype = "html"  # Main content is now text/html
+                msg.send()
                 return Response("Success",status=status.HTTP_200_OK)
         except:
             return Response('error',status=status.HTTP_400_BAD_REQUEST)
@@ -881,7 +935,7 @@ class my_apartment_viewset(viewsets.ViewSet):
 
                 ctx = {
                 'user': request.user.first_name+' '+request.user.last_name,
-               
+               'id':room.apartment_id,
                 }
                 message = get_template('roomadd.html').render(ctx)
                 msg = EmailMessage(
@@ -1024,10 +1078,19 @@ class my_apartment_viewset(viewsets.ViewSet):
             room.removed = True
             room.save()
 
-            subject = 'Apartment Deleted'
-            message = 'Your Apartment has been deleted'
-            recepient = request.user
-            send_mail(subject,message, EMAIL_HOST_USER, [recepient], fail_silently=False)
+            ctx = {
+            'user': request.user.first_name+' '+request.user.last_name,
+            'id':room.apartment_id,
+            }
+            message = get_template('roomdeleted.html').render(ctx)
+            msg = EmailMessage(
+                'Apartment deleted',
+                message,
+                EMAIL_HOST_USER,
+                [request.user],
+            )
+            msg.content_subtype = "html"  # Main content is now text/html
+            msg.send()
 
             return Response("Deleted",status=status.HTTP_200_OK)
 
@@ -1045,10 +1108,19 @@ class my_apartment_viewset(viewsets.ViewSet):
 
                 room.pausebooking = False
                 room.save()
-                subject = 'Booking resumed'
-                message = 'Bookings on your apartment is resumed'
-                recepient = request.user
-                send_mail(subject,message, EMAIL_HOST_USER, [recepient], fail_silently=False)
+                ctx = {
+                'user': request.user.first_name+' '+request.user.last_name,
+               'id':room.apartment_id,
+                }
+                message = get_template('bookingresumed.html').render(ctx)
+                msg = EmailMessage(
+                    'Booking resumed',
+                    message,
+                    EMAIL_HOST_USER,
+                    [request.user],
+                )
+                msg.content_subtype = "html"  # Main content is now text/html
+                msg.send()
 
                 return Response("Success",status=status.HTTP_200_OK)
 
@@ -1056,10 +1128,19 @@ class my_apartment_viewset(viewsets.ViewSet):
         
                 room.pausebooking = True
                 room.save()
-                subject = 'Booking paused'
-                message = 'Bookings on your apartment is paused'
-                recepient = request.user
-                send_mail(subject,message, EMAIL_HOST_USER, [recepient], fail_silently=False)
+                ctx = {
+                'user': request.user.first_name+' '+request.user.last_name,
+               'id':room.apartment_id,
+                }
+                message = get_template('bookingpaused.html').render(ctx)
+                msg = EmailMessage(
+                    'Booking paused',
+                    message,
+                    EMAIL_HOST_USER,
+                    [request.user],
+                )
+                msg.content_subtype = "html"  # Main content is now text/html
+                msg.send()
 
                 return Response("Success",status=status.HTTP_200_OK)
         except:
