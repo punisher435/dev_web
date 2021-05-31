@@ -103,7 +103,7 @@
                             <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px;">
                                 <tr>
                                     <td align="center" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding-top: 25px;"> <img src="https://img.icons8.com/carbon-copy/100/3edbf00/checked-checkbox.png" width="125" height="120" style="display: block; border: 0px;" /><br>
-                                        <h2 style="font-size: 30px; font-weight: 800; line-height: 36px; color: #333333; margin: 0;"> Thank You For Your Booking! </h2>
+                                        <h2 style="font-size: 30px; font-weight: 800; line-height: 36px; color: #333333; margin: 0;"> Booking cancellation </h2>
                                     </td>
                                 </tr>
                                 <tr>
@@ -111,8 +111,8 @@
                                         <p style="font-size: 16px; font-weight: 400; line-height: 24px; color: #777777;"> 
                                         Dear {{user}}, </p>
                                         <p style="font-size: 16px; font-weight: 400; line-height: 24px; color: #777777;"> 
-                                            Your booking with booking id {{id}} on {{name}} is been successfully placed. Kindly, do not share this booking id for sequrity reasons. You can check the booking
-                                        details in your account's dashboard as well as download the booking receipt. </p>
+                                             Booking with booking id {{id}} on your {{name}} has been cancelled. You can check the other
+                                        details in your account's dashboard as well as download the cancellation receipt. Your earning from this booking will be transferred a week after booking was placed.</p>
                                     </td>
                                 </tr>
                                 <tr>
@@ -134,7 +134,10 @@
                                                 <td width="75%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 5px 10px;"> Duration </td>
                                                 <td width="25%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 5px 10px;"> {{duration}} months </td>
                                             </tr>
-                                          
+                                            <tr>
+                                                <td width="75%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 5px 10px;"> Booked for </td>
+                                                <td width="25%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 5px 10px;"> {{capacity}} people </td>
+                                            </tr>
                                         </table>
                                     </td>
                                 </tr>
@@ -142,7 +145,7 @@
                                     <td align="left" style="padding-top: 20px;">
                                         <table cellspacing="0" cellpadding="0" border="0" width="100%">
                                             <tr>
-                                                <td width="75%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 800; line-height: 24px; padding: 10px; border-top: 3px solid #eeeeee; border-bottom: 3px solid #eeeeee;"> TOTAL </td>
+                                                <td width="75%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 800; line-height: 24px; padding: 10px; border-top: 3px solid #eeeeee; border-bottom: 3px solid #eeeeee;"> Your Earning </td>
                                                 <td width="25%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 800; line-height: 24px; padding: 10px; border-top: 3px solid #eeeeee; border-bottom: 3px solid #eeeeee;"> {{currency}} {{money}} </td>
                                             </tr>
                                         </table>

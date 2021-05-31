@@ -307,10 +307,33 @@ class room_payment(viewsets.ViewSet):
             'Booking Confirmation',
             message,
             EMAIL_HOST_USER,
-            [request.user,room.seller_id],
+            [request.user],
         )
         msg.content_subtype = "html"  # Main content is now text/html
         msg.send()
+
+        ctx = {
+        'user': booking.seller_id.first_name+' '+booking.seller_id.last_name,
+     
+        'id':booking.booking_id,
+        'start':booking.booked_from,
+        'end':booking.booked_till,
+        'duration':booking.duration,
+        'name':booking.room_name,
+        'capacity':booking.capacity,
+        'money':booking.seller_pay,
+        'currency':booking.currency,
+        }
+        message = get_template('bookingsell.html').render(ctx)
+        msg = EmailMessage(
+            'Booking Confirmation',
+            message,
+            EMAIL_HOST_USER,
+            [room.seller_id],
+        )
+        msg.content_subtype = "html"  # Main content is now text/html
+        msg.send()
+
 
         room.save()
 
@@ -419,7 +442,7 @@ class shop_payment(viewsets.ViewSet):
             room.booked = True
             room.bookedtill = list1[0]
 
-         ctx = {
+        ctx = {
         'user': request.user.first_name+' '+request.user.last_name,
         'id':booking.booking_id,
         'start':booking.booked_from,
@@ -435,7 +458,28 @@ class shop_payment(viewsets.ViewSet):
             'Booking Confirmation',
             message,
             EMAIL_HOST_USER,
-            [request.user,room.seller_id],
+            [request.user],
+        )
+        msg.content_subtype = "html"  # Main content is now text/html
+        msg.send()
+
+        ctx = {
+        'user': booking.seller_id.first_name+' '+booking.seller_id.last_name,
+        'id':booking.booking_id,
+        'start':booking.booked_from,
+        'end':booking.booked_till,
+        'duration':booking.duration,
+        'name':booking.shop_name,
+        
+        'money':booking.seller_pay,
+        'currency':booking.currency,
+        }
+        message = get_template('bookingsell1.html').render(ctx)
+        msg = EmailMessage(
+            'Booking Confirmation',
+            message,
+            EMAIL_HOST_USER,
+            [room.seller_id],
         )
         msg.content_subtype = "html"  # Main content is now text/html
         msg.send()
@@ -548,7 +592,7 @@ class apartment_payment(viewsets.ViewSet):
             room.booked = True
             room.bookedtill = list1[0]
 
-         ctx = {
+        ctx = {
         'user': request.user.first_name+' '+request.user.last_name,
         'id':booking.booking_id,
         'start':booking.booked_from,
@@ -564,10 +608,32 @@ class apartment_payment(viewsets.ViewSet):
             'Booking Confirmation',
             message,
             EMAIL_HOST_USER,
-            [request.user,room.seller_id],
+            [request.user],
         )
         msg.content_subtype = "html"  # Main content is now text/html
         msg.send()
+
+        ctx = {
+        'user': booking.seller_id.first_name+' '+booking.seller_id.last_name,
+        'id':booking.booking_id,
+        'start':booking.booked_from,
+        'end':booking.booked_till,
+        'duration':booking.duration,
+        'name':booking.apartment_name,
+        
+        'money':booking.seller_pay,
+        'currency':booking.currency,
+        }
+        message = get_template('bookingsell1.html').render(ctx)
+        msg = EmailMessage(
+            'Booking Confirmation',
+            message,
+            EMAIL_HOST_USER,
+            [room.seller_id],
+        )
+        msg.content_subtype = "html"  # Main content is now text/html
+        msg.send()
+
 
         room.save()
 

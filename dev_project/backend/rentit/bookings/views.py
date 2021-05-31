@@ -30,9 +30,14 @@ from django.views.decorators.csrf import csrf_protect
 from django.utils.decorators import method_decorator
 
 utc=pytz.UTC
+from rentit.settings import EMAIL_HOST_USER
 
 import razorpay
 import environ
+
+from django.template import Context
+from django.template.loader import render_to_string, get_template
+from django.core.mail import EmailMessage
 
 
 env = environ.Env()
@@ -468,9 +473,6 @@ class room_booking(viewsets.ViewSet):
             booking.refund_amount = refund_price
             booking.cancelled_date = datetime.datetime.now()
 
-            subject = 'Booking cancelled'
-            message = 'Booking has been successfull cancelled.'
-            email_send(subject,message,request.user,room.seller_id)
             booking.save()
 
             
@@ -554,6 +556,49 @@ class room_booking(viewsets.ViewSet):
                     room.book10=list1[9]
 
             room.save()
+
+            ctx = {
+            'user': request.user.first_name+' '+request.user.last_name,
+            'id':booking.booking_id,
+            'start':booking.booked_from,
+            'end':booking.booked_till,
+            'duration':booking.duration,
+            'name':booking.room_name,
+            'capacity':booking.capacity,
+            'money':booking.refund_amount,
+            'currency':booking.currency,
+            }
+            message = get_template('booking_cancel.html').render(ctx)
+            msg = EmailMessage(
+                'Booking Cancellation',
+                message,
+                EMAIL_HOST_USER,
+                [request.user],
+            )
+            msg.content_subtype = "html"  # Main content is now text/html
+            msg.send()
+
+            ctx = {
+            'user': booking.seller_id.first_name+' '+booking.seller_id.last_name,
+        
+            'id':booking.booking_id,
+            'start':booking.booked_from,
+            'end':booking.booked_till,
+            'duration':booking.duration,
+            'name':booking.room_name,
+            'capacity':booking.capacity,
+            'money':booking.seller_pay,
+            'currency':booking.currency,
+            }
+            message = get_template('bookingsell_cancel.html').render(ctx)
+            msg = EmailMessage(
+                'Booking Cancellation',
+                message,
+                EMAIL_HOST_USER,
+                [room.seller_id],
+            )
+            msg.content_subtype = "html"  # Main content is now text/html
+            msg.send()
 
             return Response('cancelled',status = status.HTTP_202_ACCEPTED)
         except:
@@ -967,6 +1012,8 @@ class shop_booking(viewsets.ViewSet):
     
     def destroy(self,request,pk=None):
 
+        
+
         try:
 
 
@@ -1052,9 +1099,7 @@ class shop_booking(viewsets.ViewSet):
             booking.refund_amount = refund_price
             booking.cancelled_date = datetime.datetime.now()
 
-            subject = 'Booking cancelled'
-            message = 'Booking has been successfull cancelled.'
-            email_send(subject,message,request.user,room.seller_id)
+           
             booking.save()
 
             
@@ -1083,6 +1128,49 @@ class shop_booking(viewsets.ViewSet):
                 room.bookedtill = list1[0]
 
             room.save()
+
+            ctx = {
+            'user': request.user.first_name+' '+request.user.last_name,
+            'id':booking.booking_id,
+            'start':booking.booked_from,
+            'end':booking.booked_till,
+            'duration':booking.duration,
+            'name':booking.shop_name,
+            
+            'money':booking.refund_amount,
+            'currency':booking.currency,
+            }
+            message = get_template('booking_cancel1.html').render(ctx)
+            msg = EmailMessage(
+                'Booking Cancellation',
+                message,
+                EMAIL_HOST_USER,
+                [request.user],
+            )
+            msg.content_subtype = "html"  # Main content is now text/html
+            msg.send()
+
+            ctx = {
+            'user': booking.seller_id.first_name+' '+booking.seller_id.last_name,
+        
+            'id':booking.booking_id,
+            'start':booking.booked_from,
+            'end':booking.booked_till,
+            'duration':booking.duration,
+            'name':booking.shop_name,
+            
+            'money':booking.seller_pay,
+            'currency':booking.currency,
+            }
+            message = get_template('bookingsell_cancel1.html').render(ctx)
+            msg = EmailMessage(
+                'Booking Cancellation',
+                message,
+                EMAIL_HOST_USER,
+                [room.seller_id],
+            )
+            msg.content_subtype = "html"  # Main content is now text/html
+            msg.send()
 
             return Response('cancelled',status = status.HTTP_202_ACCEPTED)
         except:
@@ -1547,9 +1635,7 @@ class apartment_booking(viewsets.ViewSet):
             booking.refund_amount = refund_price
             booking.cancelled_date = datetime.datetime.now()
 
-            subject = 'Booking cancelled'
-            message = 'Booking has been successfull cancelled.'
-            email_send(subject,message,request.user,room.seller_id)
+           
             booking.save()
 
             
@@ -1578,6 +1664,49 @@ class apartment_booking(viewsets.ViewSet):
                 room.bookedtill = list1[0]
 
             room.save()
+
+            ctx = {
+            'user': request.user.first_name+' '+request.user.last_name,
+            'id':booking.booking_id,
+            'start':booking.booked_from,
+            'end':booking.booked_till,
+            'duration':booking.duration,
+            'name':booking.apartment_name,
+            
+            'money':booking.refund_amount,
+            'currency':booking.currency,
+            }
+            message = get_template('booking_cancel1.html').render(ctx)
+            msg = EmailMessage(
+                'Booking Cancellation',
+                message,
+                EMAIL_HOST_USER,
+                [request.user],
+            )
+            msg.content_subtype = "html"  # Main content is now text/html
+            msg.send()
+
+            ctx = {
+            'user': booking.seller_id.first_name+' '+booking.seller_id.last_name,
+        
+            'id':booking.booking_id,
+            'start':booking.booked_from,
+            'end':booking.booked_till,
+            'duration':booking.duration,
+            'name':booking.apartment_name,
+            
+            'money':booking.seller_pay,
+            'currency':booking.currency,
+            }
+            message = get_template('bookingsell_cancel1.html').render(ctx)
+            msg = EmailMessage(
+                'Booking Cancellation',
+                message,
+                EMAIL_HOST_USER,
+                [room.seller_id],
+            )
+            msg.content_subtype = "html"  # Main content is now text/html
+            msg.send()
 
             return Response('cancelled',status = status.HTTP_202_ACCEPTED)
         except:

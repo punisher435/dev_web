@@ -84,6 +84,10 @@ class give_reviews(viewsets.ViewSet):
 
                         room.avg_rating = float(total_rate)/float(total)
                         room.reviews = total
+                        
+                        if(review.rating>1):
+
+                            room.trust_points = room.trust_points + (review.rating*int(booking.duration))
 
                         room.save()
 
@@ -123,6 +127,10 @@ class give_reviews(viewsets.ViewSet):
                         room.avg_rating = float(total_rate)/float(total)
                         room.reviews = total
 
+                        if(review.rating>1):
+    
+                            room.trust_points = room.trust_points + (review.rating*int(booking.duration))
+
                         room.save()
 
 
@@ -160,6 +168,10 @@ class give_reviews(viewsets.ViewSet):
 
                         room.avg_rating = float(total_rate)/float(total)
                         room.reviews = total
+
+                        if(review.rating>1):
+    
+                            room.trust_points = room.trust_points + (review.rating*int(booking.duration))
 
                         room.save()
 

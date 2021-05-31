@@ -198,6 +198,20 @@ class my_room_viewset(viewsets.ViewSet):
 
                 room.save()
 
+                ctx = {
+                'user': request.user.first_name+' '+request.user.last_name,
+               
+                }
+                message = get_template('roomadd.html').render(ctx)
+                msg = EmailMessage(
+                    'Room added',
+                    message,
+                    EMAIL_HOST_USER,
+                    [request.user],
+                )
+                msg.content_subtype = "html"  # Main content is now text/html
+                msg.send()
+
                 return Response('success',status=status.HTTP_200_OK)
             else:
                 return Response('error',status=status.HTTP_400_BAD_REQUEST)
@@ -534,6 +548,20 @@ class my_shop_viewset(viewsets.ViewSet):
 
                 shop.save()
 
+                ctx = {
+                'user': request.user.first_name+' '+request.user.last_name,
+               
+                }
+                message = get_template('roomadd.html').render(ctx)
+                msg = EmailMessage(
+                    'Shop added',
+                    message,
+                    EMAIL_HOST_USER,
+                    [request.user],
+                )
+                msg.content_subtype = "html"  # Main content is now text/html
+                msg.send()
+
                 print('success')
                 return Response('success',status=status.HTTP_200_OK)
             else:
@@ -850,6 +878,20 @@ class my_apartment_viewset(viewsets.ViewSet):
                 apartment_type=request.data["apartment_type"],sofa=bool(request.data["sofa"]=='true'),gender=request.data["gender"])
 
                 room.save()
+
+                ctx = {
+                'user': request.user.first_name+' '+request.user.last_name,
+               
+                }
+                message = get_template('roomadd.html').render(ctx)
+                msg = EmailMessage(
+                    'House added',
+                    message,
+                    EMAIL_HOST_USER,
+                    [request.user],
+                )
+                msg.content_subtype = "html"  # Main content is now text/html
+                msg.send()
 
                 return Response('success',status=status.HTTP_200_OK)
             else:
