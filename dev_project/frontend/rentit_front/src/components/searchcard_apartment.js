@@ -473,7 +473,7 @@ function NestedGrid({ mypost,setmypost,openmycard,setmycard,filters,setfilters,p
         </Typography>
         <Typography variant="body1" component="h2">
         <Icon color="error"><RoomIcon /></Icon>
-        {post.location},{post.city},{post.district},{post.state},{post.country}
+        {post.location},{post.city},{post.district},{post.state},{post.country},{post.pincode}
         </Typography>
         <Typography variant="body2" component="h2">
             -   near {post.landmark}

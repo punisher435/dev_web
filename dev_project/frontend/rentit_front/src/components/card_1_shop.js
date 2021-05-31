@@ -101,7 +101,7 @@ function RecipeReviewCard({isAuthenticated,post,setOpen1,setOpen2,wishlistitems,
      <Grid item xs={11}>
             <Typography variant="body1" component="h2">
               <Box mt={1}>
-              {post.location},{post.city},{post.district},{post.state},{post.country}
+              {post.location},{post.city},{post.district},{post.state},{post.country},{post.pincode}
           {/* Anand Plaza, First, University Rd, A Block, Udaipur, Rajasthan 313001 */}
               </Box>
         </Typography>
