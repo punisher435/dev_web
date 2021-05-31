@@ -30,7 +30,7 @@ from django.views.decorators.csrf import csrf_protect
 from django.utils.decorators import method_decorator
 
 utc=pytz.UTC
-from rentit.settings import EMAIL_HOST_USER
+
 
 import razorpay
 import environ
@@ -38,6 +38,7 @@ import environ
 from django.template import Context
 from django.template.loader import render_to_string, get_template
 from django.core.mail import EmailMessage
+from rentit.settings import EMAIL_HOST_USER
 
 
 env = environ.Env()

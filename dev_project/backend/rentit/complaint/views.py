@@ -29,6 +29,12 @@ from products.models import rooms,shops,apartments
 from email1 import email_send
 from bookings.models import roomBookings,shopBookings,apartmentBookings
 
+from django.template import Context
+from django.template.loader import render_to_string, get_template
+from django.core.mail import EmailMessage
+from rentit.settings import EMAIL_HOST_USER
+
+
 
 
 
@@ -125,9 +131,19 @@ class room_complaint(viewsets.ViewSet):
                    
 
 
-                    subject = 'Complaint Issued'
-                    message = 'A complaint has been issued for the room. You can check the details in your dashboard.'
-                    email_send(subject,message,request.user.email)
+                    ctx = {
+                    'user': request.user.first_name+' '+request.user.last_name,
+                    'cid':complaint.complaint_id,
+                    }
+                    message = get_template('complaint.html').render(ctx)
+                    msg = EmailMessage(
+                        'Complaint issued',
+                        message,
+                        EMAIL_HOST_USER,
+                        [request.user],
+                    )
+                    msg.content_subtype = "html"  # Main content is now text/html
+                    msg.send()
 
                     serializer = room_complaints_serializer(complaint,context={'request':request})
 
@@ -204,9 +220,19 @@ class room_complaint(viewsets.ViewSet):
                 
 
 
-                subject = 'Complaint Closed'
-                message = 'The complaint has been closed for the room. You can check the details in your dashboard.'
-                email_send(subject,message,request.user)
+                ctx = {
+                'user': request.user.first_name+' '+request.user.last_name,
+                'cid':complaint.complaint_id,
+                }
+                message = get_template('complaintclosed.html').render(ctx)
+                msg = EmailMessage(
+                    'Complaint closed',
+                    message,
+                    EMAIL_HOST_USER,
+                    [request.user],
+                )
+                msg.content_subtype = "html"  # Main content is now text/html
+                msg.send()
             
       
 
@@ -317,9 +343,19 @@ class shop_complaint(viewsets.ViewSet):
                    
 
 
-                    subject = 'Complaint Issued'
-                    message = 'A complaint has been issued for the shop. You can check the details in your dashboard.'
-                    email_send(subject,message,request.user.email)
+                    ctx = {
+                    'user': request.user.first_name+' '+request.user.last_name,
+                    'cid':complaint.complaint_id,
+                    }
+                    message = get_template('complaint.html').render(ctx)
+                    msg = EmailMessage(
+                        'Complaint issued',
+                        message,
+                        EMAIL_HOST_USER,
+                        [request.user],
+                    )
+                    msg.content_subtype = "html"  # Main content is now text/html
+                    msg.send()
 
                     serializer = shop_complaints_serializer(complaint,context={'request':request})
 
@@ -396,9 +432,19 @@ class shop_complaint(viewsets.ViewSet):
                 
 
 
-                subject = 'Complaint Closed'
-                message = 'The complaint has been closed for the shop. You can check the details in your dashboard.'
-                email_send(subject,message,request.user)
+                ctx = {
+                'user': request.user.first_name+' '+request.user.last_name,
+                'cid':complaint.complaint_id,
+                }
+                message = get_template('complaintclosed.html').render(ctx)
+                msg = EmailMessage(
+                    'Complaint closed',
+                    message,
+                    EMAIL_HOST_USER,
+                    [request.user],
+                )
+                msg.content_subtype = "html"  # Main content is now text/html
+                msg.send()
             
       
 
@@ -509,9 +555,19 @@ class apartment_complaint(viewsets.ViewSet):
                    
 
 
-                    subject = 'Complaint Issued'
-                    message = 'A complaint has been issued for the apartment. You can check the details in your dashboard.'
-                    email_send(subject,message,request.user.email)
+                    ctx = {
+                    'user': request.user.first_name+' '+request.user.last_name,
+                    'cid':complaint.complaint_id,
+                    }
+                    message = get_template('complaint.html').render(ctx)
+                    msg = EmailMessage(
+                        'Complaint issued',
+                        message,
+                        EMAIL_HOST_USER,
+                        [request.user],
+                    )
+                    msg.content_subtype = "html"  # Main content is now text/html
+                    msg.send()
 
                     serializer = apartment_complaints_serializer(complaint,context={'request':request})
 
@@ -588,9 +644,19 @@ class apartment_complaint(viewsets.ViewSet):
                 
 
 
-                subject = 'Complaint Closed'
-                message = 'The complaint has been closed for the apartment. You can check the details in your dashboard.'
-                email_send(subject,message,request.user)
+                ctx = {
+                'user': request.user.first_name+' '+request.user.last_name,
+                'cid':complaint.complaint_id,
+                }
+                message = get_template('complaintclosed.html').render(ctx)
+                msg = EmailMessage(
+                    'Complaint closed',
+                    message,
+                    EMAIL_HOST_USER,
+                    [request.user],
+                )
+                msg.content_subtype = "html"  # Main content is now text/html
+                msg.send()
             
       
 

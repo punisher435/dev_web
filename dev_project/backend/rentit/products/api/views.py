@@ -24,6 +24,11 @@ from products.models import minmax_room,minmax_shop,minmax_apartment
 from .serializers import minmax_room_serializer,minmax_shop_serializer,minmax_apartment_serializer
 from user.models import seller_bank_details
 
+from django.template import Context
+from django.template.loader import render_to_string, get_template
+from django.core.mail import EmailMessage
+from rentit.settings import EMAIL_HOST_USER
+
 
 #pagination
 
