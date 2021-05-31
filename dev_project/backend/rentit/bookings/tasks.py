@@ -9,7 +9,10 @@ from email1 import email_send
 
 import datetime
 import pytz
-
+from django.template import Context
+from django.template.loader import render_to_string, get_template
+from django.core.mail import EmailMessage
+from rentit.settings import EMAIL_HOST_USER
 utc=pytz.UTC
 
 
@@ -28,10 +31,42 @@ def book_end():
 
             if booking.booked_till<datetime.date.today():
                 booking.ended=True
-                subject = 'Booking ended'
-                message = 'Booking has ended.'
-                email_send(subject,message,booking.customer_id,booking.seller_id)
+                ctx = {
+                'user': booking.customer_id.first_name+' '+booking.customer_id.last_name,
+                'id':booking.booking_id,
+                
+               
+                }
+                message = get_template('bookingend.html').render(ctx)
+                msg = EmailMessage(
+                    'Booking Ended',
+                    message,
+                    EMAIL_HOST_USER,
+                    [booking.customer_id.email],
+                )
+                msg.content_subtype = "html"  # Main content is now text/html
+                msg.send()
                 booking.save()
+
+        for booking in queryset:
+        
+            if booking.booked_till>=datetime.date.today() && booking.booked_till<=datetime.date.today()+datetime.timedelta(days=5)):
+                
+                ctx = {
+                'user': booking.customer_id.first_name+' '+booking.customer_id.last_name,
+                'id':booking.booking_id,
+                
+               
+                }
+                message = get_template('bookingendsoon.html').render(ctx)
+                msg = EmailMessage(
+                    'Booking ending soon',
+                    message,
+                    EMAIL_HOST_USER,
+                    [booking.customer_id.email],
+                )
+                msg.content_subtype = "html"  # Main content is now text/html
+                msg.send()
 
         queryset1 = rooms.objects.all()
 
@@ -144,10 +179,44 @@ def book_end_shop():
 
             if booking.booked_till<datetime.date.today():
                 booking.ended=True
-                subject = 'Booking ended'
-                message = 'Booking has ended.'
-                email_send(subject,message,booking.customer_id,booking.seller_id)
+                ctx = {
+                'user': booking.customer_id.first_name+' '+booking.customer_id.last_name,
+                'id':booking.booking_id,
+                
+               
+                }
+                message = get_template('bookingend.html').render(ctx)
+                msg = EmailMessage(
+                    'Booking Ended',
+                    message,
+                    EMAIL_HOST_USER,
+                    [booking.customer_id.email],
+                )
+                msg.content_subtype = "html"  # Main content is now text/html
+                msg.send()
                 booking.save()
+
+
+        for booking in queryset:
+    
+            if booking.booked_till>=datetime.date.today() && booking.booked_till<=datetime.date.today()+datetime.timedelta(days=5)):
+                
+                ctx = {
+                'user': booking.customer_id.first_name+' '+booking.customer_id.last_name,
+                'id':booking.booking_id,
+                
+               
+                }
+                message = get_template('bookingendsoon.html').render(ctx)
+                msg = EmailMessage(
+                    'Booking ending soon',
+                    message,
+                    EMAIL_HOST_USER,
+                    [booking.customer_id.email],
+                )
+                msg.content_subtype = "html"  # Main content is now text/html
+                msg.send()
+              
 
         queryset1 = shops.objects.all()
 
@@ -201,10 +270,42 @@ def book_end_apartment():
 
             if booking.booked_till<datetime.date.today():
                 booking.ended=True
-                subject = 'Booking ended'
-                message = 'Booking has ended.'
-                email_send(subject,message,booking.customer_id,booking.seller_id)
+                ctx = {
+                'user': booking.customer_id.first_name+' '+booking.customer_id.last_name,
+                'id':booking.booking_id,
+                
+               
+                }
+                message = get_template('bookingend.html').render(ctx)
+                msg = EmailMessage(
+                    'Booking Ended',
+                    message,
+                    EMAIL_HOST_USER,
+                    [booking.customer_id.email],
+                )
+                msg.content_subtype = "html"  # Main content is now text/html
+                msg.send()
                 booking.save()
+
+        for booking in queryset:
+        
+            if booking.booked_till>=datetime.date.today() && booking.booked_till<=datetime.date.today()+datetime.timedelta(days=5)):
+                
+                ctx = {
+                'user': booking.customer_id.first_name+' '+booking.customer_id.last_name,
+                'id':booking.booking_id,
+                
+               
+                }
+                message = get_template('bookingendsoon.html').render(ctx)
+                msg = EmailMessage(
+                    'Booking ending soon',
+                    message,
+                    EMAIL_HOST_USER,
+                    [booking.customer_id.email],
+                )
+                msg.content_subtype = "html"  # Main content is now text/html
+                msg.send()
 
         queryset1 = apartments.objects.all()
 
