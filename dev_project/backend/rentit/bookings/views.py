@@ -381,6 +381,8 @@ class room_booking(viewsets.ViewSet):
     
     def destroy(self,request,pk=None):
 
+        
+
         try:
 
 
@@ -408,7 +410,7 @@ class room_booking(viewsets.ViewSet):
 
             refund_price = 0
 
-            if utc.localize(datetime.datetime.now())<=booking.created_at+datetime.timedelta(days=7) and datetime.date.today()>booking.booked_from:
+            if utc.localize(datetime.datetime.now())<=booking.created_at+datetime.timedelta(days=7) and datetime.date.today()>booking.booked_from+datetime.timedelta(days=2):
                 yo1=int(booking.price_to_be_paid)
                 yo1=yo1*100 
                 yo1=yo1/103.0
@@ -439,7 +441,7 @@ class room_booking(viewsets.ViewSet):
                
                 
                 seller = get_object_or_404(seller_bank_details.objects.all(),pk=room.seller_id)
-                seller.total_due_payment = seller.total_due_payment-seller_pay
+                seller.total_due_payment = seller.total_due_payment-booking.seller_pay
                 seller.save()
                 booking.seller_pay=0
 
@@ -992,7 +994,7 @@ class shop_booking(viewsets.ViewSet):
 
             refund_price = 0
 
-            if utc.localize(datetime.datetime.now())<=booking.created_at+datetime.timedelta(days=7) and datetime.date.today()>booking.booked_from:
+            if utc.localize(datetime.datetime.now())<=booking.created_at+datetime.timedelta(days=7) and datetime.date.today()>booking.booked_from+datetime.timedelta(days=2):
                 yo1=int(booking.price_to_be_paid)
                 yo1=yo1*100 
                 yo1=yo1/103.0
@@ -1023,7 +1025,7 @@ class shop_booking(viewsets.ViewSet):
                
                 
                 seller = get_object_or_404(seller_bank_details.objects.all(),pk=room.seller_id)
-                seller.total_due_payment = seller.total_due_payment-seller_pay
+                seller.total_due_payment = seller.total_due_payment-booking.seller_pay
                 seller.save()
                 booking.seller_pay=0
 
@@ -1457,8 +1459,10 @@ class apartment_booking(viewsets.ViewSet):
         
     
     def destroy(self,request,pk=None):
+        
 
         try:
+            
 
 
             queryset = apartmentBookings.objects.all()
@@ -1485,7 +1489,7 @@ class apartment_booking(viewsets.ViewSet):
 
             refund_price = 0
 
-            if utc.localize(datetime.datetime.now())<=booking.created_at+datetime.timedelta(days=7) and datetime.date.today()>booking.booked_from:
+            if utc.localize(datetime.datetime.now())<=booking.created_at+datetime.timedelta(days=7) and datetime.date.today()>booking.booked_from+datetime.timedelta(days=2):
                 yo1=int(booking.price_to_be_paid)
                 yo1=yo1*100 
                 yo1=yo1/103.0
@@ -1516,7 +1520,7 @@ class apartment_booking(viewsets.ViewSet):
                
                 
                 seller = get_object_or_404(seller_bank_details.objects.all(),pk=room.seller_id)
-                seller.total_due_payment = seller.total_due_payment-seller_pay
+                seller.total_due_payment = seller.total_due_payment-booking.seller_pay
                 seller.save()
                 booking.seller_pay=0
 
