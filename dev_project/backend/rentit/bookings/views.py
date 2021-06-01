@@ -822,8 +822,8 @@ class room_booking(viewsets.ViewSet):
 
                     param_dict = {
                         'MID': PAYTM_MERCHANT_ID,
-                        'ORDER_ID': str(booking.booking_id),
-                        'TXN_AMOUNT': str(booking.price_to_be_paid),
+                        'ORDER_ID': str(booking_new.booking_id),
+                        'TXN_AMOUNT': str(booking_new.price_to_be_paid),
                         'CUST_ID': request.user.email,
                         'INDUSTRY_TYPE_ID': PAYTM_INDUSTRY_TYPE_ID,
                         'WEBSITE': PAYTM_WEBSITE,
@@ -1374,8 +1374,8 @@ class shop_booking(viewsets.ViewSet):
 
                     param_dict = {
                         'MID': PAYTM_MERCHANT_ID,
-                        'ORDER_ID': str(booking.booking_id),
-                        'TXN_AMOUNT': str(booking.price_to_be_paid),
+                        'ORDER_ID': str(booking_new.booking_id),
+                        'TXN_AMOUNT': str(booking_new.price_to_be_paid),
                         'CUST_ID': request.user.email,
                         'INDUSTRY_TYPE_ID': PAYTM_INDUSTRY_TYPE_ID,
                         'WEBSITE': PAYTM_WEBSITE,
@@ -1953,8 +1953,8 @@ class apartment_booking(viewsets.ViewSet):
 
                     param_dict = {
                         'MID': PAYTM_MERCHANT_ID,
-                        'ORDER_ID': str(booking.booking_id),
-                        'TXN_AMOUNT': str(booking.price_to_be_paid),
+                        'ORDER_ID': str(booking_new.booking_id),
+                        'TXN_AMOUNT': str(booking_new.price_to_be_paid),
                         'CUST_ID': request.user.email,
                         'INDUSTRY_TYPE_ID': PAYTM_INDUSTRY_TYPE_ID,
                         'WEBSITE': PAYTM_WEBSITE,

@@ -275,53 +275,59 @@ function Bookingextend(props) {
     const classes = useStyles();
 
 
-    const loadScript = () => {
-      const script = document.createElement("script");
-      script.src = "https://checkout.razorpay.com/v1/checkout.js";
-      document.body.appendChild(script);
-    };
   
-    const handlePaymentSuccess = async (response) => {
-      try {
-     
-        let bodyData = new FormData();
+    const [newload,setnewload] = React.useState(false);
   
-        // we will send the response we've got from razorpay to the backend to validate the payment
-        bodyData.append("response", JSON.stringify(response));
-  
-        await axios({
-          url: `${process.env.REACT_APP_API_URL}/sourcwjndqndoni3290902uruwhi2/shop/book/payment/1/`,
-          method: "PUT",
-          data: bodyData,
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            'Authorization': `JWT ${localStorage.getItem('access')}`,
-          },
-        })
-          .then((res) => {
-            setcancelled(false);
-            setredirect(true)
-            
-          })
-          .catch((err) => {
-            setcancelled(false);
-            seterror(true);
-            setredirect(true)
-          });
-      } catch (error) {
-        seterror(true);
-      }
-           
-      
-    };
 
+    const handlePaymentSuccess = async (res) => {
+      try {
+      
+        let keyArr = Object.keys(res);
+        let valArr = Object.values(res);
+    
+        // when we start the payment verification we will hide our Product form
+        document.getElementById("paymentFrm").style.display = "none";
+        setnewload(true);
+    
+        // Lets create a form by DOM manipulation
+        // display messages as soon as payment starts
+       
+    
+        //create a form that will send necessary details to the paytm
+        let frm = document.createElement("form");
+        frm.action = "https://securegw-stage.paytm.in/order/process/";
+        frm.method = "post";
+        frm.name = "paytmForm";
+    
+        // we have to pass all the credentials that we've got from param_dict
+        keyArr.map((k, i) => {
+          // create an input element
+          let inp = document.createElement("input");
+          inp.key = i;
+          inp.type = "hidden";
+          // input tag's name should be a key of param_dict
+          inp.name = k;
+          // input tag's value should be a value associated with the key that we are passing in inp.name
+          inp.value = valArr[i];
+          // append those all input tags in the form tag
+          frm.appendChild(inp);
+        });
+    
+        // append all the above tags into the body tag
+      
+        document.body.appendChild(frm);
+        // finally submit that form
+        frm.submit();
+      } catch (error) {
+      
+      }
+    };
 
 
     const handleclick1 = async (e) => {
       e.preventDefault();
 
-      const res = await loadScript();
+     
       var data = '';
 
       if(bookdetails.coupon=='')
@@ -349,36 +355,9 @@ function Bookingextend(props) {
 
         data = res;
         
-        var options = {
-          key_id: process.env.REACT_APP_RAZORPAY_API_KEY, // in react your environment variable must start with REACT_APP_
-          key_secret: process.env.REACT_APP_RAZORPAY_KEY_SECRET,
-          amount: data.data.price_to_be_paid,
-          currency: bookdetails.currency.slice(2,),
-          name: "Org. Name",
-          description: "Test teansaction",
-          image: "", // add image url
-          order_id: data.data.payment_id,
-          handler: function (response) {
-            // we will handle success by calling handlePaymentSuccess method and
-            // will pass the response that we've got from razorpay
-            handlePaymentSuccess(response);
-          },
-          prefill: {
-            name: bookdetails.firstname + " " + bookdetails.lastname,
-            email:props.profile.email ,
-            contact: bookdetails.mobile,
-          },
-          notes: {
-            address: "Razorpay Corporate Office",
-          },
-          theme: {
-            color: "#528FF0",
-          },
-        };
-        
-    
-        var rzp1 = new window.Razorpay(options);
-        rzp1.open();
+        if (res) {
+          handlePaymentSuccess(res.data.param_dict);
+        }
       
       }
         catch{
@@ -453,8 +432,33 @@ function Bookingextend(props) {
     
     
     return (
-        <div>
-
+      <div>
+      {
+        newload ? <div>
+          <Grid
+  container
+  direction="column"
+  justify="center"
+  alignItems="center"
+  >
+          
+          <Load1 loading={newload}/>
+          <br />
+          <Typography variant="h5">
+          Redirecting you to the payment gateway....
+          </Typography>
+  
+          <br />
+  
+          <Typography variant="h5">
+          Please do not refresh your page....
+          </Typography>
+          </Grid>
+        
+        </div> : null
+      }
+   
+    <div id="paymentFrm" >
 <SuccessSnackbars openme={openme} setopenme={setopenme} message={'Coupon applied successfully!'}/>
       <ErrorSnackbars openme={openme1} setopenme={setopenme1} message={'Coupon not applicable!'}/>
           {
@@ -605,7 +609,7 @@ function Bookingextend(props) {
             </Grid>
             </div>
             </main>
-        </div>
+        </div></div>
     )
     }
     else{

@@ -15,6 +15,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { deepPurple } from '@material-ui/core/colors';
+
 import { connect } from 'react-redux';
 
 import Avatar from '@material-ui/core/Avatar';
@@ -46,6 +47,10 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         
       },
+      purple: {
+        color: theme.palette.getContrastText(deepPurple[500]),
+        backgroundColor: deepPurple[500],
+      },
   root: {
     display: 'flex',
   },
@@ -68,10 +73,6 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('sm')]: {
       display: 'none',
     },
-  },
-  purple: {
-    color: theme.palette.getContrastText(deepPurple[500]),
-    backgroundColor: deepPurple[500],
   },
   menuButton1: {
     [theme.breakpoints.up('sm')]: {
@@ -266,8 +267,10 @@ function Dashboarddrawer(props) {
   );
 
   const container = window !== undefined ? () => window().document.body : undefined;
-
+if(props.profile)
+{
   return (
+    
     <div className={classes.root}>
       <CssBaseline />
       <AppBar position="fixed" className="navbarclass">
@@ -298,7 +301,7 @@ function Dashboarddrawer(props) {
             >
       
 
-              {
+      {
                 props.profile ? <Avatar className={classes.purple} alt={props.profile.first_name.toUpperCase()} src={pic} /> : <Avatar className={classes.purple}><AccountCircle /></Avatar>
               }
               
@@ -344,7 +347,10 @@ function Dashboarddrawer(props) {
 
       </main> */}
     </div>
-  );
+  );}
+  else{
+    return <div></div>
+  }
 }
 
 

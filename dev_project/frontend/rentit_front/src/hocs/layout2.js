@@ -267,8 +267,10 @@ function Dashboarddrawer(props) {
   );
 
   const container = window !== undefined ? () => window().document.body : undefined;
-
+if(props.profile)
+{
   return (
+    
     <div className={classes.root}>
       <CssBaseline />
       <AppBar position="fixed" className="navbarclass">
@@ -345,7 +347,10 @@ function Dashboarddrawer(props) {
 
       </main> */}
     </div>
-  );
+  );}
+  else{
+    return <div></div>
+  }
 }
 
 
