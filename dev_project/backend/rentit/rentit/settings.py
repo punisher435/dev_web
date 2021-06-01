@@ -144,9 +144,7 @@ EMAIL_HOST_PASSWORD = 'emzmpswkzjlhcdjf'
 EMAIL_USE_TLS = True
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticatedOrReadOnly'
-    ],
+   
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
@@ -284,3 +282,9 @@ CELERY_BEAT_SCHEDULE = {
     },
 }
 
+
+PAYTM_MERCHANT_ID = 'wQJwHy46659019071181'
+PAYTM_SECRET_KEY = 'tJMnB2wC5wIH291H'
+PAYTM_WEBSITE = 'WEBSTAGING'
+PAYTM_CHANNEL_ID = 'WEB'
+PAYTM_INDUSTRY_TYPE_ID = 'Retail'

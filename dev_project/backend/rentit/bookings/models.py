@@ -64,7 +64,7 @@ class roomBookings(models.Model):
     lunch = models.BooleanField()
     dinner = models.BooleanField()
     
-    payment_id = models.CharField(max_length=255)
+    payment_id = models.CharField(max_length=255,null=True,blank=True)
 
     currency=models.CharField(max_length=255)
     savings = models.IntegerField()

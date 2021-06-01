@@ -83,13 +83,13 @@ urlpatterns = [
 
     #bookings
     path('sourcehjbda983290whjba/',include('bookings.urls')),
-    path('sourcehdnaj2iu0qejwba9022qjadnba/',include('bookings.urls_manage')),
+    path('room/book/',include('bookings.urls_manage')),
 
     path('sourcehdawnajk289uadhq/',include('bookings.urls_shop_bookings')),
-    path('sourcwjndqndoni3290902uruwhi2/',include('bookings.urls_manage_shop')),
+    path('shop/book/',include('bookings.urls_manage_shop')),
 
     path('sourcensinejfcdajewcn29210/',include('bookings.urls_apartment_bookings')),
-    path('sourcefueiu320has82bzadh12naaaa2/',include('bookings.urls_manage_apartment')),
+    path('apartment/book/',include('bookings.urls_manage_apartment')),
 
     #reviews
     path('sourcebahsda292bidua92/',include('products.api.urls_give_reviews')),

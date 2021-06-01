@@ -41,6 +41,13 @@ from django.core.mail import EmailMessage
 from rentit.settings import EMAIL_HOST_USER
 
 
+from rentit.settings import PAYTM_MERCHANT_ID
+from rentit.settings import PAYTM_WEBSITE
+from rentit.settings import PAYTM_CHANNEL_ID
+from rentit.settings import PAYTM_INDUSTRY_TYPE_ID
+from rentit.settings import PAYTM_SECRET_KEY
+from . import Checksum 
+
 env = environ.Env()
 
 environ.Env.read_env()
@@ -189,6 +196,8 @@ class room_booking(viewsets.ViewSet):
     
     def create(self,request,format=None):
 
+             
+
         
 
 
@@ -328,9 +337,9 @@ class room_booking(viewsets.ViewSet):
 
                                         data['savings'] = data['savings']+coupon.off
 
-                                   
+                                    
                                     temp_coupon = coupon.coupoun_code
-                                  
+                                    
                 
                         except:
                             return Response('Coupon not applicable',status=status.HTTP_400_BAD_REQUEST)
@@ -351,7 +360,7 @@ class room_booking(viewsets.ViewSet):
                     
                     price=price+t11
 
-                    x = payment(price,room.currency[2:])
+                    
                     if data['alternate_mobile']=='':
                     
                         data['alternate_mobile']=None
@@ -359,7 +368,7 @@ class room_booking(viewsets.ViewSet):
                     
 
 
-                    booking = roomBookings(room_id=room,payment_id=x['id'],coupon=temp_coupon,room_name=room.title,customer_id=request.user,seller_id=room.seller_id,
+                    booking = roomBookings(room_id=room,coupon=temp_coupon,room_name=room.title,customer_id=request.user,seller_id=room.seller_id,
                         booked_from=book_date,booked_till=end_date,capacity=data['capacity'],duration=data['duration'],first_name=data['firstname'],last_name=data['lastname'],mobile=data['mobile'],alternate_mobile=data['alternate_mobile'],
                         country_code=data['country_code'],wifi=data['wifi'],house_TV=data['house_TV'],room_TV=data['room_TV'],house_refridgerator=data['house_refridgerator'],room_refridgerator=data['room_refridgerator'],
                         purified_water=data['purified_water'],geyser=data['geyser'],AC=data['AC'],cooler=data['cooler'],breakfast=data['breakfast'],lunch=data['lunch'],dinner=data['dinner'],currency=room.currency,
@@ -369,9 +378,25 @@ class room_booking(viewsets.ViewSet):
 
                     
 
-                    serializer = roomBookingsSerializer(booking)                       
+                    serializer = roomBookingsSerializer(booking)         
 
-                    return Response(serializer.data,status=status.HTTP_202_ACCEPTED)
+                    print('good')
+                    param_dict = {
+                        'MID': PAYTM_MERCHANT_ID,
+                        'ORDER_ID': str(booking.booking_id),
+                        'TXN_AMOUNT': str(booking.price_to_be_paid),
+                        'CUST_ID': request.user.email,
+                        'INDUSTRY_TYPE_ID': PAYTM_INDUSTRY_TYPE_ID,
+                        'WEBSITE': PAYTM_WEBSITE,
+                        'CHANNEL_ID': PAYTM_CHANNEL_ID,
+                        'CALLBACK_URL': 'http://127.0.0.1:8000/room/book/payment/',
+                        # this is the url of handlepayment function, paytm will send a POST request to the fuction associated with this CALLBACK_URL
+                    }
+
+                    # create new checksum (unique hashed string) using our merchant key with every paytm payment
+                    param_dict['CHECKSUMHASH'] = Checksum.generate_checksum(param_dict, PAYTM_SECRET_KEY)
+                    # send the dictionary with all the credentials to the frontend
+                    return Response({'param_dict': param_dict},status=status.HTTP_202_ACCEPTED)            
 
                     
                 else:
@@ -774,14 +799,14 @@ class room_booking(viewsets.ViewSet):
                    
                     price=price+t11
 
-                    x = payment(price,room.currency[2:])
+                   
                     if data['alternate_mobile']=='':
                         
                         data['alternate_mobile']=None
 
                     
 
-                    booking_new = roomBookings(room_id=room,payment_id=x['id'],extended_on=booking,is_extended=True,coupon=temp_coupon,room_name=room.title,customer_id=request.user,seller_id=room.seller_id,
+                    booking_new = roomBookings(room_id=room,extended_on=booking,is_extended=True,coupon=temp_coupon,room_name=room.title,customer_id=request.user,seller_id=room.seller_id,
                         booked_from=book_date,booked_till=end_date,capacity=data['capacity'],duration=data['duration'],first_name=data['firstname'],last_name=data['lastname'],mobile=data['mobile'],alternate_mobile=data['alternate_mobile'],
                         country_code=data['country_code'],wifi=data['wifi'],house_TV=data['house_TV'],room_TV=data['room_TV'],house_refridgerator=data['house_refridgerator'],room_refridgerator=data['room_refridgerator'],
                         purified_water=data['purified_water'],geyser=data['geyser'],AC=data['AC'],cooler=data['cooler'],breakfast=data['breakfast'],lunch=data['lunch'],dinner=data['dinner'],currency=room.currency,
@@ -795,7 +820,22 @@ class room_booking(viewsets.ViewSet):
 
                     serializer = roomBookingsSerializer(booking_new)                       
 
-                    return Response(serializer.data,status=status.HTTP_202_ACCEPTED)
+                    param_dict = {
+                        'MID': PAYTM_MERCHANT_ID,
+                        'ORDER_ID': str(booking.booking_id),
+                        'TXN_AMOUNT': str(booking.price_to_be_paid),
+                        'CUST_ID': request.user.email,
+                        'INDUSTRY_TYPE_ID': PAYTM_INDUSTRY_TYPE_ID,
+                        'WEBSITE': PAYTM_WEBSITE,
+                        'CHANNEL_ID': PAYTM_CHANNEL_ID,
+                        'CALLBACK_URL': 'http://127.0.0.1:8000/room/book/payment/',
+                        # this is the url of handlepayment function, paytm will send a POST request to the fuction associated with this CALLBACK_URL
+                    }
+
+                    # create new checksum (unique hashed string) using our merchant key with every paytm payment
+                    param_dict['CHECKSUMHASH'] = Checksum.generate_checksum(param_dict, PAYTM_SECRET_KEY)
+                    # send the dictionary with all the credentials to the frontend
+                    return Response({'param_dict': param_dict},status=status.HTTP_202_ACCEPTED) 
                 
                 else:
                     return Response('error',status=status.HTTP_400_BAD_REQUEST)
@@ -979,14 +1019,14 @@ class shop_booking(viewsets.ViewSet):
         
                     end_date = book_date + relativedelta(months=+data['duration'])  
 
-                    x = payment(price,room.currency[2:])
+                    
                     if data['alternate_mobile']=='':
                         
                         data['alternate_mobile']=None
 
                     
 
-                    booking = shopBookings(shop_id=room,payment_id=x['id'],coupon=temp_coupon,shop_name=room.title,customer_id=request.user,seller_id=room.seller_id,
+                    booking = shopBookings(shop_id=room,coupon=temp_coupon,shop_name=room.title,customer_id=request.user,seller_id=room.seller_id,
                     booked_from=book_date,booked_till=end_date,duration=data['duration'],first_name=data['firstname'],last_name=data['lastname'],mobile=data['mobile'],alternate_mobile=data['alternate_mobile'],
                     country_code=data['country_code'],wifi=data['wifi'],TV=data['TV'],
                     purified_water=data['purified_water'],AC=data['AC'],cooler=data['cooler'],currency=room.currency,
@@ -996,7 +1036,22 @@ class shop_booking(viewsets.ViewSet):
                     
                     serializer = shopBookingsSerializer(booking)
 
-                    return Response(serializer.data,status=status.HTTP_202_ACCEPTED)
+                    param_dict = {
+                        'MID': PAYTM_MERCHANT_ID,
+                        'ORDER_ID': str(booking.booking_id),
+                        'TXN_AMOUNT': str(booking.price_to_be_paid),
+                        'CUST_ID': request.user.email,
+                        'INDUSTRY_TYPE_ID': PAYTM_INDUSTRY_TYPE_ID,
+                        'WEBSITE': PAYTM_WEBSITE,
+                        'CHANNEL_ID': PAYTM_CHANNEL_ID,
+                        'CALLBACK_URL': 'http://127.0.0.1:8000/shop/book/payment/',
+                        # this is the url of handlepayment function, paytm will send a POST request to the fuction associated with this CALLBACK_URL
+                    }
+
+                    # create new checksum (unique hashed string) using our merchant key with every paytm payment
+                    param_dict['CHECKSUMHASH'] = Checksum.generate_checksum(param_dict, PAYTM_SECRET_KEY)
+                    # send the dictionary with all the credentials to the frontend
+                    return Response({'param_dict': param_dict},status=status.HTTP_202_ACCEPTED) 
 
                    
                 else:
@@ -1295,13 +1350,13 @@ class shop_booking(viewsets.ViewSet):
                   
                     price=price+t11
 
-                    x = payment(price,room.currency[2:])
+                   
                     if data['alternate_mobile']=='':
                         
                         data['alternate_mobile']=None
                     
 
-                    booking_new = shopBookings(shop_id=room,payment_id=x['id'],extended_on=booking,is_extended=True,coupon=temp_coupon,shop_name=room.title,customer_id=request.user,seller_id=room.seller_id,
+                    booking_new = shopBookings(shop_id=room,extended_on=booking,is_extended=True,coupon=temp_coupon,shop_name=room.title,customer_id=request.user,seller_id=room.seller_id,
                         booked_from=book_date,booked_till=end_date,duration=data['duration'],first_name=data['firstname'],last_name=data['lastname'],mobile=data['mobile'],alternate_mobile=data['alternate_mobile'],
                         country_code=data['country_code'],wifi=data['wifi'],TV=data['TV'],
                         purified_water=data['purified_water'],AC=data['AC'],cooler=data['cooler'],currency=room.currency,
@@ -1317,7 +1372,22 @@ class shop_booking(viewsets.ViewSet):
 
                     serializer = shopBookingsSerializer(booking_new)
 
-                    return Response(serializer.data,status=status.HTTP_202_ACCEPTED)
+                    param_dict = {
+                        'MID': PAYTM_MERCHANT_ID,
+                        'ORDER_ID': str(booking.booking_id),
+                        'TXN_AMOUNT': str(booking.price_to_be_paid),
+                        'CUST_ID': request.user.email,
+                        'INDUSTRY_TYPE_ID': PAYTM_INDUSTRY_TYPE_ID,
+                        'WEBSITE': PAYTM_WEBSITE,
+                        'CHANNEL_ID': PAYTM_CHANNEL_ID,
+                        'CALLBACK_URL': 'http://127.0.0.1:8000/shop/book/payment/',
+                        # this is the url of handlepayment function, paytm will send a POST request to the fuction associated with this CALLBACK_URL
+                    }
+
+                    # create new checksum (unique hashed string) using our merchant key with every paytm payment
+                    param_dict['CHECKSUMHASH'] = Checksum.generate_checksum(param_dict, PAYTM_SECRET_KEY)
+                    # send the dictionary with all the credentials to the frontend
+                    return Response({'param_dict': param_dict},status=status.HTTP_202_ACCEPTED) 
 
                    
                 else:
@@ -1515,13 +1585,13 @@ class apartment_booking(viewsets.ViewSet):
                    
                     price=price+t11
 
-                    x = payment(price,room.currency[2:])
+                    
                     if data['alternate_mobile']=='':
                         
                         data['alternate_mobile']=None
                     
 
-                    booking = apartmentBookings(apartment_id=room,payment_id=x['id'],coupon=temp_coupon,apartment_name=room.title,customer_id=request.user,seller_id=room.seller_id,
+                    booking = apartmentBookings(apartment_id=room,coupon=temp_coupon,apartment_name=room.title,customer_id=request.user,seller_id=room.seller_id,
                     booked_from=book_date,booked_till=end_date,duration=data['duration'],first_name=data['firstname'],last_name=data['lastname'],mobile=data['mobile'],alternate_mobile=data['alternate_mobile'],
                     country_code=data['country_code'],wifi=data['wifi'],TV=data['TV'],house_refridgerator=data['house_refridgerator'],geyser=data['geyser'],laundry=data['laundry'],
                     purified_water=data['purified_water'],AC=data['AC'],cooler=data['cooler'],currency=room.currency,
@@ -1531,7 +1601,24 @@ class apartment_booking(viewsets.ViewSet):
                     
                     serializer = apartmentBookingsSerializer(booking)
 
-                    return Response(serializer.data,status=status.HTTP_202_ACCEPTED)
+
+
+                    param_dict = {
+                        'MID': PAYTM_MERCHANT_ID,
+                        'ORDER_ID': str(booking.booking_id),
+                        'TXN_AMOUNT': str(booking.price_to_be_paid),
+                        'CUST_ID': request.user.email,
+                        'INDUSTRY_TYPE_ID': PAYTM_INDUSTRY_TYPE_ID,
+                        'WEBSITE': PAYTM_WEBSITE,
+                        'CHANNEL_ID': PAYTM_CHANNEL_ID,
+                        'CALLBACK_URL': 'http://127.0.0.1:8000/apartment/book/payment/',
+                        # this is the url of handlepayment function, paytm will send a POST request to the fuction associated with this CALLBACK_URL
+                    }
+
+                    # create new checksum (unique hashed string) using our merchant key with every paytm payment
+                    param_dict['CHECKSUMHASH'] = Checksum.generate_checksum(param_dict, PAYTM_SECRET_KEY)
+                    # send the dictionary with all the credentials to the frontend
+                    return Response({'param_dict': param_dict},status=status.HTTP_202_ACCEPTED) 
 
                    
                 else:
@@ -1846,9 +1933,9 @@ class apartment_booking(viewsets.ViewSet):
                  
                     price=price+t11
 
-                    x = payment(price,room.currency[2:])
+                   
 
-                    booking_new = apartmentBookings(apartment_id=room,payment_id=x['id'],extended_on=booking,is_extended=True,coupon=temp_coupon,apartment_name=room.title,customer_id=request.user,seller_id=room.seller_id,
+                    booking_new = apartmentBookings(apartment_id=room,extended_on=booking,is_extended=True,coupon=temp_coupon,apartment_name=room.title,customer_id=request.user,seller_id=room.seller_id,
                         booked_from=book_date,booked_till=end_date,duration=data['duration'],first_name=data['firstname'],last_name=data['lastname'],mobile=data['mobile'],alternate_mobile=data['alternate_mobile'],
                         country_code=data['country_code'],wifi=data['wifi'],TV=data['TV'],house_refridgerator=data['house_refridgerator'],geyser=data['geyser'],laundry=data['laundry'],
                         purified_water=data['purified_water'],AC=data['AC'],cooler=data['cooler'],currency=room.currency,
@@ -1864,7 +1951,22 @@ class apartment_booking(viewsets.ViewSet):
 
                     serializer = apartmentBookingsSerializer(booking_new)
 
-                    return Response(serializer.data,status=status.HTTP_202_ACCEPTED)
+                    param_dict = {
+                        'MID': PAYTM_MERCHANT_ID,
+                        'ORDER_ID': str(booking.booking_id),
+                        'TXN_AMOUNT': str(booking.price_to_be_paid),
+                        'CUST_ID': request.user.email,
+                        'INDUSTRY_TYPE_ID': PAYTM_INDUSTRY_TYPE_ID,
+                        'WEBSITE': PAYTM_WEBSITE,
+                        'CHANNEL_ID': PAYTM_CHANNEL_ID,
+                        'CALLBACK_URL': 'http://127.0.0.1:8000/apartment/book/payment/',
+                        # this is the url of handlepayment function, paytm will send a POST request to the fuction associated with this CALLBACK_URL
+                    }
+
+                    # create new checksum (unique hashed string) using our merchant key with every paytm payment
+                    param_dict['CHECKSUMHASH'] = Checksum.generate_checksum(param_dict, PAYTM_SECRET_KEY)
+                    # send the dictionary with all the credentials to the frontend
+                    return Response({'param_dict': param_dict},status=status.HTTP_202_ACCEPTED) 
 
                     
                 else:

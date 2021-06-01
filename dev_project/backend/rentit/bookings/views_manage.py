@@ -4,6 +4,7 @@ import json
 import pytz
 
 from rest_framework import viewsets
+from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.parsers import MultiPartParser,FormParser
@@ -14,6 +15,7 @@ from django.core.mail import send_mail
 from django_filters import rest_framework as rest_filters
 from rest_framework import filters
 from rest_framework.pagination import PageNumberPagination
+from django.views.decorators.csrf import csrf_exempt
 
 from .models import roomBookings,shopBookings,apartmentBookings
 from .serializers import roomBookingsSerializer,shopBookingsSerializer,apartmentBookingsSerializer
@@ -38,6 +40,13 @@ utc=pytz.UTC
 
 import razorpay
 import environ
+
+from rentit.settings import PAYTM_MERCHANT_ID
+from rentit.settings import PAYTM_WEBSITE
+from rentit.settings import PAYTM_CHANNEL_ID
+from rentit.settings import PAYTM_INDUSTRY_TYPE_ID
+from rentit.settings import PAYTM_SECRET_KEY
+from . import Checksum 
 
 
 env = environ.Env()
@@ -133,56 +142,53 @@ def arrange_complex(list1,book_date,end_date,booked_space,capacity,bookings):
 
 class room_payment(viewsets.ViewSet):
 
-    authentication_classes = [authentication.JWTAuthentication]
-    permission_classes = [permissions.IsAuthenticated]
-    parser_classes=(MultiPartParser,FormParser)
+   
+
+    @csrf_exempt
+    def create(self,request):
+
+        checksum = ""
+        # the request.POST is coming from paytm
+        form = request.POST
+
+        response_dict = {}
+        order = None  # initialize the order varible with None
+
+        for i in form.keys():
+            response_dict[i] = form[i]
+            if i == 'CHECKSUMHASH':
+                # 'CHECKSUMHASH' is coming from paytm and we will assign it to checksum variable to verify our paymant
+                checksum = form[i]
+
+            if i == 'ORDERID':
+                queryset = roomBookings.objects.all()
+                
+                order = queryset.get(booking_id = form[i])
+                # we will get an order with id==ORDERID to turn isPaid=True when payment is successful
+            
+
+        # we will verify the payment using our merchant key and the checksum that we are getting from Paytm request.POST
+        verify = Checksum.verify_checksum(response_dict, PAYTM_SECRET_KEY, checksum)
+
+        if verify:
+            if response_dict['RESPCODE'] == '01':
+                # if the response code is 01 that means our transaction is successfull
+                print('order successful')
+                # after successfull payment we will make isPaid=True and will save the order
+                order.paid = True
+                order.save()
+                # we will render a template to display the payment status
+                
+            else:
+                print('order was not successful because' + response_dict['RESPMSG'])
+                return render(request, 'paymentstatus.html', {'response': response_dict})
 
 
-    def update(self,request,pk=None):
-
-        res = json.loads(request.data["response"])
-
-
-        
-
-        ord_id = ""
-        raz_pay_id = ""
-        raz_signature = ""
-
-        for key in res.keys():
-            if key == 'razorpay_order_id':
-                ord_id = res[key]
-            elif key == 'razorpay_payment_id':
-                raz_pay_id = res[key]
-            elif key == 'razorpay_signature':
-                raz_signature = res[key]
-
-        data = {
-        'razorpay_order_id': ord_id,
-        'razorpay_payment_id': raz_pay_id,
-        'razorpay_signature': raz_signature
-        }
-
-        queryset = roomBookings.objects.all()
-        queryset = queryset.filter(customer_id = request.user)
-        booking = queryset.get(payment_id = ord_id)
-
-
-
-        room = get_object_or_404(rooms.objects.all(),pk=booking.room_id.room_id)
-
-
-        client = razorpay.Client(auth=("rzp_test_pZY7nsJ2sz72Or","jWnoB4EKVm7j3nAngWEx9zaE"))
-
-        check = client.utility.verify_payment_signature(data)
-
-        if check is not None:
-            print("Redirect to error url or error page")
-            return Response({'error': 'Payment failed'},status=status.HTTP_400_BAD_REQUEST)
-
+        room = get_object_or_404(rooms.objects.all(),pk=order.room_id.room_id)
+        booking=order
 
         #payment success 
-        booking.paid = True
+
 
         if booking.coupon!='None':
             queryse_t = coupons.objects.all()
@@ -292,7 +298,7 @@ class room_payment(viewsets.ViewSet):
         
 
         ctx = {
-        'user': request.user.first_name+' '+request.user.last_name,
+        'user': booking.customer_id.first_name+" "+booking.customer_id.last_name,
         'id':booking.booking_id,
         'start':booking.booked_from,
         'end':booking.booked_till,
@@ -307,7 +313,7 @@ class room_payment(viewsets.ViewSet):
             'Booking Confirmation',
             message,
             EMAIL_HOST_USER,
-            [request.user],
+            [booking.customer_id.email],
         )
         msg.content_subtype = "html"  # Main content is now text/html
         msg.send()
@@ -339,59 +345,60 @@ class room_payment(viewsets.ViewSet):
 
         
 
-        return Response('Success',status=status.HTTP_202_ACCEPTED)
+        return render(request, 'paymentstatus.html', {'response': response_dict})
 
 
 
 class shop_payment(viewsets.ViewSet):
 
-    authentication_classes = [authentication.JWTAuthentication]
-    permission_classes = [permissions.IsAuthenticated]
-    parser_classes=(MultiPartParser,FormParser)
+  
 
 
-    def update(self,request,pk=None):
+    @csrf_exempt
+    def create(self,request):
     
-        res = json.loads(request.data["response"])
+        checksum = ""
+        # the request.POST is coming from paytm
+        form = request.POST
 
-        ord_id = ""
-        raz_pay_id = ""
-        raz_signature = ""
+        response_dict = {}
+        order = None  # initialize the order varible with None
 
-        for key in res.keys():
-            if key == 'razorpay_order_id':
-                ord_id = res[key]
-            elif key == 'razorpay_payment_id':
-                raz_pay_id = res[key]
-            elif key == 'razorpay_signature':
-                raz_signature = res[key]
+        for i in form.keys():
+            response_dict[i] = form[i]
+            if i == 'CHECKSUMHASH':
+                # 'CHECKSUMHASH' is coming from paytm and we will assign it to checksum variable to verify our paymant
+                checksum = form[i]
 
-        data = {
-        'razorpay_order_id': ord_id,
-        'razorpay_payment_id': raz_pay_id,
-        'razorpay_signature': raz_signature
-        }
+            if i == 'ORDERID':
+                queryset = shopBookings.objects.all()
+                
+                order = queryset.get(booking_id = form[i])
+                # we will get an order with id==ORDERID to turn isPaid=True when payment is successful
+            
 
-        queryset = shopBookings.objects.all()
-        queryset = queryset.filter(customer_id = request.user)
-        booking = queryset.get(payment_id = ord_id)
+        # we will verify the payment using our merchant key and the checksum that we are getting from Paytm request.POST
+        verify = Checksum.verify_checksum(response_dict, PAYTM_SECRET_KEY, checksum)
+
+        if verify:
+            if response_dict['RESPCODE'] == '01':
+                # if the response code is 01 that means our transaction is successfull
+                print('order successful')
+                # after successfull payment we will make isPaid=True and will save the order
+                order.paid = True
+                order.save()
+                # we will render a template to display the payment status
+                
+            else:
+                print('order was not successful because' + response_dict['RESPMSG'])
+                return render(request, 'paymentstatus.html', {'response': response_dict})
 
 
-
-        room = get_object_or_404(shops.objects.all(),pk=booking.shop_id.shop_id)
-
-
-        client = razorpay.Client(auth=("rzp_test_pZY7nsJ2sz72Or","jWnoB4EKVm7j3nAngWEx9zaE"))
-
-        check = client.utility.verify_payment_signature(data)
-
-        if check is not None:
-            print("Redirect to error url or error page")
-            return Response({'error': 'Payment failed'},status=status.HTTP_400_BAD_REQUEST)
+        room = get_object_or_404(shops.objects.all(),pk=order.shop_id.shop_id)
+        booking=order
 
         
         #payment success 
-        booking.paid = True
 
         if booking.coupon!='None':
             queryse_t = coupons.objects.all()
@@ -443,7 +450,7 @@ class shop_payment(viewsets.ViewSet):
             room.bookedtill = list1[0]
 
         ctx = {
-        'user': request.user.first_name+' '+request.user.last_name,
+        'user': booking.customer_id.first_name+" "+booking.customer_id.last_name,
         'id':booking.booking_id,
         'start':booking.booked_from,
         'end':booking.booked_till,
@@ -458,7 +465,7 @@ class shop_payment(viewsets.ViewSet):
             'Booking Confirmation',
             message,
             EMAIL_HOST_USER,
-            [request.user],
+            [booking.customer_id.email],
         )
         msg.content_subtype = "html"  # Main content is now text/html
         msg.send()
@@ -486,7 +493,7 @@ class shop_payment(viewsets.ViewSet):
 
         room.save()
 
-        return Response('Success',status=status.HTTP_202_ACCEPTED)
+        return render(request, 'paymentstatus.html', {'response': response_dict})
 
 
 
@@ -495,53 +502,53 @@ class shop_payment(viewsets.ViewSet):
 
 class apartment_payment(viewsets.ViewSet):
 
-    authentication_classes = [authentication.JWTAuthentication]
-    permission_classes = [permissions.IsAuthenticated]
-    parser_classes=(MultiPartParser,FormParser)
+   
 
-
-    def update(self,request,pk=None):
+    @csrf_exempt
+    def create(self,request):
     
-        res = json.loads(request.data["response"])
+        checksum = ""
+        # the request.POST is coming from paytm
+        form = request.POST
 
-        ord_id = ""
-        raz_pay_id = ""
-        raz_signature = ""
+        response_dict = {}
+        order = None  # initialize the order varible with None
 
-        for key in res.keys():
-            if key == 'razorpay_order_id':
-                ord_id = res[key]
-            elif key == 'razorpay_payment_id':
-                raz_pay_id = res[key]
-            elif key == 'razorpay_signature':
-                raz_signature = res[key]
+        for i in form.keys():
+            response_dict[i] = form[i]
+            if i == 'CHECKSUMHASH':
+                # 'CHECKSUMHASH' is coming from paytm and we will assign it to checksum variable to verify our paymant
+                checksum = form[i]
 
-        data = {
-        'razorpay_order_id': ord_id,
-        'razorpay_payment_id': raz_pay_id,
-        'razorpay_signature': raz_signature
-        }
+            if i == 'ORDERID':
+                queryset = apartmentBookings.objects.all()
+                
+                order = queryset.get(booking_id = form[i])
+                # we will get an order with id==ORDERID to turn isPaid=True when payment is successful
+            
 
-        queryset = apartmentBookings.objects.all()
-        queryset = queryset.filter(customer_id = request.user)
-        booking = queryset.get(payment_id = ord_id)
+        # we will verify the payment using our merchant key and the checksum that we are getting from Paytm request.POST
+        verify = Checksum.verify_checksum(response_dict, PAYTM_SECRET_KEY, checksum)
+
+        if verify:
+            if response_dict['RESPCODE'] == '01':
+                # if the response code is 01 that means our transaction is successfull
+                print('order successful')
+                # after successfull payment we will make isPaid=True and will save the order
+                order.paid = True
+                order.save()
+                # we will render a template to display the payment status
+                
+            else:
+                print('order was not successful because' + response_dict['RESPMSG'])
+                return render(request, 'paymentstatus.html', {'response': response_dict})
 
 
-
-        room = get_object_or_404(apartments.objects.all(),pk=booking.apartment_id.apartment_id)
-
-
-        client = razorpay.Client(auth=("rzp_test_pZY7nsJ2sz72Or","jWnoB4EKVm7j3nAngWEx9zaE"))
-
-        check = client.utility.verify_payment_signature(data)
-
-        if check is not None:
-            print("Redirect to error url or error page")
-            return Response({'error': 'Payment failed'},status=status.HTTP_400_BAD_REQUEST)
+        room = get_object_or_404(apartments.objects.all(),pk=order.apartment_id.apartment_id)
+        booking=order
 
         
         #payment success 
-        booking.paid = True
 
         if booking.coupon!='None':
             queryse_t = coupons.objects.all()
@@ -593,7 +600,7 @@ class apartment_payment(viewsets.ViewSet):
             room.bookedtill = list1[0]
 
         ctx = {
-        'user': request.user.first_name+' '+request.user.last_name,
+       'user': booking.customer_id.first_name+" "+booking.customer_id.last_name,
         'id':booking.booking_id,
         'start':booking.booked_from,
         'end':booking.booked_till,
@@ -608,7 +615,7 @@ class apartment_payment(viewsets.ViewSet):
             'Booking Confirmation',
             message,
             EMAIL_HOST_USER,
-            [request.user],
+            [booking.customer_id.email],
         )
         msg.content_subtype = "html"  # Main content is now text/html
         msg.send()
@@ -637,7 +644,7 @@ class apartment_payment(viewsets.ViewSet):
 
         room.save()
 
-        return Response('Success',status=status.HTTP_202_ACCEPTED)
+        return render(request, 'paymentstatus.html', {'response': response_dict})
 
 
 

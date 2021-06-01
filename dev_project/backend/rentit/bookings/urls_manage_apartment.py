@@ -4,5 +4,5 @@ from .views_manage import apartment_payment
 
 
 router = DefaultRouter()
-router.register(r'apartment/book/payment', apartment_payment, basename='apartment_booking_payment')
+router.register(r'payment', apartment_payment, basename='apartment_booking_payment')
 urlpatterns = router.urls 
