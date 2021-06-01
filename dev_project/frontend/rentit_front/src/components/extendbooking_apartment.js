@@ -328,7 +328,8 @@ function Bookingextend(props) {
         // finally submit that form
         frm.submit();
       } catch (error) {
-      
+        setcancelled(false);
+        seterror(true);
       }
     };
 
@@ -371,7 +372,7 @@ function Bookingextend(props) {
       }
         catch{
           setcancelled(false);
-          
+          seterror(true);
         }
         
 

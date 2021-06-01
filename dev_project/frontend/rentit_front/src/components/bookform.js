@@ -275,7 +275,8 @@ function Checkout(props) {
       // finally submit that form
       frm.submit();
     } catch (error) {
-    
+      setopen(false)
+      setActiveStep(5);
     }
   };
 

@@ -114,6 +114,7 @@ function Dashboarddrawer(props) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [pic,setpic] = React.useState('')
   const [seller,setseller] = React.useState(false);
+  const [super1,setsuper1] = React.useState(false);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -132,6 +133,7 @@ function Dashboarddrawer(props) {
         if(props.profile)
         {
           setseller(props.profile.is_seller);
+          setsuper1(props.profile.is_superuser);
           try{const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcezxradakgdlh/profile/${props.profile.id}/`,config);
         
         setpic(res.data.photo);
@@ -241,7 +243,7 @@ function Dashboarddrawer(props) {
 
 
 {
-          props.profile.is_superuser ?  <Link to='/admin/jdwai2021801yadb28ykha2sad1893812/awuhd812832232w7dyqw1/ada' style={{textDecoration:'none',color:'black'}}><ListItem button key="Housing complaints">
+          super1 ?  <Link to='/admin/jdwai2021801yadb28ykha2sad1893812/awuhd812832232w7dyqw1/ada' style={{textDecoration:'none',color:'black'}}><ListItem button key="Housing complaints">
           <ListItemIcon className={classes.layouttextclass}><SupervisorAccountIcon /></ListItemIcon>
           <ListItemText primary="Admin" className={classes.layouttextclass}/>
       </ListItem></Link> : null
