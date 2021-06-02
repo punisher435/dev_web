@@ -1,4 +1,5 @@
 import 'antd/dist/antd.css';
+import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'; 
 import Activate from './containers/Activate';
