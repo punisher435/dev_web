@@ -289,7 +289,7 @@ Find best and affordable rooms or hostels for the time duration of your choice.<
             <Hidden mdUp>
               <div className="zoomintemp">
               <div className="bg1">
-        <div style={{textAlign: 'center',}}>
+        <div className="center1">
             <img src="https://res.cloudinary.com/djbyqrhy9/image/upload/v1622021322/Final_logo11_guuu2a.png" className="logo" />
             <p className="tagline">Connecting customers with sellers</p>
         </div>
