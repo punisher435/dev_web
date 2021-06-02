@@ -345,38 +345,38 @@ function ShopForm (props){
     const [newredirect,setnewredirect] = React.useState(false);
     const [myroom,setroom] = useState({
       wifi:'',
-      cost_wifi:'',
+      cost_wifi:0,
       removable_wifi:false,
 
       TV:'',
-      cost_TV:'',
+      cost_TV:0,
       removable_TV:false,
 
       gender:'Any',
 
       cooler:'',
-      cost_cooler:'',
+      cost_cooler:0,
       removable_cooler:false,
 
       AC:'',
-      cost_AC:'',
+      cost_AC:0,
       removable_AC:false,
 
       purified_water:'',
-      cost_purified_water:'',
+      cost_purified_water:0,
       removable_purified_water:false,
 
-      cost_electricity:'',
-      cost_water:'',
+      cost_electricity:0,
+      cost_water:0,
 
       shop_cleaning:'',
-      cost_cleaning:'',
+      cost_cleaning:0,
 
       contact:'',
 
    
       separate_washroom:'',
-      title:'',
+      title:'Rentene shop',
       seller_price:'',
       owner_discount:0,
      

@@ -404,24 +404,24 @@ function ApartmentForm (props){
    
     const [myroom,setroom] = useState({
       wifi:'',
-      cost_wifi:'',
+      cost_wifi:0,
       removable_wifi:false,
 
       TV:'',
-      cost_TV:'',
+      cost_TV:0,
       removable_house_TV:false,
 
       house_refridgerator:'',
-      cost_refridgerator:'',
+      cost_refridgerator:0,
       removable_house_refridgerator:false,
 
       purified_water:'',
-      cost_purified_water:'',
+      cost_purified_water:0,
       removable_purified_water:false,
 
       AC:'',
-      cost_AC:'',
-      removable_AC:'',
+      cost_AC:0,
+      removable_AC:false,
 
       gender:'Any',
 
@@ -430,23 +430,23 @@ function ApartmentForm (props){
       removable_laundry:false,
 
       geyser:'',
-      cost_geyser:'',
+      cost_geyser:0,
       removable_geyser:false,
 
       cooler:'',
-      cost_cooler:'',
+      cost_cooler:0,
       removable_cooler:false,
 
-      cost_electricity:'',
-      cost_water:'',
+      cost_electricity:0,
+      cost_water:0,
 
       apartment_cleaning:'',
-      cost_cleaning:'',
+      cost_cleaning:0,
 
       BHK:0,
       balcony:0,
     
-      title:'',
+      title:'Rentene home',
       seller_price:'',
       owner_discount:0,
       bed_type:'',

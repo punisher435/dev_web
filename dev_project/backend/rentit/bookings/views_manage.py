@@ -38,7 +38,6 @@ from django.core.mail import EmailMessage
 
 utc=pytz.UTC
 
-import razorpay
 import environ
 
 from rentit.settings import PAYTM_MERCHANT_ID

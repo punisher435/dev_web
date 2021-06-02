@@ -70,7 +70,7 @@ export default function ApartmentCard({myapartment}) {
         </Button></Link>
         <Link to={{
     pathname: `/dashboard/my_housing/delete`,
-    state: { property_id: myapartment.apartment_id,url:'sourceddnvslf54d/my_apartments' ,url1:'my_apartments' }
+    state: { property_id: myapartment.apartment_id,url:'sourceddnvslf54d/my_apartments' ,url1:'my_housing' }
   }} style={{textDecoration:'none'}}><Button size="small" color="primary" >
           Delete
         </Button></Link>
@@ -78,12 +78,12 @@ export default function ApartmentCard({myapartment}) {
       {
         myapartment.pausebooking ? <Link to={{
           pathname: `/dashboard/my_housing/pause_booking`,
-          state: { property_id: myapartment.apartment_id,url:'sourceddnvslf54d/my_apartments',url1:'my_apartments' }
+          state: { property_id: myapartment.apartment_id,url:'sourceddnvslf54d/my_apartments',url1:'my_housing' }
         }} style={{textDecoration:'none'}}><Button size="small" color="primary">
                 Resume Booking
               </Button></Link> :  <Link to={{
     pathname: `/dashboard/my_housing/pause_booking`,
-    state: { property_id: myapartment.apartment_id,url:'sourceddnvslf54d/my_apartments',url1:'my_apartments' }
+    state: { property_id: myapartment.apartment_id,url:'sourceddnvslf54d/my_apartments',url1:'my_housing' }
   }} style={{textDecoration:'none'}}><Button size="small" color="primary">
           Pause Booking
         </Button></Link>

@@ -32,7 +32,7 @@ from django.utils.decorators import method_decorator
 utc=pytz.UTC
 
 
-import razorpay
+
 import environ
 
 from django.template import Context
@@ -56,16 +56,7 @@ environ.Env.read_env()
 
 
 
-def payment(amount,currency):
 
-    client = razorpay.Client(auth=("rzp_test_pZY7nsJ2sz72Or","jWnoB4EKVm7j3nAngWEx9zaE"))
-
-    # create razorpay order
-    payment = client.order.create({"amount": int(amount) * 100, 
-                                   "currency": currency,
-                                   })
-
-    return payment
 
 def arrange(list1,end_date,capacity):
     list2=[]

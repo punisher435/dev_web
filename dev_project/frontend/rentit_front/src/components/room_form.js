@@ -443,33 +443,33 @@ function RoomForm (props){
     const [newredirect,setnewredirect] = React.useState(false);
     const [myroom,setroom] = useState({
       wifi:'',
-      cost_wifi:'',
+      cost_wifi:0,
       removable_wifi:false,
 
       house_TV:'',
-      cost_TV:'',
+      cost_TV:0,
       removable_house_TV:false,
 
       room_TV:'',
-      cost_roomTV:'',
+      cost_roomTV:0,
       removable_room_TV:false,
 
       house_refridgerator:'',
-      cost_refridgerator:'',
+      cost_refridgerator:0,
       removable_house_refridgerator:false,
 
       room_refridgerator:'',
-      cost_roomrefridgerator:'',
+      cost_roomrefridgerator:0,
       removable_room_refridgerator:false,
 
       purified_water:'',
-      cost_purified_water:'',
+      cost_purified_water:0,
       removable_purified_water:false,
 
       contact:'',
 
       AC:'',
-      cost_AC:'',
+      cost_AC:0,
       removable_AC:false,
 
       iron:'',
@@ -483,30 +483,30 @@ function RoomForm (props){
       gender:'Any',
 
       geyser:'',
-      cost_geyser:'',
+      cost_geyser:0,
       removable_geyser:false,
 
       cooler:'',
-      cost_cooler:'',
+      cost_cooler:0,
       removable_cooler:false,
 
       breakfast:'',
-      cost_breakfast:'',
+      cost_breakfast:0,
       removable_breakfast:false,
 
       lunch:'',
-      cost_lunch:'',
+      cost_lunch:0,
       removable_lunch:false,
 
       dinner:'',
-      cost_dinner:'',
+      cost_dinner:0,
       removable_dinner:false,
 
-      cost_electricity:'',
-      cost_water:'',
+      cost_electricity:0,
+      cost_water:0,
 
       room_cleaning:'',
-      cost_cleaning:'',
+      cost_cleaning:0,
 
       video:'',
       videofile:'',
@@ -514,7 +514,7 @@ function RoomForm (props){
       capacity:'',
       balcony:0,
       separate_washroom:'',
-      title:'',
+      title:'Rentene room',
       seller_price:'',
       owner_discount:0,
       bed_type:'',
