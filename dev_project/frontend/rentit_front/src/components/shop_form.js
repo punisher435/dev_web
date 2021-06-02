@@ -392,9 +392,9 @@ function ShopForm (props){
       washroom:1,
       windows:0,
       power_backup:'',
-      furniture:'',
-      facility:'',
-      description:'',
+      furniture:'None',
+      facility:'None',
+      description:'None',
       fans:1,
       floor_no:0,
 
@@ -413,7 +413,7 @@ function ShopForm (props){
       distance1:0,
       distance2:0,
 
-      shop_policy:'',
+      shop_policy:'None',
 
       address_proof:'',
 

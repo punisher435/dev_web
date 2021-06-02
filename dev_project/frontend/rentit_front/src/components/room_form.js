@@ -526,16 +526,16 @@ function RoomForm (props){
       cctv_building:'',
       windows:0,
       power_backup:'',
-      furniture:'',
-      facility:'',
-      description:'',
+      furniture:'None',
+      facility:'None',
+      description:'None',
       fans:1,
       floor_no:0,
 
 
       veg_food:'',
       nonveg_food:'',
-      food_policy:'',
+      food_policy:'None',
 
       city:'',
       state:'',
@@ -553,9 +553,9 @@ function RoomForm (props){
       distance2:0,
 
       guest_allowed:'',
-      guest_policy:'',
+      guest_policy:'None',
 
-      room_policy:'',
+      room_policy:'None',
 
       address_proof:'',
 
@@ -3582,7 +3582,7 @@ if(newredirect==true)
        
         <FormControl className={classes.form}>
         
-            <InputLabel id="guest_allowed">Guest allowed</InputLabel>
+            <InputLabel id="guest_allowed">Guest allowed*</InputLabel>
             <Select
             labelId="guest_allowed"
             id="guest_allowed"

@@ -458,9 +458,9 @@ function ApartmentForm (props){
       cctv_building:'',
       windows:0,
       power_backup:'',
-      furniture:'',
-      facility:'',
-      description:'',
+      furniture:'None',
+      facility:'None',
+      description:'None',
       fans:1,
       floor_no:0,
       contact:'',
@@ -480,7 +480,7 @@ function ApartmentForm (props){
       distance1:0,
       distance2:0,
 
-      apartment_policy:'',
+      apartment_policy:'None',
 
       address_proof:'',
 

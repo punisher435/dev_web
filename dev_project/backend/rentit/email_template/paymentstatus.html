@@ -3,16 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>Payment status</title>
 </head>
+<style type="text/css">
+    .center1{
+        margin-top:80px;
+        text-align: center;
+    }
+    .img1{
+        width:30vw;
+        max-width:100px;
+    }
+</style>
+
 <body>
     <!-- style it however you want -->
     <!-- the 'response' is coming from the context -->
     {% if response.STATUS == "TXN_SUCCESS" %}
-    <h1>Transaction successful</h1>
+    <div class="center1">
+    <img src="https://res.cloudinary.com/dbtck3w9w/image/upload/v1622635731/success-icon-23194_s4d1ar.png" class="img1"/>
+    
+    <br /> <br />
+    <h2>Payment successful</h2>
+    
+    <br />
+    <a href="https://rentene111222.herokuapp.com"><button type="button" class="btn btn-success">Go back</button></a>
+</div>
     {% else %}
-    <h1>Transaction Failed</h1>
-    {% endif %}
-    <a href="http://localhost:3000"><button>Go Home</button></a>
+    <div class="center1">
+        <img src="https://res.cloudinary.com/dbtck3w9w/image/upload/v1622636310/PinClipart.com_barometer-clip-art_2495553_1_hlsumz.png" class="img1"/>
+        <br />
+        <br />
+        <h2>Oops, payment failed</h2>
+        <br />
+    <a href="https://rentene111222.herokuapp.com"><button type="button" class="btn btn-outline-danger">Go back</button></a>
+</div>
+
+{% endif %}
+<div></div>
+   
 </body>
 </html>

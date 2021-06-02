@@ -84,6 +84,7 @@ function App(props) {
     
   } 
   return (
+    <div className="newfont">
     <Provider store={store}>
       <Router>
       <Switch>
@@ -188,6 +189,7 @@ function App(props) {
           </Switch>
       </Router>
     </Provider>
+    </div>
   );
 }
 
