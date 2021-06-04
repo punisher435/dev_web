@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
 
     [theme.breakpoints.up('sm')]: {
         position: 'absolute',
-    width: '60%',
+    width: '48%',
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
       },
@@ -49,8 +49,9 @@ export default function SimpleModal({open,change,id}) {
   );
 
   return (
-    <div>
+    <div >
       <Modal
+      className="newfont"
         open={open}
         onClose={handleClose}
         aria-labelledby="simple-modal-title"

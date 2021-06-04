@@ -508,11 +508,7 @@ function Home(props) {
         <div>
           
            
-          <Snackbar open={warnbrowser} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose111} severity="info">
-            We recommend using Google Chrome for better user experience!
-        </Alert>
-      </Snackbar>
+         
             <div className={classes.containerclass}>
                 <div className={classes.headerclass}>
                     <Welcome />

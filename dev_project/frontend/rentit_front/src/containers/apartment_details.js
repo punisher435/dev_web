@@ -29,6 +29,7 @@ import RatingWithCompliments from '../components/MobileRatingSearchCard'
 import Mapview from '../components/mapcomp'
 import Footer from '../components/footer';
 
+import ScrollText from '../components/scrolltext'
 
 
 import axios from 'axios';
@@ -67,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
    
   },
   typo4:{
-    fontSize: '80%',
+    fontSize: '100%',
   },
   paper: {
     padding: theme.spacing(2),
@@ -554,12 +555,7 @@ if(details){
             <Typography variant="h5" component="h4" className={classes.typo1}>
             {details.title}
             </Typography>
-            <Typography variant="body1" component="h6" gutterBottom  className={classes.typo3}>
-                              <Icon color="error" fontSize="inherit"><LocationOnIcon /></Icon>  {details.location}, {details.city}
-                                </Typography>
-                                <Typography variant="body1" component="h6" gutterBottom className={classes.typo3}>
-                                , {details.district}, {details.state}, {details.country},{details.pincode}
-                                </Typography>
+            <ScrollText post={details}/>
                                 <Typography variant="body1" className={classes.typo4}>
           Owner Info:
         </Typography>

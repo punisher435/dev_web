@@ -10,6 +10,7 @@ import RoomImage from './mobilesearchshopimage'
 import Box from '@material-ui/core/Box'
 import ScrollableIcons from './ScrollableIcons'
 import {Link} from 'react-router-dom';
+import ScrollText from './scrolltext'
 
 import axios from 'axios';
 import { connect } from 'react-redux'
@@ -21,7 +22,7 @@ axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
 const useStyles = makeStyles((theme) => ({
 root: {
   width:'80vw',
-maxWidth: 355,
+maxWidth: 330,
 maxLength: 400,
 margin: '0 auto',
 float: 'none',
@@ -90,26 +91,7 @@ function RecipeReviewCard({isAuthenticated,post,setOpen1,setOpen2,wishlistitems,
 
  <Link to={`/shops/${post.shop_id}`} target="_blank" style={{textDecoration:'none',color:'black'}}>
 
- <Box ml={1}>
-
-   <Box mb={0}>
-   <Grid container alignItems='flex-start'>
-     <Grid item xs={1}>
-        <Icon color="error"><RoomIcon /></Icon>
-
-     </Grid>
-     <Grid item xs={11}>
-            <Typography variant="body1" component="h2">
-              <Box mt={1}>
-              {post.location},{post.city},{post.district},{post.state},{post.country},{post.pincode}
-          {/* Anand Plaza, First, University Rd, A Block, Udaipur, Rajasthan 313001 */}
-              </Box>
-        </Typography>
-
-     </Grid>
-   </Grid>
-   </Box>
-   </Box>
+ <ScrollText post={post}/>
    <ScrollableIcons post={post}/>
   <Box ml={1} mt={1} mb={1}>
     <Grid

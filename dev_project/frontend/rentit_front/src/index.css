@@ -73,6 +73,16 @@ body * {
   -webkit-text-size-adjust: none;
 }
 
+@media only screen and (min-width: 1100px)
+{
+  .MuiMenu-paper{
+ 
+    zoom:0.8 !important;
+  
+  }
+}
+
+
 
 body {
  
@@ -88,7 +98,14 @@ body {
   
 }
 
-
+@media only screen and (min-width: 1100px)
+{
+  .zoomtemp1{
+    -moz-transform: scale(1.25, 1.25);
+    zoom:1.25;
+    zoom:125%;
+  }
+}
 
 
 

@@ -39,6 +39,8 @@ import ScrollableIcons from '../components/ScrollableIcons'
 import Footer from '../components/footer';
 import Load1 from '../components/Spinner';
 
+import ScrollText from '../components/scrolltext'
+
 
 
 
@@ -97,7 +99,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '90%',
   },
   typo4:{
-    fontSize: '80%',
+    fontSize: '100%',
   },
   paraclass:{
     marginTop:'15px',
@@ -406,6 +408,7 @@ if(details){
                                 <Typography variant="h4" component="h4">
                                 {details.title}
                                 </Typography>
+                                
                                 <Typography variant="h6" component="h6" gutterBottom >
                                 {details.location},{details.city},{details.district},{details.state},{details.country},{details.pincode}
                                 </Typography>
@@ -556,12 +559,8 @@ if(details){
             <Typography variant="h5" component="h4" className={classes.typo1}>
             {details.title}
             </Typography>
-            <Typography variant="body1" component="h6" gutterBottom  className={classes.typo3}>
-                              <Icon color="error" fontSize="inherit"><LocationOnIcon /></Icon>  {details.location}, {details.city}
-                                </Typography>
-                                <Typography variant="body1" component="h6" gutterBottom className={classes.typo3}>
-                                , {details.district}, {details.state}, {details.country},{details.pincode}
-                                </Typography>
+            <ScrollText post={details}/>
+           
 
                                 <Typography variant="body1" className={classes.typo4}>
           Owner Info:

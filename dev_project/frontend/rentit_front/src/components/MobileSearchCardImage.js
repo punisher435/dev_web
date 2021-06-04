@@ -13,6 +13,7 @@ import { Typography } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import RatingWithCompliments from './MobileRatingSearchCard' 
 import axios from 'axios'
+import {Link} from 'react-router-dom';
 
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
@@ -119,6 +120,7 @@ export default function NestedGrid({isAuthenticated,post,wishlist,changewishlist
 >
 
 <Grid item xs={12}>
+<Link to={`/rooms/${post.room_id}`} target="_blank" style={{textDecoration:'none',color:'black'}}>
 <Card className={classes.root1}>
           <CardMedia
             className={classes.media}
@@ -168,6 +170,7 @@ export default function NestedGrid({isAuthenticated,post,wishlist,changewishlist
           </CardMedia>
         {/* </CardActionArea> */}
     </Card>
+    </Link>
     
 </Grid>
 

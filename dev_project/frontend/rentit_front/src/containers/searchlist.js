@@ -140,6 +140,7 @@ const useStyles = makeStyles((theme) => ({
   },
   mystyle: {
     marginLeft:'10px',
+   
   },
   iconstyle: {
     color: 'white',
@@ -171,7 +172,7 @@ function ResponsiveDrawer(props) {
   };
 
   const drawer = (
-    <div>
+    <div >
       <div className={classes.toolbar} />
       
       <Divider />
@@ -212,7 +213,8 @@ function ResponsiveDrawer(props) {
 
       <Divider />
       <ListItem className={classes.mystyle}>
-       <SimpleSelect filters={props.filters} setfilters={props.setfilters}/>
+        <div >
+       <SimpleSelect filters={props.filters} setfilters={props.setfilters}/></div>
       </ListItem >
       <Divider />
 

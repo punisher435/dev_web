@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
     color:'#f50057',
-    width: 170,
+    width: 130,
   },
   selectEmpty: {
     marginTop: theme.spacing(2),
@@ -35,7 +35,7 @@ export default function SimpleSelect(props) {
           value={props.filters.category}
           onChange={handleChange}
         >
-          <MenuItem value={''}>None</MenuItem>
+          <MenuItem value={''}>Any</MenuItem>
           <MenuItem value={'Classic room'}>Classic room</MenuItem>
           <MenuItem value={'Deluxe room'}>Deluxe room</MenuItem>
           <MenuItem value={'Single'}>Single</MenuItem>
@@ -51,13 +51,12 @@ export default function SimpleSelect(props) {
           <MenuItem value={'Executive suite'}>Executive suite</MenuItem>
           <MenuItem value={'Mini suite'}>Mini suite</MenuItem>
           <MenuItem value={'Presidential suite'}>Presidential suite</MenuItem>
-          <MenuItem value={'Apartment'}>Apartment</MenuItem>
-          <MenuItem value={'Shop'}>Shop</MenuItem>
           <MenuItem value={'Connecting rooms'}>Connecting rooms</MenuItem>
           <MenuItem value={'Murphy rooms'}>Murphy room</MenuItem>
           <MenuItem value={'Adjacent rooms'}>Adjacent rooms</MenuItem>
           <MenuItem value={'Murphy room'}>Murphy room</MenuItem>
           <MenuItem value={'Adjacent rooms'}>Adjacent rooms</MenuItem>
+          <MenuItem value={'None'}>None</MenuItem>
         </Select>
         <FormHelperText> Select the room category</FormHelperText>
       </FormControl>

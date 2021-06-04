@@ -169,7 +169,7 @@ export default function NestedGrid({post}) {
   justify="center"
   alignItems="center"
   spacing = {1}
-  className="zoomtemp"
+  className="zoomtemp1"
 >
 
 <SimpleModal open={open} change={changeopen} photo={photos.a}/>
