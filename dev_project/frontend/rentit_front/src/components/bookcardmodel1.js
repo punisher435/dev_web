@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     
       width:'100%',
       maxWidth:'400px',
-      height:'75vh',maxHeight:'731px',
+      height:'89vh',maxHeight:'720px',
       overflowY: 'scroll',
       overflowx: 'hidden',
       
@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
       left:'50vw',
     },
  
-    
+    zoom:'0.8',
    
  
 
@@ -69,15 +69,17 @@ export default function SimpleModal1({details,open,change,bookvalues,setbookvalu
   );
 
   return (
-    <div>
+    
       <Modal
         open={open}
         onClose={handleClose}
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
       >
+        
         {body}
+       
       </Modal>
-    </div>
+    
   );
 }

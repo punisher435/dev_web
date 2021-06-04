@@ -72,6 +72,7 @@ const useStyles = makeStyles({
     fontSize:'20px',
     fontWeight:'bold',
     textAlign:'left',
+  
   },
   coupon:{
     color:'white',
@@ -140,10 +141,10 @@ export default function CouponCard({mycoupon}) {
    <div className={ mycoupon.admin_coupon ? classes.root1 : mycoupon.coupon_type==='off_price'? classes.root2 : classes.root3}>
 
     <img src={logo} className={classes.logo}/>
-
+    <div id="tempfont">
     <Typography  className={classes.text}>
        {text}
-    </Typography>
+    </Typography></div>
 
     <div className={classes.couponbg}>
     <Typography variant="body1" className={classes.coupon}>

@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
         color:'red',
     },
     graphclass:{
-        width:'100vw',
+        width:'90vw',
         [theme.breakpoints.up('sm')]: {
             width:'90vw',
             maxWidth:440,
@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
           },
     },
     graphclass1:{
-        width:'100vw',
+        width:'90vw',
         [theme.breakpoints.up('sm')]: {
             width:'90vw',
             maxWidth:440,

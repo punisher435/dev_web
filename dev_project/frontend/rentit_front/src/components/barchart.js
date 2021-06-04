@@ -152,7 +152,7 @@ function BarChart({roombookings,shopbookings,apartmentbookings}) {
         {
           !isSmall && <Chart
           data={data1}
-          width={330}
+          width={380}
           height={350}>
           <ArgumentAxis />
           <ValueAxis max={7} />

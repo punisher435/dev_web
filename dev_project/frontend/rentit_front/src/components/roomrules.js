@@ -31,8 +31,8 @@ const useStyles = makeStyles((theme) => ({
     overflowx: 'hidden',
     maxHeight:'731px',
     
-    top:'25vh',
-    left:'10vw',
+    top:'15vh',
+    left:'8vw',
     padding:20,
     backgroundColor:' #f0e4e4',
     backgroundSize:'cover',
@@ -48,8 +48,8 @@ const useStyles = makeStyles((theme) => ({
       overflowx: 'hidden',
       backgroundColor:' #f0e4e4',
       backgroundSize:'cover',
-      top:'28vh',
-      left:'38vw',
+      top:'25vh',
+      left:'30vw',
     },
 
     [theme.breakpoints.up('lg')]: {
@@ -62,8 +62,8 @@ const useStyles = makeStyles((theme) => ({
       overflowx: 'hidden',
       backgroundColor:' #f0e4e4 ',
       backgroundSize:'cover',
-      top:'28vh',
-      left:'38vw',
+      top:'15vh',
+      left:'27vw',
     },
  
     

@@ -1,49 +1,90 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 
-
-* {
-  
-  font-family: 'Noto Sans JP', sans-serif !important;
- 
-  text-size-adjust:none !important;
-  -moz-text-size-adjust: none !important;
+p{
+  -webkit-text-size-adjust: none !important;
+}
+.MuiTypography-root{
+  -webkit-text-size-adjust: none !important;
+}
+.MuiTypography-body1{
+  -webkit-text-size-adjust: none !important;
+}
+.MuiTypography-body2{
   -webkit-text-size-adjust: none !important;
 }
 
+.MuiTypography-h6{
+  -webkit-text-size-adjust: none !important;
+}
+
+.MuiTypography-h5{
+  -webkit-text-size-adjust: none !important;
+}
+.MuiTypography-h4{
+  -webkit-text-size-adjust: none !important;
+}
+.MuiTypography-h3{
+  -webkit-text-size-adjust: none !important;
+}
+
+.MuiTypography-h2{
+  -webkit-text-size-adjust: none !important;
+}
+.MuiTypography-h1{
+  -webkit-text-size-adjust: none !important;
+}
+
+* {
+  
+  -webkit-text-size-adjust: none;
+
+}
+
+
 html *{
 
-  font-family: 'Noto Sans JP', sans-serif !important;
  
-  text-size-adjust:none !important;
-  -moz-text-size-adjust: none !important;
-  -webkit-text-size-adjust: none !important;
+  -webkit-text-size-adjust: none;
+
 
  
   
 }
 body * {
  
-  font-family: 'Noto Sans JP', sans-serif !important;
-  text-size-adjust:none !important;
-  -moz-text-size-adjust: none !important;
-  -webkit-text-size-adjust: none !important;
+  -webkit-text-size-adjust: none;
  
+
+ 
+}
+
+
+
+@media only screen and (min-width: 1100px)
+{
+  .newfont{
+    -moz-transform: scale(0.8, 0.8);
+   zoom:0.8;
+   zoom:80%;
+  }
+}
+
+#tempfont{
+  -webkit-text-size-adjust: none;
 }
 
 
 body {
  
-  font-family: 'Noto Sans JP', sans-serif !important;
-
-  margin: 0;
   
+ 
+  -webkit-text-size-adjust: none;
+  margin: 0;
+ 
   overflow-x: hidden;
-  -moz-transform: scale(0.8, 0.8);
-  zoom: 0.8;
-  zoom: 80%;
-  text-size-adjust:none !important;
-  -moz-text-size-adjust: none !important;
-  -webkit-text-size-adjust: none !important;
+  
+  
+
   
 }
 
