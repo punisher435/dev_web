@@ -321,6 +321,10 @@ nowclass1:{
 padding:{
   padding:'60px',
 },
+backdrop: {
+  zIndex: theme.zIndex.drawer + 1,
+  color: '#fff',
+},
   }));
 
 function ShopForm (props){
