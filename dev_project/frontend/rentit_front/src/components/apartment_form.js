@@ -377,7 +377,11 @@ papernewclass:{
 },
 nowclass1:{
   width: 'inherit'
-}
+},
+backdrop: {
+  zIndex: theme.zIndex.drawer + 1,
+  color: '#fff',
+},
   }));
 
 function ApartmentForm (props){
