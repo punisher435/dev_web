@@ -172,19 +172,19 @@ const Layout = (props) => {
 
         
     <Grid item xs={12} sm={3}>
+        
+        <Grid item xs={7} md={11}>
+        <div className={classes.logoclass}><img src={Logo} /></div>
+       
         <Grid
         container
         direction="row"
         justify="flex-start"
         alignItems="flex-start"
-        >
-        <Grid item xs={11}>
-        <div className={classes.logoclass}><img src={Logo} /></div>
-        </Grid>
-        
+        > 
         
         <Grid item >
-                <Box  fontSize={25} mr={2}>
+                <Box  fontSize={25} mr={2} ml={7}>
                 <Link href="#" onClick='#' >
                     <FacebookIcon color='white'/>
                 </Link>
@@ -212,13 +212,13 @@ const Layout = (props) => {
                 </Link>
                 </Box>
         </Grid>
-        
+        </Grid>
     </Grid>
     <br/>
 </Grid>
 
 
-<Grid item xs={12} sm={2}>
+<Grid item xs={4} sm={2}>
 <Grid
     container
     direction="row"
@@ -226,25 +226,28 @@ const Layout = (props) => {
     alignItems="flex-start"
     >
         <Grid item xs={12}>
+    
             <Typography variant='h6' className={classes.textclass}>
                 <Box lineHeight={0}>
 
                 Hit Counter
                 </Box>
             </Typography>
-        </Grid>
+            </Grid>
+       
         <Grid item xs={12}>
+
             <Typography variant='subtitle1' className={classes.textclass}>
         <Box lineHeight={1} fontSize={15}>
-                {totalbookings} (No. of bookings from our website)
-        </Box>
+                {totalbookings}</Box> <Box lineHeight={1} fontSize={12}>(No. of bookings from our website)</Box>
+        
             </Typography>
         </Grid>
     </Grid><br/>
         </Grid>
         {/* <Divider orientation="vertical" flexItem={true} light={true}/> */}
 
-        <Grid item xs={12} sm={2}>
+        <Grid item xs={4} sm={2}>
         {/* <Paper elevation={5} > */}
         <Grid
     container
@@ -253,17 +256,23 @@ const Layout = (props) => {
     alignItems="flex-start"
     >
         <Grid item xs={12}>
+        <Grid
+    container
+    direction="row"
+    justify="center"
+    alignItems="flex-start"
+    >
             <Typography variant='h6' className={classes.textclass}>
-                About Us
+            <Link to='/about-us' style={{textDecoration:'None',color:'white'} } target="_blank">   About Us </Link>
             </Typography>
-        </Grid>
+        </Grid></Grid>
     </Grid><br/>
     {/* </Paper> */}
         </Grid>
         {/* <Divider orientation="vertical" flexItem  light/> */}
         
         
-        <Grid item xs={12} sm={3}>
+        <Grid item xs={4} sm={3}>
         {/* <Paper elevation={5}> */}
         <Grid
     container
@@ -272,10 +281,16 @@ const Layout = (props) => {
     alignItems="flex-start"
     >
         <Grid item xs={12}>
+        <Grid
+    container
+    direction="row"
+    justify="center"
+    alignItems="flex-start"
+    >
             <Typography variant='h6' className={classes.textclass}>
-                <Link to='/policies' style={{textDecoration:'None',color:'white'}}> {props.profile ? props.profile.is_seller ? 'Owner Policy' : 'Guest Policy' : 'Guest Policy'}</Link>
+                <Link to='/policies' style={{textDecoration:'None',color:'white'} } target="_blank"> {props.profile ? props.profile.is_seller ? 'Owner Policy' : 'Guest Policy' : 'Guest Policy'}</Link>
             </Typography>
-        </Grid>
+        </Grid></Grid>
         
     </Grid><br/>
     {/* </Paper> */}

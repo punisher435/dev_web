@@ -316,7 +316,7 @@ function RenteneAppBar(props) {
         </NavLink>
       </MenuItem>
       <MenuItem>
-      <NavLink className={`nav-link ${styles.textclass2}`} exact to='/about-us'>
+      <NavLink className={`nav-link ${styles.textclass2}`} exact to='/about-us' target="_blank">
       <IconButton aria-label="show 4 new mails" color="inherit" className={classes.yo1class}>
         
         <InfoIcon />
@@ -425,7 +425,7 @@ function RenteneAppBar(props) {
           <div className={classes.logoclass}><img src={logo} /></div>
           
           </NavLink>
-          <NavLink className={`nav-link ${styles.textclass3} ${classes.body}`} exact to='/about-us'>
+          <NavLink className={`nav-link ${styles.textclass3} ${classes.body}`} target="_blank" exact to='/about-us'>
           <IconButton aria-label="show 4 new mails" color="inherit" className={classes.yo1class}>
         
         <InfoIcon />

@@ -310,7 +310,7 @@ function Bookingdetails(props) {
    
    <Grid item >
             {
-                mybooking.apartment_review || mybooking.cancelled ? null :  <Link to={{
+                props.profile.is_seller || mybooking.apartment_review || mybooking.cancelled ? null :  <Link to={{
                   pathname: `/dashboard/recentbookings/housing-bookings/${mybooking.booking_id}/feedback`,
                   state: { property_id:'apartment' }
                 }} style={{textDecoration:'none'}}><Button variant="contained" padding="auto"color="secondary" >

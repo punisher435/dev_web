@@ -330,7 +330,7 @@ function Bookingdetails(props) {
     <br />
 
     {
-      mybooking.room_review || mybooking.cancelled ? null :  <Grid
+      props.profile.is_seller || mybooking.room_review || mybooking.cancelled ? null :  <Grid
       container
       direction="row"
       justify="center"
