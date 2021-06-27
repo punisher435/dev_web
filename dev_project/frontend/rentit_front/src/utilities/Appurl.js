@@ -32,9 +32,10 @@ export default {
     shop_reviews:'sourcensjahdwua2853/',
 
     //apartments
-    apartment_listing:'sourcebvdfesl2746/',
+    apartment_listing:'sourcebvdfesl2746/apartments',
     apartment_personal:'sourceddnvslf54d/',
-    apartment_reviews:'sourcemvdsnksnd59472/',
+    apartment_reviews:'sourcemvdsnksnd59472/apartment/reviews',
+    
 
     //location
     room_location:'sourceadbeios287y19/',
@@ -56,8 +57,11 @@ export default {
     apply_coupon:'sourcesawdajwnr32w2/',
     coupon_shop:'sourcefsejfnsjcn9302/',
     coupon_apartment:'sourceasindwanuia29910/',
-    coupon_get:'sourcesnajeijchi032uhd9w/',
+    coupon_get:'sourcesnajeijchi032uhd9w/coupon/give',
     coupon_list:'sourceadbwub2812gbwga981/',
+
+
+    
 
     //bookings
     room_bookings:'sourcehjbda983290whjba/',

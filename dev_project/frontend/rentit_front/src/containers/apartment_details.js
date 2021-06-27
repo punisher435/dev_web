@@ -52,6 +52,7 @@ import ReviewSeller from '../components/seller_reviews_pop';
 import Button from '@material-ui/core/Button';
 import ScrollableIcons from '../components/ScrollableIcons'
 import Load1 from '../components/Spinner';
+import Links from '../utilities/Appurl';
 
 
 
@@ -198,18 +199,19 @@ function FullWidthGrid(props) {
             'Content-Type': 'application/json'
         }
       };
-      const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcebvdfesl2746/apartments/${roomid}/`,config);
+      const res = await axios.get(`${process.env.REACT_APP_API_URL}/${Links.apartment_listing}/${roomid}/`,config);
       
       try{
          
         
           setDetails(res.data);
           setLoading(false);
+          console.clear();
       
 
       }  catch (err) {
         // Handle Error Here
-        console.error(err);
+        console.clear();
     }
 
     
@@ -228,7 +230,7 @@ function FullWidthGrid(props) {
       }
     };
     try{
-    const res1 = await axios.get(`${process.env.REACT_APP_API_URL}/sourcemvdsnksnd59472/apartment/reviews/`,{
+    const res1 = await axios.get(`${process.env.REACT_APP_API_URL}/${Links.apartment_reviews}/`,{
       params:{
         apartment_id:roomid,
         page:params1.page,
@@ -247,7 +249,7 @@ function FullWidthGrid(props) {
       console.error(err);
   }
   try{
-    const res12 = await axios.get(`${process.env.REACT_APP_API_URL}/sourcesnajeijchi032uhd9w/coupon/give/`,{
+    const res12 = await axios.get(`${process.env.REACT_APP_API_URL}/${Links.coupon_get}/`,{
       params:{
         roomid:roomid,
         type:'apartment',

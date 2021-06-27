@@ -1,6 +1,8 @@
+
 import 'antd/dist/antd.css';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css'; 
+
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'; 
 import Activate from './containers/Activate';
 import Home from './containers/Home';
@@ -76,6 +78,10 @@ require('dotenv').config()
 
 
 function App(props) {
+
+
+ 
+
   var temp=false;
   
   if (navigator.appVersion.indexOf("Win") != -1)

@@ -58,6 +58,7 @@ export const checkAuthenticated = () => async dispatch => {
             type: AUTHENTICATED_FAIL
         });
     }
+    console.clear();
 };
 
 export const load_user = () => async dispatch => {
@@ -89,6 +90,7 @@ export const load_user = () => async dispatch => {
             type: USER_LOADED_FAIL
         });
     }
+    console.clear();
 };
 
 export const login = (email, password) => async dispatch => {
@@ -122,8 +124,8 @@ export const login = (email, password) => async dispatch => {
             });
 
             
+           
             console.clear();
-            
            
             throw new Error(`${err.response.data.detail}`)
             
@@ -195,6 +197,7 @@ export const verify = (uid, token) => async dispatch => {
             type: ACTIVATION_FAIL
         });
     }
+    console.clear();
 };
 
 export const reset_password = (email) => async dispatch => {
@@ -218,6 +221,7 @@ export const reset_password = (email) => async dispatch => {
             type: RESET_PASSWORD_FAIL
         });
     }
+    console.clear();
 };
 
 export const reset_password_confirm = (uid, token, new_password, re_new_password) => async dispatch => {
@@ -241,8 +245,10 @@ export const reset_password_confirm = (uid, token, new_password, re_new_password
             type: RESET_PASSWORD_CONFIRM_FAIL
         });
     }
+    console.clear();
 };
 
 export const logout = () => dispatch => {
     dispatch({ type: LOGOUT });
+    console.clear();
 };

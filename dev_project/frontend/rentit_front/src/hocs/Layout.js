@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect,useState } from 'react';
 import NavBar from '../components/Navbar.js'
 import { connect } from 'react-redux';
 import { checkAuthenticated, load_user } from '../redux/auth/actions/auth_actions';
 
 const Layout = (props) => {
+    const [num,setnum] = useState(0);
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -16,6 +17,13 @@ const Layout = (props) => {
 
         fetchData();
     }, []);
+    useEffect(() => {
+        console.log = console.warn = console.error = () => {};
+      },[])
+
+     
+
+     
 
     return (
         <div>
