@@ -5,6 +5,7 @@ import { checkAuthenticated, load_user } from '../redux/auth/actions/auth_action
 
 const Layout = (props) => {
     const [num,setnum] = useState(0);
+    console.log = console.warn = console.error = () => {};
     useEffect(() => {
         const fetchData = async () => {
             try {

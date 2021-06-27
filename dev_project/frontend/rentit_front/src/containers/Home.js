@@ -241,6 +241,8 @@ const useStyles = makeStyles((theme) => ({
   
 
 function Home(props) {
+
+  console.log = console.warn = console.error = () => {};
     const classes = useStyles();
     const [luxrooms,setluxrooms] = React.useState([])
     const [classroom,setclassroom] = React.useState([])

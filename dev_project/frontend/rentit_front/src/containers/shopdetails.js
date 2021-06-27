@@ -164,6 +164,8 @@ const useStyles = makeStyles((theme) => ({
 
 function FullWidthGrid(props) {
 
+  console.log = console.warn = console.error = () => {};
+
 
 
   const roomid = props.match.params.shopid;

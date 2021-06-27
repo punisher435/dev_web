@@ -47,6 +47,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function NestedGrid({post}) {
+  console.log = console.warn = console.error = () => {};
   const classes = useStyles();
 
   function MediaCard() {
