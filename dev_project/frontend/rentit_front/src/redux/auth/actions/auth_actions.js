@@ -101,6 +101,9 @@ export const login = (email, password) => async dispatch => {
 
     const body = JSON.stringify({ email, password });
 
+
+        
+
    
         await axios.post(`${process.env.REACT_APP_API_URL}/auth/jwt/create/`, body, config)
         .then(res => {
@@ -119,7 +122,7 @@ export const login = (email, password) => async dispatch => {
             });
 
             
-            
+            console.clear();
             
            
             throw new Error(`${err.response.data.detail}`)

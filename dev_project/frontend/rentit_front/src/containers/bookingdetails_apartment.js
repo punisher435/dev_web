@@ -103,6 +103,8 @@ function Bookingdetails(props) {
 
     React.useEffect(
       async () => {
+        if(props.profile) 
+        {
           const config = {
               headers: {
                       'Content-Type': 'application/json',
@@ -129,7 +131,7 @@ function Bookingdetails(props) {
             due_date: `${res.data.created_at}`,
             cancelled:`${res.data.cancelled ? `Yes ${res.data.cancelled_date}` : 'No'}`,
             extended:`${res.data.extended ? `Yes` : 'No'}`,
-            pay:`${res.data.currency.slice(2,)} ${res.data.price_to_be_paid}`,
+            pay:props.profile.is_seller ? `${res.data.currency.slice(2,)} ${res.data.seller_pay}` : `${res.data.currency.slice(2,)} ${res.data.price_to_be_paid}`,
             capacity:`None`,
             duration:`${res.data.duration}`,
             paid:`${res.data.paid ? `Yes` : 'No'}`,
@@ -195,9 +197,9 @@ function Bookingdetails(props) {
                 seterror(true);
               }
 
-      }
+      }}
   
-  ,[])
+  ,[props.profile])
 
 
   const classes = useStyles();

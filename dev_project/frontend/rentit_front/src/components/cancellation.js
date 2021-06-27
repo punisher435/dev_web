@@ -19,12 +19,17 @@ import {Redirect} from 'react-router-dom'
 import {connect} from 'react-redux'
 import Load1 from './Spinner';
 
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+
 
 axios.defaults.xsrfHeaderName = `${process.env.REACT_APP_XSRF_COOKIE}`;
 axios.defaults.xsrfCookieName = `${process.env.REACT_APP_CSRF_COOKIE}`;
 
 
-
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const drawerWidth = 240;
 
@@ -119,11 +124,27 @@ function Bookingcancel(props) {
     
     ,[])
 
-
+      
     const classes = useStyles();
+
+    const [meup,setmeup] = useState(false);
+
+    const handleCloseup = (event, reason) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+  
+      setmeup(false);
+    };
+
 
     const handleclick1 = async (e) => {
       e.preventDefault();
+
+      if(canceldetails.account_no!='' && canceldetails.IFSC_code!='' && canceldetails.bank_name!='' && canceldetails.bank_address!='')
+      {
+
+      
 
       const config = {
         headers: {
@@ -158,7 +179,10 @@ function Bookingcancel(props) {
           seterror(true);
         }
         
-
+      }
+      else{
+        setmeup(true);
+      }
     }
     const handleChange = (event) => {
         setdetails({...canceldetails,reason:event.target.value});
@@ -195,6 +219,12 @@ function Bookingcancel(props) {
             <Dashboarddrawer/>
             <main className={classes.content}>
             <div className={classes.toolbar} />
+
+            <Snackbar open={meup} autoHideDuration={6000} onClose={handleCloseup}>
+            <Alert onClose={handleCloseup} severity="info">
+              You must fill all the bank details
+            </Alert>
+          </Snackbar>
 
             <div>
 
@@ -251,7 +281,7 @@ function Bookingcancel(props) {
             
             <TextField
             id="account_no"
-            label="account_no"
+            label="Account no"
             name="account_no"
             multiline
             rows={1}
@@ -262,7 +292,7 @@ function Bookingcancel(props) {
         <br />
         <TextField
             id="IFSC_code"
-            label="IFSC_code"
+            label="IFSC code"
             name="IFSC_code"
             multiline
             rows={1}
@@ -273,7 +303,7 @@ function Bookingcancel(props) {
         <br />
         <TextField
             id="bank_name"
-            label="bank_name"
+            label="Bank name"
             name="bank_name"
             multiline
             rows={1}
@@ -284,7 +314,7 @@ function Bookingcancel(props) {
         <br />
         <TextField
             id="bank_address"
-            label="bank_address"
+            label="Branch address"
             name="bank_address"
             multiline
             rows={3}

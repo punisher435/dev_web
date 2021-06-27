@@ -245,6 +245,7 @@ function Home(props) {
     const [luxrooms,setluxrooms] = React.useState([])
     const [classroom,setclassroom] = React.useState([])
     const [singleroom,setsingleroom] = React.useState([])
+    const [temproom,settemproom] = React.useState([])
     const [shop,setshop] = React.useState([])
     const [apartment,setapartment] = React.useState([])
     const [coupons,setcoupons] = React.useState([])
@@ -337,6 +338,30 @@ function Home(props) {
             
           }
     },[])
+
+
+    React.useEffect(async() => {
+      const config = {
+          headers: {
+              'Content-Type': 'application/json'
+          }
+        };
+        try{const res1 = await axios.get(`${process.env.REACT_APP_API_URL}/sourceaxcnfrudadv34/rooms/`,{
+          params:{
+           page:1,
+           ordering:'-trust_points',
+  
+          },
+          config:config
+        });
+        
+        settemproom(res1.data.results);
+        
+        }
+        catch{
+          
+        }
+  },[])
 
     React.useEffect(async() => {
         const config = {
@@ -620,6 +645,28 @@ function Home(props) {
                 <br />
                 <div className={classes.myclass1}>
                 <Scrollroom rooms={singleroom}/></div> <br /></> : null
+            }
+
+
+{
+                temproom.length>=1 ? <><Paper elevation={5} className={classes.paperclass}>
+                <div className="navbarclass1">
+                <div   className={classes.myclass}>
+                <Typography variant='h6' className={classes.textclass}>
+                <Box fontSize={20}>
+
+                    <Link to='/rooms/' style={{textDecoration:'none',color:'white'}}>Our Rooms...</Link>
+                    </Box>
+                </Typography>
+                </div>
+                </div>
+                </Paper>
+                <br />
+                <div className={classes.myclass1}>
+                <Scrollroom rooms={temproom}/>
+                </div>
+    
+                <br /></> : null
             }
 
 

@@ -21,6 +21,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import '../components/css/App.css';
 
+
 const validationSchema = yup.object({
   
  
@@ -146,7 +147,7 @@ const Login = ({ login, isAuthenticated }) => {
      
     },
     validationSchema: validationSchema,
-    onSubmit: async (values) => {
+    onSubmit: (values) => {
      
       const { email, password } = values;
       

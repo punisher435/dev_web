@@ -134,9 +134,27 @@ export default function BasicTable({booking,profile,name}) {
             {
                 profile.is_seller ? <StyledTableRow key='payment'>
                 <StyledTableCell component="th" scope="row">
-                 Amount 
+                 Your earnings
                 </StyledTableCell>
                 <StyledTableCell align="right">{booking.currency} {booking.seller_pay}</StyledTableCell>
+                
+              </StyledTableRow> :
+               <StyledTableRow key='payment12'>
+               <StyledTableCell component="th" scope="row">
+                Amount
+               </StyledTableCell>
+               <StyledTableCell align="right">{booking.currency} {booking.price_to_be_paid}</StyledTableCell>
+               
+             </StyledTableRow>
+
+            }
+
+{
+                profile.is_seller ? <StyledTableRow key='payment1'>
+                <StyledTableCell component="th" scope="row">
+                 Payment sent to you 
+                </StyledTableCell>
+                <StyledTableCell align="right">{booking.seller_paid ? 'Yes' : 'No'}</StyledTableCell>
                 
               </StyledTableRow> :null
             }
@@ -188,7 +206,19 @@ export default function BasicTable({booking,profile,name}) {
                 </StyledTableCell>
                 <StyledTableCell align="right">{booking.currency} {booking.refund_amount}</StyledTableCell>
                 
-              </StyledTableRow> :null
+              </StyledTableRow> 
+              :null
+            } 
+
+{
+                booking.cancelled ? <StyledTableRow key='cancelled'>
+                <StyledTableCell component="th" scope="row">
+                 Refunded
+                </StyledTableCell>
+                <StyledTableCell align="right">{booking.refunded ? 'Yes' : 'No'}</StyledTableCell>
+                
+              </StyledTableRow> 
+              :null
             } 
 
 
