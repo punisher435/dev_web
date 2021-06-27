@@ -129,6 +129,7 @@ function MyReviews(props) {
                 
               
         }
+        console.clear();
     }
     
     ,[props.isAuthenticated,props.profile,params1])

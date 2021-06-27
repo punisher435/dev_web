@@ -125,6 +125,7 @@ function MyReviews({id}) {
                 
               
         }
+        console.clear();
     }
     
     ,[id,params1])

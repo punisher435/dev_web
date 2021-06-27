@@ -49,6 +49,7 @@ function Wishlistapartments({isAuthenticated,access}) {
             }
         setloading(false);
         }
+        console.clear();
     },[])
 
     if(loading)

@@ -50,6 +50,7 @@ function Wishlistshops({isAuthenticated,access}) {
             }
         setloading(false);
         }
+        console.clear();
     },[])
 
     if(loading)
