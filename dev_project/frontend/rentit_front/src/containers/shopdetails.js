@@ -220,6 +220,7 @@ function FullWidthGrid(props) {
 
    
     fetchDetails();
+    console.clear();
    
   }, [props.isAuthenticated]);
 
@@ -267,6 +268,7 @@ function FullWidthGrid(props) {
       // Handle Error Here
       console.error(err,'coupons_error');
   }
+  console.clear();
   },[])
 
   useEffect( async() => {
@@ -309,6 +311,7 @@ function FullWidthGrid(props) {
         catch{
         }
     }
+    console.clear();
   },[props.isAuthenticated])
 
 
@@ -333,7 +336,7 @@ function FullWidthGrid(props) {
     }else{
       setOpen1(true);
     }
-
+    console.clear();
   }
 
   const handleclick1 = async (event) => {
@@ -359,7 +362,7 @@ function FullWidthGrid(props) {
     }else{
       setOpen1(true);
     }
-
+    console.clear();
   }
 
 

@@ -283,6 +283,7 @@ function Home(props) {
         else{
           setdisplay(false);
         }
+        console.clear();
       },[warning])
   
       function Alert(props) {
@@ -313,6 +314,7 @@ function Home(props) {
           catch{
             
           }
+          console.clear();
     },[])
 
     React.useEffect(async() => {
@@ -337,6 +339,7 @@ function Home(props) {
           catch{
             
           }
+          console.clear();
     },[])
 
 
@@ -361,6 +364,8 @@ function Home(props) {
         catch{
           
         }
+
+        console.clear();
   },[])
 
     React.useEffect(async() => {
@@ -385,6 +390,7 @@ function Home(props) {
           catch{
             
           }
+          console.clear();
     },[])
 
 
@@ -413,6 +419,7 @@ function Home(props) {
           catch{
             
           }
+          console.clear();
     },[])
 
     React.useEffect(async() => {
@@ -438,6 +445,7 @@ function Home(props) {
           catch{
             
           }
+          console.clear();
     },[])
 
     React.useEffect(async() => {
@@ -463,6 +471,7 @@ function Home(props) {
           catch{
             
           }
+          console.clear();
     },[])
 
     const [value, setValue] = React.useState('Rooms');

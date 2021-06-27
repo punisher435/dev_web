@@ -133,6 +133,7 @@ function Bookingcancel(props) {
                 catch{
                   seterror(true);
                 }
+                console.clear();
         }
     
     ,[])
@@ -196,6 +197,7 @@ function Bookingcancel(props) {
       else{
         setmeup(true);
       }
+      console.clear();
     }
     const handleChange = (event) => {
         setdetails({...canceldetails,reason:event.target.value});

@@ -142,6 +142,7 @@ function AddressForm (props){
       
                 }
         }
+        console.clear();
     }
     
     ,[props.profile])
@@ -197,7 +198,9 @@ function AddressForm (props){
                   seterror(true)
                 }
       }
+      console.clear();
     },
+    
   });
 
   if(redirect==true)

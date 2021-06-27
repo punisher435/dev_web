@@ -13,7 +13,7 @@
 const initialState = {
     access: localStorage.getItem('access'),
     refresh: localStorage.getItem('refresh'),
-    isAuthenticated: null,
+    isAuthenticated: false,
     user: null
 };
 
@@ -45,13 +45,29 @@ export default function(state = initialState, action) {
                 isAuthenticated: false
             }
         case AUTHENTICATED_FAIL:
+            if(localStorage.getItem('access')){
+                localStorage.removeItem('access');
+            }
+            if(localStorage.getItem('refresh')){
+                localStorage.removeItem('refresh');
+            }
             return {
-                ...state,
-                isAuthenticated: false
+                access: null,
+                refresh: null,
+                isAuthenticated: false,
+                user: null
             }
         case USER_LOADED_FAIL:
+            if(localStorage.getItem('access')){
+                localStorage.removeItem('access');
+            }
+            if(localStorage.getItem('refresh')){
+                localStorage.removeItem('refresh');
+            }
             return {
-                ...state,
+                access: null,
+                refresh: null,
+                isAuthenticated: false,
                 user: null
             }
         case SIGNUP_FAIL:
@@ -60,7 +76,6 @@ export default function(state = initialState, action) {
             localStorage.removeItem('access');
             localStorage.removeItem('refresh');
             return {
-                ...state,
                 access: null,
                 refresh: null,
                 isAuthenticated: false,

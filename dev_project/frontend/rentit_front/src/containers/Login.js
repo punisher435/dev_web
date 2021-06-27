@@ -115,7 +115,7 @@ const Login = ({ login, isAuthenticated }) => {
    setdisplay(true) 
   }
 
-
+  console.clear();
   },[temp])
   
   const handleClose = (event, reason) => {

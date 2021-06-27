@@ -167,6 +167,7 @@ function ProfileForm (props){
                  
                 }
         }
+        console.clear();
     }
     
     ,[props.isAuthenticated])
@@ -218,7 +219,7 @@ function ProfileForm (props){
         
 
               
-                
+        console.clear();     
       
     },
   });

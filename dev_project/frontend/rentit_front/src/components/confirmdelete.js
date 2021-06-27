@@ -121,6 +121,7 @@ function ConfirmDelete(props) {
             }
 
     }
+    console.clear();
 }
 
     if(error==true)

@@ -661,6 +661,7 @@ function ApartmentForm (props){
                 setnewredirect(true);
               }
         }
+        console.clear();
     }
     
     ,[props.profile,roomid])
@@ -944,6 +945,8 @@ function ApartmentForm (props){
                  
                 }
       }
+
+      console.clear();
     },
   });
 
@@ -1280,7 +1283,7 @@ React.useEffect(
         const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcezxradakgdlh/profile/${props.profile.id}/`,config);
        setprofilem(res.data)
       }
-      
+      console.clear();
   }
   
 ,[props.profile])

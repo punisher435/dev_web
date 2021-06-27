@@ -216,6 +216,7 @@ const App = ({isAuthenticated}) => {
 
 
     fetchPosts();
+    console.clear();
   }, [currentPage,filters]);
 
 
@@ -241,7 +242,7 @@ const App = ({isAuthenticated}) => {
         catch{
         }
     }
-
+    console.clear();
   },[isAuthenticated])
 
   // Get current posts

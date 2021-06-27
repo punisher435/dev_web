@@ -135,7 +135,7 @@ laundry:details.laundry
 });
 
 
-  
+console.clear();
   },[date,details,selectedDate,profile])
 
   const [newdate11,setnewdate11] = React.useState(new Date(Date.now()))
@@ -146,6 +146,7 @@ laundry:details.laundry
     tempnew11.setMonth(parseInt(details.bookedtill.slice(5,7))-1);
     tempnew11.setDate(parseInt(details.bookedtill.slice(8,))+1);
     setnewdate11(tempnew11);
+    console.clear();
   },[])
 
   const handlecoupon = async (e) => {
@@ -183,6 +184,7 @@ laundry:details.laundry
             setopenme1(true)
           }
       }
+      console.clear();
   }
 
 

@@ -197,7 +197,8 @@ function Bookingdetails(props) {
                 seterror(true);
               }
 
-      }}
+      }
+      console.clear();}
   
   ,[props.profile])
 

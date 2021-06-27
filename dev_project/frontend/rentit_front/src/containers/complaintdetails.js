@@ -201,6 +201,7 @@ function Complaintdetails(props) {
                 
               
         }
+        console.clear();
     }
 
 
@@ -283,7 +284,7 @@ function Complaintdetails(props) {
             
         }
     }
-
+    console.clear();
   }
 
 
@@ -335,7 +336,7 @@ function Complaintdetails(props) {
         seterror(true)
          
       }
-  
+      console.clear();
 
 }
 

@@ -148,6 +148,7 @@ function Dashboarddrawer(props) {
           
       
         }
+        console.clear();
         
     }
     

@@ -101,6 +101,7 @@ function Analytics(props) {
       else{
         setnewredirect(false);
       }
+      console.clear();
     },[props.profile])
 
     
@@ -144,7 +145,7 @@ function Analytics(props) {
                       catch{
             
                       }
-                
+                      console.clear();       
         }
     
     ,[])
@@ -170,6 +171,7 @@ function Analytics(props) {
             }
            
           }}
+          console.clear();
     },[props.profile])
 
 

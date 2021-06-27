@@ -136,6 +136,7 @@ function BankForm (props){
       
                 }
         }
+        console.clear();
     }
     
     ,[props.profile])
@@ -190,6 +191,7 @@ function BankForm (props){
                   seterror(true)
                 }
       }
+      console.clear();
     },
   });
 

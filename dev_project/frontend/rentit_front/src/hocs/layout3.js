@@ -148,7 +148,7 @@ function Dashboarddrawer(props) {
           
       
         }
-        
+        console.clear(); 
     }
     
 ,[props.profile])

@@ -221,7 +221,7 @@ function Checkout(props) {
             )
         
           }
-          
+          console.clear();
       }
       
   ,[props.location.state.property_id,props.profile])
@@ -273,6 +273,7 @@ function Checkout(props) {
       setopen(false)
       setActiveStep(5);
     }
+    console.clear();
   };
 
 
@@ -331,7 +332,7 @@ function Checkout(props) {
       }
       
     }
-    
+    console.clear();
   };
 
 

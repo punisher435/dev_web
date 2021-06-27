@@ -888,7 +888,7 @@ useEffect(
     if(formik.values.cost_cooler!==formik.values.cost_cooler){formik.setFieldValue('cost_cooler',0);}
   
   }
-,[formik.values.cost_electricity,formik.values.cost_water,formik.values.cost_AC,formik.values.cost_TV,formik.values.cooler])
+,[formik.values.cost_electricity,formik.values.cost_water,formik.values.cost_AC,formik.values.cost_TV,formik.values.cost_cooler])
 
 
 useEffect(

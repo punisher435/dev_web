@@ -219,6 +219,7 @@ function Complaintdetails(props) {
                 
               
         }
+        console.clear();
     }
 
 
@@ -301,7 +302,7 @@ function Complaintdetails(props) {
             
         }
     }
-
+    console.clear();
   }
 
 
@@ -354,7 +355,7 @@ function Complaintdetails(props) {
          
       }
   
-
+      console.clear();
 }
 
 

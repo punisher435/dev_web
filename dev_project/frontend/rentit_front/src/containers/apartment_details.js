@@ -247,6 +247,7 @@ function FullWidthGrid(props) {
     }  catch (err) {
       // Handle Error Here
       console.error(err);
+      console.clear();
   }
   try{
     const res12 = await axios.get(`${process.env.REACT_APP_API_URL}/${Links.coupon_get}/`,{
@@ -266,6 +267,8 @@ function FullWidthGrid(props) {
       // Handle Error Here
       console.error(err,'coupons_error');
   }
+
+  console.clear();
   },[])
 
   useEffect( async() => {
@@ -308,6 +311,8 @@ function FullWidthGrid(props) {
         catch{
         }
     }
+
+    console.clear();
   },[props.isAuthenticated])
 
 
@@ -332,7 +337,7 @@ function FullWidthGrid(props) {
     }else{
       setOpen1(true);
     }
-
+    console.clear();
   }
 
   const handleclick1 = async (event) => {
@@ -358,7 +363,7 @@ function FullWidthGrid(props) {
     }else{
       setOpen1(true);
     }
-
+    console.clear();
   }
 
 

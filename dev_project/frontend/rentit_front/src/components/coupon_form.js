@@ -173,6 +173,7 @@ function CouponForm (props){
           }
         }
       }
+      console.clear();
     },[props.profile])
 
    
@@ -246,6 +247,7 @@ function CouponForm (props){
         
                   }
         }
+        console.clear();
     }
     
     ,[couponid])
@@ -297,7 +299,7 @@ function CouponForm (props){
                   
                 }
       }
-     
+      console.clear();
     },
   });
 

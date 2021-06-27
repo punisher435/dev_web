@@ -182,6 +182,7 @@ function Bookingdetails(props) {
                 }
 
         }
+        console.clear();
       }
     
     ,[props.profile])

@@ -77,7 +77,7 @@ function RecipeReviewCard({isAuthenticated,post,setOpen1,setOpen2,wishlistitems,
   
   
       }
-  
+      console.clear();
       }
         ,[isAuthenticated])
 

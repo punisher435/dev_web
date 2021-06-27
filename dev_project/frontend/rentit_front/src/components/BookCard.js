@@ -226,7 +226,7 @@ if(details.book10!=null || details.book10!=undefined)
 
 
 setcapacity(x);
-    
+console.clear();
   
   },[date,details,selectedDate,profile])
 
@@ -265,6 +265,7 @@ setcapacity(x);
             setopenme1(true)
           }
       }
+      console.clear();
   }
 
 
@@ -281,6 +282,7 @@ setcapacity(x);
     tempnew11.setMonth(parseInt(details.bookedtill.slice(5,7))-1);
     tempnew11.setDate(parseInt(details.bookedtill.slice(8,))+1);
     setnewdate11(tempnew11);
+    console.clear();
   },[])
 
 

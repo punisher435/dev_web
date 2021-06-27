@@ -125,7 +125,7 @@ savings:details.price - details.final_price,monthsavings:details.price - details
 });
 
 
-
+console.clear();
   
   },[date,details,selectedDate,profile])
 
@@ -164,6 +164,7 @@ savings:details.price - details.final_price,monthsavings:details.price - details
             setopenme1(true)
           }
       }
+      console.clear();
   }
 
 
@@ -180,6 +181,7 @@ savings:details.price - details.final_price,monthsavings:details.price - details
     tempnew11.setMonth(parseInt(details.bookedtill.slice(5,7))-1);
     tempnew11.setDate(parseInt(details.bookedtill.slice(8,))+1);
     setnewdate11(tempnew11);
+    console.clear();
   },[])
 
 
