@@ -185,6 +185,7 @@ function NestedGrid({ mypost,setmypost,openmycard,setmycard,filters,setfilters,p
     tempnew11.setMonth(parseInt(post.bookedtill.slice(5,7))-1);
     tempnew11.setDate(parseInt(post.bookedtill.slice(8,))+1);
     setnewdate11(tempnew11);
+    console.clear();
   },[])
 
   const handlebookcard = e => {
@@ -361,8 +362,9 @@ setspace(b);
       catch{
       }
     }
-
+    console.clear();
     }
+    
       ,[])
 
   
@@ -523,7 +525,7 @@ setspace(b);
       }else{
         setOpen1(true);
       }
-
+      console.clear();
     }
 
   

@@ -243,7 +243,7 @@ function Bookingextend(props) {
                   
                 }
 
-                
+                console.clear();    
           
         }
     
@@ -264,7 +264,7 @@ function Bookingextend(props) {
 
     
     }
-
+    console.clear();
     },[date,myroom,bookdetails.capacity,selectedDate])
 
     React.useEffect(() => {
@@ -277,7 +277,7 @@ function Bookingextend(props) {
         setbookdetails({...bookdetails,coupon:mycoupon})
       }
    
-
+      console.clear();
     },[mycoupon])
 
 
@@ -331,6 +331,7 @@ function Bookingextend(props) {
         setcancelled(false);
         seterror(true);
       }
+      console.clear();
     };
 
     const handleclick1 = async (e) => {
@@ -375,7 +376,7 @@ function Bookingextend(props) {
           seterror(true);
         }
         
-
+        console.clear();
     }
     const handleChange = (event) => {
       
@@ -420,6 +421,7 @@ function Bookingextend(props) {
               setopenme1(true)
             }
         }
+        console.clear();
       }
 
 

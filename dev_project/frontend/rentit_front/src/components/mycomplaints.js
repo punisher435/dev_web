@@ -154,6 +154,7 @@ function Myrooms(props) {
                 
               
         }
+        console.clear();
     }
     
     ,[props.isAuthenticated])

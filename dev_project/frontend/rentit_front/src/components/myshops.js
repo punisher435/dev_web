@@ -159,6 +159,7 @@ function Myshops(props) {
                 
               
         }
+        console.clear();
     }
     
     ,[props.isAuthenticated])

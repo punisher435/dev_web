@@ -234,7 +234,7 @@ function Bookingextend(props) {
                   
                 }
 
-                
+                console.clear();      
           
         }
     
@@ -255,7 +255,7 @@ function Bookingextend(props) {
 
     
     }
-
+    console.clear();
     },[date,myroom,bookdetails.capacity,selectedDate])
 
     React.useEffect(() => {
@@ -267,7 +267,7 @@ function Bookingextend(props) {
       {
         setbookdetails({...bookdetails,coupon:mycoupon})
       }
-     
+      console.clear();
 
     },[mycoupon])
 

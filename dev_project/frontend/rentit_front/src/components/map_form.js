@@ -51,6 +51,7 @@ React.useEffect(() => {
     ]);
   }
   setwidth(map)
+  console.clear();
 },[])
 
 const mapContainerStyle = {
@@ -81,7 +82,7 @@ const mapContainerStyle = {
     ]);
     setvalue('longitude',e.latLng.lng())
     setvalue('latitude',e.latLng.lat())
-    
+    console.clear();
   }, []);
 
   const mapRef = React.useRef();

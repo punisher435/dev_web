@@ -189,7 +189,7 @@ function RenteneAppBar({ isAuthenticated, logout,profile }) {
           
       
         }
-        
+        console.clear();
     }
     
 ,[profile])

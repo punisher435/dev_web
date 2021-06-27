@@ -174,6 +174,7 @@ function ReviewForm (props){
               
                   seterror(true)
                 }
+                console.clear();
       }
     
   });

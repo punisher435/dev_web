@@ -738,6 +738,7 @@ function RoomForm (props){
                 setnewredirect(true);
               }
         }
+        console.clear();
     }
     
     ,[props.profile,roomid])
@@ -1071,7 +1072,9 @@ function RoomForm (props){
                  
                 }
       }
+      console.clear();
     },
+    
   });
 
   const handleclick1 = (name,value,setvalue) => {
@@ -1385,7 +1388,7 @@ React.useEffect(
         const res = await axios.get(`${process.env.REACT_APP_API_URL}/sourcezxradakgdlh/profile/${props.profile.id}/`,config);
        setprofilem(res.data)
       }
-      
+      console.clear();    
   }
   
 ,[props.profile])

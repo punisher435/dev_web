@@ -77,7 +77,7 @@ function Mapmount({filters,setfilters}) {
             
             setloading(false);
            
-
+            console.clear();
         }
     ,[filters])
 

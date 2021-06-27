@@ -144,6 +144,7 @@ const Layout = (props) => {
           catch{
             
           }
+          console.clear();
     },[])
 
     const classes = useStyles();

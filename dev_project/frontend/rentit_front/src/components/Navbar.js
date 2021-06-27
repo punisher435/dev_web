@@ -172,6 +172,7 @@ function RenteneAppBar(props) {
     const logout_user = () => {
         props.logout();
         setRedirect(true);
+        console.clear();
     };
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);

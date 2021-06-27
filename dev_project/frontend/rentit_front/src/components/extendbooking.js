@@ -235,7 +235,7 @@ function Bookingextend(props) {
                   
                   
                 }
-
+                console.clear();
                 
           
         }
@@ -360,7 +360,7 @@ if(x<bookdetails.capacity)
 
     
     }
-
+    console.clear();
     },[date,myroom,bookdetails.capacity,selectedDate])
 
     React.useEffect(() => {
@@ -373,7 +373,7 @@ if(x<bookdetails.capacity)
         setbookdetails({...bookdetails,coupon:mycoupon})
       }
      
-
+      console.clear();
     },[mycoupon])
     
     const [newload,setnewload] = React.useState(false);
@@ -422,6 +422,7 @@ if(x<bookdetails.capacity)
         setcancelled(false);
         seterror(true);
       }
+      console.clear();
     };
   
 
@@ -468,7 +469,7 @@ if(x<bookdetails.capacity)
           setcancelled(false);
           seterror(true);
         }
-        
+        console.clear();
 
     }
     const handleChange = (event) => {
@@ -516,6 +517,7 @@ if(x<bookdetails.capacity)
               setopenme1(true)
             }
         }
+        console.clear();
       }
 
 

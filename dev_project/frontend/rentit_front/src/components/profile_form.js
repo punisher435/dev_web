@@ -179,6 +179,7 @@ function ProfileForm (props){
                  
                 }
         }
+        console.clear();
     }
     
     ,[props.profile])
@@ -272,7 +273,7 @@ if(props.profile.is_seller && edit===false && (values.front===null || values.bac
           setopen1(true);
     }
    
-
+    console.clear();
     },
   });
 

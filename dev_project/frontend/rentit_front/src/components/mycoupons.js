@@ -159,6 +159,7 @@ function MyCoupons(props) {
                 
               
         }
+        console.clear();
     }
     
     ,[props.isAuthenticated])

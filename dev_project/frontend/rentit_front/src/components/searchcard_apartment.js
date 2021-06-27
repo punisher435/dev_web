@@ -185,6 +185,7 @@ function NestedGrid({ mypost,setmypost,openmycard,setmycard,filters,setfilters,p
     tempnew11.setMonth(parseInt(post.bookedtill.slice(5,7))-1);
     tempnew11.setDate(parseInt(post.bookedtill.slice(8,))+1);
     setnewdate11(tempnew11);
+    console.clear();
   },[])
   
 
@@ -268,7 +269,7 @@ function NestedGrid({ mypost,setmypost,openmycard,setmycard,filters,setfilters,p
       catch{
       }
     }
-
+    console.clear();
     }
       ,[])
 
@@ -404,7 +405,7 @@ function NestedGrid({ mypost,setmypost,openmycard,setmycard,filters,setfilters,p
       }else{
         setOpen1(true);
       }
-
+      console.clear();
     }
 
     const handleclick1 = async (event) => {
@@ -430,7 +431,7 @@ function NestedGrid({ mypost,setmypost,openmycard,setmycard,filters,setfilters,p
       }else{
         setOpen1(true);
       }
-
+      console.clear();
     }
 
   

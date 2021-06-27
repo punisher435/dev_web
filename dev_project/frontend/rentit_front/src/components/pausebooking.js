@@ -118,6 +118,7 @@ function ConfirmPause(props) {
             }
 
     }
+    console.clear();
 }
 
     if(error==true)

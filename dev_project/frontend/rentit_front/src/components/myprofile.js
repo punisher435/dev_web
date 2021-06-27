@@ -133,6 +133,7 @@ function Myprofile(props) {
               }
               
         }
+        console.clear();
     }
     
     ,[props.profile])

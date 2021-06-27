@@ -154,6 +154,7 @@ function Myapartments(props) {
                 
               
         }
+        console.clear();
     }
     
     ,[props.isAuthenticated])
