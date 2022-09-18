@@ -222,10 +222,10 @@ function NestedGrid({mypost,setmypost,openmycard,setmycard,filters,setfilters,po
 
   function MediaCard() {
     const [photos,changephotos] = useState({
-      a:post.photo1,
-      b:post.photo2,
-      c:post.photo3,
-      d:post.photo4,
+      d:"https://www.thespruce.com/thmb/0mCrVrlgAOLHm03zxtJxMd8RIwQ=/2048x1365/filters:fill(auto,1)/put-together-a-perfect-guest-room-1976987-hero-223e3e8f697e4b13b62ad4fe898d492d.jpg",
+      c:"https://assets.architecturaldigest.in/photos/60084dd6cce5700439e12bf7/16:9/w_2560%2Cc_limit/modern-living-room-decor-1366x768.jpg",
+      b:"https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/vibrant-rooms-8-1548883440.jpg",
+      a:"https://media.designcafe.com/wp-content/uploads/2021/06/21172006/girls-study-room-design-ideas.jpg",
     })
 
     

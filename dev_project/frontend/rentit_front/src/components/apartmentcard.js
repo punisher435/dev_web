@@ -35,7 +35,7 @@ export default function ApartmentCard({myapartment}) {
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image={myapartment.photo1}
+          image={"https://media.designcafe.com/wp-content/uploads/2021/06/21172006/girls-study-room-design-ideas.jpg"}
           title="Photo"
         />
         <CardContent>

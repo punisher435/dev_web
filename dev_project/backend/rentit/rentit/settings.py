@@ -117,30 +117,17 @@ WSGI_APPLICATION = 'rentit.wsgi.application'
 
 
 DATABASES = {
-
     'default': {
-
-        'ENGINE': 'django.db.backends.postgresql',
-
-        'NAME': 'rentene',
-
-        'USER': 'rentene',
-
-        'PASSWORD': 'H2mpad6H.V-21',
-
-        'HOST': 'localhost',
-
-        'PORT': '5432',
-
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
-
 }
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER ='rentitsequrity@gmail.com'
-EMAIL_HOST_PASSWORD = 'emzmpswkzjlhcdjf'
+EMAIL_HOST_PASSWORD = 'dvafbelqpsffiazk'
 EMAIL_USE_TLS = True
 
 REST_FRAMEWORK = {
@@ -157,9 +144,7 @@ REST_FRAMEWORK = {
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
 PASSWORD_HASHERS = [
-    'django.contrib.auth.hashers.Argon2PasswordHasher',
-    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
-    'django.contrib.auth.hashers.BCryptPasswordHasher',
+    
     'django.contrib.auth.hashers.PBKDF2PasswordHasher',
     'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
 ]

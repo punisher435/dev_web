@@ -17,16 +17,21 @@ from .managers import profile_manager
 class UserAccountManager(BaseUserManager):
 
     def create_user(self,email,first_name,last_name,is_seller,gender,password=None,**extra_fields):
-     
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', False)
+        extra_fields.setdefault('is_active', True)
         if not email:
             raise ValueError('Users must have an email address!')
         email =self.normalize_email(email)
         user = self.model(email=email,first_name=first_name,last_name=last_name,is_seller=is_seller,gender=gender,**extra_fields)
-
+        
         user.set_password(password)
         user.save(using=self._db)
         
-        
+        if user.is_active==False:    
+            user.is_active=True
+            user.save()
+    
 
         return user
 

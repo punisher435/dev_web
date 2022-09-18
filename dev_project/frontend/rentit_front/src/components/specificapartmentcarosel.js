@@ -147,18 +147,21 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
+const videoo="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
+
+
 export default function NestedGrid({post}) {
   const classes = useStyles();
 
   function MediaCard() {
     const [photos,changephotos] = useState({
-      a:post.photo1,
-      b:post.photo2,
-      c:post.photo3,
-      d:post.photo4,
-      e:post.photo5,
-      f:post.photo6,
-      g:post.video,
+      d:"https://www.thespruce.com/thmb/0mCrVrlgAOLHm03zxtJxMd8RIwQ=/2048x1365/filters:fill(auto,1)/put-together-a-perfect-guest-room-1976987-hero-223e3e8f697e4b13b62ad4fe898d492d.jpg",
+      e:"https://images.unsplash.com/photo-1567767292278-a4f21aa2d36e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8bGl2aW5nJTIwcm9vbXxlbnwwfHwwfHw%3D&w=1000&q=80",
+      c:"https://assets.architecturaldigest.in/photos/60084dd6cce5700439e12bf7/16:9/w_2560%2Cc_limit/modern-living-room-decor-1366x768.jpg",
+      b:"https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/vibrant-rooms-8-1548883440.jpg",
+      a:"https://media.designcafe.com/wp-content/uploads/2021/06/21172006/girls-study-room-design-ideas.jpg",
+      f:"https://miro.medium.com/max/1000/1*hWsO4b8NUBfDp_BGUq_VvQ.jpeg",
+      g:"http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
     })
     const [open,changeopen] = useState(false)
   
@@ -177,7 +180,7 @@ export default function NestedGrid({post}) {
 <Grid item xs={12}>
 
 {
-  photos.a===post.video ? <Card className={classes.root1}>
+  photos.a===videoo ? <Card className={classes.root1}>
   <CardActionArea>
     <CardMedia
       component="video"
@@ -216,7 +219,7 @@ export default function NestedGrid({post}) {
     
 <Grid item xs={2}>
 {
-  photos.b===post.video ? <Card>
+  photos.b===videoo ? <Card>
   <CardActionArea>
     <CardMedia
       className={`${classes.media3}`}
@@ -263,7 +266,7 @@ export default function NestedGrid({post}) {
 
 <Grid item xs={2}>
 {
-  photos.c===post.video ? <Card>
+  photos.c===videoo ? <Card>
   <CardActionArea>
     <CardMedia
       className={`${classes.media3}`}
@@ -308,7 +311,7 @@ export default function NestedGrid({post}) {
 </Grid>
 <Grid item xs={2}>
 {
-  photos.d===post.video ? <Card>
+  photos.d===videoo ? <Card>
   <CardActionArea>
     <CardMedia
       className={`${classes.media3}`}
@@ -353,7 +356,7 @@ export default function NestedGrid({post}) {
 </Grid>
 <Grid item xs={2}>
 {
-  photos.e===post.video ? <Card>
+  photos.e===videoo ? <Card>
   <CardActionArea>
     <CardMedia
       className={`${classes.media3}`}
@@ -401,7 +404,7 @@ export default function NestedGrid({post}) {
 
 <Grid item xs={2}>
 {
-  photos.f===post.video ? <Card>
+  photos.f===videoo ? <Card>
   <CardActionArea>
     <CardMedia
       className={`${classes.media3}`}
@@ -448,7 +451,7 @@ export default function NestedGrid({post}) {
 
 <Grid item xs={2}>
 {
-  photos.g===post.video ? <Card>
+  photos.g===videoo ? <Card>
   <CardActionArea>
     <CardMedia
       className={`${classes.media3}`}

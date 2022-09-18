@@ -185,7 +185,7 @@ class room_payment(viewsets.ViewSet):
 
         room = get_object_or_404(rooms.objects.all(),pk=order.room_id.room_id)
         booking=order
-
+        print("success")
         #payment success 
 
 
@@ -203,7 +203,11 @@ class room_payment(viewsets.ViewSet):
 
         seller_pay = booking.seller_pay
 
+        print("success1")
+
         seller = get_object_or_404(seller_bank_details.objects.all(),pk=room.seller_id)
+
+        print("success2")
 
         seller_pay = seller_pay - (seller_pay*seller.commission/100)
 
@@ -214,6 +218,8 @@ class room_payment(viewsets.ViewSet):
         room.trust_points = room.trust_points + (10*booking.duration)
 
         booking.save()
+
+        
         
         queryset = roomBookings.objects.all()
         queryset = queryset.filter(room_id = room)
